@@ -1,0 +1,589 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/client/src/unix.ts",
+      "type": "file",
+      "name": "unix.ts",
+      "filePath": "packages/client/src/unix.ts",
+      "summary": "Unix domain socket 传输：发现 *.sock 上的本地 server、探测握手，并实现带背压的 ByteTransport。",
+      "tags": [
+        "unix-socket",
+        "transport",
+        "discovery",
+        "node"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Windows 上直接拒绝；发现阶段限制并发探测数量。"
+    },
+    {
+      "id": "function:packages/client/src/unix.ts:discoverUnixServers",
+      "type": "function",
+      "name": "discoverUnixServers",
+      "filePath": "packages/client/src/unix.ts",
+      "lineRange": [
+        37,
+        85
+      ],
+      "summary": "扫描目录中的 serverId.sock，lstat 确认为 socket 后并发 probe，按 serverId 排序返回路由。",
+      "tags": [
+        "discovery",
+        "unix-socket",
+        "async"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/client/src/unix.ts:createUnixTransportFactory",
+      "type": "function",
+      "name": "createUnixTransportFactory",
+      "filePath": "packages/client/src/unix.ts",
+      "lineRange": [
+        88,
+        91
+      ],
+      "summary": "校验选项后返回连接指定 path 的 ByteTransportFactory。",
+      "tags": [
+        "factory",
+        "transport",
+        "unix-socket"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/client/src/unix.ts:connectUnixSocket",
+      "type": "function",
+      "name": "connectUnixSocket",
+      "filePath": "packages/client/src/unix.ts",
+      "lineRange": [
+        103,
+        145
+      ],
+      "summary": "用 net.createConnection 建立 socket，接线 onData/onClose/onError，并在失败时 destroy。",
+      "tags": [
+        "transport",
+        "unix-socket",
+        "node"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/client/src/unix.ts:probeUnixServer",
+      "type": "function",
+      "name": "probeUnixServer",
+      "filePath": "packages/client/src/unix.ts",
+      "lineRange": [
+        237,
+        286
+      ],
+      "summary": "短生命周期 Client.connect 探测 socket 是否完成握手，超时或协议错误则视为不可达。",
+      "tags": [
+        "discovery",
+        "probe",
+        "client"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/client/src/unix.ts:isErrorCode",
+      "type": "function",
+      "name": "isErrorCode",
+      "filePath": "packages/client/src/unix.ts",
+      "lineRange": [
+        290,
+        299
+      ],
+      "summary": "判断 unknown 是否为带指定 Node errno 的系统错误。",
+      "tags": [
+        "error-handling",
+        "utility",
+        "node"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/client/src/unix.ts:UnixByteTransport",
+      "type": "class",
+      "name": "UnixByteTransport",
+      "filePath": "packages/client/src/unix.ts",
+      "lineRange": [
+        147,
+        235
+      ],
+      "summary": "实现 ByteTransport：按块 write、限制 pending bytes，close 时 destroy socket。",
+      "tags": [
+        "transport",
+        "unix-socket",
+        "backpressure"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/cli/experimental/cli.ts",
+      "type": "file",
+      "name": "cli.ts",
+      "filePath": "packages/coding-agent/src/cli/experimental/cli.ts",
+      "summary": "拼装 experimental 根 Command：挂上 server / client 子命令，缺省参数时返回用法错误。",
+      "tags": [
+        "cli",
+        "entry-point",
+        "experimental",
+        "command"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/cli/experimental/command-options.ts",
+      "type": "file",
+      "name": "command-options.ts",
+      "filePath": "packages/coding-agent/src/cli/experimental/command-options.ts",
+      "summary": "共享 CLI 选项：解析 --auth-token/--auth-token-file，以及 unix:/radius: 的 --connect 地址。",
+      "tags": [
+        "cli",
+        "validation",
+        "auth",
+        "transport"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/experimental/command-options.ts:parseAuthInput",
+      "type": "function",
+      "name": "parseAuthInput",
+      "filePath": "packages/coding-agent/src/cli/experimental/command-options.ts",
+      "lineRange": [
+        24,
+        38
+      ],
+      "summary": "互斥校验 token 与 token-file，生成 AuthInput 或错误列表。",
+      "tags": [
+        "validation",
+        "auth",
+        "cli"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/experimental/command-options.ts:parseTransportAddress",
+      "type": "function",
+      "name": "parseTransportAddress",
+      "filePath": "packages/coding-agent/src/cli/experimental/command-options.ts",
+      "lineRange": [
+        40,
+        87
+      ],
+      "summary": "把 --connect URL 解析为 unix path 或 radius serverId，拒绝非法协议与凭据。",
+      "tags": [
+        "validation",
+        "transport",
+        "cli"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/experimental/command-options.ts:parseAuth",
+      "type": "function",
+      "name": "parseAuth",
+      "filePath": "packages/coding-agent/src/cli/experimental/command-options.ts",
+      "lineRange": [
+        96,
+        101
+      ],
+      "summary": "从 ParsedCommandInput 读取鉴权选项并委托 parseAuthInput。",
+      "tags": [
+        "cli",
+        "auth",
+        "adapter"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/experimental/command-options.ts:unsupportedOptions",
+      "type": "function",
+      "name": "unsupportedOptions",
+      "filePath": "packages/coding-agent/src/cli/experimental/command-options.ts",
+      "lineRange": [
+        103,
+        106
+      ],
+      "summary": "当残留未知 argv 时返回“实验命令尚不支持现有 CLI 选项”的错误。",
+      "tags": [
+        "cli",
+        "validation",
+        "error-handling"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/cli/experimental/command.ts",
+      "type": "file",
+      "name": "command.ts",
+      "filePath": "packages/coding-agent/src/cli/experimental/command.ts",
+      "summary": "无第三方依赖的 CLI 框架：选项解析、子命令路由、build/action 两阶段执行。",
+      "tags": [
+        "cli",
+        "parser",
+        "framework",
+        "experimental"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "刻意不依赖 commander，以便实验命令与发布 CLI 隔离。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/experimental/command.ts:valueOption",
+      "type": "function",
+      "name": "valueOption",
+      "filePath": "packages/coding-agent/src/cli/experimental/command.ts",
+      "lineRange": [
+        24,
+        30
+      ],
+      "summary": "构造带自定义 parse 的命名选项描述符。",
+      "tags": [
+        "cli",
+        "factory",
+        "parser"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/experimental/command.ts:stringOption",
+      "type": "function",
+      "name": "stringOption",
+      "filePath": "packages/coding-agent/src/cli/experimental/command.ts",
+      "lineRange": [
+        32,
+        37
+      ],
+      "summary": "valueOption 的字符串快捷封装。",
+      "tags": [
+        "cli",
+        "factory",
+        "parser"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/experimental/command.ts:flagOption",
+      "type": "function",
+      "name": "flagOption",
+      "filePath": "packages/coding-agent/src/cli/experimental/command.ts",
+      "lineRange": [
+        39,
+        41
+      ],
+      "summary": "构造布尔 flag 选项（出现即为 true）。",
+      "tags": [
+        "cli",
+        "factory",
+        "parser"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/cli/experimental/command.ts:Command",
+      "type": "class",
+      "name": "Command",
+      "filePath": "packages/coding-agent/src/cli/experimental/command.ts",
+      "lineRange": [
+        73,
+        225
+      ],
+      "summary": "可嵌套命令：注册 option/subcommand，parse 校验 argv，execute 调用 builder 与 action。",
+      "tags": [
+        "cli",
+        "parser",
+        "command"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/client/src/unix.ts",
+      "target": "file:packages/client/src/client.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/client/src/unix.ts",
+      "target": "file:packages/client/src/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/client/src/unix.ts",
+      "target": "file:packages/client/src/transport.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/client/src/unix.ts",
+      "target": "file:packages/protocol/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/cli.ts",
+      "target": "file:packages/coding-agent/src/cli/experimental/command.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/cli.ts",
+      "target": "file:packages/coding-agent/src/cli/experimental/commands/client.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/cli.ts",
+      "target": "file:packages/coding-agent/src/cli/experimental/commands/server.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/command-options.ts",
+      "target": "file:packages/coding-agent/src/cli/experimental/command.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/command-options.ts",
+      "target": "file:packages/protocol/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/client/src/unix.ts",
+      "target": "function:packages/client/src/unix.ts:discoverUnixServers",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/client/src/unix.ts",
+      "target": "function:packages/client/src/unix.ts:createUnixTransportFactory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/client/src/unix.ts",
+      "target": "function:packages/client/src/unix.ts:connectUnixSocket",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/client/src/unix.ts",
+      "target": "function:packages/client/src/unix.ts:probeUnixServer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/client/src/unix.ts",
+      "target": "function:packages/client/src/unix.ts:isErrorCode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/client/src/unix.ts",
+      "target": "class:packages/client/src/unix.ts:UnixByteTransport",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/client/src/unix.ts",
+      "target": "function:packages/client/src/unix.ts:discoverUnixServers",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/client/src/unix.ts",
+      "target": "function:packages/client/src/unix.ts:createUnixTransportFactory",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/client/src/unix.ts:discoverUnixServers",
+      "target": "function:packages/client/src/unix.ts:probeUnixServer",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/client/src/unix.ts:discoverUnixServers",
+      "target": "function:packages/client/src/unix.ts:isErrorCode",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/client/src/unix.ts:discoverUnixServers",
+      "target": "function:packages/protocol/src/index.ts:isServerId",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/client/src/unix.ts:createUnixTransportFactory",
+      "target": "function:packages/client/src/unix.ts:connectUnixSocket",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/client/src/unix.ts:connectUnixSocket",
+      "target": "class:packages/client/src/unix.ts:UnixByteTransport",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/client/src/unix.ts:probeUnixServer",
+      "target": "class:packages/client/src/client.ts:Client",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/command-options.ts",
+      "target": "function:packages/coding-agent/src/cli/experimental/command-options.ts:parseAuthInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/command-options.ts",
+      "target": "function:packages/coding-agent/src/cli/experimental/command-options.ts:parseTransportAddress",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/command-options.ts",
+      "target": "function:packages/coding-agent/src/cli/experimental/command-options.ts:parseAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/command-options.ts",
+      "target": "function:packages/coding-agent/src/cli/experimental/command-options.ts:unsupportedOptions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/command-options.ts",
+      "target": "function:packages/coding-agent/src/cli/experimental/command-options.ts:parseAuth",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/command-options.ts",
+      "target": "function:packages/coding-agent/src/cli/experimental/command-options.ts:unsupportedOptions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/experimental/command-options.ts:parseAuth",
+      "target": "function:packages/coding-agent/src/cli/experimental/command-options.ts:parseAuthInput",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/experimental/command-options.ts:parseTransportAddress",
+      "target": "function:packages/protocol/src/index.ts:isServerId",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/command.ts",
+      "target": "function:packages/coding-agent/src/cli/experimental/command.ts:valueOption",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/command.ts",
+      "target": "function:packages/coding-agent/src/cli/experimental/command.ts:stringOption",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/command.ts",
+      "target": "function:packages/coding-agent/src/cli/experimental/command.ts:flagOption",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/command.ts",
+      "target": "class:packages/coding-agent/src/cli/experimental/command.ts:Command",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/command.ts",
+      "target": "function:packages/coding-agent/src/cli/experimental/command.ts:valueOption",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/command.ts",
+      "target": "function:packages/coding-agent/src/cli/experimental/command.ts:stringOption",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/command.ts",
+      "target": "function:packages/coding-agent/src/cli/experimental/command.ts:flagOption",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/command.ts",
+      "target": "class:packages/coding-agent/src/cli/experimental/command.ts:Command",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/experimental/command.ts:stringOption",
+      "target": "function:packages/coding-agent/src/cli/experimental/command.ts:valueOption",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/cli.ts",
+      "target": "class:packages/coding-agent/src/cli/experimental/command.ts:Command",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

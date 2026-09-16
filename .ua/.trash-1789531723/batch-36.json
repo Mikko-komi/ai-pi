@@ -1,0 +1,732 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/coding-agent/docs/compaction.md",
+      "type": "document",
+      "name": "compaction.md",
+      "filePath": "packages/coding-agent/docs/compaction.md",
+      "summary": "说明会话上下文压缩与分支摘要：触发条件、切分轮次、切入点规则、CompactionEntry/BranchSummaryEntry 结构，以及 session_before_compact 等扩展钩子和按模型覆盖的设置。",
+      "tags": ["documentation", "compaction", "session", "extensions", "上下文管理"],
+      "complexity": "complex",
+      "languageNotes": "22 个 Markdown 小节，覆盖压缩管线、分支摘要序列化与扩展拦截点。"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/containerization.md",
+      "type": "document",
+      "name": "containerization.md",
+      "filePath": "packages/coding-agent/docs/containerization.md",
+      "summary": "对比四种隔离模式（Gondolin 微虚拟机、纯 Docker、OpenShell、Docker Sandboxes），说明如何把整个 pi 进程或内置工具放到容器/沙箱中运行。",
+      "tags": ["documentation", "containerization", "sandbox", "security", "隔离"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/custom-provider.md",
+      "type": "document",
+      "name": "custom-provider.md",
+      "filePath": "packages/coding-agent/docs/custom-provider.md",
+      "summary": "通过扩展注册、覆盖或注销自定义 LLM provider：OAuth、自定义流式 API、事件与 tool call、用量/费用、上下文溢出，以及配置与模型定义参考。",
+      "tags": ["documentation", "provider", "oauth", "streaming", "extensions"],
+      "complexity": "complex",
+      "languageNotes": "23 个小节，含 Stream Pattern、Content Blocks 与 Model Definition Reference。"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/development.md",
+      "type": "document",
+      "name": "development.md",
+      "filePath": "packages/coding-agent/docs/development.md",
+      "summary": "coding-agent 本地开发指南：clone/build、pi-test.sh、实验性 remote harness、fork 品牌化、src/config.ts 路径解析、/debug 以及测试与发布包冒烟检查。",
+      "tags": ["documentation", "development", "testing", "monorepo", "调试"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:packages/coding-agent/docs/docs.json",
+      "type": "config",
+      "name": "docs.json",
+      "filePath": "packages/coding-agent/docs/docs.json",
+      "summary": "文档站导航与重定向配置：按入门、定制、参考、编程接入、平台与开发分组页面，并把 session.md 指到 session-format.md、tree.md 指到 sessions.md。",
+      "tags": ["configuration", "documentation", "navigation", "docs-site"],
+      "complexity": "moderate",
+      "languageNotes": "Mintlify 风格 JSON：navigation 分组 + redirects 数组。"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/environment-variables.md",
+      "type": "document",
+      "name": "environment-variables.md",
+      "filePath": "packages/coding-agent/docs/environment-variables.md",
+      "summary": "记录 Pi 进程配置变量、AI_AGENT/PI_CODING_AGENT 进程标记，以及 bash/powershell 工具注入的 PI_SESSION_*、PI_PROVIDER、PI_MODEL 等会话环境变量。",
+      "tags": ["documentation", "environment-variables", "cli", "shell-tool", "配置"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/extensions.md",
+      "type": "document",
+      "name": "extensions.md",
+      "filePath": "packages/coding-agent/docs/extensions.md",
+      "summary": "扩展系统完整参考：发现路径、生命周期事件、ExtensionContext 与 ExtensionAPI、自定义工具/UI/快捷键，以及状态管理与各运行模式行为。",
+      "tags": ["documentation", "extensions", "api-reference", "tools", "event-handler"],
+      "complexity": "complex",
+      "languageNotes": "123 个小节，覆盖从 project_trust 到 overlay/自定义编辑器的全部扩展面。"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/index.md",
+      "type": "document",
+      "name": "index.md",
+      "filePath": "packages/coding-agent/docs/index.md",
+      "summary": "Pi 文档门户：给出 npm/安装脚本与认证速览，并按入门、定制、编程接入、参考、平台与开发分组链接其余手册。",
+      "tags": ["documentation", "entry-point", "overview", "入门指南"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/json.md",
+      "type": "document",
+      "name": "json.md",
+      "filePath": "packages/coding-agent/docs/json.md",
+      "summary": "说明 `pi --mode json` 的 JSONL 事件流：JsonAgentSessionEvent 与消息类型、输出格式，便于把 pi 接入外部工具或自定义 UI。",
+      "tags": ["documentation", "json", "event-stream", "cli", "integration"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/keybindings.md",
+      "type": "document",
+      "name": "keybindings.md",
+      "filePath": "packages/coding-agent/docs/keybindings.md",
+      "summary": "列出 TUI 编辑器与应用快捷键：光标/删除/剪贴板/全屏视口、会话、模型与树导航等动作，并给出 Emacs/Vim 风格自定义示例。",
+      "tags": ["documentation", "keybindings", "tui", "configuration", "快捷键"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/llama-cpp.md",
+      "type": "document",
+      "name": "llama-cpp.md",
+      "filePath": "packages/coding-agent/docs/llama-cpp.md",
+      "summary": "说明如何用 llama.cpp router 跑本地 GGUF：启动 llama-server、在 Pi 中配置端点，以及用 `/llama` 加载/卸载模型与排障。",
+      "tags": ["documentation", "llama-cpp", "local-models", "provider", "平台配置"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/models.md",
+      "type": "document",
+      "name": "models.md",
+      "filePath": "packages/coding-agent/docs/models.md",
+      "summary": "讲解在 settings 中添加自定义模型：最小/完整示例、支持的 API、provider 解析与自定义 header、采样与 thinking level，以及覆盖内置 provider 与 Anthropic/OpenAI 兼容层。",
+      "tags": ["documentation", "models", "provider", "configuration", "sampling"],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/packages.md",
+      "type": "document",
+      "name": "packages.md",
+      "filePath": "packages/coding-agent/docs/packages.md",
+      "summary": "说明 Pi Package 的安装与来源（npm/git/本地路径）、画廊元数据、约定目录、依赖、过滤与资源启停，以及作用域去重规则。",
+      "tags": ["documentation", "packages", "extensions", "distribution", "插件包"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/prompt-templates.md",
+      "type": "document",
+      "name": "prompt-templates.md",
+      "filePath": "packages/coding-agent/docs/prompt-templates.md",
+      "summary": "说明 Markdown 提示模板：全局/项目/包/CLI 加载位置、frontmatter 与参数提示、用 `/name` 展开调用，以及加载规则。",
+      "tags": ["documentation", "prompt-templates", "slash-commands", "customization"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/providers.md",
+      "type": "document",
+      "name": "providers.md",
+      "filePath": "packages/coding-agent/docs/providers.md",
+      "summary": "覆盖内置订阅与 API key 认证（Codex、Claude、Copilot、xAI、OpenRouter 等）、auth.json 解析顺序，以及 Azure/Bedrock/Cloudflare/Vertex 与 llama.cpp。",
+      "tags": ["documentation", "provider", "authentication", "oauth", "cloud"],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/quickstart.md",
+      "type": "document",
+      "name": "quickstart.md",
+      "filePath": "packages/coding-agent/docs/quickstart.md",
+      "summary": "首次使用指南：安装与卸载、订阅或 API key 认证、第一会话与项目说明，以及引用文件、shell、换模型、续聊与非交互模式。",
+      "tags": ["documentation", "quickstart", "entry-point", "cli", "入门指南"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/rpc.md",
+      "type": "document",
+      "name": "rpc.md",
+      "filePath": "packages/coding-agent/docs/rpc.md",
+      "summary": "stdin/stdout JSONL RPC 协议：prompt/steer/会话/模型/压缩等命令、事件流、扩展 UI 协议、消息类型，以及 Python/Node 客户端示例。",
+      "tags": ["documentation", "rpc", "protocol", "integration", "api-reference"],
+      "complexity": "complex",
+      "languageNotes": "88 个小节，命令、事件与 Extension UI 请求/响应成对列出。"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/sdk.md",
+      "type": "document",
+      "name": "sdk.md",
+      "filePath": "packages/coding-agent/docs/sdk.md",
+      "summary": "Node.js SDK 手册：createAgentSession 与 AgentSession、模型/工具/扩展/skills/会话选项、ResourceLoader，以及 Interactive/print/RPC 运行模式与导出面。",
+      "tags": ["documentation", "sdk", "api-reference", "embedding", "agent-session"],
+      "complexity": "complex",
+      "languageNotes": "33 个小节，把 CLI 能力映射到可编程 AgentSession API。"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/security.md",
+      "type": "document",
+      "name": "security.md",
+      "filePath": "packages/coding-agent/docs/security.md",
+      "summary": "说明项目信任（trust.json / defaultProjectTrust）、无内置沙箱的设计边界、不可信仓库的容器化建议，以及通过仓库 Security Policy 报告漏洞。",
+      "tags": ["documentation", "security", "project-trust", "sandbox", "漏洞报告"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/session-format.md",
+      "type": "document",
+      "name": "session-format.md",
+      "filePath": "packages/coding-agent/docs/session-format.md",
+      "summary": "定义 JSONL 会话文件格式：存放位置与版本、消息与 entry 类型、树结构与上下文构建、解析示例，以及 SessionManager 的创建/追加/导航 API。",
+      "tags": ["documentation", "session", "data-format", "session-manager", "api-reference"],
+      "complexity": "complex",
+      "languageNotes": "32 个小节，从 SessionHeader 到 LabelEntry/SessionInfoEntry 逐项定义。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "config:packages/coding-agent/docs/docs.json",
+      "target": "document:packages/coding-agent/docs/index.md",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/coding-agent/docs/docs.json",
+      "target": "document:packages/coding-agent/docs/quickstart.md",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/coding-agent/docs/docs.json",
+      "target": "document:packages/coding-agent/docs/providers.md",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/coding-agent/docs/docs.json",
+      "target": "document:packages/coding-agent/docs/security.md",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/coding-agent/docs/docs.json",
+      "target": "document:packages/coding-agent/docs/containerization.md",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/coding-agent/docs/docs.json",
+      "target": "document:packages/coding-agent/docs/keybindings.md",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/coding-agent/docs/docs.json",
+      "target": "document:packages/coding-agent/docs/compaction.md",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/coding-agent/docs/docs.json",
+      "target": "document:packages/coding-agent/docs/extensions.md",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/coding-agent/docs/docs.json",
+      "target": "document:packages/coding-agent/docs/prompt-templates.md",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/coding-agent/docs/docs.json",
+      "target": "document:packages/coding-agent/docs/packages.md",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/coding-agent/docs/docs.json",
+      "target": "document:packages/coding-agent/docs/models.md",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/coding-agent/docs/docs.json",
+      "target": "document:packages/coding-agent/docs/custom-provider.md",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/coding-agent/docs/docs.json",
+      "target": "document:packages/coding-agent/docs/environment-variables.md",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/coding-agent/docs/docs.json",
+      "target": "document:packages/coding-agent/docs/session-format.md",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/coding-agent/docs/docs.json",
+      "target": "document:packages/coding-agent/docs/sdk.md",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/coding-agent/docs/docs.json",
+      "target": "document:packages/coding-agent/docs/rpc.md",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/coding-agent/docs/docs.json",
+      "target": "document:packages/coding-agent/docs/json.md",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/coding-agent/docs/docs.json",
+      "target": "document:packages/coding-agent/docs/development.md",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "document:packages/coding-agent/docs/index.md",
+      "target": "document:packages/coding-agent/docs/quickstart.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/index.md",
+      "target": "document:packages/coding-agent/docs/providers.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/index.md",
+      "target": "document:packages/coding-agent/docs/llama-cpp.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/index.md",
+      "target": "document:packages/coding-agent/docs/security.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/index.md",
+      "target": "document:packages/coding-agent/docs/containerization.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/index.md",
+      "target": "document:packages/coding-agent/docs/keybindings.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/index.md",
+      "target": "document:packages/coding-agent/docs/compaction.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/index.md",
+      "target": "document:packages/coding-agent/docs/extensions.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/index.md",
+      "target": "document:packages/coding-agent/docs/prompt-templates.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/index.md",
+      "target": "document:packages/coding-agent/docs/packages.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/index.md",
+      "target": "document:packages/coding-agent/docs/models.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/index.md",
+      "target": "document:packages/coding-agent/docs/custom-provider.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/index.md",
+      "target": "document:packages/coding-agent/docs/sdk.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/index.md",
+      "target": "document:packages/coding-agent/docs/rpc.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/index.md",
+      "target": "document:packages/coding-agent/docs/json.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/index.md",
+      "target": "document:packages/coding-agent/docs/environment-variables.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/index.md",
+      "target": "document:packages/coding-agent/docs/session-format.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/index.md",
+      "target": "document:packages/coding-agent/docs/development.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/compaction.md",
+      "target": "document:packages/coding-agent/docs/extensions.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/compaction.md",
+      "target": "document:packages/coding-agent/docs/session-format.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/security.md",
+      "target": "document:packages/coding-agent/docs/containerization.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/containerization.md",
+      "target": "document:packages/coding-agent/docs/security.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/custom-provider.md",
+      "target": "document:packages/coding-agent/docs/extensions.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/custom-provider.md",
+      "target": "document:packages/coding-agent/docs/models.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/custom-provider.md",
+      "target": "document:packages/coding-agent/docs/providers.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/environment-variables.md",
+      "target": "document:packages/coding-agent/docs/providers.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/environment-variables.md",
+      "target": "document:packages/coding-agent/docs/extensions.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/extensions.md",
+      "target": "document:packages/coding-agent/docs/packages.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/extensions.md",
+      "target": "document:packages/coding-agent/docs/session-format.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/extensions.md",
+      "target": "document:packages/coding-agent/docs/compaction.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/extensions.md",
+      "target": "document:packages/coding-agent/docs/rpc.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/extensions.md",
+      "target": "document:packages/coding-agent/docs/keybindings.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/extensions.md",
+      "target": "document:packages/coding-agent/docs/models.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/extensions.md",
+      "target": "document:packages/coding-agent/docs/custom-provider.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/extensions.md",
+      "target": "document:packages/coding-agent/docs/environment-variables.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/json.md",
+      "target": "document:packages/coding-agent/docs/sdk.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/json.md",
+      "target": "document:packages/coding-agent/docs/rpc.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/json.md",
+      "target": "document:packages/coding-agent/docs/session-format.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/llama-cpp.md",
+      "target": "document:packages/coding-agent/docs/providers.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/models.md",
+      "target": "document:packages/coding-agent/docs/custom-provider.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/models.md",
+      "target": "document:packages/coding-agent/docs/providers.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/packages.md",
+      "target": "document:packages/coding-agent/docs/extensions.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/packages.md",
+      "target": "document:packages/coding-agent/docs/prompt-templates.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/prompt-templates.md",
+      "target": "document:packages/coding-agent/docs/packages.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/providers.md",
+      "target": "document:packages/coding-agent/docs/custom-provider.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/providers.md",
+      "target": "document:packages/coding-agent/docs/llama-cpp.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/providers.md",
+      "target": "document:packages/coding-agent/docs/environment-variables.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/quickstart.md",
+      "target": "document:packages/coding-agent/docs/providers.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/rpc.md",
+      "target": "document:packages/coding-agent/docs/sdk.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/rpc.md",
+      "target": "document:packages/coding-agent/docs/extensions.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/rpc.md",
+      "target": "document:packages/coding-agent/docs/compaction.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/rpc.md",
+      "target": "document:packages/coding-agent/docs/session-format.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/sdk.md",
+      "target": "document:packages/coding-agent/docs/extensions.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/sdk.md",
+      "target": "document:packages/coding-agent/docs/session-format.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/sdk.md",
+      "target": "document:packages/coding-agent/docs/rpc.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/sdk.md",
+      "target": "document:packages/coding-agent/docs/prompt-templates.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/sdk.md",
+      "target": "document:packages/coding-agent/docs/models.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/session-format.md",
+      "target": "document:packages/coding-agent/docs/compaction.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/session-format.md",
+      "target": "document:packages/coding-agent/docs/extensions.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

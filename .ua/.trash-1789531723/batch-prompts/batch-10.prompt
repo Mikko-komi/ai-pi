@@ -1,0 +1,44 @@
+Analyze these files and produce GraphNode and GraphEdge objects.
+Project root: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi`
+Project: `pi-monorepo`
+Batch: `10/45`
+Skill directory: `/Users/elex-mb0203/.cursor/plugins/local/Understand-Anything/understand-anything-plugin/skills/understand`
+Output: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-10.json` OR `batch-10-part-<k>.json`.
+UA_DIR: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua`
+Load `batchImportData` and `neighborMap` from `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-briefs/batch-10.json`.
+Pass every listed file through to `batchFiles` with path, language, sizeLines, fileCategory.
+
+> **Language directive**: Generate all textual content in **Chinese (zh)**. Keep technical terms in English when no standard translation exists.
+
+Files:
+1. packages/agent/src/harness/runtime/drive/tools.ts (692 lines, language: typescript, fileCategory: code)
+2. packages/agent/src/harness/runtime/harness.ts (408 lines, language: typescript, fileCategory: code)
+3. packages/agent/src/harness/runtime/lane.ts (2012 lines, language: typescript, fileCategory: code)
+4. packages/agent/src/harness/runtime/progress.ts (117 lines, language: typescript, fileCategory: code)
+5. packages/agent/src/harness/runtime/reducer.ts (232 lines, language: typescript, fileCategory: code)
+6. packages/agent/src/harness/runtime/restore.ts (171 lines, language: typescript, fileCategory: code)
+7. packages/agent/src/harness/runtime/transcript.ts (129 lines, language: typescript, fileCategory: code)
+8. packages/agent/src/harness/runtime/types.ts (146 lines, language: typescript, fileCategory: code)
+9. packages/agent/src/harness/session/commit.ts (116 lines, language: typescript, fileCategory: code)
+10. packages/agent/src/harness/session/context.ts (64 lines, language: typescript, fileCategory: code)
+11. packages/agent/src/harness/session/fork-policy.ts (67 lines, language: typescript, fileCategory: code)
+12. packages/agent/src/harness/session/fork.ts (119 lines, language: typescript, fileCategory: code)
+13. packages/agent/src/harness/session/in-memory-storage-state.ts (349 lines, language: typescript, fileCategory: code)
+14. packages/agent/src/harness/session/jsonl/codec.ts (63 lines, language: typescript, fileCategory: code)
+15. packages/agent/src/harness/session/jsonl/fork.ts (328 lines, language: typescript, fileCategory: code)
+16. packages/agent/src/harness/session/jsonl/io.ts (118 lines, language: typescript, fileCategory: code)
+17. packages/agent/src/harness/session/jsonl/legacy-v3.ts (681 lines, language: typescript, fileCategory: code)
+18. packages/agent/src/harness/session/jsonl/repo.ts (389 lines, language: typescript, fileCategory: code)
+19. packages/agent/src/harness/session/jsonl/storage.ts (267 lines, language: typescript, fileCategory: code)
+20. packages/agent/src/harness/session/jsonl/types.ts (45 lines, language: typescript, fileCategory: code)
+21. packages/agent/src/harness/session/memory.ts (453 lines, language: typescript, fileCategory: code)
+22. packages/agent/src/harness/session/mutation-line.ts (23 lines, language: typescript, fileCategory: code)
+23. packages/agent/src/harness/session/session.ts (475 lines, language: typescript, fileCategory: code)
+24. packages/agent/src/harness/session/testing/benchmark/datasets.ts (33 lines, language: typescript, fileCategory: code)
+25. packages/agent/src/harness/session/testing/benchmark/session-repo.ts (181 lines, language: typescript, fileCategory: code)
+26. packages/agent/src/harness/session/testing/benchmark/storage.ts (143 lines, language: typescript, fileCategory: code)
+27. packages/agent/src/harness/session/testing/conformance/session-repo.ts (1185 lines, language: typescript, fileCategory: code)
+28. packages/agent/src/harness/session/testing/conformance/storage.ts (920 lines, language: typescript, fileCategory: code)
+29. packages/agent/src/harness/session/testing/gating-storage.ts (114 lines, language: typescript, fileCategory: code)
+
+Respond with only a brief summary: parts written, total nodes/edges, files skipped.

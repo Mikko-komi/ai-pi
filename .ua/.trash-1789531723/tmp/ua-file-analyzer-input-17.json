@@ -1,0 +1,377 @@
+{
+  "projectRoot": "/Users/elex-mb0203/MyWork/agent-projects/ai-pi",
+  "batchFiles": [
+    {
+      "path": "packages/ai/src/api/anthropic-messages.ts",
+      "language": "typescript",
+      "sizeLines": 1490,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/azure-openai-responses.ts",
+      "language": "typescript",
+      "sizeLines": 338,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "language": "typescript",
+      "sizeLines": 1325,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/cloudflare-ai-binding.ts",
+      "language": "typescript",
+      "sizeLines": 90,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/constrained-sampling.ts",
+      "language": "typescript",
+      "sizeLines": 277,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/github-copilot-headers.ts",
+      "language": "typescript",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/google-generative-ai.ts",
+      "language": "typescript",
+      "sizeLines": 526,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/google-shared.ts",
+      "language": "typescript",
+      "sizeLines": 453,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/google-vertex.ts",
+      "language": "typescript",
+      "sizeLines": 598,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/mistral-conversations.ts",
+      "language": "typescript",
+      "sizeLines": 941,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/openai-codex-responses.ts",
+      "language": "typescript",
+      "sizeLines": 1657,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/openai-completions.ts",
+      "language": "typescript",
+      "sizeLines": 1717,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/openai-prompt-cache.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/openai-responses-shared.ts",
+      "language": "typescript",
+      "sizeLines": 793,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/openai-responses.ts",
+      "language": "typescript",
+      "sizeLines": 389,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/openrouter-images.lazy.ts",
+      "language": "typescript",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/openrouter-images.ts",
+      "language": "typescript",
+      "sizeLines": 196,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/pi-messages.ts",
+      "language": "typescript",
+      "sizeLines": 441,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/simple-options.ts",
+      "language": "typescript",
+      "sizeLines": 95,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/transform-messages.ts",
+      "language": "typescript",
+      "sizeLines": 223,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/env-api-keys.ts",
+      "language": "typescript",
+      "sizeLines": 188,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/image-models.ts",
+      "language": "typescript",
+      "sizeLines": 42,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/images-api-registry.ts",
+      "language": "typescript",
+      "sizeLines": 53,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/images.ts",
+      "language": "typescript",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/legacy-api-aliases.ts",
+      "language": "typescript",
+      "sizeLines": 108,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "packages/ai/src/api/anthropic-messages.ts": [
+      "packages/ai/src/api/constrained-sampling.ts",
+      "packages/ai/src/api/github-copilot-headers.ts",
+      "packages/ai/src/api/simple-options.ts",
+      "packages/ai/src/api/transform-messages.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/types.ts",
+      "packages/ai/src/utils/deferred-tools.ts",
+      "packages/ai/src/utils/diagnostics.ts",
+      "packages/ai/src/utils/event-stream.ts",
+      "packages/ai/src/utils/headers.ts",
+      "packages/ai/src/utils/json-parse.ts",
+      "packages/ai/src/utils/pi-user-agent.ts",
+      "packages/ai/src/utils/provider-env.ts",
+      "packages/ai/src/utils/provider-retry.ts",
+      "packages/ai/src/utils/sanitize-unicode.ts"
+    ],
+    "packages/ai/src/api/azure-openai-responses.ts": [
+      "packages/ai/src/api/constrained-sampling.ts",
+      "packages/ai/src/api/openai-prompt-cache.ts",
+      "packages/ai/src/api/openai-responses-shared.ts",
+      "packages/ai/src/api/simple-options.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/types.ts",
+      "packages/ai/src/utils/error-body.ts",
+      "packages/ai/src/utils/event-stream.ts",
+      "packages/ai/src/utils/headers.ts",
+      "packages/ai/src/utils/pi-user-agent.ts",
+      "packages/ai/src/utils/provider-env.ts",
+      "packages/ai/src/utils/provider-retry.ts"
+    ],
+    "packages/ai/src/api/bedrock-converse-stream.ts": [
+      "packages/ai/src/api/constrained-sampling.ts",
+      "packages/ai/src/api/simple-options.ts",
+      "packages/ai/src/api/transform-messages.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/types.ts",
+      "packages/ai/src/utils/diagnostics.ts",
+      "packages/ai/src/utils/error-body.ts",
+      "packages/ai/src/utils/event-stream.ts",
+      "packages/ai/src/utils/headers.ts",
+      "packages/ai/src/utils/json-parse.ts",
+      "packages/ai/src/utils/node-http-proxy.ts",
+      "packages/ai/src/utils/provider-env.ts",
+      "packages/ai/src/utils/sanitize-unicode.ts"
+    ],
+    "packages/ai/src/api/cloudflare-ai-binding.ts": [
+      "packages/ai/src/types.ts"
+    ],
+    "packages/ai/src/api/constrained-sampling.ts": [
+      "packages/ai/src/types.ts"
+    ],
+    "packages/ai/src/api/github-copilot-headers.ts": [
+      "packages/ai/src/types.ts"
+    ],
+    "packages/ai/src/api/google-generative-ai.ts": [
+      "packages/ai/src/api/google-shared.ts",
+      "packages/ai/src/api/simple-options.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/types.ts",
+      "packages/ai/src/utils/error-body.ts",
+      "packages/ai/src/utils/event-stream.ts",
+      "packages/ai/src/utils/headers.ts",
+      "packages/ai/src/utils/pi-user-agent.ts",
+      "packages/ai/src/utils/sanitize-unicode.ts"
+    ],
+    "packages/ai/src/api/google-shared.ts": [
+      "packages/ai/src/api/constrained-sampling.ts",
+      "packages/ai/src/api/transform-messages.ts",
+      "packages/ai/src/types.ts",
+      "packages/ai/src/utils/provider-retry.ts",
+      "packages/ai/src/utils/sanitize-unicode.ts"
+    ],
+    "packages/ai/src/api/google-vertex.ts": [
+      "packages/ai/src/api/google-shared.ts",
+      "packages/ai/src/api/simple-options.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/types.ts",
+      "packages/ai/src/utils/error-body.ts",
+      "packages/ai/src/utils/event-stream.ts",
+      "packages/ai/src/utils/headers.ts",
+      "packages/ai/src/utils/pi-user-agent.ts",
+      "packages/ai/src/utils/provider-env.ts",
+      "packages/ai/src/utils/sanitize-unicode.ts"
+    ],
+    "packages/ai/src/api/mistral-conversations.ts": [
+      "packages/ai/src/api/constrained-sampling.ts",
+      "packages/ai/src/api/simple-options.ts",
+      "packages/ai/src/api/transform-messages.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/types.ts",
+      "packages/ai/src/utils/event-stream.ts",
+      "packages/ai/src/utils/hash.ts",
+      "packages/ai/src/utils/headers.ts",
+      "packages/ai/src/utils/json-parse.ts",
+      "packages/ai/src/utils/pi-user-agent.ts",
+      "packages/ai/src/utils/sanitize-unicode.ts"
+    ],
+    "packages/ai/src/api/openai-codex-responses.ts": [
+      "packages/ai/src/api/constrained-sampling.ts",
+      "packages/ai/src/api/openai-prompt-cache.ts",
+      "packages/ai/src/api/openai-responses-shared.ts",
+      "packages/ai/src/api/simple-options.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/session-resources.ts",
+      "packages/ai/src/types.ts",
+      "packages/ai/src/utils/abort-signals.ts",
+      "packages/ai/src/utils/deferred-tools.ts",
+      "packages/ai/src/utils/diagnostics.ts",
+      "packages/ai/src/utils/error-body.ts",
+      "packages/ai/src/utils/event-stream.ts",
+      "packages/ai/src/utils/headers.ts",
+      "packages/ai/src/utils/node-http-proxy.ts",
+      "packages/ai/src/utils/pi-user-agent.ts",
+      "packages/ai/src/utils/uuid.ts"
+    ],
+    "packages/ai/src/api/openai-completions.ts": [
+      "packages/ai/src/api/constrained-sampling.ts",
+      "packages/ai/src/api/github-copilot-headers.ts",
+      "packages/ai/src/api/openai-prompt-cache.ts",
+      "packages/ai/src/api/simple-options.ts",
+      "packages/ai/src/api/transform-messages.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/types.ts",
+      "packages/ai/src/utils/error-body.ts",
+      "packages/ai/src/utils/event-stream.ts",
+      "packages/ai/src/utils/hash.ts",
+      "packages/ai/src/utils/headers.ts",
+      "packages/ai/src/utils/json-parse.ts",
+      "packages/ai/src/utils/pi-user-agent.ts",
+      "packages/ai/src/utils/provider-env.ts",
+      "packages/ai/src/utils/provider-retry.ts",
+      "packages/ai/src/utils/sanitize-unicode.ts"
+    ],
+    "packages/ai/src/api/openai-prompt-cache.ts": [],
+    "packages/ai/src/api/openai-responses-shared.ts": [
+      "packages/ai/src/api/constrained-sampling.ts",
+      "packages/ai/src/api/transform-messages.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/types.ts",
+      "packages/ai/src/utils/event-stream.ts",
+      "packages/ai/src/utils/hash.ts",
+      "packages/ai/src/utils/json-parse.ts",
+      "packages/ai/src/utils/sanitize-unicode.ts"
+    ],
+    "packages/ai/src/api/openai-responses.ts": [
+      "packages/ai/src/api/constrained-sampling.ts",
+      "packages/ai/src/api/github-copilot-headers.ts",
+      "packages/ai/src/api/openai-prompt-cache.ts",
+      "packages/ai/src/api/openai-responses-shared.ts",
+      "packages/ai/src/api/simple-options.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/types.ts",
+      "packages/ai/src/utils/deferred-tools.ts",
+      "packages/ai/src/utils/error-body.ts",
+      "packages/ai/src/utils/event-stream.ts",
+      "packages/ai/src/utils/headers.ts",
+      "packages/ai/src/utils/pi-user-agent.ts",
+      "packages/ai/src/utils/provider-env.ts",
+      "packages/ai/src/utils/provider-retry.ts"
+    ],
+    "packages/ai/src/api/openrouter-images.lazy.ts": [
+      "packages/ai/src/types.ts"
+    ],
+    "packages/ai/src/api/openrouter-images.ts": [
+      "packages/ai/src/types.ts",
+      "packages/ai/src/utils/error-body.ts",
+      "packages/ai/src/utils/headers.ts",
+      "packages/ai/src/utils/provider-retry.ts",
+      "packages/ai/src/utils/sanitize-unicode.ts"
+    ],
+    "packages/ai/src/api/pi-messages.ts": [
+      "packages/ai/src/types.ts",
+      "packages/ai/src/utils/diagnostics.ts",
+      "packages/ai/src/utils/event-stream.ts",
+      "packages/ai/src/utils/headers.ts",
+      "packages/ai/src/utils/json-parse.ts",
+      "packages/ai/src/utils/provider-env.ts"
+    ],
+    "packages/ai/src/api/simple-options.ts": [
+      "packages/ai/src/types.ts",
+      "packages/ai/src/utils/estimate.ts"
+    ],
+    "packages/ai/src/api/transform-messages.ts": [
+      "packages/ai/src/types.ts"
+    ],
+    "packages/ai/src/env-api-keys.ts": [
+      "packages/ai/src/types.ts",
+      "packages/ai/src/utils/provider-env.ts"
+    ],
+    "packages/ai/src/image-models.ts": [
+      "packages/ai/src/types.ts"
+    ],
+    "packages/ai/src/images-api-registry.ts": [
+      "packages/ai/src/types.ts"
+    ],
+    "packages/ai/src/images.ts": [
+      "packages/ai/src/images-api-registry.ts",
+      "packages/ai/src/providers/images/register-builtins.ts",
+      "packages/ai/src/types.ts"
+    ],
+    "packages/ai/src/legacy-api-aliases.ts": [
+      "packages/ai/src/api/anthropic-messages.lazy.ts",
+      "packages/ai/src/api/anthropic-messages.ts",
+      "packages/ai/src/api/azure-openai-responses.lazy.ts",
+      "packages/ai/src/api/azure-openai-responses.ts",
+      "packages/ai/src/api/google-generative-ai.lazy.ts",
+      "packages/ai/src/api/google-generative-ai.ts",
+      "packages/ai/src/api/google-vertex.lazy.ts",
+      "packages/ai/src/api/google-vertex.ts",
+      "packages/ai/src/api/mistral-conversations.lazy.ts",
+      "packages/ai/src/api/mistral-conversations.ts",
+      "packages/ai/src/api/openai-codex-responses.lazy.ts",
+      "packages/ai/src/api/openai-codex-responses.ts",
+      "packages/ai/src/api/openai-completions.lazy.ts",
+      "packages/ai/src/api/openai-completions.ts",
+      "packages/ai/src/api/openai-responses.lazy.ts",
+      "packages/ai/src/api/openai-responses.ts",
+      "packages/ai/src/types.ts"
+    ]
+  }
+}

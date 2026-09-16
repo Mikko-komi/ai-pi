@@ -1,0 +1,492 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 3,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 3
+    }
+  },
+  "results": [
+    {
+      "path": "packages/ai/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 1715,
+      "nonEmptyLines": 1340,
+      "sections": [
+        {
+          "heading": "@earendil-works/pi-ai",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Table of Contents",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Supported Providers",
+          "level": 2,
+          "line": 58
+        },
+        {
+          "heading": "Installation",
+          "level": 2,
+          "line": 93
+        },
+        {
+          "heading": "Quick Start",
+          "level": 2,
+          "line": 101
+        },
+        {
+          "heading": "Providers and Models",
+          "level": 2,
+          "line": 231
+        },
+        {
+          "heading": "Provider Factories",
+          "level": 3,
+          "line": 237
+        },
+        {
+          "heading": "All Built-in Providers",
+          "level": 3,
+          "line": 255
+        },
+        {
+          "heading": "Querying Models",
+          "level": 3,
+          "line": 267
+        },
+        {
+          "heading": "Static Catalog Reads",
+          "level": 3,
+          "line": 300
+        },
+        {
+          "heading": "Dynamic Providers",
+          "level": 3,
+          "line": 312
+        },
+        {
+          "heading": "Auth",
+          "level": 2,
+          "line": 325
+        },
+        {
+          "heading": "How Auth Resolves",
+          "level": 3,
+          "line": 329
+        },
+        {
+          "heading": "Transforming Request Headers",
+          "level": 3,
+          "line": 359
+        },
+        {
+          "heading": "Credential Store",
+          "level": 3,
+          "line": 383
+        },
+        {
+          "heading": "Environment Variables",
+          "level": 3,
+          "line": 410
+        },
+        {
+          "heading": "Tools",
+          "level": 2,
+          "line": 459
+        },
+        {
+          "heading": "Defining Tools",
+          "level": 3,
+          "line": 463
+        },
+        {
+          "heading": "Constrained Sampling for Tools",
+          "level": 3,
+          "line": 493
+        },
+        {
+          "heading": "Handling Tool Calls",
+          "level": 3,
+          "line": 527
+        },
+        {
+          "heading": "Streaming Tool Calls with Partial JSON",
+          "level": 3,
+          "line": 575
+        },
+        {
+          "heading": "Validating Tool Arguments",
+          "level": 3,
+          "line": 619
+        },
+        {
+          "heading": "Complete Event Reference",
+          "level": 3,
+          "line": 653
+        },
+        {
+          "heading": "Compact Assistant Message Frames",
+          "level": 3,
+          "line": 678
+        },
+        {
+          "heading": "Image Input",
+          "level": 2,
+          "line": 706
+        },
+        {
+          "heading": "Image Generation",
+          "level": 2,
+          "line": 742
+        },
+        {
+          "heading": "Basic Image Generation",
+          "level": 3,
+          "line": 746
+        },
+        {
+          "heading": "Notes and Limitations",
+          "level": 3,
+          "line": 807
+        },
+        {
+          "heading": "Thinking/Reasoning",
+          "level": 2,
+          "line": 819
+        },
+        {
+          "heading": "Unified Interface (streamSimple/completeSimple)",
+          "level": 3,
+          "line": 823
+        },
+        {
+          "heading": "Provider-Specific Options (stream/complete)",
+          "level": 3,
+          "line": 856
+        },
+        {
+          "heading": "Streaming Thinking Content",
+          "level": 3,
+          "line": 893
+        },
+        {
+          "heading": "Stop Reasons",
+          "level": 2,
+          "line": 915
+        },
+        {
+          "heading": "Error Handling",
+          "level": 2,
+          "line": 928
+        },
+        {
+          "heading": "Aborting Requests",
+          "level": 3,
+          "line": 954
+        },
+        {
+          "heading": "Continuing After Abort",
+          "level": 3,
+          "line": 988
+        },
+        {
+          "heading": "Debugging Provider Payloads",
+          "level": 3,
+          "line": 1013
+        },
+        {
+          "heading": "Custom Providers",
+          "level": 2,
+          "line": 1027
+        },
+        {
+          "heading": "createProvider()",
+          "level": 3,
+          "line": 1029
+        },
+        {
+          "heading": "Calling API Implementations Directly",
+          "level": 3,
+          "line": 1169
+        },
+        {
+          "heading": "OpenAI Compatibility Settings",
+          "level": 3,
+          "line": 1199
+        },
+        {
+          "heading": "Faux Provider for Tests",
+          "level": 2,
+          "line": 1245
+        },
+        {
+          "heading": "Cross-Provider Handoffs",
+          "level": 2,
+          "line": 1332
+        },
+        {
+          "heading": "Context Serialization",
+          "level": 2,
+          "line": 1374
+        },
+        {
+          "heading": "Browser Usage",
+          "level": 2,
+          "line": 1409
+        },
+        {
+          "heading": "Bundling and Tree Shaking",
+          "level": 2,
+          "line": 1436
+        },
+        {
+          "heading": "Provider-Scoped Environment Overrides",
+          "level": 3,
+          "line": 1490
+        },
+        {
+          "heading": "OAuth Providers",
+          "level": 2,
+          "line": 1509
+        },
+        {
+          "heading": "Vertex AI",
+          "level": 3,
+          "line": 1554
+        },
+        {
+          "heading": "CLI Login",
+          "level": 3,
+          "line": 1576
+        },
+        {
+          "heading": "Programmatic OAuth",
+          "level": 3,
+          "line": 1588
+        },
+        {
+          "heading": "Migrating from the Old Global API",
+          "level": 2,
+          "line": 1600
+        },
+        {
+          "heading": "Development",
+          "level": 2,
+          "line": 1624
+        },
+        {
+          "heading": "Adding a New Provider",
+          "level": 3,
+          "line": 1626
+        },
+        {
+          "heading": "1. Core Types (`src/types.ts`)",
+          "level": 4,
+          "line": 1630
+        },
+        {
+          "heading": "2. API Implementation (`src/api/<api-id>.ts`, only for a new API)",
+          "level": 4,
+          "line": 1636
+        },
+        {
+          "heading": "3. Model Generation (`scripts/generate-models.ts`, `scripts/generate-image-models.ts`)",
+          "level": 4,
+          "line": 1647
+        },
+        {
+          "heading": "4. Provider Factory (`src/providers/<id>.ts`)",
+          "level": 4,
+          "line": 1654
+        },
+        {
+          "heading": "5. Tests (`test/`)",
+          "level": 4,
+          "line": 1661
+        },
+        {
+          "heading": "6. Coding Agent Integration (`../coding-agent/`)",
+          "level": 4,
+          "line": 1682
+        },
+        {
+          "heading": "7. Documentation",
+          "level": 4,
+          "line": 1696
+        },
+        {
+          "heading": "8. Changelog",
+          "level": 4,
+          "line": 1704
+        },
+        {
+          "heading": "License",
+          "level": 2,
+          "line": 1713
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 63
+      }
+    },
+    {
+      "path": "packages/ai/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 103,
+      "nonEmptyLines": 103,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "description",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "type",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "main",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "types",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "sideEffects",
+          "level": 1,
+          "line": 8
+        },
+        {
+          "heading": "exports",
+          "level": 1,
+          "line": 13
+        },
+        {
+          "heading": "bin",
+          "level": 1,
+          "line": 47
+        },
+        {
+          "heading": "files",
+          "level": 1,
+          "line": 50
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 54
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 66
+        },
+        {
+          "heading": "keywords",
+          "level": 1,
+          "line": 78
+        },
+        {
+          "heading": "author",
+          "level": 1,
+          "line": 88
+        },
+        {
+          "heading": "license",
+          "level": 1,
+          "line": 89
+        },
+        {
+          "heading": "repository",
+          "level": 1,
+          "line": 90
+        },
+        {
+          "heading": "engines",
+          "level": 1,
+          "line": 95
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 98
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 18
+      }
+    },
+    {
+      "path": "packages/ai/tsconfig.build.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 11,
+      "nonEmptyLines": 11,
+      "sections": [
+        {
+          "heading": "extends",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 9
+        },
+        {
+          "heading": "exclude",
+          "level": 1,
+          "line": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    }
+  ]
+}

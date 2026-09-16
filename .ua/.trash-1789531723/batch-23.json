@@ -1,0 +1,927 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/agent/src/harness/session/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/agent/src/harness/session/index.ts",
+      "summary": "harness session 子系统的 barrel：再导出提交写入、fork 快照、JSONL/内存 SessionRepo、StorageBackedSession 及会话错误类型。",
+      "tags": ["barrel", "entry-point", "会话", "re-export", "type-definition"],
+      "complexity": "simple",
+      "languageNotes": "纯 TypeScript 再导出，不含实现；调用方通过 @earendil-works/pi-agent-core/harness/session 进入。"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/mini/main.ts",
+      "type": "file",
+      "name": "main.ts",
+      "filePath": "packages/coding-agent/src/experimental/mini/main.ts",
+      "summary": "experimental mini 命令入口：解析 --continue/-c 后启动 presentation host（TUI）。",
+      "tags": ["entry-point", "cli", "mini", "tui"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/mini/server/entry.ts",
+      "type": "file",
+      "name": "entry.ts",
+      "filePath": "packages/coding-agent/src/experimental/mini/server/entry.ts",
+      "summary": "会话 server 进程入口：从 argv 读取 Unix socket 路径与 sessionsRoot，再用 socketTransport 调用 runServer。由 CLI 以 detached 方式拉起。",
+      "tags": ["entry-point", "server", "process", "mini"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/mini/server/run.ts",
+      "type": "file",
+      "name": "run.ts",
+      "filePath": "packages/coding-agent/src/experimental/mini/server/run.ts",
+      "summary": "无 agent 状态的会话路由 server：提供 Sessions、按 session 派生 worker，并把未托管的 RPC 转发到对应 worker，同时按 presentation 回推事件。",
+      "tags": ["server", "routing", "rpc", "session", "process"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/mini/server/run.ts:listSessions",
+      "type": "function",
+      "name": "listSessions",
+      "filePath": "packages/coding-agent/src/experimental/mini/server/run.ts",
+      "lineRange": [36, 50],
+      "summary": "用 NodeExecutionEnv 与 JsonlSessionRepo 列出 sessionsRoot 下的会话摘要，并在 finally 中关闭 repo、清理环境。",
+      "tags": ["session", "storage", "listing"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/mini/server/run.ts:runServer",
+      "type": "function",
+      "name": "runServer",
+      "filePath": "packages/coding-agent/src/experimental/mini/server/run.ts",
+      "lineRange": [52, 160],
+      "summary": "监听 transport、按 session 复用/派生 worker、把 Sessions.attach 接到路由表，并在空闲超时后退出以便下次加载新代码。",
+      "tags": ["server", "routing", "lifecycle", "rpc"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/mini/shared/protocol.ts",
+      "type": "file",
+      "name": "protocol.ts",
+      "filePath": "packages/coding-agent/src/experimental/mini/shared/protocol.ts",
+      "summary": "定义跨进程传输的服务契约：CommandResult、ModelRef、会话快照，以及 Lane/Models/Worker/Sessions 四个 ServiceToken。",
+      "tags": ["type-definition", "rpc", "protocol", "service"],
+      "complexity": "moderate",
+      "languageNotes": "ServiceToken 用 phantom types 字段携带 API/事件类型，运行时只保留 name。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/mini/shared/protocol.ts:defineService",
+      "type": "function",
+      "name": "defineService",
+      "filePath": "packages/coding-agent/src/experimental/mini/shared/protocol.ts",
+      "lineRange": [56, 58],
+      "summary": "按全局唯一名称构造 ServiceToken，把调用与事件类型钉在 token 上供 peer.provide/use 推断。",
+      "tags": ["factory", "rpc", "type-definition"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/mini/shared/rpc.ts",
+      "type": "file",
+      "name": "rpc.ts",
+      "filePath": "packages/coding-agent/src/experimental/mini/shared/rpc.ts",
+      "summary": "在一条 Connection 上实现双向 RPC：call/result/error/cancel/event/announce/ping，以及本地未提供服务时的 forward 路由。",
+      "tags": ["rpc", "peer", "routing", "protocol"],
+      "complexity": "complex",
+      "languageNotes": "use() 返回 Proxy，把方法名拼成 service.method；liveness 用 ping 与 deadMs 检测对端消失。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/mini/shared/rpc.ts:createPeer",
+      "type": "function",
+      "name": "createPeer",
+      "filePath": "packages/coding-agent/src/experimental/mini/shared/rpc.ts",
+      "lineRange": [65, 229],
+      "summary": "基于 Connection 创建 RpcPeer：分发本地服务或 forward、管理 inflight 取消与超时，并支持定向 emitTo 供 server 路由事件。",
+      "tags": ["rpc", "factory", "peer", "routing"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "type": "file",
+      "name": "transport.ts",
+      "filePath": "packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "summary": "可插拔传输层：用换行分隔 JSON 封装 Connection，并提供子进程管道、父进程 stdio 与 Unix socket Transport。",
+      "tags": ["transport", "ipc", "socket", "serialization"],
+      "complexity": "moderate",
+      "languageNotes": "worker 在 spawn 时已有管道，因此只有 presentation↔server 需要带地址的 Transport。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/mini/shared/transport.ts:jsonConnection",
+      "type": "function",
+      "name": "jsonConnection",
+      "filePath": "packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "lineRange": [29, 71],
+      "summary": "在任意可读/可写流上按行解析与写出 JSON，并在 end/error/close 时通知订阅者。",
+      "tags": ["transport", "serialization", "stream"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/mini/shared/transport.ts:childConnection",
+      "type": "function",
+      "name": "childConnection",
+      "filePath": "packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "lineRange": [81, 88],
+      "summary": "把已 spawn 子进程的 stdout/stdin 接到 jsonConnection，关闭时 kill 子进程。",
+      "tags": ["transport", "ipc", "process"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/mini/shared/transport.ts:parentConnection",
+      "type": "function",
+      "name": "parentConnection",
+      "filePath": "packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "lineRange": [91, 93],
+      "summary": "子进程视角：用 stdin/stdout 建立与父进程对称的 jsonConnection。",
+      "tags": ["transport", "ipc", "process"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/mini/shared/transport.ts:socketTransport",
+      "type": "function",
+      "name": "socketTransport",
+      "filePath": "packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "lineRange": [95, 119],
+      "summary": "按路径提供 Unix socket 的 listen/connect Transport，listen 前先删除残留 socket 文件。",
+      "tags": ["transport", "socket", "ipc"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/mini/tui/run.ts",
+      "type": "file",
+      "name": "run.ts",
+      "filePath": "packages/coding-agent/src/experimental/mini/tui/run.ts",
+      "summary": "presentation host：确保 mini session server 在跑，按 --continue 选择会话，再 connect 并交给 runView。",
+      "tags": ["tui", "entry-point", "session", "orchestration"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/mini/tui/run.ts:ensureServer",
+      "type": "function",
+      "name": "ensureServer",
+      "filePath": "packages/coding-agent/src/experimental/mini/tui/run.ts",
+      "lineRange": [23, 46],
+      "summary": "先尝试连接已有 server；失败则 detached spawn server/entry，并在超时前轮询 socket 就绪。",
+      "tags": ["process", "lifecycle", "server"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/mini/tui/run.ts:runTui",
+      "type": "function",
+      "name": "runTui",
+      "filePath": "packages/coding-agent/src/experimental/mini/tui/run.ts",
+      "lineRange": [48, 68],
+      "summary": "在 agentDir/experimental 下准备 socket 与会话目录，拉起 server、可选续上最近会话，然后运行 view。",
+      "tags": ["tui", "orchestration", "session"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/mini/tui/session.ts",
+      "type": "file",
+      "name": "session.ts",
+      "filePath": "packages/coding-agent/src/experimental/mini/tui/session.ts",
+      "summary": "presentation 侧会话客户端：一个 peer 同时使用 server 的 Sessions 与 worker 的 Lane/Models，并用 reduceLaneSnapshot 折叠副本。",
+      "tags": ["session", "client", "rpc", "replication"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/mini/tui/session.ts:listSessions",
+      "type": "function",
+      "name": "listSessions",
+      "filePath": "packages/coding-agent/src/experimental/mini/tui/session.ts",
+      "lineRange": [44, 51],
+      "summary": "短连接 server，调用 Sessions.list 后立即关闭 peer。",
+      "tags": ["session", "rpc", "listing"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/mini/tui/session.ts:connect",
+      "type": "function",
+      "name": "connect",
+      "filePath": "packages/coding-agent/src/experimental/mini/tui/session.ts",
+      "lineRange": [54, 117],
+      "summary": "attach 到指定或新建会话，watch/start 订阅 lane，折叠 harness 事件并转发 Models 登录提示，返回 AttachedSession。",
+      "tags": ["session", "rpc", "subscription", "replication"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/mini/worker/entry.ts",
+      "type": "file",
+      "name": "entry.ts",
+      "filePath": "packages/coding-agent/src/experimental/mini/worker/entry.ts",
+      "summary": "session worker 进程入口：从 argv 读取 sessionsRoot、cwd 与可选 sessionId，再调用 runSessionWorker。",
+      "tags": ["entry-point", "worker", "process", "mini"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/mini/worker/lane-service.ts",
+      "type": "file",
+      "name": "lane-service.ts",
+      "filePath": "packages/coding-agent/src/experimental/mini/worker/lane-service.ts",
+      "summary": "worker 侧 Lane 服务：为每个 presentation 建立 lane.watch 订阅，并把 prompt/steer/compact 等命令转给 AgentLane。",
+      "tags": ["service", "lane", "worker", "rpc"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/experimental/mini/worker/lane-service.ts:LaneService",
+      "type": "class",
+      "name": "LaneService",
+      "filePath": "packages/coding-agent/src/experimental/mini/worker/lane-service.ts",
+      "lineRange": [31, 122],
+      "summary": "实现 LaneServiceApi：watch 捕获快照、start 开始投递、命令走 #command 转成 CommandResult，setModel 先查 registry 再写入 lane。",
+      "tags": ["service", "lane", "rpc", "subscription"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/mini/worker/models-service.ts",
+      "type": "file",
+      "name": "models-service.ts",
+      "filePath": "packages/coding-agent/src/experimental/mini/worker/models-service.ts",
+      "summary": "worker 侧 Models 服务：把 ModelRuntime 编成可序列化目录与账号列表，登录提示作为事件发给 presentation。",
+      "tags": ["service", "models", "auth", "worker"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/experimental/mini/worker/models-service.ts:ModelsService",
+      "type": "class",
+      "name": "ModelsService",
+      "filePath": "packages/coding-agent/src/experimental/mini/worker/models-service.ts",
+      "lineRange": [22, 115],
+      "summary": "实现 ModelsServiceApi：refresh 目录、login/logout，以及把 AuthPrompt 拆成 prompt 事件并用 authReply 收回答。",
+      "tags": ["service", "models", "auth", "rpc"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/mini/worker/models-service.ts:readState",
+      "type": "function",
+      "name": "readState",
+      "filePath": "packages/coding-agent/src/experimental/mini/worker/models-service.ts",
+      "lineRange": [117, 144],
+      "summary": "从 ModelRuntime 快照拼出 ModelSummary 与 ProviderAccount 列表，并带上 refreshing 标志。",
+      "tags": ["models", "serialization", "catalog"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/mini/worker/run.ts",
+      "type": "file",
+      "name": "run.ts",
+      "filePath": "packages/coding-agent/src/experimental/mini/worker/run.ts",
+      "summary": "单会话 worker：持有 JsonlSessionRepo、AgentHarness、ModelRuntime，经 stdio peer 暴露 Lane/Models/Worker 服务。",
+      "tags": ["worker", "session", "harness", "orchestration"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/mini/worker/run.ts:openSession",
+      "type": "function",
+      "name": "openSession",
+      "filePath": "packages/coding-agent/src/experimental/mini/worker/run.ts",
+      "lineRange": [39, 49],
+      "summary": "无 sessionId 时 create 新会话，否则按 id 在 repo.list 中查找并 open。",
+      "tags": ["session", "storage"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/mini/worker/run.ts:runSessionWorker",
+      "type": "function",
+      "name": "runSessionWorker",
+      "filePath": "packages/coding-agent/src/experimental/mini/worker/run.ts",
+      "lineRange": [52, 113],
+      "summary": "创建 runtime/harness/lane，通过 parentConnection 提供服务，恢复未完成 operation，并在 stdio 关闭后依次清理。",
+      "tags": ["worker", "lifecycle", "harness", "rpc"],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/main.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/tui/run.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/server/entry.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/server/run.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/server/entry.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/server/run.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/server/run.ts",
+      "target": "file:packages/agent/src/harness/env/nodejs.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/server/run.ts",
+      "target": "file:packages/agent/src/harness/session/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/server/run.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/shared/protocol.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/server/run.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/shared/rpc.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/server/run.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/shared/protocol.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/shared/protocol.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/shared/rpc.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/shared/protocol.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/shared/rpc.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/run.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/run.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/run.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/tui/session.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/run.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/session.ts",
+      "target": "file:packages/agent/src/harness/runtime/reducer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/session.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/session.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/shared/protocol.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/session.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/shared/rpc.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/session.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/entry.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/worker/run.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/lane-service.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/lane-service.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/lane-service.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/shared/protocol.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/models-service.ts",
+      "target": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/models-service.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/shared/protocol.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/models-service.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/model-catalog-refresh.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/run.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/run.ts",
+      "target": "file:packages/agent/src/node.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/run.ts",
+      "target": "file:packages/coding-agent/src/core/model-resolver.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/run.ts",
+      "target": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/run.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/shared/protocol.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/run.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/shared/rpc.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/run.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/run.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/worker/lane-service.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/run.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/worker/models-service.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/server/run.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/server/run.ts:listSessions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/server/run.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/server/run.ts:runServer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/shared/protocol.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/shared/protocol.ts:defineService",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/shared/rpc.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/shared/rpc.ts:createPeer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/shared/transport.ts:jsonConnection",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/shared/transport.ts:childConnection",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/shared/transport.ts:parentConnection",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/shared/transport.ts:socketTransport",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/run.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/tui/run.ts:ensureServer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/run.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/tui/run.ts:runTui",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/session.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/tui/session.ts:listSessions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/session.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/tui/session.ts:connect",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/lane-service.ts",
+      "target": "class:packages/coding-agent/src/experimental/mini/worker/lane-service.ts:LaneService",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/models-service.ts",
+      "target": "class:packages/coding-agent/src/experimental/mini/worker/models-service.ts:ModelsService",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/models-service.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/worker/models-service.ts:readState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/run.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/worker/run.ts:openSession",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/run.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/worker/run.ts:runSessionWorker",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/server/run.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/server/run.ts:runServer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/shared/protocol.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/shared/protocol.ts:defineService",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/shared/rpc.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/shared/rpc.ts:createPeer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/shared/transport.ts:jsonConnection",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/shared/transport.ts:childConnection",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/shared/transport.ts:parentConnection",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/shared/transport.ts:socketTransport",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/run.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/tui/run.ts:runTui",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/session.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/tui/session.ts:listSessions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/session.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/tui/session.ts:connect",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/lane-service.ts",
+      "target": "class:packages/coding-agent/src/experimental/mini/worker/lane-service.ts:LaneService",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/models-service.ts",
+      "target": "class:packages/coding-agent/src/experimental/mini/worker/models-service.ts:ModelsService",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/worker/run.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/worker/run.ts:runSessionWorker",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/server/run.ts:listSessions",
+      "target": "class:packages/agent/src/harness/env/nodejs.ts:NodeExecutionEnv",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/server/run.ts:runServer",
+      "target": "function:packages/coding-agent/src/experimental/mini/shared/rpc.ts:createPeer",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/server/run.ts:runServer",
+      "target": "function:packages/coding-agent/src/experimental/mini/shared/transport.ts:childConnection",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/tui/run.ts:runTui",
+      "target": "function:packages/coding-agent/src/config.ts:getAgentDir",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/tui/run.ts:runTui",
+      "target": "function:packages/coding-agent/src/experimental/mini/shared/transport.ts:socketTransport",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/tui/run.ts:runTui",
+      "target": "function:packages/coding-agent/src/experimental/mini/tui/session.ts:listSessions",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/tui/run.ts:runTui",
+      "target": "function:packages/coding-agent/src/experimental/mini/tui/session.ts:connect",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/tui/run.ts:runTui",
+      "target": "function:packages/coding-agent/src/experimental/mini/tui/view.ts:runView",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/tui/session.ts:listSessions",
+      "target": "function:packages/coding-agent/src/experimental/mini/shared/rpc.ts:createPeer",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/tui/session.ts:connect",
+      "target": "function:packages/coding-agent/src/experimental/mini/shared/rpc.ts:createPeer",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/tui/session.ts:connect",
+      "target": "function:packages/agent/src/harness/runtime/reducer.ts:reduceLaneSnapshot",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/mini/worker/models-service.ts:ModelsService",
+      "target": "function:packages/coding-agent/src/modes/interactive/model-catalog-refresh.ts:refreshModelCatalogs",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/worker/models-service.ts:readState",
+      "target": "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/worker/run.ts:runSessionWorker",
+      "target": "function:packages/coding-agent/src/core/model-resolver.ts:findInitialModel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/worker/run.ts:runSessionWorker",
+      "target": "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/worker/run.ts:runSessionWorker",
+      "target": "function:packages/coding-agent/src/experimental/mini/shared/transport.ts:parentConnection",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/worker/run.ts:runSessionWorker",
+      "target": "function:packages/coding-agent/src/experimental/mini/shared/rpc.ts:createPeer",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/worker/run.ts:runSessionWorker",
+      "target": "class:packages/coding-agent/src/experimental/mini/worker/lane-service.ts:LaneService",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/worker/run.ts:runSessionWorker",
+      "target": "class:packages/coding-agent/src/experimental/mini/worker/models-service.ts:ModelsService",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/worker/run.ts:runSessionWorker",
+      "target": "class:packages/agent/src/node.ts:NodeExecutionEnv",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/run.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/server/entry.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/server/run.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/worker/entry.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

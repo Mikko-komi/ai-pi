@@ -1,0 +1,1368 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/extensions/llama/provider.ts",
+      "type": "file",
+      "name": "provider.ts",
+      "filePath": "packages/coding-agent/src/extensions/llama/provider.ts",
+      "summary": "将 llama.cpp 本地服务器适配为 pi-ai Provider：解析 LLAMA_BASE_URL、把模型目录映射为 openai-completions Model，并委托 stream/streamSimple。",
+      "tags": [
+        "provider",
+        "llama.cpp",
+        "factory",
+        "adapter"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "通过 compat.stream / streamSimple 复用 OpenAI Completions 传输，baseUrl 指向 llamaInferenceUrl。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/extensions/llama/provider.ts:routerAutoloadEnabled",
+      "type": "function",
+      "name": "routerAutoloadEnabled",
+      "filePath": "packages/coding-agent/src/extensions/llama/provider.ts",
+      "lineRange": [
+        36,
+        47
+      ],
+      "summary": "探测 llama.cpp 是否开启 models_autoload，从而决定未加载 preset 是否可被选中。",
+      "tags": [
+        "provider",
+        "llama.cpp",
+        "feature-detection"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/extensions/llama/provider.ts:toPiModel",
+      "type": "function",
+      "name": "toPiModel",
+      "filePath": "packages/coding-agent/src/extensions/llama/provider.ts",
+      "lineRange": [
+        49,
+        72
+      ],
+      "summary": "把 LlamaModelInfo 转成 openai-completions Model，补齐 contextWindow、多模态 input 与 compat 能力位。",
+      "tags": [
+        "adapter",
+        "data-model",
+        "llama.cpp"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/extensions/llama/provider.ts:createLlamaProvider",
+      "type": "function",
+      "name": "createLlamaProvider",
+      "filePath": "packages/coding-agent/src/extensions/llama/provider.ts",
+      "lineRange": [
+        79,
+        180
+      ],
+      "summary": "工厂：构造可刷新目录的 llama.cpp Provider，含 API key 登录、凭据校验与 catalog 发布。",
+      "tags": [
+        "factory",
+        "provider",
+        "entry-point"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/coding-agent/src/extensions/llama/ui.ts",
+      "type": "file",
+      "name": "ui.ts",
+      "filePath": "packages/coding-agent/src/extensions/llama/ui.ts",
+      "summary": "llama.cpp 扩展的交互式 TUI：模型列表、Hugging Face 搜索、确认框与下载进度，通过 showLlamaUi 挂到 extension custom UI。",
+      "tags": [
+        "component",
+        "llama.cpp",
+        "tui",
+        "extension"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/extensions/llama/ui.ts:contextLabel",
+      "type": "function",
+      "name": "contextLabel",
+      "filePath": "packages/coding-agent/src/extensions/llama/ui.ts",
+      "lineRange": [
+        32,
+        42
+      ],
+      "summary": "从模型 meta 或 --ctx-size 参数提取上下文窗口，格式化为 k 单位标签。",
+      "tags": [
+        "utility",
+        "formatting",
+        "llama.cpp"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/extensions/llama/ui.ts:frame",
+      "type": "function",
+      "name": "frame",
+      "filePath": "packages/coding-agent/src/extensions/llama/ui.ts",
+      "lineRange": [
+        64,
+        75
+      ],
+      "summary": "用 DynamicBorder 与标题/页脚组装标准 llama 对话框容器。",
+      "tags": [
+        "component",
+        "layout",
+        "tui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/extensions/llama/ui.ts:showLlamaUi",
+      "type": "function",
+      "name": "showLlamaUi",
+      "filePath": "packages/coding-agent/src/extensions/llama/ui.ts",
+      "lineRange": [
+        480,
+        492
+      ],
+      "summary": "在 extension command context 中打开 LlamaView，并在 run 结束后关闭 custom UI。",
+      "tags": [
+        "entry-point",
+        "tui",
+        "extension"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/extensions/llama/ui.ts:runWithProgress",
+      "type": "function",
+      "name": "runWithProgress",
+      "filePath": "packages/coding-agent/src/extensions/llama/ui.ts",
+      "lineRange": [
+        494,
+        542
+      ],
+      "summary": "在进度对话框中跑可取消任务：竞态 settled/progress，确认后 abort 并返回 cancelled 结果。",
+      "tags": [
+        "async",
+        "progress",
+        "cancellation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/extensions/llama/ui.ts:HuggingFaceSearch",
+      "type": "class",
+      "name": "HuggingFaceSearch",
+      "filePath": "packages/coding-agent/src/extensions/llama/ui.ts",
+      "lineRange": [
+        96,
+        274
+      ],
+      "summary": "可聚焦的 Hugging Face 模型搜索面板：防抖查询、结果过滤与键盘选择。",
+      "tags": [
+        "component",
+        "search",
+        "huggingface"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:packages/coding-agent/src/extensions/llama/ui.ts:LlamaView",
+      "type": "class",
+      "name": "LlamaView",
+      "filePath": "packages/coding-agent/src/extensions/llama/ui.ts",
+      "lineRange": [
+        276,
+        478
+      ],
+      "summary": "实现 LlamaUi：展示本地模型、选择/确认、连接错误与进度更新，并托管 HuggingFaceSearch。",
+      "tags": [
+        "component",
+        "tui",
+        "llama.cpp"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/chat-viewport.ts",
+      "type": "file",
+      "name": "chat-viewport.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/chat-viewport.ts",
+      "summary": "组装交互模式全屏 transcript（ScrollView follow-end）与底部固定 dock（pending/status/editor/footer）。",
+      "tags": [
+        "layout",
+        "component",
+        "tui",
+        "factory"
+      ],
+      "complexity": "simple",
+      "languageNotes": "transcript 可增长，dock 用 VStack shrink 把输入区钉在底部。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/chat-viewport.ts:createChatViewport",
+      "type": "function",
+      "name": "createChatViewport",
+      "filePath": "packages/coding-agent/src/modes/interactive/chat-viewport.ts",
+      "lineRange": [
+        22,
+        46
+      ],
+      "summary": "创建 ChatViewport：主滚动区和自动高度输入坞，可选 widgetsAbove/widgetsBelow。",
+      "tags": [
+        "factory",
+        "layout",
+        "tui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/armin.ts",
+      "type": "file",
+      "name": "armin.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/armin.ts",
+      "summary": "Armin 彩蛋：把 31×36 XBM 位图用半块字符渲染，并循环 typewriter/scanline/rain 等终端动画。",
+      "tags": [
+        "component",
+        "easter-egg",
+        "animation",
+        "tui"
+      ],
+      "complexity": "complex",
+      "languageNotes": "两行像素合成 ▀▄█，多种 effect 用 setInterval 驱动 invalidate。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/armin.ts:buildFinalGrid",
+      "type": "function",
+      "name": "buildFinalGrid",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/armin.ts",
+      "lineRange": [
+        48,
+        58
+      ],
+      "summary": "按半块字符把 XBM 位图展开成最终显示网格。",
+      "tags": [
+        "utility",
+        "rendering",
+        "bitmap"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/armin.ts:ArminComponent",
+      "type": "class",
+      "name": "ArminComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/armin.ts",
+      "lineRange": [
+        60,
+        382
+      ],
+      "summary": "实现 Component：初始化随机特效、逐帧更新网格并按宽度缓存渲染行。",
+      "tags": [
+        "component",
+        "animation",
+        "easter-egg"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/assistant-message.ts",
+      "type": "file",
+      "name": "assistant-message.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/assistant-message.ts",
+      "summary": "渲染完整 assistant 消息：Markdown 正文、可折叠 thinking 块、OSC 133 区域标记，并套用 MarkdownTransformer。",
+      "tags": [
+        "component",
+        "chat",
+        "markdown",
+        "tui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/assistant-message.ts:AssistantMessageComponent",
+      "type": "class",
+      "name": "AssistantMessageComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/assistant-message.ts",
+      "lineRange": [
+        14,
+        202
+      ],
+      "summary": "Container 子类，按内容块更新 Markdown/thinking，支持 streaming 与 thinking 显隐覆盖。",
+      "tags": [
+        "component",
+        "chat",
+        "markdown"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/bash-execution.ts",
+      "type": "file",
+      "name": "bash-execution.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/bash-execution.ts",
+      "summary": "流式展示 bash 执行：命令头、Loader、ANSI 清洗后的输出预览/展开，以及截断与完成状态。",
+      "tags": [
+        "component",
+        "bash",
+        "streaming",
+        "tui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/bash-execution.ts:BashExecutionComponent",
+      "type": "class",
+      "name": "BashExecutionComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/bash-execution.ts",
+      "lineRange": [
+        21,
+        220
+      ],
+      "summary": "Container 子类，追加输出、truncateTail/visual truncate，并在完成后显示 exitCode。",
+      "tags": [
+        "component",
+        "bash",
+        "streaming"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/bordered-loader.ts",
+      "type": "file",
+      "name": "bordered-loader.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/bordered-loader.ts",
+      "summary": "给扩展 UI 用的带 DynamicBorder 包装 Loader，可选 CancellableLoader 与 AbortController。",
+      "tags": [
+        "component",
+        "loader",
+        "extension",
+        "tui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/bordered-loader.ts:BorderedLoader",
+      "type": "class",
+      "name": "BorderedLoader",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/bordered-loader.ts",
+      "lineRange": [
+        7,
+        68
+      ],
+      "summary": "带边框的可取消 Loader，转发 handleInput 并在 dispose 时 stop。",
+      "tags": [
+        "component",
+        "loader",
+        "cancellation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts",
+      "type": "file",
+      "name": "branch-summary-message.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts",
+      "summary": "渲染会话分支摘要消息：折叠预览与展开后的 Markdown 全文。",
+      "tags": [
+        "component",
+        "chat",
+        "summary",
+        "tui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts:BranchSummaryMessageComponent",
+      "type": "class",
+      "name": "BranchSummaryMessageComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts",
+      "lineRange": [
+        10,
+        58
+      ],
+      "summary": "Box 子类，按 expanded 切换分支摘要的短标签与完整 Markdown。",
+      "tags": [
+        "component",
+        "summary",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts",
+      "type": "file",
+      "name": "compaction-summary-message.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts",
+      "summary": "渲染 compaction 摘要：显示压缩前后 token 数，支持展开查看 Markdown 摘要。",
+      "tags": [
+        "component",
+        "chat",
+        "compaction",
+        "tui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts:CompactionSummaryMessageComponent",
+      "type": "class",
+      "name": "CompactionSummaryMessageComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts",
+      "lineRange": [
+        10,
+        59
+      ],
+      "summary": "Box 子类，折叠时展示 token 统计，展开后渲染 compaction Markdown。",
+      "tags": [
+        "component",
+        "compaction",
+        "summary"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "type": "file",
+      "name": "config-selector.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "summary": "交互式资源选择器：按 global/project 作用域浏览并开关 extensions/skills/prompts/themes，写入 SettingsManager。",
+      "tags": [
+        "component",
+        "settings",
+        "selector",
+        "tui"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/config-selector.ts:formatBaseDir",
+      "type": "function",
+      "name": "formatBaseDir",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "lineRange": [
+        66,
+        81
+      ],
+      "summary": "把资源基目录格式化为 ~ 相对路径，便于分组标题显示。",
+      "tags": [
+        "utility",
+        "path",
+        "formatting"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/config-selector.ts:getGroupLabel",
+      "type": "function",
+      "name": "getGroupLabel",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "lineRange": [
+        83,
+        97
+      ],
+      "summary": "按 metadata 与 agentDir 生成用户/项目/临时资源分组标签。",
+      "tags": [
+        "utility",
+        "settings",
+        "labeling"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/config-selector.ts:buildGroups",
+      "type": "function",
+      "name": "buildGroups",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "lineRange": [
+        99,
+        180
+      ],
+      "summary": "把 ResolvedPaths 归并为按来源与资源类型分层的 ResourceGroup 树。",
+      "tags": [
+        "data-model",
+        "settings",
+        "grouping"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/config-selector.ts:ConfigSelectorHeader",
+      "type": "class",
+      "name": "ConfigSelectorHeader",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "lineRange": [
+        187,
+        220
+      ],
+      "summary": "渲染作用域标题与 tab/space/esc 快捷提示。",
+      "tags": [
+        "component",
+        "header",
+        "keybinding"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/config-selector.ts:ResourceList",
+      "type": "class",
+      "name": "ResourceList",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "lineRange": [
+        222,
+        864
+      ],
+      "summary": "可搜索、可聚焦的资源清单：继承/覆盖三态、包级与顶层开关，以及项目覆盖写入。",
+      "tags": [
+        "component",
+        "settings",
+        "selector"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/config-selector.ts:ConfigSelectorComponent",
+      "type": "class",
+      "name": "ConfigSelectorComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "lineRange": [
+        866,
+        942
+      ],
+      "summary": "组合 Header 与 ResourceList，处理 global/project 写作用域切换。",
+      "tags": [
+        "component",
+        "settings",
+        "entry-point"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/countdown-timer.ts",
+      "type": "file",
+      "name": "countdown-timer.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/countdown-timer.ts",
+      "summary": "对话框复用倒计时：每秒 onTick 并 requestRender，到时 dispose 后调用 onExpire。",
+      "tags": [
+        "utility",
+        "timer",
+        "component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/countdown-timer.ts:CountdownTimer",
+      "type": "class",
+      "name": "CountdownTimer",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/countdown-timer.ts",
+      "lineRange": [
+        7,
+        39
+      ],
+      "summary": "基于 setInterval 的秒级倒计时，支持 TUI 重绘与过期回调。",
+      "tags": [
+        "timer",
+        "utility",
+        "tui"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/provider.ts",
+      "target": "file:packages/ai/src/compat.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/provider.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/provider.ts",
+      "target": "file:packages/coding-agent/src/extensions/llama/client.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/ui.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/ui.ts",
+      "target": "file:packages/coding-agent/src/core/keybindings.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/ui.ts",
+      "target": "file:packages/coding-agent/src/extensions/llama/client.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/ui.ts",
+      "target": "file:packages/coding-agent/src/extensions/llama/huggingface.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/ui.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/ui.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/ui.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/ui.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/chat-viewport.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/armin.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/armin.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/assistant-message.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/assistant-message.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/assistant-message.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/markdown-transform.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/assistant-message.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/assistant-message.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/bash-execution.ts",
+      "target": "file:packages/coding-agent/src/core/tools/truncate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/bash-execution.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/bash-execution.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/bash-execution.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/visual-truncate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/bash-execution.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/bash-execution.ts",
+      "target": "file:packages/coding-agent/src/utils/ansi.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/bash-execution.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/bordered-loader.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/bordered-loader.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/bordered-loader.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/bordered-loader.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts",
+      "target": "file:packages/coding-agent/src/core/messages.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts",
+      "target": "file:packages/coding-agent/src/core/messages.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "target": "file:packages/coding-agent/src/core/package-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "target": "file:packages/coding-agent/src/core/settings-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "target": "file:packages/coding-agent/src/utils/paths.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/countdown-timer.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/provider.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/provider.ts:routerAutoloadEnabled",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/provider.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/provider.ts:toPiModel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/provider.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/provider.ts:createLlamaProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/provider.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/provider.ts:createLlamaProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/ui.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/ui.ts:contextLabel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/ui.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/ui.ts:frame",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/ui.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/ui.ts:showLlamaUi",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/ui.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/ui.ts:showLlamaUi",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/ui.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/ui.ts:runWithProgress",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/ui.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/ui.ts:runWithProgress",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/ui.ts",
+      "target": "class:packages/coding-agent/src/extensions/llama/ui.ts:HuggingFaceSearch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/ui.ts",
+      "target": "class:packages/coding-agent/src/extensions/llama/ui.ts:LlamaView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/chat-viewport.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/chat-viewport.ts:createChatViewport",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/chat-viewport.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/chat-viewport.ts:createChatViewport",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/armin.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/armin.ts:buildFinalGrid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/armin.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/armin.ts:ArminComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/armin.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/armin.ts:ArminComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/assistant-message.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/assistant-message.ts:AssistantMessageComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/assistant-message.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/assistant-message.ts:AssistantMessageComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/bash-execution.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/bash-execution.ts:BashExecutionComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/bash-execution.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/bash-execution.ts:BashExecutionComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/bordered-loader.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/bordered-loader.ts:BorderedLoader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/bordered-loader.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/bordered-loader.ts:BorderedLoader",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts:BranchSummaryMessageComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts:BranchSummaryMessageComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts:CompactionSummaryMessageComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts:CompactionSummaryMessageComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/config-selector.ts:formatBaseDir",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/config-selector.ts:getGroupLabel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/config-selector.ts:buildGroups",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/config-selector.ts:ConfigSelectorHeader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/config-selector.ts:ResourceList",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/config-selector.ts:ConfigSelectorComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/config-selector.ts:ConfigSelectorComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/countdown-timer.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/countdown-timer.ts:CountdownTimer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/countdown-timer.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/countdown-timer.ts:CountdownTimer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/extensions/llama/provider.ts:createLlamaProvider",
+      "target": "function:packages/coding-agent/src/extensions/llama/provider.ts:toPiModel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/extensions/llama/provider.ts:createLlamaProvider",
+      "target": "function:packages/coding-agent/src/extensions/llama/provider.ts:routerAutoloadEnabled",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/extensions/llama/ui.ts:showLlamaUi",
+      "target": "class:packages/coding-agent/src/extensions/llama/ui.ts:LlamaView",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/armin.ts:ArminComponent",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/armin.ts:buildFinalGrid",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/modes/interactive/components/config-selector.ts:getGroupLabel",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/config-selector.ts:formatBaseDir",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/modes/interactive/components/config-selector.ts:buildGroups",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/config-selector.ts:getGroupLabel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/extensions/llama/provider.ts:createLlamaProvider",
+      "target": "function:packages/coding-agent/src/extensions/llama/client.ts:normalizeLlamaServerUrl",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/extensions/llama/provider.ts:createLlamaProvider",
+      "target": "function:packages/coding-agent/src/extensions/llama/client.ts:llamaInferenceUrl",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/extensions/llama/provider.ts:toPiModel",
+      "target": "function:packages/coding-agent/src/extensions/llama/client.ts:llamaInferenceUrl",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/extensions/llama/provider.ts:createLlamaProvider",
+      "target": "function:packages/ai/src/compat.ts:stream",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/extensions/llama/provider.ts:createLlamaProvider",
+      "target": "function:packages/ai/src/compat.ts:streamSimple",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/bash-execution.ts:BashExecutionComponent",
+      "target": "function:packages/coding-agent/src/core/tools/truncate.ts:truncateTail",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/bash-execution.ts:BashExecutionComponent",
+      "target": "function:packages/coding-agent/src/utils/ansi.ts:stripAnsi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/bash-execution.ts:BashExecutionComponent",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/visual-truncate.ts:truncateToVisualLines",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/config-selector.ts:ResourceList",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:canonicalizePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/config-selector.ts:ResourceList",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:resolvePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/config-selector.ts:ResourceList",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:isLocalPath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/extensions/llama/ui.ts:HuggingFaceSearch",
+      "target": "class:packages/tui/src/index.ts:Container",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/assistant-message.ts:AssistantMessageComponent",
+      "target": "class:packages/tui/src/index.ts:Container",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/bash-execution.ts:BashExecutionComponent",
+      "target": "class:packages/tui/src/index.ts:Container",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/bordered-loader.ts:BorderedLoader",
+      "target": "class:packages/tui/src/index.ts:Container",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts:BranchSummaryMessageComponent",
+      "target": "class:packages/tui/src/index.ts:Box",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts:CompactionSummaryMessageComponent",
+      "target": "class:packages/tui/src/index.ts:Box",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/config-selector.ts:ConfigSelectorComponent",
+      "target": "class:packages/tui/src/index.ts:Container",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/armin.ts:ArminComponent",
+      "target": "class:packages/tui/src/index.ts:Component",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/config-selector.ts:ConfigSelectorHeader",
+      "target": "class:packages/tui/src/index.ts:Component",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/config-selector.ts:ResourceList",
+      "target": "class:packages/tui/src/index.ts:Component",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/extensions/llama/ui.ts:HuggingFaceSearch",
+      "target": "class:packages/tui/src/index.ts:Focusable",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/extensions/llama/ui.ts:LlamaView",
+      "target": "class:packages/tui/src/index.ts:Focusable",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/config-selector.ts:ResourceList",
+      "target": "class:packages/tui/src/index.ts:Focusable",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/config-selector.ts:ConfigSelectorComponent",
+      "target": "class:packages/tui/src/index.ts:Focusable",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    }
+  ]
+}

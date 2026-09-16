@@ -1,0 +1,344 @@
+{
+  "projectRoot": "/Users/elex-mb0203/MyWork/agent-projects/ai-pi",
+  "batchFiles": [
+    {
+      "path": "packages/ai/src/bedrock-provider.ts",
+      "language": "typescript",
+      "sizeLines": 6,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/oauth.ts",
+      "language": "typescript",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/bun/cli.ts",
+      "language": "typescript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/bun/restore-sandbox-env.ts",
+      "language": "typescript",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/bun/runtime-setup.ts",
+      "language": "typescript",
+      "sizeLines": 9,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/bun/sandbox-env-setup.ts",
+      "language": "typescript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli.ts",
+      "language": "typescript",
+      "sizeLines": 6,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/args.ts",
+      "language": "typescript",
+      "sizeLines": 447,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/auth-check.ts",
+      "language": "typescript",
+      "sizeLines": 73,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/auth-command.ts",
+      "language": "typescript",
+      "sizeLines": 126,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/credential-print.ts",
+      "language": "typescript",
+      "sizeLines": 87,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/initial-message.ts",
+      "language": "typescript",
+      "sizeLines": 43,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/list-models.ts",
+      "language": "typescript",
+      "sizeLines": 115,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/project-trust.ts",
+      "language": "typescript",
+      "sizeLines": 62,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/setup.ts",
+      "language": "typescript",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/config.ts",
+      "language": "typescript",
+      "sizeLines": 579,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/agent-session-runtime.ts",
+      "language": "typescript",
+      "sizeLines": 449,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/agent-session-services.ts",
+      "language": "typescript",
+      "sizeLines": 221,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/agent-session.ts",
+      "language": "typescript",
+      "sizeLines": 3552,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/auth-guidance.ts",
+      "language": "typescript",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/auth-storage.ts",
+      "language": "typescript",
+      "sizeLines": 506,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/bash-executor.ts",
+      "language": "typescript",
+      "sizeLines": 156,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/compaction/index.ts",
+      "language": "typescript",
+      "sizeLines": 7,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/defaults.ts",
+      "language": "typescript",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/diagnostics.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/event-bus.ts",
+      "language": "typescript",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/exec.ts",
+      "language": "typescript",
+      "sizeLines": 107,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/export-html/index.ts",
+      "language": "typescript",
+      "sizeLines": 316,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/extensions/index.ts",
+      "language": "typescript",
+      "sizeLines": 193,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "packages/ai/src/bedrock-provider.ts": [
+      "packages/ai/src/api/bedrock-converse-stream.ts"
+    ],
+    "packages/ai/src/oauth.ts": [],
+    "packages/coding-agent/src/bun/cli.ts": [
+      "packages/coding-agent/src/bun/runtime-setup.ts",
+      "packages/coding-agent/src/bun/sandbox-env-setup.ts",
+      "packages/coding-agent/src/cli.ts"
+    ],
+    "packages/coding-agent/src/bun/restore-sandbox-env.ts": [],
+    "packages/coding-agent/src/bun/runtime-setup.ts": [
+      "packages/ai/src/bedrock-provider.ts",
+      "packages/ai/src/bun-oauth.ts",
+      "packages/ai/src/compat.ts",
+      "packages/coding-agent/src/config.ts"
+    ],
+    "packages/coding-agent/src/bun/sandbox-env-setup.ts": [
+      "packages/coding-agent/src/bun/restore-sandbox-env.ts"
+    ],
+    "packages/coding-agent/src/cli.ts": [
+      "packages/coding-agent/src/cli/setup.ts",
+      "packages/coding-agent/src/main.ts"
+    ],
+    "packages/coding-agent/src/cli/args.ts": [
+      "packages/agent/src/index.ts",
+      "packages/coding-agent/src/config.ts",
+      "packages/coding-agent/src/core/extensions/types.ts",
+      "packages/coding-agent/src/core/settings-manager.ts"
+    ],
+    "packages/coding-agent/src/cli/auth-check.ts": [
+      "packages/ai/src/index.ts",
+      "packages/coding-agent/src/cli/args.ts",
+      "packages/coding-agent/src/cli/auth-command.ts",
+      "packages/coding-agent/src/core/model-resolver.ts",
+      "packages/coding-agent/src/core/model-runtime.ts",
+      "packages/coding-agent/src/core/models-store.ts"
+    ],
+    "packages/coding-agent/src/cli/auth-command.ts": [
+      "packages/ai/src/index.ts",
+      "packages/coding-agent/src/cli/args.ts",
+      "packages/coding-agent/src/config.ts"
+    ],
+    "packages/coding-agent/src/cli/credential-print.ts": [
+      "packages/ai/src/index.ts",
+      "packages/coding-agent/src/cli/args.ts",
+      "packages/coding-agent/src/cli/auth-command.ts",
+      "packages/coding-agent/src/core/model-resolver.ts",
+      "packages/coding-agent/src/core/model-runtime.ts"
+    ],
+    "packages/coding-agent/src/cli/initial-message.ts": [
+      "packages/ai/src/index.ts",
+      "packages/coding-agent/src/cli/args.ts"
+    ],
+    "packages/coding-agent/src/cli/list-models.ts": [
+      "packages/ai/src/index.ts",
+      "packages/coding-agent/src/core/auth-guidance.ts",
+      "packages/coding-agent/src/core/model-runtime.ts",
+      "packages/tui/src/index.ts"
+    ],
+    "packages/coding-agent/src/cli/project-trust.ts": [
+      "packages/coding-agent/src/cli/startup-ui.ts",
+      "packages/coding-agent/src/core/extensions/types.ts",
+      "packages/coding-agent/src/core/project-trust.ts",
+      "packages/coding-agent/src/core/settings-manager.ts"
+    ],
+    "packages/coding-agent/src/cli/setup.ts": [
+      "packages/coding-agent/src/config.ts",
+      "packages/coding-agent/src/core/http-dispatcher.ts"
+    ],
+    "packages/coding-agent/src/config.ts": [
+      "packages/coding-agent/src/utils/child-process.ts",
+      "packages/coding-agent/src/utils/paths.ts",
+      "packages/coding-agent/src/utils/text.ts"
+    ],
+    "packages/coding-agent/src/core/agent-session-runtime.ts": [
+      "packages/coding-agent/src/core/agent-session-services.ts",
+      "packages/coding-agent/src/core/agent-session.ts",
+      "packages/coding-agent/src/core/extensions/index.ts",
+      "packages/coding-agent/src/core/extensions/runner.ts",
+      "packages/coding-agent/src/core/sdk.ts",
+      "packages/coding-agent/src/core/session-cwd.ts",
+      "packages/coding-agent/src/core/session-manager.ts",
+      "packages/coding-agent/src/utils/paths.ts"
+    ],
+    "packages/coding-agent/src/core/agent-session-services.ts": [
+      "packages/agent/src/index.ts",
+      "packages/ai/src/index.ts",
+      "packages/coding-agent/src/config.ts",
+      "packages/coding-agent/src/core/extensions/index.ts",
+      "packages/coding-agent/src/core/model-runtime.ts",
+      "packages/coding-agent/src/core/resource-loader.ts",
+      "packages/coding-agent/src/core/sdk.ts",
+      "packages/coding-agent/src/core/session-manager.ts",
+      "packages/coding-agent/src/core/settings-manager.ts",
+      "packages/coding-agent/src/utils/paths.ts"
+    ],
+    "packages/coding-agent/src/core/agent-session.ts": [
+      "packages/agent/src/index.ts",
+      "packages/ai/src/compat.ts",
+      "packages/ai/src/index.ts",
+      "packages/coding-agent/src/core/auth-guidance.ts",
+      "packages/coding-agent/src/core/bash-executor.ts",
+      "packages/coding-agent/src/core/compaction/index.ts",
+      "packages/coding-agent/src/core/defaults.ts",
+      "packages/coding-agent/src/core/export-html/index.ts",
+      "packages/coding-agent/src/core/export-html/tool-renderer.ts",
+      "packages/coding-agent/src/core/extensions/index.ts",
+      "packages/coding-agent/src/core/extensions/runner.ts",
+      "packages/coding-agent/src/core/messages.ts",
+      "packages/coding-agent/src/core/model-registry.ts",
+      "packages/coding-agent/src/core/model-runtime.ts",
+      "packages/coding-agent/src/core/prompt-templates.ts",
+      "packages/coding-agent/src/core/resource-loader.ts",
+      "packages/coding-agent/src/core/session-export.ts",
+      "packages/coding-agent/src/core/session-manager.ts",
+      "packages/coding-agent/src/core/settings-manager.ts",
+      "packages/coding-agent/src/core/slash-commands.ts",
+      "packages/coding-agent/src/core/source-info.ts",
+      "packages/coding-agent/src/core/system-prompt.ts",
+      "packages/coding-agent/src/core/tools/bash.ts",
+      "packages/coding-agent/src/core/tools/index.ts",
+      "packages/coding-agent/src/core/tools/tool-definition-wrapper.ts",
+      "packages/coding-agent/src/core/usage-totals.ts",
+      "packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "packages/coding-agent/src/utils/frontmatter.ts",
+      "packages/coding-agent/src/utils/sleep.ts",
+      "packages/coding-agent/src/utils/tool-result-images.ts"
+    ],
+    "packages/coding-agent/src/core/auth-guidance.ts": [
+      "packages/coding-agent/src/config.ts"
+    ],
+    "packages/coding-agent/src/core/auth-storage.ts": [
+      "packages/ai/src/index.ts",
+      "packages/coding-agent/src/config.ts",
+      "packages/coding-agent/src/core/resolve-config-value.ts",
+      "packages/coding-agent/src/utils/abort.ts",
+      "packages/coding-agent/src/utils/paths.ts",
+      "packages/coding-agent/src/utils/text.ts"
+    ],
+    "packages/coding-agent/src/core/bash-executor.ts": [
+      "packages/coding-agent/src/core/tools/bash.ts",
+      "packages/coding-agent/src/core/tools/truncate.ts",
+      "packages/coding-agent/src/utils/ansi.ts",
+      "packages/coding-agent/src/utils/shell.ts"
+    ],
+    "packages/coding-agent/src/core/compaction/index.ts": [],
+    "packages/coding-agent/src/core/defaults.ts": [
+      "packages/agent/src/index.ts"
+    ],
+    "packages/coding-agent/src/core/diagnostics.ts": [],
+    "packages/coding-agent/src/core/event-bus.ts": [],
+    "packages/coding-agent/src/core/exec.ts": [
+      "packages/coding-agent/src/utils/child-process.ts"
+    ],
+    "packages/coding-agent/src/core/export-html/index.ts": [
+      "packages/agent/src/index.ts",
+      "packages/coding-agent/src/config.ts",
+      "packages/coding-agent/src/core/extensions/types.ts",
+      "packages/coding-agent/src/core/session-manager.ts",
+      "packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "packages/coding-agent/src/utils/paths.ts"
+    ],
+    "packages/coding-agent/src/core/extensions/index.ts": []
+  }
+}

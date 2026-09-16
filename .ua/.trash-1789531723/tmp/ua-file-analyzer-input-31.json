@@ -1,0 +1,25 @@
+{
+  "projectRoot": "/Users/elex-mb0203/MyWork/agent-projects/ai-pi",
+  "batchFiles": [
+    {"path": "packages/agent/docs/assistant-durability.md", "language": "markdown", "sizeLines": 355, "fileCategory": "docs"},
+    {"path": "packages/agent/docs/harness.md", "language": "markdown", "sizeLines": 1468, "fileCategory": "docs"},
+    {"path": "packages/agent/docs/plugins.md", "language": "markdown", "sizeLines": 1158, "fileCategory": "docs"},
+    {"path": "packages/agent/docs/rpc.md", "language": "markdown", "sizeLines": 215, "fileCategory": "docs"},
+    {"path": "packages/agent/docs/runtime-simplification.md", "language": "markdown", "sizeLines": 391, "fileCategory": "docs"},
+    {"path": "packages/agent/docs/telemetry-schema.md", "language": "markdown", "sizeLines": 383, "fileCategory": "docs"},
+    {"path": "packages/agent/docs/telemetry.md", "language": "markdown", "sizeLines": 251, "fileCategory": "docs"},
+    {"path": "packages/agent/docs/tool-durability.md", "language": "markdown", "sizeLines": 704, "fileCategory": "docs"},
+    {"path": "packages/agent/docs/values.md", "language": "markdown", "sizeLines": 735, "fileCategory": "docs"}
+  ],
+  "batchImportData": {
+    "packages/agent/docs/assistant-durability.md": [],
+    "packages/agent/docs/harness.md": [],
+    "packages/agent/docs/plugins.md": [],
+    "packages/agent/docs/rpc.md": [],
+    "packages/agent/docs/runtime-simplification.md": [],
+    "packages/agent/docs/telemetry-schema.md": [],
+    "packages/agent/docs/telemetry.md": [],
+    "packages/agent/docs/tool-durability.md": [],
+    "packages/agent/docs/values.md": []
+  }
+}

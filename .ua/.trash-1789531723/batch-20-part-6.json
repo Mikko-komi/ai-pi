@@ -1,0 +1,571 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/tui/src/components/markdown.ts",
+      "type": "file",
+      "name": "markdown.ts",
+      "filePath": "packages/tui/src/components/markdown.ts",
+      "summary": "终端 Markdown 渲染：扩展 marked 以支持 LaTeX、严格删除线、表格折行与 OSC 8 链接。",
+      "tags": [
+        "component",
+        "markdown",
+        "rendering"
+      ],
+      "complexity": "complex",
+      "languageNotes": "自定义 Tokenizer 解析 $ / $$，渲染时走 renderLatex，并保护 Kitty 图像行不被 wrap。"
+    },
+    {
+      "id": "function:packages/tui/src/components/markdown.ts:tokenizeInlineLatex",
+      "type": "function",
+      "name": "tokenizeInlineLatex",
+      "filePath": "packages/tui/src/components/markdown.ts",
+      "lineRange": [
+        52,
+        99
+      ],
+      "summary": "扫描 $...$ 行内公式，处理转义并标记未闭合的 pending 段。",
+      "tags": [
+        "markdown",
+        "latex",
+        "tokenizer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/markdown.ts:tokenizeBlockLatex",
+      "type": "function",
+      "name": "tokenizeBlockLatex",
+      "filePath": "packages/tui/src/components/markdown.ts",
+      "lineRange": [
+        101,
+        121
+      ],
+      "summary": "扫描 $$ 块级公式，生成 latexBlock token。",
+      "tags": [
+        "markdown",
+        "latex",
+        "tokenizer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/markdown.ts:trimPartialClosingFences",
+      "type": "function",
+      "name": "trimPartialClosingFences",
+      "filePath": "packages/tui/src/components/markdown.ts",
+      "lineRange": [
+        146,
+        169
+      ],
+      "summary": "流式渲染时去掉未写完的代码围栏，避免闪烁残片。",
+      "tags": [
+        "markdown",
+        "streaming",
+        "fence"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/markdown.ts:del",
+      "type": "function",
+      "name": "del",
+      "filePath": "packages/tui/src/components/markdown.ts",
+      "lineRange": [
+        10,
+        24
+      ],
+      "summary": "严格匹配成对 ~~，避免松散删除线误伤文本。",
+      "tags": [
+        "markdown",
+        "tokenizer",
+        "strikethrough"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/tui/src/components/markdown.ts:Markdown",
+      "type": "class",
+      "name": "Markdown",
+      "filePath": "packages/tui/src/components/markdown.ts",
+      "lineRange": [
+        236,
+        1015
+      ],
+      "summary": "把 Markdown 词法树渲染成带主题、表格与公式的终端行。",
+      "tags": [
+        "component",
+        "markdown",
+        "rendering"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/tui/src/components/markdown.ts:constructor",
+      "type": "function",
+      "name": "constructor",
+      "filePath": "packages/tui/src/components/markdown.ts",
+      "lineRange": [
+        250,
+        265
+      ],
+      "summary": "保存 Markdown 文本、padding、主题与渲染选项。",
+      "tags": [
+        "markdown",
+        "initialization",
+        "theme"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/markdown.ts:render",
+      "type": "function",
+      "name": "render",
+      "filePath": "packages/tui/src/components/markdown.ts",
+      "lineRange": [
+        277,
+        376
+      ],
+      "summary": "解析 token 树、应用默认样式与 padding，并缓存按宽度的输出行。",
+      "tags": [
+        "markdown",
+        "rendering",
+        "cache"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/components/markdown.ts:applyDefaultStyle",
+      "type": "function",
+      "name": "applyDefaultStyle",
+      "filePath": "packages/tui/src/components/markdown.ts",
+      "lineRange": [
+        377,
+        405
+      ],
+      "summary": "给普通文本行套上默认前景/背景，跳过已有样式与图像行。",
+      "tags": [
+        "markdown",
+        "styling",
+        "ansi"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/markdown.ts:getDefaultStylePrefix",
+      "type": "function",
+      "name": "getDefaultStylePrefix",
+      "filePath": "packages/tui/src/components/markdown.ts",
+      "lineRange": [
+        406,
+        439
+      ],
+      "summary": "根据主题计算默认文本的 ANSI 前缀。",
+      "tags": [
+        "markdown",
+        "styling",
+        "theme"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/markdown.ts:renderToken",
+      "type": "function",
+      "name": "renderToken",
+      "filePath": "packages/tui/src/components/markdown.ts",
+      "lineRange": [
+        454,
+        633
+      ],
+      "summary": "按 token 类型渲染标题、代码、引用、列表、表格、公式与段落。",
+      "tags": [
+        "markdown",
+        "rendering",
+        "dispatch"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/components/markdown.ts:renderInlineTokens",
+      "type": "function",
+      "name": "renderInlineTokens",
+      "filePath": "packages/tui/src/components/markdown.ts",
+      "lineRange": [
+        634,
+        742
+      ],
+      "summary": "渲染行内加粗/链接/代码/公式，并在支持时输出 OSC 8 超链接。",
+      "tags": [
+        "markdown",
+        "inline",
+        "hyperlink"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/components/markdown.ts:renderList",
+      "type": "function",
+      "name": "renderList",
+      "filePath": "packages/tui/src/components/markdown.ts",
+      "lineRange": [
+        756,
+        810
+      ],
+      "summary": "渲染有序/无序列表，处理嵌套缩进与续行折行。",
+      "tags": [
+        "markdown",
+        "list",
+        "rendering"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/components/markdown.ts:getLongestWordWidth",
+      "type": "function",
+      "name": "getLongestWordWidth",
+      "filePath": "packages/tui/src/components/markdown.ts",
+      "lineRange": [
+        811,
+        828
+      ],
+      "summary": "测量单元格内最长词的可见宽度，供表格列宽估计。",
+      "tags": [
+        "markdown",
+        "table",
+        "metrics"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/markdown.ts:wrapCellText",
+      "type": "function",
+      "name": "wrapCellText",
+      "filePath": "packages/tui/src/components/markdown.ts",
+      "lineRange": [
+        829,
+        841
+      ],
+      "summary": "用 ANSI 感知折行把单元格文本限制在列宽内。",
+      "tags": [
+        "markdown",
+        "table",
+        "word-wrap"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/markdown.ts:renderTable",
+      "type": "function",
+      "name": "renderTable",
+      "filePath": "packages/tui/src/components/markdown.ts",
+      "lineRange": [
+        842,
+        1015
+      ],
+      "summary": "计算列宽、绘制表头分隔线，并按单元格折行对齐表格。",
+      "tags": [
+        "markdown",
+        "table",
+        "rendering"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/tui/src/components/mouse-region.ts",
+      "type": "file",
+      "name": "mouse-region.ts",
+      "filePath": "packages/tui/src/components/mouse-region.ts",
+      "summary": "鼠标区域包装器：原样渲染子组件，并把命中的鼠标事件回调给 onMouse。",
+      "tags": [
+        "component",
+        "event-handler",
+        "mouse"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/tui/src/components/mouse-region.ts:MouseRegion",
+      "type": "class",
+      "name": "MouseRegion",
+      "filePath": "packages/tui/src/components/mouse-region.ts",
+      "lineRange": [
+        12,
+        33
+      ],
+      "summary": "把鼠标事件从子组件坐标转交给外部 handler。",
+      "tags": [
+        "component",
+        "mouse",
+        "event-handler"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/tui/src/components/markdown.ts",
+      "target": "file:packages/tui/src/latex.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/markdown.ts",
+      "target": "file:packages/tui/src/terminal-image.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/markdown.ts",
+      "target": "file:packages/tui/src/tui.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/markdown.ts",
+      "target": "file:packages/tui/src/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/markdown.ts",
+      "target": "function:packages/tui/src/components/markdown.ts:tokenizeInlineLatex",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/markdown.ts",
+      "target": "function:packages/tui/src/components/markdown.ts:tokenizeBlockLatex",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/markdown.ts",
+      "target": "function:packages/tui/src/components/markdown.ts:trimPartialClosingFences",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/markdown.ts",
+      "target": "function:packages/tui/src/components/markdown.ts:del",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/markdown.ts",
+      "target": "class:packages/tui/src/components/markdown.ts:Markdown",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/markdown.ts",
+      "target": "class:packages/tui/src/components/markdown.ts:Markdown",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/components/markdown.ts",
+      "target": "function:packages/tui/src/components/markdown.ts:constructor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/markdown.ts",
+      "target": "function:packages/tui/src/components/markdown.ts:render",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/markdown.ts",
+      "target": "function:packages/tui/src/components/markdown.ts:applyDefaultStyle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/markdown.ts",
+      "target": "function:packages/tui/src/components/markdown.ts:getDefaultStylePrefix",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/markdown.ts",
+      "target": "function:packages/tui/src/components/markdown.ts:renderToken",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/markdown.ts",
+      "target": "function:packages/tui/src/components/markdown.ts:renderInlineTokens",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/markdown.ts",
+      "target": "function:packages/tui/src/components/markdown.ts:renderList",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/markdown.ts",
+      "target": "function:packages/tui/src/components/markdown.ts:getLongestWordWidth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/markdown.ts",
+      "target": "function:packages/tui/src/components/markdown.ts:wrapCellText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/markdown.ts",
+      "target": "function:packages/tui/src/components/markdown.ts:renderTable",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/mouse-region.ts",
+      "target": "file:packages/tui/src/tui.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/mouse-region.ts",
+      "target": "class:packages/tui/src/components/mouse-region.ts:MouseRegion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/mouse-region.ts",
+      "target": "class:packages/tui/src/components/mouse-region.ts:MouseRegion",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/markdown.ts:render",
+      "target": "function:packages/tui/src/components/markdown.ts:renderToken",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/markdown.ts:render",
+      "target": "function:packages/tui/src/utils.ts:wrapTextWithAnsi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/markdown.ts:render",
+      "target": "function:packages/tui/src/utils.ts:applyBackgroundToLine",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/markdown.ts:render",
+      "target": "function:packages/tui/src/terminal-image.ts:isImageLine",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/markdown.ts:renderToken",
+      "target": "function:packages/tui/src/latex.ts:renderLatex",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/markdown.ts:renderToken",
+      "target": "function:packages/tui/src/components/markdown.ts:renderInlineTokens",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/markdown.ts:renderToken",
+      "target": "function:packages/tui/src/components/markdown.ts:renderList",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/markdown.ts:renderToken",
+      "target": "function:packages/tui/src/components/markdown.ts:renderTable",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/markdown.ts:renderInlineTokens",
+      "target": "function:packages/tui/src/latex.ts:renderLatex",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/markdown.ts:renderInlineTokens",
+      "target": "function:packages/tui/src/terminal-image.ts:hyperlink",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/markdown.ts:renderInlineTokens",
+      "target": "function:packages/tui/src/terminal-image.ts:getCapabilities",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/markdown.ts:wrapCellText",
+      "target": "function:packages/tui/src/utils.ts:wrapTextWithAnsi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/markdown.ts:renderTable",
+      "target": "function:packages/tui/src/components/markdown.ts:wrapCellText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/markdown.ts:renderTable",
+      "target": "function:packages/tui/src/components/markdown.ts:getLongestWordWidth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/markdown.ts:renderList",
+      "target": "function:packages/tui/src/utils.ts:wrapTextWithAnsi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

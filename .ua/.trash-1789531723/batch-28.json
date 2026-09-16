@@ -1,0 +1,84 @@
+{
+  "nodes": [
+    {
+      "id": "config:.github/ISSUE_TEMPLATE/bug.yml",
+      "type": "config",
+      "name": "bug.yml",
+      "filePath": ".github/ISSUE_TEMPLATE/bug.yml",
+      "summary": "GitHub Issue 表单模板，用于提交缺陷报告，强制填写现象与最小复现步骤，并提示先读 CONTRIBUTING.md、用 `pi -ne` 排除扩展干扰。",
+      "tags": ["configuration", "github", "issue-template", "bug-report"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.github/ISSUE_TEMPLATE/config.yml",
+      "type": "config",
+      "name": "config.yml",
+      "filePath": ".github/ISSUE_TEMPLATE/config.yml",
+      "summary": "GitHub Issue 模板选择器配置：关闭空白 Issue，并把提问引导到 Discord。",
+      "tags": ["configuration", "github", "issue-template", "community"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.github/ISSUE_TEMPLATE/contribution.yml",
+      "type": "config",
+      "name": "contribution.yml",
+      "filePath": ".github/ISSUE_TEMPLATE/contribution.yml",
+      "summary": "GitHub Issue 表单模板，供新贡献者在提 PR 前提出改动或功能提案，收集要改什么、为什么以及可选实现思路。",
+      "tags": ["configuration", "github", "issue-template", "contribution"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.github/ISSUE_TEMPLATE/package-report.yml",
+      "type": "config",
+      "name": "package-report.yml",
+      "filePath": ".github/ISSUE_TEMPLATE/package-report.yml",
+      "summary": "GitHub Issue 表单模板，用于举报 pi.dev 上有问题的 Pi 包，收集包名、版本、举报类型（恶意、仿冒、商标/TOS）与详情。",
+      "tags": ["configuration", "github", "issue-template", "security"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "config:.github/ISSUE_TEMPLATE/config.yml",
+      "target": "config:.github/ISSUE_TEMPLATE/bug.yml",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:.github/ISSUE_TEMPLATE/config.yml",
+      "target": "config:.github/ISSUE_TEMPLATE/contribution.yml",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:.github/ISSUE_TEMPLATE/config.yml",
+      "target": "config:.github/ISSUE_TEMPLATE/package-report.yml",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:.github/ISSUE_TEMPLATE/bug.yml",
+      "target": "document:CONTRIBUTING.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:.github/ISSUE_TEMPLATE/contribution.yml",
+      "target": "document:CONTRIBUTING.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:.github/ISSUE_TEMPLATE/package-report.yml",
+      "target": "document:CONTRIBUTING.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

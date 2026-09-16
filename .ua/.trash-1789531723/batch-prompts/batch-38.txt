@@ -1,0 +1,3 @@
+1. packages/coding-agent/src/modes/interactive/theme/dark.json (91 lines, language: json, fileCategory: config)
+2. packages/coding-agent/src/modes/interactive/theme/light.json (90 lines, language: json, fileCategory: config)
+3. packages/coding-agent/src/modes/interactive/theme/theme-schema.json (356 lines, language: json, fileCategory: config)

@@ -1,0 +1,91 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/server/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/server/README.md",
+      "summary": "说明 @earendil-works/pi-server 实验性本地服务：按连接/Session 做 facet 路由与多 presentation 挂载，并给出 Unix socket 启动示例。覆盖 attachmentId 校验、SessionDirectory/SessionManagement 职责划分，以及 worker/Harness 生命周期由应用侧托管、协议层只负责稳定路由的设计。",
+      "tags": ["documentation", "entry-point", "server", "routing", "unix"],
+      "complexity": "moderate",
+      "languageNotes": "含一段 TypeScript 示例，演示 createUnixServer 与 ServerHost.resolveSession/openSession。"
+    },
+    {
+      "id": "config:packages/server/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "packages/server/package.json",
+      "summary": "定义 @earendil-works/pi-server（0.85.1）的 npm 包元数据、ESM 导出与构建脚本。公开 `.`、`./testing`、`./unix` 三个入口，依赖 chord、pi-agent-core、pi-protocol，并用 tsgo 配合 tsconfig.build.json 产出 dist。",
+      "tags": ["configuration", "npm-package", "exports", "build-system"],
+      "complexity": "moderate",
+      "languageNotes": "package exports 将 unix 传输单独挂到 ./unix，testing 辅助挂到 ./testing。"
+    },
+    {
+      "id": "config:packages/server/tsconfig.build.json",
+      "type": "config",
+      "name": "tsconfig.build.json",
+      "filePath": "packages/server/tsconfig.build.json",
+      "summary": "packages/server 的生产构建 TypeScript 配置：继承仓库根 tsconfig.base.json，将 src 编译到 dist，并排除声明文件与构建产物。",
+      "tags": ["configuration", "typescript", "build-system"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:packages/server/README.md",
+      "target": "file:packages/server/src/index.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/server/README.md",
+      "target": "file:packages/server/src/transports/unix/index.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:packages/server/package.json",
+      "target": "file:packages/server/src/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/server/package.json",
+      "target": "file:packages/server/src/testing/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/server/package.json",
+      "target": "file:packages/server/src/transports/unix/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/server/package.json",
+      "target": "config:packages/server/tsconfig.build.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/server/tsconfig.build.json",
+      "target": "config:tsconfig.base.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/server/tsconfig.build.json",
+      "target": "file:packages/server/src/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

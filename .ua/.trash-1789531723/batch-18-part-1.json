@@ -1,0 +1,1873 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/ai/src/models-store.ts",
+      "type": "file",
+      "name": "models-store.ts",
+      "filePath": "packages/ai/src/models-store.ts",
+      "summary": "定义按 provider ID 持久化模型目录的 ModelsStore 接口，并提供基于 Map 的 InMemoryModelsStore；读写使用 structuredClone，并尊重 AbortSignal。",
+      "tags": [
+        "data-model",
+        "in-memory-store",
+        "模型目录"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/ai/src/models-store.ts:InMemoryModelsStore",
+      "type": "class",
+      "name": "InMemoryModelsStore",
+      "filePath": "packages/ai/src/models-store.ts",
+      "lineRange": [
+        27,
+        45
+      ],
+      "summary": "进程内 ModelsStore：按 provider 缓存目录条目，read/write 深拷贝，delete 移除条目。",
+      "tags": [
+        "in-memory-store",
+        "data-model",
+        "实现"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/providers/faux.ts",
+      "type": "file",
+      "name": "faux.ts",
+      "filePath": "packages/ai/src/providers/faux.ts",
+      "summary": "测试用 faux provider：按脚本队列产出 assistant 消息，模拟 token 增量流、usage 估算以及 deferred 拉取/取消，再通过 createProvider 注册为真实 Provider。",
+      "tags": [
+        "test",
+        "factory",
+        "provider",
+        "测试替身"
+      ],
+      "complexity": "complex",
+      "languageNotes": "用 queueMicrotask 驱动异步事件流，避免测试里真实网络 I/O。"
+    },
+    {
+      "id": "function:packages/ai/src/providers/faux.ts:fauxText",
+      "type": "function",
+      "name": "fauxText",
+      "filePath": "packages/ai/src/providers/faux.ts",
+      "lineRange": [
+        52,
+        54
+      ],
+      "summary": "构造 type=text 的 Faux 文本内容块。",
+      "tags": [
+        "factory",
+        "test",
+        "content"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/faux.ts:fauxThinking",
+      "type": "function",
+      "name": "fauxThinking",
+      "filePath": "packages/ai/src/providers/faux.ts",
+      "lineRange": [
+        56,
+        58
+      ],
+      "summary": "构造 type=thinking 的 Faux 思考内容块。",
+      "tags": [
+        "factory",
+        "test",
+        "thinking"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/faux.ts:fauxToolCall",
+      "type": "function",
+      "name": "fauxToolCall",
+      "filePath": "packages/ai/src/providers/faux.ts",
+      "lineRange": [
+        60,
+        67
+      ],
+      "summary": "构造带随机 id 的 Faux toolCall 内容块。",
+      "tags": [
+        "factory",
+        "test",
+        "tool-call"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/faux.ts:fauxAssistantMessage",
+      "type": "function",
+      "name": "fauxAssistantMessage",
+      "filePath": "packages/ai/src/providers/faux.ts",
+      "lineRange": [
+        76,
+        99
+      ],
+      "summary": "把字符串或内容块规范成完整 AssistantMessage，填入 faux 默认 api/provider/model 与 usage。",
+      "tags": [
+        "factory",
+        "test",
+        "assistant-message"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/faux.ts:contentToText",
+      "type": "function",
+      "name": "contentToText",
+      "filePath": "packages/ai/src/providers/faux.ts",
+      "lineRange": [
+        164,
+        176
+      ],
+      "summary": "把用户/工具结果内容块压成文本，图像块用 mime 与长度占位。",
+      "tags": [
+        "utility",
+        "serialization",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/faux.ts:assistantContentToText",
+      "type": "function",
+      "name": "assistantContentToText",
+      "filePath": "packages/ai/src/providers/faux.ts",
+      "lineRange": [
+        178,
+        190
+      ],
+      "summary": "把 assistant 内容块压成文本，thinking 与 toolCall 也参与序列化。",
+      "tags": [
+        "utility",
+        "serialization",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/faux.ts:serializeContext",
+      "type": "function",
+      "name": "serializeContext",
+      "filePath": "packages/ai/src/providers/faux.ts",
+      "lineRange": [
+        206,
+        218
+      ],
+      "summary": "序列化 system/messages/tools，供 prompt-cache 前缀比较与 token 估算。",
+      "tags": [
+        "utility",
+        "serialization",
+        "prompt-cache"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/faux.ts:withUsageEstimate",
+      "type": "function",
+      "name": "withUsageEstimate",
+      "filePath": "packages/ai/src/providers/faux.ts",
+      "lineRange": [
+        229,
+        267
+      ],
+      "summary": "按上下文序列估算 input/output/cacheRead/cacheWrite，并写入 AssistantMessage.usage。",
+      "tags": [
+        "token-estimate",
+        "usage",
+        "test"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/providers/faux.ts:splitStringByTokenSize",
+      "type": "function",
+      "name": "splitStringByTokenSize",
+      "filePath": "packages/ai/src/providers/faux.ts",
+      "lineRange": [
+        269,
+        279
+      ],
+      "summary": "按 min/max token 字符窗口把字符串切成流式 delta 片段。",
+      "tags": [
+        "streaming",
+        "utility",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/faux.ts:cloneMessage",
+      "type": "function",
+      "name": "cloneMessage",
+      "filePath": "packages/ai/src/providers/faux.ts",
+      "lineRange": [
+        281,
+        291
+      ],
+      "summary": "深拷贝 AssistantMessage 并覆盖 api/provider/modelId。",
+      "tags": [
+        "utility",
+        "clone",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/faux.ts:createDeferredMessage",
+      "type": "function",
+      "name": "createDeferredMessage",
+      "filePath": "packages/ai/src/providers/faux.ts",
+      "lineRange": [
+        293,
+        305
+      ],
+      "summary": "构造 stopReason=deferred 的占位 assistant 消息，携带 DeferredHandle。",
+      "tags": [
+        "factory",
+        "deferred",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/faux.ts:createErrorMessage",
+      "type": "function",
+      "name": "createErrorMessage",
+      "filePath": "packages/ai/src/providers/faux.ts",
+      "lineRange": [
+        307,
+        319
+      ],
+      "summary": "把任意抛出值转成 stopReason=error 的 AssistantMessage。",
+      "tags": [
+        "error-handling",
+        "factory",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/faux.ts:streamWithDeltas",
+      "type": "function",
+      "name": "streamWithDeltas",
+      "filePath": "packages/ai/src/providers/faux.ts",
+      "lineRange": [
+        338,
+        434
+      ],
+      "summary": "把完整 assistant 消息拆成 start/delta/end 事件推入流，可按 tokensPerSecond 节流，并处理 abort。",
+      "tags": [
+        "streaming",
+        "event-stream",
+        "test"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/ai/src/providers/faux.ts:createFauxCore",
+      "type": "function",
+      "name": "createFauxCore",
+      "filePath": "packages/ai/src/providers/faux.ts",
+      "lineRange": [
+        436,
+        673
+      ],
+      "summary": "创建 faux 核心：脚本化 stream/streamSimple、deferred fetch/cancel、模型解析与响应队列。",
+      "tags": [
+        "factory",
+        "provider",
+        "test",
+        "deferred"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/ai/src/providers/faux.ts:fauxProvider",
+      "type": "function",
+      "name": "fauxProvider",
+      "filePath": "packages/ai/src/providers/faux.ts",
+      "lineRange": [
+        685,
+        708
+      ],
+      "summary": "用 createFauxCore 加上 createProvider，返回可挂到 Models 集合的测试 Provider 句柄。",
+      "tags": [
+        "factory",
+        "provider",
+        "test",
+        "entry-point"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/providers/images/register-builtins.ts",
+      "type": "file",
+      "name": "register-builtins.ts",
+      "filePath": "packages/ai/src/providers/images/register-builtins.ts",
+      "summary": "懒加载 OpenRouter 图像 API 并注册为内置 images provider；模块加载失败时返回 stopReason=error 的 AssistantImages。模块加载时自动执行注册。",
+      "tags": [
+        "entry-point",
+        "lazy-load",
+        "images",
+        "registry"
+      ],
+      "complexity": "simple",
+      "languageNotes": "使用动态 import 延迟加载 openrouter-images，避免主路径拉入图像实现。"
+    },
+    {
+      "id": "function:packages/ai/src/providers/images/register-builtins.ts:createLazyLoadErrorImages",
+      "type": "function",
+      "name": "createLazyLoadErrorImages",
+      "filePath": "packages/ai/src/providers/images/register-builtins.ts",
+      "lineRange": [
+        11,
+        21
+      ],
+      "summary": "把懒加载失败转成带 errorMessage 的空输出 AssistantImages。",
+      "tags": [
+        "error-handling",
+        "images",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/images/register-builtins.ts:generateImagesOpenRouter",
+      "type": "function",
+      "name": "generateImagesOpenRouter",
+      "filePath": "packages/ai/src/providers/images/register-builtins.ts",
+      "lineRange": [
+        30,
+        41
+      ],
+      "summary": "懒加载后转发到 OpenRouter generateImages，捕获异常并返回错误图像结果。",
+      "tags": [
+        "images",
+        "lazy-load",
+        "api-handler"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/images/register-builtins.ts:registerBuiltInImagesApiProviders",
+      "type": "function",
+      "name": "registerBuiltInImagesApiProviders",
+      "filePath": "packages/ai/src/providers/images/register-builtins.ts",
+      "lineRange": [
+        43,
+        48
+      ],
+      "summary": "把 openrouter-images 注册进 images API registry。",
+      "tags": [
+        "registry",
+        "images",
+        "entry-point"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/session-resources.ts",
+      "type": "file",
+      "name": "session-resources.ts",
+      "filePath": "packages/ai/src/session-resources.ts",
+      "summary": "维护会话级 cleanup 回调集合；cleanupSessionResources 逐一执行，任一失败则汇总为 AggregateError。",
+      "tags": [
+        "session",
+        "cleanup",
+        "resource-management"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/session-resources.ts:registerSessionResourceCleanup",
+      "type": "function",
+      "name": "registerSessionResourceCleanup",
+      "filePath": "packages/ai/src/session-resources.ts",
+      "lineRange": [
+        5,
+        10
+      ],
+      "summary": "注册会话资源清理回调，并返回用于注销的 disposer。",
+      "tags": [
+        "session",
+        "cleanup",
+        "registry"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/session-resources.ts:cleanupSessionResources",
+      "type": "function",
+      "name": "cleanupSessionResources",
+      "filePath": "packages/ai/src/session-resources.ts",
+      "lineRange": [
+        12,
+        24
+      ],
+      "summary": "对全部 cleanup 回调执行会话清理，收集错误后一次性抛出 AggregateError。",
+      "tags": [
+        "session",
+        "cleanup",
+        "error-handling"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/types.ts",
+      "type": "file",
+      "name": "types.ts",
+      "filePath": "packages/ai/src/types.ts",
+      "summary": "pi-ai 核心类型契约：KnownApi/Provider、消息与工具、流与图像选项、各厂商 compat，以及 Model/ImagesModel 与成本结构。",
+      "tags": [
+        "type-definition",
+        "data-model",
+        "类型定义",
+        "barrel"
+      ],
+      "complexity": "complex",
+      "languageNotes": "以 export type/interface 为主的契约文件；tree-sitter 只抽到 AssistantMessageEventStream 的类型再导出。"
+    },
+    {
+      "id": "file:packages/ai/src/utils/abort-signals.ts",
+      "type": "file",
+      "name": "abort-signals.ts",
+      "filePath": "packages/ai/src/utils/abort-signals.ts",
+      "summary": "合并多个 AbortSignal：任一源 abort 即触发，并在返回 signal abort 时拆除监听以免泄漏。",
+      "tags": [
+        "utility",
+        "abort",
+        "cancellation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/abort-signals.ts:combineAbortSignals",
+      "type": "function",
+      "name": "combineAbortSignals",
+      "filePath": "packages/ai/src/utils/abort-signals.ts",
+      "lineRange": [
+        6,
+        41
+      ],
+      "summary": "过滤有效 AbortSignal 并合成一个联动 abort 的新 signal，带 abort 清理。",
+      "tags": [
+        "utility",
+        "abort",
+        "cancellation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/ai/src/utils/assistant-message-frame.ts",
+      "type": "file",
+      "name": "assistant-message-frame.ts",
+      "filePath": "packages/ai/src/utils/assistant-message-frame.ts",
+      "summary": "把 AssistantMessageEvent 编成可传输 frame，处理 text/thinking/toolCall 增量与 JSON 前缀追赶，并能从 frame 还原 assistant 消息。",
+      "tags": [
+        "serialization",
+        "streaming",
+        "assistant-message",
+        "frame"
+      ],
+      "complexity": "complex",
+      "languageNotes": "toolcall_delta 会用 parseStreamingJson 追赶 start 快照，兼容 grammar 调用的遗留初始 input。"
+    },
+    {
+      "id": "function:packages/ai/src/utils/assistant-message-frame.ts:cloneToolCall",
+      "type": "function",
+      "name": "cloneToolCall",
+      "filePath": "packages/ai/src/utils/assistant-message-frame.ts",
+      "lineRange": [
+        66,
+        75
+      ],
+      "summary": "深拷贝 toolCall，arguments 用 structuredClone。",
+      "tags": [
+        "clone",
+        "tool-call",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/assistant-message-frame.ts:cloneStartMessage",
+      "type": "function",
+      "name": "cloneStartMessage",
+      "filePath": "packages/ai/src/utils/assistant-message-frame.ts",
+      "lineRange": [
+        77,
+        92
+      ],
+      "summary": "深拷贝 start 事件中的部分 AssistantMessage，避免后续增量污染快照。",
+      "tags": [
+        "clone",
+        "assistant-message",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/assistant-message-frame.ts:isJsonPrefix",
+      "type": "function",
+      "name": "isJsonPrefix",
+      "filePath": "packages/ai/src/utils/assistant-message-frame.ts",
+      "lineRange": [
+        117,
+        132
+      ],
+      "summary": "递归判断 current JSON 值是否为 snapshot 的前缀扩展，用于 tool-call 增量追赶。",
+      "tags": [
+        "validation",
+        "json",
+        "streaming"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/ai/src/utils/assistant-message-frame.ts:AssistantMessageFrameEncoder",
+      "type": "class",
+      "name": "AssistantMessageFrameEncoder",
+      "filePath": "packages/ai/src/utils/assistant-message-frame.ts",
+      "lineRange": [
+        139,
+        326
+      ],
+      "summary": "有状态编码器：按 start/delta/end 事件输出 frame，并处理 toolCall JSON 追赶与 text/thinking 覆盖增量。",
+      "tags": [
+        "serialization",
+        "streaming",
+        "encoder"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/ai/src/utils/assistant-message-frame.ts:encode",
+      "type": "function",
+      "name": "encode",
+      "filePath": "packages/ai/src/utils/assistant-message-frame.ts",
+      "lineRange": [
+        144,
+        285
+      ],
+      "summary": "将单个 AssistantMessageEvent 转为 frame；终态 done/error 不产出 frame，非法顺序抛错。",
+      "tags": [
+        "serialization",
+        "streaming",
+        "encoder"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/ai/src/utils/assistant-message-frame.ts:encodeTextDelta",
+      "type": "function",
+      "name": "encodeTextDelta",
+      "filePath": "packages/ai/src/utils/assistant-message-frame.ts",
+      "lineRange": [
+        310,
+        325
+      ],
+      "summary": "对 text/thinking 增量去掉已被 start 快照覆盖的前缀，只发送未覆盖字符。",
+      "tags": [
+        "streaming",
+        "delta",
+        "encoder"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/assistant-message-frame.ts:appendBlock",
+      "type": "function",
+      "name": "appendBlock",
+      "filePath": "packages/ai/src/utils/assistant-message-frame.ts",
+      "lineRange": [
+        328,
+        342
+      ],
+      "summary": "按 contentIndex 追加块到还原中的消息，禁止覆盖已有块或留下空洞。",
+      "tags": [
+        "reducer",
+        "assistant-message",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/assistant-message-frame.ts:activeBlock",
+      "type": "function",
+      "name": "activeBlock",
+      "filePath": "packages/ai/src/utils/assistant-message-frame.ts",
+      "lineRange": [
+        344,
+        366
+      ],
+      "summary": "取出指定 index 的进行中块并校验 kind，供 reducer 追加 delta。",
+      "tags": [
+        "reducer",
+        "validation",
+        "assistant-message"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/assistant-message-frame.ts:reduceAssistantMessageFrames",
+      "type": "function",
+      "name": "reduceAssistantMessageFrames",
+      "filePath": "packages/ai/src/utils/assistant-message-frame.ts",
+      "lineRange": [
+        372,
+        490
+      ],
+      "summary": "把 frame 序列还原为 AssistantMessage，拼接 text/thinking 并流式解析 toolCall JSON。",
+      "tags": [
+        "reducer",
+        "serialization",
+        "assistant-message"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/ai/src/utils/deferred-tools.ts",
+      "type": "file",
+      "name": "deferred-tools.ts",
+      "filePath": "packages/ai/src/utils/deferred-tools.ts",
+      "summary": "根据 transcript 里 toolResult.addedToolNames，把当前工具拆成立即下发与延迟加载两套。",
+      "tags": [
+        "tools",
+        "deferred",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/deferred-tools.ts:splitDeferredTools",
+      "type": "function",
+      "name": "splitDeferredTools",
+      "filePath": "packages/ai/src/utils/deferred-tools.ts",
+      "lineRange": [
+        8,
+        39
+      ],
+      "summary": "按已用 toolCall 与 addedToolNames 划分 immediate/deferred 工具表，可自定义名称归一化。",
+      "tags": [
+        "tools",
+        "deferred",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/ai/src/utils/diagnostics.ts",
+      "type": "file",
+      "name": "diagnostics.ts",
+      "filePath": "packages/ai/src/utils/diagnostics.ts",
+      "summary": "把抛出值规范化为 AssistantMessageDiagnostic，并追加到 assistant 消息的 diagnostics 列表。",
+      "tags": [
+        "diagnostics",
+        "error-handling",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/diagnostics.ts:formatThrownValue",
+      "type": "function",
+      "name": "formatThrownValue",
+      "filePath": "packages/ai/src/utils/diagnostics.ts",
+      "lineRange": [
+        15,
+        19
+      ],
+      "summary": "把 Error 或任意抛出值格式化为诊断字符串。",
+      "tags": [
+        "diagnostics",
+        "error-handling",
+        "formatting"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/diagnostics.ts:extractDiagnosticError",
+      "type": "function",
+      "name": "extractDiagnosticError",
+      "filePath": "packages/ai/src/utils/diagnostics.ts",
+      "lineRange": [
+        21,
+        30
+      ],
+      "summary": "从未知错误提取 name/message，供诊断记录使用。",
+      "tags": [
+        "diagnostics",
+        "error-handling",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/diagnostics.ts:createAssistantMessageDiagnostic",
+      "type": "function",
+      "name": "createAssistantMessageDiagnostic",
+      "filePath": "packages/ai/src/utils/diagnostics.ts",
+      "lineRange": [
+        32,
+        38
+      ],
+      "summary": "创建带 type/error/details 的 AssistantMessageDiagnostic。",
+      "tags": [
+        "diagnostics",
+        "factory",
+        "assistant-message"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/diagnostics.ts:appendAssistantMessageDiagnostic",
+      "type": "function",
+      "name": "appendAssistantMessageDiagnostic",
+      "filePath": "packages/ai/src/utils/diagnostics.ts",
+      "lineRange": [
+        40,
+        45
+      ],
+      "summary": "把一条诊断追加到 AssistantMessage.diagnostics。",
+      "tags": [
+        "diagnostics",
+        "assistant-message",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/utils/error-body.ts",
+      "type": "file",
+      "name": "error-body.ts",
+      "filePath": "packages/ai/src/utils/error-body.ts",
+      "summary": "从各厂商 SDK 错误对象抽取 HTTP status 与 body，截断后格式化为可读 provider 错误文本，避免只剩 “403 no body”。",
+      "tags": [
+        "error-handling",
+        "provider",
+        "normalization"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "兼容 Mistral、openai、@google/genai、Bedrock 等不同字段名，并用 messageCarriesBody 避免重复打印。"
+    },
+    {
+      "id": "function:packages/ai/src/utils/error-body.ts:normalizeProviderError",
+      "type": "function",
+      "name": "normalizeProviderError",
+      "filePath": "packages/ai/src/utils/error-body.ts",
+      "lineRange": [
+        38,
+        54
+      ],
+      "summary": "探测 SDK 错误形状，返回 status/body/message 及 body 是否已含在 message 中。",
+      "tags": [
+        "error-handling",
+        "normalization",
+        "provider"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/error-body.ts:formatProviderError",
+      "type": "function",
+      "name": "formatProviderError",
+      "filePath": "packages/ai/src/utils/error-body.ts",
+      "lineRange": [
+        128,
+        135
+      ],
+      "summary": "把规范化错误拼成带可选前缀的展示字符串。",
+      "tags": [
+        "error-handling",
+        "formatting",
+        "provider"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/error-body.ts:truncateErrorText",
+      "type": "function",
+      "name": "truncateErrorText",
+      "filePath": "packages/ai/src/utils/error-body.ts",
+      "lineRange": [
+        137,
+        140
+      ],
+      "summary": "按字符上限截断错误文本。",
+      "tags": [
+        "error-handling",
+        "utility",
+        "truncation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/error-body.ts:safeJsonStringify",
+      "type": "function",
+      "name": "safeJsonStringify",
+      "filePath": "packages/ai/src/utils/error-body.ts",
+      "lineRange": [
+        142,
+        149
+      ],
+      "summary": "安全 JSON.stringify，循环引用或不可序列化时回退占位串。",
+      "tags": [
+        "serialization",
+        "error-handling",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/utils/estimate.ts",
+      "type": "file",
+      "name": "estimate.ts",
+      "filePath": "packages/ai/src/utils/estimate.ts",
+      "summary": "用约 4 字符/token 启发式估算消息、图像、工具与完整 context 的 token，并优先复用最近 assistant usage。",
+      "tags": [
+        "token-estimate",
+        "utility",
+        "usage"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/utils/estimate.ts:calculateContextTokens",
+      "type": "function",
+      "name": "calculateContextTokens",
+      "filePath": "packages/ai/src/utils/estimate.ts",
+      "lineRange": [
+        17,
+        19
+      ],
+      "summary": "从 Usage 取 totalTokens，否则把 input/output/cache 分量相加。",
+      "tags": [
+        "token-estimate",
+        "usage",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/estimate.ts:estimateTextTokens",
+      "type": "function",
+      "name": "estimateTextTokens",
+      "filePath": "packages/ai/src/utils/estimate.ts",
+      "lineRange": [
+        37,
+        39
+      ],
+      "summary": "按字符数/4 估算纯文本 token。",
+      "tags": [
+        "token-estimate",
+        "utility",
+        "text"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/estimate.ts:estimateTextAndImageContentTokens",
+      "type": "function",
+      "name": "estimateTextAndImageContentTokens",
+      "filePath": "packages/ai/src/utils/estimate.ts",
+      "lineRange": [
+        41,
+        43
+      ],
+      "summary": "估算文本加图像内容块的 token（图像按固定字符当量）。",
+      "tags": [
+        "token-estimate",
+        "images",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/estimate.ts:estimateMessageTokens",
+      "type": "function",
+      "name": "estimateMessageTokens",
+      "filePath": "packages/ai/src/utils/estimate.ts",
+      "lineRange": [
+        45,
+        61
+      ],
+      "summary": "按角色估算单条 user/assistant/toolResult 消息的 token。",
+      "tags": [
+        "token-estimate",
+        "message",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/estimate.ts:getLastAssistantUsageInfo",
+      "type": "function",
+      "name": "getLastAssistantUsageInfo",
+      "filePath": "packages/ai/src/utils/estimate.ts",
+      "lineRange": [
+        63,
+        87
+      ],
+      "summary": "从后往前找带有效 usage 的 assistant 消息，作为估算锚点。",
+      "tags": [
+        "token-estimate",
+        "usage",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/estimate.ts:estimateMessages",
+      "type": "function",
+      "name": "estimateMessages",
+      "filePath": "packages/ai/src/utils/estimate.ts",
+      "lineRange": [
+        89,
+        103
+      ],
+      "summary": "对消息数组逐条估算并求和。",
+      "tags": [
+        "token-estimate",
+        "message",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/estimate.ts:estimateContextTokens",
+      "type": "function",
+      "name": "estimateContextTokens",
+      "filePath": "packages/ai/src/utils/estimate.ts",
+      "lineRange": [
+        114,
+        143
+      ],
+      "summary": "综合 system、tools、历史 usage 与其后消息，返回 ContextUsageEstimate。",
+      "tags": [
+        "token-estimate",
+        "context",
+        "usage"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/ai/src/utils/event-stream.ts",
+      "type": "file",
+      "name": "event-stream.ts",
+      "filePath": "packages/ai/src/utils/event-stream.ts",
+      "summary": "通用异步事件流：双栈 FIFO 在生产者 push 与消费者 async iterate 之间交接；AssistantMessageEventStream 在 done/error 时给出最终消息。",
+      "tags": [
+        "streaming",
+        "async-iterable",
+        "event-stream"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "用两个数组模拟 FIFO，避免 shift 的 O(n) 成本。"
+    },
+    {
+      "id": "class:packages/ai/src/utils/event-stream.ts:FifoQueue",
+      "type": "class",
+      "name": "FifoQueue",
+      "filePath": "packages/ai/src/utils/event-stream.ts",
+      "lineRange": [
+        3,
+        23
+      ],
+      "summary": "双栈 FIFO：enqueue 入 incoming，dequeue 时翻转到 outgoing。",
+      "tags": [
+        "queue",
+        "utility",
+        "data-structure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/ai/src/utils/event-stream.ts:EventStream",
+      "type": "class",
+      "name": "EventStream",
+      "filePath": "packages/ai/src/utils/event-stream.ts",
+      "lineRange": [
+        26,
+        89
+      ],
+      "summary": "可异步迭代的事件流：push 投递或唤醒 waiter，end 结束，result 等待终态提取值。",
+      "tags": [
+        "streaming",
+        "async-iterable",
+        "event-stream"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/utils/event-stream.ts:push",
+      "type": "function",
+      "name": "push",
+      "filePath": "packages/ai/src/utils/event-stream.ts",
+      "lineRange": [
+        43,
+        58
+      ],
+      "summary": "推入事件；若判定完成则 resolve 最终结果，否则交给 waiter 或入队。",
+      "tags": [
+        "streaming",
+        "event-stream",
+        "producer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/event-stream.ts:end",
+      "type": "function",
+      "name": "end",
+      "filePath": "packages/ai/src/utils/event-stream.ts",
+      "lineRange": [
+        60,
+        70
+      ],
+      "summary": "标记流结束，可选写入最终结果并唤醒全部等待中的消费者。",
+      "tags": [
+        "streaming",
+        "event-stream",
+        "producer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/ai/src/utils/event-stream.ts:AssistantMessageEventStream",
+      "type": "class",
+      "name": "AssistantMessageEventStream",
+      "filePath": "packages/ai/src/utils/event-stream.ts",
+      "lineRange": [
+        91,
+        105
+      ],
+      "summary": "特化 EventStream：done/error 为终态，分别提取 message 或 error。",
+      "tags": [
+        "streaming",
+        "assistant-message",
+        "event-stream"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/event-stream.ts:createAssistantMessageEventStream",
+      "type": "function",
+      "name": "createAssistantMessageEventStream",
+      "filePath": "packages/ai/src/utils/event-stream.ts",
+      "lineRange": [
+        108,
+        110
+      ],
+      "summary": "工厂函数，供扩展创建 AssistantMessageEventStream。",
+      "tags": [
+        "factory",
+        "streaming",
+        "assistant-message"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/ai/src/models-store.ts",
+      "target": "class:packages/ai/src/models-store.ts:InMemoryModelsStore",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/models-store.ts",
+      "target": "class:packages/ai/src/models-store.ts:InMemoryModelsStore",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "function:packages/ai/src/providers/faux.ts:fauxText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "function:packages/ai/src/providers/faux.ts:fauxText",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "function:packages/ai/src/providers/faux.ts:fauxThinking",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "function:packages/ai/src/providers/faux.ts:fauxThinking",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "function:packages/ai/src/providers/faux.ts:fauxToolCall",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "function:packages/ai/src/providers/faux.ts:fauxToolCall",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "function:packages/ai/src/providers/faux.ts:fauxAssistantMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "function:packages/ai/src/providers/faux.ts:fauxAssistantMessage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "function:packages/ai/src/providers/faux.ts:contentToText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "function:packages/ai/src/providers/faux.ts:assistantContentToText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "function:packages/ai/src/providers/faux.ts:serializeContext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "function:packages/ai/src/providers/faux.ts:withUsageEstimate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "function:packages/ai/src/providers/faux.ts:splitStringByTokenSize",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "function:packages/ai/src/providers/faux.ts:cloneMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "function:packages/ai/src/providers/faux.ts:createDeferredMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "function:packages/ai/src/providers/faux.ts:createErrorMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "function:packages/ai/src/providers/faux.ts:streamWithDeltas",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "function:packages/ai/src/providers/faux.ts:createFauxCore",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "function:packages/ai/src/providers/faux.ts:createFauxCore",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "function:packages/ai/src/providers/faux.ts:fauxProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "function:packages/ai/src/providers/faux.ts:fauxProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/images/register-builtins.ts",
+      "target": "function:packages/ai/src/providers/images/register-builtins.ts:createLazyLoadErrorImages",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/images/register-builtins.ts",
+      "target": "function:packages/ai/src/providers/images/register-builtins.ts:generateImagesOpenRouter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/images/register-builtins.ts",
+      "target": "function:packages/ai/src/providers/images/register-builtins.ts:generateImagesOpenRouter",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/images/register-builtins.ts",
+      "target": "function:packages/ai/src/providers/images/register-builtins.ts:registerBuiltInImagesApiProviders",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/images/register-builtins.ts",
+      "target": "function:packages/ai/src/providers/images/register-builtins.ts:registerBuiltInImagesApiProviders",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/session-resources.ts",
+      "target": "function:packages/ai/src/session-resources.ts:registerSessionResourceCleanup",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/session-resources.ts",
+      "target": "function:packages/ai/src/session-resources.ts:registerSessionResourceCleanup",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/session-resources.ts",
+      "target": "function:packages/ai/src/session-resources.ts:cleanupSessionResources",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/session-resources.ts",
+      "target": "function:packages/ai/src/session-resources.ts:cleanupSessionResources",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/abort-signals.ts",
+      "target": "function:packages/ai/src/utils/abort-signals.ts:combineAbortSignals",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/abort-signals.ts",
+      "target": "function:packages/ai/src/utils/abort-signals.ts:combineAbortSignals",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/assistant-message-frame.ts",
+      "target": "function:packages/ai/src/utils/assistant-message-frame.ts:cloneToolCall",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/assistant-message-frame.ts",
+      "target": "function:packages/ai/src/utils/assistant-message-frame.ts:cloneStartMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/assistant-message-frame.ts",
+      "target": "function:packages/ai/src/utils/assistant-message-frame.ts:isJsonPrefix",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/assistant-message-frame.ts",
+      "target": "class:packages/ai/src/utils/assistant-message-frame.ts:AssistantMessageFrameEncoder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/assistant-message-frame.ts",
+      "target": "class:packages/ai/src/utils/assistant-message-frame.ts:AssistantMessageFrameEncoder",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/assistant-message-frame.ts",
+      "target": "function:packages/ai/src/utils/assistant-message-frame.ts:encode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/assistant-message-frame.ts",
+      "target": "function:packages/ai/src/utils/assistant-message-frame.ts:encodeTextDelta",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/assistant-message-frame.ts",
+      "target": "function:packages/ai/src/utils/assistant-message-frame.ts:appendBlock",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/assistant-message-frame.ts",
+      "target": "function:packages/ai/src/utils/assistant-message-frame.ts:activeBlock",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/assistant-message-frame.ts",
+      "target": "function:packages/ai/src/utils/assistant-message-frame.ts:reduceAssistantMessageFrames",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/assistant-message-frame.ts",
+      "target": "function:packages/ai/src/utils/assistant-message-frame.ts:reduceAssistantMessageFrames",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/deferred-tools.ts",
+      "target": "function:packages/ai/src/utils/deferred-tools.ts:splitDeferredTools",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/deferred-tools.ts",
+      "target": "function:packages/ai/src/utils/deferred-tools.ts:splitDeferredTools",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/diagnostics.ts",
+      "target": "function:packages/ai/src/utils/diagnostics.ts:formatThrownValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/diagnostics.ts",
+      "target": "function:packages/ai/src/utils/diagnostics.ts:formatThrownValue",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/diagnostics.ts",
+      "target": "function:packages/ai/src/utils/diagnostics.ts:extractDiagnosticError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/diagnostics.ts",
+      "target": "function:packages/ai/src/utils/diagnostics.ts:extractDiagnosticError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/diagnostics.ts",
+      "target": "function:packages/ai/src/utils/diagnostics.ts:createAssistantMessageDiagnostic",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/diagnostics.ts",
+      "target": "function:packages/ai/src/utils/diagnostics.ts:createAssistantMessageDiagnostic",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/diagnostics.ts",
+      "target": "function:packages/ai/src/utils/diagnostics.ts:appendAssistantMessageDiagnostic",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/diagnostics.ts",
+      "target": "function:packages/ai/src/utils/diagnostics.ts:appendAssistantMessageDiagnostic",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/error-body.ts",
+      "target": "function:packages/ai/src/utils/error-body.ts:normalizeProviderError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/error-body.ts",
+      "target": "function:packages/ai/src/utils/error-body.ts:normalizeProviderError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/error-body.ts",
+      "target": "function:packages/ai/src/utils/error-body.ts:formatProviderError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/error-body.ts",
+      "target": "function:packages/ai/src/utils/error-body.ts:formatProviderError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/error-body.ts",
+      "target": "function:packages/ai/src/utils/error-body.ts:truncateErrorText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/error-body.ts",
+      "target": "function:packages/ai/src/utils/error-body.ts:truncateErrorText",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/error-body.ts",
+      "target": "function:packages/ai/src/utils/error-body.ts:safeJsonStringify",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/error-body.ts",
+      "target": "function:packages/ai/src/utils/error-body.ts:safeJsonStringify",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/estimate.ts",
+      "target": "function:packages/ai/src/utils/estimate.ts:calculateContextTokens",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/estimate.ts",
+      "target": "function:packages/ai/src/utils/estimate.ts:calculateContextTokens",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/estimate.ts",
+      "target": "function:packages/ai/src/utils/estimate.ts:estimateTextTokens",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/estimate.ts",
+      "target": "function:packages/ai/src/utils/estimate.ts:estimateTextTokens",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/estimate.ts",
+      "target": "function:packages/ai/src/utils/estimate.ts:estimateTextAndImageContentTokens",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/estimate.ts",
+      "target": "function:packages/ai/src/utils/estimate.ts:estimateTextAndImageContentTokens",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/estimate.ts",
+      "target": "function:packages/ai/src/utils/estimate.ts:estimateMessageTokens",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/estimate.ts",
+      "target": "function:packages/ai/src/utils/estimate.ts:estimateMessageTokens",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/estimate.ts",
+      "target": "function:packages/ai/src/utils/estimate.ts:getLastAssistantUsageInfo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/estimate.ts",
+      "target": "function:packages/ai/src/utils/estimate.ts:estimateMessages",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/estimate.ts",
+      "target": "function:packages/ai/src/utils/estimate.ts:estimateContextTokens",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/estimate.ts",
+      "target": "function:packages/ai/src/utils/estimate.ts:estimateContextTokens",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/event-stream.ts",
+      "target": "class:packages/ai/src/utils/event-stream.ts:FifoQueue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/event-stream.ts",
+      "target": "class:packages/ai/src/utils/event-stream.ts:EventStream",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/event-stream.ts",
+      "target": "class:packages/ai/src/utils/event-stream.ts:EventStream",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/event-stream.ts",
+      "target": "function:packages/ai/src/utils/event-stream.ts:push",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/event-stream.ts",
+      "target": "function:packages/ai/src/utils/event-stream.ts:end",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/event-stream.ts",
+      "target": "class:packages/ai/src/utils/event-stream.ts:AssistantMessageEventStream",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/event-stream.ts",
+      "target": "class:packages/ai/src/utils/event-stream.ts:AssistantMessageEventStream",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/event-stream.ts",
+      "target": "function:packages/ai/src/utils/event-stream.ts:createAssistantMessageEventStream",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/event-stream.ts",
+      "target": "function:packages/ai/src/utils/event-stream.ts:createAssistantMessageEventStream",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/models-store.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/faux.ts",
+      "target": "file:packages/ai/src/utils/event-stream.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/images/register-builtins.ts",
+      "target": "file:packages/ai/src/api/openrouter-images.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/images/register-builtins.ts",
+      "target": "file:packages/ai/src/images-api-registry.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/images/register-builtins.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/types.ts",
+      "target": "file:packages/ai/src/api/anthropic-messages.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/types.ts",
+      "target": "file:packages/ai/src/api/azure-openai-responses.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/types.ts",
+      "target": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/types.ts",
+      "target": "file:packages/ai/src/api/google-generative-ai.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/types.ts",
+      "target": "file:packages/ai/src/api/google-vertex.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/types.ts",
+      "target": "file:packages/ai/src/api/mistral-conversations.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/types.ts",
+      "target": "file:packages/ai/src/api/openai-codex-responses.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/types.ts",
+      "target": "file:packages/ai/src/api/openai-completions.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/types.ts",
+      "target": "file:packages/ai/src/api/openai-responses.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/types.ts",
+      "target": "file:packages/ai/src/api/pi-messages.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/types.ts",
+      "target": "file:packages/ai/src/utils/diagnostics.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/types.ts",
+      "target": "file:packages/ai/src/utils/event-stream.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/types.ts",
+      "target": "file:packages/telemetry/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/utils/assistant-message-frame.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/utils/assistant-message-frame.ts",
+      "target": "file:packages/ai/src/utils/json-parse.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/utils/deferred-tools.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/utils/estimate.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/utils/event-stream.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:packages/ai/src/providers/faux.ts:createFauxCore",
+      "target": "function:packages/ai/src/utils/event-stream.ts:createAssistantMessageEventStream",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/faux.ts:fauxProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/images/register-builtins.ts:registerBuiltInImagesApiProviders",
+      "target": "function:packages/ai/src/images-api-registry.ts:registerImagesApiProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/images/register-builtins.ts:generateImagesOpenRouter",
+      "target": "function:packages/ai/src/api/openrouter-images.ts:generateImages",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/ai/src/utils/event-stream.ts:AssistantMessageEventStream",
+      "target": "class:packages/ai/src/utils/event-stream.ts:EventStream",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    }
+  ]
+}

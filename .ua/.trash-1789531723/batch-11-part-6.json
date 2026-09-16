@@ -1,0 +1,414 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/core/auth-storage.ts",
+      "type": "file",
+      "name": "auth-storage.ts",
+      "filePath": "packages/coding-agent/src/core/auth-storage.ts",
+      "summary": "以 auth.json 实现 CredentialStore：文件锁、只读视图、内存后端，以及一次性同步读取。",
+      "tags": [
+        "data-model",
+        "auth",
+        "persistence",
+        "singleton"
+      ],
+      "complexity": "complex",
+      "languageNotes": "写入使用 mode 0o600；共享读状态避免重复解析同一 auth.json。"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/bash-executor.ts",
+      "type": "file",
+      "name": "bash-executor.ts",
+      "filePath": "packages/coding-agent/src/core/bash-executor.ts",
+      "summary": "通过可插拔 BashOperations 执行命令，支持流式输出、取消、截断与超额输出落临时文件。",
+      "tags": [
+        "service",
+        "shell",
+        "streaming"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/compaction/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/coding-agent/src/core/compaction/index.ts",
+      "summary": "compaction / 分支摘要工具的 barrel，再导出 branch-summarization、compaction 与 utils。",
+      "tags": [
+        "barrel",
+        "compaction",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/defaults.ts",
+      "type": "file",
+      "name": "defaults.ts",
+      "filePath": "packages/coding-agent/src/core/defaults.ts",
+      "summary": "定义默认 thinking level（medium）及可选档位列表。",
+      "tags": [
+        "config",
+        "defaults",
+        "thinking"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/core/auth-storage.ts:FileAuthStorageBackend",
+      "type": "class",
+      "name": "FileAuthStorageBackend",
+      "filePath": "packages/coding-agent/src/core/auth-storage.ts",
+      "lineRange": [
+        49,
+        201
+      ],
+      "summary": "对 auth.json 做同步/异步文件锁读写，创建时使用 0o600。",
+      "tags": [
+        "persistence",
+        "auth",
+        "locking"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:packages/coding-agent/src/core/auth-storage.ts:ReadOnlyAuthStorage",
+      "type": "class",
+      "name": "ReadOnlyAuthStorage",
+      "filePath": "packages/coding-agent/src/core/auth-storage.ts",
+      "lineRange": [
+        203,
+        290
+      ],
+      "summary": "只读 CredentialStore，拒绝 modify/delete。",
+      "tags": [
+        "auth",
+        "persistence",
+        "readonly"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/core/auth-storage.ts:InMemoryAuthStorageBackend",
+      "type": "class",
+      "name": "InMemoryAuthStorageBackend",
+      "filePath": "packages/coding-agent/src/core/auth-storage.ts",
+      "lineRange": [
+        292,
+        322
+      ],
+      "summary": "内存锁后端，串行化异步 withLockAsync。",
+      "tags": [
+        "auth",
+        "in-memory",
+        "locking"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/core/auth-storage.ts:AuthStorage",
+      "type": "class",
+      "name": "AuthStorage",
+      "filePath": "packages/coding-agent/src/core/auth-storage.ts",
+      "lineRange": [
+        327,
+        490
+      ],
+      "summary": "CredentialStore 实现：解析 auth.json、热重载、按 provider 读写删除。",
+      "tags": [
+        "auth",
+        "persistence",
+        "data-model"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/auth-storage.ts:readStoredCredential",
+      "type": "function",
+      "name": "readStoredCredential",
+      "filePath": "packages/coding-agent/src/core/auth-storage.ts",
+      "lineRange": [
+        496,
+        506
+      ],
+      "summary": "同步读取 auth.json 中某 provider 的原始凭证，不解析 command 配置值。",
+      "tags": [
+        "auth",
+        "utility",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/bash-executor.ts:executeBashWithOperations",
+      "type": "function",
+      "name": "executeBashWithOperations",
+      "filePath": "packages/coding-agent/src/core/bash-executor.ts",
+      "lineRange": [
+        50,
+        156
+      ],
+      "summary": "用 BashOperations.exec 跑命令，流式清理输出并在超额时写入临时文件。",
+      "tags": [
+        "shell",
+        "streaming",
+        "service"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/core/auth-storage.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/auth-storage.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/auth-storage.ts",
+      "target": "file:packages/coding-agent/src/core/resolve-config-value.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/auth-storage.ts",
+      "target": "file:packages/coding-agent/src/utils/abort.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/auth-storage.ts",
+      "target": "file:packages/coding-agent/src/utils/paths.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/auth-storage.ts",
+      "target": "file:packages/coding-agent/src/utils/text.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/bash-executor.ts",
+      "target": "file:packages/coding-agent/src/core/tools/bash.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/bash-executor.ts",
+      "target": "file:packages/coding-agent/src/core/tools/truncate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/bash-executor.ts",
+      "target": "file:packages/coding-agent/src/utils/ansi.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/bash-executor.ts",
+      "target": "file:packages/coding-agent/src/utils/shell.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/defaults.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/auth-storage.ts",
+      "target": "class:packages/coding-agent/src/core/auth-storage.ts:FileAuthStorageBackend",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/auth-storage.ts",
+      "target": "class:packages/coding-agent/src/core/auth-storage.ts:FileAuthStorageBackend",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/auth-storage.ts",
+      "target": "class:packages/coding-agent/src/core/auth-storage.ts:ReadOnlyAuthStorage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/auth-storage.ts",
+      "target": "class:packages/coding-agent/src/core/auth-storage.ts:ReadOnlyAuthStorage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/auth-storage.ts",
+      "target": "class:packages/coding-agent/src/core/auth-storage.ts:InMemoryAuthStorageBackend",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/auth-storage.ts",
+      "target": "class:packages/coding-agent/src/core/auth-storage.ts:InMemoryAuthStorageBackend",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/auth-storage.ts",
+      "target": "class:packages/coding-agent/src/core/auth-storage.ts:AuthStorage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/auth-storage.ts",
+      "target": "class:packages/coding-agent/src/core/auth-storage.ts:AuthStorage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/auth-storage.ts",
+      "target": "function:packages/coding-agent/src/core/auth-storage.ts:readStoredCredential",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/auth-storage.ts",
+      "target": "function:packages/coding-agent/src/core/auth-storage.ts:readStoredCredential",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/bash-executor.ts",
+      "target": "function:packages/coding-agent/src/core/bash-executor.ts:executeBashWithOperations",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/bash-executor.ts",
+      "target": "function:packages/coding-agent/src/core/bash-executor.ts:executeBashWithOperations",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/auth-storage.ts:FileAuthStorageBackend",
+      "target": "function:packages/coding-agent/src/config.ts:getAgentDir",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/auth-storage.ts:FileAuthStorageBackend",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:normalizePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/auth-storage.ts:ReadOnlyAuthStorage",
+      "target": "function:packages/coding-agent/src/config.ts:getAgentDir",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/auth-storage.ts:ReadOnlyAuthStorage",
+      "target": "function:packages/coding-agent/src/core/resolve-config-value.ts:resolveConfigValue",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/auth-storage.ts:AuthStorage",
+      "target": "function:packages/coding-agent/src/config.ts:getAgentDir",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/auth-storage.ts:AuthStorage",
+      "target": "function:packages/coding-agent/src/core/resolve-config-value.ts:resolveConfigValue",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/auth-storage.ts:AuthStorage",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:getFileRevision",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/auth-storage.ts:readStoredCredential",
+      "target": "function:packages/coding-agent/src/config.ts:getAgentDir",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/auth-storage.ts:readStoredCredential",
+      "target": "function:packages/coding-agent/src/utils/text.ts:stripBom",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/auth-storage.ts:readStoredCredential",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:normalizePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/bash-executor.ts:executeBashWithOperations",
+      "target": "function:packages/coding-agent/src/core/tools/truncate.ts:truncateTail",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/bash-executor.ts:executeBashWithOperations",
+      "target": "function:packages/coding-agent/src/utils/ansi.ts:stripAnsi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/bash-executor.ts:executeBashWithOperations",
+      "target": "function:packages/coding-agent/src/utils/shell.ts:sanitizeBinaryOutput",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

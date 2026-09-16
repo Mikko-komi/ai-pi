@@ -1,0 +1,327 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/ai/src/api/simple-options.ts",
+      "type": "file",
+      "name": "simple-options.ts",
+      "filePath": "packages/ai/src/api/simple-options.ts",
+      "summary": "把 SimpleStreamOptions 收成各 API 共用的 StreamOptions，并按 context window 与 thinking budget 夹紧 token。",
+      "tags": [
+        "utility",
+        "options",
+        "thinking",
+        "token-budget"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/simple-options.ts:clampMaxTokensToContext",
+      "type": "function",
+      "name": "clampMaxTokensToContext",
+      "filePath": "packages/ai/src/api/simple-options.ts",
+      "lineRange": [
+        15,
+        19
+      ],
+      "summary": "按 context window 与安全余量夹紧 maxTokens。",
+      "tags": [
+        "exports",
+        "validation",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/simple-options.ts:buildBaseOptions",
+      "type": "function",
+      "name": "buildBaseOptions",
+      "filePath": "packages/ai/src/api/simple-options.ts",
+      "lineRange": [
+        21,
+        52
+      ],
+      "summary": "把 SimpleStreamOptions 展开为各 API 共用的 StreamOptions。",
+      "tags": [
+        "exports",
+        "factory",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/simple-options.ts:clampReasoning",
+      "type": "function",
+      "name": "clampReasoning",
+      "filePath": "packages/ai/src/api/simple-options.ts",
+      "lineRange": [
+        64,
+        66
+      ],
+      "summary": "把 xhigh/max reasoning 降为 high，避免超出多数供应商档位。",
+      "tags": [
+        "exports",
+        "validation",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/simple-options.ts:thinkingBudgetForLevel",
+      "type": "function",
+      "name": "thinkingBudgetForLevel",
+      "filePath": "packages/ai/src/api/simple-options.ts",
+      "lineRange": [
+        68,
+        72
+      ],
+      "summary": "按 ThinkingLevel 与自定义预算表返回 thinking token。",
+      "tags": [
+        "exports",
+        "utility",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/simple-options.ts:clampThinkingBudgetToAnswerRoom",
+      "type": "function",
+      "name": "clampThinkingBudgetToAnswerRoom",
+      "filePath": "packages/ai/src/api/simple-options.ts",
+      "lineRange": [
+        75,
+        77
+      ],
+      "summary": "保证 thinking 预算不会吃掉 MIN_ANSWER_TOKENS 的作答空间。",
+      "tags": [
+        "exports",
+        "validation",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/simple-options.ts:adjustMaxTokensForThinking",
+      "type": "function",
+      "name": "adjustMaxTokensForThinking",
+      "filePath": "packages/ai/src/api/simple-options.ts",
+      "lineRange": [
+        79,
+        95
+      ],
+      "summary": "在模型上限内同时给出 maxTokens 与 thinkingBudget。",
+      "tags": [
+        "exports",
+        "validation",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/api/transform-messages.ts",
+      "type": "file",
+      "name": "transform-messages.ts",
+      "filePath": "packages/ai/src/api/transform-messages.ts",
+      "summary": "统一消息预处理：降级不支持的图片、规范化工具调用 ID，并展开内部内容块供各供应商转换。",
+      "tags": [
+        "serialization",
+        "messages",
+        "utility",
+        "images"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/transform-messages.ts:replaceImagesWithPlaceholder",
+      "type": "function",
+      "name": "replaceImagesWithPlaceholder",
+      "filePath": "packages/ai/src/api/transform-messages.ts",
+      "lineRange": [
+        15,
+        33
+      ],
+      "summary": "把内容中的图片块替换为占位文本。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/transform-messages.ts:downgradeUnsupportedImages",
+      "type": "function",
+      "name": "downgradeUnsupportedImages",
+      "filePath": "packages/ai/src/api/transform-messages.ts",
+      "lineRange": [
+        35,
+        57
+      ],
+      "summary": "当模型不支持视觉时，把历史图片降级为占位，避免请求被拒。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/transform-messages.ts:transformMessages",
+      "type": "function",
+      "name": "transformMessages",
+      "filePath": "packages/ai/src/api/transform-messages.ts",
+      "lineRange": [
+        64,
+        223
+      ],
+      "summary": "统一预处理消息：降级图片、规范化 tool call id，供各供应商 convertMessages 使用。",
+      "tags": [
+        "exports",
+        "serialization",
+        "转换"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/ai/src/api/simple-options.ts",
+      "target": "function:packages/ai/src/api/simple-options.ts:clampMaxTokensToContext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/simple-options.ts",
+      "target": "function:packages/ai/src/api/simple-options.ts:clampMaxTokensToContext",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/simple-options.ts",
+      "target": "function:packages/ai/src/api/simple-options.ts:buildBaseOptions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/simple-options.ts",
+      "target": "function:packages/ai/src/api/simple-options.ts:buildBaseOptions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/simple-options.ts",
+      "target": "function:packages/ai/src/api/simple-options.ts:clampReasoning",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/simple-options.ts",
+      "target": "function:packages/ai/src/api/simple-options.ts:clampReasoning",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/simple-options.ts",
+      "target": "function:packages/ai/src/api/simple-options.ts:thinkingBudgetForLevel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/simple-options.ts",
+      "target": "function:packages/ai/src/api/simple-options.ts:thinkingBudgetForLevel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/simple-options.ts",
+      "target": "function:packages/ai/src/api/simple-options.ts:clampThinkingBudgetToAnswerRoom",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/simple-options.ts",
+      "target": "function:packages/ai/src/api/simple-options.ts:clampThinkingBudgetToAnswerRoom",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/simple-options.ts",
+      "target": "function:packages/ai/src/api/simple-options.ts:adjustMaxTokensForThinking",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/simple-options.ts",
+      "target": "function:packages/ai/src/api/simple-options.ts:adjustMaxTokensForThinking",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/simple-options.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/simple-options.ts",
+      "target": "file:packages/ai/src/utils/estimate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/transform-messages.ts",
+      "target": "function:packages/ai/src/api/transform-messages.ts:replaceImagesWithPlaceholder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/transform-messages.ts",
+      "target": "function:packages/ai/src/api/transform-messages.ts:downgradeUnsupportedImages",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/transform-messages.ts",
+      "target": "function:packages/ai/src/api/transform-messages.ts:transformMessages",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/transform-messages.ts",
+      "target": "function:packages/ai/src/api/transform-messages.ts:transformMessages",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/transform-messages.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:packages/ai/src/api/simple-options.ts:clampMaxTokensToContext",
+      "target": "function:packages/ai/src/utils/estimate.ts:estimateContextTokens",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

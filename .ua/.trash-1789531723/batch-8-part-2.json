@@ -1,0 +1,165 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/settings-submenu.ts",
+      "type": "file",
+      "name": "settings-submenu.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/settings-submenu.ts",
+      "summary": "设置页复用的子菜单原语：可搜索单选 SelectSubmenu 与多步 SteppedSubmenu。",
+      "tags": [
+        "component",
+        "submenu",
+        "settings",
+        "tui"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/settings-submenu.ts:SelectSubmenu",
+      "type": "class",
+      "name": "SelectSubmenu",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/settings-submenu.ts",
+      "summary": "带搜索框的单选子菜单，fuzzyFilter 过滤选项并回调选中/取消。",
+      "tags": [
+        "component",
+        "submenu",
+        "selector",
+        "tui"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        31,
+        138
+      ]
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/settings-submenu.ts:SteppedSubmenu",
+      "type": "class",
+      "name": "SteppedSubmenu",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/settings-submenu.ts",
+      "summary": "多步向导子菜单：逐步收集选项，完成后一次性 onComplete。",
+      "tags": [
+        "component",
+        "submenu",
+        "wizard",
+        "tui"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        178,
+        258
+      ]
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/show-images-selector.ts",
+      "type": "file",
+      "name": "show-images-selector.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/show-images-selector.ts",
+      "summary": "选择是否在工具结果中显示图片的简单 SelectList。",
+      "tags": [
+        "component",
+        "selector",
+        "images",
+        "tui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/show-images-selector.ts:ShowImagesSelectorComponent",
+      "type": "class",
+      "name": "ShowImagesSelectorComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/show-images-selector.ts",
+      "summary": "Show images 开关选择器，选中后回调并关闭。",
+      "tags": [
+        "component",
+        "selector",
+        "images",
+        "tui"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        13,
+        50
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/settings-submenu.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/settings-submenu.ts:SelectSubmenu",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/settings-submenu.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/settings-submenu.ts:SelectSubmenu",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/settings-submenu.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/settings-submenu.ts:SteppedSubmenu",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/settings-submenu.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/settings-submenu.ts:SteppedSubmenu",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/settings-submenu.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/settings-submenu.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/show-images-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/show-images-selector.ts:ShowImagesSelectorComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/show-images-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/show-images-selector.ts:ShowImagesSelectorComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/show-images-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/show-images-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/show-images-selector.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

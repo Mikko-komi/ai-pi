@@ -1,0 +1,69 @@
+{
+  "nodes": [
+    {
+      "id": "config:packages/coding-agent/src/modes/interactive/theme/dark.json",
+      "type": "config",
+      "name": "dark.json",
+      "filePath": "packages/coding-agent/src/modes/interactive/theme/dark.json",
+      "summary": "coding-agent 交互模式的内置暗色主题：用 vars 定义可复用色值，再映射到边框、消息、Markdown、语法高亮、thinking 档位与 bash 模式等 UI token，并提供导出页的 pageBg/cardBg/infoBg。",
+      "tags": ["主题", "暗色模式", "配置", "配色令牌", "tui"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:packages/coding-agent/src/modes/interactive/theme/light.json",
+      "type": "config",
+      "name": "light.json",
+      "filePath": "packages/coding-agent/src/modes/interactive/theme/light.json",
+      "summary": "coding-agent 交互模式的内置浅色主题：token 集合与 dark.json 对齐，但 vars 与颜色取值偏向浅底深字，覆盖消息区、Markdown、语法高亮与 thinking 档位。",
+      "tags": ["主题", "浅色模式", "配置", "配色令牌", "tui"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:packages/coding-agent/src/modes/interactive/theme/theme-schema.json",
+      "type": "config",
+      "name": "theme-schema.json",
+      "filePath": "packages/coding-agent/src/modes/interactive/theme/theme-schema.json",
+      "summary": "Pi coding-agent 主题的 JSON Schema（draft-07）：约束 name/colors（及可选 vars、export），用 $defs 描述 hex、变量引用与 256 色索引等 colorValue，校验内置与自定义主题文件。",
+      "tags": ["json-schema", "主题", "配置", "schema-definition", "校验"],
+      "complexity": "complex",
+      "languageNotes": "JSON Schema draft-07；$defs.colorValue 同时允许 hex 字符串、vars 引用与 0–255 调色板索引。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "config:packages/coding-agent/src/modes/interactive/theme/dark.json",
+      "target": "config:packages/coding-agent/src/modes/interactive/theme/theme-schema.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/coding-agent/src/modes/interactive/theme/light.json",
+      "target": "config:packages/coding-agent/src/modes/interactive/theme/theme-schema.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/coding-agent/src/modes/interactive/theme/theme-schema.json",
+      "target": "config:packages/coding-agent/src/modes/interactive/theme/dark.json",
+      "type": "defines_schema",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "config:packages/coding-agent/src/modes/interactive/theme/theme-schema.json",
+      "target": "config:packages/coding-agent/src/modes/interactive/theme/light.json",
+      "type": "defines_schema",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "config:packages/coding-agent/src/modes/interactive/theme/dark.json",
+      "target": "config:packages/coding-agent/src/modes/interactive/theme/light.json",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

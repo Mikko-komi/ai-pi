@@ -1,0 +1,1285 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/footer.ts",
+      "type": "file",
+      "name": "footer.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/footer.ts",
+      "summary": "交互模式页脚：cwd、git 分支、token/context 用量，以及扩展状态文本。",
+      "tags": [
+        "component",
+        "footer",
+        "usage",
+        "tui"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/footer.ts:formatTokens",
+      "type": "function",
+      "name": "formatTokens",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/footer.ts",
+      "lineRange": [
+        24,
+        30
+      ],
+      "summary": "把 token 计数格式化为 k/M 紧凑字符串供页脚显示。",
+      "tags": [
+        "utility",
+        "formatting",
+        "usage"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/footer.ts:formatCwdForFooter",
+      "type": "function",
+      "name": "formatCwdForFooter",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/footer.ts",
+      "lineRange": [
+        32,
+        44
+      ],
+      "summary": "若 cwd 在 home 下则显示为 ~/ 相对路径。",
+      "tags": [
+        "utility",
+        "path",
+        "formatting"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/footer.ts:FooterComponent",
+      "type": "class",
+      "name": "FooterComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/footer.ts",
+      "lineRange": [
+        50,
+        245
+      ],
+      "summary": "实现 Component：从 AgentSession 汇总 usage，并从 FooterDataProvider 取 git/扩展状态。",
+      "tags": [
+        "component",
+        "footer",
+        "usage"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "file",
+      "name": "keybinding-hints.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "summary": "把 Keybinding 解析为显示文本：macOS alt→option、大小写，以及 dim/muted 的 hint 行。",
+      "tags": [
+        "utility",
+        "keybinding",
+        "formatting",
+        "tui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:formatKeyText",
+      "type": "function",
+      "name": "formatKeyText",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "lineRange": [
+        17,
+        27
+      ],
+      "summary": "把 ctrl+x/alt+y 这类键串拆开格式化，macOS 上将 alt 显示为 option。",
+      "tags": [
+        "utility",
+        "keybinding",
+        "formatting"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyText",
+      "type": "function",
+      "name": "keyText",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "lineRange": [
+        34,
+        36
+      ],
+      "summary": "按当前 Keybindings 解析绑定并输出未大写的按键文本。",
+      "tags": [
+        "utility",
+        "keybinding"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyDisplayText",
+      "type": "function",
+      "name": "keyDisplayText",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "lineRange": [
+        38,
+        40
+      ],
+      "summary": "与 keyText 相同但首字母大写，适合页脚/选择器说明。",
+      "tags": [
+        "utility",
+        "keybinding"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyHint",
+      "type": "function",
+      "name": "keyHint",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "lineRange": [
+        42,
+        44
+      ],
+      "summary": "组合绑定文本与描述，用 theme dim/muted 着色。",
+      "tags": [
+        "utility",
+        "keybinding",
+        "theme"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:rawKeyHint",
+      "type": "function",
+      "name": "rawKeyHint",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "lineRange": [
+        46,
+        48
+      ],
+      "summary": "不查绑定表，直接把原始键串格式化为 hint。",
+      "tags": [
+        "utility",
+        "keybinding",
+        "theme"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/login-dialog.ts",
+      "type": "file",
+      "name": "login-dialog.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/login-dialog.ts",
+      "summary": "OAuth/设备码/手动输入登录对话框：可打开浏览器、展示等待/进度，并用 AbortController 取消。",
+      "tags": [
+        "component",
+        "oauth",
+        "auth",
+        "tui"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/login-dialog.ts:LoginDialogComponent",
+      "type": "class",
+      "name": "LoginDialogComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/login-dialog.ts",
+      "lineRange": [
+        11,
+        233
+      ],
+      "summary": "可聚焦 Container，分 showAuth/showDeviceCode/showPrompt 等状态替换内容并收集输入。",
+      "tags": [
+        "component",
+        "oauth",
+        "auth"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/markdown-transform.ts",
+      "type": "file",
+      "name": "markdown-transform.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/markdown-transform.ts",
+      "summary": "按序应用 MarkdownTransformer；单个 transformer 抛错时跳过以保留当前 Markdown。",
+      "tags": [
+        "utility",
+        "markdown",
+        "pipeline",
+        "extension"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/markdown-transform.ts:createMarkdownTransform",
+      "type": "function",
+      "name": "createMarkdownTransform",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/markdown-transform.ts",
+      "lineRange": [
+        3,
+        10
+      ],
+      "summary": "绑定 messageType/streaming 上下文，返回供 Markdown 组件调用的 transform 函数。",
+      "tags": [
+        "factory",
+        "markdown",
+        "pipeline"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/markdown-transform.ts:applyMarkdownTransformers",
+      "type": "function",
+      "name": "applyMarkdownTransformers",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/markdown-transform.ts",
+      "lineRange": [
+        12,
+        29
+      ],
+      "summary": "依次执行 transformer，忽略异常以免一条扩展搞挂整段渲染。",
+      "tags": [
+        "markdown",
+        "pipeline",
+        "error-handling"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/mermaid.ts",
+      "type": "file",
+      "name": "mermaid.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/mermaid.ts",
+      "summary": "MarkdownTransformer：把顶级 mermaid 代码块渲染成 Unicode 终端图，过宽或告警时回退源码。",
+      "tags": [
+        "markdown",
+        "mermaid",
+        "transformer",
+        "rendering"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "用加长 backtick fence 把每行图编码为 CommonMark code span，以保留盒线与空格。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/mermaid.ts:codeSpan",
+      "type": "function",
+      "name": "codeSpan",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/mermaid.ts",
+      "lineRange": [
+        18,
+        36
+      ],
+      "summary": "按内容中最长反引号游程选择 fence，必要时加空格填充，避免破坏 CommonMark。",
+      "tags": [
+        "markdown",
+        "utility",
+        "escaping"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/mermaid.ts:styleSpan",
+      "type": "function",
+      "name": "styleSpan",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/mermaid.ts",
+      "lineRange": [
+        38,
+        53
+      ],
+      "summary": "按 grok-mermaid span.cls 把边框/边/标题映射到 Theme 前景色。",
+      "tags": [
+        "theme",
+        "mermaid",
+        "styling"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/mermaid.ts:createMermaidMarkdownTransformer",
+      "type": "function",
+      "name": "createMermaidMarkdownTransformer",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/mermaid.ts",
+      "lineRange": [
+        60,
+        89
+      ],
+      "summary": "工厂：按渲染模式跳过 thinking/streaming，否则 lexer 替换 mermaid token。",
+      "tags": [
+        "factory",
+        "markdown",
+        "mermaid"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/model-selector.ts",
+      "type": "file",
+      "name": "model-selector.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/model-selector.ts",
+      "summary": "可搜索模型选择器：all/scoped 范围、默认模型标记、后台 refreshModelCatalogs，以及设为默认的快捷键。",
+      "tags": [
+        "component",
+        "selector",
+        "model",
+        "tui"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/model-selector.ts:ModelSelectorComponent",
+      "type": "class",
+      "name": "ModelSelectorComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/model-selector.ts",
+      "lineRange": [
+        40,
+        421
+      ],
+      "summary": "可聚焦列表：从 ModelRuntime 快照加载、模糊过滤，并异步刷新目录状态。",
+      "tags": [
+        "component",
+        "selector",
+        "model"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts",
+      "type": "file",
+      "name": "oauth-selector.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/oauth-selector.ts",
+      "summary": "认证提供方选择器：模糊搜索 oauth/api_key，并显示登录状态指示。",
+      "tags": [
+        "component",
+        "selector",
+        "oauth",
+        "auth"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:formatAuthSelectorProviderType",
+      "type": "function",
+      "name": "formatAuthSelectorProviderType",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/oauth-selector.ts",
+      "lineRange": [
+        22,
+        24
+      ],
+      "summary": "把 authType 显示为 subscription 或 API key。",
+      "tags": [
+        "utility",
+        "formatting",
+        "auth"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:OAuthSelectorComponent",
+      "type": "class",
+      "name": "OAuthSelectorComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/oauth-selector.ts",
+      "lineRange": [
+        29,
+        214
+      ],
+      "summary": "可聚焦提供方列表，支持搜索过滤与状态徽章。",
+      "tags": [
+        "component",
+        "selector",
+        "oauth"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts",
+      "type": "file",
+      "name": "scoped-models-selector.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts",
+      "summary": "管理 scoped 模型白名单：启用/全选/清空、排序移动，以及脏状态通知。",
+      "tags": [
+        "component",
+        "selector",
+        "model",
+        "settings"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:move",
+      "type": "function",
+      "name": "move",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts",
+      "lineRange": [
+        55,
+        65
+      ],
+      "summary": "在 enabledIds 列表中把指定模型上移或下移一位。",
+      "tags": [
+        "utility",
+        "ordering",
+        "model"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:ScopedModelsSelectorComponent",
+      "type": "class",
+      "name": "ScopedModelsSelectorComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts",
+      "lineRange": [
+        97,
+        401
+      ],
+      "summary": "可聚焦多选列表：搜索、开关与排序，enabledIds 为 null 表示全部启用。",
+      "tags": [
+        "component",
+        "selector",
+        "model"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts",
+      "type": "file",
+      "name": "session-selector-search.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/session-selector-search.ts",
+      "summary": "会话选择器搜索：解析 token/短语/re: 正则，模糊或精确匹配后按 threaded/recent/relevance 排序。",
+      "tags": [
+        "utility",
+        "search",
+        "session",
+        "filtering"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts:hasSessionName",
+      "type": "function",
+      "name": "hasSessionName",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/session-selector-search.ts",
+      "lineRange": [
+        30,
+        32
+      ],
+      "summary": "判断 SessionInfo 是否带非空 name。",
+      "tags": [
+        "utility",
+        "session",
+        "predicate"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts:parseSearchQuery",
+      "type": "function",
+      "name": "parseSearchQuery",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/session-selector-search.ts",
+      "lineRange": [
+        39,
+        114
+      ],
+      "summary": "解析查询：re: 进正则模式，否则拆 quoted phrase 与 fuzzy token。",
+      "tags": [
+        "search",
+        "parser",
+        "session"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts:matchSession",
+      "type": "function",
+      "name": "matchSession",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/session-selector-search.ts",
+      "lineRange": [
+        116,
+        154
+      ],
+      "summary": "按解析结果匹配会话文本，返回 matches 与越低越好的 score。",
+      "tags": [
+        "search",
+        "session",
+        "scoring"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts:filterAndSortSessions",
+      "type": "function",
+      "name": "filterAndSortSessions",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/session-selector-search.ts",
+      "lineRange": [
+        156,
+        194
+      ],
+      "summary": "应用 nameFilter 与查询，再按 sortMode 排序会话列表。",
+      "tags": [
+        "search",
+        "session",
+        "filtering"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/footer.ts",
+      "target": "file:packages/coding-agent/src/core/agent-session.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/footer.ts",
+      "target": "file:packages/coding-agent/src/core/experimental.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/footer.ts",
+      "target": "file:packages/coding-agent/src/core/footer-data-provider.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/footer.ts",
+      "target": "file:packages/coding-agent/src/core/usage-totals.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/footer.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/footer.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/login-dialog.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/login-dialog.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/login-dialog.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/login-dialog.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/login-dialog.ts",
+      "target": "file:packages/coding-agent/src/utils/open-browser.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/login-dialog.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/markdown-transform.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/mermaid.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/mermaid.ts",
+      "target": "file:packages/coding-agent/src/core/settings-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/mermaid.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/mermaid.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/model-selector.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/model-selector.ts",
+      "target": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/model-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/model-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/model-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/model-catalog-refresh.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/model-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/model-search.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/model-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/model-selector.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/model-search.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts",
+      "target": "file:packages/coding-agent/src/core/session-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/footer.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/footer.ts:formatTokens",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/footer.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/footer.ts:formatTokens",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/footer.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/footer.ts:formatCwdForFooter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/footer.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/footer.ts:formatCwdForFooter",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/footer.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/footer.ts:FooterComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/footer.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/footer.ts:FooterComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:formatKeyText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:formatKeyText",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyText",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyDisplayText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyDisplayText",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyHint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyHint",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:rawKeyHint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:rawKeyHint",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/login-dialog.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/login-dialog.ts:LoginDialogComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/login-dialog.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/login-dialog.ts:LoginDialogComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/markdown-transform.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/markdown-transform.ts:createMarkdownTransform",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/markdown-transform.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/markdown-transform.ts:createMarkdownTransform",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/markdown-transform.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/markdown-transform.ts:applyMarkdownTransformers",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/mermaid.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/mermaid.ts:codeSpan",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/mermaid.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/mermaid.ts:styleSpan",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/mermaid.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/mermaid.ts:createMermaidMarkdownTransformer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/mermaid.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/mermaid.ts:createMermaidMarkdownTransformer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/model-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/model-selector.ts:ModelSelectorComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/model-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/model-selector.ts:ModelSelectorComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:formatAuthSelectorProviderType",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:formatAuthSelectorProviderType",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:OAuthSelectorComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:OAuthSelectorComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:move",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:ScopedModelsSelectorComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:ScopedModelsSelectorComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts:hasSessionName",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts:hasSessionName",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts:parseSearchQuery",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts:parseSearchQuery",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts:matchSession",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts:matchSession",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts:filterAndSortSessions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts:filterAndSortSessions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/footer.ts:FooterComponent",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/footer.ts:formatTokens",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/footer.ts:FooterComponent",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/footer.ts:formatCwdForFooter",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyText",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:formatKeyText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyDisplayText",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:formatKeyText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyHint",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:rawKeyHint",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:formatKeyText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/modes/interactive/components/markdown-transform.ts:createMarkdownTransform",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/markdown-transform.ts:applyMarkdownTransformers",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/modes/interactive/components/mermaid.ts:createMermaidMarkdownTransformer",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/mermaid.ts:codeSpan",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/modes/interactive/components/mermaid.ts:createMermaidMarkdownTransformer",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/mermaid.ts:styleSpan",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:OAuthSelectorComponent",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:formatAuthSelectorProviderType",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts:filterAndSortSessions",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts:parseSearchQuery",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts:filterAndSortSessions",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts:matchSession",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts:filterAndSortSessions",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts:hasSessionName",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/footer.ts:FooterComponent",
+      "target": "function:packages/coding-agent/src/core/usage-totals.ts:createUsageTotals",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/footer.ts:FooterComponent",
+      "target": "function:packages/coding-agent/src/core/usage-totals.ts:addUsageToTotals",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/login-dialog.ts:LoginDialogComponent",
+      "target": "function:packages/coding-agent/src/utils/open-browser.ts:openBrowser",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/model-selector.ts:ModelSelectorComponent",
+      "target": "function:packages/coding-agent/src/modes/interactive/model-catalog-refresh.ts:refreshModelCatalogs",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/model-selector.ts:ModelSelectorComponent",
+      "target": "function:packages/coding-agent/src/modes/interactive/model-search.ts:getModelSelectorSearchText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:ScopedModelsSelectorComponent",
+      "target": "function:packages/coding-agent/src/modes/interactive/model-search.ts:getModelSearchText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/login-dialog.ts:LoginDialogComponent",
+      "target": "class:packages/tui/src/index.ts:Container",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/model-selector.ts:ModelSelectorComponent",
+      "target": "class:packages/tui/src/index.ts:Container",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:OAuthSelectorComponent",
+      "target": "class:packages/tui/src/index.ts:Container",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:ScopedModelsSelectorComponent",
+      "target": "class:packages/tui/src/index.ts:Container",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/footer.ts:FooterComponent",
+      "target": "class:packages/tui/src/index.ts:Component",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/login-dialog.ts:LoginDialogComponent",
+      "target": "class:packages/tui/src/index.ts:Focusable",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/model-selector.ts:ModelSelectorComponent",
+      "target": "class:packages/tui/src/index.ts:Focusable",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:OAuthSelectorComponent",
+      "target": "class:packages/tui/src/index.ts:Focusable",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:ScopedModelsSelectorComponent",
+      "target": "class:packages/tui/src/index.ts:Focusable",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    }
+  ]
+}

@@ -1,0 +1,206 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/chord/PLANNING.md",
+      "type": "document",
+      "name": "PLANNING.md",
+      "filePath": "packages/chord/PLANNING.md",
+      "summary": "Chord 的现行实现计划：规定独立于 Pi 的依赖边界，以及插件生命周期、服务 facade、复制状态、对称 RPC 与 bundling 的分层模型。Context、复制状态、facet host/loader 与 Node 打包已落地；对称 RPC 与结构性 generation 替换仍在规划，并列出 WP0–WP8 工作包与符合性矩阵。",
+      "tags": ["documentation", "架构规划", "plugins", "rpc", "工作包"],
+      "complexity": "complex",
+      "languageNotes": "长篇 Markdown 实现计划，含 17 个二级章节与 WP0–WP8 工作包。"
+    },
+    {
+      "id": "document:packages/chord/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/chord/README.md",
+      "summary": "@earendil-works/chord 的入门文档：说明 facet、服务 token、复制状态、JSON delta 与远程适配器的职责，并演示 bundler 与 Node loader 的打包加载流程。公开 API 按根、context、delta、bundler、node 分入口导出。",
+      "tags": ["documentation", "入口点", "plugins", "runtime", "bundler"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:packages/chord/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "packages/chord/package.json",
+      "summary": "@earendil-works/chord 的 npm 清单：声明 ESM 多入口（根、context、delta、bundler、node），用 tsgo 按 tsconfig.build.json 构建，并仅依赖 pinned 的 esbuild。要求 Node >= 22.19.0，发布物包含 dist 与两份 README。",
+      "tags": ["configuration", "npm", "包导出", "build-system", "esbuild"],
+      "complexity": "moderate",
+      "languageNotes": "Node ESM 包，exports 条件字段同时暴露 source 与 dist。"
+    },
+    {
+      "id": "config:packages/chord/tsconfig.build.json",
+      "type": "config",
+      "name": "tsconfig.build.json",
+      "filePath": "packages/chord/tsconfig.build.json",
+      "summary": "Chord 包的 TypeScript 构建配置：继承仓库根 tsconfig.base.json，将 src 编译到 dist，并排除声明文件与构建产物。",
+      "tags": ["configuration", "typescript", "build-system"],
+      "complexity": "simple",
+      "languageNotes": "继承 monorepo 根 tsconfig.base.json。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:packages/chord/README.md",
+      "target": "document:packages/chord/PLANNING.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/chord/README.md",
+      "target": "document:packages/chord/src/delta/README.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/chord/README.md",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/chord/README.md",
+      "target": "file:packages/chord/src/context/index.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/chord/README.md",
+      "target": "file:packages/chord/src/delta/index.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/chord/README.md",
+      "target": "file:packages/chord/src/bundler.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/chord/README.md",
+      "target": "file:packages/chord/src/node.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/chord/PLANNING.md",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/chord/PLANNING.md",
+      "target": "document:packages/agent/docs/plugins.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/chord/PLANNING.md",
+      "target": "document:packages/agent/docs/rpc.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/chord/PLANNING.md",
+      "target": "file:packages/coding-agent/src/experimental/services/connection.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/chord/PLANNING.md",
+      "target": "file:packages/coding-agent/src/experimental/services/server.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/chord/PLANNING.md",
+      "target": "file:packages/coding-agent/src/experimental/services/worker.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/chord/PLANNING.md",
+      "target": "document:packages/chord/README.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:packages/chord/package.json",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/chord/package.json",
+      "target": "file:packages/chord/src/context/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/chord/package.json",
+      "target": "file:packages/chord/src/delta/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/chord/package.json",
+      "target": "file:packages/chord/src/bundler.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/chord/package.json",
+      "target": "file:packages/chord/src/node.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/chord/package.json",
+      "target": "config:packages/chord/tsconfig.build.json",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/chord/package.json",
+      "target": "document:packages/chord/README.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:packages/chord/tsconfig.build.json",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/chord/tsconfig.build.json",
+      "target": "config:tsconfig.base.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

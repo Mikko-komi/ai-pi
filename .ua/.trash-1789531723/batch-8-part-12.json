@@ -1,0 +1,288 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/utils/changelog.ts",
+      "type": "file",
+      "name": "changelog.ts",
+      "filePath": "packages/coding-agent/src/utils/changelog.ts",
+      "summary": "解析 CHANGELOG 版本块、规范化仓库相对链接，并计算相对上次版本的新条目。",
+      "tags": [
+        "changelog",
+        "parsing",
+        "versioning",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/changelog.ts:splitLocalTarget",
+      "type": "function",
+      "name": "splitLocalTarget",
+      "filePath": "packages/coding-agent/src/utils/changelog.ts",
+      "summary": "拆分本地链接的 path、query 与 fragment。",
+      "tags": [
+        "url",
+        "parsing",
+        "utility"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        26,
+        41
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/changelog.ts:resolveRepositoryPath",
+      "type": "function",
+      "name": "resolveRepositoryPath",
+      "filePath": "packages/coding-agent/src/utils/changelog.ts",
+      "summary": "把 changelog 链接路径规范到仓库内 packages/coding-agent 前缀。",
+      "tags": [
+        "path",
+        "changelog",
+        "utility"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        47,
+        58
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/changelog.ts:normalizeChangelogLinkTarget",
+      "type": "function",
+      "name": "normalizeChangelogLinkTarget",
+      "filePath": "packages/coding-agent/src/utils/changelog.ts",
+      "summary": "把相对/旧仓库链接改写成当前 GitHub 仓库的规范 URL。",
+      "tags": [
+        "changelog",
+        "url",
+        "normalization"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        69,
+        98
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/changelog.ts:normalizeChangelogLinks",
+      "type": "function",
+      "name": "normalizeChangelogLinks",
+      "filePath": "packages/coding-agent/src/utils/changelog.ts",
+      "summary": "替换 markdown 中的 changelog 链接目标。",
+      "tags": [
+        "changelog",
+        "markdown",
+        "normalization"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        100,
+        105
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/changelog.ts:parseChangelog",
+      "type": "function",
+      "name": "parseChangelog",
+      "filePath": "packages/coding-agent/src/utils/changelog.ts",
+      "summary": "按 `## [x.y.z]` 标题解析 changelog 文件为版本条目列表。",
+      "tags": [
+        "changelog",
+        "parsing",
+        "versioning"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        111,
+        168
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/changelog.ts:compareVersions",
+      "type": "function",
+      "name": "compareVersions",
+      "filePath": "packages/coding-agent/src/utils/changelog.ts",
+      "summary": "按 major/minor/patch 比较两个 changelog 条目。",
+      "tags": [
+        "versioning",
+        "utility",
+        "changelog"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        173,
+        177
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/changelog.ts:getNewEntries",
+      "type": "function",
+      "name": "getNewEntries",
+      "filePath": "packages/coding-agent/src/utils/changelog.ts",
+      "summary": "筛选出比 lastVersion 更新的 changelog 条目。",
+      "tags": [
+        "changelog",
+        "versioning",
+        "filter"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        182,
+        193
+      ]
+    },
+    {
+      "id": "file:packages/coding-agent/src/utils/clipboard-command.ts",
+      "type": "file",
+      "name": "clipboard-command.ts",
+      "filePath": "packages/coding-agent/src/utils/clipboard-command.ts",
+      "summary": "带超时 spawn 剪贴板 CLI，收集 stdout 并在超时后杀掉子进程。",
+      "tags": [
+        "clipboard",
+        "spawn",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/clipboard-command.ts:runClipboardCommand",
+      "type": "function",
+      "name": "runClipboardCommand",
+      "filePath": "packages/coding-agent/src/utils/clipboard-command.ts",
+      "summary": "执行剪贴板命令，支持 timeout、stdin 写入与 stdout 拼接。",
+      "tags": [
+        "clipboard",
+        "spawn",
+        "io"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        4,
+        44
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/utils/changelog.ts",
+      "target": "function:packages/coding-agent/src/utils/changelog.ts:splitLocalTarget",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/changelog.ts",
+      "target": "function:packages/coding-agent/src/utils/changelog.ts:resolveRepositoryPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/changelog.ts",
+      "target": "function:packages/coding-agent/src/utils/changelog.ts:normalizeChangelogLinkTarget",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/changelog.ts",
+      "target": "function:packages/coding-agent/src/utils/changelog.ts:normalizeChangelogLinks",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/changelog.ts",
+      "target": "function:packages/coding-agent/src/utils/changelog.ts:normalizeChangelogLinks",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/changelog.ts",
+      "target": "function:packages/coding-agent/src/utils/changelog.ts:parseChangelog",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/changelog.ts",
+      "target": "function:packages/coding-agent/src/utils/changelog.ts:parseChangelog",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/changelog.ts",
+      "target": "function:packages/coding-agent/src/utils/changelog.ts:compareVersions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/changelog.ts",
+      "target": "function:packages/coding-agent/src/utils/changelog.ts:compareVersions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/changelog.ts",
+      "target": "function:packages/coding-agent/src/utils/changelog.ts:getNewEntries",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/changelog.ts",
+      "target": "function:packages/coding-agent/src/utils/changelog.ts:getNewEntries",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard-command.ts",
+      "target": "function:packages/coding-agent/src/utils/clipboard-command.ts:runClipboardCommand",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard-command.ts",
+      "target": "function:packages/coding-agent/src/utils/clipboard-command.ts:runClipboardCommand",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/changelog.ts:normalizeChangelogLinks",
+      "target": "function:packages/coding-agent/src/utils/changelog.ts:normalizeChangelogLinkTarget",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/changelog.ts:normalizeChangelogLinkTarget",
+      "target": "function:packages/coding-agent/src/utils/changelog.ts:splitLocalTarget",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/changelog.ts:normalizeChangelogLinkTarget",
+      "target": "function:packages/coding-agent/src/utils/changelog.ts:resolveRepositoryPath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/changelog.ts:getNewEntries",
+      "target": "function:packages/coding-agent/src/utils/changelog.ts:compareVersions",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

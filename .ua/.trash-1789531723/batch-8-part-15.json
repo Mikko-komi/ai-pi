@@ -1,0 +1,304 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/utils/open-browser.ts",
+      "type": "file",
+      "name": "open-browser.ts",
+      "filePath": "packages/coding-agent/src/utils/open-browser.ts",
+      "summary": "按平台 spawn 默认浏览器打开 URL（open/xdg-open/cmd start）。",
+      "tags": [
+        "browser",
+        "spawn",
+        "platform",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/open-browser.ts:openBrowser",
+      "type": "function",
+      "name": "openBrowser",
+      "filePath": "packages/coding-agent/src/utils/open-browser.ts",
+      "summary": "detached spawn 系统浏览器打开 target。",
+      "tags": [
+        "browser",
+        "spawn",
+        "platform"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        10,
+        24
+      ]
+    },
+    {
+      "id": "file:packages/coding-agent/src/utils/syntax-highlight.ts",
+      "type": "file",
+      "name": "syntax-highlight.ts",
+      "filePath": "packages/coding-agent/src/utils/syntax-highlight.ts",
+      "summary": "用 highlight.js 高亮代码，再把 HTML span 映射为 theme 着色的 ANSI。",
+      "tags": [
+        "highlight",
+        "ansi",
+        "html",
+        "utility"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "异步 import highlight.js 全语言包；renderHighlightedHtml 解析 span class 为 scope 栈。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/syntax-highlight.ts:loadAllHighlightLanguages",
+      "type": "function",
+      "name": "loadAllHighlightLanguages",
+      "filePath": "packages/coding-agent/src/utils/syntax-highlight.ts",
+      "summary": "延迟加载 highlight.js 全语言索引。",
+      "tags": [
+        "highlight",
+        "lazy-load",
+        "initialization"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        53,
+        68
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/syntax-highlight.ts:getScopeFromSpanTag",
+      "type": "function",
+      "name": "getScopeFromSpanTag",
+      "filePath": "packages/coding-agent/src/utils/syntax-highlight.ts",
+      "summary": "从 highlight.js span 的 class 提取 hljs 作用域名。",
+      "tags": [
+        "highlight",
+        "html",
+        "parsing"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        83,
+        97
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/syntax-highlight.ts:getScopeFormatter",
+      "type": "function",
+      "name": "getScopeFormatter",
+      "filePath": "packages/coding-agent/src/utils/syntax-highlight.ts",
+      "summary": "按 scope 前缀查找 theme 中的着色函数。",
+      "tags": [
+        "highlight",
+        "theme",
+        "formatting"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        99,
+        122
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/syntax-highlight.ts:getActiveFormatter",
+      "type": "function",
+      "name": "getActiveFormatter",
+      "filePath": "packages/coding-agent/src/utils/syntax-highlight.ts",
+      "summary": "从 scope 栈顶向下找第一个可用 formatter。",
+      "tags": [
+        "highlight",
+        "theme",
+        "formatting"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        124,
+        136
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/syntax-highlight.ts:renderHighlightedHtml",
+      "type": "function",
+      "name": "renderHighlightedHtml",
+      "filePath": "packages/coding-agent/src/utils/syntax-highlight.ts",
+      "summary": "把 highlight.js HTML 转为 ANSI：处理 span 栈与 HTML 实体。",
+      "tags": [
+        "highlight",
+        "ansi",
+        "html"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        146,
+        198
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/syntax-highlight.ts:highlight",
+      "type": "function",
+      "name": "highlight",
+      "filePath": "packages/coding-agent/src/utils/syntax-highlight.ts",
+      "summary": "调用 highlight.js（指定语言或自动）并渲染为 ANSI。",
+      "tags": [
+        "highlight",
+        "api",
+        "code"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        200,
+        208
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/syntax-highlight.ts:supportsLanguage",
+      "type": "function",
+      "name": "supportsLanguage",
+      "filePath": "packages/coding-agent/src/utils/syntax-highlight.ts",
+      "summary": "查询 highlight.js 是否识别该语言名。",
+      "tags": [
+        "highlight",
+        "language",
+        "api"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        210,
+        212
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/utils/open-browser.ts",
+      "target": "function:packages/coding-agent/src/utils/open-browser.ts:openBrowser",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/open-browser.ts",
+      "target": "function:packages/coding-agent/src/utils/open-browser.ts:openBrowser",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/syntax-highlight.ts",
+      "target": "function:packages/coding-agent/src/utils/syntax-highlight.ts:loadAllHighlightLanguages",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/syntax-highlight.ts",
+      "target": "function:packages/coding-agent/src/utils/syntax-highlight.ts:loadAllHighlightLanguages",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/syntax-highlight.ts",
+      "target": "function:packages/coding-agent/src/utils/syntax-highlight.ts:getScopeFromSpanTag",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/syntax-highlight.ts",
+      "target": "function:packages/coding-agent/src/utils/syntax-highlight.ts:getScopeFormatter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/syntax-highlight.ts",
+      "target": "function:packages/coding-agent/src/utils/syntax-highlight.ts:getActiveFormatter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/syntax-highlight.ts",
+      "target": "function:packages/coding-agent/src/utils/syntax-highlight.ts:renderHighlightedHtml",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/syntax-highlight.ts",
+      "target": "function:packages/coding-agent/src/utils/syntax-highlight.ts:renderHighlightedHtml",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/syntax-highlight.ts",
+      "target": "function:packages/coding-agent/src/utils/syntax-highlight.ts:highlight",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/syntax-highlight.ts",
+      "target": "function:packages/coding-agent/src/utils/syntax-highlight.ts:highlight",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/syntax-highlight.ts",
+      "target": "function:packages/coding-agent/src/utils/syntax-highlight.ts:supportsLanguage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/syntax-highlight.ts",
+      "target": "function:packages/coding-agent/src/utils/syntax-highlight.ts:supportsLanguage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/syntax-highlight.ts",
+      "target": "file:packages/coding-agent/src/utils/html.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/syntax-highlight.ts:highlight",
+      "target": "function:packages/coding-agent/src/utils/syntax-highlight.ts:renderHighlightedHtml",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/syntax-highlight.ts:renderHighlightedHtml",
+      "target": "function:packages/coding-agent/src/utils/syntax-highlight.ts:getScopeFromSpanTag",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/syntax-highlight.ts:renderHighlightedHtml",
+      "target": "function:packages/coding-agent/src/utils/syntax-highlight.ts:getActiveFormatter",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/syntax-highlight.ts:getActiveFormatter",
+      "target": "function:packages/coding-agent/src/utils/syntax-highlight.ts:getScopeFormatter",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/syntax-highlight.ts:supportsLanguage",
+      "target": "function:packages/coding-agent/src/utils/syntax-highlight.ts:loadAllHighlightLanguages",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

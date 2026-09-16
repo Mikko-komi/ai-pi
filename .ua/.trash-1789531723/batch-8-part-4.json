@@ -1,0 +1,175 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/theme-selector.ts",
+      "type": "file",
+      "name": "theme-selector.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/theme-selector.ts",
+      "summary": "独立主题选择器：列出 getAvailableThemes() 并在焦点变化时预览。",
+      "tags": [
+        "component",
+        "theme",
+        "selector",
+        "tui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/theme-selector.ts:ThemeSelectorComponent",
+      "type": "class",
+      "name": "ThemeSelectorComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/theme-selector.ts",
+      "summary": "主题 SelectList，选中应用、取消还原，移动时触发 onPreview。",
+      "tags": [
+        "component",
+        "theme",
+        "selector",
+        "tui"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        13,
+        67
+      ]
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/thinking-selector.ts",
+      "type": "file",
+      "name": "thinking-selector.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/thinking-selector.ts",
+      "summary": "Thinking level 选择器：可搜索列表，支持设为默认并显示快捷键。",
+      "tags": [
+        "component",
+        "thinking",
+        "selector",
+        "tui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/thinking-selector.ts:ThinkingSelectorComponent",
+      "type": "class",
+      "name": "ThinkingSelectorComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/thinking-selector.ts",
+      "summary": "可聚焦 thinking 选择器，fuzzyFilter 过滤级别并回调 onSelect/onSelectAsDefault。",
+      "tags": [
+        "component",
+        "thinking",
+        "selector",
+        "tui"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        36,
+        154
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/theme-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/theme-selector.ts:ThemeSelectorComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/theme-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/theme-selector.ts:ThemeSelectorComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/theme-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/theme-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/theme-selector.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/thinking-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/thinking-selector.ts:ThinkingSelectorComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/thinking-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/thinking-selector.ts:ThinkingSelectorComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/thinking-selector.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/thinking-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/thinking-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/thinking-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/thinking-selector.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/theme-selector.ts:ThemeSelectorComponent",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts:DynamicBorder",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/thinking-selector.ts:ThinkingSelectorComponent",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyDisplayText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/thinking-selector.ts:ThinkingSelectorComponent",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts:DynamicBorder",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

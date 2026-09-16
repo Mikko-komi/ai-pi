@@ -1,0 +1,18 @@
+Analyze these files and produce GraphNode and GraphEdge objects.
+Project root: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi`
+Project: `pi-monorepo`
+Batch: `39/45`
+Skill directory: `/Users/elex-mb0203/.cursor/plugins/local/Understand-Anything/understand-anything-plugin/skills/understand`
+Output: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-39.json` OR `batch-39-part-<k>.json`.
+UA_DIR: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua`
+Load `batchImportData` and `neighborMap` from `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-briefs/batch-39.json`.
+Pass every listed file through to `batchFiles` with path, language, sizeLines, fileCategory.
+
+> **Language directive**: Generate all textual content in **Chinese (zh)**. Keep technical terms in English when no standard translation exists.
+
+Files:
+1. packages/protocol/README.md (41 lines, language: markdown, fileCategory: docs)
+2. packages/protocol/package.json (49 lines, language: json, fileCategory: config)
+3. packages/protocol/tsconfig.build.json (9 lines, language: json, fileCategory: config)
+
+Respond with only a brief summary: parts written, total nodes/edges, files skipped.

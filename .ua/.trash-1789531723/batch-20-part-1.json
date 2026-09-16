@@ -1,0 +1,910 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/tui/src/alt-screen-search.ts",
+      "type": "file",
+      "name": "alt-screen-search.ts",
+      "filePath": "packages/tui/src/alt-screen-search.ts",
+      "summary": "备用屏幕搜索：把终端行编成可检索语料，定位匹配并渲染带导航按钮的查询栏。",
+      "tags": [
+        "component",
+        "search",
+        "alt-screen"
+      ],
+      "complexity": "complex",
+      "languageNotes": "用 grapheme segmenter 把 ANSI 行映射回行列，避免宽字符与转义序列错位。"
+    },
+    {
+      "id": "function:packages/tui/src/alt-screen-search.ts:buildSearchCorpus",
+      "type": "function",
+      "name": "buildSearchCorpus",
+      "filePath": "packages/tui/src/alt-screen-search.ts",
+      "lineRange": [
+        34,
+        106
+      ],
+      "summary": "去掉 ANSI 后按 grapheme 拼出可检索文本，并记录每个片段对应的行列跨度。",
+      "tags": [
+        "search",
+        "corpus",
+        "ansi"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/alt-screen-search.ts:findSearchCorpusMatches",
+      "type": "function",
+      "name": "findSearchCorpusMatches",
+      "filePath": "packages/tui/src/alt-screen-search.ts",
+      "lineRange": [
+        116,
+        148
+      ],
+      "summary": "在语料上做正则查找，并把字符偏移映射回屏幕行列片段。",
+      "tags": [
+        "search",
+        "regex",
+        "mapping"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/alt-screen-search.ts:findAltScreenSearchMatches",
+      "type": "function",
+      "name": "findAltScreenSearchMatches",
+      "filePath": "packages/tui/src/alt-screen-search.ts",
+      "lineRange": [
+        186,
+        189
+      ],
+      "summary": "一次性构建语料并返回查询的全部屏幕匹配。",
+      "tags": [
+        "search",
+        "entry-point",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/alt-screen-search.ts:getAltScreenSearchMatchKey",
+      "type": "function",
+      "name": "getAltScreenSearchMatchKey",
+      "filePath": "packages/tui/src/alt-screen-search.ts",
+      "lineRange": [
+        191,
+        195
+      ],
+      "summary": "用行列区间生成匹配稳定键，供导航去重。",
+      "tags": [
+        "search",
+        "utility",
+        "identity"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/tui/src/alt-screen-search.ts:AltScreenSearchIndex",
+      "type": "class",
+      "name": "AltScreenSearchIndex",
+      "filePath": "packages/tui/src/alt-screen-search.ts",
+      "lineRange": [
+        156,
+        184
+      ],
+      "summary": "缓存备用屏幕语料与查询结果，query 变化时重建匹配列表。",
+      "tags": [
+        "search",
+        "index",
+        "cache"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/alt-screen-search.ts:search",
+      "type": "function",
+      "name": "search",
+      "filePath": "packages/tui/src/alt-screen-search.ts",
+      "lineRange": [
+        162,
+        184
+      ],
+      "summary": "在索引上复用或重建语料，返回规范化查询的匹配列表。",
+      "tags": [
+        "search",
+        "index",
+        "cache"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/tui/src/alt-screen-search.ts:AltScreenSearchComponent",
+      "type": "class",
+      "name": "AltScreenSearchComponent",
+      "filePath": "packages/tui/src/alt-screen-search.ts",
+      "lineRange": [
+        197,
+        327
+      ],
+      "summary": "搜索栏 UI：嵌入 Input、显示结果计数，并处理上/下一条命中按钮。",
+      "tags": [
+        "component",
+        "search",
+        "input"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/alt-screen-search.ts:render",
+      "type": "function",
+      "name": "render",
+      "filePath": "packages/tui/src/alt-screen-search.ts",
+      "lineRange": [
+        260,
+        327
+      ],
+      "summary": "绘制查询 Input、结果计数与上/下一条按钮，并计算按钮命中列。",
+      "tags": [
+        "rendering",
+        "search",
+        "ui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/tui/src/autocomplete.ts",
+      "type": "file",
+      "name": "autocomplete.ts",
+      "filePath": "packages/tui/src/autocomplete.ts",
+      "summary": "组合自动补全：斜杠命令 fuzzy 过滤，以及路径/@ 引用的目录与 fd 模糊文件建议。",
+      "tags": [
+        "autocomplete",
+        "service",
+        "file-search"
+      ],
+      "complexity": "complex",
+      "languageNotes": "通过 spawn fd 做可取消的文件系统遍历，超时或 abort 时回退到同步 readdir。"
+    },
+    {
+      "id": "function:packages/tui/src/autocomplete.ts:buildFdPathQuery",
+      "type": "function",
+      "name": "buildFdPathQuery",
+      "filePath": "packages/tui/src/autocomplete.ts",
+      "lineRange": [
+        17,
+        43
+      ],
+      "summary": "把用户路径前缀转成 fd 可用的正则，按路径段拼接分隔符模式。",
+      "tags": [
+        "autocomplete",
+        "fd",
+        "query"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/autocomplete.ts:findUnclosedQuoteStart",
+      "type": "function",
+      "name": "findUnclosedQuoteStart",
+      "filePath": "packages/tui/src/autocomplete.ts",
+      "lineRange": [
+        54,
+        68
+      ],
+      "summary": "从光标向前找未闭合引号起点，用于带引号的路径前缀。",
+      "tags": [
+        "autocomplete",
+        "parsing",
+        "quotes"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/autocomplete.ts:extractQuotedPrefix",
+      "type": "function",
+      "name": "extractQuotedPrefix",
+      "filePath": "packages/tui/src/autocomplete.ts",
+      "lineRange": [
+        74,
+        92
+      ],
+      "summary": "提取光标前带引号的 token，区分原始前缀与是否仍在引号内。",
+      "tags": [
+        "autocomplete",
+        "parsing",
+        "quotes"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/autocomplete.ts:parsePathPrefix",
+      "type": "function",
+      "name": "parsePathPrefix",
+      "filePath": "packages/tui/src/autocomplete.ts",
+      "lineRange": [
+        94,
+        105
+      ],
+      "summary": "规范化路径前缀：展开引号、识别 ~/ 与相对/绝对路径形态。",
+      "tags": [
+        "autocomplete",
+        "parsing",
+        "path"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/autocomplete.ts:buildCompletionValue",
+      "type": "function",
+      "name": "buildCompletionValue",
+      "filePath": "packages/tui/src/autocomplete.ts",
+      "lineRange": [
+        107,
+        121
+      ],
+      "summary": "按是否目录、是否引号来组装插入文本，目录补上分隔符。",
+      "tags": [
+        "autocomplete",
+        "completion",
+        "path"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/autocomplete.ts:walkDirectoryWithFd",
+      "type": "function",
+      "name": "walkDirectoryWithFd",
+      "filePath": "packages/tui/src/autocomplete.ts",
+      "lineRange": [
+        124,
+        222
+      ],
+      "summary": "优先 spawn fd 列举匹配路径，失败或取消时回退同步目录遍历。",
+      "tags": [
+        "autocomplete",
+        "fd",
+        "filesystem"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/tui/src/autocomplete.ts:CombinedAutocompleteProvider",
+      "type": "class",
+      "name": "CombinedAutocompleteProvider",
+      "filePath": "packages/tui/src/autocomplete.ts",
+      "lineRange": [
+        278,
+        826
+      ],
+      "summary": "实现 AutocompleteProvider：命令补全、@ 路径与 fd 模糊文件建议，并写回补全文本。",
+      "tags": [
+        "autocomplete",
+        "provider",
+        "file-search"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/tui/src/autocomplete.ts:getSuggestions",
+      "type": "function",
+      "name": "getSuggestions",
+      "filePath": "packages/tui/src/autocomplete.ts",
+      "lineRange": [
+        289,
+        379
+      ],
+      "summary": "按 @ 前缀、斜杠命令或路径上下文选择补全源，并返回 items/prefix。",
+      "tags": [
+        "autocomplete",
+        "provider",
+        "dispatch"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/autocomplete.ts:applyCompletion",
+      "type": "function",
+      "name": "applyCompletion",
+      "filePath": "packages/tui/src/autocomplete.ts",
+      "lineRange": [
+        380,
+        467
+      ],
+      "summary": "把选中项写回当前行：处理引号、目录斜杠与命令/路径替换范围。",
+      "tags": [
+        "autocomplete",
+        "completion",
+        "editing"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/autocomplete.ts:extractAtPrefix",
+      "type": "function",
+      "name": "extractAtPrefix",
+      "filePath": "packages/tui/src/autocomplete.ts",
+      "lineRange": [
+        468,
+        484
+      ],
+      "summary": "识别 @ 文件引用前缀，供模糊文件补全触发。",
+      "tags": [
+        "autocomplete",
+        "parsing",
+        "mention"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/autocomplete.ts:extractPathPrefix",
+      "type": "function",
+      "name": "extractPathPrefix",
+      "filePath": "packages/tui/src/autocomplete.ts",
+      "lineRange": [
+        485,
+        514
+      ],
+      "summary": "从光标前文本抽出路径 token，处理分隔符与引号。",
+      "tags": [
+        "autocomplete",
+        "parsing",
+        "path"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/autocomplete.ts:expandHomePath",
+      "type": "function",
+      "name": "expandHomePath",
+      "filePath": "packages/tui/src/autocomplete.ts",
+      "lineRange": [
+        515,
+        525
+      ],
+      "summary": "把 ~/ 展开为用户主目录，供文件系统查询使用。",
+      "tags": [
+        "autocomplete",
+        "path",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/autocomplete.ts:resolveScopedFuzzyQuery",
+      "type": "function",
+      "name": "resolveScopedFuzzyQuery",
+      "filePath": "packages/tui/src/autocomplete.ts",
+      "lineRange": [
+        526,
+        555
+      ],
+      "summary": "把 scoped 查询拆成目录基座与 fd/fuzzy 片段，限制搜索范围。",
+      "tags": [
+        "autocomplete",
+        "fuzzy",
+        "path"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/autocomplete.ts:getFileSuggestions",
+      "type": "function",
+      "name": "getFileSuggestions",
+      "filePath": "packages/tui/src/autocomplete.ts",
+      "lineRange": [
+        565,
+        701
+      ],
+      "summary": "按前缀列目录或启动 fd，给路径补全打分并排序。",
+      "tags": [
+        "autocomplete",
+        "filesystem",
+        "ranking"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/autocomplete.ts:scoreEntry",
+      "type": "function",
+      "name": "scoreEntry",
+      "filePath": "packages/tui/src/autocomplete.ts",
+      "lineRange": [
+        702,
+        723
+      ],
+      "summary": "按前缀匹配位置与目录优先给补全项打分。",
+      "tags": [
+        "autocomplete",
+        "ranking",
+        "scoring"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/autocomplete.ts:getBaseDirSuggestions",
+      "type": "function",
+      "name": "getBaseDirSuggestions",
+      "filePath": "packages/tui/src/autocomplete.ts",
+      "lineRange": [
+        724,
+        736
+      ],
+      "summary": "当前缀为空时列出基目录条目作为起点建议。",
+      "tags": [
+        "autocomplete",
+        "filesystem",
+        "listing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/autocomplete.ts:getFuzzyFileSuggestions",
+      "type": "function",
+      "name": "getFuzzyFileSuggestions",
+      "filePath": "packages/tui/src/autocomplete.ts",
+      "lineRange": [
+        737,
+        814
+      ],
+      "summary": "对 @ 引用走 fd 模糊搜索，并把结果转成显示路径。",
+      "tags": [
+        "autocomplete",
+        "fuzzy",
+        "fd"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/autocomplete.ts:shouldTriggerFileCompletion",
+      "type": "function",
+      "name": "shouldTriggerFileCompletion",
+      "filePath": "packages/tui/src/autocomplete.ts",
+      "lineRange": [
+        815,
+        826
+      ],
+      "summary": "判断光标前文本是否像路径，从而自动弹出文件补全。",
+      "tags": [
+        "autocomplete",
+        "trigger",
+        "path"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/tui/src/alt-screen-search.ts",
+      "target": "file:packages/tui/src/components/input.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/alt-screen-search.ts",
+      "target": "file:packages/tui/src/keybindings.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/alt-screen-search.ts",
+      "target": "file:packages/tui/src/tui.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/alt-screen-search.ts",
+      "target": "file:packages/tui/src/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/alt-screen-search.ts",
+      "target": "function:packages/tui/src/alt-screen-search.ts:buildSearchCorpus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/alt-screen-search.ts",
+      "target": "function:packages/tui/src/alt-screen-search.ts:findSearchCorpusMatches",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/alt-screen-search.ts",
+      "target": "function:packages/tui/src/alt-screen-search.ts:findAltScreenSearchMatches",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/alt-screen-search.ts",
+      "target": "function:packages/tui/src/alt-screen-search.ts:findAltScreenSearchMatches",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/alt-screen-search.ts",
+      "target": "function:packages/tui/src/alt-screen-search.ts:getAltScreenSearchMatchKey",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/alt-screen-search.ts",
+      "target": "function:packages/tui/src/alt-screen-search.ts:getAltScreenSearchMatchKey",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/alt-screen-search.ts",
+      "target": "class:packages/tui/src/alt-screen-search.ts:AltScreenSearchIndex",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/alt-screen-search.ts",
+      "target": "class:packages/tui/src/alt-screen-search.ts:AltScreenSearchIndex",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/alt-screen-search.ts",
+      "target": "function:packages/tui/src/alt-screen-search.ts:search",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/alt-screen-search.ts",
+      "target": "class:packages/tui/src/alt-screen-search.ts:AltScreenSearchComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/alt-screen-search.ts",
+      "target": "class:packages/tui/src/alt-screen-search.ts:AltScreenSearchComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/alt-screen-search.ts",
+      "target": "function:packages/tui/src/alt-screen-search.ts:render",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/autocomplete.ts",
+      "target": "file:packages/tui/src/fuzzy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/autocomplete.ts",
+      "target": "function:packages/tui/src/autocomplete.ts:buildFdPathQuery",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/autocomplete.ts",
+      "target": "function:packages/tui/src/autocomplete.ts:findUnclosedQuoteStart",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/autocomplete.ts",
+      "target": "function:packages/tui/src/autocomplete.ts:extractQuotedPrefix",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/autocomplete.ts",
+      "target": "function:packages/tui/src/autocomplete.ts:parsePathPrefix",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/autocomplete.ts",
+      "target": "function:packages/tui/src/autocomplete.ts:buildCompletionValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/autocomplete.ts",
+      "target": "function:packages/tui/src/autocomplete.ts:walkDirectoryWithFd",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/autocomplete.ts",
+      "target": "class:packages/tui/src/autocomplete.ts:CombinedAutocompleteProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/autocomplete.ts",
+      "target": "class:packages/tui/src/autocomplete.ts:CombinedAutocompleteProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/autocomplete.ts",
+      "target": "function:packages/tui/src/autocomplete.ts:getSuggestions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/autocomplete.ts",
+      "target": "function:packages/tui/src/autocomplete.ts:applyCompletion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/autocomplete.ts",
+      "target": "function:packages/tui/src/autocomplete.ts:extractAtPrefix",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/autocomplete.ts",
+      "target": "function:packages/tui/src/autocomplete.ts:extractPathPrefix",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/autocomplete.ts",
+      "target": "function:packages/tui/src/autocomplete.ts:expandHomePath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/autocomplete.ts",
+      "target": "function:packages/tui/src/autocomplete.ts:resolveScopedFuzzyQuery",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/autocomplete.ts",
+      "target": "function:packages/tui/src/autocomplete.ts:getFileSuggestions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/autocomplete.ts",
+      "target": "function:packages/tui/src/autocomplete.ts:scoreEntry",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/autocomplete.ts",
+      "target": "function:packages/tui/src/autocomplete.ts:getBaseDirSuggestions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/autocomplete.ts",
+      "target": "function:packages/tui/src/autocomplete.ts:getFuzzyFileSuggestions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/autocomplete.ts",
+      "target": "function:packages/tui/src/autocomplete.ts:shouldTriggerFileCompletion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "function:packages/tui/src/alt-screen-search.ts:search",
+      "target": "function:packages/tui/src/alt-screen-search.ts:buildSearchCorpus",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/alt-screen-search.ts:search",
+      "target": "function:packages/tui/src/alt-screen-search.ts:findSearchCorpusMatches",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/alt-screen-search.ts:findAltScreenSearchMatches",
+      "target": "function:packages/tui/src/alt-screen-search.ts:buildSearchCorpus",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/alt-screen-search.ts:findAltScreenSearchMatches",
+      "target": "function:packages/tui/src/alt-screen-search.ts:findSearchCorpusMatches",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/alt-screen-search.ts:buildSearchCorpus",
+      "target": "function:packages/tui/src/utils.ts:stripTerminalSequences",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/alt-screen-search.ts:buildSearchCorpus",
+      "target": "function:packages/tui/src/utils.ts:visibleWidth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/alt-screen-search.ts:render",
+      "target": "function:packages/tui/src/utils.ts:visibleWidth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/alt-screen-search.ts:render",
+      "target": "function:packages/tui/src/utils.ts:truncateToWidth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/autocomplete.ts:getSuggestions",
+      "target": "function:packages/tui/src/fuzzy.ts:fuzzyFilter",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/autocomplete.ts:getSuggestions",
+      "target": "function:packages/tui/src/autocomplete.ts:extractAtPrefix",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/autocomplete.ts:getSuggestions",
+      "target": "function:packages/tui/src/autocomplete.ts:extractPathPrefix",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/autocomplete.ts:getSuggestions",
+      "target": "function:packages/tui/src/autocomplete.ts:getFileSuggestions",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/autocomplete.ts:getSuggestions",
+      "target": "function:packages/tui/src/autocomplete.ts:getFuzzyFileSuggestions",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/autocomplete.ts:applyCompletion",
+      "target": "function:packages/tui/src/autocomplete.ts:buildCompletionValue",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/autocomplete.ts:extractPathPrefix",
+      "target": "function:packages/tui/src/autocomplete.ts:extractQuotedPrefix",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/autocomplete.ts:extractQuotedPrefix",
+      "target": "function:packages/tui/src/autocomplete.ts:findUnclosedQuoteStart",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/autocomplete.ts:getFileSuggestions",
+      "target": "function:packages/tui/src/autocomplete.ts:walkDirectoryWithFd",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/autocomplete.ts:getFileSuggestions",
+      "target": "function:packages/tui/src/autocomplete.ts:parsePathPrefix",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/autocomplete.ts:getFileSuggestions",
+      "target": "function:packages/tui/src/autocomplete.ts:buildFdPathQuery",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/autocomplete.ts:getFileSuggestions",
+      "target": "function:packages/tui/src/autocomplete.ts:expandHomePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/autocomplete.ts:getFileSuggestions",
+      "target": "function:packages/tui/src/autocomplete.ts:getBaseDirSuggestions",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/autocomplete.ts:getFileSuggestions",
+      "target": "function:packages/tui/src/autocomplete.ts:getFuzzyFileSuggestions",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/autocomplete.ts:getFileSuggestions",
+      "target": "function:packages/tui/src/autocomplete.ts:scoreEntry",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/autocomplete.ts:getFuzzyFileSuggestions",
+      "target": "function:packages/tui/src/autocomplete.ts:walkDirectoryWithFd",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/autocomplete.ts:getFuzzyFileSuggestions",
+      "target": "function:packages/tui/src/autocomplete.ts:resolveScopedFuzzyQuery",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/autocomplete.ts:getFuzzyFileSuggestions",
+      "target": "function:packages/tui/src/autocomplete.ts:buildFdPathQuery",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

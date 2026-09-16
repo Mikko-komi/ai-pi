@@ -1,0 +1,260 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/bun/runtime-setup.ts",
+      "type": "file",
+      "name": "runtime-setup.ts",
+      "filePath": "packages/coding-agent/src/bun/runtime-setup.ts",
+      "summary": "设置进程标题、屏蔽 Node 警告，并注册 Bun OAuth 流程与 Bedrock provider module。",
+      "tags": [
+        "entry-point",
+        "bun",
+        "runtime",
+        "oauth"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/bun/sandbox-env-setup.ts",
+      "type": "file",
+      "name": "sandbox-env-setup.ts",
+      "filePath": "packages/coding-agent/src/bun/sandbox-env-setup.ts",
+      "summary": "在其他模块读取环境变量之前立即调用 restoreSandboxEnv。",
+      "tags": [
+        "entry-point",
+        "bun",
+        "sandbox"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/cli.ts",
+      "type": "file",
+      "name": "cli.ts",
+      "filePath": "packages/coding-agent/src/cli.ts",
+      "summary": "Node/通用 CLI 入口：执行 setupCli 后把 argv 交给 main。",
+      "tags": [
+        "entry-point",
+        "cli",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/cli/args.ts",
+      "type": "file",
+      "name": "args.ts",
+      "filePath": "packages/coding-agent/src/cli/args.ts",
+      "summary": "解析 coding-agent CLI 参数并打印帮助，覆盖模型、会话、工具、扩展、主题与输出模式。",
+      "tags": [
+        "cli",
+        "validation",
+        "entry-point"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/args.ts:isValidThinkingLevel",
+      "type": "function",
+      "name": "isValidThinkingLevel",
+      "filePath": "packages/coding-agent/src/cli/args.ts",
+      "lineRange": [
+        62,
+        64
+      ],
+      "summary": "判断字符串是否为合法 ThinkingLevel。",
+      "tags": [
+        "validation",
+        "utility",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/args.ts:normalizeSessionName",
+      "type": "function",
+      "name": "normalizeSessionName",
+      "filePath": "packages/coding-agent/src/cli/args.ts",
+      "lineRange": [
+        66,
+        69
+      ],
+      "summary": "修剪会话名，空字符串视为未设置。",
+      "tags": [
+        "utility",
+        "validation",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/args.ts:parseArgs",
+      "type": "function",
+      "name": "parseArgs",
+      "filePath": "packages/coding-agent/src/cli/args.ts",
+      "lineRange": [
+        71,
+        249
+      ],
+      "summary": "扫描 argv，填充 Args（模型、会话、工具、扩展、未知 flag 与诊断）。",
+      "tags": [
+        "cli",
+        "validation",
+        "parser"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/args.ts:printHelp",
+      "type": "function",
+      "name": "printHelp",
+      "filePath": "packages/coding-agent/src/cli/args.ts",
+      "lineRange": [
+        251,
+        447
+      ],
+      "summary": "打印 CLI 用法、环境变量与扩展自定义 flag。",
+      "tags": [
+        "cli",
+        "documentation",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/bun/runtime-setup.ts",
+      "target": "file:packages/ai/src/bedrock-provider.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/bun/runtime-setup.ts",
+      "target": "file:packages/ai/src/bun-oauth.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/bun/runtime-setup.ts",
+      "target": "file:packages/ai/src/compat.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/bun/runtime-setup.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/bun/sandbox-env-setup.ts",
+      "target": "file:packages/coding-agent/src/bun/restore-sandbox-env.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli.ts",
+      "target": "file:packages/coding-agent/src/cli/setup.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli.ts",
+      "target": "file:packages/coding-agent/src/main.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/args.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/args.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/args.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/args.ts",
+      "target": "file:packages/coding-agent/src/core/settings-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/args.ts",
+      "target": "function:packages/coding-agent/src/cli/args.ts:isValidThinkingLevel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/args.ts",
+      "target": "function:packages/coding-agent/src/cli/args.ts:isValidThinkingLevel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/args.ts",
+      "target": "function:packages/coding-agent/src/cli/args.ts:normalizeSessionName",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/args.ts",
+      "target": "function:packages/coding-agent/src/cli/args.ts:normalizeSessionName",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/args.ts",
+      "target": "function:packages/coding-agent/src/cli/args.ts:parseArgs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/args.ts",
+      "target": "function:packages/coding-agent/src/cli/args.ts:parseArgs",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/args.ts",
+      "target": "function:packages/coding-agent/src/cli/args.ts:printHelp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/args.ts",
+      "target": "function:packages/coding-agent/src/cli/args.ts:printHelp",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

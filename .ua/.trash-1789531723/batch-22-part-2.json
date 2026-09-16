@@ -1,0 +1,1756 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/tui/src/native-modifiers.ts",
+      "type": "file",
+      "name": "native-modifiers.ts",
+      "filePath": "packages/tui/src/native-modifiers.ts",
+      "summary": "通过原生平台 helper 查询 Shift/Command/Control/Option 是否按下。",
+      "tags": [
+        "原生模块",
+        "修饰键",
+        "utility",
+        "键盘"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/tui/src/native-module-path.ts",
+      "type": "file",
+      "name": "native-module-path.ts",
+      "filePath": "packages/tui/src/native-module-path.ts",
+      "summary": "按包安装路径、源码目录与可执行文件目录生成原生 .node 模块候选路径。",
+      "tags": [
+        "原生模块",
+        "路径解析",
+        "utility",
+        "打包"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/tui/src/native-platform.ts",
+      "type": "file",
+      "name": "native-platform.ts",
+      "filePath": "packages/tui/src/native-platform.ts",
+      "summary": "按平台惰性加载原生 helper，提供剪贴板、VT 输入与修饰键查询。",
+      "tags": [
+        "原生模块",
+        "剪贴板",
+        "平台适配",
+        "factory"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/tui/src/stdin-buffer.ts",
+      "type": "file",
+      "name": "stdin-buffer.ts",
+      "filePath": "packages/tui/src/stdin-buffer.ts",
+      "summary": "缓冲 stdin 分片直到 CSI/OSC/DCS/APC 等 escape 序列完整，避免半包被当成普通按键。",
+      "tags": [
+        "输入缓冲",
+        "escape-sequence",
+        "event-handler",
+        "stdin"
+      ],
+      "complexity": "complex",
+      "languageNotes": "用超时与括号粘贴模式拼装可能跨多次 data 事件到达的终端序列。"
+    },
+    {
+      "id": "file:packages/tui/src/terminal-colors.ts",
+      "type": "file",
+      "name": "terminal-colors.ts",
+      "filePath": "packages/tui/src/terminal-colors.ts",
+      "summary": "解析 OSC 11 背景色与终端配色方案报告，将 hex 通道转为 RGB 并判断 dark/light。",
+      "tags": [
+        "颜色",
+        "osc",
+        "终端查询",
+        "解析"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/tui/src/terminal-image.ts",
+      "type": "file",
+      "name": "terminal-image.ts",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "summary": "探测 Kitty/iTerm2 图像能力，编解码图像转义序列，并计算单元格尺寸与回退文本。",
+      "tags": [
+        "图像协议",
+        "kitty",
+        "iterm2",
+        "能力探测"
+      ],
+      "complexity": "complex",
+      "languageNotes": "从 PNG/JPEG/GIF/WebP 头解析像素尺寸，再按单元格像素换算占位行。"
+    },
+    {
+      "id": "file:packages/tui/src/terminal.ts",
+      "type": "file",
+      "name": "terminal.ts",
+      "filePath": "packages/tui/src/terminal.ts",
+      "summary": "封装进程终端 I/O：协商 Kitty/modifyOtherKeys、缓冲 stdin，并提供光标、清屏与进度条写入。",
+      "tags": [
+        "终端",
+        "键盘协议",
+        "I/O",
+        "service"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/tui/src/native-modifiers.ts:isNativeModifierPressed",
+      "type": "function",
+      "name": "isNativeModifierPressed",
+      "filePath": "packages/tui/src/native-modifiers.ts",
+      "lineRange": [
+        5,
+        13
+      ],
+      "summary": "查询原生 helper 报告的修饰键按下状态，失败时返回 false。",
+      "tags": [
+        "修饰键",
+        "原生模块",
+        "键盘"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/native-module-path.ts:getNativeModuleCandidates",
+      "type": "function",
+      "name": "getNativeModuleCandidates",
+      "filePath": "packages/tui/src/native-module-path.ts",
+      "lineRange": [
+        14,
+        31
+      ],
+      "summary": "生成去重后的原生模块候选路径列表。",
+      "tags": [
+        "路径解析",
+        "原生模块",
+        "打包"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/native-platform.ts:loadNativePlatformHelper",
+      "type": "function",
+      "name": "loadNativePlatformHelper",
+      "filePath": "packages/tui/src/native-platform.ts",
+      "lineRange": [
+        26,
+        51
+      ],
+      "summary": "按平台/架构尝试加载预编译 .node helper 并缓存结果。",
+      "tags": [
+        "原生模块",
+        "加载",
+        "缓存"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/native-platform.ts:getNativePlatformHelper",
+      "type": "function",
+      "name": "getNativePlatformHelper",
+      "filePath": "packages/tui/src/native-platform.ts",
+      "lineRange": [
+        53,
+        56
+      ],
+      "summary": "在 macOS/Windows 上返回已加载的原生平台 helper。",
+      "tags": [
+        "原生模块",
+        "平台适配",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/native-platform.ts:getNativeClipboard",
+      "type": "function",
+      "name": "getNativeClipboard",
+      "filePath": "packages/tui/src/native-platform.ts",
+      "lineRange": [
+        59,
+        63
+      ],
+      "summary": "获取剪贴板 helper；Linux 仅在 DISPLAY 存在时加载 X11 变体。",
+      "tags": [
+        "剪贴板",
+        "linux",
+        "原生模块"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/stdin-buffer.ts:isCompleteSequence",
+      "type": "function",
+      "name": "isCompleteSequence",
+      "filePath": "packages/tui/src/stdin-buffer.ts",
+      "lineRange": [
+        31,
+        80
+      ],
+      "summary": "判断缓冲数据是否为完整 escape 序列、半包或非 escape。",
+      "tags": [
+        "escape-sequence",
+        "完整性",
+        "解析"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/stdin-buffer.ts:isCompleteCsiSequence",
+      "type": "function",
+      "name": "isCompleteCsiSequence",
+      "filePath": "packages/tui/src/stdin-buffer.ts",
+      "lineRange": [
+        86,
+        128
+      ],
+      "summary": "检测 CSI 序列是否已收到终结符。",
+      "tags": [
+        "csi",
+        "escape-sequence",
+        "解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/stdin-buffer.ts:isCompleteOscSequence",
+      "type": "function",
+      "name": "isCompleteOscSequence",
+      "filePath": "packages/tui/src/stdin-buffer.ts",
+      "lineRange": [
+        134,
+        145
+      ],
+      "summary": "检测 OSC 序列是否以 BEL 或 ST 结束。",
+      "tags": [
+        "osc",
+        "escape-sequence",
+        "解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/stdin-buffer.ts:isCompleteDcsSequence",
+      "type": "function",
+      "name": "isCompleteDcsSequence",
+      "filePath": "packages/tui/src/stdin-buffer.ts",
+      "lineRange": [
+        152,
+        163
+      ],
+      "summary": "检测 DCS 序列是否完整。",
+      "tags": [
+        "dcs",
+        "escape-sequence",
+        "解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/stdin-buffer.ts:isCompleteApcSequence",
+      "type": "function",
+      "name": "isCompleteApcSequence",
+      "filePath": "packages/tui/src/stdin-buffer.ts",
+      "lineRange": [
+        170,
+        181
+      ],
+      "summary": "检测 APC 序列是否完整。",
+      "tags": [
+        "apc",
+        "escape-sequence",
+        "解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/stdin-buffer.ts:extractCompleteSequences",
+      "type": "function",
+      "name": "extractCompleteSequences",
+      "filePath": "packages/tui/src/stdin-buffer.ts",
+      "lineRange": [
+        194,
+        257
+      ],
+      "summary": "从缓冲区切出所有已完成序列，留下半包。",
+      "tags": [
+        "分帧",
+        "stdin",
+        "escape-sequence"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-colors.ts:parseOscHexChannel",
+      "type": "function",
+      "name": "parseOscHexChannel",
+      "filePath": "packages/tui/src/terminal-colors.ts",
+      "lineRange": [
+        17,
+        26
+      ],
+      "summary": "解析 OSC 颜色响应中的单个 hex 通道。",
+      "tags": [
+        "颜色",
+        "hex",
+        "解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-colors.ts:isOsc11BackgroundColorResponse",
+      "type": "function",
+      "name": "isOsc11BackgroundColorResponse",
+      "filePath": "packages/tui/src/terminal-colors.ts",
+      "lineRange": [
+        31,
+        33
+      ],
+      "summary": "判断数据是否像 OSC 11 背景色响应。",
+      "tags": [
+        "osc11",
+        "颜色",
+        "探测"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-colors.ts:parseOsc11BackgroundColor",
+      "type": "function",
+      "name": "parseOsc11BackgroundColor",
+      "filePath": "packages/tui/src/terminal-colors.ts",
+      "lineRange": [
+        35,
+        65
+      ],
+      "summary": "解析 OSC 11 响应得到 RGB 背景色。",
+      "tags": [
+        "osc11",
+        "颜色",
+        "解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-colors.ts:parseTerminalColorSchemeReport",
+      "type": "function",
+      "name": "parseTerminalColorSchemeReport",
+      "filePath": "packages/tui/src/terminal-colors.ts",
+      "lineRange": [
+        67,
+        73
+      ],
+      "summary": "解析终端 dark/light 配色方案报告。",
+      "tags": [
+        "配色",
+        "dark-mode",
+        "解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:getCellDimensions",
+      "type": "function",
+      "name": "getCellDimensions",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        40,
+        42
+      ],
+      "summary": "返回当前单元格像素宽高，默认 9x18。",
+      "tags": [
+        "单元格",
+        "图像",
+        "度量"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:setCellDimensions",
+      "type": "function",
+      "name": "setCellDimensions",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        44,
+        46
+      ],
+      "summary": "更新由终端查询得到的单元格像素尺寸。",
+      "tags": [
+        "单元格",
+        "图像",
+        "配置"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:probeTmuxHyperlinks",
+      "type": "function",
+      "name": "probeTmuxHyperlinks",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        53,
+        67
+      ],
+      "summary": "探测 tmux 是否转发 OSC 8 超链接。",
+      "tags": [
+        "tmux",
+        "hyperlink",
+        "能力探测"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:detectCapabilitiesFromEnvironment",
+      "type": "function",
+      "name": "detectCapabilitiesFromEnvironment",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        69,
+        133
+      ],
+      "summary": "根据 TERM/环境变量推断图像协议、真彩与超链接能力。",
+      "tags": [
+        "能力探测",
+        "环境变量",
+        "图像协议"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:detectCapabilities",
+      "type": "function",
+      "name": "detectCapabilities",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        139,
+        158
+      ],
+      "summary": "探测并缓存终端图像相关能力，可叠加覆盖项。",
+      "tags": [
+        "能力探测",
+        "缓存",
+        "图像"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:getCapabilities",
+      "type": "function",
+      "name": "getCapabilities",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        160,
+        169
+      ],
+      "summary": "返回已缓存的终端能力，必要时先探测。",
+      "tags": [
+        "能力探测",
+        "缓存",
+        "图像"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:resetCapabilitiesCache",
+      "type": "function",
+      "name": "resetCapabilitiesCache",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        171,
+        173
+      ],
+      "summary": "清空能力探测缓存以便重新检测。",
+      "tags": [
+        "缓存",
+        "能力探测",
+        "重置"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:setCapabilityOverrides",
+      "type": "function",
+      "name": "setCapabilityOverrides",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        176,
+        186
+      ],
+      "summary": "设置能力覆盖并失效缓存。",
+      "tags": [
+        "配置",
+        "能力探测",
+        "覆盖"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:setCapabilities",
+      "type": "function",
+      "name": "setCapabilities",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        189,
+        191
+      ],
+      "summary": "直接写入缓存的终端能力对象。",
+      "tags": [
+        "配置",
+        "能力探测",
+        "缓存"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:isImageLine",
+      "type": "function",
+      "name": "isImageLine",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        196,
+        203
+      ],
+      "summary": "判断一行是否包含 Kitty/iTerm2 图像占位序列。",
+      "tags": [
+        "图像行",
+        "探测",
+        "渲染"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:allocateImageId",
+      "type": "function",
+      "name": "allocateImageId",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        210,
+        213
+      ],
+      "summary": "分配递增的 Kitty 图像 ID。",
+      "tags": [
+        "kitty",
+        "id",
+        "分配"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:encodeKitty",
+      "type": "function",
+      "name": "encodeKitty",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        215,
+        259
+      ],
+      "summary": "把 base64 图像编码为 Kitty 图形协议转义序列。",
+      "tags": [
+        "kitty",
+        "编码",
+        "图像协议"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:deleteKittyImage",
+      "type": "function",
+      "name": "deleteKittyImage",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        265,
+        267
+      ],
+      "summary": "生成删除指定 Kitty 图像 ID 的序列。",
+      "tags": [
+        "kitty",
+        "清理",
+        "图像"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:deleteAllKittyImages",
+      "type": "function",
+      "name": "deleteAllKittyImages",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        273,
+        275
+      ],
+      "summary": "生成删除全部 Kitty 图像的序列。",
+      "tags": [
+        "kitty",
+        "清理",
+        "图像"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:deleteAllKittyPlacements",
+      "type": "function",
+      "name": "deleteAllKittyPlacements",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        278,
+        280
+      ],
+      "summary": "生成删除全部 Kitty placement 的序列。",
+      "tags": [
+        "kitty",
+        "清理",
+        "placement"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:encodeITerm2",
+      "type": "function",
+      "name": "encodeITerm2",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        282,
+        308
+      ],
+      "summary": "把 base64 图像编码为 iTerm2 内联图像序列。",
+      "tags": [
+        "iterm2",
+        "编码",
+        "图像协议"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:registerKittyImageMetadata",
+      "type": "function",
+      "name": "registerKittyImageMetadata",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        337,
+        345
+      ],
+      "summary": "登记一行对应的 Kitty 图像元数据。",
+      "tags": [
+        "kitty",
+        "元数据",
+        "注册"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:getKittyImageMetadata",
+      "type": "function",
+      "name": "getKittyImageMetadata",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        354,
+        364
+      ],
+      "summary": "读取一行上登记的 Kitty 图像元数据。",
+      "tags": [
+        "kitty",
+        "元数据",
+        "查询"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:getKittyImagePlacement",
+      "type": "function",
+      "name": "getKittyImagePlacement",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        387,
+        419
+      ],
+      "summary": "解析一行中的 Kitty placement 参数。",
+      "tags": [
+        "kitty",
+        "placement",
+        "解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:cropKittyImageLine",
+      "type": "function",
+      "name": "cropKittyImageLine",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        421,
+        433
+      ],
+      "summary": "按可见行裁剪 Kitty 图像行的占位内容。",
+      "tags": [
+        "kitty",
+        "裁剪",
+        "滚动"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:calculateImageCellSize",
+      "type": "function",
+      "name": "calculateImageCellSize",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        435,
+        459
+      ],
+      "summary": "按最大单元格与纵横比计算图像占用的单元格宽高。",
+      "tags": [
+        "度量",
+        "单元格",
+        "图像"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:calculateImageRows",
+      "type": "function",
+      "name": "calculateImageRows",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        461,
+        467
+      ],
+      "summary": "按目标宽度计算图像占用的终端行数。",
+      "tags": [
+        "度量",
+        "行数",
+        "图像"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:getPngDimensions",
+      "type": "function",
+      "name": "getPngDimensions",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        469,
+        488
+      ],
+      "summary": "从 PNG 头读取像素宽高。",
+      "tags": [
+        "png",
+        "尺寸",
+        "解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:getJpegDimensions",
+      "type": "function",
+      "name": "getJpegDimensions",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        490,
+        531
+      ],
+      "summary": "扫描 JPEG SOF 标记读取像素宽高。",
+      "tags": [
+        "jpeg",
+        "尺寸",
+        "解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:getGifDimensions",
+      "type": "function",
+      "name": "getGifDimensions",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        533,
+        553
+      ],
+      "summary": "从 GIF 逻辑屏幕描述符读取像素宽高。",
+      "tags": [
+        "gif",
+        "尺寸",
+        "解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:getWebpDimensions",
+      "type": "function",
+      "name": "getWebpDimensions",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        555,
+        592
+      ],
+      "summary": "解析 WebP VP8/VP8L/VP8X 头得到像素宽高。",
+      "tags": [
+        "webp",
+        "尺寸",
+        "解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:getImageDimensions",
+      "type": "function",
+      "name": "getImageDimensions",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        594,
+        608
+      ],
+      "summary": "按 MIME 类型分发到对应格式的尺寸解析器。",
+      "tags": [
+        "尺寸",
+        "分发",
+        "图像"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:renderImage",
+      "type": "function",
+      "name": "renderImage",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        610,
+        653
+      ],
+      "summary": "按终端能力选择 Kitty/iTerm2 编码并生成可绘制行。",
+      "tags": [
+        "渲染",
+        "图像协议",
+        "入口"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:hyperlink",
+      "type": "function",
+      "name": "hyperlink",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        665,
+        667
+      ],
+      "summary": "用 OSC 8 把文本包成终端超链接。",
+      "tags": [
+        "osc8",
+        "hyperlink",
+        "格式化"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal-image.ts:imageFallback",
+      "type": "function",
+      "name": "imageFallback",
+      "filePath": "packages/tui/src/terminal-image.ts",
+      "lineRange": [
+        683,
+        696
+      ],
+      "summary": "在不支持图像协议时生成路径/尺寸回退文本。",
+      "tags": [
+        "回退",
+        "图像",
+        "文本"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal.ts:parseKeyboardProtocolNegotiationSequence",
+      "type": "function",
+      "name": "parseKeyboardProtocolNegotiationSequence",
+      "filePath": "packages/tui/src/terminal.ts",
+      "lineRange": [
+        20,
+        31
+      ],
+      "summary": "识别 Kitty flags 或设备属性响应，用于键盘协议协商。",
+      "tags": [
+        "键盘协议",
+        "协商",
+        "解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal.ts:isAppleTerminalSession",
+      "type": "function",
+      "name": "isAppleTerminalSession",
+      "filePath": "packages/tui/src/terminal.ts",
+      "lineRange": [
+        37,
+        39
+      ],
+      "summary": "判断当前是否为 macOS Apple Terminal。",
+      "tags": [
+        "终端探测",
+        "apple-terminal",
+        "平台"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal.ts:refreshTerminalDimensions",
+      "type": "function",
+      "name": "refreshTerminalDimensions",
+      "filePath": "packages/tui/src/terminal.ts",
+      "lineRange": [
+        46,
+        53
+      ],
+      "summary": "向自身发送 SIGWINCH 以刷新行列尺寸，失败则忽略。",
+      "tags": [
+        "窗口尺寸",
+        "sigwinch",
+        "终端"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal.ts:normalizeNativeShiftEnterInput",
+      "type": "function",
+      "name": "normalizeNativeShiftEnterInput",
+      "filePath": "packages/tui/src/terminal.ts",
+      "lineRange": [
+        55,
+        62
+      ],
+      "summary": "把原生 Shift+Enter 序列规范成 Kitty 风格输入。",
+      "tags": [
+        "shift-enter",
+        "normalization",
+        "键盘"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal.ts:normalizeAppleTerminalInput",
+      "type": "function",
+      "name": "normalizeAppleTerminalInput",
+      "filePath": "packages/tui/src/terminal.ts",
+      "lineRange": [
+        64,
+        66
+      ],
+      "summary": "对 Apple Terminal 输入做平台相关规范化。",
+      "tags": [
+        "apple-terminal",
+        "normalization",
+        "键盘"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/terminal.ts:resolveEscapeTimeoutMs",
+      "type": "function",
+      "name": "resolveEscapeTimeoutMs",
+      "filePath": "packages/tui/src/terminal.ts",
+      "lineRange": [
+        123,
+        132
+      ],
+      "summary": "按终端类型解析 stdin escape 超时毫秒数。",
+      "tags": [
+        "超时",
+        "escape",
+        "配置"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/tui/src/stdin-buffer.ts:StdinBuffer",
+      "type": "class",
+      "name": "StdinBuffer",
+      "filePath": "packages/tui/src/stdin-buffer.ts",
+      "lineRange": [
+        281,
+        444
+      ],
+      "summary": "积累 stdin 分片，按超时刷新半包，并向监听者发出完整序列。",
+      "tags": [
+        "输入缓冲",
+        "event-emitter",
+        "stdin"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/tui/src/terminal.ts:ProcessTerminal",
+      "type": "class",
+      "name": "ProcessTerminal",
+      "filePath": "packages/tui/src/terminal.ts",
+      "lineRange": [
+        137,
+        547
+      ],
+      "summary": "进程 stdin/stdout 终端实现：键盘协议协商、原始模式、光标与进度写入。",
+      "tags": [
+        "终端",
+        "I/O",
+        "键盘协议"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/tui/src/native-modifiers.ts",
+      "target": "file:packages/tui/src/native-platform.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/native-platform.ts",
+      "target": "file:packages/tui/src/native-module-path.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/terminal.ts",
+      "target": "file:packages/tui/src/keys.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/terminal.ts",
+      "target": "file:packages/tui/src/native-modifiers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/terminal.ts",
+      "target": "file:packages/tui/src/native-platform.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/terminal.ts",
+      "target": "file:packages/tui/src/stdin-buffer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/native-modifiers.ts",
+      "target": "function:packages/tui/src/native-modifiers.ts:isNativeModifierPressed",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/native-modifiers.ts",
+      "target": "function:packages/tui/src/native-modifiers.ts:isNativeModifierPressed",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/native-module-path.ts",
+      "target": "function:packages/tui/src/native-module-path.ts:getNativeModuleCandidates",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/native-module-path.ts",
+      "target": "function:packages/tui/src/native-module-path.ts:getNativeModuleCandidates",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/native-platform.ts",
+      "target": "function:packages/tui/src/native-platform.ts:loadNativePlatformHelper",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/native-platform.ts",
+      "target": "function:packages/tui/src/native-platform.ts:getNativePlatformHelper",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/native-platform.ts",
+      "target": "function:packages/tui/src/native-platform.ts:getNativePlatformHelper",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/native-platform.ts",
+      "target": "function:packages/tui/src/native-platform.ts:getNativeClipboard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/native-platform.ts",
+      "target": "function:packages/tui/src/native-platform.ts:getNativeClipboard",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/stdin-buffer.ts",
+      "target": "function:packages/tui/src/stdin-buffer.ts:isCompleteSequence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/stdin-buffer.ts",
+      "target": "function:packages/tui/src/stdin-buffer.ts:isCompleteCsiSequence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/stdin-buffer.ts",
+      "target": "function:packages/tui/src/stdin-buffer.ts:isCompleteOscSequence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/stdin-buffer.ts",
+      "target": "function:packages/tui/src/stdin-buffer.ts:isCompleteDcsSequence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/stdin-buffer.ts",
+      "target": "function:packages/tui/src/stdin-buffer.ts:isCompleteApcSequence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/stdin-buffer.ts",
+      "target": "function:packages/tui/src/stdin-buffer.ts:extractCompleteSequences",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-colors.ts",
+      "target": "function:packages/tui/src/terminal-colors.ts:parseOscHexChannel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-colors.ts",
+      "target": "function:packages/tui/src/terminal-colors.ts:isOsc11BackgroundColorResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-colors.ts",
+      "target": "function:packages/tui/src/terminal-colors.ts:isOsc11BackgroundColorResponse",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-colors.ts",
+      "target": "function:packages/tui/src/terminal-colors.ts:parseOsc11BackgroundColor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-colors.ts",
+      "target": "function:packages/tui/src/terminal-colors.ts:parseOsc11BackgroundColor",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-colors.ts",
+      "target": "function:packages/tui/src/terminal-colors.ts:parseTerminalColorSchemeReport",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-colors.ts",
+      "target": "function:packages/tui/src/terminal-colors.ts:parseTerminalColorSchemeReport",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:getCellDimensions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:getCellDimensions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:setCellDimensions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:setCellDimensions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:probeTmuxHyperlinks",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:detectCapabilitiesFromEnvironment",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:detectCapabilities",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:detectCapabilities",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:getCapabilities",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:getCapabilities",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:resetCapabilitiesCache",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:resetCapabilitiesCache",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:setCapabilityOverrides",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:setCapabilityOverrides",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:setCapabilities",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:setCapabilities",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:isImageLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:isImageLine",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:allocateImageId",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:allocateImageId",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:encodeKitty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:encodeKitty",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:deleteKittyImage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:deleteKittyImage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:deleteAllKittyImages",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:deleteAllKittyImages",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:deleteAllKittyPlacements",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:deleteAllKittyPlacements",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:encodeITerm2",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:encodeITerm2",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:registerKittyImageMetadata",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:registerKittyImageMetadata",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:getKittyImageMetadata",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:getKittyImageMetadata",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:getKittyImagePlacement",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:getKittyImagePlacement",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:cropKittyImageLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:cropKittyImageLine",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:calculateImageCellSize",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:calculateImageCellSize",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:calculateImageRows",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:calculateImageRows",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:getPngDimensions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:getPngDimensions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:getJpegDimensions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:getJpegDimensions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:getGifDimensions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:getGifDimensions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:getWebpDimensions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:getWebpDimensions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:getImageDimensions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:getImageDimensions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:renderImage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:renderImage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:hyperlink",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:hyperlink",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:imageFallback",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal-image.ts",
+      "target": "function:packages/tui/src/terminal-image.ts:imageFallback",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal.ts",
+      "target": "function:packages/tui/src/terminal.ts:parseKeyboardProtocolNegotiationSequence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal.ts",
+      "target": "function:packages/tui/src/terminal.ts:parseKeyboardProtocolNegotiationSequence",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal.ts",
+      "target": "function:packages/tui/src/terminal.ts:isAppleTerminalSession",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal.ts",
+      "target": "function:packages/tui/src/terminal.ts:isAppleTerminalSession",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal.ts",
+      "target": "function:packages/tui/src/terminal.ts:refreshTerminalDimensions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal.ts",
+      "target": "function:packages/tui/src/terminal.ts:refreshTerminalDimensions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal.ts",
+      "target": "function:packages/tui/src/terminal.ts:normalizeNativeShiftEnterInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal.ts",
+      "target": "function:packages/tui/src/terminal.ts:normalizeNativeShiftEnterInput",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal.ts",
+      "target": "function:packages/tui/src/terminal.ts:normalizeAppleTerminalInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal.ts",
+      "target": "function:packages/tui/src/terminal.ts:normalizeAppleTerminalInput",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal.ts",
+      "target": "function:packages/tui/src/terminal.ts:resolveEscapeTimeoutMs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal.ts",
+      "target": "function:packages/tui/src/terminal.ts:resolveEscapeTimeoutMs",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/stdin-buffer.ts",
+      "target": "class:packages/tui/src/stdin-buffer.ts:StdinBuffer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/stdin-buffer.ts",
+      "target": "class:packages/tui/src/stdin-buffer.ts:StdinBuffer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/terminal.ts",
+      "target": "class:packages/tui/src/terminal.ts:ProcessTerminal",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/terminal.ts",
+      "target": "class:packages/tui/src/terminal.ts:ProcessTerminal",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/native-modifiers.ts:isNativeModifierPressed",
+      "target": "function:packages/tui/src/native-platform.ts:getNativePlatformHelper",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/native-platform.ts:loadNativePlatformHelper",
+      "target": "function:packages/tui/src/native-module-path.ts:getNativeModuleCandidates",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/terminal.ts:ProcessTerminal",
+      "target": "function:packages/tui/src/keys.ts:setKittyProtocolActive",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/terminal.ts:ProcessTerminal",
+      "target": "function:packages/tui/src/native-modifiers.ts:isNativeModifierPressed",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/terminal.ts:ProcessTerminal",
+      "target": "function:packages/tui/src/native-platform.ts:getNativePlatformHelper",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

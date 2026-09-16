@@ -1,0 +1,1111 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "type": "file",
+      "name": "entries.ts",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "summary": "session 条目的编解码与 SQL 读写，含预编译插入的 EntryRowWriter 和按查询扫描。",
+      "tags": [
+        "data-model",
+        "serialization",
+        "database"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "type": "file",
+      "name": "session-row.ts",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "summary": "sessions 表的 CRUD：读写元数据、插入初始行，并级联删除 entries/values/ledger/branch 相关行。",
+      "tags": [
+        "data-model",
+        "database",
+        "session"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-sequences.ts",
+      "type": "file",
+      "name": "session-sequences.ts",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/session-sequences.ts",
+      "summary": "读写 sessions.next_seq，用于分配下一条目序号。",
+      "tags": [
+        "database",
+        "utility",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts",
+      "type": "file",
+      "name": "session-stats.ts",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts",
+      "summary": "聚合 session 的 message_count 与 token usage，支持累加 Usage 并写回 usage_payload。",
+      "tags": [
+        "data-model",
+        "session",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts",
+      "type": "file",
+      "name": "usage-ledger.ts",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts",
+      "summary": "usage_ledger 行的插入、解码与条件扫描，并提供预编译写入器。",
+      "tags": [
+        "data-model",
+        "database",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:entryPayload",
+      "type": "function",
+      "name": "entryPayload",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "lineRange": [
+        28,
+        63
+      ],
+      "summary": "按条目类型序列化 payload JSON，覆盖 message/tool/compaction/custom 等变体。",
+      "tags": [
+        "serialization",
+        "data-model",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:entryRowParams",
+      "type": "function",
+      "name": "entryRowParams",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "lineRange": [
+        72,
+        83
+      ],
+      "summary": "把 Entry 转成 INSERT 语句参数，包含序列化后的 payload。",
+      "tags": [
+        "serialization",
+        "database",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:EntryRowWriter",
+      "type": "class",
+      "name": "EntryRowWriter",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "lineRange": [
+        85,
+        97
+      ],
+      "summary": "预编译 INSERT 语句的条目写入器，供提交循环复用。",
+      "tags": [
+        "database",
+        "serialization",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:insertEntryRow",
+      "type": "function",
+      "name": "insertEntryRow",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "lineRange": [
+        99,
+        101
+      ],
+      "summary": "一次性准备并插入单条 entry 行。",
+      "tags": [
+        "database",
+        "session",
+        "write"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:decodeEntryRow",
+      "type": "function",
+      "name": "decodeEntryRow",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "lineRange": [
+        103,
+        121
+      ],
+      "summary": "按 type 把 entries 行解码为 Entry，解析 JSON payload。",
+      "tags": [
+        "serialization",
+        "data-model",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:entryStructureFromRow",
+      "type": "function",
+      "name": "entryStructureFromRow",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "lineRange": [
+        123,
+        132
+      ],
+      "summary": "从行数据构造不含 payload 的 EntryStructure。",
+      "tags": [
+        "serialization",
+        "data-model",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:readEntryRows",
+      "type": "function",
+      "name": "readEntryRows",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "lineRange": [
+        134,
+        143
+      ],
+      "summary": "按 id 列表批量读取 entries 行。",
+      "tags": [
+        "query",
+        "database",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:readAllEntryRows",
+      "type": "function",
+      "name": "readAllEntryRows",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "lineRange": [
+        145,
+        148
+      ],
+      "summary": "按 seq 升序读取某 session 的全部 entries。",
+      "tags": [
+        "query",
+        "database",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:scanEntryRows",
+      "type": "function",
+      "name": "scanEntryRows",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "lineRange": [
+        150,
+        161
+      ],
+      "summary": "按类型、序号范围与 limit 扫描 entries 表。",
+      "tags": [
+        "query",
+        "database",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:zeroUsage",
+      "type": "function",
+      "name": "zeroUsage",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "lineRange": [
+        22,
+        31
+      ],
+      "summary": "返回全零的 Usage 对象，用作新 session 的初始 usage_payload。",
+      "tags": [
+        "utility",
+        "data-model",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:readSessionRow",
+      "type": "function",
+      "name": "readSessionRow",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "lineRange": [
+        33,
+        40
+      ],
+      "summary": "按 id 读取 sessions 表的一行。",
+      "tags": [
+        "query",
+        "database",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:readAllSessionRows",
+      "type": "function",
+      "name": "readAllSessionRows",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "lineRange": [
+        42,
+        46
+      ],
+      "summary": "读取库中全部 sessions 行。",
+      "tags": [
+        "query",
+        "database",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:hasSessionRow",
+      "type": "function",
+      "name": "hasSessionRow",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "lineRange": [
+        48,
+        50
+      ],
+      "summary": "判断指定 session id 是否已存在。",
+      "tags": [
+        "query",
+        "database",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:metadataFromSessionRow",
+      "type": "function",
+      "name": "metadataFromSessionRow",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "lineRange": [
+        52,
+        70
+      ],
+      "summary": "把 sessions 行映射为 SqliteSessionMetadata，并标记存储版本是否过期。",
+      "tags": [
+        "serialization",
+        "data-model",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:insertSessionRow",
+      "type": "function",
+      "name": "insertSessionRow",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "lineRange": [
+        72,
+        90
+      ],
+      "summary": "插入新 session 行，写入零 usage 与初始 next_seq。",
+      "tags": [
+        "database",
+        "session",
+        "data-model"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:deleteSessionRows",
+      "type": "function",
+      "name": "deleteSessionRows",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "lineRange": [
+        92,
+        102
+      ],
+      "summary": "按 session id 级联删除 entries、values、ledger、branch 与 session 行。",
+      "tags": [
+        "database",
+        "session",
+        "migration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-sequences.ts:readNextSeq",
+      "type": "function",
+      "name": "readNextSeq",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/session-sequences.ts",
+      "lineRange": [
+        4,
+        8
+      ],
+      "summary": "读取 sessions.next_seq。",
+      "tags": [
+        "query",
+        "database",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-sequences.ts:advanceNextSeq",
+      "type": "function",
+      "name": "advanceNextSeq",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/session-sequences.ts",
+      "lineRange": [
+        10,
+        14
+      ],
+      "summary": "把 sessions.next_seq 更新为指定值。",
+      "tags": [
+        "database",
+        "session",
+        "write"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts:addUsage",
+      "type": "function",
+      "name": "addUsage",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts",
+      "lineRange": [
+        7,
+        28
+      ],
+      "summary": "逐字段累加两次 Usage（token 与 cost）。",
+      "tags": [
+        "utility",
+        "data-model",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts:readSessionStats",
+      "type": "function",
+      "name": "readSessionStats",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts",
+      "lineRange": [
+        30,
+        36
+      ],
+      "summary": "从 session 行解析 messageCount 与 usage。",
+      "tags": [
+        "query",
+        "session",
+        "data-model"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts:incrementMessageCount",
+      "type": "function",
+      "name": "incrementMessageCount",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts",
+      "lineRange": [
+        38,
+        40
+      ],
+      "summary": "将 sessions.message_count 加一。",
+      "tags": [
+        "database",
+        "session",
+        "write"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts:addUsageToSessionStats",
+      "type": "function",
+      "name": "addUsageToSessionStats",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts",
+      "lineRange": [
+        42,
+        45
+      ],
+      "summary": "把增量 Usage 累加后写回 usage_payload。",
+      "tags": [
+        "database",
+        "session",
+        "data-model"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts:usageLedgerRowParams",
+      "type": "function",
+      "name": "usageLedgerRowParams",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts",
+      "lineRange": [
+        17,
+        27
+      ],
+      "summary": "把 usage ledger 行转成 INSERT 参数，序列化 usage 与 details。",
+      "tags": [
+        "serialization",
+        "database",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts:UsageLedgerRowWriter",
+      "type": "class",
+      "name": "UsageLedgerRowWriter",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts",
+      "lineRange": [
+        29,
+        41
+      ],
+      "summary": "预编译 INSERT 的 usage_ledger 写入器。",
+      "tags": [
+        "database",
+        "serialization",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts:insertUsageLedgerRow",
+      "type": "function",
+      "name": "insertUsageLedgerRow",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts",
+      "lineRange": [
+        43,
+        45
+      ],
+      "summary": "一次性准备并插入单条 usage_ledger 行。",
+      "tags": [
+        "database",
+        "session",
+        "write"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts:decodeUsageLedgerRow",
+      "type": "function",
+      "name": "decodeUsageLedgerRow",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts",
+      "lineRange": [
+        47,
+        56
+      ],
+      "summary": "把 usage_ledger 行解码为 UsageRow，解析 JSON 字段。",
+      "tags": [
+        "serialization",
+        "data-model",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts:scanUsageLedgerRows",
+      "type": "function",
+      "name": "scanUsageLedgerRows",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts",
+      "lineRange": [
+        58,
+        67
+      ],
+      "summary": "按序号范围与 limit 扫描 usage_ledger。",
+      "tags": [
+        "query",
+        "database",
+        "session"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:entryPayload",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:entryRowParams",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "target": "class:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:EntryRowWriter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:insertEntryRow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:decodeEntryRow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:entryStructureFromRow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:readEntryRows",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:readAllEntryRows",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:scanEntryRows",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:zeroUsage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:readSessionRow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:readAllSessionRows",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:hasSessionRow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:metadataFromSessionRow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:insertSessionRow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:deleteSessionRows",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-sequences.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-sequences.ts:readNextSeq",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-sequences.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-sequences.ts:advanceNextSeq",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts:addUsage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts:readSessionStats",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts:incrementMessageCount",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts:addUsageToSessionStats",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts:usageLedgerRowParams",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts",
+      "target": "class:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts:UsageLedgerRowWriter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts:insertUsageLedgerRow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts:decodeUsageLedgerRow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts:scanUsageLedgerRows",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "target": "class:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:EntryRowWriter",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:insertEntryRow",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:decodeEntryRow",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:entryStructureFromRow",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:readEntryRows",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:readAllEntryRows",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:scanEntryRows",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:readSessionRow",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:readAllSessionRows",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:hasSessionRow",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:metadataFromSessionRow",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:insertSessionRow",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:deleteSessionRows",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-sequences.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-sequences.ts:readNextSeq",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-sequences.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-sequences.ts:advanceNextSeq",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts:readSessionStats",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts:incrementMessageCount",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts:addUsageToSessionStats",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts",
+      "target": "class:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts:UsageLedgerRowWriter",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts:insertUsageLedgerRow",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts:decodeUsageLedgerRow",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts:scanUsageLedgerRows",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/sql.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/sql.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-sequences.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/sql.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-sequences.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/sql.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/sql.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:readEntryRows",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:readAllEntryRows",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:scanEntryRows",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:readEntryRows",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:joinSqlFragments",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:scanEntryRows",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:joinSqlFragments",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:readSessionRow",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:readAllSessionRows",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:hasSessionRow",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:insertSessionRow",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:deleteSessionRows",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-sequences.ts:readNextSeq",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-sequences.ts:advanceNextSeq",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts:readSessionStats",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:readSessionRow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts:incrementMessageCount",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts:addUsageToSessionStats",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts:scanUsageLedgerRows",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts:scanUsageLedgerRows",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:joinSqlFragments",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

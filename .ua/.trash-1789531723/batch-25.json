@@ -1,0 +1,383 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/protocol/src/cbor/decoder.ts",
+      "type": "file",
+      "name": "decoder.ts",
+      "filePath": "packages/protocol/src/cbor/decoder.ts",
+      "summary": "实现协议用的严格 RFC 8949 CBOR 子集解码：只接受单条 definite-length 载荷，拒绝 tag、不定长与尾随字节。",
+      "tags": ["cbor", "decoder", "protocol", "反序列化", "rfc-8949"],
+      "complexity": "moderate",
+      "languageNotes": "CborReader 按 major type 分派，整数限制在 Number.isSafeInteger 范围内。"
+    },
+    {
+      "id": "function:packages/protocol/src/cbor/decoder.ts:decodeCbor",
+      "type": "function",
+      "name": "decodeCbor",
+      "filePath": "packages/protocol/src/cbor/decoder.ts",
+      "lineRange": [161, 168],
+      "summary": "校验 Uint8Array 输入并解析选项后，用 CborReader 解码恰好一项 CBOR 值。",
+      "tags": ["cbor", "decoder", "入口点", "validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/protocol/src/cbor/decoder.ts:CborReader",
+      "type": "class",
+      "name": "CborReader",
+      "filePath": "packages/protocol/src/cbor/decoder.ts",
+      "lineRange": [10, 158],
+      "summary": "基于偏移的字节读取器，按 RFC 8949 major type 递归解码整数、字节串、文本、数组、字符串键 map 与简单值。",
+      "tags": ["cbor", "decoder", "reader", "递归解析"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/protocol/src/cbor/decoder.ts:readItem",
+      "type": "function",
+      "name": "readItem",
+      "filePath": "packages/protocol/src/cbor/decoder.ts",
+      "lineRange": [26, 86],
+      "summary": "读取一个 CBOR 项：检查嵌套深度，解析 major type，并递归处理容器；拒绝 tag 与未知类型。",
+      "tags": ["cbor", "decoder", "递归", "major-type"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/protocol/src/cbor/decoder.ts:readSimple",
+      "type": "function",
+      "name": "readSimple",
+      "filePath": "packages/protocol/src/cbor/decoder.ts",
+      "lineRange": [88, 110],
+      "summary": "解码 major type 7 的简单值：false/true/null 以及有限的 float64，拒绝 break 与其他宽度。",
+      "tags": ["cbor", "decoder", "float64", "simple-value"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/protocol/src/cbor/decoder.ts:readArgument",
+      "type": "function",
+      "name": "readArgument",
+      "filePath": "packages/protocol/src/cbor/decoder.ts",
+      "lineRange": [119, 143],
+      "summary": "按 additional information 读取 0–8 字节无符号参数，并将 64 位值限制在 JS 安全整数范围内。",
+      "tags": ["cbor", "decoder", "integer", "additional-info"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/protocol/src/cbor/encoder.ts",
+      "type": "file",
+      "name": "encoder.ts",
+      "filePath": "packages/protocol/src/cbor/encoder.ts",
+      "summary": "将 JS 值编码为协议的 definite-length RFC 8949 子集，拒绝循环、空洞数组、非字符串键与不安全整数。",
+      "tags": ["cbor", "encoder", "protocol", "序列化", "rfc-8949"],
+      "complexity": "moderate",
+      "languageNotes": "用 ancestors Set 做循环检测；文本先 UTF-8 编码再回解码以校验 Unicode scalar。"
+    },
+    {
+      "id": "class:packages/protocol/src/cbor/encoder.ts:CborWriter",
+      "type": "class",
+      "name": "CborWriter",
+      "filePath": "packages/protocol/src/cbor/encoder.ts",
+      "lineRange": [12, 81],
+      "summary": "可扩容的字节缓冲写入器，按大端写出 8/16/32/64 位整数与 float64，并强制 maxByteLength。",
+      "tags": ["cbor", "encoder", "buffer", "writer"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/protocol/src/cbor/encoder.ts:ensureCapacity",
+      "type": "function",
+      "name": "ensureCapacity",
+      "filePath": "packages/protocol/src/cbor/encoder.ts",
+      "lineRange": [68, 80],
+      "summary": "在写出前扩容内部 buffer；超过配置的最大字节长度时抛出 CborError。",
+      "tags": ["cbor", "encoder", "buffer", "limits"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/protocol/src/cbor/encoder.ts:writeArgument",
+      "type": "function",
+      "name": "writeArgument",
+      "filePath": "packages/protocol/src/cbor/encoder.ts",
+      "lineRange": [83, 100],
+      "summary": "按值大小选择 additional information，写出 major type 前缀及 1/2/4/8 字节参数。",
+      "tags": ["cbor", "encoder", "major-type", "additional-info"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/protocol/src/cbor/encoder.ts:encodeText",
+      "type": "function",
+      "name": "encodeText",
+      "filePath": "packages/protocol/src/cbor/encoder.ts",
+      "lineRange": [108, 117],
+      "summary": "将字符串编码为 UTF-8 文本串（major type 3），并校验往返解码后仍是合法 Unicode scalar。",
+      "tags": ["cbor", "encoder", "utf-8", "文本"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/protocol/src/cbor/encoder.ts:encodeValue",
+      "type": "function",
+      "name": "encodeValue",
+      "filePath": "packages/protocol/src/cbor/encoder.ts",
+      "lineRange": [119, 208],
+      "summary": "按 JS 运行时类型递归编码 null/布尔/数字/字符串/Uint8Array/数组/纯对象，并执行深度、循环与容器长度检查。",
+      "tags": ["cbor", "encoder", "递归", "validation"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/protocol/src/cbor/encoder.ts:encodeCbor",
+      "type": "function",
+      "name": "encodeCbor",
+      "filePath": "packages/protocol/src/cbor/encoder.ts",
+      "lineRange": [211, 216],
+      "summary": "解析选项后创建 CborWriter，将单个 JS 值编码为 definite-length CBOR 字节。",
+      "tags": ["cbor", "encoder", "入口点", "序列化"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/protocol/src/cbor/options.ts",
+      "type": "file",
+      "name": "options.ts",
+      "filePath": "packages/protocol/src/cbor/options.ts",
+      "summary": "定义 CBOR 编解码的安全默认上限、CborOptions 类型、CborError 以及 resolveOptions 校验逻辑。",
+      "tags": ["cbor", "limits", "type-definition", "error-handling", "配置"],
+      "complexity": "simple",
+      "languageNotes": "共享 fatal UTF-8 TextDecoder（ignoreBOM）与 TextEncoder，供编解码两侧复用。"
+    },
+    {
+      "id": "class:packages/protocol/src/cbor/options.ts:CborError",
+      "type": "class",
+      "name": "CborError",
+      "filePath": "packages/protocol/src/cbor/options.ts",
+      "lineRange": [25, 30],
+      "summary": "CBOR 编解码失败时抛出的 Error 子类，name 固定为 CborError。",
+      "tags": ["cbor", "error", "exception", "validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/protocol/src/cbor/options.ts:resolveOptions",
+      "type": "function",
+      "name": "resolveOptions",
+      "filePath": "packages/protocol/src/cbor/options.ts",
+      "lineRange": [42, 52],
+      "summary": "把可选 CborOptions 填成已校验的上限：字节长度、容器长度与嵌套深度。",
+      "tags": ["cbor", "options", "validation", "limits"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/protocol/src/cbor/decoder.ts",
+      "target": "file:packages/protocol/src/cbor/options.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/protocol/src/cbor/encoder.ts",
+      "target": "file:packages/protocol/src/cbor/options.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/protocol/src/cbor/decoder.ts",
+      "target": "function:packages/protocol/src/cbor/decoder.ts:decodeCbor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/protocol/src/cbor/decoder.ts",
+      "target": "class:packages/protocol/src/cbor/decoder.ts:CborReader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/protocol/src/cbor/decoder.ts",
+      "target": "function:packages/protocol/src/cbor/decoder.ts:readItem",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/protocol/src/cbor/decoder.ts",
+      "target": "function:packages/protocol/src/cbor/decoder.ts:readSimple",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/protocol/src/cbor/decoder.ts",
+      "target": "function:packages/protocol/src/cbor/decoder.ts:readArgument",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/protocol/src/cbor/encoder.ts",
+      "target": "class:packages/protocol/src/cbor/encoder.ts:CborWriter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/protocol/src/cbor/encoder.ts",
+      "target": "function:packages/protocol/src/cbor/encoder.ts:ensureCapacity",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/protocol/src/cbor/encoder.ts",
+      "target": "function:packages/protocol/src/cbor/encoder.ts:writeArgument",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/protocol/src/cbor/encoder.ts",
+      "target": "function:packages/protocol/src/cbor/encoder.ts:encodeText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/protocol/src/cbor/encoder.ts",
+      "target": "function:packages/protocol/src/cbor/encoder.ts:encodeValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/protocol/src/cbor/encoder.ts",
+      "target": "function:packages/protocol/src/cbor/encoder.ts:encodeCbor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/protocol/src/cbor/options.ts",
+      "target": "class:packages/protocol/src/cbor/options.ts:CborError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/protocol/src/cbor/options.ts",
+      "target": "function:packages/protocol/src/cbor/options.ts:resolveOptions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:packages/protocol/src/cbor/decoder.ts:CborReader",
+      "target": "function:packages/protocol/src/cbor/decoder.ts:readItem",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:packages/protocol/src/cbor/decoder.ts:CborReader",
+      "target": "function:packages/protocol/src/cbor/decoder.ts:readSimple",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:packages/protocol/src/cbor/decoder.ts:CborReader",
+      "target": "function:packages/protocol/src/cbor/decoder.ts:readArgument",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:packages/protocol/src/cbor/encoder.ts:CborWriter",
+      "target": "function:packages/protocol/src/cbor/encoder.ts:ensureCapacity",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/protocol/src/cbor/decoder.ts",
+      "target": "function:packages/protocol/src/cbor/decoder.ts:decodeCbor",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/protocol/src/cbor/encoder.ts",
+      "target": "function:packages/protocol/src/cbor/encoder.ts:encodeCbor",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/protocol/src/cbor/options.ts",
+      "target": "class:packages/protocol/src/cbor/options.ts:CborError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/protocol/src/cbor/options.ts",
+      "target": "function:packages/protocol/src/cbor/options.ts:resolveOptions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/protocol/src/cbor/decoder.ts:decodeCbor",
+      "target": "function:packages/protocol/src/cbor/options.ts:resolveOptions",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/protocol/src/cbor/encoder.ts:encodeCbor",
+      "target": "function:packages/protocol/src/cbor/options.ts:resolveOptions",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/protocol/src/cbor/encoder.ts:encodeCbor",
+      "target": "function:packages/protocol/src/cbor/encoder.ts:encodeValue",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/protocol/src/cbor/encoder.ts:encodeValue",
+      "target": "function:packages/protocol/src/cbor/encoder.ts:encodeText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/protocol/src/cbor/encoder.ts:encodeValue",
+      "target": "function:packages/protocol/src/cbor/encoder.ts:writeArgument",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/protocol/src/cbor/encoder.ts:encodeText",
+      "target": "function:packages/protocol/src/cbor/encoder.ts:writeArgument",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/protocol/src/cbor/decoder.ts:readItem",
+      "target": "function:packages/protocol/src/cbor/decoder.ts:readArgument",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/protocol/src/cbor/decoder.ts:readItem",
+      "target": "function:packages/protocol/src/cbor/decoder.ts:readSimple",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

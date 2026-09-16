@@ -1,0 +1,200 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/tui-renderer.ts",
+      "type": "file",
+      "name": "tui-renderer.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/tui-renderer.ts",
+      "summary": "交互 TUI 组合根：fullscreen 建 TuiAltScreen，regular 建 TuiMainScreen，并用 Proxy 稳定 TUI 引用。",
+      "tags": [
+        "factory",
+        "tui",
+        "renderer",
+        "entry-point"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "createInteractiveTuiReference 用 Proxy 在 InteractiveMode 替换 renderer 时保持组件持有的 TUI 引用有效。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/tui-renderer.ts:createInteractiveTui",
+      "type": "function",
+      "name": "createInteractiveTui",
+      "filePath": "packages/coding-agent/src/modes/interactive/tui-renderer.ts",
+      "summary": "按 tuiMode 创建 TuiAltScreen 或 TuiMainScreen，并接入复制、打开 URL 与搜索高亮。",
+      "tags": [
+        "factory",
+        "tui",
+        "renderer"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        21,
+        48
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/tui-renderer.ts:createInteractiveTuiReference",
+      "type": "function",
+      "name": "createInteractiveTuiReference",
+      "filePath": "packages/coding-agent/src/modes/interactive/tui-renderer.ts",
+      "summary": "返回转发到当前 TUI 的 Proxy，避免组件持有已替换的 renderer。",
+      "tags": [
+        "factory",
+        "proxy",
+        "tui"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        51,
+        79
+      ]
+    },
+    {
+      "id": "file:packages/coding-agent/src/utils/ansi.ts",
+      "type": "file",
+      "name": "ansi.ts",
+      "filePath": "packages/coding-agent/src/utils/ansi.ts",
+      "summary": "剥离 ANSI/OSC 转义序列，得到可供测量或复制的纯文本。",
+      "tags": [
+        "utility",
+        "ansi",
+        "text"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/ansi.ts:ansiRegex",
+      "type": "function",
+      "name": "ansiRegex",
+      "filePath": "packages/coding-agent/src/utils/ansi.ts",
+      "summary": "构造匹配 CSI/OSC 等终端序列的正则。",
+      "tags": [
+        "ansi",
+        "regex",
+        "utility"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        29,
+        42
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/ansi.ts:stripAnsi",
+      "type": "function",
+      "name": "stripAnsi",
+      "filePath": "packages/coding-agent/src/utils/ansi.ts",
+      "summary": "删除字符串中的 ANSI 转义，保留可见字符。",
+      "tags": [
+        "ansi",
+        "text",
+        "utility"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        46,
+        60
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/tui-renderer.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/tui-renderer.ts:createInteractiveTui",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/tui-renderer.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/tui-renderer.ts:createInteractiveTui",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/tui-renderer.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/tui-renderer.ts:createInteractiveTuiReference",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/tui-renderer.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/tui-renderer.ts:createInteractiveTuiReference",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/tui-renderer.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/tui-renderer.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/tui-renderer.ts",
+      "target": "file:packages/coding-agent/src/utils/clipboard.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/tui-renderer.ts",
+      "target": "file:packages/coding-agent/src/utils/open-browser.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/tui-renderer.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/ansi.ts",
+      "target": "function:packages/coding-agent/src/utils/ansi.ts:ansiRegex",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/ansi.ts",
+      "target": "function:packages/coding-agent/src/utils/ansi.ts:stripAnsi",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/ansi.ts",
+      "target": "function:packages/coding-agent/src/utils/ansi.ts:stripAnsi",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/modes/interactive/tui-renderer.ts:createInteractiveTui",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyDisplayText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/ansi.ts:stripAnsi",
+      "target": "function:packages/coding-agent/src/utils/ansi.ts:ansiRegex",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

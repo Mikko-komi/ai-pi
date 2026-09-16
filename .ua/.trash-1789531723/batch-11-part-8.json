@@ -1,0 +1,35 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/core/extensions/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/coding-agent/src/core/extensions/index.ts",
+      "summary": "扩展系统公共 barrel：再导出 loader、ExtensionRunner、事件/工具类型与 defineTool 守卫。",
+      "tags": [
+        "barrel",
+        "extensions",
+        "type-definition",
+        "entry-point"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "大量 type/value 再导出，供 AgentSession 与各 mode 单一入口引用。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/index.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/loader.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/index.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

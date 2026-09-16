@@ -1,0 +1,821 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/ai/src/api/anthropic-messages.lazy.ts",
+      "type": "file",
+      "name": "anthropic-messages.lazy.ts",
+      "filePath": "packages/ai/src/api/anthropic-messages.lazy.ts",
+      "summary": "导出 `anthropicMessagesApi`，用 `lazyApi` 在首次 stream 时再动态 import Anthropic Messages 的 API 实现。",
+      "tags": [
+        "惰性加载",
+        "api-wrapper",
+        "factory"
+      ],
+      "complexity": "simple",
+      "languageNotes": "单行工厂：`() => lazyApi(() => import(\"./…\"))`，把实现模块挡在 bundler 静态图之外。"
+    },
+    {
+      "id": "function:packages/ai/src/api/anthropic-messages.lazy.ts:anthropicMessagesApi",
+      "type": "function",
+      "name": "anthropicMessagesApi",
+      "filePath": "packages/ai/src/api/anthropic-messages.lazy.ts",
+      "lineRange": [
+        4,
+        4
+      ],
+      "summary": "返回延迟加载的 Anthropic Messages `ProviderStreams`。",
+      "tags": [
+        "factory",
+        "惰性加载",
+        "api-wrapper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/api/azure-openai-responses.lazy.ts",
+      "type": "file",
+      "name": "azure-openai-responses.lazy.ts",
+      "filePath": "packages/ai/src/api/azure-openai-responses.lazy.ts",
+      "summary": "导出 `azureOpenAIResponsesApi`，用 `lazyApi` 在首次 stream 时再动态 import Azure OpenAI Responses 的 API 实现。",
+      "tags": [
+        "惰性加载",
+        "api-wrapper",
+        "factory"
+      ],
+      "complexity": "simple",
+      "languageNotes": "单行工厂：`() => lazyApi(() => import(\"./…\"))`，把实现模块挡在 bundler 静态图之外。"
+    },
+    {
+      "id": "function:packages/ai/src/api/azure-openai-responses.lazy.ts:azureOpenAIResponsesApi",
+      "type": "function",
+      "name": "azureOpenAIResponsesApi",
+      "filePath": "packages/ai/src/api/azure-openai-responses.lazy.ts",
+      "lineRange": [
+        4,
+        4
+      ],
+      "summary": "返回延迟加载的 Azure OpenAI Responses `ProviderStreams`。",
+      "tags": [
+        "factory",
+        "惰性加载",
+        "api-wrapper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/api/google-generative-ai.lazy.ts",
+      "type": "file",
+      "name": "google-generative-ai.lazy.ts",
+      "filePath": "packages/ai/src/api/google-generative-ai.lazy.ts",
+      "summary": "导出 `googleGenerativeAIApi`，用 `lazyApi` 在首次 stream 时再动态 import Google Generative AI 的 API 实现。",
+      "tags": [
+        "惰性加载",
+        "api-wrapper",
+        "factory"
+      ],
+      "complexity": "simple",
+      "languageNotes": "单行工厂：`() => lazyApi(() => import(\"./…\"))`，把实现模块挡在 bundler 静态图之外。"
+    },
+    {
+      "id": "function:packages/ai/src/api/google-generative-ai.lazy.ts:googleGenerativeAIApi",
+      "type": "function",
+      "name": "googleGenerativeAIApi",
+      "filePath": "packages/ai/src/api/google-generative-ai.lazy.ts",
+      "lineRange": [
+        4,
+        4
+      ],
+      "summary": "返回延迟加载的 Google Generative AI `ProviderStreams`。",
+      "tags": [
+        "factory",
+        "惰性加载",
+        "api-wrapper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/api/google-vertex.lazy.ts",
+      "type": "file",
+      "name": "google-vertex.lazy.ts",
+      "filePath": "packages/ai/src/api/google-vertex.lazy.ts",
+      "summary": "导出 `googleVertexApi`，用 `lazyApi` 在首次 stream 时再动态 import Google Vertex 的 API 实现。",
+      "tags": [
+        "惰性加载",
+        "api-wrapper",
+        "factory"
+      ],
+      "complexity": "simple",
+      "languageNotes": "单行工厂：`() => lazyApi(() => import(\"./…\"))`，把实现模块挡在 bundler 静态图之外。"
+    },
+    {
+      "id": "function:packages/ai/src/api/google-vertex.lazy.ts:googleVertexApi",
+      "type": "function",
+      "name": "googleVertexApi",
+      "filePath": "packages/ai/src/api/google-vertex.lazy.ts",
+      "lineRange": [
+        4,
+        4
+      ],
+      "summary": "返回延迟加载的 Google Vertex `ProviderStreams`。",
+      "tags": [
+        "factory",
+        "惰性加载",
+        "api-wrapper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/api/mistral-conversations.lazy.ts",
+      "type": "file",
+      "name": "mistral-conversations.lazy.ts",
+      "filePath": "packages/ai/src/api/mistral-conversations.lazy.ts",
+      "summary": "导出 `mistralConversationsApi`，用 `lazyApi` 在首次 stream 时再动态 import Mistral Conversations 的 API 实现。",
+      "tags": [
+        "惰性加载",
+        "api-wrapper",
+        "factory"
+      ],
+      "complexity": "simple",
+      "languageNotes": "单行工厂：`() => lazyApi(() => import(\"./…\"))`，把实现模块挡在 bundler 静态图之外。"
+    },
+    {
+      "id": "function:packages/ai/src/api/mistral-conversations.lazy.ts:mistralConversationsApi",
+      "type": "function",
+      "name": "mistralConversationsApi",
+      "filePath": "packages/ai/src/api/mistral-conversations.lazy.ts",
+      "lineRange": [
+        4,
+        4
+      ],
+      "summary": "返回延迟加载的 Mistral Conversations `ProviderStreams`。",
+      "tags": [
+        "factory",
+        "惰性加载",
+        "api-wrapper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/api/openai-codex-responses.lazy.ts",
+      "type": "file",
+      "name": "openai-codex-responses.lazy.ts",
+      "filePath": "packages/ai/src/api/openai-codex-responses.lazy.ts",
+      "summary": "导出 `openAICodexResponsesApi`，用 `lazyApi` 在首次 stream 时再动态 import OpenAI Codex Responses 的 API 实现。",
+      "tags": [
+        "惰性加载",
+        "api-wrapper",
+        "factory"
+      ],
+      "complexity": "simple",
+      "languageNotes": "单行工厂：`() => lazyApi(() => import(\"./…\"))`，把实现模块挡在 bundler 静态图之外。"
+    },
+    {
+      "id": "function:packages/ai/src/api/openai-codex-responses.lazy.ts:openAICodexResponsesApi",
+      "type": "function",
+      "name": "openAICodexResponsesApi",
+      "filePath": "packages/ai/src/api/openai-codex-responses.lazy.ts",
+      "lineRange": [
+        4,
+        4
+      ],
+      "summary": "返回延迟加载的 OpenAI Codex Responses `ProviderStreams`。",
+      "tags": [
+        "factory",
+        "惰性加载",
+        "api-wrapper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "file",
+      "name": "openai-completions.lazy.ts",
+      "filePath": "packages/ai/src/api/openai-completions.lazy.ts",
+      "summary": "导出 `openAICompletionsApi`，用 `lazyApi` 在首次 stream 时再动态 import OpenAI Completions 的 API 实现。",
+      "tags": [
+        "惰性加载",
+        "api-wrapper",
+        "factory"
+      ],
+      "complexity": "simple",
+      "languageNotes": "单行工厂：`() => lazyApi(() => import(\"./…\"))`，把实现模块挡在 bundler 静态图之外。"
+    },
+    {
+      "id": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "function",
+      "name": "openAICompletionsApi",
+      "filePath": "packages/ai/src/api/openai-completions.lazy.ts",
+      "lineRange": [
+        4,
+        4
+      ],
+      "summary": "返回延迟加载的 OpenAI Completions `ProviderStreams`。",
+      "tags": [
+        "factory",
+        "惰性加载",
+        "api-wrapper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/api/openai-responses.lazy.ts",
+      "type": "file",
+      "name": "openai-responses.lazy.ts",
+      "filePath": "packages/ai/src/api/openai-responses.lazy.ts",
+      "summary": "导出 `openAIResponsesApi`，用 `lazyApi` 在首次 stream 时再动态 import OpenAI Responses 的 API 实现。",
+      "tags": [
+        "惰性加载",
+        "api-wrapper",
+        "factory"
+      ],
+      "complexity": "simple",
+      "languageNotes": "单行工厂：`() => lazyApi(() => import(\"./…\"))`，把实现模块挡在 bundler 静态图之外。"
+    },
+    {
+      "id": "function:packages/ai/src/api/openai-responses.lazy.ts:openAIResponsesApi",
+      "type": "function",
+      "name": "openAIResponsesApi",
+      "filePath": "packages/ai/src/api/openai-responses.lazy.ts",
+      "lineRange": [
+        4,
+        4
+      ],
+      "summary": "返回延迟加载的 OpenAI Responses `ProviderStreams`。",
+      "tags": [
+        "factory",
+        "惰性加载",
+        "api-wrapper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/api/pi-messages.lazy.ts",
+      "type": "file",
+      "name": "pi-messages.lazy.ts",
+      "filePath": "packages/ai/src/api/pi-messages.lazy.ts",
+      "summary": "导出 `piMessagesApi`，用 `lazyApi` 在首次 stream 时再动态 import pi-messages 的 API 实现。",
+      "tags": [
+        "惰性加载",
+        "api-wrapper",
+        "factory"
+      ],
+      "complexity": "simple",
+      "languageNotes": "单行工厂：`() => lazyApi(() => import(\"./…\"))`，把实现模块挡在 bundler 静态图之外。"
+    },
+    {
+      "id": "function:packages/ai/src/api/pi-messages.lazy.ts:piMessagesApi",
+      "type": "function",
+      "name": "piMessagesApi",
+      "filePath": "packages/ai/src/api/pi-messages.lazy.ts",
+      "lineRange": [
+        4,
+        4
+      ],
+      "summary": "返回延迟加载的 pi-messages `ProviderStreams`。",
+      "tags": [
+        "factory",
+        "惰性加载",
+        "api-wrapper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/api/bedrock-converse-stream.lazy.ts",
+      "type": "file",
+      "name": "bedrock-converse-stream.lazy.ts",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.lazy.ts",
+      "summary": "Bedrock Converse Stream 的惰性入口：用变量 specifier 动态 import Node-only AWS SDK，并允许 Bun 构建注入静态模块。",
+      "tags": [
+        "惰性加载",
+        "api-wrapper",
+        "factory",
+        "node-only"
+      ],
+      "complexity": "simple",
+      "languageNotes": "变量 specifier 阻止 bundler 跟踪进 AWS SDK；`setBedrockProviderModule` 给无法打包动态 import 的 Bun binary 用。"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.lazy.ts:setBedrockProviderModule",
+      "type": "function",
+      "name": "setBedrockProviderModule",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.lazy.ts",
+      "lineRange": [
+        22,
+        24
+      ],
+      "summary": "覆盖默认的动态 Bedrock 实现，供 Bun 二进制静态注册模块。",
+      "tags": [
+        "factory",
+        "bun",
+        "覆盖点"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.lazy.ts:bedrockConverseStreamApi",
+      "type": "function",
+      "name": "bedrockConverseStreamApi",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.lazy.ts",
+      "lineRange": [
+        26,
+        30
+      ],
+      "summary": "返回 Bedrock Converse Stream 的 `lazyApi` 包装，优先使用注入模块。",
+      "tags": [
+        "factory",
+        "惰性加载",
+        "api-wrapper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/api/lazy.ts",
+      "type": "file",
+      "name": "lazy.ts",
+      "filePath": "packages/ai/src/api/lazy.ts",
+      "summary": "惰性 API 基础设施：同步返回 `AssistantMessageEventStream`，把动态 import 与 setup 失败转成 stream error event。",
+      "tags": [
+        "惰性加载",
+        "factory",
+        "stream",
+        "基础设施"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "setup 在 stream 背后异步执行；load 失败不会抛出到调用方，而是终止 outer stream。"
+    },
+    {
+      "id": "function:packages/ai/src/api/lazy.ts:createSetupErrorMessage",
+      "type": "function",
+      "name": "createSetupErrorMessage",
+      "filePath": "packages/ai/src/api/lazy.ts",
+      "lineRange": [
+        4,
+        23
+      ],
+      "summary": "把 setup/load 异常转成带 `stopReason: error` 的 `AssistantMessage`。",
+      "tags": [
+        "error-handling",
+        "stream",
+        "工具函数"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/lazy.ts:lazyStream",
+      "type": "function",
+      "name": "lazyStream",
+      "filePath": "packages/ai/src/api/lazy.ts",
+      "lineRange": [
+        46,
+        61
+      ],
+      "summary": "立即返回 outer stream，并把异步 setup 的事件转发进去；失败则推 error event。",
+      "tags": [
+        "stream",
+        "惰性加载",
+        "factory"
+      ],
+      "complexity": "simple",
+      "languageNotes": "调用方拿到的是同步 EventStream，auth/module load 在 then/catch 里完成。"
+    },
+    {
+      "id": "function:packages/ai/src/api/lazy.ts:lazyApi",
+      "type": "function",
+      "name": "lazyApi",
+      "filePath": "packages/ai/src/api/lazy.ts",
+      "lineRange": [
+        73,
+        98
+      ],
+      "summary": "把动态 import 的 `ProviderStreams` 包成延迟执行的 stream/streamSimple，并可按需挂上 deferred 能力。",
+      "tags": [
+        "factory",
+        "惰性加载",
+        "api-wrapper"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/ai/src/api/anthropic-messages.lazy.ts",
+      "target": "function:packages/ai/src/api/anthropic-messages.lazy.ts:anthropicMessagesApi",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/api/anthropic-messages.lazy.ts",
+      "target": "function:packages/ai/src/api/anthropic-messages.lazy.ts:anthropicMessagesApi",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/anthropic-messages.lazy.ts:anthropicMessagesApi",
+      "target": "function:packages/ai/src/api/lazy.ts:lazyApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/azure-openai-responses.lazy.ts",
+      "target": "function:packages/ai/src/api/azure-openai-responses.lazy.ts:azureOpenAIResponsesApi",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/api/azure-openai-responses.lazy.ts",
+      "target": "function:packages/ai/src/api/azure-openai-responses.lazy.ts:azureOpenAIResponsesApi",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/azure-openai-responses.lazy.ts:azureOpenAIResponsesApi",
+      "target": "function:packages/ai/src/api/lazy.ts:lazyApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/google-generative-ai.lazy.ts",
+      "target": "function:packages/ai/src/api/google-generative-ai.lazy.ts:googleGenerativeAIApi",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/api/google-generative-ai.lazy.ts",
+      "target": "function:packages/ai/src/api/google-generative-ai.lazy.ts:googleGenerativeAIApi",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/google-generative-ai.lazy.ts:googleGenerativeAIApi",
+      "target": "function:packages/ai/src/api/lazy.ts:lazyApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.lazy.ts",
+      "target": "function:packages/ai/src/api/google-vertex.lazy.ts:googleVertexApi",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.lazy.ts",
+      "target": "function:packages/ai/src/api/google-vertex.lazy.ts:googleVertexApi",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/google-vertex.lazy.ts:googleVertexApi",
+      "target": "function:packages/ai/src/api/lazy.ts:lazyApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.lazy.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.lazy.ts:mistralConversationsApi",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.lazy.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.lazy.ts:mistralConversationsApi",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/mistral-conversations.lazy.ts:mistralConversationsApi",
+      "target": "function:packages/ai/src/api/lazy.ts:lazyApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/openai-codex-responses.lazy.ts",
+      "target": "function:packages/ai/src/api/openai-codex-responses.lazy.ts:openAICodexResponsesApi",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/api/openai-codex-responses.lazy.ts",
+      "target": "function:packages/ai/src/api/openai-codex-responses.lazy.ts:openAICodexResponsesApi",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/openai-codex-responses.lazy.ts:openAICodexResponsesApi",
+      "target": "function:packages/ai/src/api/lazy.ts:lazyApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "target": "function:packages/ai/src/api/lazy.ts:lazyApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/openai-responses.lazy.ts",
+      "target": "function:packages/ai/src/api/openai-responses.lazy.ts:openAIResponsesApi",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/api/openai-responses.lazy.ts",
+      "target": "function:packages/ai/src/api/openai-responses.lazy.ts:openAIResponsesApi",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/openai-responses.lazy.ts:openAIResponsesApi",
+      "target": "function:packages/ai/src/api/lazy.ts:lazyApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.lazy.ts",
+      "target": "function:packages/ai/src/api/pi-messages.lazy.ts:piMessagesApi",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.lazy.ts",
+      "target": "function:packages/ai/src/api/pi-messages.lazy.ts:piMessagesApi",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/pi-messages.lazy.ts:piMessagesApi",
+      "target": "function:packages/ai/src/api/lazy.ts:lazyApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.lazy.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.lazy.ts:setBedrockProviderModule",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.lazy.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.lazy.ts:setBedrockProviderModule",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.lazy.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.lazy.ts:bedrockConverseStreamApi",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.lazy.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.lazy.ts:bedrockConverseStreamApi",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/bedrock-converse-stream.lazy.ts:bedrockConverseStreamApi",
+      "target": "function:packages/ai/src/api/lazy.ts:lazyApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/lazy.ts",
+      "target": "function:packages/ai/src/api/lazy.ts:createSetupErrorMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/api/lazy.ts",
+      "target": "function:packages/ai/src/api/lazy.ts:lazyStream",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/api/lazy.ts",
+      "target": "function:packages/ai/src/api/lazy.ts:lazyStream",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/lazy.ts",
+      "target": "function:packages/ai/src/api/lazy.ts:lazyApi",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/api/lazy.ts",
+      "target": "function:packages/ai/src/api/lazy.ts:lazyApi",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/lazy.ts:lazyStream",
+      "target": "class:packages/ai/src/utils/event-stream.ts:AssistantMessageEventStream",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/anthropic-messages.lazy.ts",
+      "target": "file:packages/ai/src/api/lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/anthropic-messages.lazy.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/azure-openai-responses.lazy.ts",
+      "target": "file:packages/ai/src/api/lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/azure-openai-responses.lazy.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.lazy.ts",
+      "target": "file:packages/ai/src/api/lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.lazy.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/google-generative-ai.lazy.ts",
+      "target": "file:packages/ai/src/api/lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/google-generative-ai.lazy.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.lazy.ts",
+      "target": "file:packages/ai/src/api/lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.lazy.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/lazy.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/lazy.ts",
+      "target": "file:packages/ai/src/utils/event-stream.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.lazy.ts",
+      "target": "file:packages/ai/src/api/lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.lazy.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/openai-codex-responses.lazy.ts",
+      "target": "file:packages/ai/src/api/lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/openai-codex-responses.lazy.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "target": "file:packages/ai/src/api/lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/openai-responses.lazy.ts",
+      "target": "file:packages/ai/src/api/lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/openai-responses.lazy.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.lazy.ts",
+      "target": "file:packages/ai/src/api/lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.lazy.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

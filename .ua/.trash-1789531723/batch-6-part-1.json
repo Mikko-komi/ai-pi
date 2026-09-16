@@ -1,0 +1,961 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/cli/config-selector.ts",
+      "type": "file",
+      "name": "config-selector.ts",
+      "filePath": "packages/coding-agent/src/cli/config-selector.ts",
+      "summary": "为 `pi config` 启动 TUI 配置选择器：初始化 theme，挂上 ConfigSelectorComponent，关闭时停止 TUI 与 theme watcher。",
+      "tags": [
+        "cli",
+        "tui",
+        "配置选择",
+        "entry-point"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/config-selector.ts:selectConfig",
+      "type": "function",
+      "name": "selectConfig",
+      "filePath": "packages/coding-agent/src/cli/config-selector.ts",
+      "lineRange": [
+        20,
+        61
+      ],
+      "summary": "初始化 theme 后打开 ConfigSelectorComponent；关闭时 stop TUI 与 theme watcher，exit 回调则 process.exit(0)。",
+      "tags": [
+        "cli",
+        "tui",
+        "配置选择"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/cli/session-picker.ts",
+      "type": "file",
+      "name": "session-picker.ts",
+      "filePath": "packages/coding-agent/src/cli/session-picker.ts",
+      "summary": "为 `--resume` 展示会话选择器：创建启动 TUI、注入 KeybindingsManager，返回所选 session 路径或取消。",
+      "tags": [
+        "cli",
+        "tui",
+        "会话选择",
+        "entry-point"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/session-picker.ts:selectSession",
+      "type": "function",
+      "name": "selectSession",
+      "filePath": "packages/coding-agent/src/cli/session-picker.ts",
+      "lineRange": [
+        15,
+        55
+      ],
+      "summary": "创建启动 TUI 与 KeybindingsManager，展示 SessionSelectorComponent，resolve 所选路径或 null。",
+      "tags": [
+        "cli",
+        "tui",
+        "会话选择"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "type": "file",
+      "name": "startup-ui.ts",
+      "filePath": "packages/coding-agent/src/cli/startup-ui.ts",
+      "summary": "启动阶段 TUI 基础设施：加载 theme 与 keybindings、创建 TuiMainScreen，并提供首次设置向导与通用 selector/input。",
+      "tags": [
+        "cli",
+        "tui",
+        "启动流程",
+        "theme"
+      ],
+      "complexity": "complex",
+      "languageNotes": "首次设置仅在官方发行版且 PI_EXPERIMENTAL=1、未覆盖 agent dir、尚无 settings.json 时运行。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/startup-ui.ts:loadThemes",
+      "type": "function",
+      "name": "loadThemes",
+      "filePath": "packages/coding-agent/src/cli/startup-ui.ts",
+      "lineRange": [
+        50,
+        68
+      ],
+      "summary": "从已 resolve 的 theme 资源按路径加载 Theme，按名称去重；损坏 theme 被吞掉以免阻断启动。",
+      "tags": [
+        "theme",
+        "startup",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/startup-ui.ts:loadStartupThemes",
+      "type": "function",
+      "name": "loadStartupThemes",
+      "filePath": "packages/coding-agent/src/cli/startup-ui.ts",
+      "lineRange": [
+        70,
+        81
+      ],
+      "summary": "用全局 SettingsManager 与 DefaultPackageManager.resolve 收集 theme 资源，再交给 loadThemes。",
+      "tags": [
+        "theme",
+        "startup",
+        "package-manager"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/startup-ui.ts:createStartupTui",
+      "type": "function",
+      "name": "createStartupTui",
+      "filePath": "packages/coding-agent/src/cli/startup-ui.ts",
+      "lineRange": [
+        83,
+        92
+      ],
+      "summary": "配置终端 capability/theme/keybindings，构造 TuiMainScreen 并应用 clear-on-shrink。",
+      "tags": [
+        "tui",
+        "startup",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/startup-ui.ts:startStartupTui",
+      "type": "function",
+      "name": "startStartupTui",
+      "filePath": "packages/coding-agent/src/cli/startup-ui.ts",
+      "lineRange": [
+        94,
+        97
+      ],
+      "summary": "启动 TUI 并异步检测 auto theme，避免阻塞首帧。",
+      "tags": [
+        "tui",
+        "startup",
+        "theme"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/startup-ui.ts:shouldRunFirstTimeSetup",
+      "type": "function",
+      "name": "shouldRunFirstTimeSetup",
+      "filePath": "packages/coding-agent/src/cli/startup-ui.ts",
+      "lineRange": [
+        122,
+        139
+      ],
+      "summary": "仅当官方发行版、PI_EXPERIMENTAL、未覆盖 agent dir 且 settings.json 不存在时返回 true。",
+      "tags": [
+        "startup",
+        "feature-flag",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/startup-ui.ts:showStartupSelector",
+      "type": "function",
+      "name": "showStartupSelector",
+      "filePath": "packages/coding-agent/src/cli/startup-ui.ts",
+      "lineRange": [
+        141,
+        170
+      ],
+      "summary": "用 ExtensionSelectorComponent 展示选项列表，settle 后清空并 stop TUI。",
+      "tags": [
+        "tui",
+        "startup",
+        "selector"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/startup-ui.ts:showFirstTimeSetup",
+      "type": "function",
+      "name": "showFirstTimeSetup",
+      "filePath": "packages/coding-agent/src/cli/startup-ui.ts",
+      "lineRange": [
+        173,
+        212
+      ],
+      "summary": "展示 FirstTimeSetupComponent，把 theme 与 analytics 选择写回 SettingsManager 并 flush。",
+      "tags": [
+        "tui",
+        "startup",
+        "onboarding"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/startup-ui.ts:showStartupInput",
+      "type": "function",
+      "name": "showStartupInput",
+      "filePath": "packages/coding-agent/src/cli/startup-ui.ts",
+      "lineRange": [
+        214,
+        246
+      ],
+      "summary": "用 ExtensionInputComponent 收集单行输入，settle 后 dispose 并 stop TUI。",
+      "tags": [
+        "tui",
+        "startup",
+        "input"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/cache-stats.ts",
+      "type": "file",
+      "name": "cache-stats.ts",
+      "filePath": "packages/coding-agent/src/core/cache-stats.ts",
+      "summary": "扫描 session entries，把本应命中 prompt-cache 却被重新计费的 token/费用记为 cache waste，并按 assistant 消息收集 miss。",
+      "tags": [
+        "cache",
+        "usage",
+        "会话分析",
+        "utility"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "用 1024 token 噪声地板和 5 分钟 CACHE_TTL 区分 breakpoint 粒度噪声与真实 miss。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/cache-stats.ts:detectMiss",
+      "type": "function",
+      "name": "detectMiss",
+      "filePath": "packages/coding-agent/src/core/cache-stats.ts",
+      "lineRange": [
+        56,
+        90
+      ],
+      "summary": "相对上一请求计算 cache miss token/费用；无缓存活动、首轮或低于噪声地板则忽略。",
+      "tags": [
+        "cache",
+        "usage",
+        "pricing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/cache-stats.ts:asPreviousRequest",
+      "type": "function",
+      "name": "asPreviousRequest",
+      "filePath": "packages/coding-agent/src/core/cache-stats.ts",
+      "lineRange": [
+        92,
+        102
+      ],
+      "summary": "把 assistant usage 收成 PreviousRequest，并粘滞 reportedCache 以便识别 cache-read-only provider。",
+      "tags": [
+        "cache",
+        "usage",
+        "data-model"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/cache-stats.ts:scan",
+      "type": "function",
+      "name": "scan",
+      "filePath": "packages/coding-agent/src/core/cache-stats.ts",
+      "lineRange": [
+        104,
+        132
+      ],
+      "summary": "遍历 session entries 累计 waste；compaction/branch_summary 会重置 prev，模型切换则计入。",
+      "tags": [
+        "cache",
+        "session",
+        "scan"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/cache-stats.ts:computeCacheWaste",
+      "type": "function",
+      "name": "computeCacheWaste",
+      "filePath": "packages/coding-agent/src/core/cache-stats.ts",
+      "lineRange": [
+        138,
+        140
+      ],
+      "summary": "返回整段 session 的累计 missedTokens/missedCost/missCount。",
+      "tags": [
+        "cache",
+        "usage",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/cache-stats.ts:collectCacheMisses",
+      "type": "function",
+      "name": "collectCacheMisses",
+      "filePath": "packages/coding-agent/src/core/cache-stats.ts",
+      "lineRange": [
+        147,
+        152
+      ],
+      "summary": "返回按 assistant 消息引用索引的 miss map，供 resume/compaction 重建 transcript notice。",
+      "tags": [
+        "cache",
+        "session",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/cache-stats.ts:detectCacheMiss",
+      "type": "function",
+      "name": "detectCacheMiss",
+      "filePath": "packages/coding-agent/src/core/cache-stats.ts",
+      "lineRange": [
+        158,
+        164
+      ],
+      "summary": "在 message_end（尚未 persist）时，用 scan 出的 prev 检测刚完成消息的 miss。",
+      "tags": [
+        "cache",
+        "event-handler",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/experimental.ts",
+      "type": "file",
+      "name": "experimental.ts",
+      "filePath": "packages/coding-agent/src/core/experimental.ts",
+      "summary": "用环境变量 `PI_EXPERIMENTAL=1` 判断是否启用实验功能开关。",
+      "tags": [
+        "feature-flag",
+        "experimental",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/experimental.ts:areExperimentalFeaturesEnabled",
+      "type": "function",
+      "name": "areExperimentalFeaturesEnabled",
+      "filePath": "packages/coding-agent/src/core/experimental.ts",
+      "lineRange": [
+        1,
+        3
+      ],
+      "summary": "检查 process.env.PI_EXPERIMENTAL 是否为 \"1\"。",
+      "tags": [
+        "feature-flag",
+        "experimental",
+        "utility"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/cli/config-selector.ts",
+      "target": "file:packages/coding-agent/src/core/settings-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/config-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/config-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/config-selector.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/session-picker.ts",
+      "target": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/session-picker.ts",
+      "target": "file:packages/coding-agent/src/core/keybindings.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/session-picker.ts",
+      "target": "file:packages/coding-agent/src/core/session-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/session-picker.ts",
+      "target": "file:packages/coding-agent/src/core/settings-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/session-picker.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/session-picker.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "file:packages/coding-agent/src/core/experimental.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "file:packages/coding-agent/src/core/keybindings.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "file:packages/coding-agent/src/core/package-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "file:packages/coding-agent/src/core/settings-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/extension-input.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/extension-selector.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/first-time-setup.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/cache-stats.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/cache-stats.ts",
+      "target": "file:packages/coding-agent/src/core/session-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/config-selector.ts",
+      "target": "function:packages/coding-agent/src/cli/config-selector.ts:selectConfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/config-selector.ts",
+      "target": "function:packages/coding-agent/src/cli/config-selector.ts:selectConfig",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/session-picker.ts",
+      "target": "function:packages/coding-agent/src/cli/session-picker.ts:selectSession",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/session-picker.ts",
+      "target": "function:packages/coding-agent/src/cli/session-picker.ts:selectSession",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:loadThemes",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:loadStartupThemes",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:createStartupTui",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:createStartupTui",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:startStartupTui",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:startStartupTui",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:shouldRunFirstTimeSetup",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:shouldRunFirstTimeSetup",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:showStartupSelector",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:showStartupSelector",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:showFirstTimeSetup",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:showFirstTimeSetup",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:showStartupInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:showStartupInput",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/cache-stats.ts",
+      "target": "function:packages/coding-agent/src/core/cache-stats.ts:detectMiss",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/cache-stats.ts",
+      "target": "function:packages/coding-agent/src/core/cache-stats.ts:asPreviousRequest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/cache-stats.ts",
+      "target": "function:packages/coding-agent/src/core/cache-stats.ts:scan",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/cache-stats.ts",
+      "target": "function:packages/coding-agent/src/core/cache-stats.ts:computeCacheWaste",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/cache-stats.ts",
+      "target": "function:packages/coding-agent/src/core/cache-stats.ts:computeCacheWaste",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/cache-stats.ts",
+      "target": "function:packages/coding-agent/src/core/cache-stats.ts:collectCacheMisses",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/cache-stats.ts",
+      "target": "function:packages/coding-agent/src/core/cache-stats.ts:collectCacheMisses",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/cache-stats.ts",
+      "target": "function:packages/coding-agent/src/core/cache-stats.ts:detectCacheMiss",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/cache-stats.ts",
+      "target": "function:packages/coding-agent/src/core/cache-stats.ts:detectCacheMiss",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/experimental.ts",
+      "target": "function:packages/coding-agent/src/core/experimental.ts:areExperimentalFeaturesEnabled",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/experimental.ts",
+      "target": "function:packages/coding-agent/src/core/experimental.ts:areExperimentalFeaturesEnabled",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/session-picker.ts:selectSession",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:createStartupTui",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/session-picker.ts:selectSession",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:startStartupTui",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/session-picker.ts:selectSession",
+      "target": "file:packages/coding-agent/src/core/keybindings.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/startup-ui.ts:loadStartupThemes",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:loadThemes",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/startup-ui.ts:createStartupTui",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:loadStartupThemes",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/startup-ui.ts:createStartupTui",
+      "target": "file:packages/coding-agent/src/core/keybindings.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/startup-ui.ts:shouldRunFirstTimeSetup",
+      "target": "function:packages/coding-agent/src/core/experimental.ts:areExperimentalFeaturesEnabled",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/startup-ui.ts:showStartupSelector",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:createStartupTui",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/startup-ui.ts:showStartupSelector",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:startStartupTui",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/startup-ui.ts:showFirstTimeSetup",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:createStartupTui",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/startup-ui.ts:showStartupInput",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:createStartupTui",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/startup-ui.ts:showStartupInput",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:startStartupTui",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/cache-stats.ts:scan",
+      "target": "function:packages/coding-agent/src/core/cache-stats.ts:detectMiss",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/cache-stats.ts:scan",
+      "target": "function:packages/coding-agent/src/core/cache-stats.ts:asPreviousRequest",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/cache-stats.ts:computeCacheWaste",
+      "target": "function:packages/coding-agent/src/core/cache-stats.ts:scan",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/cache-stats.ts:collectCacheMisses",
+      "target": "function:packages/coding-agent/src/core/cache-stats.ts:scan",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/cache-stats.ts:detectCacheMiss",
+      "target": "function:packages/coding-agent/src/core/cache-stats.ts:detectMiss",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/cache-stats.ts:detectCacheMiss",
+      "target": "function:packages/coding-agent/src/core/cache-stats.ts:scan",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/config-selector.ts:selectConfig",
+      "target": "function:packages/coding-agent/src/modes/interactive/theme/theme.ts:initTheme",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/config-selector.ts:selectConfig",
+      "target": "function:packages/coding-agent/src/modes/interactive/theme/theme.ts:stopThemeWatcher",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/config-selector.ts:selectConfig",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/config-selector.ts:ConfigSelectorComponent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/session-picker.ts:selectSession",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/session-selector.ts:SessionSelectorComponent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/startup-ui.ts:loadThemes",
+      "target": "function:packages/coding-agent/src/modes/interactive/theme/theme.ts:loadThemeFromPath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/startup-ui.ts:loadStartupThemes",
+      "target": "function:packages/coding-agent/src/config.ts:getAgentDir",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/startup-ui.ts:loadStartupThemes",
+      "target": "class:packages/coding-agent/src/core/package-manager.ts:DefaultPackageManager",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/startup-ui.ts:createStartupTui",
+      "target": "function:packages/coding-agent/src/modes/interactive/theme/theme.ts:initTheme",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/startup-ui.ts:createStartupTui",
+      "target": "function:packages/coding-agent/src/modes/interactive/theme/theme.ts:setRegisteredThemes",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/startup-ui.ts:createStartupTui",
+      "target": "function:packages/coding-agent/src/modes/interactive/theme/theme.ts:resolveThemeSetting",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/startup-ui.ts:createStartupTui",
+      "target": "function:packages/coding-agent/src/config.ts:getAgentDir",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/startup-ui.ts:shouldRunFirstTimeSetup",
+      "target": "function:packages/coding-agent/src/config.ts:getSettingsPath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/startup-ui.ts:showStartupSelector",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/extension-selector.ts:ExtensionSelectorComponent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/startup-ui.ts:showFirstTimeSetup",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/first-time-setup.ts:FirstTimeSetupComponent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/startup-ui.ts:showFirstTimeSetup",
+      "target": "function:packages/coding-agent/src/modes/interactive/theme/theme.ts:detectTerminalThemeForAuto",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/startup-ui.ts:showStartupInput",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/extension-input.ts:ExtensionInputComponent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

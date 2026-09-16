@@ -1,0 +1,1194 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 5,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 5,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 5,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "packages/telemetry/src/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 357,
+      "nonEmptyLines": 308,
+      "functions": [
+        {
+          "name": "defineTelemetrySchema",
+          "startLine": 72,
+          "endLine": 74,
+          "params": [
+            "schema"
+          ]
+        },
+        {
+          "name": "bindTypedSpanStarter",
+          "startLine": 324,
+          "endLine": 343,
+          "params": [
+            "telemetryContext"
+          ]
+        },
+        {
+          "name": "createTypedSpanStarter",
+          "startLine": 349,
+          "endLine": 354,
+          "params": [
+            "telemetryContext",
+            "_schemas"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "NOOP_TELEMETRY_CONTEXT",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "defineTelemetrySchema",
+          "line": 72,
+          "isDefault": false
+        },
+        {
+          "name": "createTypedSpanStarter",
+          "line": 349,
+          "isDefault": false
+        },
+        {
+          "name": "RecordedTelemetryEvent",
+          "line": 356,
+          "isDefault": false
+        },
+        {
+          "name": "RecordedTelemetrySpan",
+          "line": 356,
+          "isDefault": false
+        },
+        {
+          "name": "InMemoryTelemetryContext",
+          "line": 357,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "startSpan",
+          "callee": "telemetryContext.startSpan",
+          "lineNumber": 335
+        },
+        {
+          "caller": "startSpan",
+          "callee": "callback",
+          "lineNumber": 336
+        },
+        {
+          "caller": "startSpan",
+          "callee": "bindTypedSpanStarter",
+          "lineNumber": 338
+        },
+        {
+          "caller": "createTypedSpanStarter",
+          "callee": "bindTypedSpanStarter",
+          "lineNumber": 353
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 6,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/telemetry/src/memory.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 219,
+      "nonEmptyLines": 199,
+      "functions": [
+        {
+          "name": "copyAttributeValue",
+          "startLine": 50,
+          "endLine": 52,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "copyAttributes",
+          "startLine": 54,
+          "endLine": 61,
+          "params": [
+            "attributes"
+          ]
+        },
+        {
+          "name": "mergeAttributes",
+          "startLine": 63,
+          "endLine": 69,
+          "params": [
+            "current",
+            "attributes"
+          ]
+        },
+        {
+          "name": "copyStatus",
+          "startLine": 71,
+          "endLine": 76,
+          "params": [
+            "status"
+          ]
+        },
+        {
+          "name": "automaticErrorStatus",
+          "startLine": 78,
+          "endLine": 87,
+          "params": [
+            "error"
+          ]
+        },
+        {
+          "name": "settleSpan",
+          "startLine": 89,
+          "endLine": 99,
+          "params": [
+            "state",
+            "span",
+            "failed",
+            "error"
+          ]
+        },
+        {
+          "name": "createSpan",
+          "startLine": 101,
+          "endLine": 118,
+          "params": [
+            "state",
+            "parent",
+            "options"
+          ]
+        },
+        {
+          "name": "startInMemorySpan",
+          "startLine": 120,
+          "endLine": 186,
+          "params": [
+            "state",
+            "parent",
+            "options",
+            "callback"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "InMemoryTelemetryContext",
+          "startLine": 192,
+          "endLine": 219,
+          "methods": [
+            "startSpan",
+            "getSpans"
+          ],
+          "properties": [
+            "state"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "InMemoryTelemetryContext",
+          "line": 192,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "copyAttributeValue",
+          "callee": "Array.isArray",
+          "lineNumber": 51
+        },
+        {
+          "caller": "copyAttributes",
+          "callee": "Object.entries",
+          "lineNumber": 57
+        },
+        {
+          "caller": "copyAttributes",
+          "callee": "copyAttributeValue",
+          "lineNumber": 58
+        },
+        {
+          "caller": "mergeAttributes",
+          "callee": "copyAttributes",
+          "lineNumber": 64
+        },
+        {
+          "caller": "mergeAttributes",
+          "callee": "Object.entries",
+          "lineNumber": 65
+        },
+        {
+          "caller": "mergeAttributes",
+          "callee": "copyAttributeValue",
+          "lineNumber": 66
+        },
+        {
+          "caller": "settleSpan",
+          "callee": "automaticErrorStatus",
+          "lineNumber": 96
+        },
+        {
+          "caller": "createSpan",
+          "callee": "copyAttributes",
+          "lineNumber": 107
+        },
+        {
+          "caller": "startInMemorySpan",
+          "callee": "NOOP_TELEMETRY_CONTEXT.startSpan",
+          "lineNumber": 126
+        },
+        {
+          "caller": "startInMemorySpan",
+          "callee": "createSpan",
+          "lineNumber": 130
+        },
+        {
+          "caller": "startInMemorySpan",
+          "callee": "state.spans.push",
+          "lineNumber": 131
+        },
+        {
+          "caller": "startInMemorySpan",
+          "callee": "NOOP_TELEMETRY_CONTEXT.startSpan",
+          "lineNumber": 133
+        },
+        {
+          "caller": "startInMemorySpan",
+          "callee": "startInMemorySpan",
+          "lineNumber": 140
+        },
+        {
+          "caller": "addEvent",
+          "callee": "recordedSpan.events.push",
+          "lineNumber": 144
+        },
+        {
+          "caller": "addEvent",
+          "callee": "copyAttributes",
+          "lineNumber": 144
+        },
+        {
+          "caller": "setAttributes",
+          "callee": "mergeAttributes",
+          "lineNumber": 152
+        },
+        {
+          "caller": "setStatus",
+          "callee": "copyStatus",
+          "lineNumber": 160
+        },
+        {
+          "caller": "startInMemorySpan",
+          "callee": "callback",
+          "lineNumber": 170
+        },
+        {
+          "caller": "startInMemorySpan",
+          "callee": "settleSpan",
+          "lineNumber": 172
+        },
+        {
+          "caller": "startInMemorySpan",
+          "callee": "Promise.reject",
+          "lineNumber": 173
+        },
+        {
+          "caller": "startInMemorySpan",
+          "callee": "Promise.resolve(result).then",
+          "lineNumber": 176
+        },
+        {
+          "caller": "startInMemorySpan",
+          "callee": "Promise.resolve",
+          "lineNumber": 176
+        },
+        {
+          "caller": "startInMemorySpan",
+          "callee": "settleSpan",
+          "lineNumber": 178
+        },
+        {
+          "caller": "startInMemorySpan",
+          "callee": "settleSpan",
+          "lineNumber": 182
+        },
+        {
+          "caller": "startSpan",
+          "callee": "startInMemorySpan",
+          "lineNumber": 200
+        },
+        {
+          "caller": "getSpans",
+          "callee": "this.state.spans.map",
+          "lineNumber": 205
+        },
+        {
+          "caller": "getSpans",
+          "callee": "copyAttributes",
+          "lineNumber": 209
+        },
+        {
+          "caller": "getSpans",
+          "callee": "span.events.map",
+          "lineNumber": 210
+        },
+        {
+          "caller": "getSpans",
+          "callee": "copyAttributes",
+          "lineNumber": 212
+        },
+        {
+          "caller": "getSpans",
+          "callee": "copyStatus",
+          "lineNumber": 214
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 8,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/telemetry/src/noop.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 17,
+      "functions": [
+        {
+          "name": "startNoopSpan",
+          "startLine": 3,
+          "endLine": 9,
+          "params": [
+            "_options",
+            "callback"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "NOOP_TELEMETRY_CONTEXT",
+          "line": 20,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "startNoopSpan",
+          "callee": "Promise.resolve",
+          "lineNumber": 5
+        },
+        {
+          "caller": "startNoopSpan",
+          "callee": "callback",
+          "lineNumber": 5
+        },
+        {
+          "caller": "startNoopSpan",
+          "callee": "Promise.reject",
+          "lineNumber": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/telemetry/src/testing/conformance.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 315,
+      "nonEmptyLines": 281,
+      "functions": [
+        {
+          "name": "createCase",
+          "startLine": 12,
+          "endLine": 26,
+          "params": [
+            "factory",
+            "group",
+            "name",
+            "test"
+          ]
+        },
+        {
+          "name": "findSpan",
+          "startLine": 28,
+          "endLine": 32,
+          "params": [
+            "spans",
+            "name"
+          ]
+        },
+        {
+          "name": "rejectsWithSameValue",
+          "startLine": 34,
+          "endLine": 41,
+          "params": [
+            "operation",
+            "expected"
+          ]
+        },
+        {
+          "name": "unreadable",
+          "startLine": 43,
+          "endLine": 58,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "createTelemetryAdapterConformance",
+          "startLine": 61,
+          "endLine": 315,
+          "params": [
+            "factory"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "createTelemetryAdapterConformance",
+          "line": 61,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "run",
+          "callee": "factory",
+          "lineNumber": 22
+        },
+        {
+          "caller": "run",
+          "callee": "test",
+          "lineNumber": 23
+        },
+        {
+          "caller": "findSpan",
+          "callee": "spans.find",
+          "lineNumber": 29
+        },
+        {
+          "caller": "findSpan",
+          "callee": "ok",
+          "lineNumber": 30
+        },
+        {
+          "caller": "rejectsWithSameValue",
+          "callee": "fail",
+          "lineNumber": 37
+        },
+        {
+          "caller": "rejectsWithSameValue",
+          "callee": "strictEqual",
+          "lineNumber": 39
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "createCase",
+          "lineNumber": 65
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.context.startSpan",
+          "lineNumber": 73
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "strictEqual",
+          "lineNumber": 79
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "strictEqual",
+          "lineNumber": 80
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "strictEqual",
+          "lineNumber": 81
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "deepStrictEqual",
+          "lineNumber": 82
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "findSpan",
+          "lineNumber": 82
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.getSpans",
+          "lineNumber": 82
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "strictEqual",
+          "lineNumber": 83
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "findSpan",
+          "lineNumber": 83
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.getSpans",
+          "lineNumber": 83
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "createCase",
+          "lineNumber": 87
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "rejectsWithSameValue",
+          "lineNumber": 93
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.context.startSpan",
+          "lineNumber": 94
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "rejectsWithSameValue",
+          "lineNumber": 101
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.context.startSpan",
+          "lineNumber": 102
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "rejectsWithSameValue",
+          "lineNumber": 108
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.context.startSpan",
+          "lineNumber": 109
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "Promise.reject",
+          "lineNumber": 109
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "unreadable",
+          "lineNumber": 113
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "rejectsWithSameValue",
+          "lineNumber": 114
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.context.startSpan",
+          "lineNumber": 115
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "unreadable",
+          "lineNumber": 121
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "rejectsWithSameValue",
+          "lineNumber": 122
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.context.startSpan",
+          "lineNumber": 123
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "Promise.reject",
+          "lineNumber": 124
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.getSpans",
+          "lineNumber": 129
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "strictEqual",
+          "lineNumber": 137
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "findSpan",
+          "lineNumber": 137
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "createCase",
+          "lineNumber": 142
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.context.startSpan",
+          "lineNumber": 143
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "span.setStatus",
+          "lineNumber": 144
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "span.setStatus",
+          "lineNumber": 145
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "rejectsWithSameValue",
+          "lineNumber": 149
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.context.startSpan",
+          "lineNumber": 150
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "span.setStatus",
+          "lineNumber": 151
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "rejectsWithSameValue",
+          "lineNumber": 158
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.context.startSpan",
+          "lineNumber": 159
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "span.setStatus",
+          "lineNumber": 160
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "Promise.reject",
+          "lineNumber": 161
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.context.startSpan",
+          "lineNumber": 166
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "span.setStatus",
+          "lineNumber": 167
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.getSpans",
+          "lineNumber": 171
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "deepStrictEqual",
+          "lineNumber": 172
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "findSpan",
+          "lineNumber": 172
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "deepStrictEqual",
+          "lineNumber": 173
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "findSpan",
+          "lineNumber": 173
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "deepStrictEqual",
+          "lineNumber": 174
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "findSpan",
+          "lineNumber": 174
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "deepStrictEqual",
+          "lineNumber": 178
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "findSpan",
+          "lineNumber": 178
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "createCase",
+          "lineNumber": 184
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.context.startSpan",
+          "lineNumber": 185
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "span.setAttributes",
+          "lineNumber": 191
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "span.setAttributes",
+          "lineNumber": 192
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "span.addEvent",
+          "lineNumber": 193
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "span.addEvent",
+          "lineNumber": 194
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "findSpan",
+          "lineNumber": 198
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.getSpans",
+          "lineNumber": 198
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "deepStrictEqual",
+          "lineNumber": 199
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "deepStrictEqual",
+          "lineNumber": 200
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "createCase",
+          "lineNumber": 206
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.context.startSpan",
+          "lineNumber": 207
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "unreadable",
+          "lineNumber": 210
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "doesNotThrow",
+          "lineNumber": 212
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "span.setAttributes",
+          "lineNumber": 212
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "deepStrictEqual",
+          "lineNumber": 215
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "findSpan",
+          "lineNumber": 215
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.getSpans",
+          "lineNumber": 215
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "createCase",
+          "lineNumber": 220
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.context.startSpan",
+          "lineNumber": 222
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "doesNotThrow",
+          "lineNumber": 228
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "capturedSpan.setAttributes",
+          "lineNumber": 228
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "doesNotThrow",
+          "lineNumber": 229
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "capturedSpan.addEvent",
+          "lineNumber": 229
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "doesNotThrow",
+          "lineNumber": 230
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "capturedSpan.setStatus",
+          "lineNumber": 230
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "capturedSpan.startSpan",
+          "lineNumber": 232
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "strictEqual",
+          "lineNumber": 236
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "strictEqual",
+          "lineNumber": 237
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.getSpans",
+          "lineNumber": 239
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "strictEqual",
+          "lineNumber": 240
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "deepStrictEqual",
+          "lineNumber": 241
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "deepStrictEqual",
+          "lineNumber": 242
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "deepStrictEqual",
+          "lineNumber": 243
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "createCase",
+          "lineNumber": 246
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.context.startSpan",
+          "lineNumber": 252
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "parent.startSpan",
+          "lineNumber": 253
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "parent.startSpan",
+          "lineNumber": 256
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "strictEqual",
+          "lineNumber": 257
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "releaseFirst",
+          "lineNumber": 258
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.getSpans",
+          "lineNumber": 262
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "findSpan",
+          "lineNumber": 263
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "findSpan",
+          "lineNumber": 264
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "findSpan",
+          "lineNumber": 265
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "strictEqual",
+          "lineNumber": 266
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "strictEqual",
+          "lineNumber": 267
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "strictEqual",
+          "lineNumber": 268
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "ok",
+          "lineNumber": 269
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "ok",
+          "lineNumber": 270
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "ok",
+          "lineNumber": 271
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "createCase",
+          "lineNumber": 274
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "unreadable",
+          "lineNumber": 276
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.context.startSpan",
+          "lineNumber": 277
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "strictEqual",
+          "lineNumber": 282
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "strictEqual",
+          "lineNumber": 283
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "deepStrictEqual",
+          "lineNumber": 284
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.getSpans",
+          "lineNumber": 284
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.context.startSpan",
+          "lineNumber": 286
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "unreadable",
+          "lineNumber": 287
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "unreadable",
+          "lineNumber": 288
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "doesNotThrow",
+          "lineNumber": 289
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "span.setAttributes",
+          "lineNumber": 289
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "doesNotThrow",
+          "lineNumber": 290
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "span.addEvent",
+          "lineNumber": 290
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "doesNotThrow",
+          "lineNumber": 291
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "span.setStatus",
+          "lineNumber": 291
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.getSpans",
+          "lineNumber": 294
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "strictEqual",
+          "lineNumber": 295
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "deepStrictEqual",
+          "lineNumber": 296
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "deepStrictEqual",
+          "lineNumber": 297
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "deepStrictEqual",
+          "lineNumber": 298
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "createCase",
+          "lineNumber": 301
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "rejectsWithSameValue",
+          "lineNumber": 303
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.context.startSpan",
+          "lineNumber": 304
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "unreadable",
+          "lineNumber": 305
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "doesNotThrow",
+          "lineNumber": 306
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "span.setStatus",
+          "lineNumber": 306
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "Promise.reject",
+          "lineNumber": 307
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "strictEqual",
+          "lineNumber": 312
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "findSpan",
+          "lineNumber": 312
+        },
+        {
+          "caller": "createTelemetryAdapterConformance",
+          "callee": "fixture.getSpans",
+          "lineNumber": 312
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/telemetry/src/testing/types.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 15,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

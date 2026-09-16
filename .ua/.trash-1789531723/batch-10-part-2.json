@@ -1,0 +1,1364 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/agent/src/harness/session/commit.ts",
+      "type": "file",
+      "name": "commit.ts",
+      "filePath": "packages/agent/src/harness/session/commit.ts",
+      "summary": "把 Write 物化为带 seq 的 CommittedWrite，并校验 commit 不变量。",
+      "tags": [
+        "serialization",
+        "validation",
+        "data-model"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/agent/src/harness/session/context.ts",
+      "type": "file",
+      "name": "context.ts",
+      "filePath": "packages/agent/src/harness/session/context.ts",
+      "summary": "把 session entry 投影为 LLM context messages，包含 compaction 与 branch summary。",
+      "tags": [
+        "context",
+        "serialization",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/agent/src/harness/session/fork-policy.ts",
+      "type": "file",
+      "name": "fork-policy.ts",
+      "filePath": "packages/agent/src/harness/session/fork-policy.ts",
+      "summary": "决定 fork 时复制哪些 entry，并投影目标 lane 的 current-state 写入。",
+      "tags": [
+        "fork",
+        "policy",
+        "validation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/agent/src/harness/session/fork.ts",
+      "type": "file",
+      "name": "fork.ts",
+      "filePath": "packages/agent/src/harness/session/fork.ts",
+      "summary": "从源 snapshot 选择 fork 内容，并校验源分支完整性与 lane 配置。",
+      "tags": [
+        "fork",
+        "validation",
+        "service"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/agent/src/harness/session/in-memory-storage-state.ts",
+      "type": "file",
+      "name": "in-memory-storage-state.ts",
+      "filePath": "packages/agent/src/harness/session/in-memory-storage-state.ts",
+      "summary": "内存中的 entry/value/list/usage 存储状态机，支持 prepare/validate/apply commit 与 fork。",
+      "tags": [
+        "data-model",
+        "storage",
+        "in-memory"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/agent/src/harness/session/jsonl/codec.ts",
+      "type": "file",
+      "name": "codec.ts",
+      "filePath": "packages/agent/src/harness/session/jsonl/codec.ts",
+      "summary": "解析 JSONL session header，区分 format-4 存储头与 legacy v3 session 头。",
+      "tags": [
+        "serialization",
+        "validation",
+        "codec"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/agent/src/harness/session/jsonl/fork.ts",
+      "type": "file",
+      "name": "fork.ts",
+      "filePath": "packages/agent/src/harness/session/jsonl/fork.ts",
+      "summary": "流式扫描 JSONL 事务、按 fork 策略筛选内容，并原子写出目标 session 文件。",
+      "tags": [
+        "fork",
+        "jsonl",
+        "service"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/agent/src/harness/session/jsonl/io.ts",
+      "type": "file",
+      "name": "io.ts",
+      "filePath": "packages/agent/src/harness/session/jsonl/io.ts",
+      "summary": "JSONL 事务编解码与原子文件发布，供存储与 fork 路径共用。",
+      "tags": [
+        "io",
+        "jsonl",
+        "serialization"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/commit.ts:insertEntry",
+      "type": "function",
+      "name": "insertEntry",
+      "filePath": "packages/agent/src/harness/session/commit.ts",
+      "lineRange": [
+        53,
+        55
+      ],
+      "summary": "把 NewEntry 包装成 entry Write。",
+      "tags": [
+        "factory",
+        "commit",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/commit.ts:insertUsage",
+      "type": "function",
+      "name": "insertUsage",
+      "filePath": "packages/agent/src/harness/session/commit.ts",
+      "lineRange": [
+        57,
+        59
+      ],
+      "summary": "把 usage 行包装成 usage Write。",
+      "tags": [
+        "factory",
+        "commit",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/commit.ts:commitWrite",
+      "type": "function",
+      "name": "commitWrite",
+      "filePath": "packages/agent/src/harness/session/commit.ts",
+      "lineRange": [
+        61,
+        76
+      ],
+      "summary": "为一条 Write 分配 seq/timestamp 并转为 CommittedWrite。",
+      "tags": [
+        "serialization",
+        "commit",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/commit.ts:materializeCommittedEntry",
+      "type": "function",
+      "name": "materializeCommittedEntry",
+      "filePath": "packages/agent/src/harness/session/commit.ts",
+      "lineRange": [
+        78,
+        80
+      ],
+      "summary": "给 NewEntry 填上 seq 与 timestamp 得到 Entry。",
+      "tags": [
+        "serialization",
+        "commit",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/commit.ts:prepareStorageCommit",
+      "type": "function",
+      "name": "prepareStorageCommit",
+      "filePath": "packages/agent/src/harness/session/commit.ts",
+      "lineRange": [
+        82,
+        88
+      ],
+      "summary": "批量物化 writes 并生成不含 stats 的 CommitResult。",
+      "tags": [
+        "commit",
+        "factory",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/commit.ts:validateCommittedWrites",
+      "type": "function",
+      "name": "validateCommittedWrites",
+      "filePath": "packages/agent/src/harness/session/commit.ts",
+      "lineRange": [
+        90,
+        116
+      ],
+      "summary": "校验已物化 writes 的 id/parent 不变量。",
+      "tags": [
+        "validation",
+        "commit",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/context.ts:buildContextEntries",
+      "type": "function",
+      "name": "buildContextEntries",
+      "filePath": "packages/agent/src/harness/session/context.ts",
+      "lineRange": [
+        10,
+        22
+      ],
+      "summary": "按投影规则把 entry 列表建成 context 条目。",
+      "tags": [
+        "context",
+        "serialization",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/context.ts:sessionEntryToContextMessages",
+      "type": "function",
+      "name": "sessionEntryToContextMessages",
+      "filePath": "packages/agent/src/harness/session/context.ts",
+      "lineRange": [
+        31,
+        45
+      ],
+      "summary": "把单条 session entry 转成 LLM context messages。",
+      "tags": [
+        "context",
+        "serialization",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/context.ts:buildSessionContext",
+      "type": "function",
+      "name": "buildSessionContext",
+      "filePath": "packages/agent/src/harness/session/context.ts",
+      "lineRange": [
+        47,
+        64
+      ],
+      "summary": "读取并组装供模型使用的完整 session context。",
+      "tags": [
+        "context",
+        "session",
+        "harness"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/fork-policy.ts:selectBranchFork",
+      "type": "function",
+      "name": "selectBranchFork",
+      "filePath": "packages/agent/src/harness/session/fork-policy.ts",
+      "lineRange": [
+        8,
+        37
+      ],
+      "summary": "按 ForkOptions 选出要复制到目标的 entry 集合。",
+      "tags": [
+        "fork",
+        "policy",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/fork-policy.ts:projectForkCurrentStateWrite",
+      "type": "function",
+      "name": "projectForkCurrentStateWrite",
+      "filePath": "packages/agent/src/harness/session/fork-policy.ts",
+      "lineRange": [
+        40,
+        67
+      ],
+      "summary": "为 fork 目标投影 lane current-state 的 value writes。",
+      "tags": [
+        "fork",
+        "serialization",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/fork.ts:createForkSnapshot",
+      "type": "function",
+      "name": "createForkSnapshot",
+      "filePath": "packages/agent/src/harness/session/fork.ts",
+      "lineRange": [
+        29,
+        63
+      ],
+      "summary": "从源存储读取 fork 所需的 entry 与 scalar values。",
+      "tags": [
+        "fork",
+        "snapshot",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/fork.ts:selectForkContents",
+      "type": "function",
+      "name": "selectForkContents",
+      "filePath": "packages/agent/src/harness/session/fork.ts",
+      "lineRange": [
+        65,
+        83
+      ],
+      "summary": "对 snapshot 应用 fork 策略，得到目标内容。",
+      "tags": [
+        "fork",
+        "policy",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/fork.ts:validateForkSourceSnapshot",
+      "type": "function",
+      "name": "validateForkSourceSnapshot",
+      "filePath": "packages/agent/src/harness/session/fork.ts",
+      "lineRange": [
+        85,
+        119
+      ],
+      "summary": "校验源 snapshot 的分支完整性与必需 lane 值。",
+      "tags": [
+        "fork",
+        "validation",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/in-memory-storage-state.ts:compareKeys",
+      "type": "function",
+      "name": "compareKeys",
+      "filePath": "packages/agent/src/harness/session/in-memory-storage-state.ts",
+      "lineRange": [
+        61,
+        70
+      ],
+      "summary": "按 namespace/key 比较存储键，供有序扫描使用。",
+      "tags": [
+        "utility",
+        "storage",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/agent/src/harness/session/in-memory-storage-state.ts:InMemoryStorageState",
+      "type": "class",
+      "name": "InMemoryStorageState",
+      "filePath": "packages/agent/src/harness/session/in-memory-storage-state.ts",
+      "lineRange": [
+        78,
+        349
+      ],
+      "summary": "内存状态机：apply commit、扫描 entry/value/list/usage，并执行 fork。",
+      "tags": [
+        "storage",
+        "in-memory",
+        "state-machine"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/jsonl/codec.ts:isLegacyV3SessionHeader",
+      "type": "function",
+      "name": "isLegacyV3SessionHeader",
+      "filePath": "packages/agent/src/harness/session/jsonl/codec.ts",
+      "lineRange": [
+        21,
+        32
+      ],
+      "summary": "判断记录是否为 legacy v3 session header。",
+      "tags": [
+        "validation",
+        "codec",
+        "jsonl"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/jsonl/codec.ts:isJsonlStorageHeader",
+      "type": "function",
+      "name": "isJsonlStorageHeader",
+      "filePath": "packages/agent/src/harness/session/jsonl/codec.ts",
+      "lineRange": [
+        34,
+        47
+      ],
+      "summary": "判断记录是否为 format-4 JSONL 存储头。",
+      "tags": [
+        "validation",
+        "codec",
+        "jsonl"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/jsonl/codec.ts:parseJsonlSessionHeader",
+      "type": "function",
+      "name": "parseJsonlSessionHeader",
+      "filePath": "packages/agent/src/harness/session/jsonl/codec.ts",
+      "lineRange": [
+        53,
+        63
+      ],
+      "summary": "解析 JSONL 文件第一行 header，失败则返回 Result 错误。",
+      "tags": [
+        "codec",
+        "serialization",
+        "jsonl"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/jsonl/fork.ts:readJsonlForkHeader",
+      "type": "function",
+      "name": "readJsonlForkHeader",
+      "filePath": "packages/agent/src/harness/session/jsonl/fork.ts",
+      "lineRange": [
+        25,
+        42
+      ],
+      "summary": "读取源 JSONL 的 header 作为 fork 输入元数据。",
+      "tags": [
+        "fork",
+        "jsonl",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/jsonl/fork.ts:reachesForkBoundary",
+      "type": "function",
+      "name": "reachesForkBoundary",
+      "filePath": "packages/agent/src/harness/session/jsonl/fork.ts",
+      "lineRange": [
+        44,
+        53
+      ],
+      "summary": "判断一条 entry 是否到达 fork 边界。",
+      "tags": [
+        "fork",
+        "policy",
+        "jsonl"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/agent/src/harness/session/jsonl/fork.ts:JsonlForkIndex",
+      "type": "class",
+      "name": "JsonlForkIndex",
+      "filePath": "packages/agent/src/harness/session/jsonl/fork.ts",
+      "lineRange": [
+        71,
+        158
+      ],
+      "summary": "在流式扫描中索引源事务，判断 entry/value 是否应进入目标。",
+      "tags": [
+        "fork",
+        "index",
+        "jsonl"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/jsonl/fork.ts:selectJsonlFork",
+      "type": "function",
+      "name": "selectJsonlFork",
+      "filePath": "packages/agent/src/harness/session/jsonl/fork.ts",
+      "lineRange": [
+        170,
+        181
+      ],
+      "summary": "用 fork 策略从索引中选出要复制的内容。",
+      "tags": [
+        "fork",
+        "policy",
+        "jsonl"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/jsonl/fork.ts:projectJsonlForkWrite",
+      "type": "function",
+      "name": "projectJsonlForkWrite",
+      "filePath": "packages/agent/src/harness/session/jsonl/fork.ts",
+      "lineRange": [
+        185,
+        205
+      ],
+      "summary": "把选中的源 write 投影为 fork 目标 write。",
+      "tags": [
+        "fork",
+        "serialization",
+        "jsonl"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/jsonl/fork.ts:indexForkInput",
+      "type": "function",
+      "name": "indexForkInput",
+      "filePath": "packages/agent/src/harness/session/jsonl/fork.ts",
+      "lineRange": [
+        227,
+        257
+      ],
+      "summary": "扫描源 JSONL 事务并填充 JsonlForkIndex。",
+      "tags": [
+        "fork",
+        "jsonl",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/jsonl/fork.ts:runJsonlFork",
+      "type": "function",
+      "name": "runJsonlFork",
+      "filePath": "packages/agent/src/harness/session/jsonl/fork.ts",
+      "lineRange": [
+        295,
+        328
+      ],
+      "summary": "执行完整 JSONL fork：索引、筛选并原子发布目标文件。",
+      "tags": [
+        "fork",
+        "entry-point",
+        "jsonl"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/jsonl/io.ts:fileValue",
+      "type": "function",
+      "name": "fileValue",
+      "filePath": "packages/agent/src/harness/session/jsonl/io.ts",
+      "lineRange": [
+        15,
+        18
+      ],
+      "summary": "构造指向 JSONL 路径的 FileValue 描述。",
+      "tags": [
+        "io",
+        "factory",
+        "jsonl"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/jsonl/io.ts:readJsonlHeader",
+      "type": "function",
+      "name": "readJsonlHeader",
+      "filePath": "packages/agent/src/harness/session/jsonl/io.ts",
+      "lineRange": [
+        20,
+        34
+      ],
+      "summary": "读取并解析 JSONL 文件头。",
+      "tags": [
+        "io",
+        "codec",
+        "jsonl"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/jsonl/io.ts:parseCommittedWrite",
+      "type": "function",
+      "name": "parseCommittedWrite",
+      "filePath": "packages/agent/src/harness/session/jsonl/io.ts",
+      "lineRange": [
+        44,
+        64
+      ],
+      "summary": "把 JSON 记录解析为 CommittedWrite。",
+      "tags": [
+        "io",
+        "serialization",
+        "jsonl"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/jsonl/io.ts:parseJsonlTransaction",
+      "type": "function",
+      "name": "parseJsonlTransaction",
+      "filePath": "packages/agent/src/harness/session/jsonl/io.ts",
+      "lineRange": [
+        66,
+        74
+      ],
+      "summary": "解析一行 JSONL 事务记录。",
+      "tags": [
+        "io",
+        "serialization",
+        "jsonl"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/jsonl/io.ts:serializeJsonlTransaction",
+      "type": "function",
+      "name": "serializeJsonlTransaction",
+      "filePath": "packages/agent/src/harness/session/jsonl/io.ts",
+      "lineRange": [
+        76,
+        78
+      ],
+      "summary": "把事务序列化为 JSONL 行。",
+      "tags": [
+        "io",
+        "serialization",
+        "jsonl"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/jsonl/io.ts:publishFileAtomically",
+      "type": "function",
+      "name": "publishFileAtomically",
+      "filePath": "packages/agent/src/harness/session/jsonl/io.ts",
+      "lineRange": [
+        81,
+        104
+      ],
+      "summary": "先写临时文件再 rename，原子发布内容。",
+      "tags": [
+        "io",
+        "atomicity",
+        "jsonl"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/jsonl/io.ts:publishJsonl",
+      "type": "function",
+      "name": "publishJsonl",
+      "filePath": "packages/agent/src/harness/session/jsonl/io.ts",
+      "lineRange": [
+        107,
+        118
+      ],
+      "summary": "原子写出 header 加事务序列的 JSONL 文件。",
+      "tags": [
+        "io",
+        "jsonl",
+        "session"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/agent/src/harness/session/commit.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/context.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/context.ts",
+      "target": "file:packages/agent/src/harness/messages.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/context.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/context.ts",
+      "target": "file:packages/agent/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/fork-policy.ts",
+      "target": "file:packages/agent/src/harness/session/commit.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/fork-policy.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/fork.ts",
+      "target": "file:packages/agent/src/harness/session/fork-policy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/fork.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/fork.ts",
+      "target": "file:packages/agent/src/harness/session/values.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/in-memory-storage-state.ts",
+      "target": "file:packages/agent/src/harness/session/commit.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/in-memory-storage-state.ts",
+      "target": "file:packages/agent/src/harness/session/fork-policy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/in-memory-storage-state.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/in-memory-storage-state.ts",
+      "target": "file:packages/agent/src/harness/session/values.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/in-memory-storage-state.ts",
+      "target": "file:packages/agent/src/harness/utils/usage.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/codec.ts",
+      "target": "file:packages/agent/src/harness/session/jsonl/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/codec.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/fork.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/fork.ts",
+      "target": "file:packages/agent/src/harness/session/commit.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/fork.ts",
+      "target": "file:packages/agent/src/harness/session/fork-policy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/fork.ts",
+      "target": "file:packages/agent/src/harness/session/jsonl/io.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/fork.ts",
+      "target": "file:packages/agent/src/harness/session/jsonl/legacy-v3.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/fork.ts",
+      "target": "file:packages/agent/src/harness/session/jsonl/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/fork.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/fork.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/io.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/io.ts",
+      "target": "file:packages/agent/src/harness/session/commit.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/io.ts",
+      "target": "file:packages/agent/src/harness/session/jsonl/codec.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/io.ts",
+      "target": "file:packages/agent/src/harness/session/jsonl/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/io.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/commit.ts",
+      "target": "function:packages/agent/src/harness/session/commit.ts:insertEntry",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/commit.ts",
+      "target": "function:packages/agent/src/harness/session/commit.ts:insertEntry",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/commit.ts",
+      "target": "function:packages/agent/src/harness/session/commit.ts:insertUsage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/commit.ts",
+      "target": "function:packages/agent/src/harness/session/commit.ts:insertUsage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/commit.ts",
+      "target": "function:packages/agent/src/harness/session/commit.ts:commitWrite",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/commit.ts",
+      "target": "function:packages/agent/src/harness/session/commit.ts:commitWrite",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/commit.ts",
+      "target": "function:packages/agent/src/harness/session/commit.ts:materializeCommittedEntry",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/commit.ts",
+      "target": "function:packages/agent/src/harness/session/commit.ts:materializeCommittedEntry",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/commit.ts",
+      "target": "function:packages/agent/src/harness/session/commit.ts:prepareStorageCommit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/commit.ts",
+      "target": "function:packages/agent/src/harness/session/commit.ts:prepareStorageCommit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/commit.ts",
+      "target": "function:packages/agent/src/harness/session/commit.ts:validateCommittedWrites",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/commit.ts",
+      "target": "function:packages/agent/src/harness/session/commit.ts:validateCommittedWrites",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/context.ts",
+      "target": "function:packages/agent/src/harness/session/context.ts:buildContextEntries",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/context.ts",
+      "target": "function:packages/agent/src/harness/session/context.ts:buildContextEntries",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/context.ts",
+      "target": "function:packages/agent/src/harness/session/context.ts:sessionEntryToContextMessages",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/context.ts",
+      "target": "function:packages/agent/src/harness/session/context.ts:sessionEntryToContextMessages",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/context.ts",
+      "target": "function:packages/agent/src/harness/session/context.ts:buildSessionContext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/context.ts",
+      "target": "function:packages/agent/src/harness/session/context.ts:buildSessionContext",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/fork-policy.ts",
+      "target": "function:packages/agent/src/harness/session/fork-policy.ts:selectBranchFork",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/fork-policy.ts",
+      "target": "function:packages/agent/src/harness/session/fork-policy.ts:selectBranchFork",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/fork-policy.ts",
+      "target": "function:packages/agent/src/harness/session/fork-policy.ts:projectForkCurrentStateWrite",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/fork-policy.ts",
+      "target": "function:packages/agent/src/harness/session/fork-policy.ts:projectForkCurrentStateWrite",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/fork.ts",
+      "target": "function:packages/agent/src/harness/session/fork.ts:createForkSnapshot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/fork.ts",
+      "target": "function:packages/agent/src/harness/session/fork.ts:createForkSnapshot",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/fork.ts",
+      "target": "function:packages/agent/src/harness/session/fork.ts:selectForkContents",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/fork.ts",
+      "target": "function:packages/agent/src/harness/session/fork.ts:validateForkSourceSnapshot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/in-memory-storage-state.ts",
+      "target": "function:packages/agent/src/harness/session/in-memory-storage-state.ts:compareKeys",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/in-memory-storage-state.ts",
+      "target": "class:packages/agent/src/harness/session/in-memory-storage-state.ts:InMemoryStorageState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/in-memory-storage-state.ts",
+      "target": "class:packages/agent/src/harness/session/in-memory-storage-state.ts:InMemoryStorageState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/codec.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/codec.ts:isLegacyV3SessionHeader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/codec.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/codec.ts:isLegacyV3SessionHeader",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/codec.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/codec.ts:isJsonlStorageHeader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/codec.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/codec.ts:isJsonlStorageHeader",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/codec.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/codec.ts:parseJsonlSessionHeader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/codec.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/codec.ts:parseJsonlSessionHeader",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/fork.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/fork.ts:readJsonlForkHeader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/fork.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/fork.ts:reachesForkBoundary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/fork.ts",
+      "target": "class:packages/agent/src/harness/session/jsonl/fork.ts:JsonlForkIndex",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/fork.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/fork.ts:selectJsonlFork",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/fork.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/fork.ts:projectJsonlForkWrite",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/fork.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/fork.ts:indexForkInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/fork.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/fork.ts:runJsonlFork",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/fork.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/fork.ts:runJsonlFork",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/io.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/io.ts:fileValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/io.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/io.ts:fileValue",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/io.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/io.ts:readJsonlHeader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/io.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/io.ts:readJsonlHeader",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/io.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/io.ts:parseCommittedWrite",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/io.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/io.ts:parseJsonlTransaction",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/io.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/io.ts:parseJsonlTransaction",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/io.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/io.ts:serializeJsonlTransaction",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/io.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/io.ts:serializeJsonlTransaction",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/io.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/io.ts:publishFileAtomically",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/io.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/io.ts:publishFileAtomically",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/io.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/io.ts:publishJsonl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/jsonl/io.ts",
+      "target": "function:packages/agent/src/harness/session/jsonl/io.ts:publishJsonl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/session/context.ts:sessionEntryToContextMessages",
+      "target": "function:packages/agent/src/harness/messages.ts:createBranchSummaryMessage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/session/context.ts:sessionEntryToContextMessages",
+      "target": "function:packages/agent/src/harness/messages.ts:createCompactionSummaryMessage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/session/context.ts:buildSessionContext",
+      "target": "function:packages/agent/src/harness/session/context.ts:buildContextEntries",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/session/context.ts:buildSessionContext",
+      "target": "function:packages/agent/src/harness/session/context.ts:sessionEntryToContextMessages",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/agent/src/harness/session/in-memory-storage-state.ts:InMemoryStorageState",
+      "target": "function:packages/agent/src/harness/utils/usage.ts:addUsage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/agent/src/harness/session/in-memory-storage-state.ts:InMemoryStorageState",
+      "target": "function:packages/agent/src/harness/utils/usage.ts:emptyUsage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/session/jsonl/codec.ts:parseJsonlSessionHeader",
+      "target": "function:packages/agent/src/harness/types.ts:ok",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/session/jsonl/codec.ts:parseJsonlSessionHeader",
+      "target": "function:packages/agent/src/harness/types.ts:err",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/session/jsonl/io.ts:publishJsonl",
+      "target": "function:packages/agent/src/harness/session/jsonl/io.ts:publishFileAtomically",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/session/commit.ts:prepareStorageCommit",
+      "target": "function:packages/agent/src/harness/session/commit.ts:commitWrite",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/commit.ts",
+      "target": "file:packages/agent/src/harness/session/testing/conformance/session-repo.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/commit.ts",
+      "target": "file:packages/agent/src/harness/session/testing/conformance/storage.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/commit.ts",
+      "target": "file:packages/agent/src/harness/session/testing/benchmark/storage.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

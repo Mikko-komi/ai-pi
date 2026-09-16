@@ -1,0 +1,401 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/core/diagnostics.ts",
+      "type": "file",
+      "name": "diagnostics.ts",
+      "filePath": "packages/coding-agent/src/core/diagnostics.ts",
+      "summary": "定义扩展/skill/prompt/theme 资源冲突与诊断消息的类型。",
+      "tags": [
+        "type-definition",
+        "diagnostics",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/event-bus.ts",
+      "type": "file",
+      "name": "event-bus.ts",
+      "filePath": "packages/coding-agent/src/core/event-bus.ts",
+      "summary": "基于 EventEmitter 的频道式事件总线，处理器错误隔离，并提供 clear。",
+      "tags": [
+        "utility",
+        "event-handler",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/exec.ts",
+      "type": "file",
+      "name": "exec.ts",
+      "filePath": "packages/coding-agent/src/core/exec.ts",
+      "summary": "为扩展与自定义工具提供带 timeout/AbortSignal 的 spawn 封装，返回 stdout/stderr/code。",
+      "tags": [
+        "utility",
+        "shell",
+        "process"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "先 SIGTERM，5 秒后 SIGKILL；用 waitForChildProcess 避免继承 stdio 挂起。"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/export-html/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/coding-agent/src/core/export-html/index.ts",
+      "summary": "将会话 JSONL 导出为带主题变量的 HTML，可预渲染自定义工具输出。",
+      "tags": [
+        "serialization",
+        "export",
+        "html"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/event-bus.ts:createEventBus",
+      "type": "function",
+      "name": "createEventBus",
+      "filePath": "packages/coding-agent/src/core/event-bus.ts",
+      "lineRange": [
+        12,
+        33
+      ],
+      "summary": "创建带错误隔离的 emit/on/clear 事件总线。",
+      "tags": [
+        "factory",
+        "event-handler",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/exec.ts:execCommand",
+      "type": "function",
+      "name": "execCommand",
+      "filePath": "packages/coding-agent/src/core/exec.ts",
+      "lineRange": [
+        34,
+        107
+      ],
+      "summary": "spawn 命令并收集输出，支持 abort 与超时杀进程。",
+      "tags": [
+        "shell",
+        "process",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/index.ts:parseColor",
+      "type": "function",
+      "name": "parseColor",
+      "filePath": "packages/coding-agent/src/core/export-html/index.ts",
+      "lineRange": [
+        43,
+        61
+      ],
+      "summary": "解析 #RRGGBB 或 rgb() 为 RGB 分量。",
+      "tags": [
+        "utility",
+        "color",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/index.ts:deriveExportColors",
+      "type": "function",
+      "name": "deriveExportColors",
+      "filePath": "packages/coding-agent/src/core/export-html/index.ts",
+      "lineRange": [
+        81,
+        106
+      ],
+      "summary": "由主题基色推导导出 HTML 的对比/高亮色。",
+      "tags": [
+        "theming",
+        "export",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/index.ts:generateThemeVars",
+      "type": "function",
+      "name": "generateThemeVars",
+      "filePath": "packages/coding-agent/src/core/export-html/index.ts",
+      "lineRange": [
+        111,
+        128
+      ],
+      "summary": "生成导出页 CSS 变量，必要时从基色派生。",
+      "tags": [
+        "theming",
+        "export",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/index.ts:generateHtml",
+      "type": "function",
+      "name": "generateHtml",
+      "filePath": "packages/coding-agent/src/core/export-html/index.ts",
+      "lineRange": [
+        143,
+        175
+      ],
+      "summary": "读取导出模板并注入会话 JSON 与主题变量。",
+      "tags": [
+        "export",
+        "html",
+        "serialization"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/index.ts:preRenderCustomTools",
+      "type": "function",
+      "name": "preRenderCustomTools",
+      "filePath": "packages/coding-agent/src/core/export-html/index.ts",
+      "lineRange": [
+        183,
+        230
+      ],
+      "summary": "用 ToolHtmlRenderer 预渲染扩展工具调用/结果 HTML。",
+      "tags": [
+        "export",
+        "extensions",
+        "html"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/index.ts:exportSessionToHtml",
+      "type": "function",
+      "name": "exportSessionToHtml",
+      "filePath": "packages/coding-agent/src/core/export-html/index.ts",
+      "lineRange": [
+        236,
+        282
+      ],
+      "summary": "从 SessionManager 导出当前会话 HTML，可选预渲染自定义工具。",
+      "tags": [
+        "export",
+        "html",
+        "session"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/index.ts:exportFromFile",
+      "type": "function",
+      "name": "exportFromFile",
+      "filePath": "packages/coding-agent/src/core/export-html/index.ts",
+      "lineRange": [
+        288,
+        316
+      ],
+      "summary": "打开任意会话 JSONL 并导出 HTML（无 AgentState）。",
+      "tags": [
+        "export",
+        "html",
+        "cli"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/core/exec.ts",
+      "target": "file:packages/coding-agent/src/utils/child-process.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/index.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/index.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/index.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/index.ts",
+      "target": "file:packages/coding-agent/src/core/session-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/index.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/index.ts",
+      "target": "file:packages/coding-agent/src/utils/paths.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/event-bus.ts",
+      "target": "function:packages/coding-agent/src/core/event-bus.ts:createEventBus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/event-bus.ts",
+      "target": "function:packages/coding-agent/src/core/event-bus.ts:createEventBus",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/exec.ts",
+      "target": "function:packages/coding-agent/src/core/exec.ts:execCommand",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/exec.ts",
+      "target": "function:packages/coding-agent/src/core/exec.ts:execCommand",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/index.ts",
+      "target": "function:packages/coding-agent/src/core/export-html/index.ts:parseColor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/index.ts",
+      "target": "function:packages/coding-agent/src/core/export-html/index.ts:deriveExportColors",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/index.ts",
+      "target": "function:packages/coding-agent/src/core/export-html/index.ts:generateThemeVars",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/index.ts",
+      "target": "function:packages/coding-agent/src/core/export-html/index.ts:generateHtml",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/index.ts",
+      "target": "function:packages/coding-agent/src/core/export-html/index.ts:preRenderCustomTools",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/index.ts",
+      "target": "function:packages/coding-agent/src/core/export-html/index.ts:exportSessionToHtml",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/index.ts",
+      "target": "function:packages/coding-agent/src/core/export-html/index.ts:exportSessionToHtml",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/index.ts",
+      "target": "function:packages/coding-agent/src/core/export-html/index.ts:exportFromFile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/index.ts",
+      "target": "function:packages/coding-agent/src/core/export-html/index.ts:exportFromFile",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/exec.ts:execCommand",
+      "target": "function:packages/coding-agent/src/utils/child-process.ts:waitForChildProcess",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/export-html/index.ts:generateHtml",
+      "target": "function:packages/coding-agent/src/config.ts:getExportTemplateDir",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/export-html/index.ts:generateThemeVars",
+      "target": "function:packages/coding-agent/src/modes/interactive/theme/theme.ts:getResolvedThemeColors",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/export-html/index.ts:generateThemeVars",
+      "target": "function:packages/coding-agent/src/modes/interactive/theme/theme.ts:getThemeExportColors",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/export-html/index.ts:exportFromFile",
+      "target": "class:packages/coding-agent/src/core/session-manager.ts:SessionManager",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/export-html/index.ts:exportSessionToHtml",
+      "target": "class:packages/coding-agent/src/core/session-manager.ts:SessionManager",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/export-html/index.ts:exportFromFile",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:resolvePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

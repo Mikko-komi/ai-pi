@@ -1,0 +1,860 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/experimental/client.ts",
+      "type": "file",
+      "name": "client.ts",
+      "filePath": "packages/coding-agent/src/experimental/client.ts",
+      "summary": "无 TUI 的 experimental 客户端：发现 session、attach，或对选中 session 发送 prompt 并收集 assistant 文本。",
+      "tags": [
+        "client",
+        "cli",
+        "session",
+        "experimental"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/client.ts:runClient",
+      "type": "function",
+      "name": "runClient",
+      "filePath": "packages/coding-agent/src/experimental/client.ts",
+      "lineRange": [
+        25,
+        117
+      ],
+      "summary": "打开 runtime、按 sessionId/continue/resume/prompt 分流：列表、attach 或 prompt 并订阅 Transcript。",
+      "tags": [
+        "client",
+        "session",
+        "orchestration"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/commands.ts",
+      "type": "file",
+      "name": "commands.ts",
+      "filePath": "packages/coding-agent/src/experimental/commands.ts",
+      "summary": "experimental CLI 分发：feature flag 开启后把 server/client 转到前台 server 或 TUI/无头 client。",
+      "tags": [
+        "cli",
+        "entry-point",
+        "experimental",
+        "dispatch"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "文件头注明发布入口不得 import 本模块。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/commands.ts:runServerCommand",
+      "type": "function",
+      "name": "runServerCommand",
+      "filePath": "packages/coding-agent/src/experimental/commands.ts",
+      "lineRange": [
+        11,
+        65
+      ],
+      "summary": "启动前台 server，打印 socket 与 Radius 状态，直到 SIGINT/SIGTERM 或 runtime.closed。",
+      "tags": [
+        "server",
+        "cli",
+        "lifecycle"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/commands.ts:runClientCommand",
+      "type": "function",
+      "name": "runClientCommand",
+      "filePath": "packages/coding-agent/src/experimental/commands.ts",
+      "lineRange": [
+        67,
+        90
+      ],
+      "summary": "TTY 无 prompt 时走 TUI，否则 runClient 并流式打印 text_delta 或 session 列表。",
+      "tags": [
+        "client",
+        "cli",
+        "tui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/commands.ts:runExperimentalCommand",
+      "type": "function",
+      "name": "runExperimentalCommand",
+      "filePath": "packages/coding-agent/src/experimental/commands.ts",
+      "lineRange": [
+        93,
+        106
+      ],
+      "summary": "检查实验开关与 argv[0]，执行 cli.execute，把错误打到 stderr。",
+      "tags": [
+        "cli",
+        "entry-point",
+        "dispatch"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/coordinator-entry.ts",
+      "type": "file",
+      "name": "coordinator-entry.ts",
+      "filePath": "packages/coding-agent/src/experimental/coordinator-entry.ts",
+      "summary": "coordinator 内部进程入口：校验 INTERNAL_PROCESS_ENV 角色后调用 runCoordinatorProcess。",
+      "tags": [
+        "entry-point",
+        "coordinator",
+        "process",
+        "experimental"
+      ],
+      "complexity": "simple",
+      "languageNotes": "shebang 为 node；必须由 spawnInternalProcess 带 coordinator 角色拉起。"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "type": "file",
+      "name": "coordinator.ts",
+      "filePath": "packages/coding-agent/src/experimental/coordinator.ts",
+      "summary": "实验 coordinator：Unix 控制/公共 socket 上的不透明消息路由器，登记 server 与 peer 并在空闲后退出。",
+      "tags": [
+        "coordinator",
+        "router",
+        "unix-socket",
+        "process"
+      ],
+      "complexity": "complex",
+      "languageNotes": "刻意不解析 Pi/session/worker 载荷，只做 JSON-line 转发。"
+    },
+    {
+      "id": "class:packages/coding-agent/src/experimental/coordinator.ts:CoordinatorConnection",
+      "type": "class",
+      "name": "CoordinatorConnection",
+      "filePath": "packages/coding-agent/src/experimental/coordinator.ts",
+      "lineRange": [
+        43,
+        181
+      ],
+      "summary": "server 侧控制连接：注册、收发 routed message、跟踪 peer，并在被替换时 resolve replaced。",
+      "tags": [
+        "coordinator",
+        "connection",
+        "client"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/coordinator.ts:ensureCoordinator",
+      "type": "function",
+      "name": "ensureCoordinator",
+      "filePath": "packages/coding-agent/src/experimental/coordinator.ts",
+      "lineRange": [
+        187,
+        199
+      ],
+      "summary": "尝试连接已有 coordinator；失败则 spawn 子进程并轮询控制 socket 直至就绪。",
+      "tags": [
+        "coordinator",
+        "lifecycle",
+        "process-spawn"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/coordinator.ts:connectSocket",
+      "type": "function",
+      "name": "connectSocket",
+      "filePath": "packages/coding-agent/src/experimental/coordinator.ts",
+      "lineRange": [
+        201,
+        215
+      ],
+      "summary": "对 Unix path 做一次性 connect，成功 resolve Socket，失败 reject。",
+      "tags": [
+        "unix-socket",
+        "utility",
+        "connection"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/coordinator.ts:attachJsonLineReader",
+      "type": "function",
+      "name": "attachJsonLineReader",
+      "filePath": "packages/coding-agent/src/experimental/coordinator.ts",
+      "lineRange": [
+        227,
+        249
+      ],
+      "summary": "按行缓冲 UTF-8 JSON，超 MAX_CONTROL_LINE_BYTES 或非法 JSON 则 destroy。",
+      "tags": [
+        "protocol",
+        "parser",
+        "unix-socket"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/coordinator.ts:runCoordinatorProcess",
+      "type": "function",
+      "name": "runCoordinatorProcess",
+      "filePath": "packages/coding-agent/src/experimental/coordinator.ts",
+      "lineRange": [
+        301,
+        313
+      ],
+      "summary": "校验 argv 中的 public/control path，注册信号，然后进入 main 监听循环。",
+      "tags": [
+        "entry-point",
+        "coordinator",
+        "process"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/coordinator.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "packages/coding-agent/src/experimental/coordinator.ts",
+      "lineRange": [
+        315,
+        328
+      ],
+      "summary": "清理陈旧 socket、listen 控制/公共端点、收紧权限，并安排空闲关闭。",
+      "tags": [
+        "coordinator",
+        "lifecycle",
+        "unix-socket"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/coordinator.ts:acceptControlConnection",
+      "type": "function",
+      "name": "acceptControlConnection",
+      "filePath": "packages/coding-agent/src/experimental/coordinator.ts",
+      "lineRange": [
+        330,
+        370
+      ],
+      "summary": "接受控制连接：解析 register_server / register_peer / routed message。",
+      "tags": [
+        "coordinator",
+        "connection",
+        "router"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/coordinator.ts:registerServer",
+      "type": "function",
+      "name": "registerServer",
+      "filePath": "packages/coding-agent/src/experimental/coordinator.ts",
+      "lineRange": [
+        372,
+        397
+      ],
+      "summary": "登记（或替换）当前 server peer，并向其回写已连接 peer 列表。",
+      "tags": [
+        "coordinator",
+        "registry",
+        "server"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/coordinator.ts:registerPeer",
+      "type": "function",
+      "name": "registerPeer",
+      "filePath": "packages/coding-agent/src/experimental/coordinator.ts",
+      "lineRange": [
+        399,
+        418
+      ],
+      "summary": "登记 routed peer，并向 server 广播 peer_connected。",
+      "tags": [
+        "coordinator",
+        "registry",
+        "peer"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/coordinator.ts:handleRoutedMessage",
+      "type": "function",
+      "name": "handleRoutedMessage",
+      "filePath": "packages/coding-agent/src/experimental/coordinator.ts",
+      "lineRange": [
+        424,
+        442
+      ],
+      "summary": "按 to 字段把 payload 转给目标 peer 或当前 server。",
+      "tags": [
+        "coordinator",
+        "router",
+        "message"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/coordinator.ts:acceptPublicConnection",
+      "type": "function",
+      "name": "acceptPublicConnection",
+      "filePath": "packages/coding-agent/src/experimental/coordinator.ts",
+      "lineRange": [
+        444,
+        473
+      ],
+      "summary": "把公共 socket 与当前 server endpoint 对接成双向字节管道。",
+      "tags": [
+        "coordinator",
+        "proxy",
+        "unix-socket"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/coordinator.ts:scheduleEmptyShutdown",
+      "type": "function",
+      "name": "scheduleEmptyShutdown",
+      "filePath": "packages/coding-agent/src/experimental/coordinator.ts",
+      "lineRange": [
+        491,
+        500
+      ],
+      "summary": "在无连接宽限期后调用 shutdownCoordinator。",
+      "tags": [
+        "coordinator",
+        "lifecycle",
+        "timer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/coordinator.ts:shutdownCoordinator",
+      "type": "function",
+      "name": "shutdownCoordinator",
+      "filePath": "packages/coding-agent/src/experimental/coordinator.ts",
+      "lineRange": [
+        508,
+        517
+      ],
+      "summary": "关闭监听器与现存连接，清理 socket 文件后退出进程。",
+      "tags": [
+        "coordinator",
+        "lifecycle",
+        "shutdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/coordinator.ts:attachRoutedLineReader",
+      "type": "function",
+      "name": "attachRoutedLineReader",
+      "filePath": "packages/coding-agent/src/experimental/coordinator.ts",
+      "lineRange": [
+        523,
+        547
+      ],
+      "summary": "为 routed peer 读取 JSON-line 并回调，超限或坏帧则断开。",
+      "tags": [
+        "protocol",
+        "parser",
+        "unix-socket"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/coordinator.ts:listen",
+      "type": "function",
+      "name": "listen",
+      "filePath": "packages/coding-agent/src/experimental/coordinator.ts",
+      "lineRange": [
+        549,
+        563
+      ],
+      "summary": "让 net.Server listen 指定 Unix path，错误则 reject。",
+      "tags": [
+        "unix-socket",
+        "lifecycle",
+        "server"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/coordinator.ts:removeStaleSocket",
+      "type": "function",
+      "name": "removeStaleSocket",
+      "filePath": "packages/coding-agent/src/experimental/coordinator.ts",
+      "lineRange": [
+        574,
+        596
+      ],
+      "summary": "若 path 上残留无主 socket 则 unlink，避免 EADDRINUSE。",
+      "tags": [
+        "unix-socket",
+        "cleanup",
+        "filesystem"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/experimental/client.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client.ts",
+      "target": "file:packages/coding-agent/src/cli/experimental/commands/client.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client.ts",
+      "target": "file:packages/coding-agent/src/experimental/client-runtime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/agent-controller.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/sessions.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/commands.ts",
+      "target": "file:packages/coding-agent/src/cli/experimental/cli.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/commands.ts",
+      "target": "file:packages/coding-agent/src/cli/experimental/commands/client.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/commands.ts",
+      "target": "file:packages/coding-agent/src/cli/experimental/commands/server.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/commands.ts",
+      "target": "file:packages/coding-agent/src/core/experimental.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/commands.ts",
+      "target": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/commands.ts",
+      "target": "file:packages/coding-agent/src/experimental/client.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/commands.ts",
+      "target": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/commands.ts",
+      "target": "file:packages/coding-agent/src/experimental/server.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator-entry.ts",
+      "target": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator-entry.ts",
+      "target": "file:packages/coding-agent/src/experimental/process.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "target": "file:packages/coding-agent/src/experimental/process.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client.ts",
+      "target": "function:packages/coding-agent/src/experimental/client.ts:runClient",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client.ts",
+      "target": "function:packages/coding-agent/src/experimental/client.ts:runClient",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/client.ts:runClient",
+      "target": "function:packages/coding-agent/src/experimental/client-runtime.ts:openClientRuntime",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/client.ts:runClient",
+      "target": "function:packages/coding-agent/src/experimental/client-runtime.ts:activateBuiltinClientServices",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/commands.ts",
+      "target": "function:packages/coding-agent/src/experimental/commands.ts:runServerCommand",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/commands.ts",
+      "target": "function:packages/coding-agent/src/experimental/commands.ts:runClientCommand",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/commands.ts",
+      "target": "function:packages/coding-agent/src/experimental/commands.ts:runExperimentalCommand",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/commands.ts",
+      "target": "function:packages/coding-agent/src/experimental/commands.ts:runExperimentalCommand",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/commands.ts:runServerCommand",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:startForegroundServer",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/commands.ts:runClientCommand",
+      "target": "function:packages/coding-agent/src/experimental/client-tui.ts:runClientTui",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/commands.ts:runClientCommand",
+      "target": "function:packages/coding-agent/src/experimental/client.ts:runClient",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/commands.ts:runExperimentalCommand",
+      "target": "function:packages/coding-agent/src/experimental/commands.ts:runServerCommand",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/commands.ts:runExperimentalCommand",
+      "target": "function:packages/coding-agent/src/experimental/commands.ts:runClientCommand",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/commands.ts:runExperimentalCommand",
+      "target": "function:packages/coding-agent/src/core/experimental.ts:areExperimentalFeaturesEnabled",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "target": "class:packages/coding-agent/src/experimental/coordinator.ts:CoordinatorConnection",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:ensureCoordinator",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:connectSocket",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:attachJsonLineReader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:runCoordinatorProcess",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:acceptControlConnection",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:registerServer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:registerPeer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:handleRoutedMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:acceptPublicConnection",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:scheduleEmptyShutdown",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:shutdownCoordinator",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:attachRoutedLineReader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:listen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:removeStaleSocket",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "target": "class:packages/coding-agent/src/experimental/coordinator.ts:CoordinatorConnection",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:ensureCoordinator",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:runCoordinatorProcess",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/coordinator.ts:CoordinatorConnection",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:connectSocket",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/coordinator.ts:CoordinatorConnection",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:attachJsonLineReader",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/coordinator.ts:ensureCoordinator",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:connectSocket",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/coordinator.ts:ensureCoordinator",
+      "target": "function:packages/coding-agent/src/experimental/process.ts:spawnInternalProcess",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/coordinator.ts:runCoordinatorProcess",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:main",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/coordinator.ts:runCoordinatorProcess",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:shutdownCoordinator",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/coordinator.ts:main",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:removeStaleSocket",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/coordinator.ts:main",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:listen",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/coordinator.ts:main",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:scheduleEmptyShutdown",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/coordinator.ts:acceptControlConnection",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:registerServer",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/coordinator.ts:acceptControlConnection",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:registerPeer",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/coordinator.ts:acceptControlConnection",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:handleRoutedMessage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/coordinator.ts:scheduleEmptyShutdown",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:shutdownCoordinator",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator-entry.ts",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:runCoordinatorProcess",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/coordinator-entry.ts",
+      "target": "function:packages/coding-agent/src/experimental/process.ts:consumeInternalProcessRole",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

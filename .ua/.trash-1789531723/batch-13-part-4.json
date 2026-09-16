@@ -1,0 +1,608 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/agent/src/harness/utils/truncate.ts",
+      "type": "file",
+      "name": "truncate.ts",
+      "filePath": "packages/agent/src/harness/utils/truncate.ts",
+      "summary": "按行数（默认 2000）与 UTF-8 字节（默认 50KB）截断工具输出，提供 head/tail 与单行截断。",
+      "tags": [
+        "utility",
+        "truncation",
+        "utf8",
+        "工具函数"
+      ],
+      "complexity": "complex",
+      "languageNotes": "优先用 Node Buffer.byteLength，否则手算 UTF-8 并替换未配对 surrogate。"
+    },
+    {
+      "id": "file:packages/agent/src/harness/utils/usage.ts",
+      "type": "file",
+      "name": "usage.ts",
+      "filePath": "packages/agent/src/harness/utils/usage.ts",
+      "summary": "构造空 Usage 并按 token/cost 字段相加，可选合并 cacheWrite1h 与 reasoning。",
+      "tags": [
+        "utility",
+        "usage",
+        "billing",
+        "聚合"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/agent/src/proxy.ts",
+      "type": "file",
+      "name": "proxy.ts",
+      "filePath": "packages/agent/src/proxy.ts",
+      "summary": "streamProxy 经 /api/stream 代理 LLM：解析 SSE，在客户端重建 partial AssistantMessage。",
+      "tags": [
+        "streaming",
+        "proxy",
+        "llm",
+        "entry-point"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/agent/src/stream-fn.ts",
+      "type": "file",
+      "name": "stream-fn.ts",
+      "filePath": "packages/agent/src/stream-fn.ts",
+      "summary": "进程级默认 StreamFn 注册表，供 Agent/循环在调用方未传入 streamFn 时回退。",
+      "tags": [
+        "singleton",
+        "streaming",
+        "configuration",
+        "入口"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/agent/src/types.ts",
+      "type": "file",
+      "name": "types.ts",
+      "filePath": "packages/agent/src/types.ts",
+      "summary": "Agent 循环公共契约：StreamFn、工具执行/队列模式、AgentTool 与 before/afterToolCall 等回调。",
+      "tags": [
+        "type-definition",
+        "agent-loop",
+        "tool",
+        "api-contract"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/ai/src/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/ai/src/index.ts",
+      "summary": "pi-ai 无副作用核心 barrel：重导出模型/鉴权/消息类型与 contentText、uuidv7，不含 provider 工厂。",
+      "tags": [
+        "barrel",
+        "entry-point",
+        "re-export",
+        "ai"
+      ],
+      "complexity": "simple",
+      "languageNotes": "有意排除 generated catalogs、api-registry 与 OAuth 实现，避免核心包产生副作用。"
+    },
+    {
+      "id": "file:packages/ai/src/utils/uuid.ts",
+      "type": "file",
+      "name": "uuid.ts",
+      "filePath": "packages/ai/src/utils/uuid.ts",
+      "summary": "生成时间有序 UUIDv7；可传入 timestamp 供 follower id，并用 41-bit 序列保证同毫秒单调。",
+      "tags": [
+        "utility",
+        "uuid",
+        "identifier",
+        "工具函数"
+      ],
+      "complexity": "simple",
+      "languageNotes": "模块级 BigInt 序列与 lastOrdinaryTimestamp 保证同进程单调递增。"
+    },
+    {
+      "id": "function:packages/agent/src/harness/utils/truncate.ts:utf8ByteLength",
+      "type": "function",
+      "name": "utf8ByteLength",
+      "filePath": "packages/agent/src/harness/utils/truncate.ts",
+      "lineRange": [
+        54,
+        80
+      ],
+      "summary": "计算 UTF-8 字节长度：优先 Buffer，否则扫描非 ASCII 码点。",
+      "tags": [
+        "utf8",
+        "utility",
+        "truncation",
+        "bytes"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/utils/truncate.ts:replaceUnpairedSurrogates",
+      "type": "function",
+      "name": "replaceUnpairedSurrogates",
+      "filePath": "packages/agent/src/harness/utils/truncate.ts",
+      "lineRange": [
+        89,
+        110
+      ],
+      "summary": "把未配对 UTF-16 surrogate 换成 U+FFFD，保证截断边界合法。",
+      "tags": [
+        "utf8",
+        "unicode",
+        "sanitization",
+        "truncation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/utils/truncate.ts:formatSize",
+      "type": "function",
+      "name": "formatSize",
+      "filePath": "packages/agent/src/harness/utils/truncate.ts",
+      "lineRange": [
+        115,
+        123
+      ],
+      "summary": "把字节数格式化为 B/KB/MB 提示。",
+      "tags": [
+        "utility",
+        "formatting",
+        "bytes",
+        "display"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/utils/truncate.ts:truncateHead",
+      "type": "function",
+      "name": "truncateHead",
+      "filePath": "packages/agent/src/harness/utils/truncate.ts",
+      "lineRange": [
+        132,
+        214
+      ],
+      "summary": "保留开头完整行，直到行数或字节限额；超限首行单独标记。",
+      "tags": [
+        "truncation",
+        "head",
+        "utility",
+        "lines"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/agent/src/harness/utils/truncate.ts:truncateTail",
+      "type": "function",
+      "name": "truncateTail",
+      "filePath": "packages/agent/src/harness/utils/truncate.ts",
+      "lineRange": [
+        222,
+        295
+      ],
+      "summary": "保留末尾完整行（bash 尾部可半行），用于 shell 输出窗口。",
+      "tags": [
+        "truncation",
+        "tail",
+        "utility",
+        "shell"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/agent/src/harness/utils/truncate.ts:truncateStringToBytesFromEnd",
+      "type": "function",
+      "name": "truncateStringToBytesFromEnd",
+      "filePath": "packages/agent/src/harness/utils/truncate.ts",
+      "lineRange": [
+        301,
+        336
+      ],
+      "summary": "从字符串末尾截到 maxBytes，并落在合法 UTF-8 边界。",
+      "tags": [
+        "truncation",
+        "utf8",
+        "tail",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/utils/truncate.ts:truncateLine",
+      "type": "function",
+      "name": "truncateLine",
+      "filePath": "packages/agent/src/harness/utils/truncate.ts",
+      "lineRange": [
+        342,
+        350
+      ],
+      "summary": "按字符数截断单行并追加省略号，供 grep 等匹配行使用。",
+      "tags": [
+        "truncation",
+        "line",
+        "grep",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/utils/usage.ts:emptyUsage",
+      "type": "function",
+      "name": "emptyUsage",
+      "filePath": "packages/agent/src/harness/utils/usage.ts",
+      "lineRange": [
+        3,
+        12
+      ],
+      "summary": "返回全零 Usage（含 cost 子字段）。",
+      "tags": [
+        "usage",
+        "factory",
+        "billing",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/utils/usage.ts:addUsage",
+      "type": "function",
+      "name": "addUsage",
+      "filePath": "packages/agent/src/harness/utils/usage.ts",
+      "lineRange": [
+        14,
+        35
+      ],
+      "summary": "逐字段相加两份 Usage，可选合并 cacheWrite1h 与 reasoning。",
+      "tags": [
+        "usage",
+        "aggregation",
+        "billing",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/proxy.ts:buildProxyRequestOptions",
+      "type": "function",
+      "name": "buildProxyRequestOptions",
+      "filePath": "packages/agent/src/proxy.ts",
+      "lineRange": [
+        104,
+        118
+      ],
+      "summary": "挑出可 JSON 序列化的采样/会话字段，去掉本地 signal 与鉴权。",
+      "tags": [
+        "proxy",
+        "serialization",
+        "options",
+        "streaming"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/proxy.ts:streamProxy",
+      "type": "function",
+      "name": "streamProxy",
+      "filePath": "packages/agent/src/proxy.ts",
+      "lineRange": [
+        120,
+        261
+      ],
+      "summary": "POST 到代理 /api/stream，解析 SSE 行并在客户端重建 partial 消息。",
+      "tags": [
+        "proxy",
+        "streaming",
+        "sse",
+        "llm"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/agent/src/proxy.ts:processProxyEvent",
+      "type": "function",
+      "name": "processProxyEvent",
+      "filePath": "packages/agent/src/proxy.ts",
+      "lineRange": [
+        266,
+        402
+      ],
+      "summary": "把精简 Proxy 事件应用到 partial AssistantMessage，还原为完整 AssistantMessageEvent。",
+      "tags": [
+        "proxy",
+        "streaming",
+        "event",
+        "reducer"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/agent/src/stream-fn.ts:setDefaultStreamFn",
+      "type": "function",
+      "name": "setDefaultStreamFn",
+      "filePath": "packages/agent/src/stream-fn.ts",
+      "lineRange": [
+        11,
+        13
+      ],
+      "summary": "安装或清除进程默认 StreamFn。",
+      "tags": [
+        "streaming",
+        "configuration",
+        "singleton",
+        "setter"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/stream-fn.ts:getDefaultStreamFn",
+      "type": "function",
+      "name": "getDefaultStreamFn",
+      "filePath": "packages/agent/src/stream-fn.ts",
+      "lineRange": [
+        15,
+        20
+      ],
+      "summary": "读取默认 StreamFn；未配置则抛错，要求显式传入或先 set。",
+      "tags": [
+        "streaming",
+        "configuration",
+        "singleton",
+        "getter"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/uuid.ts:uuidv7",
+      "type": "function",
+      "name": "uuidv7",
+      "filePath": "packages/ai/src/utils/uuid.ts",
+      "lineRange": [
+        8,
+        45
+      ],
+      "summary": "生成时间有序 UUIDv7；省略 timestamp 时保证同进程单调。",
+      "tags": [
+        "uuid",
+        "identifier",
+        "utility",
+        "crypto"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/agent/src/harness/utils/truncate.ts",
+      "target": "function:packages/agent/src/harness/utils/truncate.ts:utf8ByteLength",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/truncate.ts",
+      "target": "function:packages/agent/src/harness/utils/truncate.ts:utf8ByteLength",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/truncate.ts",
+      "target": "function:packages/agent/src/harness/utils/truncate.ts:replaceUnpairedSurrogates",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/truncate.ts",
+      "target": "function:packages/agent/src/harness/utils/truncate.ts:formatSize",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/truncate.ts",
+      "target": "function:packages/agent/src/harness/utils/truncate.ts:formatSize",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/truncate.ts",
+      "target": "function:packages/agent/src/harness/utils/truncate.ts:truncateHead",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/truncate.ts",
+      "target": "function:packages/agent/src/harness/utils/truncate.ts:truncateHead",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/truncate.ts",
+      "target": "function:packages/agent/src/harness/utils/truncate.ts:truncateTail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/truncate.ts",
+      "target": "function:packages/agent/src/harness/utils/truncate.ts:truncateTail",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/truncate.ts",
+      "target": "function:packages/agent/src/harness/utils/truncate.ts:truncateStringToBytesFromEnd",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/truncate.ts",
+      "target": "function:packages/agent/src/harness/utils/truncate.ts:truncateLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/truncate.ts",
+      "target": "function:packages/agent/src/harness/utils/truncate.ts:truncateLine",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/usage.ts",
+      "target": "function:packages/agent/src/harness/utils/usage.ts:emptyUsage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/usage.ts",
+      "target": "function:packages/agent/src/harness/utils/usage.ts:emptyUsage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/usage.ts",
+      "target": "function:packages/agent/src/harness/utils/usage.ts:addUsage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/usage.ts",
+      "target": "function:packages/agent/src/harness/utils/usage.ts:addUsage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/proxy.ts",
+      "target": "function:packages/agent/src/proxy.ts:buildProxyRequestOptions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/proxy.ts",
+      "target": "function:packages/agent/src/proxy.ts:streamProxy",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/proxy.ts",
+      "target": "function:packages/agent/src/proxy.ts:streamProxy",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/proxy.ts",
+      "target": "function:packages/agent/src/proxy.ts:processProxyEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/stream-fn.ts",
+      "target": "function:packages/agent/src/stream-fn.ts:setDefaultStreamFn",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/stream-fn.ts",
+      "target": "function:packages/agent/src/stream-fn.ts:setDefaultStreamFn",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/stream-fn.ts",
+      "target": "function:packages/agent/src/stream-fn.ts:getDefaultStreamFn",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/stream-fn.ts",
+      "target": "function:packages/agent/src/stream-fn.ts:getDefaultStreamFn",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/uuid.ts",
+      "target": "function:packages/ai/src/utils/uuid.ts:uuidv7",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/utils/uuid.ts",
+      "target": "function:packages/ai/src/utils/uuid.ts:uuidv7",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/usage.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/proxy.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/stream-fn.ts",
+      "target": "file:packages/agent/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/types.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:packages/agent/src/proxy.ts:streamProxy",
+      "target": "function:packages/agent/src/proxy.ts:buildProxyRequestOptions",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/proxy.ts:streamProxy",
+      "target": "function:packages/agent/src/proxy.ts:processProxyEvent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/index.ts",
+      "target": "file:packages/ai/src/utils/uuid.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

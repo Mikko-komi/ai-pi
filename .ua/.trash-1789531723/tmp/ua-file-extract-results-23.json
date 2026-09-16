@@ -1,0 +1,2278 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 13,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 13,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 13,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "packages/agent/src/harness/session/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 35,
+      "exports": [
+        {
+          "name": "CommittedEntryWrite",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "CommittedListAppendWrite",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "CommittedListDeleteWrite",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "CommittedUsageWrite",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "CommittedValueDeleteWrite",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "CommittedValueSetWrite",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "CommittedWrite",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "CommitValidationState",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "PreparedCommit",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "commitWrite",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "insertEntry",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "insertUsage",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "prepareStorageCommit",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "validateCommittedWrites",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "createForkSnapshot",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "ForkSourceSnapshot",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "ForkCurrentStatePlan",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "projectForkCurrentStateWrite",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "JSONL_STORAGE_VERSION",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "JsonlSessionCreateOptions",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "JsonlSessionListOptions",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "JsonlSessionMetadata",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "JsonlSessionRepo",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "JsonlSessionRepoOptions",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "MemorySessionRepoOptions",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "MemorySessionRepo",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "SessionBranchExistsError",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "SessionInvalidBranchError",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "SessionInvariantError",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "SessionPendingAssistantMessageError",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "SessionUnknownTargetError",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "StorageBackedSession",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "StorageBackedSessionOptions",
+          "line": 25,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 33,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/main.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 24,
+      "nonEmptyLines": 21,
+      "functions": [
+        {
+          "name": "parseArgs",
+          "startLine": 9,
+          "endLine": 16,
+          "params": [
+            "argv"
+          ]
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/server/entry.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 12,
+      "nonEmptyLines": 9,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/server/run.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 160,
+      "nonEmptyLines": 150,
+      "functions": [
+        {
+          "name": "listSessions",
+          "startLine": 36,
+          "endLine": 50,
+          "params": [
+            "sessionsRoot"
+          ]
+        },
+        {
+          "name": "runServer",
+          "startLine": 52,
+          "endLine": 160,
+          "params": [
+            "options"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "runServer",
+          "line": 52,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "listSessions",
+          "callee": "process.cwd",
+          "lineNumber": 37
+        },
+        {
+          "caller": "listSessions",
+          "callee": "(await repo.list(undefined, BACKGROUND_CONTEXT)).map",
+          "lineNumber": 40
+        },
+        {
+          "caller": "listSessions",
+          "callee": "repo.list",
+          "lineNumber": 40
+        },
+        {
+          "caller": "listSessions",
+          "callee": "repo.close",
+          "lineNumber": 47
+        },
+        {
+          "caller": "listSessions",
+          "callee": "executionEnv.cleanup",
+          "lineNumber": 48
+        },
+        {
+          "caller": "considerRetiring",
+          "callee": "clearTimeout",
+          "lineNumber": 62
+        },
+        {
+          "caller": "considerRetiring",
+          "callee": "setTimeout",
+          "lineNumber": 64
+        },
+        {
+          "caller": "considerRetiring",
+          "callee": "retire",
+          "lineNumber": 65
+        },
+        {
+          "caller": "considerRetiring",
+          "callee": "idleTimer.unref",
+          "lineNumber": 67
+        },
+        {
+          "caller": "spawnWorker",
+          "callee": "spawn",
+          "lineNumber": 74
+        },
+        {
+          "caller": "spawnWorker",
+          "callee": "childConnection",
+          "lineNumber": 75
+        },
+        {
+          "caller": "spawnWorker",
+          "callee": "createPeer",
+          "lineNumber": 76
+        },
+        {
+          "caller": "spawnWorker",
+          "callee": "peer.provide",
+          "lineNumber": 78
+        },
+        {
+          "caller": "spawnWorker",
+          "callee": "peer.use(Worker, { timeoutMs: WORKER_START_TIMEOUT_MS }).describe",
+          "lineNumber": 80
+        },
+        {
+          "caller": "spawnWorker",
+          "callee": "peer.use",
+          "lineNumber": 80
+        },
+        {
+          "caller": "spawnWorker",
+          "callee": "child.kill",
+          "lineNumber": 85
+        },
+        {
+          "caller": "spawnWorker",
+          "callee": "peer.onEvent",
+          "lineNumber": 88
+        },
+        {
+          "caller": "spawnWorker",
+          "callee": "route.subscribers.get(to)?.emitRaw",
+          "lineNumber": 90
+        },
+        {
+          "caller": "spawnWorker",
+          "callee": "route.subscribers.get",
+          "lineNumber": 90
+        },
+        {
+          "caller": "spawnWorker",
+          "callee": "route.subscribers.values",
+          "lineNumber": 93
+        },
+        {
+          "caller": "spawnWorker",
+          "callee": "subscriber.emitRaw",
+          "lineNumber": 93
+        },
+        {
+          "caller": "spawnWorker",
+          "callee": "peer.onClose",
+          "lineNumber": 95
+        },
+        {
+          "caller": "spawnWorker",
+          "callee": "routes.delete",
+          "lineNumber": 96
+        },
+        {
+          "caller": "spawnWorker",
+          "callee": "considerRetiring",
+          "lineNumber": 97
+        },
+        {
+          "caller": "spawnWorker",
+          "callee": "routes.set",
+          "lineNumber": 99
+        },
+        {
+          "caller": "ensureRoute",
+          "callee": "spawnWorker",
+          "lineNumber": 104
+        },
+        {
+          "caller": "ensureRoute",
+          "callee": "routes.get",
+          "lineNumber": 105
+        },
+        {
+          "caller": "ensureRoute",
+          "callee": "Promise.resolve",
+          "lineNumber": 106
+        },
+        {
+          "caller": "ensureRoute",
+          "callee": "spawning.get",
+          "lineNumber": 107
+        },
+        {
+          "caller": "ensureRoute",
+          "callee": "spawnWorker(sessionId, cwd).finally",
+          "lineNumber": 109
+        },
+        {
+          "caller": "ensureRoute",
+          "callee": "spawnWorker",
+          "lineNumber": 109
+        },
+        {
+          "caller": "ensureRoute",
+          "callee": "spawning.delete",
+          "lineNumber": 109
+        },
+        {
+          "caller": "ensureRoute",
+          "callee": "spawning.set",
+          "lineNumber": 110
+        },
+        {
+          "caller": "list",
+          "callee": "listSessions",
+          "lineNumber": 114
+        },
+        {
+          "caller": "runServer",
+          "callee": "options.transport.listen",
+          "lineNumber": 119
+        },
+        {
+          "caller": "runServer",
+          "callee": "route?.subscribers.delete",
+          "lineNumber": 126
+        },
+        {
+          "caller": "runServer",
+          "callee": "ensureRoute",
+          "lineNumber": 128
+        },
+        {
+          "caller": "runServer",
+          "callee": "route.subscribers.set",
+          "lineNumber": 129
+        },
+        {
+          "caller": "runServer",
+          "callee": "createPeer",
+          "lineNumber": 133
+        },
+        {
+          "caller": "runServer",
+          "callee": "method.slice",
+          "lineNumber": 136
+        },
+        {
+          "caller": "runServer",
+          "callee": "method.indexOf",
+          "lineNumber": 136
+        },
+        {
+          "caller": "runServer",
+          "callee": "route.worker.announced.has",
+          "lineNumber": 137
+        },
+        {
+          "caller": "runServer",
+          "callee": "route.worker.call",
+          "lineNumber": 142
+        },
+        {
+          "caller": "runServer",
+          "callee": "presentation.provide",
+          "lineNumber": 145
+        },
+        {
+          "caller": "runServer",
+          "callee": "connection.onClose",
+          "lineNumber": 146
+        },
+        {
+          "caller": "runServer",
+          "callee": "route.subscribers.delete",
+          "lineNumber": 149
+        },
+        {
+          "caller": "runServer",
+          "callee": "route.stop",
+          "lineNumber": 151
+        },
+        {
+          "caller": "runServer",
+          "callee": "considerRetiring",
+          "lineNumber": 153
+        },
+        {
+          "caller": "runServer",
+          "callee": "considerRetiring",
+          "lineNumber": 157
+        },
+        {
+          "caller": "runServer",
+          "callee": "listener.close",
+          "lineNumber": 159
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/shared/protocol.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 138,
+      "nonEmptyLines": 117,
+      "functions": [
+        {
+          "name": "defineService",
+          "startLine": 56,
+          "endLine": 58,
+          "params": [
+            "name"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "defineService",
+          "line": 56,
+          "isDefault": false
+        },
+        {
+          "name": "Lane",
+          "line": 132,
+          "isDefault": false
+        },
+        {
+          "name": "Models",
+          "line": 134,
+          "isDefault": false
+        },
+        {
+          "name": "Worker",
+          "line": 136,
+          "isDefault": false
+        },
+        {
+          "name": "Sessions",
+          "line": 138,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 5,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/shared/rpc.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 233,
+      "nonEmptyLines": 218,
+      "functions": [
+        {
+          "name": "createPeer",
+          "startLine": 65,
+          "endLine": 229,
+          "params": [
+            "connection",
+            "options"
+          ]
+        },
+        {
+          "name": "message",
+          "startLine": 231,
+          "endLine": 233,
+          "params": [
+            "error"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "createPeer",
+          "line": 65,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "createPeer",
+          "callee": "Date.now",
+          "lineNumber": 75
+        },
+        {
+          "caller": "dispatch",
+          "callee": "method.indexOf",
+          "lineNumber": 80
+        },
+        {
+          "caller": "dispatch",
+          "callee": "services.get",
+          "lineNumber": 81
+        },
+        {
+          "caller": "dispatch",
+          "callee": "method.slice",
+          "lineNumber": 81
+        },
+        {
+          "caller": "dispatch",
+          "callee": "options.forward",
+          "lineNumber": 84
+        },
+        {
+          "caller": "dispatch",
+          "callee": "method.slice",
+          "lineNumber": 86
+        },
+        {
+          "caller": "dispatch",
+          "callee": "(handler as (...args: unknown[]) => unknown).apply",
+          "lineNumber": 88
+        },
+        {
+          "caller": "createPeer",
+          "callee": "connection.onMessage",
+          "lineNumber": 91
+        },
+        {
+          "caller": "createPeer",
+          "callee": "Date.now",
+          "lineNumber": 93
+        },
+        {
+          "caller": "createPeer",
+          "callee": "handler",
+          "lineNumber": 96
+        },
+        {
+          "caller": "createPeer",
+          "callee": "inflight.set",
+          "lineNumber": 101
+        },
+        {
+          "caller": "createPeer",
+          "callee": "dispatch(frame.method, frame.args, controller.signal)\n\t\t\t\t\t.then(\n\t\t\t\t\t\t// `undefined` vanishes through JSON, so an absent result is sent as null.\n\t\t\t\t\t\t(result) => connection.send({ kind: \"result\", id: frame.id, result: result ?? null }),\n\t\t\t\t\t\t(error: unknown) => connection.send({ kind: \"error\", id: frame.id, error: message(error) }),\n\t\t\t\t\t)\n\t\t\t\t\t.finally",
+          "lineNumber": 102
+        },
+        {
+          "caller": "createPeer",
+          "callee": "dispatch(frame.method, frame.args, controller.signal)\n\t\t\t\t\t.then",
+          "lineNumber": 102
+        },
+        {
+          "caller": "createPeer",
+          "callee": "dispatch",
+          "lineNumber": 102
+        },
+        {
+          "caller": "createPeer",
+          "callee": "connection.send",
+          "lineNumber": 105
+        },
+        {
+          "caller": "createPeer",
+          "callee": "connection.send",
+          "lineNumber": 106
+        },
+        {
+          "caller": "createPeer",
+          "callee": "message",
+          "lineNumber": 106
+        },
+        {
+          "caller": "createPeer",
+          "callee": "inflight.delete",
+          "lineNumber": 108
+        },
+        {
+          "caller": "createPeer",
+          "callee": "inflight.get(frame.id)?.abort",
+          "lineNumber": 112
+        },
+        {
+          "caller": "createPeer",
+          "callee": "inflight.get",
+          "lineNumber": 112
+        },
+        {
+          "caller": "createPeer",
+          "callee": "inflight.delete",
+          "lineNumber": 113
+        },
+        {
+          "caller": "createPeer",
+          "callee": "pending.get",
+          "lineNumber": 118
+        },
+        {
+          "caller": "createPeer",
+          "callee": "pending.delete",
+          "lineNumber": 119
+        },
+        {
+          "caller": "createPeer",
+          "callee": "waiter?.reject",
+          "lineNumber": 120
+        },
+        {
+          "caller": "createPeer",
+          "callee": "waiter?.resolve",
+          "lineNumber": 121
+        },
+        {
+          "caller": "createPeer",
+          "callee": "announced.clear",
+          "lineNumber": 125
+        },
+        {
+          "caller": "createPeer",
+          "callee": "announced.add",
+          "lineNumber": 126
+        },
+        {
+          "caller": "createPeer",
+          "callee": "JSON.stringify",
+          "lineNumber": 133
+        },
+        {
+          "caller": "createPeer",
+          "callee": "connection.onClose",
+          "lineNumber": 138
+        },
+        {
+          "caller": "createPeer",
+          "callee": "clearInterval",
+          "lineNumber": 139
+        },
+        {
+          "caller": "createPeer",
+          "callee": "pending.values",
+          "lineNumber": 140
+        },
+        {
+          "caller": "createPeer",
+          "callee": "waiter.reject",
+          "lineNumber": 140
+        },
+        {
+          "caller": "createPeer",
+          "callee": "pending.clear",
+          "lineNumber": 141
+        },
+        {
+          "caller": "createPeer",
+          "callee": "inflight.values",
+          "lineNumber": 142
+        },
+        {
+          "caller": "createPeer",
+          "callee": "controller.abort",
+          "lineNumber": 142
+        },
+        {
+          "caller": "createPeer",
+          "callee": "inflight.clear",
+          "lineNumber": 143
+        },
+        {
+          "caller": "createPeer",
+          "callee": "setInterval",
+          "lineNumber": 153
+        },
+        {
+          "caller": "createPeer",
+          "callee": "Date.now",
+          "lineNumber": 155
+        },
+        {
+          "caller": "createPeer",
+          "callee": "connection.close",
+          "lineNumber": 155
+        },
+        {
+          "caller": "createPeer",
+          "callee": "connection.send",
+          "lineNumber": 156
+        },
+        {
+          "caller": "createPeer",
+          "callee": "Math.floor",
+          "lineNumber": 158
+        },
+        {
+          "caller": "createPeer",
+          "callee": "liveness?.unref",
+          "lineNumber": 161
+        },
+        {
+          "caller": "abandon",
+          "callee": "pending.delete",
+          "lineNumber": 168
+        },
+        {
+          "caller": "abandon",
+          "callee": "clearTimeout",
+          "lineNumber": 169
+        },
+        {
+          "caller": "abandon",
+          "callee": "callOptions.signal?.removeEventListener",
+          "lineNumber": 170
+        },
+        {
+          "caller": "abandon",
+          "callee": "connection.send",
+          "lineNumber": 172
+        },
+        {
+          "caller": "abandon",
+          "callee": "reject",
+          "lineNumber": 173
+        },
+        {
+          "caller": "onAbort",
+          "callee": "abandon",
+          "lineNumber": 175
+        },
+        {
+          "caller": "settle",
+          "callee": "clearTimeout",
+          "lineNumber": 179
+        },
+        {
+          "caller": "settle",
+          "callee": "callOptions.signal?.removeEventListener",
+          "lineNumber": 180
+        },
+        {
+          "caller": "settle",
+          "callee": "handler",
+          "lineNumber": 181
+        },
+        {
+          "caller": "callWith",
+          "callee": "reject",
+          "lineNumber": 184
+        },
+        {
+          "caller": "callWith",
+          "callee": "pending.set",
+          "lineNumber": 187
+        },
+        {
+          "caller": "callWith",
+          "callee": "settle",
+          "lineNumber": 187
+        },
+        {
+          "caller": "callWith",
+          "callee": "settle",
+          "lineNumber": 187
+        },
+        {
+          "caller": "callWith",
+          "callee": "callOptions.signal?.addEventListener",
+          "lineNumber": 188
+        },
+        {
+          "caller": "callWith",
+          "callee": "setTimeout",
+          "lineNumber": 190
+        },
+        {
+          "caller": "callWith",
+          "callee": "abandon",
+          "lineNumber": 191
+        },
+        {
+          "caller": "callWith",
+          "callee": "timer.unref",
+          "lineNumber": 194
+        },
+        {
+          "caller": "callWith",
+          "callee": "connection.send",
+          "lineNumber": 196
+        },
+        {
+          "caller": "createPeer",
+          "callee": "services.set",
+          "lineNumber": 201
+        },
+        {
+          "caller": "createPeer",
+          "callee": "provided.add",
+          "lineNumber": 202
+        },
+        {
+          "caller": "createPeer",
+          "callee": "connection.send",
+          "lineNumber": 203
+        },
+        {
+          "caller": "createPeer",
+          "callee": "callWith",
+          "lineNumber": 212
+        },
+        {
+          "caller": "createPeer",
+          "callee": "String",
+          "lineNumber": 212
+        },
+        {
+          "caller": "createPeer",
+          "callee": "connection.send",
+          "lineNumber": 214
+        },
+        {
+          "caller": "createPeer",
+          "callee": "connection.send",
+          "lineNumber": 215
+        },
+        {
+          "caller": "createPeer",
+          "callee": "connection.send",
+          "lineNumber": 217
+        },
+        {
+          "caller": "createPeer",
+          "callee": "eventHandlers.push",
+          "lineNumber": 219
+        },
+        {
+          "caller": "createPeer",
+          "callee": "handler",
+          "lineNumber": 220
+        },
+        {
+          "caller": "createPeer",
+          "callee": "eventHandlers.push",
+          "lineNumber": 222
+        },
+        {
+          "caller": "createPeer",
+          "callee": "callWith",
+          "lineNumber": 223
+        },
+        {
+          "caller": "createPeer",
+          "callee": "connection.onClose",
+          "lineNumber": 225
+        },
+        {
+          "caller": "createPeer",
+          "callee": "connection.close",
+          "lineNumber": 226
+        },
+        {
+          "caller": "message",
+          "callee": "String",
+          "lineNumber": 232
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 119,
+      "nonEmptyLines": 110,
+      "functions": [
+        {
+          "name": "jsonConnection",
+          "startLine": 29,
+          "endLine": 71,
+          "params": [
+            "input",
+            "output",
+            "close"
+          ]
+        },
+        {
+          "name": "socketConnection",
+          "startLine": 73,
+          "endLine": 75,
+          "params": [
+            "socket"
+          ]
+        },
+        {
+          "name": "childConnection",
+          "startLine": 81,
+          "endLine": 88,
+          "params": [
+            "child"
+          ]
+        },
+        {
+          "name": "parentConnection",
+          "startLine": 91,
+          "endLine": 93,
+          "params": []
+        },
+        {
+          "name": "socketTransport",
+          "startLine": 95,
+          "endLine": 119,
+          "params": [
+            "path"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "jsonConnection",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "childConnection",
+          "line": 81,
+          "isDefault": false
+        },
+        {
+          "name": "parentConnection",
+          "line": 91,
+          "isDefault": false
+        },
+        {
+          "name": "socketTransport",
+          "line": 95,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "notifyClosed",
+          "callee": "handler",
+          "lineNumber": 41
+        },
+        {
+          "caller": "jsonConnection",
+          "callee": "input.setEncoding",
+          "lineNumber": 43
+        },
+        {
+          "caller": "jsonConnection",
+          "callee": "input.on",
+          "lineNumber": 44
+        },
+        {
+          "caller": "jsonConnection",
+          "callee": "buffered.indexOf",
+          "lineNumber": 46
+        },
+        {
+          "caller": "jsonConnection",
+          "callee": "buffered.slice",
+          "lineNumber": 48
+        },
+        {
+          "caller": "jsonConnection",
+          "callee": "buffered.slice",
+          "lineNumber": 49
+        },
+        {
+          "caller": "jsonConnection",
+          "callee": "JSON.parse",
+          "lineNumber": 51
+        },
+        {
+          "caller": "jsonConnection",
+          "callee": "handler",
+          "lineNumber": 52
+        },
+        {
+          "caller": "jsonConnection",
+          "callee": "buffered.indexOf",
+          "lineNumber": 54
+        },
+        {
+          "caller": "jsonConnection",
+          "callee": "input.on",
+          "lineNumber": 57
+        },
+        {
+          "caller": "jsonConnection",
+          "callee": "input.on",
+          "lineNumber": 58
+        },
+        {
+          "caller": "jsonConnection",
+          "callee": "output.on",
+          "lineNumber": 59
+        },
+        {
+          "caller": "jsonConnection",
+          "callee": "output.write",
+          "lineNumber": 62
+        },
+        {
+          "caller": "jsonConnection",
+          "callee": "JSON.stringify",
+          "lineNumber": 62
+        },
+        {
+          "caller": "jsonConnection",
+          "callee": "messageHandlers.push",
+          "lineNumber": 64
+        },
+        {
+          "caller": "jsonConnection",
+          "callee": "closeHandlers.push",
+          "lineNumber": 65
+        },
+        {
+          "caller": "jsonConnection",
+          "callee": "notifyClosed",
+          "lineNumber": 67
+        },
+        {
+          "caller": "jsonConnection",
+          "callee": "close",
+          "lineNumber": 68
+        },
+        {
+          "caller": "socketConnection",
+          "callee": "jsonConnection",
+          "lineNumber": 74
+        },
+        {
+          "caller": "socketConnection",
+          "callee": "socket.destroy",
+          "lineNumber": 74
+        },
+        {
+          "caller": "childConnection",
+          "callee": "jsonConnection",
+          "lineNumber": 87
+        },
+        {
+          "caller": "childConnection",
+          "callee": "child.kill",
+          "lineNumber": 87
+        },
+        {
+          "caller": "parentConnection",
+          "callee": "jsonConnection",
+          "lineNumber": 92
+        },
+        {
+          "caller": "parentConnection",
+          "callee": "process.stdin.pause",
+          "lineNumber": 92
+        },
+        {
+          "caller": "listen",
+          "callee": "rm",
+          "lineNumber": 98
+        },
+        {
+          "caller": "listen",
+          "callee": "createServer",
+          "lineNumber": 99
+        },
+        {
+          "caller": "listen",
+          "callee": "onConnection",
+          "lineNumber": 99
+        },
+        {
+          "caller": "listen",
+          "callee": "socketConnection",
+          "lineNumber": 99
+        },
+        {
+          "caller": "listen",
+          "callee": "server.once",
+          "lineNumber": 101
+        },
+        {
+          "caller": "listen",
+          "callee": "server.listen",
+          "lineNumber": 102
+        },
+        {
+          "caller": "listen",
+          "callee": "server.close",
+          "lineNumber": 107
+        },
+        {
+          "caller": "listen",
+          "callee": "resolve",
+          "lineNumber": 107
+        },
+        {
+          "caller": "connect",
+          "callee": "connectSocket",
+          "lineNumber": 113
+        },
+        {
+          "caller": "connect",
+          "callee": "socket.once",
+          "lineNumber": 114
+        },
+        {
+          "caller": "connect",
+          "callee": "resolve",
+          "lineNumber": 114
+        },
+        {
+          "caller": "connect",
+          "callee": "socketConnection",
+          "lineNumber": 114
+        },
+        {
+          "caller": "connect",
+          "callee": "socket.once",
+          "lineNumber": 115
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/tui/run.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 68,
+      "nonEmptyLines": 62,
+      "functions": [
+        {
+          "name": "ensureServer",
+          "startLine": 23,
+          "endLine": 46,
+          "params": [
+            "transport",
+            "socketPath",
+            "sessionsRoot"
+          ]
+        },
+        {
+          "name": "runTui",
+          "startLine": 48,
+          "endLine": 68,
+          "params": [
+            "options"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "runTui",
+          "line": 48,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ensureServer",
+          "callee": "(await transport.connect()).close",
+          "lineNumber": 25
+        },
+        {
+          "caller": "ensureServer",
+          "callee": "transport.connect",
+          "lineNumber": 25
+        },
+        {
+          "caller": "ensureServer",
+          "callee": "spawn",
+          "lineNumber": 31
+        },
+        {
+          "caller": "ensureServer",
+          "callee": "child.unref",
+          "lineNumber": 35
+        },
+        {
+          "caller": "ensureServer",
+          "callee": "Date.now",
+          "lineNumber": 36
+        },
+        {
+          "caller": "ensureServer",
+          "callee": "Date.now",
+          "lineNumber": 37
+        },
+        {
+          "caller": "ensureServer",
+          "callee": "(await transport.connect()).close",
+          "lineNumber": 39
+        },
+        {
+          "caller": "ensureServer",
+          "callee": "transport.connect",
+          "lineNumber": 39
+        },
+        {
+          "caller": "ensureServer",
+          "callee": "setTimeout",
+          "lineNumber": 42
+        },
+        {
+          "caller": "runTui",
+          "callee": "process.cwd",
+          "lineNumber": 49
+        },
+        {
+          "caller": "runTui",
+          "callee": "join",
+          "lineNumber": 50
+        },
+        {
+          "caller": "runTui",
+          "callee": "getAgentDir",
+          "lineNumber": 50
+        },
+        {
+          "caller": "runTui",
+          "callee": "mkdir",
+          "lineNumber": 51
+        },
+        {
+          "caller": "runTui",
+          "callee": "join",
+          "lineNumber": 52
+        },
+        {
+          "caller": "runTui",
+          "callee": "join",
+          "lineNumber": 53
+        },
+        {
+          "caller": "runTui",
+          "callee": "socketTransport",
+          "lineNumber": 54
+        },
+        {
+          "caller": "runTui",
+          "callee": "ensureServer",
+          "lineNumber": 55
+        },
+        {
+          "caller": "runTui",
+          "callee": "(await listSessions(transport)).filter",
+          "lineNumber": 59
+        },
+        {
+          "caller": "runTui",
+          "callee": "listSessions",
+          "lineNumber": 59
+        },
+        {
+          "caller": "runTui",
+          "callee": "sessions.sort((left, right) => left.createdAt - right.createdAt).at",
+          "lineNumber": 60
+        },
+        {
+          "caller": "runTui",
+          "callee": "sessions.sort",
+          "lineNumber": 60
+        },
+        {
+          "caller": "runTui",
+          "callee": "connect",
+          "lineNumber": 62
+        },
+        {
+          "caller": "runTui",
+          "callee": "runView",
+          "lineNumber": 64
+        },
+        {
+          "caller": "runTui",
+          "callee": "client.close",
+          "lineNumber": 66
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/tui/session.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 117,
+      "nonEmptyLines": 106,
+      "functions": [
+        {
+          "name": "listSessions",
+          "startLine": 44,
+          "endLine": 51,
+          "params": [
+            "transport"
+          ]
+        },
+        {
+          "name": "connect",
+          "startLine": 54,
+          "endLine": 117,
+          "params": [
+            "transport",
+            "sessionId",
+            "cwd"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "listSessions",
+          "line": 44,
+          "isDefault": false
+        },
+        {
+          "name": "connect",
+          "line": 54,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "listSessions",
+          "callee": "createPeer",
+          "lineNumber": 45
+        },
+        {
+          "caller": "listSessions",
+          "callee": "transport.connect",
+          "lineNumber": 45
+        },
+        {
+          "caller": "listSessions",
+          "callee": "peer.use(Sessions).list",
+          "lineNumber": 47
+        },
+        {
+          "caller": "listSessions",
+          "callee": "peer.use",
+          "lineNumber": 47
+        },
+        {
+          "caller": "listSessions",
+          "callee": "peer.close",
+          "lineNumber": 49
+        },
+        {
+          "caller": "connect",
+          "callee": "createPeer",
+          "lineNumber": 55
+        },
+        {
+          "caller": "connect",
+          "callee": "transport.connect",
+          "lineNumber": 55
+        },
+        {
+          "caller": "connect",
+          "callee": "peer.use",
+          "lineNumber": 56
+        },
+        {
+          "caller": "connect",
+          "callee": "randomUUID",
+          "lineNumber": 58
+        },
+        {
+          "caller": "publish",
+          "callee": "listener",
+          "lineNumber": 62
+        },
+        {
+          "caller": "fold",
+          "callee": "reduceLaneSnapshot",
+          "lineNumber": 70
+        },
+        {
+          "caller": "fold",
+          "callee": "resubscribe",
+          "lineNumber": 71
+        },
+        {
+          "caller": "fold",
+          "callee": "publish",
+          "lineNumber": 74
+        },
+        {
+          "caller": "resubscribe",
+          "callee": "lane.watch",
+          "lineNumber": 80
+        },
+        {
+          "caller": "resubscribe",
+          "callee": "publish",
+          "lineNumber": 83
+        },
+        {
+          "caller": "resubscribe",
+          "callee": "lane.start",
+          "lineNumber": 84
+        },
+        {
+          "caller": "resubscribe",
+          "callee": "lane.unwatch",
+          "lineNumber": 85
+        },
+        {
+          "caller": "connect",
+          "callee": "peer.on",
+          "lineNumber": 88
+        },
+        {
+          "caller": "connect",
+          "callee": "fold",
+          "lineNumber": 90
+        },
+        {
+          "caller": "connect",
+          "callee": "peer.on",
+          "lineNumber": 92
+        },
+        {
+          "caller": "connect",
+          "callee": "handler",
+          "lineNumber": 95
+        },
+        {
+          "caller": "connect",
+          "callee": "publish",
+          "lineNumber": 100
+        },
+        {
+          "caller": "connect",
+          "callee": "peer.use(Sessions, { timeoutMs: ATTACH_TIMEOUT_MS }).attach",
+          "lineNumber": 103
+        },
+        {
+          "caller": "connect",
+          "callee": "peer.use",
+          "lineNumber": 103
+        },
+        {
+          "caller": "connect",
+          "callee": "resubscribe",
+          "lineNumber": 104
+        },
+        {
+          "caller": "connect",
+          "callee": "listeners.add",
+          "lineNumber": 109
+        },
+        {
+          "caller": "connect",
+          "callee": "listeners.delete",
+          "lineNumber": 110
+        },
+        {
+          "caller": "connect",
+          "callee": "authHandlers.add",
+          "lineNumber": 112
+        },
+        {
+          "caller": "connect",
+          "callee": "peer.use",
+          "lineNumber": 114
+        },
+        {
+          "caller": "connect",
+          "callee": "peer.close",
+          "lineNumber": 115
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/worker/entry.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 10,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/worker/lane-service.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 126,
+      "nonEmptyLines": 110,
+      "functions": [
+        {
+          "name": "message",
+          "startLine": 124,
+          "endLine": 126,
+          "params": [
+            "error"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "LaneService",
+          "startLine": 31,
+          "endLine": 122,
+          "methods": [
+            "constructor",
+            "watch",
+            "start",
+            "unwatch",
+            "prompt",
+            "steer",
+            "followUp",
+            "compact",
+            "abort",
+            "setModel",
+            "close"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "LaneService",
+          "line": 31,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "watch",
+          "callee": "randomUUID",
+          "lineNumber": 42
+        },
+        {
+          "caller": "watch",
+          "callee": "lane.watch",
+          "lineNumber": 43
+        },
+        {
+          "caller": "watch",
+          "callee": "this.#watches.set",
+          "lineNumber": 45
+        },
+        {
+          "caller": "watch",
+          "callee": "this.#options.modelsState",
+          "lineNumber": 51
+        },
+        {
+          "caller": "watch",
+          "callee": "handle.unsubscribe",
+          "lineNumber": 56
+        },
+        {
+          "caller": "start",
+          "callee": "this.#watches.get",
+          "lineNumber": 63
+        },
+        {
+          "caller": "start",
+          "callee": "watch.handle.start",
+          "lineNumber": 65
+        },
+        {
+          "caller": "start",
+          "callee": "this.#options.publish",
+          "lineNumber": 65
+        },
+        {
+          "caller": "unwatch",
+          "callee": "this.#watches.get(subscriptionId)?.handle.unsubscribe",
+          "lineNumber": 69
+        },
+        {
+          "caller": "unwatch",
+          "callee": "this.#watches.get",
+          "lineNumber": 69
+        },
+        {
+          "caller": "unwatch",
+          "callee": "this.#watches.delete",
+          "lineNumber": 70
+        },
+        {
+          "caller": "prompt",
+          "callee": "this.#command",
+          "lineNumber": 74
+        },
+        {
+          "caller": "prompt",
+          "callee": "this.#options.lane.prompt",
+          "lineNumber": 74
+        },
+        {
+          "caller": "steer",
+          "callee": "this.#command",
+          "lineNumber": 78
+        },
+        {
+          "caller": "steer",
+          "callee": "this.#options.lane.steer",
+          "lineNumber": 78
+        },
+        {
+          "caller": "followUp",
+          "callee": "this.#command",
+          "lineNumber": 82
+        },
+        {
+          "caller": "followUp",
+          "callee": "this.#options.lane.followUp",
+          "lineNumber": 82
+        },
+        {
+          "caller": "compact",
+          "callee": "this.#command",
+          "lineNumber": 86
+        },
+        {
+          "caller": "compact",
+          "callee": "this.#options.lane.compact",
+          "lineNumber": 86
+        },
+        {
+          "caller": "abort",
+          "callee": "this.#command",
+          "lineNumber": 90
+        },
+        {
+          "caller": "abort",
+          "callee": "this.#options.lane.abort",
+          "lineNumber": 90
+        },
+        {
+          "caller": "setModel",
+          "callee": "this.#options.models.getModel",
+          "lineNumber": 98
+        },
+        {
+          "caller": "setModel",
+          "callee": "this.#options.lane.setModel",
+          "lineNumber": 102
+        },
+        {
+          "caller": "setModel",
+          "callee": "message",
+          "lineNumber": 105
+        },
+        {
+          "caller": "close",
+          "callee": "this.#watches.values",
+          "lineNumber": 110
+        },
+        {
+          "caller": "close",
+          "callee": "watch.handle.unsubscribe",
+          "lineNumber": 110
+        },
+        {
+          "caller": "close",
+          "callee": "this.#watches.clear",
+          "lineNumber": 111
+        },
+        {
+          "caller": "message",
+          "callee": "String",
+          "lineNumber": 125
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/worker/models-service.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 148,
+      "nonEmptyLines": 135,
+      "functions": [
+        {
+          "name": "readState",
+          "startLine": 117,
+          "endLine": 144,
+          "params": [
+            "runtime",
+            "refreshing"
+          ]
+        },
+        {
+          "name": "message",
+          "startLine": 146,
+          "endLine": 148,
+          "params": [
+            "error"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ModelsService",
+          "startLine": 22,
+          "endLine": 115,
+          "methods": [
+            "constructor",
+            "state",
+            "refresh",
+            "login",
+            "authReply",
+            "logout"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ModelsService",
+          "line": 22,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "readState",
+          "lineNumber": 32
+        },
+        {
+          "caller": "refresh",
+          "callee": "this.#update",
+          "lineNumber": 40
+        },
+        {
+          "caller": "refresh",
+          "callee": "setTimeout",
+          "lineNumber": 42
+        },
+        {
+          "caller": "refresh",
+          "callee": "controller.abort",
+          "lineNumber": 42
+        },
+        {
+          "caller": "refresh",
+          "callee": "refreshModelCatalogs",
+          "lineNumber": 44
+        },
+        {
+          "caller": "refresh",
+          "callee": "[...result.errors.keys()].join",
+          "lineNumber": 47
+        },
+        {
+          "caller": "refresh",
+          "callee": "result.errors.keys",
+          "lineNumber": 47
+        },
+        {
+          "caller": "refresh",
+          "callee": "message",
+          "lineNumber": 49
+        },
+        {
+          "caller": "refresh",
+          "callee": "clearTimeout",
+          "lineNumber": 51
+        },
+        {
+          "caller": "refresh",
+          "callee": "this.#update",
+          "lineNumber": 52
+        },
+        {
+          "caller": "login",
+          "callee": "this.#runtime.login",
+          "lineNumber": 59
+        },
+        {
+          "caller": "login",
+          "callee": "this.#ask",
+          "lineNumber": 62
+        },
+        {
+          "caller": "login",
+          "callee": "this.#publish",
+          "lineNumber": 64
+        },
+        {
+          "caller": "login",
+          "callee": "message",
+          "lineNumber": 68
+        },
+        {
+          "caller": "login",
+          "callee": "this.#update",
+          "lineNumber": 70
+        },
+        {
+          "caller": "authReply",
+          "callee": "this.#pendingAuth.get",
+          "lineNumber": 75
+        },
+        {
+          "caller": "authReply",
+          "callee": "this.#pendingAuth.delete",
+          "lineNumber": 76
+        },
+        {
+          "caller": "authReply",
+          "callee": "waiter",
+          "lineNumber": 77
+        },
+        {
+          "caller": "settle",
+          "callee": "signal?.removeEventListener",
+          "lineNumber": 86
+        },
+        {
+          "caller": "settle",
+          "callee": "reject",
+          "lineNumber": 87
+        },
+        {
+          "caller": "settle",
+          "callee": "resolve",
+          "lineNumber": 88
+        },
+        {
+          "caller": "onAbort",
+          "callee": "this.#pendingAuth.delete",
+          "lineNumber": 91
+        },
+        {
+          "caller": "onAbort",
+          "callee": "reject",
+          "lineNumber": 92
+        },
+        {
+          "caller": "logout",
+          "callee": "this.#runtime.logout",
+          "lineNumber": 102
+        },
+        {
+          "caller": "logout",
+          "callee": "message",
+          "lineNumber": 105
+        },
+        {
+          "caller": "logout",
+          "callee": "this.#update",
+          "lineNumber": 107
+        },
+        {
+          "caller": "readState",
+          "callee": "runtime\n\t\t.getAvailableSnapshot()\n\t\t.map",
+          "lineNumber": 118
+        },
+        {
+          "caller": "readState",
+          "callee": "runtime\n\t\t.getAvailableSnapshot",
+          "lineNumber": 118
+        },
+        {
+          "caller": "readState",
+          "callee": "runtime.getProviders",
+          "lineNumber": 122
+        },
+        {
+          "caller": "readState",
+          "callee": "runtime.getProviderAuthStatus",
+          "lineNumber": 123
+        },
+        {
+          "caller": "readState",
+          "callee": "accounts.push",
+          "lineNumber": 131
+        },
+        {
+          "caller": "readState",
+          "callee": "accounts.push",
+          "lineNumber": 134
+        },
+        {
+          "caller": "readState",
+          "callee": "accounts.sort",
+          "lineNumber": 142
+        },
+        {
+          "caller": "readState",
+          "callee": "left.name.localeCompare",
+          "lineNumber": 142
+        },
+        {
+          "caller": "message",
+          "callee": "String",
+          "lineNumber": 147
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/worker/run.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 113,
+      "nonEmptyLines": 105,
+      "functions": [
+        {
+          "name": "systemPrompt",
+          "startLine": 30,
+          "endLine": 37,
+          "params": [
+            "cwd"
+          ]
+        },
+        {
+          "name": "openSession",
+          "startLine": 39,
+          "endLine": 49,
+          "params": [
+            "repo",
+            "sessionId",
+            "cwd",
+            "context"
+          ]
+        },
+        {
+          "name": "runSessionWorker",
+          "startLine": 52,
+          "endLine": 113,
+          "params": [
+            "options"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "runSessionWorker",
+          "line": 52,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "systemPrompt",
+          "callee": "[\n\t\t\"You are a coding agent working in a terminal.\",\n\t\t`Working directory: ${cwd}`,\n\t\t\"Use the read, write, edit, and bash tools to inspect and change files.\",\n\t\t\"Keep answers short and technical.\",\n\t].join",
+          "lineNumber": 31
+        },
+        {
+          "caller": "openSession",
+          "callee": "repo.create",
+          "lineNumber": 45
+        },
+        {
+          "caller": "openSession",
+          "callee": "(await repo.list(undefined, context)).find",
+          "lineNumber": 46
+        },
+        {
+          "caller": "openSession",
+          "callee": "repo.list",
+          "lineNumber": 46
+        },
+        {
+          "caller": "openSession",
+          "callee": "repo.open",
+          "lineNumber": 48
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "ModelRuntime.create",
+          "lineNumber": 59
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "findInitialModel",
+          "lineNumber": 60
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "openSession",
+          "lineNumber": 65
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "AgentHarness.create",
+          "lineNumber": 66
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "createReadTool",
+          "lineNumber": 72
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "createWriteTool",
+          "lineNumber": 72
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "createEditTool",
+          "lineNumber": 72
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "createBashTool",
+          "lineNumber": 72
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "systemPrompt",
+          "lineNumber": 74
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "harness.lane",
+          "lineNumber": 78
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "parentConnection",
+          "lineNumber": 79
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "createPeer",
+          "lineNumber": 80
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "peer.emit",
+          "lineNumber": 82
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "peer.emitTo",
+          "lineNumber": 89
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "peer.provide",
+          "lineNumber": 91
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "peer.provide",
+          "lineNumber": 92
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "peer.provide",
+          "lineNumber": 93
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "open.map",
+          "lineNumber": 97
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "harness.lane",
+          "lineNumber": 99
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "restoredLane.resume",
+          "lineNumber": 100
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "console.error",
+          "lineNumber": 103
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "connection.onClose",
+          "lineNumber": 107
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "laneService.close",
+          "lineNumber": 108
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "harness.close(context).catch",
+          "lineNumber": 109
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "harness.close",
+          "lineNumber": 109
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "Promise.all",
+          "lineNumber": 110
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "repo.close(context).catch",
+          "lineNumber": 111
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "repo.close",
+          "lineNumber": 111
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "executionEnv.cleanup(context).catch",
+          "lineNumber": 112
+        },
+        {
+          "caller": "runSessionWorker",
+          "callee": "executionEnv.cleanup",
+          "lineNumber": 112
+        }
+      ],
+      "metrics": {
+        "importCount": 9,
+        "exportCount": 1,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    }
+  ]
+}

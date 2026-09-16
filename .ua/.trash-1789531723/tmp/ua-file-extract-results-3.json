@@ -1,0 +1,6050 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 31,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 31,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 31,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "packages/ai/src/api/anthropic-messages.lazy.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 4,
+      "nonEmptyLines": 3,
+      "functions": [
+        {
+          "name": "anthropicMessagesApi",
+          "startLine": 4,
+          "endLine": 4,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "anthropicMessagesApi",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "anthropicMessagesApi",
+          "callee": "lazyApi",
+          "lineNumber": 4
+        },
+        {
+          "caller": "anthropicMessagesApi",
+          "callee": "import",
+          "lineNumber": 4
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/api/azure-openai-responses.lazy.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 4,
+      "nonEmptyLines": 3,
+      "functions": [
+        {
+          "name": "azureOpenAIResponsesApi",
+          "startLine": 4,
+          "endLine": 4,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "azureOpenAIResponsesApi",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "azureOpenAIResponsesApi",
+          "callee": "lazyApi",
+          "lineNumber": 4
+        },
+        {
+          "caller": "azureOpenAIResponsesApi",
+          "callee": "import",
+          "lineNumber": 4
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/api/bedrock-converse-stream.lazy.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 30,
+      "nonEmptyLines": 26,
+      "functions": [
+        {
+          "name": "importNodeOnlyApi",
+          "startLine": 10,
+          "endLine": 13,
+          "params": [
+            "specifier"
+          ]
+        },
+        {
+          "name": "setBedrockProviderModule",
+          "startLine": 22,
+          "endLine": 24,
+          "params": [
+            "module"
+          ]
+        },
+        {
+          "name": "bedrockConverseStreamApi",
+          "startLine": 26,
+          "endLine": 30,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "setBedrockProviderModule",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "bedrockConverseStreamApi",
+          "line": 26,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "importNodeOnlyApi",
+          "callee": "import.meta.url.endsWith",
+          "lineNumber": 11
+        },
+        {
+          "caller": "importNodeOnlyApi",
+          "callee": "specifier.replace",
+          "lineNumber": 11
+        },
+        {
+          "caller": "importNodeOnlyApi",
+          "callee": "import",
+          "lineNumber": 12
+        },
+        {
+          "caller": "bedrockConverseStreamApi",
+          "callee": "lazyApi",
+          "lineNumber": 27
+        },
+        {
+          "caller": "bedrockConverseStreamApi",
+          "callee": "importNodeOnlyApi",
+          "lineNumber": 29
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/api/google-generative-ai.lazy.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 4,
+      "nonEmptyLines": 3,
+      "functions": [
+        {
+          "name": "googleGenerativeAIApi",
+          "startLine": 4,
+          "endLine": 4,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "googleGenerativeAIApi",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "googleGenerativeAIApi",
+          "callee": "lazyApi",
+          "lineNumber": 4
+        },
+        {
+          "caller": "googleGenerativeAIApi",
+          "callee": "import",
+          "lineNumber": 4
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/api/google-vertex.lazy.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 4,
+      "nonEmptyLines": 3,
+      "functions": [
+        {
+          "name": "googleVertexApi",
+          "startLine": 4,
+          "endLine": 4,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "googleVertexApi",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "googleVertexApi",
+          "callee": "lazyApi",
+          "lineNumber": 4
+        },
+        {
+          "caller": "googleVertexApi",
+          "callee": "import",
+          "lineNumber": 4
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/api/lazy.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 98,
+      "nonEmptyLines": 88,
+      "functions": [
+        {
+          "name": "createSetupErrorMessage",
+          "startLine": 4,
+          "endLine": 23,
+          "params": [
+            "model",
+            "error"
+          ]
+        },
+        {
+          "name": "hasResult",
+          "startLine": 25,
+          "endLine": 29,
+          "params": [
+            "source"
+          ]
+        },
+        {
+          "name": "forwardStream",
+          "startLine": 31,
+          "endLine": 39,
+          "params": [
+            "target",
+            "source"
+          ]
+        },
+        {
+          "name": "lazyStream",
+          "startLine": 46,
+          "endLine": 61,
+          "params": [
+            "model",
+            "setup"
+          ]
+        },
+        {
+          "name": "lazyApi",
+          "startLine": 73,
+          "endLine": 98,
+          "params": [
+            "load",
+            "capabilities"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "lazyStream",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "lazyApi",
+          "line": 73,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "createSetupErrorMessage",
+          "callee": "String",
+          "lineNumber": 20
+        },
+        {
+          "caller": "createSetupErrorMessage",
+          "callee": "Date.now",
+          "lineNumber": 21
+        },
+        {
+          "caller": "forwardStream",
+          "callee": "target.push",
+          "lineNumber": 36
+        },
+        {
+          "caller": "forwardStream",
+          "callee": "target.end",
+          "lineNumber": 38
+        },
+        {
+          "caller": "forwardStream",
+          "callee": "hasResult",
+          "lineNumber": 38
+        },
+        {
+          "caller": "forwardStream",
+          "callee": "source.result",
+          "lineNumber": 38
+        },
+        {
+          "caller": "lazyStream",
+          "callee": "setup()\n\t\t.then((inner) => forwardStream(outer, inner))\n\t\t.catch",
+          "lineNumber": 52
+        },
+        {
+          "caller": "lazyStream",
+          "callee": "setup()\n\t\t.then",
+          "lineNumber": 52
+        },
+        {
+          "caller": "lazyStream",
+          "callee": "setup",
+          "lineNumber": 52
+        },
+        {
+          "caller": "lazyStream",
+          "callee": "forwardStream",
+          "lineNumber": 53
+        },
+        {
+          "caller": "lazyStream",
+          "callee": "createSetupErrorMessage",
+          "lineNumber": 55
+        },
+        {
+          "caller": "lazyStream",
+          "callee": "outer.push",
+          "lineNumber": 56
+        },
+        {
+          "caller": "lazyStream",
+          "callee": "outer.end",
+          "lineNumber": 57
+        },
+        {
+          "caller": "lazyApi",
+          "callee": "lazyStream",
+          "lineNumber": 76
+        },
+        {
+          "caller": "lazyApi",
+          "callee": "(await load()).stream",
+          "lineNumber": 76
+        },
+        {
+          "caller": "lazyApi",
+          "callee": "load",
+          "lineNumber": 76
+        },
+        {
+          "caller": "lazyApi",
+          "callee": "lazyStream",
+          "lineNumber": 78
+        },
+        {
+          "caller": "lazyApi",
+          "callee": "(await load()).streamSimple",
+          "lineNumber": 78
+        },
+        {
+          "caller": "lazyApi",
+          "callee": "load",
+          "lineNumber": 78
+        },
+        {
+          "caller": "lazyApi",
+          "callee": "lazyStream",
+          "lineNumber": 83
+        },
+        {
+          "caller": "lazyApi",
+          "callee": "load",
+          "lineNumber": 84
+        },
+        {
+          "caller": "lazyApi",
+          "callee": "implementation.fetchDeferred",
+          "lineNumber": 86
+        },
+        {
+          "caller": "lazyApi",
+          "callee": "load",
+          "lineNumber": 91
+        },
+        {
+          "caller": "lazyApi",
+          "callee": "implementation.cancelDeferred",
+          "lineNumber": 93
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/api/mistral-conversations.lazy.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 4,
+      "nonEmptyLines": 3,
+      "functions": [
+        {
+          "name": "mistralConversationsApi",
+          "startLine": 4,
+          "endLine": 4,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "mistralConversationsApi",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "mistralConversationsApi",
+          "callee": "lazyApi",
+          "lineNumber": 4
+        },
+        {
+          "caller": "mistralConversationsApi",
+          "callee": "import",
+          "lineNumber": 4
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/api/openai-codex-responses.lazy.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 4,
+      "nonEmptyLines": 3,
+      "functions": [
+        {
+          "name": "openAICodexResponsesApi",
+          "startLine": 4,
+          "endLine": 4,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "openAICodexResponsesApi",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "openAICodexResponsesApi",
+          "callee": "lazyApi",
+          "lineNumber": 4
+        },
+        {
+          "caller": "openAICodexResponsesApi",
+          "callee": "import",
+          "lineNumber": 4
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/api/openai-completions.lazy.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 4,
+      "nonEmptyLines": 3,
+      "functions": [
+        {
+          "name": "openAICompletionsApi",
+          "startLine": 4,
+          "endLine": 4,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "openAICompletionsApi",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "openAICompletionsApi",
+          "callee": "lazyApi",
+          "lineNumber": 4
+        },
+        {
+          "caller": "openAICompletionsApi",
+          "callee": "import",
+          "lineNumber": 4
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/api/openai-responses.lazy.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 4,
+      "nonEmptyLines": 3,
+      "functions": [
+        {
+          "name": "openAIResponsesApi",
+          "startLine": 4,
+          "endLine": 4,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "openAIResponsesApi",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "openAIResponsesApi",
+          "callee": "lazyApi",
+          "lineNumber": 4
+        },
+        {
+          "caller": "openAIResponsesApi",
+          "callee": "import",
+          "lineNumber": 4
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/api/pi-messages.lazy.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 4,
+      "nonEmptyLines": 3,
+      "functions": [
+        {
+          "name": "piMessagesApi",
+          "startLine": 4,
+          "endLine": 4,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "piMessagesApi",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "piMessagesApi",
+          "callee": "lazyApi",
+          "lineNumber": 4
+        },
+        {
+          "caller": "piMessagesApi",
+          "callee": "import",
+          "lineNumber": 4
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/auth/context.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 45,
+      "nonEmptyLines": 39,
+      "functions": [
+        {
+          "name": "importNodeModule",
+          "startLine": 12,
+          "endLine": 12,
+          "params": [
+            "specifier"
+          ]
+        },
+        {
+          "name": "getProcessEnv",
+          "startLine": 14,
+          "endLine": 17,
+          "params": []
+        },
+        {
+          "name": "defaultProviderAuthContext",
+          "startLine": 23,
+          "endLine": 45,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "defaultProviderAuthContext",
+          "line": 23,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "importNodeModule",
+          "callee": "import",
+          "lineNumber": 12
+        },
+        {
+          "caller": "env",
+          "callee": "getProcessEnv",
+          "lineNumber": 26
+        },
+        {
+          "caller": "env",
+          "callee": "value.trim",
+          "lineNumber": 27
+        },
+        {
+          "caller": "fileExists",
+          "callee": "importNodeModule",
+          "lineNumber": 32
+        },
+        {
+          "caller": "fileExists",
+          "callee": "resolved.startsWith",
+          "lineNumber": 34
+        },
+        {
+          "caller": "fileExists",
+          "callee": "importNodeModule",
+          "lineNumber": 35
+        },
+        {
+          "caller": "fileExists",
+          "callee": "os.homedir",
+          "lineNumber": 36
+        },
+        {
+          "caller": "fileExists",
+          "callee": "resolved.slice",
+          "lineNumber": 36
+        },
+        {
+          "caller": "fileExists",
+          "callee": "fs.access",
+          "lineNumber": 38
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/auth/credential-store.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 67,
+      "nonEmptyLines": 61,
+      "classes": [
+        {
+          "name": "InMemoryCredentialStore",
+          "startLine": 9,
+          "endLine": 67,
+          "methods": [
+            "enqueue",
+            "read",
+            "list",
+            "modify",
+            "delete"
+          ],
+          "properties": [
+            "credentials",
+            "chains"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "InMemoryCredentialStore",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "enqueue",
+          "callee": "operationSignal",
+          "lineNumber": 15
+        },
+        {
+          "caller": "enqueue",
+          "callee": "this.chains.get",
+          "lineNumber": 16
+        },
+        {
+          "caller": "enqueue",
+          "callee": "Promise.resolve",
+          "lineNumber": 16
+        },
+        {
+          "caller": "enqueue",
+          "callee": "(async () => {\n\t\t\tawait previous.catch(() => {});\n\t\t\tsignal.throwIfAborted();\n\t\t\treturn task();\n\t\t})",
+          "lineNumber": 17
+        },
+        {
+          "caller": "enqueue",
+          "callee": "previous.catch",
+          "lineNumber": 18
+        },
+        {
+          "caller": "enqueue",
+          "callee": "signal.throwIfAborted",
+          "lineNumber": 19
+        },
+        {
+          "caller": "enqueue",
+          "callee": "task",
+          "lineNumber": 20
+        },
+        {
+          "caller": "enqueue",
+          "callee": "queued.catch",
+          "lineNumber": 22
+        },
+        {
+          "caller": "enqueue",
+          "callee": "this.chains.set",
+          "lineNumber": 23
+        },
+        {
+          "caller": "enqueue",
+          "callee": "tail.then",
+          "lineNumber": 24
+        },
+        {
+          "caller": "enqueue",
+          "callee": "this.chains.get",
+          "lineNumber": 25
+        },
+        {
+          "caller": "enqueue",
+          "callee": "this.chains.delete",
+          "lineNumber": 25
+        },
+        {
+          "caller": "enqueue",
+          "callee": "raceWithAbortSignal",
+          "lineNumber": 27
+        },
+        {
+          "caller": "read",
+          "callee": "options?.signal?.throwIfAborted",
+          "lineNumber": 31
+        },
+        {
+          "caller": "read",
+          "callee": "this.credentials.get",
+          "lineNumber": 32
+        },
+        {
+          "caller": "list",
+          "callee": "options?.signal?.throwIfAborted",
+          "lineNumber": 36
+        },
+        {
+          "caller": "list",
+          "callee": "[...this.credentials].map",
+          "lineNumber": 37
+        },
+        {
+          "caller": "modify",
+          "callee": "this.enqueue",
+          "lineNumber": 45
+        },
+        {
+          "caller": "modify",
+          "callee": "this.credentials.get",
+          "lineNumber": 48
+        },
+        {
+          "caller": "modify",
+          "callee": "fn",
+          "lineNumber": 49
+        },
+        {
+          "caller": "modify",
+          "callee": "options?.signal?.throwIfAborted",
+          "lineNumber": 50
+        },
+        {
+          "caller": "modify",
+          "callee": "this.credentials.set",
+          "lineNumber": 51
+        },
+        {
+          "caller": "delete",
+          "callee": "this.enqueue",
+          "lineNumber": 59
+        },
+        {
+          "caller": "delete",
+          "callee": "this.credentials.delete",
+          "lineNumber": 62
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/ai/src/auth/helpers.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 59,
+      "nonEmptyLines": 57,
+      "functions": [
+        {
+          "name": "envApiKeyAuth",
+          "startLine": 9,
+          "endLine": 31,
+          "params": [
+            "name",
+            "envVars"
+          ]
+        },
+        {
+          "name": "lazyOAuth",
+          "startLine": 40,
+          "endLine": 59,
+          "params": [
+            "input"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "envApiKeyAuth",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "lazyOAuth",
+          "line": 40,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "envApiKeyAuth",
+          "callee": "interaction.signal.throwIfAborted",
+          "lineNumber": 13
+        },
+        {
+          "caller": "envApiKeyAuth",
+          "callee": "interaction.prompt",
+          "lineNumber": 14
+        },
+        {
+          "caller": "envApiKeyAuth",
+          "callee": "interaction.signal.throwIfAborted",
+          "lineNumber": 15
+        },
+        {
+          "caller": "envApiKeyAuth",
+          "callee": "signal.throwIfAborted",
+          "lineNumber": 19
+        },
+        {
+          "caller": "envApiKeyAuth",
+          "callee": "ctx.env",
+          "lineNumber": 24
+        },
+        {
+          "caller": "envApiKeyAuth",
+          "callee": "signal.throwIfAborted",
+          "lineNumber": 25
+        },
+        {
+          "caller": "loaded",
+          "callee": "input.load",
+          "lineNumber": 48
+        },
+        {
+          "caller": "lazyOAuth",
+          "callee": "(await loaded()).login",
+          "lineNumber": 55
+        },
+        {
+          "caller": "lazyOAuth",
+          "callee": "loaded",
+          "lineNumber": 55
+        },
+        {
+          "caller": "lazyOAuth",
+          "callee": "(await loaded()).refresh",
+          "lineNumber": 56
+        },
+        {
+          "caller": "lazyOAuth",
+          "callee": "loaded",
+          "lineNumber": 56
+        },
+        {
+          "caller": "lazyOAuth",
+          "callee": "(await loaded()).toAuth",
+          "lineNumber": 57
+        },
+        {
+          "caller": "lazyOAuth",
+          "callee": "loaded",
+          "lineNumber": 57
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/anthropic.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 364,
+      "nonEmptyLines": 325,
+      "functions": [
+        {
+          "name": "decode",
+          "startLine": 28,
+          "endLine": 28,
+          "params": [
+            "s"
+          ]
+        },
+        {
+          "name": "getNodeApis",
+          "startLine": 38,
+          "endLine": 50,
+          "params": []
+        },
+        {
+          "name": "parseAuthorizationInput",
+          "startLine": 52,
+          "endLine": 80,
+          "params": [
+            "input"
+          ]
+        },
+        {
+          "name": "formatErrorDetails",
+          "startLine": 82,
+          "endLine": 97,
+          "params": [
+            "error"
+          ]
+        },
+        {
+          "name": "startCallbackServer",
+          "startLine": 99,
+          "endLine": 168,
+          "params": [
+            "expectedState"
+          ]
+        },
+        {
+          "name": "postJson",
+          "startLine": 170,
+          "endLine": 188,
+          "params": [
+            "url",
+            "body",
+            "signal"
+          ]
+        },
+        {
+          "name": "exchangeAuthorizationCode",
+          "startLine": 190,
+          "endLine": 232,
+          "params": [
+            "code",
+            "state",
+            "verifier",
+            "redirectUri",
+            "signal"
+          ]
+        },
+        {
+          "name": "loginAnthropic",
+          "startLine": 234,
+          "endLine": 312,
+          "params": [
+            "interaction"
+          ]
+        },
+        {
+          "name": "refreshAnthropicToken",
+          "startLine": 317,
+          "endLine": 353,
+          "params": [
+            "refreshToken",
+            "signal"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "anthropicOAuth",
+          "line": 355,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "decode",
+          "callee": "atob",
+          "lineNumber": 28
+        },
+        {
+          "caller": "getNodeApis",
+          "callee": "import(\"node:http\").then",
+          "lineNumber": 44
+        },
+        {
+          "caller": "getNodeApis",
+          "callee": "import",
+          "lineNumber": 44
+        },
+        {
+          "caller": "parseAuthorizationInput",
+          "callee": "input.trim",
+          "lineNumber": 53
+        },
+        {
+          "caller": "parseAuthorizationInput",
+          "callee": "url.searchParams.get",
+          "lineNumber": 59
+        },
+        {
+          "caller": "parseAuthorizationInput",
+          "callee": "url.searchParams.get",
+          "lineNumber": 60
+        },
+        {
+          "caller": "parseAuthorizationInput",
+          "callee": "value.includes",
+          "lineNumber": 66
+        },
+        {
+          "caller": "parseAuthorizationInput",
+          "callee": "value.split",
+          "lineNumber": 67
+        },
+        {
+          "caller": "parseAuthorizationInput",
+          "callee": "value.includes",
+          "lineNumber": 71
+        },
+        {
+          "caller": "parseAuthorizationInput",
+          "callee": "params.get",
+          "lineNumber": 74
+        },
+        {
+          "caller": "parseAuthorizationInput",
+          "callee": "params.get",
+          "lineNumber": 75
+        },
+        {
+          "caller": "formatErrorDetails",
+          "callee": "details.push",
+          "lineNumber": 86
+        },
+        {
+          "caller": "formatErrorDetails",
+          "callee": "details.push",
+          "lineNumber": 87
+        },
+        {
+          "caller": "formatErrorDetails",
+          "callee": "String",
+          "lineNumber": 87
+        },
+        {
+          "caller": "formatErrorDetails",
+          "callee": "details.push",
+          "lineNumber": 89
+        },
+        {
+          "caller": "formatErrorDetails",
+          "callee": "formatErrorDetails",
+          "lineNumber": 89
+        },
+        {
+          "caller": "formatErrorDetails",
+          "callee": "details.push",
+          "lineNumber": 92
+        },
+        {
+          "caller": "formatErrorDetails",
+          "callee": "details.join",
+          "lineNumber": 94
+        },
+        {
+          "caller": "formatErrorDetails",
+          "callee": "String",
+          "lineNumber": 96
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "getNodeApis",
+          "lineNumber": 100
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "resolveWait",
+          "lineNumber": 109
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "createServer",
+          "lineNumber": 113
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "res.writeHead",
+          "lineNumber": 117
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "res.end",
+          "lineNumber": 118
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "oauthErrorHtml",
+          "lineNumber": 118
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "url.searchParams.get",
+          "lineNumber": 122
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "url.searchParams.get",
+          "lineNumber": 123
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "url.searchParams.get",
+          "lineNumber": 124
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "res.writeHead",
+          "lineNumber": 127
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "res.end",
+          "lineNumber": 128
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "oauthErrorHtml",
+          "lineNumber": 128
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "res.writeHead",
+          "lineNumber": 133
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "res.end",
+          "lineNumber": 134
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "oauthErrorHtml",
+          "lineNumber": 134
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "res.writeHead",
+          "lineNumber": 139
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "res.end",
+          "lineNumber": 140
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "oauthErrorHtml",
+          "lineNumber": 140
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "res.writeHead",
+          "lineNumber": 144
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "res.end",
+          "lineNumber": 145
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "oauthSuccessHtml",
+          "lineNumber": 145
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "settleWait",
+          "lineNumber": 146
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "res.writeHead",
+          "lineNumber": 148
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "res.end",
+          "lineNumber": 149
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "server.on",
+          "lineNumber": 153
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "reject",
+          "lineNumber": 154
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "server.listen",
+          "lineNumber": 157
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "resolve",
+          "lineNumber": 158
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "settleWait",
+          "lineNumber": 162
+        },
+        {
+          "caller": "postJson",
+          "callee": "fetch",
+          "lineNumber": 171
+        },
+        {
+          "caller": "postJson",
+          "callee": "JSON.stringify",
+          "lineNumber": 177
+        },
+        {
+          "caller": "postJson",
+          "callee": "AbortSignal.any",
+          "lineNumber": 178
+        },
+        {
+          "caller": "postJson",
+          "callee": "AbortSignal.timeout",
+          "lineNumber": 178
+        },
+        {
+          "caller": "postJson",
+          "callee": "response.text",
+          "lineNumber": 181
+        },
+        {
+          "caller": "exchangeAuthorizationCode",
+          "callee": "postJson",
+          "lineNumber": 199
+        },
+        {
+          "caller": "exchangeAuthorizationCode",
+          "callee": "formatErrorDetails",
+          "lineNumber": 213
+        },
+        {
+          "caller": "exchangeAuthorizationCode",
+          "callee": "JSON.parse",
+          "lineNumber": 219
+        },
+        {
+          "caller": "exchangeAuthorizationCode",
+          "callee": "formatErrorDetails",
+          "lineNumber": 222
+        },
+        {
+          "caller": "exchangeAuthorizationCode",
+          "callee": "Date.now",
+          "lineNumber": 230
+        },
+        {
+          "caller": "loginAnthropic",
+          "callee": "generatePKCE",
+          "lineNumber": 235
+        },
+        {
+          "caller": "loginAnthropic",
+          "callee": "startCallbackServer",
+          "lineNumber": 236
+        },
+        {
+          "caller": "onAbort",
+          "callee": "server.cancelWait",
+          "lineNumber": 238
+        },
+        {
+          "caller": "loginAnthropic",
+          "callee": "interaction.signal.addEventListener",
+          "lineNumber": 239
+        },
+        {
+          "caller": "loginAnthropic",
+          "callee": "onAbort",
+          "lineNumber": 240
+        },
+        {
+          "caller": "loginAnthropic",
+          "callee": "interaction.notify",
+          "lineNumber": 257
+        },
+        {
+          "caller": "loginAnthropic",
+          "callee": "authParams.toString",
+          "lineNumber": 259
+        },
+        {
+          "caller": "loginAnthropic",
+          "callee": "interaction\n\t\t\t.prompt({\n\t\t\t\ttype: \"manual_code\",\n\t\t\t\tmessage: \"Complete login in your browser, or paste the authorization code / redirect URL here:\",\n\t\t\t\tplaceholder: REDIRECT_URI,\n\t\t\t\tsignal: manualAbort.signal,\n\t\t\t})\n\t\t\t.then((input) => {\n\t\t\t\tmanualInput = input;\n\t\t\t\tserver.cancelWait();\n\t\t\t})\n\t\t\t.catch",
+          "lineNumber": 264
+        },
+        {
+          "caller": "loginAnthropic",
+          "callee": "interaction\n\t\t\t.prompt({\n\t\t\t\ttype: \"manual_code\",\n\t\t\t\tmessage: \"Complete login in your browser, or paste the authorization code / redirect URL here:\",\n\t\t\t\tplaceholder: REDIRECT_URI,\n\t\t\t\tsignal: manualAbort.signal,\n\t\t\t})\n\t\t\t.then",
+          "lineNumber": 264
+        },
+        {
+          "caller": "loginAnthropic",
+          "callee": "interaction\n\t\t\t.prompt",
+          "lineNumber": 264
+        },
+        {
+          "caller": "loginAnthropic",
+          "callee": "server.cancelWait",
+          "lineNumber": 273
+        },
+        {
+          "caller": "loginAnthropic",
+          "callee": "String",
+          "lineNumber": 276
+        },
+        {
+          "caller": "loginAnthropic",
+          "callee": "server.cancelWait",
+          "lineNumber": 277
+        },
+        {
+          "caller": "loginAnthropic",
+          "callee": "server.waitForCode",
+          "lineNumber": 280
+        },
+        {
+          "caller": "loginAnthropic",
+          "callee": "parseAuthorizationInput",
+          "lineNumber": 286
+        },
+        {
+          "caller": "loginAnthropic",
+          "callee": "parseAuthorizationInput",
+          "lineNumber": 296
+        },
+        {
+          "caller": "loginAnthropic",
+          "callee": "interaction.notify",
+          "lineNumber": 305
+        },
+        {
+          "caller": "loginAnthropic",
+          "callee": "exchangeAuthorizationCode",
+          "lineNumber": 306
+        },
+        {
+          "caller": "loginAnthropic",
+          "callee": "interaction.signal.removeEventListener",
+          "lineNumber": 308
+        },
+        {
+          "caller": "loginAnthropic",
+          "callee": "manualAbort.abort",
+          "lineNumber": 309
+        },
+        {
+          "caller": "loginAnthropic",
+          "callee": "server.server.close",
+          "lineNumber": 310
+        },
+        {
+          "caller": "refreshAnthropicToken",
+          "callee": "postJson",
+          "lineNumber": 320
+        },
+        {
+          "caller": "refreshAnthropicToken",
+          "callee": "formatErrorDetails",
+          "lineNumber": 330
+        },
+        {
+          "caller": "refreshAnthropicToken",
+          "callee": "JSON.parse",
+          "lineNumber": 335
+        },
+        {
+          "caller": "refreshAnthropicToken",
+          "callee": "formatErrorDetails",
+          "lineNumber": 343
+        },
+        {
+          "caller": "refreshAnthropicToken",
+          "callee": "Date.now",
+          "lineNumber": 351
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 9,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/device-code.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 98,
+      "nonEmptyLines": 85,
+      "functions": [
+        {
+          "name": "abortableSleep",
+          "startLine": 26,
+          "endLine": 44,
+          "params": [
+            "ms",
+            "signal",
+            "cancelMessage"
+          ]
+        },
+        {
+          "name": "pollOAuthDeviceCodeFlow",
+          "startLine": 46,
+          "endLine": 98,
+          "params": [
+            "options"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "abortableSleep",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "pollOAuthDeviceCodeFlow",
+          "line": 46,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "abortableSleep",
+          "callee": "reject",
+          "lineNumber": 29
+        },
+        {
+          "caller": "onAbort",
+          "callee": "clearTimeout",
+          "lineNumber": 34
+        },
+        {
+          "caller": "onAbort",
+          "callee": "reject",
+          "lineNumber": 35
+        },
+        {
+          "caller": "abortableSleep",
+          "callee": "setTimeout",
+          "lineNumber": 37
+        },
+        {
+          "caller": "abortableSleep",
+          "callee": "signal.removeEventListener",
+          "lineNumber": 38
+        },
+        {
+          "caller": "abortableSleep",
+          "callee": "resolve",
+          "lineNumber": 39
+        },
+        {
+          "caller": "abortableSleep",
+          "callee": "signal.addEventListener",
+          "lineNumber": 42
+        },
+        {
+          "caller": "pollOAuthDeviceCodeFlow",
+          "callee": "Date.now",
+          "lineNumber": 49
+        },
+        {
+          "caller": "pollOAuthDeviceCodeFlow",
+          "callee": "Math.max",
+          "lineNumber": 51
+        },
+        {
+          "caller": "pollOAuthDeviceCodeFlow",
+          "callee": "Math.floor",
+          "lineNumber": 53
+        },
+        {
+          "caller": "pollOAuthDeviceCodeFlow",
+          "callee": "Date.now",
+          "lineNumber": 58
+        },
+        {
+          "caller": "pollOAuthDeviceCodeFlow",
+          "callee": "abortableSleep",
+          "lineNumber": 60
+        },
+        {
+          "caller": "pollOAuthDeviceCodeFlow",
+          "callee": "Math.min",
+          "lineNumber": 60
+        },
+        {
+          "caller": "pollOAuthDeviceCodeFlow",
+          "callee": "Date.now",
+          "lineNumber": 64
+        },
+        {
+          "caller": "pollOAuthDeviceCodeFlow",
+          "callee": "options.poll",
+          "lineNumber": 69
+        },
+        {
+          "caller": "pollOAuthDeviceCodeFlow",
+          "callee": "Number.isFinite",
+          "lineNumber": 83
+        },
+        {
+          "caller": "pollOAuthDeviceCodeFlow",
+          "callee": "Math.max",
+          "lineNumber": 85
+        },
+        {
+          "caller": "pollOAuthDeviceCodeFlow",
+          "callee": "Math.floor",
+          "lineNumber": 85
+        },
+        {
+          "caller": "pollOAuthDeviceCodeFlow",
+          "callee": "Math.max",
+          "lineNumber": 86
+        },
+        {
+          "caller": "pollOAuthDeviceCodeFlow",
+          "callee": "Date.now",
+          "lineNumber": 89
+        },
+        {
+          "caller": "pollOAuthDeviceCodeFlow",
+          "callee": "abortableSleep",
+          "lineNumber": 94
+        },
+        {
+          "caller": "pollOAuthDeviceCodeFlow",
+          "callee": "Math.min",
+          "lineNumber": 94
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/github-copilot.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 507,
+      "nonEmptyLines": 459,
+      "functions": [
+        {
+          "name": "decode",
+          "startLine": 10,
+          "endLine": 10,
+          "params": [
+            "s"
+          ]
+        },
+        {
+          "name": "normalizeDomain",
+          "startLine": 41,
+          "endLine": 50,
+          "params": [
+            "input"
+          ]
+        },
+        {
+          "name": "getUrls",
+          "startLine": 52,
+          "endLine": 62,
+          "params": [
+            "domain"
+          ]
+        },
+        {
+          "name": "getBaseUrlFromToken",
+          "startLine": 69,
+          "endLine": 76,
+          "params": [
+            "token"
+          ]
+        },
+        {
+          "name": "getGitHubCopilotBaseUrl",
+          "startLine": 78,
+          "endLine": 87,
+          "params": [
+            "token",
+            "enterpriseDomain"
+          ]
+        },
+        {
+          "name": "asRecord",
+          "startLine": 89,
+          "endLine": 91,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "parseGitHubCopilotModelCatalog",
+          "startLine": 93,
+          "endLine": 133,
+          "params": [
+            "raw",
+            "allowPolicyFallback"
+          ]
+        },
+        {
+          "name": "fetchWithRateLimitRetry",
+          "startLine": 135,
+          "endLine": 166,
+          "params": [
+            "url",
+            "init",
+            "signal",
+            "retryPolicy"
+          ]
+        },
+        {
+          "name": "fetchGitHubCopilotModels",
+          "startLine": 168,
+          "endLine": 195,
+          "params": [
+            "copilotToken",
+            "enterpriseDomain",
+            "signal",
+            "retryPolicy"
+          ]
+        },
+        {
+          "name": "fetchJson",
+          "startLine": 197,
+          "endLine": 204,
+          "params": [
+            "url",
+            "init"
+          ]
+        },
+        {
+          "name": "startDeviceFlow",
+          "startLine": 206,
+          "endLine": 261,
+          "params": [
+            "domain",
+            "signal"
+          ]
+        },
+        {
+          "name": "pollForGitHubAccessToken",
+          "startLine": 263,
+          "endLine": 311,
+          "params": [
+            "domain",
+            "device",
+            "signal"
+          ]
+        },
+        {
+          "name": "refreshGitHubCopilotAccessToken",
+          "startLine": 313,
+          "endLine": 348,
+          "params": [
+            "refreshToken",
+            "enterpriseDomain",
+            "signal"
+          ]
+        },
+        {
+          "name": "refreshGitHubCopilotToken",
+          "startLine": 353,
+          "endLine": 367,
+          "params": [
+            "refreshToken",
+            "enterpriseDomain",
+            "signal"
+          ]
+        },
+        {
+          "name": "enableGitHubCopilotModel",
+          "startLine": 373,
+          "endLine": 408,
+          "params": [
+            "token",
+            "modelId",
+            "enterpriseDomain",
+            "signal"
+          ]
+        },
+        {
+          "name": "enableGitHubCopilotModels",
+          "startLine": 414,
+          "endLine": 432,
+          "params": [
+            "token",
+            "modelIds",
+            "enterpriseDomain",
+            "signal"
+          ]
+        },
+        {
+          "name": "loginGitHubCopilot",
+          "startLine": 434,
+          "endLine": 485,
+          "params": [
+            "interaction"
+          ]
+        },
+        {
+          "name": "copilotEnterpriseDomain",
+          "startLine": 487,
+          "endLine": 491,
+          "params": [
+            "credential"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "githubCopilotOAuth",
+          "line": 493,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "decode",
+          "callee": "atob",
+          "lineNumber": 10
+        },
+        {
+          "caller": "normalizeDomain",
+          "callee": "input.trim",
+          "lineNumber": 42
+        },
+        {
+          "caller": "normalizeDomain",
+          "callee": "trimmed.includes",
+          "lineNumber": 45
+        },
+        {
+          "caller": "getBaseUrlFromToken",
+          "callee": "token.match",
+          "lineNumber": 70
+        },
+        {
+          "caller": "getBaseUrlFromToken",
+          "callee": "proxyHost.replace",
+          "lineNumber": 74
+        },
+        {
+          "caller": "getGitHubCopilotBaseUrl",
+          "callee": "getBaseUrlFromToken",
+          "lineNumber": 81
+        },
+        {
+          "caller": "parseGitHubCopilotModelCatalog",
+          "callee": "asRecord",
+          "lineNumber": 94
+        },
+        {
+          "caller": "parseGitHubCopilotModelCatalog",
+          "callee": "Array.isArray",
+          "lineNumber": 95
+        },
+        {
+          "caller": "parseGitHubCopilotModelCatalog",
+          "callee": "data.flatMap",
+          "lineNumber": 99
+        },
+        {
+          "caller": "parseGitHubCopilotModelCatalog",
+          "callee": "asRecord",
+          "lineNumber": 100
+        },
+        {
+          "caller": "parseGitHubCopilotModelCatalog",
+          "callee": "asRecord",
+          "lineNumber": 104
+        },
+        {
+          "caller": "parseGitHubCopilotModelCatalog",
+          "callee": "asRecord",
+          "lineNumber": 105
+        },
+        {
+          "caller": "parseGitHubCopilotModelCatalog",
+          "callee": "asRecord",
+          "lineNumber": 112
+        },
+        {
+          "caller": "parseGitHubCopilotModelCatalog",
+          "callee": "accountModels\n\t\t.filter((model) => model.pickerEnabled && model.policyState !== \"disabled\")\n\t\t.map",
+          "lineNumber": 116
+        },
+        {
+          "caller": "parseGitHubCopilotModelCatalog",
+          "callee": "accountModels\n\t\t.filter",
+          "lineNumber": 116
+        },
+        {
+          "caller": "parseGitHubCopilotModelCatalog",
+          "callee": "accountModels.filter((model) => model.policyState === \"enabled\").map",
+          "lineNumber": 123
+        },
+        {
+          "caller": "parseGitHubCopilotModelCatalog",
+          "callee": "accountModels.filter",
+          "lineNumber": 123
+        },
+        {
+          "caller": "parseGitHubCopilotModelCatalog",
+          "callee": "accountModels\n\t\t.filter(\n\t\t\t(model) =>\n\t\t\t\tmodel.policyState === \"unconfigured\" &&\n\t\t\t\tObject.hasOwn(GITHUB_COPILOT_MODELS, model.id) &&\n\t\t\t\t(model.pickerEnabled || usePolicyFallback),\n\t\t)\n\t\t.map",
+          "lineNumber": 124
+        },
+        {
+          "caller": "parseGitHubCopilotModelCatalog",
+          "callee": "accountModels\n\t\t.filter",
+          "lineNumber": 124
+        },
+        {
+          "caller": "parseGitHubCopilotModelCatalog",
+          "callee": "Object.hasOwn",
+          "lineNumber": 128
+        },
+        {
+          "caller": "fetchWithRateLimitRetry",
+          "callee": "AbortSignal.timeout",
+          "lineNumber": 143
+        },
+        {
+          "caller": "fetchWithRateLimitRetry",
+          "callee": "AbortSignal.any",
+          "lineNumber": 145
+        },
+        {
+          "caller": "fetchWithRateLimitRetry",
+          "callee": "Date.now",
+          "lineNumber": 146
+        },
+        {
+          "caller": "fetchWithRateLimitRetry",
+          "callee": "fetch",
+          "lineNumber": 148
+        },
+        {
+          "caller": "fetchWithRateLimitRetry",
+          "callee": "AbortSignal.any",
+          "lineNumber": 150
+        },
+        {
+          "caller": "fetchWithRateLimitRetry",
+          "callee": "AbortSignal.timeout",
+          "lineNumber": 150
+        },
+        {
+          "caller": "fetchWithRateLimitRetry",
+          "callee": "response.headers.get",
+          "lineNumber": 154
+        },
+        {
+          "caller": "fetchWithRateLimitRetry",
+          "callee": "Number.parseFloat",
+          "lineNumber": 157
+        },
+        {
+          "caller": "fetchWithRateLimitRetry",
+          "callee": "Number.isNaN",
+          "lineNumber": 158
+        },
+        {
+          "caller": "fetchWithRateLimitRetry",
+          "callee": "Date.parse",
+          "lineNumber": 158
+        },
+        {
+          "caller": "fetchWithRateLimitRetry",
+          "callee": "Date.now",
+          "lineNumber": 158
+        },
+        {
+          "caller": "fetchWithRateLimitRetry",
+          "callee": "Number.isFinite",
+          "lineNumber": 159
+        },
+        {
+          "caller": "fetchWithRateLimitRetry",
+          "callee": "Math.max",
+          "lineNumber": 161
+        },
+        {
+          "caller": "fetchWithRateLimitRetry",
+          "callee": "Date.now",
+          "lineNumber": 162
+        },
+        {
+          "caller": "fetchWithRateLimitRetry",
+          "callee": "response.body?.cancel",
+          "lineNumber": 163
+        },
+        {
+          "caller": "fetchWithRateLimitRetry",
+          "callee": "sleep",
+          "lineNumber": 164
+        },
+        {
+          "caller": "fetchGitHubCopilotModels",
+          "callee": "getGitHubCopilotBaseUrl",
+          "lineNumber": 174
+        },
+        {
+          "caller": "fetchGitHubCopilotModels",
+          "callee": "fetchWithRateLimitRetry",
+          "lineNumber": 178
+        },
+        {
+          "caller": "fetchGitHubCopilotModels",
+          "callee": "response.text",
+          "lineNumber": 192
+        },
+        {
+          "caller": "fetchGitHubCopilotModels",
+          "callee": "parseGitHubCopilotModelCatalog",
+          "lineNumber": 194
+        },
+        {
+          "caller": "fetchGitHubCopilotModels",
+          "callee": "response.json",
+          "lineNumber": 194
+        },
+        {
+          "caller": "fetchJson",
+          "callee": "fetch",
+          "lineNumber": 198
+        },
+        {
+          "caller": "fetchJson",
+          "callee": "response.text",
+          "lineNumber": 200
+        },
+        {
+          "caller": "fetchJson",
+          "callee": "response.json",
+          "lineNumber": 203
+        },
+        {
+          "caller": "startDeviceFlow",
+          "callee": "getUrls",
+          "lineNumber": 207
+        },
+        {
+          "caller": "startDeviceFlow",
+          "callee": "fetchJson",
+          "lineNumber": 208
+        },
+        {
+          "caller": "pollForGitHubAccessToken",
+          "callee": "getUrls",
+          "lineNumber": 268
+        },
+        {
+          "caller": "pollForGitHubAccessToken",
+          "callee": "pollOAuthDeviceCodeFlow",
+          "lineNumber": 269
+        },
+        {
+          "caller": "pollForGitHubAccessToken",
+          "callee": "fetchJson",
+          "lineNumber": 275
+        },
+        {
+          "caller": "refreshGitHubCopilotAccessToken",
+          "callee": "getUrls",
+          "lineNumber": 319
+        },
+        {
+          "caller": "refreshGitHubCopilotAccessToken",
+          "callee": "fetchJson",
+          "lineNumber": 321
+        },
+        {
+          "caller": "refreshGitHubCopilotToken",
+          "callee": "refreshGitHubCopilotAccessToken",
+          "lineNumber": 358
+        },
+        {
+          "caller": "refreshGitHubCopilotToken",
+          "callee": "fetchGitHubCopilotModels",
+          "lineNumber": 359
+        },
+        {
+          "caller": "enableGitHubCopilotModel",
+          "callee": "getGitHubCopilotBaseUrl",
+          "lineNumber": 379
+        },
+        {
+          "caller": "enableGitHubCopilotModel",
+          "callee": "fetchWithRateLimitRetry",
+          "lineNumber": 384
+        },
+        {
+          "caller": "enableGitHubCopilotModel",
+          "callee": "JSON.stringify",
+          "lineNumber": 395
+        },
+        {
+          "caller": "enableGitHubCopilotModel",
+          "callee": "response.text",
+          "lineNumber": 405
+        },
+        {
+          "caller": "enableGitHubCopilotModels",
+          "callee": "enableGitHubCopilotModel",
+          "lineNumber": 423
+        },
+        {
+          "caller": "enableGitHubCopilotModels",
+          "callee": "enabledModelIds.push",
+          "lineNumber": 424
+        },
+        {
+          "caller": "loginGitHubCopilot",
+          "callee": "interaction.prompt",
+          "lineNumber": 435
+        },
+        {
+          "caller": "loginGitHubCopilot",
+          "callee": "input.trim",
+          "lineNumber": 442
+        },
+        {
+          "caller": "loginGitHubCopilot",
+          "callee": "normalizeDomain",
+          "lineNumber": 443
+        },
+        {
+          "caller": "loginGitHubCopilot",
+          "callee": "startDeviceFlow",
+          "lineNumber": 447
+        },
+        {
+          "caller": "loginGitHubCopilot",
+          "callee": "interaction.notify",
+          "lineNumber": 448
+        },
+        {
+          "caller": "loginGitHubCopilot",
+          "callee": "pollForGitHubAccessToken",
+          "lineNumber": 456
+        },
+        {
+          "caller": "loginGitHubCopilot",
+          "callee": "refreshGitHubCopilotAccessToken",
+          "lineNumber": 457
+        },
+        {
+          "caller": "loginGitHubCopilot",
+          "callee": "fetchGitHubCopilotModels",
+          "lineNumber": 462
+        },
+        {
+          "caller": "loginGitHubCopilot",
+          "callee": "interaction.notify",
+          "lineNumber": 473
+        },
+        {
+          "caller": "loginGitHubCopilot",
+          "callee": "enableGitHubCopilotModels",
+          "lineNumber": 474
+        },
+        {
+          "caller": "copilotEnterpriseDomain",
+          "callee": "normalizeDomain",
+          "lineNumber": 490
+        },
+        {
+          "caller": "toAuth",
+          "callee": "getGitHubCopilotBaseUrl",
+          "lineNumber": 504
+        },
+        {
+          "caller": "toAuth",
+          "callee": "copilotEnterpriseDomain",
+          "lineNumber": 504
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 18,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/kimi-coding.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 296,
+      "nonEmptyLines": 265,
+      "functions": [
+        {
+          "name": "getOauthHost",
+          "startLine": 36,
+          "endLine": 39,
+          "params": []
+        },
+        {
+          "name": "requestSignal",
+          "startLine": 41,
+          "endLine": 43,
+          "params": [
+            "signal"
+          ]
+        },
+        {
+          "name": "formUrlEncode",
+          "startLine": 45,
+          "endLine": 47,
+          "params": [
+            "fields"
+          ]
+        },
+        {
+          "name": "readJson",
+          "startLine": 49,
+          "endLine": 56,
+          "params": [
+            "response"
+          ]
+        },
+        {
+          "name": "trustedHttpUrl",
+          "startLine": 59,
+          "endLine": 68,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "startDeviceAuthorization",
+          "startLine": 70,
+          "endLine": 118,
+          "params": [
+            "oauthHost",
+            "signal"
+          ]
+        },
+        {
+          "name": "parseTokenResponse",
+          "startLine": 120,
+          "endLine": 140,
+          "params": [
+            "json",
+            "operation"
+          ]
+        },
+        {
+          "name": "pollForToken",
+          "startLine": 142,
+          "endLine": 208,
+          "params": [
+            "oauthHost",
+            "device",
+            "signal"
+          ]
+        },
+        {
+          "name": "isRetryableRefreshFailure",
+          "startLine": 210,
+          "endLine": 212,
+          "params": [
+            "response"
+          ]
+        },
+        {
+          "name": "refreshToken",
+          "startLine": 214,
+          "endLine": 265,
+          "params": [
+            "oauthHost",
+            "refreshTokenValue",
+            "signal"
+          ]
+        },
+        {
+          "name": "loginKimiCoding",
+          "startLine": 267,
+          "endLine": 279,
+          "params": [
+            "interaction"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "kimiCodingOAuth",
+          "line": 281,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getOauthHost",
+          "callee": "getProviderEnvValue",
+          "lineNumber": 37
+        },
+        {
+          "caller": "getOauthHost",
+          "callee": "getProviderEnvValue",
+          "lineNumber": 37
+        },
+        {
+          "caller": "getOauthHost",
+          "callee": "(override || DEFAULT_OAUTH_HOST).replace",
+          "lineNumber": 38
+        },
+        {
+          "caller": "requestSignal",
+          "callee": "AbortSignal.any",
+          "lineNumber": 42
+        },
+        {
+          "caller": "requestSignal",
+          "callee": "AbortSignal.timeout",
+          "lineNumber": 42
+        },
+        {
+          "caller": "formUrlEncode",
+          "callee": "new URLSearchParams(fields).toString",
+          "lineNumber": 46
+        },
+        {
+          "caller": "readJson",
+          "callee": "response.json",
+          "lineNumber": 51
+        },
+        {
+          "caller": "startDeviceAuthorization",
+          "callee": "fetch",
+          "lineNumber": 71
+        },
+        {
+          "caller": "startDeviceAuthorization",
+          "callee": "formUrlEncode",
+          "lineNumber": 77
+        },
+        {
+          "caller": "startDeviceAuthorization",
+          "callee": "requestSignal",
+          "lineNumber": 78
+        },
+        {
+          "caller": "startDeviceAuthorization",
+          "callee": "response.text().catch",
+          "lineNumber": 82
+        },
+        {
+          "caller": "startDeviceAuthorization",
+          "callee": "response.text",
+          "lineNumber": 82
+        },
+        {
+          "caller": "startDeviceAuthorization",
+          "callee": "readJson",
+          "lineNumber": 86
+        },
+        {
+          "caller": "startDeviceAuthorization",
+          "callee": "trustedHttpUrl",
+          "lineNumber": 96
+        },
+        {
+          "caller": "startDeviceAuthorization",
+          "callee": "trustedHttpUrl",
+          "lineNumber": 97
+        },
+        {
+          "caller": "startDeviceAuthorization",
+          "callee": "JSON.stringify",
+          "lineNumber": 99
+        },
+        {
+          "caller": "startDeviceAuthorization",
+          "callee": "Number.isFinite",
+          "lineNumber": 110
+        },
+        {
+          "caller": "startDeviceAuthorization",
+          "callee": "Number.isFinite",
+          "lineNumber": 114
+        },
+        {
+          "caller": "parseTokenResponse",
+          "callee": "Number.isFinite",
+          "lineNumber": 130
+        },
+        {
+          "caller": "parseTokenResponse",
+          "callee": "JSON.stringify",
+          "lineNumber": 133
+        },
+        {
+          "caller": "parseTokenResponse",
+          "callee": "Date.now",
+          "lineNumber": 138
+        },
+        {
+          "caller": "pollForToken",
+          "callee": "pollOAuthDeviceCodeFlow",
+          "lineNumber": 147
+        },
+        {
+          "caller": "pollForToken",
+          "callee": "fetch",
+          "lineNumber": 153
+        },
+        {
+          "caller": "pollForToken",
+          "callee": "formUrlEncode",
+          "lineNumber": 159
+        },
+        {
+          "caller": "pollForToken",
+          "callee": "requestSignal",
+          "lineNumber": 164
+        },
+        {
+          "caller": "pollForToken",
+          "callee": "response.text().catch",
+          "lineNumber": 168
+        },
+        {
+          "caller": "pollForToken",
+          "callee": "response.text",
+          "lineNumber": 168
+        },
+        {
+          "caller": "pollForToken",
+          "callee": "readJson",
+          "lineNumber": 175
+        },
+        {
+          "caller": "pollForToken",
+          "callee": "parseTokenResponse",
+          "lineNumber": 178
+        },
+        {
+          "caller": "pollForToken",
+          "callee": "String",
+          "lineNumber": 180
+        },
+        {
+          "caller": "refreshToken",
+          "callee": "sleep",
+          "lineNumber": 218
+        },
+        {
+          "caller": "refreshToken",
+          "callee": "fetch",
+          "lineNumber": 226
+        },
+        {
+          "caller": "refreshToken",
+          "callee": "formUrlEncode",
+          "lineNumber": 232
+        },
+        {
+          "caller": "refreshToken",
+          "callee": "requestSignal",
+          "lineNumber": 237
+        },
+        {
+          "caller": "refreshToken",
+          "callee": "String",
+          "lineNumber": 240
+        },
+        {
+          "caller": "refreshToken",
+          "callee": "readJson",
+          "lineNumber": 244
+        },
+        {
+          "caller": "refreshToken",
+          "callee": "parseTokenResponse",
+          "lineNumber": 246
+        },
+        {
+          "caller": "refreshToken",
+          "callee": "isRetryableRefreshFailure",
+          "lineNumber": 255
+        },
+        {
+          "caller": "refreshToken",
+          "callee": "JSON.stringify",
+          "lineNumber": 260
+        },
+        {
+          "caller": "loginKimiCoding",
+          "callee": "getOauthHost",
+          "lineNumber": 268
+        },
+        {
+          "caller": "loginKimiCoding",
+          "callee": "startDeviceAuthorization",
+          "lineNumber": 269
+        },
+        {
+          "caller": "loginKimiCoding",
+          "callee": "interaction.notify",
+          "lineNumber": 270
+        },
+        {
+          "caller": "loginKimiCoding",
+          "callee": "pollForToken",
+          "lineNumber": 277
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 11,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/load.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 68,
+      "nonEmptyLines": 57,
+      "functions": [
+        {
+          "name": "importOAuthModule",
+          "startLine": 9,
+          "endLine": 12,
+          "params": [
+            "specifier"
+          ]
+        },
+        {
+          "name": "registerBundledOAuthFlowLoaders",
+          "startLine": 27,
+          "endLine": 29,
+          "params": [
+            "loaders"
+          ]
+        },
+        {
+          "name": "loadAnthropicOAuth",
+          "startLine": 31,
+          "endLine": 34,
+          "params": []
+        },
+        {
+          "name": "loadOpenAICodexOAuth",
+          "startLine": 36,
+          "endLine": 39,
+          "params": []
+        },
+        {
+          "name": "loadGitHubCopilotOAuth",
+          "startLine": 41,
+          "endLine": 44,
+          "params": []
+        },
+        {
+          "name": "loadOpenRouterOAuth",
+          "startLine": 46,
+          "endLine": 49,
+          "params": []
+        },
+        {
+          "name": "loadKimiCodingOAuth",
+          "startLine": 51,
+          "endLine": 54,
+          "params": []
+        },
+        {
+          "name": "loadXaiOAuth",
+          "startLine": 56,
+          "endLine": 59,
+          "params": []
+        },
+        {
+          "name": "loadRadiusOAuth",
+          "startLine": 61,
+          "endLine": 68,
+          "params": [
+            "options"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "registerBundledOAuthFlowLoaders",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "loadAnthropicOAuth",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "loadOpenAICodexOAuth",
+          "line": 36,
+          "isDefault": false
+        },
+        {
+          "name": "loadGitHubCopilotOAuth",
+          "line": 41,
+          "isDefault": false
+        },
+        {
+          "name": "loadOpenRouterOAuth",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "loadKimiCodingOAuth",
+          "line": 51,
+          "isDefault": false
+        },
+        {
+          "name": "loadXaiOAuth",
+          "line": 56,
+          "isDefault": false
+        },
+        {
+          "name": "loadRadiusOAuth",
+          "line": 61,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "importOAuthModule",
+          "callee": "import.meta.url.endsWith",
+          "lineNumber": 10
+        },
+        {
+          "caller": "importOAuthModule",
+          "callee": "specifier.replace",
+          "lineNumber": 10
+        },
+        {
+          "caller": "importOAuthModule",
+          "callee": "import",
+          "lineNumber": 11
+        },
+        {
+          "caller": "loadAnthropicOAuth",
+          "callee": "bundledLoaders.anthropic",
+          "lineNumber": 32
+        },
+        {
+          "caller": "loadAnthropicOAuth",
+          "callee": "importOAuthModule",
+          "lineNumber": 33
+        },
+        {
+          "caller": "loadOpenAICodexOAuth",
+          "callee": "bundledLoaders.openaiCodex",
+          "lineNumber": 37
+        },
+        {
+          "caller": "loadOpenAICodexOAuth",
+          "callee": "importOAuthModule",
+          "lineNumber": 38
+        },
+        {
+          "caller": "loadGitHubCopilotOAuth",
+          "callee": "bundledLoaders.githubCopilot",
+          "lineNumber": 42
+        },
+        {
+          "caller": "loadGitHubCopilotOAuth",
+          "callee": "importOAuthModule",
+          "lineNumber": 43
+        },
+        {
+          "caller": "loadOpenRouterOAuth",
+          "callee": "bundledLoaders.openrouter",
+          "lineNumber": 47
+        },
+        {
+          "caller": "loadOpenRouterOAuth",
+          "callee": "importOAuthModule",
+          "lineNumber": 48
+        },
+        {
+          "caller": "loadKimiCodingOAuth",
+          "callee": "bundledLoaders.kimiCoding",
+          "lineNumber": 52
+        },
+        {
+          "caller": "loadKimiCodingOAuth",
+          "callee": "importOAuthModule",
+          "lineNumber": 53
+        },
+        {
+          "caller": "loadXaiOAuth",
+          "callee": "bundledLoaders.xai",
+          "lineNumber": 57
+        },
+        {
+          "caller": "loadXaiOAuth",
+          "callee": "importOAuthModule",
+          "lineNumber": 58
+        },
+        {
+          "caller": "loadRadiusOAuth",
+          "callee": "bundledLoaders.radius",
+          "lineNumber": 62
+        },
+        {
+          "caller": "loadRadiusOAuth",
+          "callee": "(\n\t\t(await importOAuthModule(\"./radius.ts\")) as {\n\t\t\tcreateRadiusOAuth: (input: { name: string; gateway: string }) => OAuthAuth;\n\t\t}\n\t).createRadiusOAuth",
+          "lineNumber": 63
+        },
+        {
+          "caller": "loadRadiusOAuth",
+          "callee": "importOAuthModule",
+          "lineNumber": 64
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 8,
+        "functionCount": 9,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/oauth-page.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 109,
+      "nonEmptyLines": 104,
+      "functions": [
+        {
+          "name": "escapeHtml",
+          "startLine": 3,
+          "endLine": 10,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "renderPage",
+          "startLine": 12,
+          "endLine": 92,
+          "params": [
+            "options"
+          ]
+        },
+        {
+          "name": "oauthSuccessHtml",
+          "startLine": 94,
+          "endLine": 100,
+          "params": [
+            "message"
+          ]
+        },
+        {
+          "name": "oauthErrorHtml",
+          "startLine": 102,
+          "endLine": 109,
+          "params": [
+            "message",
+            "details"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "oauthSuccessHtml",
+          "line": 94,
+          "isDefault": false
+        },
+        {
+          "name": "oauthErrorHtml",
+          "line": 102,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "escapeHtml",
+          "callee": "value\n\t\t.replaceAll(\"&\", \"&amp;\")\n\t\t.replaceAll(\"<\", \"&lt;\")\n\t\t.replaceAll(\">\", \"&gt;\")\n\t\t.replaceAll('\"', \"&quot;\")\n\t\t.replaceAll",
+          "lineNumber": 4
+        },
+        {
+          "caller": "escapeHtml",
+          "callee": "value\n\t\t.replaceAll(\"&\", \"&amp;\")\n\t\t.replaceAll(\"<\", \"&lt;\")\n\t\t.replaceAll(\">\", \"&gt;\")\n\t\t.replaceAll",
+          "lineNumber": 4
+        },
+        {
+          "caller": "escapeHtml",
+          "callee": "value\n\t\t.replaceAll(\"&\", \"&amp;\")\n\t\t.replaceAll(\"<\", \"&lt;\")\n\t\t.replaceAll",
+          "lineNumber": 4
+        },
+        {
+          "caller": "escapeHtml",
+          "callee": "value\n\t\t.replaceAll(\"&\", \"&amp;\")\n\t\t.replaceAll",
+          "lineNumber": 4
+        },
+        {
+          "caller": "escapeHtml",
+          "callee": "value\n\t\t.replaceAll",
+          "lineNumber": 4
+        },
+        {
+          "caller": "renderPage",
+          "callee": "escapeHtml",
+          "lineNumber": 13
+        },
+        {
+          "caller": "renderPage",
+          "callee": "escapeHtml",
+          "lineNumber": 14
+        },
+        {
+          "caller": "renderPage",
+          "callee": "escapeHtml",
+          "lineNumber": 15
+        },
+        {
+          "caller": "renderPage",
+          "callee": "escapeHtml",
+          "lineNumber": 16
+        },
+        {
+          "caller": "oauthSuccessHtml",
+          "callee": "renderPage",
+          "lineNumber": 95
+        },
+        {
+          "caller": "oauthErrorHtml",
+          "callee": "renderPage",
+          "lineNumber": 103
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/openai-codex.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 544,
+      "nonEmptyLines": 485,
+      "functions": [
+        {
+          "name": "getCallbackHost",
+          "startLine": 44,
+          "endLine": 46,
+          "params": []
+        },
+        {
+          "name": "createState",
+          "startLine": 66,
+          "endLine": 71,
+          "params": []
+        },
+        {
+          "name": "parseAuthorizationInput",
+          "startLine": 73,
+          "endLine": 101,
+          "params": [
+            "input"
+          ]
+        },
+        {
+          "name": "decodeJwt",
+          "startLine": 103,
+          "endLine": 113,
+          "params": [
+            "token"
+          ]
+        },
+        {
+          "name": "fetchWithLoginCancellation",
+          "startLine": 115,
+          "endLine": 124,
+          "params": [
+            "input",
+            "init"
+          ]
+        },
+        {
+          "name": "readTokenResponse",
+          "startLine": 126,
+          "endLine": 147,
+          "params": [
+            "response",
+            "operation"
+          ]
+        },
+        {
+          "name": "exchangeAuthorizationCode",
+          "startLine": 149,
+          "endLine": 169,
+          "params": [
+            "code",
+            "verifier",
+            "redirectUri",
+            "signal"
+          ]
+        },
+        {
+          "name": "refreshAccessToken",
+          "startLine": 171,
+          "endLine": 189,
+          "params": [
+            "refreshToken",
+            "signal"
+          ]
+        },
+        {
+          "name": "startOpenAICodexDeviceAuth",
+          "startLine": 191,
+          "endLine": 233,
+          "params": [
+            "signal"
+          ]
+        },
+        {
+          "name": "pollOpenAICodexDeviceAuth",
+          "startLine": 235,
+          "endLine": 291,
+          "params": [
+            "device",
+            "signal"
+          ]
+        },
+        {
+          "name": "createAuthorizationFlow",
+          "startLine": 293,
+          "endLine": 312,
+          "params": [
+            "originator"
+          ]
+        },
+        {
+          "name": "startLocalOAuthServer",
+          "startLine": 320,
+          "endLine": 394,
+          "params": [
+            "state"
+          ]
+        },
+        {
+          "name": "getAccountId",
+          "startLine": 396,
+          "endLine": 401,
+          "params": [
+            "accessToken"
+          ]
+        },
+        {
+          "name": "credentialsFromToken",
+          "startLine": 403,
+          "endLine": 416,
+          "params": [
+            "token"
+          ]
+        },
+        {
+          "name": "exchangeAuthorizationCodeForCredentials",
+          "startLine": 418,
+          "endLine": 425,
+          "params": [
+            "code",
+            "verifier",
+            "redirectUri",
+            "signal"
+          ]
+        },
+        {
+          "name": "loginOpenAICodexDeviceCode",
+          "startLine": 427,
+          "endLine": 443,
+          "params": [
+            "interaction"
+          ]
+        },
+        {
+          "name": "loginOpenAICodex",
+          "startLine": 445,
+          "endLine": 506,
+          "params": [
+            "interaction"
+          ]
+        },
+        {
+          "name": "refreshOpenAICodexToken",
+          "startLine": 511,
+          "endLine": 513,
+          "params": [
+            "refreshToken",
+            "signal"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "openaiCodexOAuth",
+          "line": 515,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getCallbackHost",
+          "callee": "getProviderEnvValue",
+          "lineNumber": 45
+        },
+        {
+          "caller": "createState",
+          "callee": "_randomBytes(16).toString",
+          "lineNumber": 70
+        },
+        {
+          "caller": "createState",
+          "callee": "_randomBytes",
+          "lineNumber": 70
+        },
+        {
+          "caller": "parseAuthorizationInput",
+          "callee": "input.trim",
+          "lineNumber": 74
+        },
+        {
+          "caller": "parseAuthorizationInput",
+          "callee": "url.searchParams.get",
+          "lineNumber": 80
+        },
+        {
+          "caller": "parseAuthorizationInput",
+          "callee": "url.searchParams.get",
+          "lineNumber": 81
+        },
+        {
+          "caller": "parseAuthorizationInput",
+          "callee": "value.includes",
+          "lineNumber": 87
+        },
+        {
+          "caller": "parseAuthorizationInput",
+          "callee": "value.split",
+          "lineNumber": 88
+        },
+        {
+          "caller": "parseAuthorizationInput",
+          "callee": "value.includes",
+          "lineNumber": 92
+        },
+        {
+          "caller": "parseAuthorizationInput",
+          "callee": "params.get",
+          "lineNumber": 95
+        },
+        {
+          "caller": "parseAuthorizationInput",
+          "callee": "params.get",
+          "lineNumber": 96
+        },
+        {
+          "caller": "decodeJwt",
+          "callee": "token.split",
+          "lineNumber": 105
+        },
+        {
+          "caller": "decodeJwt",
+          "callee": "atob",
+          "lineNumber": 108
+        },
+        {
+          "caller": "decodeJwt",
+          "callee": "JSON.parse",
+          "lineNumber": 109
+        },
+        {
+          "caller": "fetchWithLoginCancellation",
+          "callee": "fetch",
+          "lineNumber": 117
+        },
+        {
+          "caller": "readTokenResponse",
+          "callee": "response.text().catch",
+          "lineNumber": 128
+        },
+        {
+          "caller": "readTokenResponse",
+          "callee": "response.text",
+          "lineNumber": 128
+        },
+        {
+          "caller": "readTokenResponse",
+          "callee": "response.json",
+          "lineNumber": 132
+        },
+        {
+          "caller": "readTokenResponse",
+          "callee": "JSON.stringify",
+          "lineNumber": 139
+        },
+        {
+          "caller": "readTokenResponse",
+          "callee": "Date.now",
+          "lineNumber": 145
+        },
+        {
+          "caller": "exchangeAuthorizationCode",
+          "callee": "fetchWithLoginCancellation",
+          "lineNumber": 155
+        },
+        {
+          "caller": "exchangeAuthorizationCode",
+          "callee": "readTokenResponse",
+          "lineNumber": 168
+        },
+        {
+          "caller": "refreshAccessToken",
+          "callee": "fetch",
+          "lineNumber": 174
+        },
+        {
+          "caller": "refreshAccessToken",
+          "callee": "String",
+          "lineNumber": 185
+        },
+        {
+          "caller": "refreshAccessToken",
+          "callee": "readTokenResponse",
+          "lineNumber": 188
+        },
+        {
+          "caller": "startOpenAICodexDeviceAuth",
+          "callee": "fetchWithLoginCancellation",
+          "lineNumber": 192
+        },
+        {
+          "caller": "startOpenAICodexDeviceAuth",
+          "callee": "JSON.stringify",
+          "lineNumber": 195
+        },
+        {
+          "caller": "startOpenAICodexDeviceAuth",
+          "callee": "response.text().catch",
+          "lineNumber": 205
+        },
+        {
+          "caller": "startOpenAICodexDeviceAuth",
+          "callee": "response.text",
+          "lineNumber": 205
+        },
+        {
+          "caller": "startOpenAICodexDeviceAuth",
+          "callee": "response.json",
+          "lineNumber": 211
+        },
+        {
+          "caller": "startOpenAICodexDeviceAuth",
+          "callee": "Number",
+          "lineNumber": 217
+        },
+        {
+          "caller": "startOpenAICodexDeviceAuth",
+          "callee": "json.interval.trim",
+          "lineNumber": 217
+        },
+        {
+          "caller": "startOpenAICodexDeviceAuth",
+          "callee": "Number.isFinite",
+          "lineNumber": 222
+        },
+        {
+          "caller": "startOpenAICodexDeviceAuth",
+          "callee": "JSON.stringify",
+          "lineNumber": 225
+        },
+        {
+          "caller": "pollOpenAICodexDeviceAuth",
+          "callee": "pollOAuthDeviceCodeFlow",
+          "lineNumber": 236
+        },
+        {
+          "caller": "pollOpenAICodexDeviceAuth",
+          "callee": "fetchWithLoginCancellation",
+          "lineNumber": 241
+        },
+        {
+          "caller": "pollOpenAICodexDeviceAuth",
+          "callee": "JSON.stringify",
+          "lineNumber": 244
+        },
+        {
+          "caller": "pollOpenAICodexDeviceAuth",
+          "callee": "response.json",
+          "lineNumber": 252
+        },
+        {
+          "caller": "pollOpenAICodexDeviceAuth",
+          "callee": "JSON.stringify",
+          "lineNumber": 257
+        },
+        {
+          "caller": "pollOpenAICodexDeviceAuth",
+          "callee": "response.text().catch",
+          "lineNumber": 270
+        },
+        {
+          "caller": "pollOpenAICodexDeviceAuth",
+          "callee": "response.text",
+          "lineNumber": 270
+        },
+        {
+          "caller": "pollOpenAICodexDeviceAuth",
+          "callee": "JSON.parse",
+          "lineNumber": 273
+        },
+        {
+          "caller": "createAuthorizationFlow",
+          "callee": "generatePKCE",
+          "lineNumber": 296
+        },
+        {
+          "caller": "createAuthorizationFlow",
+          "callee": "createState",
+          "lineNumber": 297
+        },
+        {
+          "caller": "createAuthorizationFlow",
+          "callee": "url.searchParams.set",
+          "lineNumber": 300
+        },
+        {
+          "caller": "createAuthorizationFlow",
+          "callee": "url.searchParams.set",
+          "lineNumber": 301
+        },
+        {
+          "caller": "createAuthorizationFlow",
+          "callee": "url.searchParams.set",
+          "lineNumber": 302
+        },
+        {
+          "caller": "createAuthorizationFlow",
+          "callee": "url.searchParams.set",
+          "lineNumber": 303
+        },
+        {
+          "caller": "createAuthorizationFlow",
+          "callee": "url.searchParams.set",
+          "lineNumber": 304
+        },
+        {
+          "caller": "createAuthorizationFlow",
+          "callee": "url.searchParams.set",
+          "lineNumber": 305
+        },
+        {
+          "caller": "createAuthorizationFlow",
+          "callee": "url.searchParams.set",
+          "lineNumber": 306
+        },
+        {
+          "caller": "createAuthorizationFlow",
+          "callee": "url.searchParams.set",
+          "lineNumber": 307
+        },
+        {
+          "caller": "createAuthorizationFlow",
+          "callee": "url.searchParams.set",
+          "lineNumber": 308
+        },
+        {
+          "caller": "createAuthorizationFlow",
+          "callee": "url.searchParams.set",
+          "lineNumber": 309
+        },
+        {
+          "caller": "createAuthorizationFlow",
+          "callee": "url.toString",
+          "lineNumber": 311
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "resolve",
+          "lineNumber": 331
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "_http.createServer",
+          "lineNumber": 335
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "res.setHeader",
+          "lineNumber": 340
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "res.end",
+          "lineNumber": 341
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "oauthErrorHtml",
+          "lineNumber": 341
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "url.searchParams.get",
+          "lineNumber": 344
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "res.setHeader",
+          "lineNumber": 346
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "res.end",
+          "lineNumber": 347
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "oauthErrorHtml",
+          "lineNumber": 347
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "url.searchParams.get",
+          "lineNumber": 350
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "res.setHeader",
+          "lineNumber": 353
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "res.end",
+          "lineNumber": 354
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "oauthErrorHtml",
+          "lineNumber": 354
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "res.setHeader",
+          "lineNumber": 358
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "res.end",
+          "lineNumber": 359
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "oauthSuccessHtml",
+          "lineNumber": 359
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "settleWait",
+          "lineNumber": 360
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "res.setHeader",
+          "lineNumber": 363
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "res.end",
+          "lineNumber": 364
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "oauthErrorHtml",
+          "lineNumber": 364
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "server\n\t\t\t.listen(1455, getCallbackHost(), () => {\n\t\t\t\tresolve({\n\t\t\t\t\tclose: () => server.close(),\n\t\t\t\t\tcancelWait: () => {\n\t\t\t\t\t\tsettleWait?.(null);\n\t\t\t\t\t},\n\t\t\t\t\twaitForCode: () => waitForCodePromise,\n\t\t\t\t});\n\t\t\t})\n\t\t\t.on",
+          "lineNumber": 369
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "server\n\t\t\t.listen",
+          "lineNumber": 369
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "getCallbackHost",
+          "lineNumber": 370
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "resolve",
+          "lineNumber": 371
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "server.close",
+          "lineNumber": 372
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "settleWait",
+          "lineNumber": 374
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "settleWait",
+          "lineNumber": 380
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "resolve",
+          "lineNumber": 381
+        },
+        {
+          "caller": "startLocalOAuthServer",
+          "callee": "server.close",
+          "lineNumber": 384
+        },
+        {
+          "caller": "getAccountId",
+          "callee": "decodeJwt",
+          "lineNumber": 397
+        },
+        {
+          "caller": "credentialsFromToken",
+          "callee": "getAccountId",
+          "lineNumber": 404
+        },
+        {
+          "caller": "exchangeAuthorizationCodeForCredentials",
+          "callee": "credentialsFromToken",
+          "lineNumber": 424
+        },
+        {
+          "caller": "exchangeAuthorizationCodeForCredentials",
+          "callee": "exchangeAuthorizationCode",
+          "lineNumber": 424
+        },
+        {
+          "caller": "loginOpenAICodexDeviceCode",
+          "callee": "startOpenAICodexDeviceAuth",
+          "lineNumber": 428
+        },
+        {
+          "caller": "loginOpenAICodexDeviceCode",
+          "callee": "interaction.notify",
+          "lineNumber": 429
+        },
+        {
+          "caller": "loginOpenAICodexDeviceCode",
+          "callee": "pollOpenAICodexDeviceAuth",
+          "lineNumber": 436
+        },
+        {
+          "caller": "loginOpenAICodexDeviceCode",
+          "callee": "exchangeAuthorizationCodeForCredentials",
+          "lineNumber": 437
+        },
+        {
+          "caller": "loginOpenAICodex",
+          "callee": "createAuthorizationFlow",
+          "lineNumber": 446
+        },
+        {
+          "caller": "loginOpenAICodex",
+          "callee": "startLocalOAuthServer",
+          "lineNumber": 447
+        },
+        {
+          "caller": "onAbort",
+          "callee": "server.cancelWait",
+          "lineNumber": 449
+        },
+        {
+          "caller": "loginOpenAICodex",
+          "callee": "interaction.signal.addEventListener",
+          "lineNumber": 450
+        },
+        {
+          "caller": "loginOpenAICodex",
+          "callee": "onAbort",
+          "lineNumber": 451
+        },
+        {
+          "caller": "loginOpenAICodex",
+          "callee": "interaction.notify",
+          "lineNumber": 456
+        },
+        {
+          "caller": "loginOpenAICodex",
+          "callee": "interaction\n\t\t\t.prompt({\n\t\t\t\ttype: \"manual_code\",\n\t\t\t\tmessage: \"Complete login in your browser, or paste the authorization code / redirect URL here:\",\n\t\t\t\tplaceholder: REDIRECT_URI,\n\t\t\t\tsignal: manualAbort.signal,\n\t\t\t})\n\t\t\t.then((input) => {\n\t\t\t\tmanualCode = input;\n\t\t\t\tserver.cancelWait();\n\t\t\t})\n\t\t\t.catch",
+          "lineNumber": 463
+        },
+        {
+          "caller": "loginOpenAICodex",
+          "callee": "interaction\n\t\t\t.prompt({\n\t\t\t\ttype: \"manual_code\",\n\t\t\t\tmessage: \"Complete login in your browser, or paste the authorization code / redirect URL here:\",\n\t\t\t\tplaceholder: REDIRECT_URI,\n\t\t\t\tsignal: manualAbort.signal,\n\t\t\t})\n\t\t\t.then",
+          "lineNumber": 463
+        },
+        {
+          "caller": "loginOpenAICodex",
+          "callee": "interaction\n\t\t\t.prompt",
+          "lineNumber": 463
+        },
+        {
+          "caller": "loginOpenAICodex",
+          "callee": "server.cancelWait",
+          "lineNumber": 472
+        },
+        {
+          "caller": "loginOpenAICodex",
+          "callee": "String",
+          "lineNumber": 475
+        },
+        {
+          "caller": "loginOpenAICodex",
+          "callee": "server.cancelWait",
+          "lineNumber": 476
+        },
+        {
+          "caller": "loginOpenAICodex",
+          "callee": "server.waitForCode",
+          "lineNumber": 479
+        },
+        {
+          "caller": "loginOpenAICodex",
+          "callee": "parseAuthorizationInput",
+          "lineNumber": 484
+        },
+        {
+          "caller": "loginOpenAICodex",
+          "callee": "parseAuthorizationInput",
+          "lineNumber": 493
+        },
+        {
+          "caller": "loginOpenAICodex",
+          "callee": "exchangeAuthorizationCodeForCredentials",
+          "lineNumber": 500
+        },
+        {
+          "caller": "loginOpenAICodex",
+          "callee": "interaction.signal.removeEventListener",
+          "lineNumber": 502
+        },
+        {
+          "caller": "loginOpenAICodex",
+          "callee": "manualAbort.abort",
+          "lineNumber": 503
+        },
+        {
+          "caller": "loginOpenAICodex",
+          "callee": "server.close",
+          "lineNumber": 504
+        },
+        {
+          "caller": "refreshOpenAICodexToken",
+          "callee": "credentialsFromToken",
+          "lineNumber": 512
+        },
+        {
+          "caller": "refreshOpenAICodexToken",
+          "callee": "refreshAccessToken",
+          "lineNumber": 512
+        },
+        {
+          "caller": "login",
+          "callee": "interaction.prompt",
+          "lineNumber": 520
+        },
+        {
+          "caller": "login",
+          "callee": "loginOpenAICodexDeviceCode",
+          "lineNumber": 530
+        },
+        {
+          "caller": "login",
+          "callee": "loginOpenAICodex",
+          "lineNumber": 536
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 18,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/openrouter.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 311,
+      "nonEmptyLines": 276,
+      "functions": [
+        {
+          "name": "getCallbackHost",
+          "startLine": 25,
+          "endLine": 27,
+          "params": []
+        },
+        {
+          "name": "sendHtml",
+          "startLine": 45,
+          "endLine": 50,
+          "params": [
+            "response",
+            "status",
+            "html"
+          ]
+        },
+        {
+          "name": "parseAuthorizationInput",
+          "startLine": 52,
+          "endLine": 67,
+          "params": [
+            "input"
+          ]
+        },
+        {
+          "name": "errorDetail",
+          "startLine": 69,
+          "endLine": 78,
+          "params": [
+            "body"
+          ]
+        },
+        {
+          "name": "exchangeAuthorizationCode",
+          "startLine": 80,
+          "endLine": 133,
+          "params": [
+            "code",
+            "verifier",
+            "signal"
+          ]
+        },
+        {
+          "name": "startCallbackServer",
+          "startLine": 135,
+          "endLine": 240,
+          "params": [
+            "callbackPath",
+            "verifier",
+            "signal"
+          ]
+        },
+        {
+          "name": "loginOpenRouter",
+          "startLine": 242,
+          "endLine": 299,
+          "params": [
+            "interaction"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "openRouterOAuth",
+          "line": 301,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getCallbackHost",
+          "callee": "getProviderEnvValue",
+          "lineNumber": 26
+        },
+        {
+          "caller": "sendHtml",
+          "callee": "response.setHeader",
+          "lineNumber": 47
+        },
+        {
+          "caller": "sendHtml",
+          "callee": "response.setHeader",
+          "lineNumber": 48
+        },
+        {
+          "caller": "sendHtml",
+          "callee": "response.end",
+          "lineNumber": 49
+        },
+        {
+          "caller": "parseAuthorizationInput",
+          "callee": "input.trim",
+          "lineNumber": 53
+        },
+        {
+          "caller": "parseAuthorizationInput",
+          "callee": "new URL(value).searchParams.get",
+          "lineNumber": 57
+        },
+        {
+          "caller": "parseAuthorizationInput",
+          "callee": "value.includes",
+          "lineNumber": 62
+        },
+        {
+          "caller": "parseAuthorizationInput",
+          "callee": "new URLSearchParams(value).get",
+          "lineNumber": 63
+        },
+        {
+          "caller": "errorDetail",
+          "callee": "Array.isArray",
+          "lineNumber": 73
+        },
+        {
+          "caller": "onAbort",
+          "callee": "controller.abort",
+          "lineNumber": 87
+        },
+        {
+          "caller": "exchangeAuthorizationCode",
+          "callee": "signal.addEventListener",
+          "lineNumber": 88
+        },
+        {
+          "caller": "exchangeAuthorizationCode",
+          "callee": "setTimeout",
+          "lineNumber": 89
+        },
+        {
+          "caller": "exchangeAuthorizationCode",
+          "callee": "controller.abort",
+          "lineNumber": 90
+        },
+        {
+          "caller": "exchangeAuthorizationCode",
+          "callee": "fetch",
+          "lineNumber": 97
+        },
+        {
+          "caller": "exchangeAuthorizationCode",
+          "callee": "JSON.stringify",
+          "lineNumber": 100
+        },
+        {
+          "caller": "exchangeAuthorizationCode",
+          "callee": "response.json",
+          "lineNumber": 104
+        },
+        {
+          "caller": "exchangeAuthorizationCode",
+          "callee": "Array.isArray",
+          "lineNumber": 105
+        },
+        {
+          "caller": "exchangeAuthorizationCode",
+          "callee": "clearTimeout",
+          "lineNumber": 114
+        },
+        {
+          "caller": "exchangeAuthorizationCode",
+          "callee": "signal.removeEventListener",
+          "lineNumber": 115
+        },
+        {
+          "caller": "exchangeAuthorizationCode",
+          "callee": "errorDetail",
+          "lineNumber": 119
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "getCallbackHost",
+          "lineNumber": 141
+        },
+        {
+          "caller": "close",
+          "callee": "clearTimeout",
+          "lineNumber": 156
+        },
+        {
+          "caller": "close",
+          "callee": "signal.removeEventListener",
+          "lineNumber": 157
+        },
+        {
+          "caller": "close",
+          "callee": "server.close",
+          "lineNumber": 158
+        },
+        {
+          "caller": "finish",
+          "callee": "close",
+          "lineNumber": 164
+        },
+        {
+          "caller": "finish",
+          "callee": "resolveCredential",
+          "lineNumber": 165
+        },
+        {
+          "caller": "finish",
+          "callee": "rejectCredential",
+          "lineNumber": 166
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "createServer",
+          "lineNumber": 169
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "(async () => {\n\t\t\tconst requestUrl = new URL(request.url ?? \"/\", `http://${callbackHost}`);\n\t\t\tif (request.method !== \"GET\" || requestUrl.pathname !== callbackPath) {\n\t\t\t\tsendHtml(response, 404, oauthErrorHtml(\"OAuth callback route not found.\"));\n\t\t\t\treturn;\n\t\t\t}\n\t\t\tif (claimed || settled) {\n\t\t\t\tsendHtml(response, 409, oauthErrorHtml(\"This OAuth callback has already been used.\"));\n\t\t\t\treturn;\n\t\t\t}\n\n\t\t\tconst oauthError = requestUrl.searchParams.get(\"error\");\n\t\t\tif (oauthError) {\n\t\t\t\tconst description = requestUrl.searchParams.get(\"error_description\") ?? oauthError;\n\t\t\t\tsendHtml(response, 400, oauthErrorHtml(\"OpenRouter authorization was denied.\", description));\n\t\t\t\tfinish({ error: new Error(`OpenRouter authorization failed: ${description}`) });\n\t\t\t\treturn;\n\t\t\t}\n\n\t\t\tconst code = requestUrl.searchParams.get(\"code\");\n\t\t\tif (!code) {\n\t\t\t\tsendHtml(response, 400, oauthErrorHtml(\"OpenRouter returned no authorization code.\"));\n\t\t\t\treturn;\n\t\t\t}\n\t\t\tclaimed = true;\n\n\t\t\ttry {\n\t\t\t\tconst result = await exchangeAuthorizationCode(code, verifier, signal);\n\t\t\t\tsendHtml(response, 200, oauthSuccessHtml(\"Signed in to OpenRouter. You may now close this page.\"));\n\t\t\t\tfinish({ credential: result });\n\t\t\t} catch (error) {\n\t\t\t\tconst message = error instanceof Error ? error.message : \"Unknown token exchange error\";\n\t\t\t\tsendHtml(response, 502, oauthErrorHtml(\"OpenRouter key exchange failed.\", message));\n\t\t\t\tfinish({ error: error instanceof Error ? error : new Error(message) });\n\t\t\t}\n\t\t})",
+          "lineNumber": 170
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "sendHtml",
+          "lineNumber": 173
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "oauthErrorHtml",
+          "lineNumber": 173
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "sendHtml",
+          "lineNumber": 177
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "oauthErrorHtml",
+          "lineNumber": 177
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "requestUrl.searchParams.get",
+          "lineNumber": 181
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "requestUrl.searchParams.get",
+          "lineNumber": 183
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "sendHtml",
+          "lineNumber": 184
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "oauthErrorHtml",
+          "lineNumber": 184
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "finish",
+          "lineNumber": 185
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "requestUrl.searchParams.get",
+          "lineNumber": 189
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "sendHtml",
+          "lineNumber": 191
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "oauthErrorHtml",
+          "lineNumber": 191
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "exchangeAuthorizationCode",
+          "lineNumber": 197
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "sendHtml",
+          "lineNumber": 198
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "oauthSuccessHtml",
+          "lineNumber": 198
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "finish",
+          "lineNumber": 199
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "sendHtml",
+          "lineNumber": 202
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "oauthErrorHtml",
+          "lineNumber": 202
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "finish",
+          "lineNumber": 203
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "server.once",
+          "lineNumber": 209
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "server.listen",
+          "lineNumber": 210
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "server.removeListener",
+          "lineNumber": 211
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "resolve",
+          "lineNumber": 212
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "server.on",
+          "lineNumber": 216
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "finish",
+          "lineNumber": 216
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "finish",
+          "lineNumber": 217
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "signal.addEventListener",
+          "lineNumber": 218
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "close",
+          "lineNumber": 220
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "setTimeout",
+          "lineNumber": 223
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "finish",
+          "lineNumber": 223
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "server.address",
+          "lineNumber": 225
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "close",
+          "lineNumber": 227
+        },
+        {
+          "caller": "startCallbackServer",
+          "callee": "finish",
+          "lineNumber": 236
+        },
+        {
+          "caller": "loginOpenRouter",
+          "callee": "generatePKCE",
+          "lineNumber": 243
+        },
+        {
+          "caller": "loginOpenRouter",
+          "callee": "crypto.randomUUID",
+          "lineNumber": 244
+        },
+        {
+          "caller": "loginOpenRouter",
+          "callee": "startCallbackServer",
+          "lineNumber": 245
+        },
+        {
+          "caller": "loginOpenRouter",
+          "callee": "new URLSearchParams({\n\t\t\tcallback_url: callback.callbackUrl,\n\t\t\tcode_challenge: challenge,\n\t\t\tcode_challenge_method: \"S256\",\n\t\t}).toString",
+          "lineNumber": 252
+        },
+        {
+          "caller": "loginOpenRouter",
+          "callee": "interaction.notify",
+          "lineNumber": 258
+        },
+        {
+          "caller": "loginOpenRouter",
+          "callee": "interaction.notify",
+          "lineNumber": 262
+        },
+        {
+          "caller": "loginOpenRouter",
+          "callee": "authorizeUrl.toString",
+          "lineNumber": 264
+        },
+        {
+          "caller": "loginOpenRouter",
+          "callee": "interaction\n\t\t\t.prompt({\n\t\t\t\ttype: \"manual_code\",\n\t\t\t\tmessage: \"Complete sign-in in your browser, or paste the authorization code / redirect URL here:\",\n\t\t\t\tplaceholder: callback.callbackUrl,\n\t\t\t\tsignal: manualAbort.signal,\n\t\t\t})\n\t\t\t.then((input) => {\n\t\t\t\tmanualInput = input;\n\t\t\t\tcallback.cancelWait();\n\t\t\t})\n\t\t\t.catch",
+          "lineNumber": 269
+        },
+        {
+          "caller": "loginOpenRouter",
+          "callee": "interaction\n\t\t\t.prompt({\n\t\t\t\ttype: \"manual_code\",\n\t\t\t\tmessage: \"Complete sign-in in your browser, or paste the authorization code / redirect URL here:\",\n\t\t\t\tplaceholder: callback.callbackUrl,\n\t\t\t\tsignal: manualAbort.signal,\n\t\t\t})\n\t\t\t.then",
+          "lineNumber": 269
+        },
+        {
+          "caller": "loginOpenRouter",
+          "callee": "interaction\n\t\t\t.prompt",
+          "lineNumber": 269
+        },
+        {
+          "caller": "loginOpenRouter",
+          "callee": "callback.cancelWait",
+          "lineNumber": 278
+        },
+        {
+          "caller": "loginOpenRouter",
+          "callee": "String",
+          "lineNumber": 281
+        },
+        {
+          "caller": "loginOpenRouter",
+          "callee": "callback.cancelWait",
+          "lineNumber": 282
+        },
+        {
+          "caller": "loginOpenRouter",
+          "callee": "callback.waitForCredential",
+          "lineNumber": 285
+        },
+        {
+          "caller": "loginOpenRouter",
+          "callee": "parseAuthorizationInput",
+          "lineNumber": 291
+        },
+        {
+          "caller": "loginOpenRouter",
+          "callee": "interaction.notify",
+          "lineNumber": 293
+        },
+        {
+          "caller": "loginOpenRouter",
+          "callee": "exchangeAuthorizationCode",
+          "lineNumber": 294
+        },
+        {
+          "caller": "loginOpenRouter",
+          "callee": "manualAbort.abort",
+          "lineNumber": 296
+        },
+        {
+          "caller": "loginOpenRouter",
+          "callee": "callback.close",
+          "lineNumber": 297
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 7,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/pkce.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 34,
+      "nonEmptyLines": 30,
+      "functions": [
+        {
+          "name": "base64urlEncode",
+          "startLine": 9,
+          "endLine": 15,
+          "params": [
+            "bytes"
+          ]
+        },
+        {
+          "name": "generatePKCE",
+          "startLine": 21,
+          "endLine": 34,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "generatePKCE",
+          "line": 21,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "base64urlEncode",
+          "callee": "String.fromCharCode",
+          "lineNumber": 12
+        },
+        {
+          "caller": "base64urlEncode",
+          "callee": "btoa(binary).replace(/\\+/g, \"-\").replace(/\\//g, \"_\").replace",
+          "lineNumber": 14
+        },
+        {
+          "caller": "base64urlEncode",
+          "callee": "btoa(binary).replace(/\\+/g, \"-\").replace",
+          "lineNumber": 14
+        },
+        {
+          "caller": "base64urlEncode",
+          "callee": "btoa(binary).replace",
+          "lineNumber": 14
+        },
+        {
+          "caller": "base64urlEncode",
+          "callee": "btoa",
+          "lineNumber": 14
+        },
+        {
+          "caller": "generatePKCE",
+          "callee": "crypto.getRandomValues",
+          "lineNumber": 24
+        },
+        {
+          "caller": "generatePKCE",
+          "callee": "base64urlEncode",
+          "lineNumber": 25
+        },
+        {
+          "caller": "generatePKCE",
+          "callee": "encoder.encode",
+          "lineNumber": 29
+        },
+        {
+          "caller": "generatePKCE",
+          "callee": "crypto.subtle.digest",
+          "lineNumber": 30
+        },
+        {
+          "caller": "generatePKCE",
+          "callee": "base64urlEncode",
+          "lineNumber": 31
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/radius.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 403,
+      "nonEmptyLines": 361,
+      "functions": [
+        {
+          "name": "loadRadiusOAuthDiscovery",
+          "startLine": 49,
+          "endLine": 66,
+          "params": [
+            "gateway",
+            "signal"
+          ]
+        },
+        {
+          "name": "readOAuthResponseError",
+          "startLine": 84,
+          "endLine": 100,
+          "params": [
+            "response",
+            "message"
+          ]
+        },
+        {
+          "name": "requestOAuthToken",
+          "startLine": 102,
+          "endLine": 140,
+          "params": [
+            "gateway",
+            "body",
+            "signal"
+          ]
+        },
+        {
+          "name": "startOAuthCallbackServer",
+          "startLine": 147,
+          "endLine": 218,
+          "params": [
+            "expectedState",
+            "signal"
+          ]
+        },
+        {
+          "name": "loginWithBrowser",
+          "startLine": 220,
+          "endLine": 269,
+          "params": [
+            "gateway",
+            "authorizationEndpoint",
+            "interaction"
+          ]
+        },
+        {
+          "name": "requestDeviceAuthorization",
+          "startLine": 271,
+          "endLine": 303,
+          "params": [
+            "gateway",
+            "signal"
+          ]
+        },
+        {
+          "name": "loginWithDeviceCode",
+          "startLine": 305,
+          "endLine": 350,
+          "params": [
+            "gateway",
+            "interaction"
+          ]
+        },
+        {
+          "name": "createRadiusOAuth",
+          "startLine": 357,
+          "endLine": 403,
+          "params": [
+            "options"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "OAuthResponseError",
+          "startLine": 68,
+          "endLine": 82,
+          "methods": [
+            "constructor"
+          ],
+          "properties": [
+            "status",
+            "oauthError"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "createRadiusOAuth",
+          "line": 357,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "loadRadiusOAuthDiscovery",
+          "callee": "fetch",
+          "lineNumber": 50
+        },
+        {
+          "caller": "loadRadiusOAuthDiscovery",
+          "callee": "response.text",
+          "lineNumber": 57
+        },
+        {
+          "caller": "loadRadiusOAuthDiscovery",
+          "callee": "response.json",
+          "lineNumber": 61
+        },
+        {
+          "caller": "constructor",
+          "callee": "String",
+          "lineNumber": 77
+        },
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 78
+        },
+        {
+          "caller": "readOAuthResponseError",
+          "callee": "response.text().catch",
+          "lineNumber": 85
+        },
+        {
+          "caller": "readOAuthResponseError",
+          "callee": "response.text",
+          "lineNumber": 85
+        },
+        {
+          "caller": "readOAuthResponseError",
+          "callee": "JSON.parse",
+          "lineNumber": 91
+        },
+        {
+          "caller": "requestOAuthToken",
+          "callee": "fetch",
+          "lineNumber": 109
+        },
+        {
+          "caller": "requestOAuthToken",
+          "callee": "readOAuthResponseError",
+          "lineNumber": 123
+        },
+        {
+          "caller": "requestOAuthToken",
+          "callee": "response.json",
+          "lineNumber": 126
+        },
+        {
+          "caller": "requestOAuthToken",
+          "callee": "Date.now",
+          "lineNumber": 137
+        },
+        {
+          "caller": "finish",
+          "callee": "signal.removeEventListener",
+          "lineNumber": 162
+        },
+        {
+          "caller": "finish",
+          "callee": "settle",
+          "lineNumber": 163
+        },
+        {
+          "caller": "onAbort",
+          "callee": "finish",
+          "lineNumber": 165
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "signal.addEventListener",
+          "lineNumber": 166
+        },
+        {
+          "caller": "sendPage",
+          "callee": "import",
+          "lineNumber": 168
+        },
+        {
+          "caller": "sendPage",
+          "callee": "response.setHeader",
+          "lineNumber": 170
+        },
+        {
+          "caller": "sendPage",
+          "callee": "response.end",
+          "lineNumber": 171
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "_http.createServer",
+          "lineNumber": 174
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "sendPage",
+          "lineNumber": 177
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "oauthErrorHtml",
+          "lineNumber": 177
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "url.searchParams.get",
+          "lineNumber": 180
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "sendPage",
+          "lineNumber": 181
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "oauthErrorHtml",
+          "lineNumber": 181
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "url.searchParams.get",
+          "lineNumber": 185
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "sendPage",
+          "lineNumber": 187
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "oauthErrorHtml",
+          "lineNumber": 187
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "url.searchParams.get",
+          "lineNumber": 187
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "finish",
+          "lineNumber": 188
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "url.searchParams.get",
+          "lineNumber": 192
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "sendPage",
+          "lineNumber": 194
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "oauthErrorHtml",
+          "lineNumber": 194
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "sendPage",
+          "lineNumber": 198
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "oauthSuccessHtml",
+          "lineNumber": 198
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "finish",
+          "lineNumber": 199
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "server\n\t\t\t.listen(CALLBACK_PORT, CALLBACK_HOST, () => {\n\t\t\t\tresolve({\n\t\t\t\t\twaitForCode: () => wait,\n\t\t\t\t\tclose: () => {\n\t\t\t\t\t\tfinish(null);\n\t\t\t\t\t\tserver.close();\n\t\t\t\t\t},\n\t\t\t\t});\n\t\t\t})\n\t\t\t.once",
+          "lineNumber": 203
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "server\n\t\t\t.listen",
+          "lineNumber": 203
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "resolve",
+          "lineNumber": 205
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "finish",
+          "lineNumber": 208
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "server.close",
+          "lineNumber": 209
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "finish",
+          "lineNumber": 214
+        },
+        {
+          "caller": "startOAuthCallbackServer",
+          "callee": "resolve",
+          "lineNumber": 215
+        },
+        {
+          "caller": "loginWithBrowser",
+          "callee": "generatePKCE",
+          "lineNumber": 225
+        },
+        {
+          "caller": "loginWithBrowser",
+          "callee": "crypto.randomUUID",
+          "lineNumber": 226
+        },
+        {
+          "caller": "loginWithBrowser",
+          "callee": "new URLSearchParams({\n\t\tresponse_type: \"code\",\n\t\tclient_id: OAUTH_CLIENT_ID,\n\t\tredirect_uri: REDIRECT_URI,\n\t\tscope: OAUTH_SCOPE,\n\t\tcode_challenge: challenge,\n\t\tcode_challenge_method: \"S256\",\n\t\thandoff: \"url\",\n\t\tstate,\n\t}).toString",
+          "lineNumber": 228
+        },
+        {
+          "caller": "loginWithBrowser",
+          "callee": "startOAuthCallbackServer",
+          "lineNumber": 239
+        },
+        {
+          "caller": "loginWithBrowser",
+          "callee": "interaction.notify",
+          "lineNumber": 240
+        },
+        {
+          "caller": "loginWithBrowser",
+          "callee": "interaction.notify",
+          "lineNumber": 241
+        },
+        {
+          "caller": "loginWithBrowser",
+          "callee": "authorizeUrl.toString",
+          "lineNumber": 243
+        },
+        {
+          "caller": "loginWithBrowser",
+          "callee": "callbackServer.waitForCode",
+          "lineNumber": 248
+        },
+        {
+          "caller": "loginWithBrowser",
+          "callee": "requestOAuthToken",
+          "lineNumber": 255
+        },
+        {
+          "caller": "loginWithBrowser",
+          "callee": "callbackServer.close",
+          "lineNumber": 267
+        },
+        {
+          "caller": "requestDeviceAuthorization",
+          "callee": "fetch",
+          "lineNumber": 274
+        },
+        {
+          "caller": "requestDeviceAuthorization",
+          "callee": "readOAuthResponseError",
+          "lineNumber": 288
+        },
+        {
+          "caller": "requestDeviceAuthorization",
+          "callee": "response.json",
+          "lineNumber": 291
+        },
+        {
+          "caller": "loginWithDeviceCode",
+          "callee": "requestDeviceAuthorization",
+          "lineNumber": 306
+        },
+        {
+          "caller": "loginWithDeviceCode",
+          "callee": "interaction.notify",
+          "lineNumber": 307
+        },
+        {
+          "caller": "loginWithDeviceCode",
+          "callee": "pollOAuthDeviceCodeFlow",
+          "lineNumber": 315
+        },
+        {
+          "caller": "loginWithDeviceCode",
+          "callee": "requestOAuthToken",
+          "lineNumber": 321
+        },
+        {
+          "caller": "createRadiusOAuth",
+          "callee": "normalizeRadiusGatewayUrl",
+          "lineNumber": 358
+        },
+        {
+          "caller": "login",
+          "callee": "interaction.prompt",
+          "lineNumber": 364
+        },
+        {
+          "caller": "login",
+          "callee": "loginWithDeviceCode",
+          "lineNumber": 377
+        },
+        {
+          "caller": "login",
+          "callee": "loadRadiusOAuthDiscovery",
+          "lineNumber": 380
+        },
+        {
+          "caller": "login",
+          "callee": "loginWithBrowser",
+          "lineNumber": 381
+        },
+        {
+          "caller": "refresh",
+          "callee": "requestOAuthToken",
+          "lineNumber": 387
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 8,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/xai.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 239,
+      "nonEmptyLines": 218,
+      "functions": [
+        {
+          "name": "requiredString",
+          "startLine": 33,
+          "endLine": 39,
+          "params": [
+            "body",
+            "field"
+          ]
+        },
+        {
+          "name": "positiveNumber",
+          "startLine": 41,
+          "endLine": 47,
+          "params": [
+            "body",
+            "field"
+          ]
+        },
+        {
+          "name": "validateVerificationUri",
+          "startLine": 51,
+          "endLine": 62,
+          "params": [
+            "raw"
+          ]
+        },
+        {
+          "name": "postForm",
+          "startLine": 64,
+          "endLine": 98,
+          "params": [
+            "url",
+            "fields",
+            "signal"
+          ]
+        },
+        {
+          "name": "requestFailure",
+          "startLine": 100,
+          "endLine": 106,
+          "params": [
+            "action",
+            "response"
+          ]
+        },
+        {
+          "name": "parseDeviceCode",
+          "startLine": 108,
+          "endLine": 126,
+          "params": [
+            "body"
+          ]
+        },
+        {
+          "name": "credentialsFromTokenResponse",
+          "startLine": 128,
+          "endLine": 143,
+          "params": [
+            "body",
+            "previousRefreshToken"
+          ]
+        },
+        {
+          "name": "requestDeviceCode",
+          "startLine": 145,
+          "endLine": 159,
+          "params": [
+            "signal"
+          ]
+        },
+        {
+          "name": "pollForTokens",
+          "startLine": 161,
+          "endLine": 199,
+          "params": [
+            "device",
+            "signal"
+          ]
+        },
+        {
+          "name": "loginXai",
+          "startLine": 201,
+          "endLine": 211,
+          "params": [
+            "interaction"
+          ]
+        },
+        {
+          "name": "refreshXaiToken",
+          "startLine": 213,
+          "endLine": 227,
+          "params": [
+            "refreshToken",
+            "signal"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "xaiOAuth",
+          "line": 229,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "positiveNumber",
+          "callee": "Number.isFinite",
+          "lineNumber": 43
+        },
+        {
+          "caller": "postForm",
+          "callee": "fetch",
+          "lineNumber": 67
+        },
+        {
+          "caller": "postForm",
+          "callee": "response.json",
+          "lineNumber": 85
+        },
+        {
+          "caller": "postForm",
+          "callee": "Array.isArray",
+          "lineNumber": 86
+        },
+        {
+          "caller": "requestFailure",
+          "callee": "[error, description].filter(Boolean).join",
+          "lineNumber": 104
+        },
+        {
+          "caller": "requestFailure",
+          "callee": "[error, description].filter",
+          "lineNumber": 104
+        },
+        {
+          "caller": "parseDeviceCode",
+          "callee": "Number.isFinite",
+          "lineNumber": 113
+        },
+        {
+          "caller": "parseDeviceCode",
+          "callee": "validateVerificationUri",
+          "lineNumber": 116
+        },
+        {
+          "caller": "parseDeviceCode",
+          "callee": "requiredString",
+          "lineNumber": 119
+        },
+        {
+          "caller": "parseDeviceCode",
+          "callee": "requiredString",
+          "lineNumber": 120
+        },
+        {
+          "caller": "parseDeviceCode",
+          "callee": "validateVerificationUri",
+          "lineNumber": 121
+        },
+        {
+          "caller": "parseDeviceCode",
+          "callee": "requiredString",
+          "lineNumber": 121
+        },
+        {
+          "caller": "parseDeviceCode",
+          "callee": "positiveNumber",
+          "lineNumber": 124
+        },
+        {
+          "caller": "credentialsFromTokenResponse",
+          "callee": "requiredString",
+          "lineNumber": 129
+        },
+        {
+          "caller": "credentialsFromTokenResponse",
+          "callee": "requiredString",
+          "lineNumber": 134
+        },
+        {
+          "caller": "credentialsFromTokenResponse",
+          "callee": "positiveNumber",
+          "lineNumber": 136
+        },
+        {
+          "caller": "credentialsFromTokenResponse",
+          "callee": "Date.now",
+          "lineNumber": 141
+        },
+        {
+          "caller": "requestDeviceCode",
+          "callee": "postForm",
+          "lineNumber": 146
+        },
+        {
+          "caller": "requestDeviceCode",
+          "callee": "requestFailure",
+          "lineNumber": 156
+        },
+        {
+          "caller": "requestDeviceCode",
+          "callee": "parseDeviceCode",
+          "lineNumber": 158
+        },
+        {
+          "caller": "pollForTokens",
+          "callee": "pollOAuthDeviceCodeFlow",
+          "lineNumber": 162
+        },
+        {
+          "caller": "pollForTokens",
+          "callee": "postForm",
+          "lineNumber": 168
+        },
+        {
+          "caller": "pollForTokens",
+          "callee": "credentialsFromTokenResponse",
+          "lineNumber": 179
+        },
+        {
+          "caller": "pollForTokens",
+          "callee": "requestFailure",
+          "lineNumber": 196
+        },
+        {
+          "caller": "loginXai",
+          "callee": "requestDeviceCode",
+          "lineNumber": 202
+        },
+        {
+          "caller": "loginXai",
+          "callee": "interaction.notify",
+          "lineNumber": 203
+        },
+        {
+          "caller": "loginXai",
+          "callee": "pollForTokens",
+          "lineNumber": 210
+        },
+        {
+          "caller": "refreshXaiToken",
+          "callee": "postForm",
+          "lineNumber": 214
+        },
+        {
+          "caller": "refreshXaiToken",
+          "callee": "requestFailure",
+          "lineNumber": 224
+        },
+        {
+          "caller": "refreshXaiToken",
+          "callee": "credentialsFromTokenResponse",
+          "lineNumber": 226
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 11,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/auth/resolve.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 205,
+      "nonEmptyLines": 188,
+      "functions": [
+        {
+          "name": "withCauseDetail",
+          "startLine": 37,
+          "endLine": 42,
+          "params": [
+            "message",
+            "cause"
+          ]
+        },
+        {
+          "name": "resolveProviderAuth",
+          "startLine": 50,
+          "endLine": 61,
+          "params": [
+            "provider",
+            "credentials",
+            "authContext",
+            "overrides"
+          ]
+        },
+        {
+          "name": "resolveProviderAuthWithSignal",
+          "startLine": 63,
+          "endLine": 110,
+          "params": [
+            "provider",
+            "credentials",
+            "authContext",
+            "overrides",
+            "signal"
+          ]
+        },
+        {
+          "name": "overlayEnvAuthContext",
+          "startLine": 112,
+          "endLine": 117,
+          "params": [
+            "base",
+            "env"
+          ]
+        },
+        {
+          "name": "resolveStoredOAuth",
+          "startLine": 127,
+          "endLine": 179,
+          "params": [
+            "credentials",
+            "providerId",
+            "oauth",
+            "stored",
+            "signal",
+            "minOAuthValidityMs"
+          ]
+        },
+        {
+          "name": "resolveApiKey",
+          "startLine": 181,
+          "endLine": 193,
+          "params": [
+            "authContext",
+            "apiKey",
+            "providerId",
+            "credential",
+            "signal"
+          ]
+        },
+        {
+          "name": "readCredential",
+          "startLine": 195,
+          "endLine": 205,
+          "params": [
+            "credentials",
+            "providerId",
+            "signal"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ModelsError",
+          "startLine": 26,
+          "endLine": 34,
+          "methods": [
+            "constructor"
+          ],
+          "properties": [
+            "code"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ModelsError",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "resolveProviderAuth",
+          "line": 50,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 30
+        },
+        {
+          "caller": "constructor",
+          "callee": "withCauseDetail",
+          "lineNumber": 30
+        },
+        {
+          "caller": "withCauseDetail",
+          "callee": "formatThrownValue(cause).trim",
+          "lineNumber": 39
+        },
+        {
+          "caller": "withCauseDetail",
+          "callee": "formatThrownValue",
+          "lineNumber": 39
+        },
+        {
+          "caller": "withCauseDetail",
+          "callee": "message.includes",
+          "lineNumber": 40
+        },
+        {
+          "caller": "resolveProviderAuth",
+          "callee": "operationSignal",
+          "lineNumber": 56
+        },
+        {
+          "caller": "resolveProviderAuth",
+          "callee": "raceWithAbortSignal",
+          "lineNumber": 57
+        },
+        {
+          "caller": "resolveProviderAuth",
+          "callee": "resolveProviderAuthWithSignal",
+          "lineNumber": 58
+        },
+        {
+          "caller": "resolveProviderAuthWithSignal",
+          "callee": "signal.throwIfAborted",
+          "lineNumber": 70
+        },
+        {
+          "caller": "resolveProviderAuthWithSignal",
+          "callee": "overlayEnvAuthContext",
+          "lineNumber": 71
+        },
+        {
+          "caller": "resolveProviderAuthWithSignal",
+          "callee": "resolveApiKey",
+          "lineNumber": 74
+        },
+        {
+          "caller": "resolveProviderAuthWithSignal",
+          "callee": "readCredential",
+          "lineNumber": 87
+        },
+        {
+          "caller": "resolveProviderAuthWithSignal",
+          "callee": "resolveStoredOAuth",
+          "lineNumber": 90
+        },
+        {
+          "caller": "resolveProviderAuthWithSignal",
+          "callee": "resolveApiKey",
+          "lineNumber": 101
+        },
+        {
+          "caller": "resolveProviderAuthWithSignal",
+          "callee": "resolveApiKey",
+          "lineNumber": 108
+        },
+        {
+          "caller": "overlayEnvAuthContext",
+          "callee": "base.env",
+          "lineNumber": 114
+        },
+        {
+          "caller": "overlayEnvAuthContext",
+          "callee": "base.fileExists",
+          "lineNumber": 115
+        },
+        {
+          "caller": "resolveStoredOAuth",
+          "callee": "Math.max",
+          "lineNumber": 135
+        },
+        {
+          "caller": "expiresSoon",
+          "callee": "Date.now",
+          "lineNumber": 136
+        },
+        {
+          "caller": "resolveStoredOAuth",
+          "callee": "expiresSoon",
+          "lineNumber": 139
+        },
+        {
+          "caller": "resolveStoredOAuth",
+          "callee": "credentials.modify",
+          "lineNumber": 143
+        },
+        {
+          "caller": "resolveStoredOAuth",
+          "callee": "expiresSoon",
+          "lineNumber": 147
+        },
+        {
+          "caller": "resolveStoredOAuth",
+          "callee": "AbortSignal.any",
+          "lineNumber": 149
+        },
+        {
+          "caller": "resolveStoredOAuth",
+          "callee": "AbortSignal.timeout",
+          "lineNumber": 151
+        },
+        {
+          "caller": "resolveStoredOAuth",
+          "callee": "oauth.refresh",
+          "lineNumber": 153
+        },
+        {
+          "caller": "resolveStoredOAuth",
+          "callee": "expiresSoon",
+          "lineNumber": 169
+        },
+        {
+          "caller": "resolveStoredOAuth",
+          "callee": "oauth.toAuth",
+          "lineNumber": 175
+        },
+        {
+          "caller": "resolveApiKey",
+          "callee": "apiKey.resolve",
+          "lineNumber": 189
+        },
+        {
+          "caller": "readCredential",
+          "callee": "credentials.read",
+          "lineNumber": 201
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 2,
+        "functionCount": 7,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/ai/src/auth/types.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 240,
+      "nonEmptyLines": 208,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/bun-oauth.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 21,
+      "nonEmptyLines": 20,
+      "functions": [
+        {
+          "name": "registerBunOAuthFlows",
+          "startLine": 11,
+          "endLine": 21,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "registerBunOAuthFlows",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "registerBunOAuthFlows",
+          "callee": "registerBundledOAuthFlowLoaders",
+          "lineNumber": 12
+        }
+      ],
+      "metrics": {
+        "importCount": 8,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/cli.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 119,
+      "nonEmptyLines": 110,
+      "functions": [
+        {
+          "name": "prompt",
+          "startLine": 14,
+          "endLine": 16,
+          "params": [
+            "rl",
+            "question"
+          ]
+        },
+        {
+          "name": "loadAuth",
+          "startLine": 18,
+          "endLine": 25,
+          "params": []
+        },
+        {
+          "name": "saveAuth",
+          "startLine": 27,
+          "endLine": 29,
+          "params": [
+            "auth"
+          ]
+        },
+        {
+          "name": "answerPrompt",
+          "startLine": 31,
+          "endLine": 43,
+          "params": [
+            "rl",
+            "authPrompt"
+          ]
+        },
+        {
+          "name": "login",
+          "startLine": 45,
+          "endLine": 77,
+          "params": [
+            "providerId"
+          ]
+        },
+        {
+          "name": "main",
+          "startLine": 79,
+          "endLine": 114,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "prompt",
+          "callee": "rl.question",
+          "lineNumber": 15
+        },
+        {
+          "caller": "loadAuth",
+          "callee": "existsSync",
+          "lineNumber": 19
+        },
+        {
+          "caller": "loadAuth",
+          "callee": "JSON.parse",
+          "lineNumber": 21
+        },
+        {
+          "caller": "loadAuth",
+          "callee": "readFileSync",
+          "lineNumber": 21
+        },
+        {
+          "caller": "saveAuth",
+          "callee": "writeFileSync",
+          "lineNumber": 28
+        },
+        {
+          "caller": "saveAuth",
+          "callee": "JSON.stringify",
+          "lineNumber": 28
+        },
+        {
+          "caller": "answerPrompt",
+          "callee": "console.log",
+          "lineNumber": 33
+        },
+        {
+          "caller": "answerPrompt",
+          "callee": "console.log",
+          "lineNumber": 35
+        },
+        {
+          "caller": "answerPrompt",
+          "callee": "Number.parseInt",
+          "lineNumber": 37
+        },
+        {
+          "caller": "answerPrompt",
+          "callee": "prompt",
+          "lineNumber": 37
+        },
+        {
+          "caller": "answerPrompt",
+          "callee": "prompt",
+          "lineNumber": 42
+        },
+        {
+          "caller": "login",
+          "callee": "PROVIDERS.find",
+          "lineNumber": 46
+        },
+        {
+          "caller": "login",
+          "callee": "createInterface",
+          "lineNumber": 48
+        },
+        {
+          "caller": "login",
+          "callee": "provider.auth.oauth.login",
+          "lineNumber": 50
+        },
+        {
+          "caller": "login",
+          "callee": "answerPrompt",
+          "lineNumber": 52
+        },
+        {
+          "caller": "login",
+          "callee": "console.log",
+          "lineNumber": 56
+        },
+        {
+          "caller": "login",
+          "callee": "console.log",
+          "lineNumber": 57
+        },
+        {
+          "caller": "login",
+          "callee": "console.log",
+          "lineNumber": 60
+        },
+        {
+          "caller": "login",
+          "callee": "console.log",
+          "lineNumber": 61
+        },
+        {
+          "caller": "login",
+          "callee": "console.log",
+          "lineNumber": 65
+        },
+        {
+          "caller": "login",
+          "callee": "loadAuth",
+          "lineNumber": 70
+        },
+        {
+          "caller": "login",
+          "callee": "saveAuth",
+          "lineNumber": 72
+        },
+        {
+          "caller": "login",
+          "callee": "console.log",
+          "lineNumber": 73
+        },
+        {
+          "caller": "login",
+          "callee": "rl.close",
+          "lineNumber": 75
+        },
+        {
+          "caller": "main",
+          "callee": "process.argv.slice",
+          "lineNumber": 80
+        },
+        {
+          "caller": "main",
+          "callee": "PROVIDERS.map((provider) => `  ${provider.id.padEnd(20)} ${provider.name}`).join",
+          "lineNumber": 83
+        },
+        {
+          "caller": "main",
+          "callee": "PROVIDERS.map",
+          "lineNumber": 83
+        },
+        {
+          "caller": "main",
+          "callee": "provider.id.padEnd",
+          "lineNumber": 83
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 84
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 90
+        },
+        {
+          "caller": "main",
+          "callee": "provider.id.padEnd",
+          "lineNumber": 90
+        },
+        {
+          "caller": "main",
+          "callee": "createInterface",
+          "lineNumber": 96
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 99
+        },
+        {
+          "caller": "main",
+          "callee": "Number.parseInt",
+          "lineNumber": 101
+        },
+        {
+          "caller": "main",
+          "callee": "prompt",
+          "lineNumber": 101
+        },
+        {
+          "caller": "main",
+          "callee": "rl.close",
+          "lineNumber": 104
+        },
+        {
+          "caller": "main",
+          "callee": "PROVIDERS.some",
+          "lineNumber": 107
+        },
+        {
+          "caller": "main",
+          "callee": "login",
+          "lineNumber": 110
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 6,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/compat.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 298,
+      "nonEmptyLines": 262,
+      "functions": [
+        {
+          "name": "wrapStream",
+          "startLine": 102,
+          "endLine": 112,
+          "params": [
+            "api",
+            "stream"
+          ]
+        },
+        {
+          "name": "wrapStreamSimple",
+          "startLine": 114,
+          "endLine": 124,
+          "params": [
+            "api",
+            "streamSimple"
+          ]
+        },
+        {
+          "name": "registerApiProvider",
+          "startLine": 126,
+          "endLine": 138,
+          "params": [
+            "provider",
+            "sourceId"
+          ]
+        },
+        {
+          "name": "getApiProvider",
+          "startLine": 140,
+          "endLine": 142,
+          "params": [
+            "api"
+          ]
+        },
+        {
+          "name": "getApiProviders",
+          "startLine": 144,
+          "endLine": 146,
+          "params": []
+        },
+        {
+          "name": "unregisterApiProviders",
+          "startLine": 148,
+          "endLine": 154,
+          "params": [
+            "sourceId"
+          ]
+        },
+        {
+          "name": "clearApiProviders",
+          "startLine": 156,
+          "endLine": 158,
+          "params": []
+        },
+        {
+          "name": "registerFauxProvider",
+          "startLine": 160,
+          "endLine": 176,
+          "params": [
+            "options"
+          ]
+        },
+        {
+          "name": "registerBuiltInApiProviders",
+          "startLine": 198,
+          "endLine": 205,
+          "params": []
+        },
+        {
+          "name": "resetApiProviders",
+          "startLine": 207,
+          "endLine": 211,
+          "params": []
+        },
+        {
+          "name": "hasExplicitApiKey",
+          "startLine": 218,
+          "endLine": 220,
+          "params": [
+            "apiKey"
+          ]
+        },
+        {
+          "name": "withEnvApiKey",
+          "startLine": 222,
+          "endLine": 230,
+          "params": [
+            "model",
+            "options"
+          ]
+        },
+        {
+          "name": "hasResolvedCloudflareAuth",
+          "startLine": 232,
+          "endLine": 234,
+          "params": [
+            "options"
+          ]
+        },
+        {
+          "name": "getBuiltinProviderForModel",
+          "startLine": 236,
+          "endLine": 240,
+          "params": [
+            "model"
+          ]
+        },
+        {
+          "name": "resolveApiProvider",
+          "startLine": 242,
+          "endLine": 248,
+          "params": [
+            "api"
+          ]
+        },
+        {
+          "name": "stream",
+          "startLine": 250,
+          "endLine": 264,
+          "params": [
+            "model",
+            "context",
+            "options"
+          ]
+        },
+        {
+          "name": "complete",
+          "startLine": 266,
+          "endLine": 273,
+          "params": [
+            "model",
+            "context",
+            "options"
+          ]
+        },
+        {
+          "name": "streamSimple",
+          "startLine": 275,
+          "endLine": 289,
+          "params": [
+            "model",
+            "context",
+            "options"
+          ]
+        },
+        {
+          "name": "completeSimple",
+          "startLine": 291,
+          "endLine": 298,
+          "params": [
+            "model",
+            "context",
+            "options"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "BuiltinProvider",
+          "line": 45,
+          "isDefault": false
+        },
+        {
+          "name": "getModel",
+          "line": 63,
+          "isDefault": false
+        },
+        {
+          "name": "getModels",
+          "line": 66,
+          "isDefault": false
+        },
+        {
+          "name": "getProviders",
+          "line": 69,
+          "isDefault": false
+        },
+        {
+          "name": "registerApiProvider",
+          "line": 126,
+          "isDefault": false
+        },
+        {
+          "name": "getApiProvider",
+          "line": 140,
+          "isDefault": false
+        },
+        {
+          "name": "getApiProviders",
+          "line": 144,
+          "isDefault": false
+        },
+        {
+          "name": "unregisterApiProviders",
+          "line": 148,
+          "isDefault": false
+        },
+        {
+          "name": "registerFauxProvider",
+          "line": 160,
+          "isDefault": false
+        },
+        {
+          "name": "registerBuiltInApiProviders",
+          "line": 198,
+          "isDefault": false
+        },
+        {
+          "name": "resetApiProviders",
+          "line": 207,
+          "isDefault": false
+        },
+        {
+          "name": "stream",
+          "line": 250,
+          "isDefault": false
+        },
+        {
+          "name": "complete",
+          "line": 266,
+          "isDefault": false
+        },
+        {
+          "name": "streamSimple",
+          "line": 275,
+          "isDefault": false
+        },
+        {
+          "name": "completeSimple",
+          "line": 291,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "wrapStream",
+          "callee": "stream",
+          "lineNumber": 110
+        },
+        {
+          "caller": "wrapStreamSimple",
+          "callee": "streamSimple",
+          "lineNumber": 122
+        },
+        {
+          "caller": "registerApiProvider",
+          "callee": "apiProviderRegistry.set",
+          "lineNumber": 130
+        },
+        {
+          "caller": "registerApiProvider",
+          "callee": "wrapStream",
+          "lineNumber": 133
+        },
+        {
+          "caller": "registerApiProvider",
+          "callee": "wrapStreamSimple",
+          "lineNumber": 134
+        },
+        {
+          "caller": "getApiProvider",
+          "callee": "apiProviderRegistry.get",
+          "lineNumber": 141
+        },
+        {
+          "caller": "getApiProviders",
+          "callee": "Array.from",
+          "lineNumber": 145
+        },
+        {
+          "caller": "getApiProviders",
+          "callee": "apiProviderRegistry.values",
+          "lineNumber": 145
+        },
+        {
+          "caller": "unregisterApiProviders",
+          "callee": "apiProviderRegistry.entries",
+          "lineNumber": 149
+        },
+        {
+          "caller": "unregisterApiProviders",
+          "callee": "apiProviderRegistry.delete",
+          "lineNumber": 151
+        },
+        {
+          "caller": "clearApiProviders",
+          "callee": "apiProviderRegistry.clear",
+          "lineNumber": 157
+        },
+        {
+          "caller": "registerFauxProvider",
+          "callee": "createFauxCore",
+          "lineNumber": 161
+        },
+        {
+          "caller": "registerFauxProvider",
+          "callee": "Math.random().toString(36).slice",
+          "lineNumber": 162
+        },
+        {
+          "caller": "registerFauxProvider",
+          "callee": "Math.random().toString",
+          "lineNumber": 162
+        },
+        {
+          "caller": "registerFauxProvider",
+          "callee": "Math.random",
+          "lineNumber": 162
+        },
+        {
+          "caller": "registerFauxProvider",
+          "callee": "registerApiProvider",
+          "lineNumber": 163
+        },
+        {
+          "caller": "unregister",
+          "callee": "unregisterApiProviders",
+          "lineNumber": 173
+        },
+        {
+          "caller": "registerBuiltInApiProviders",
+          "callee": "getApiProvider",
+          "lineNumber": 200
+        },
+        {
+          "caller": "registerBuiltInApiProviders",
+          "callee": "registerApiProvider",
+          "lineNumber": 201
+        },
+        {
+          "caller": "registerBuiltInApiProviders",
+          "callee": "builtinApiProviderInstances.set",
+          "lineNumber": 203
+        },
+        {
+          "caller": "registerBuiltInApiProviders",
+          "callee": "getApiProvider",
+          "lineNumber": 203
+        },
+        {
+          "caller": "resetApiProviders",
+          "callee": "clearApiProviders",
+          "lineNumber": 208
+        },
+        {
+          "caller": "resetApiProviders",
+          "callee": "builtinApiProviderInstances.clear",
+          "lineNumber": 209
+        },
+        {
+          "caller": "resetApiProviders",
+          "callee": "registerBuiltInApiProviders",
+          "lineNumber": 210
+        },
+        {
+          "caller": "hasExplicitApiKey",
+          "callee": "apiKey.trim",
+          "lineNumber": 219
+        },
+        {
+          "caller": "withEnvApiKey",
+          "callee": "hasExplicitApiKey",
+          "lineNumber": 226
+        },
+        {
+          "caller": "withEnvApiKey",
+          "callee": "getEnvApiKey",
+          "lineNumber": 227
+        },
+        {
+          "caller": "hasResolvedCloudflareAuth",
+          "callee": "hasExplicitApiKey",
+          "lineNumber": 233
+        },
+        {
+          "caller": "getBuiltinProviderForModel",
+          "callee": "getApiProvider",
+          "lineNumber": 237
+        },
+        {
+          "caller": "getBuiltinProviderForModel",
+          "callee": "builtinApiProviderInstances.get",
+          "lineNumber": 237
+        },
+        {
+          "caller": "getBuiltinProviderForModel",
+          "callee": "compatModels.getProvider",
+          "lineNumber": 238
+        },
+        {
+          "caller": "getBuiltinProviderForModel",
+          "callee": "provider?.getModels().some",
+          "lineNumber": 239
+        },
+        {
+          "caller": "getBuiltinProviderForModel",
+          "callee": "provider?.getModels",
+          "lineNumber": 239
+        },
+        {
+          "caller": "resolveApiProvider",
+          "callee": "getApiProvider",
+          "lineNumber": 243
+        },
+        {
+          "caller": "stream",
+          "callee": "getBuiltinProviderForModel",
+          "lineNumber": 255
+        },
+        {
+          "caller": "stream",
+          "callee": "model.provider.startsWith",
+          "lineNumber": 257
+        },
+        {
+          "caller": "stream",
+          "callee": "hasResolvedCloudflareAuth",
+          "lineNumber": 257
+        },
+        {
+          "caller": "stream",
+          "callee": "compatModels.stream",
+          "lineNumber": 258
+        },
+        {
+          "caller": "stream",
+          "callee": "builtinProvider.stream",
+          "lineNumber": 260
+        },
+        {
+          "caller": "stream",
+          "callee": "withEnvApiKey",
+          "lineNumber": 260
+        },
+        {
+          "caller": "stream",
+          "callee": "resolveApiProvider",
+          "lineNumber": 262
+        },
+        {
+          "caller": "stream",
+          "callee": "provider.stream",
+          "lineNumber": 263
+        },
+        {
+          "caller": "stream",
+          "callee": "withEnvApiKey",
+          "lineNumber": 263
+        },
+        {
+          "caller": "complete",
+          "callee": "stream",
+          "lineNumber": 271
+        },
+        {
+          "caller": "complete",
+          "callee": "s.result",
+          "lineNumber": 272
+        },
+        {
+          "caller": "streamSimple",
+          "callee": "getBuiltinProviderForModel",
+          "lineNumber": 280
+        },
+        {
+          "caller": "streamSimple",
+          "callee": "model.provider.startsWith",
+          "lineNumber": 282
+        },
+        {
+          "caller": "streamSimple",
+          "callee": "hasResolvedCloudflareAuth",
+          "lineNumber": 282
+        },
+        {
+          "caller": "streamSimple",
+          "callee": "compatModels.streamSimple",
+          "lineNumber": 283
+        },
+        {
+          "caller": "streamSimple",
+          "callee": "builtinProvider.streamSimple",
+          "lineNumber": 285
+        },
+        {
+          "caller": "streamSimple",
+          "callee": "withEnvApiKey",
+          "lineNumber": 285
+        },
+        {
+          "caller": "streamSimple",
+          "callee": "resolveApiProvider",
+          "lineNumber": 287
+        },
+        {
+          "caller": "streamSimple",
+          "callee": "provider.streamSimple",
+          "lineNumber": 288
+        },
+        {
+          "caller": "streamSimple",
+          "callee": "withEnvApiKey",
+          "lineNumber": 288
+        },
+        {
+          "caller": "completeSimple",
+          "callee": "streamSimple",
+          "lineNumber": 296
+        },
+        {
+          "caller": "completeSimple",
+          "callee": "s.result",
+          "lineNumber": 297
+        }
+      ],
+      "metrics": {
+        "importCount": 15,
+        "exportCount": 15,
+        "functionCount": 19,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/compat/extension-oauth-types.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 45,
+      "nonEmptyLines": 38,
+      "exports": [
+        {
+          "name": "OAuthCredentials",
+          "line": 45,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

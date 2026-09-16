@@ -1,0 +1,971 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/server/src/server.ts",
+      "type": "file",
+      "name": "server.ts",
+      "filePath": "packages/server/src/server.ts",
+      "summary": "协议 Server：启动 listeners、完成 hello 握手、把 request 路由到 server services 或 SessionRouter，并编码 service_update。",
+      "tags": [
+        "server",
+        "rpc",
+        "handshake",
+        "routing"
+      ],
+      "complexity": "complex",
+      "languageNotes": "握手超时后 failProtocol；订阅响应会用 ServiceStateEncoder 编码 snapshot，再刷出缓冲的 update。"
+    },
+    {
+      "id": "class:packages/server/src/server.ts:Server",
+      "type": "class",
+      "name": "Server",
+      "filePath": "packages/server/src/server.ts",
+      "lineRange": [
+        46,
+        545
+      ],
+      "summary": "管理连接集合与 SessionRouter，处理 hello/request/cancel，并把 Chord service 调用映射为协议 response。",
+      "tags": [
+        "server",
+        "rpc",
+        "connection",
+        "lifecycle"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/server/src/server.ts:resolveOptions",
+      "type": "function",
+      "name": "resolveOptions",
+      "filePath": "packages/server/src/server.ts",
+      "lineRange": [
+        555,
+        576
+      ],
+      "summary": "校验 maxFrameLength 与 handshakeTimeoutMs，并套用默认帧长与 5s 握手超时。",
+      "tags": [
+        "validation",
+        "config",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/server/src/session-router.ts",
+      "type": "file",
+      "name": "session-router.ts",
+      "filePath": "packages/server/src/session-router.ts",
+      "summary": "按客户端串行化 attach/detach/remove，打开 RoutedSessionHandle，并把带 attachment 的 RPC 转发到 Session endpoint。",
+      "tags": [
+        "routing",
+        "session",
+        "attachment",
+        "lifecycle"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:packages/server/src/session-router.ts:SessionRouter",
+      "type": "class",
+      "name": "SessionRouter",
+      "filePath": "packages/server/src/session-router.ts",
+      "lineRange": [
+        34,
+        312
+      ],
+      "summary": "维护 hosted session 与每客户端唯一 attachment，校验 RpcTarget，并在 disconnect/close 时释放租约。",
+      "tags": [
+        "routing",
+        "session",
+        "attachment",
+        "concurrency"
+      ],
+      "complexity": "complex",
+      "languageNotes": "每个 client 的路由操作走 runForClient 串行队列，避免 attach/detach 与 RPC 交错破坏 attachment 不变量。"
+    },
+    {
+      "id": "file:packages/server/src/testing/client.ts",
+      "type": "file",
+      "name": "client.ts",
+      "filePath": "packages/server/src/testing/client.ts",
+      "summary": "协议一致性测试客户端：编码 hello/request，解码 server 帧，并跟踪 attachment 信封。",
+      "tags": [
+        "test",
+        "protocol",
+        "client",
+        "unix-socket"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/server/src/testing/client.ts:ProtocolTestClient",
+      "type": "class",
+      "name": "ProtocolTestClient",
+      "filePath": "packages/server/src/testing/client.ts",
+      "lineRange": [
+        27,
+        150
+      ],
+      "summary": "基于 WireChannel 的可等待消息客户端，支持分片发送与按谓词 next()。",
+      "tags": [
+        "test",
+        "protocol",
+        "client",
+        "async"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/server/src/testing/client.ts:connectUnixTestClient",
+      "type": "function",
+      "name": "connectUnixTestClient",
+      "filePath": "packages/server/src/testing/client.ts",
+      "lineRange": [
+        152,
+        174
+      ],
+      "summary": "连接 Unix domain socket 并包装为 ProtocolTestClient，支持故意分片写。",
+      "tags": [
+        "test",
+        "unix-socket",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/server/src/testing/host.ts",
+      "type": "file",
+      "name": "host.ts",
+      "filePath": "packages/server/src/testing/host.ts",
+      "summary": "内存 Session 测试主机：可注入打开/关闭/服务调用失败，并门控并发以验证 Server 路由。",
+      "tags": [
+        "test",
+        "test-double",
+        "server-host",
+        "session"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/server/src/testing/host.ts:Deferred",
+      "type": "class",
+      "name": "Deferred",
+      "filePath": "packages/server/src/testing/host.ts",
+      "lineRange": [
+        7,
+        20
+      ],
+      "summary": "可外部 resolve 的 Promise 容器，供测试门控与关闭等待。",
+      "tags": [
+        "test",
+        "utility",
+        "async"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/server/src/testing/host.ts:TestHarness",
+      "type": "class",
+      "name": "TestHarness",
+      "filePath": "packages/server/src/testing/host.ts",
+      "lineRange": [
+        27,
+        117
+      ],
+      "summary": "伪造的 RoutedSessionHandle：记录 attach/invoke/close，并可注入错误与门控。",
+      "tags": [
+        "test-double",
+        "session",
+        "harness"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/server/src/testing/host.ts:createTestServerServices",
+      "type": "function",
+      "name": "createTestServerServices",
+      "filePath": "packages/server/src/testing/host.ts",
+      "lineRange": [
+        119,
+        149
+      ],
+      "summary": "最小 serverServices：只实现 pi.session-management 的 attach/detach。",
+      "tags": [
+        "test-double",
+        "service",
+        "session-management"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/server/src/testing/host.ts:TestServerHost",
+      "type": "class",
+      "name": "TestServerHost",
+      "filePath": "packages/server/src/testing/host.ts",
+      "lineRange": [
+        151,
+        215
+      ],
+      "summary": "用 MemorySessionRepo 实现 ServerHost，支持 seed、门控 openSession 与错误注入。",
+      "tags": [
+        "test-double",
+        "server-host",
+        "session"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/server/src/testing/server.ts",
+      "type": "file",
+      "name": "server.ts",
+      "filePath": "packages/server/src/testing/server.ts",
+      "summary": "用确定性 serverId 与可选 TestServerHost 创建未 start 的 Server，供传输一致性测试。",
+      "tags": [
+        "test",
+        "factory",
+        "server"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/server/src/testing/server.ts:createTestServer",
+      "type": "function",
+      "name": "createTestServer",
+      "filePath": "packages/server/src/testing/server.ts",
+      "lineRange": [
+        16,
+        28
+      ],
+      "summary": "组装未启动的测试 Server，默认固定 UUID serverId 与 TestServerHost。",
+      "tags": [
+        "test",
+        "factory",
+        "server"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/server/src/transports/unix/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/server/src/transports/unix/index.ts",
+      "summary": "Unix 传输公共入口，重导出套接字路径、listener、preset 与选项类型。",
+      "tags": [
+        "barrel",
+        "unix-socket",
+        "transport",
+        "entry-point"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/server/src/transports/unix/listener.ts",
+      "type": "file",
+      "name": "listener.ts",
+      "filePath": "packages/server/src/transports/unix/listener.ts",
+      "summary": "Unix domain socket ServerListener：私有路径 bind 后 hardlink 到公开路径，并实现背压与优雅关闭。",
+      "tags": [
+        "transport",
+        "unix-socket",
+        "listener",
+        "infrastructure"
+      ],
+      "complexity": "complex",
+      "languageNotes": "先 bind 到 owned 临时 socket 再 link 到公开路径，关闭时按 inode 身份清理，避免误删被替换的 socket。"
+    },
+    {
+      "id": "class:packages/server/src/transports/unix/listener.ts:UnixListener",
+      "type": "class",
+      "name": "UnixListener",
+      "filePath": "packages/server/src/transports/unix/listener.ts",
+      "lineRange": [
+        29,
+        188
+      ],
+      "summary": "实现 ServerListener：清理 stale socket、监听、把 net.Socket 交给 acceptor，并按身份安全卸载路径。",
+      "tags": [
+        "listener",
+        "unix-socket",
+        "lifecycle"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/server/src/transports/unix/listener.ts:UnixByteConnection",
+      "type": "class",
+      "name": "UnixByteConnection",
+      "filePath": "packages/server/src/transports/unix/listener.ts",
+      "lineRange": [
+        191,
+        292
+      ],
+      "summary": "ByteConnection 的 Unix 实现：串行写、pending 字节上限断开慢对端，以及带超时的 graceful close。",
+      "tags": [
+        "connection",
+        "unix-socket",
+        "backpressure"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/server/src/transports/unix/listener.ts:removeStaleSocket",
+      "type": "function",
+      "name": "removeStaleSocket",
+      "filePath": "packages/server/src/transports/unix/listener.ts",
+      "lineRange": [
+        299,
+        328
+      ],
+      "summary": "若路径是死 socket（探测连接失败）则删除，活 socket 则报 EADDRINUSE。",
+      "tags": [
+        "cleanup",
+        "unix-socket",
+        "lifecycle"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/server/src/transports/unix/listener.ts:isSocketLive",
+      "type": "function",
+      "name": "isSocketLive",
+      "filePath": "packages/server/src/transports/unix/listener.ts",
+      "lineRange": [
+        338,
+        363
+      ],
+      "summary": "短超时 connect 探测 Unix socket 是否仍有进程在听。",
+      "tags": [
+        "probe",
+        "unix-socket",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/server/src/transports/unix/listener.ts:createUnixListener",
+      "type": "function",
+      "name": "createUnixListener",
+      "filePath": "packages/server/src/transports/unix/listener.ts",
+      "lineRange": [
+        388,
+        390
+      ],
+      "summary": "构造 UnixListener 的公开工厂。",
+      "tags": [
+        "factory",
+        "unix-socket",
+        "listener"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/server/src/transports/unix/listener.ts:resolveUnixListenerOptions",
+      "type": "function",
+      "name": "resolveUnixListenerOptions",
+      "filePath": "packages/server/src/transports/unix/listener.ts",
+      "lineRange": [
+        392,
+        421
+      ],
+      "summary": "解析 mode、gracefulCloseTimeout 与 maxPendingBytes（至少能缓冲一帧）。",
+      "tags": [
+        "validation",
+        "config",
+        "unix-socket"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/server/src/transports/unix/preset.ts",
+      "type": "file",
+      "name": "preset.ts",
+      "filePath": "packages/server/src/transports/unix/preset.ts",
+      "summary": "用单个 UnixListener 组装 Server 的便捷 preset。",
+      "tags": [
+        "factory",
+        "unix-socket",
+        "server",
+        "preset"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/server/src/transports/unix/preset.ts:createUnixServer",
+      "type": "function",
+      "name": "createUnixServer",
+      "filePath": "packages/server/src/transports/unix/preset.ts",
+      "lineRange": [
+        8,
+        28
+      ],
+      "summary": "创建带一个 Unix-domain listener 的 Server 实例。",
+      "tags": [
+        "factory",
+        "server",
+        "unix-socket"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/server/src/transports/unix/types.ts",
+      "type": "file",
+      "name": "types.ts",
+      "filePath": "packages/server/src/transports/unix/types.ts",
+      "summary": "UnixListener 与 UnixServer 选项：路径、权限、背压上限与优雅关闭超时。",
+      "tags": [
+        "type-definition",
+        "unix-socket",
+        "config"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/server/src/types.ts",
+      "type": "file",
+      "name": "types.ts",
+      "filePath": "packages/server/src/types.ts",
+      "summary": "定义 ServerOptions、RoutedSession/Server attachment 以及应用侧 ServerHost 能力接口。",
+      "tags": [
+        "type-definition",
+        "server-host",
+        "routing",
+        "session"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/server/src/server.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/server.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/server.ts",
+      "target": "file:packages/protocol/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/server.ts",
+      "target": "file:packages/server/src/connection.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/server.ts",
+      "target": "file:packages/server/src/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/server.ts",
+      "target": "file:packages/server/src/listener.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/server.ts",
+      "target": "file:packages/server/src/session-router.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/server.ts",
+      "target": "file:packages/server/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/session-router.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/session-router.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/session-router.ts",
+      "target": "file:packages/protocol/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/session-router.ts",
+      "target": "file:packages/server/src/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/session-router.ts",
+      "target": "file:packages/server/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/testing/client.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/testing/client.ts",
+      "target": "file:packages/protocol/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/testing/client.ts",
+      "target": "file:packages/server/src/testing/host.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/testing/host.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/testing/host.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/testing/host.ts",
+      "target": "file:packages/server/src/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/testing/host.ts",
+      "target": "file:packages/server/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/testing/server.ts",
+      "target": "file:packages/server/src/server.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/testing/server.ts",
+      "target": "file:packages/server/src/testing/host.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/testing/server.ts",
+      "target": "file:packages/server/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/listener.ts",
+      "target": "file:packages/protocol/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/listener.ts",
+      "target": "file:packages/server/src/connection.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/listener.ts",
+      "target": "file:packages/server/src/listener.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/listener.ts",
+      "target": "file:packages/server/src/transports/unix/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/preset.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/preset.ts",
+      "target": "file:packages/server/src/server.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/preset.ts",
+      "target": "file:packages/server/src/transports/unix/listener.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/preset.ts",
+      "target": "file:packages/server/src/transports/unix/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/preset.ts",
+      "target": "file:packages/server/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/types.ts",
+      "target": "file:packages/server/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/types.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/types.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/types.ts",
+      "target": "file:packages/server/src/listener.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/server.ts",
+      "target": "class:packages/server/src/server.ts:Server",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/server.ts",
+      "target": "function:packages/server/src/server.ts:resolveOptions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/session-router.ts",
+      "target": "class:packages/server/src/session-router.ts:SessionRouter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/testing/client.ts",
+      "target": "class:packages/server/src/testing/client.ts:ProtocolTestClient",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/testing/client.ts",
+      "target": "function:packages/server/src/testing/client.ts:connectUnixTestClient",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/testing/host.ts",
+      "target": "class:packages/server/src/testing/host.ts:Deferred",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/testing/host.ts",
+      "target": "class:packages/server/src/testing/host.ts:TestHarness",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/testing/host.ts",
+      "target": "function:packages/server/src/testing/host.ts:createTestServerServices",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/testing/host.ts",
+      "target": "class:packages/server/src/testing/host.ts:TestServerHost",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/testing/server.ts",
+      "target": "function:packages/server/src/testing/server.ts:createTestServer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/listener.ts",
+      "target": "class:packages/server/src/transports/unix/listener.ts:UnixListener",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/listener.ts",
+      "target": "class:packages/server/src/transports/unix/listener.ts:UnixByteConnection",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/listener.ts",
+      "target": "function:packages/server/src/transports/unix/listener.ts:removeStaleSocket",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/listener.ts",
+      "target": "function:packages/server/src/transports/unix/listener.ts:isSocketLive",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/listener.ts",
+      "target": "function:packages/server/src/transports/unix/listener.ts:createUnixListener",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/listener.ts",
+      "target": "function:packages/server/src/transports/unix/listener.ts:resolveUnixListenerOptions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/preset.ts",
+      "target": "function:packages/server/src/transports/unix/preset.ts:createUnixServer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/server.ts",
+      "target": "class:packages/server/src/server.ts:Server",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/server/src/session-router.ts",
+      "target": "class:packages/server/src/session-router.ts:SessionRouter",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/server/src/testing/client.ts",
+      "target": "class:packages/server/src/testing/client.ts:ProtocolTestClient",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/server/src/testing/client.ts",
+      "target": "function:packages/server/src/testing/client.ts:connectUnixTestClient",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/server/src/testing/host.ts",
+      "target": "class:packages/server/src/testing/host.ts:Deferred",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/server/src/testing/host.ts",
+      "target": "class:packages/server/src/testing/host.ts:TestHarness",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/server/src/testing/host.ts",
+      "target": "function:packages/server/src/testing/host.ts:createTestServerServices",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/server/src/testing/host.ts",
+      "target": "class:packages/server/src/testing/host.ts:TestServerHost",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/server/src/testing/server.ts",
+      "target": "function:packages/server/src/testing/server.ts:createTestServer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/listener.ts",
+      "target": "class:packages/server/src/transports/unix/listener.ts:UnixByteConnection",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/listener.ts",
+      "target": "function:packages/server/src/transports/unix/listener.ts:createUnixListener",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/preset.ts",
+      "target": "function:packages/server/src/transports/unix/preset.ts:createUnixServer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/server/src/server.ts:Server",
+      "target": "class:packages/server/src/session-router.ts:SessionRouter",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/server/src/server.ts:Server",
+      "target": "function:packages/chord/src/index.ts:parseServiceCall",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/server/src/testing/server.ts:createTestServer",
+      "target": "class:packages/server/src/server.ts:Server",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/server/src/testing/server.ts:createTestServer",
+      "target": "class:packages/server/src/testing/host.ts:TestServerHost",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/server/src/transports/unix/preset.ts:createUnixServer",
+      "target": "function:packages/server/src/transports/unix/listener.ts:createUnixListener",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/server/src/transports/unix/preset.ts:createUnixServer",
+      "target": "class:packages/server/src/server.ts:Server",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/index.ts",
+      "target": "file:packages/server/src/transports/unix/listener.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/index.ts",
+      "target": "file:packages/server/src/transports/unix/preset.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/index.ts",
+      "target": "file:packages/server/src/transports/unix/types.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/server/src/server.ts",
+      "target": "file:packages/server/src/testing/server.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:packages/server/src/testing/client.ts",
+      "target": "file:packages/protocol/src/index.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

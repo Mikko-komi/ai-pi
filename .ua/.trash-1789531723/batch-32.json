@@ -1,0 +1,141 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/ai/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/ai/README.md",
+      "summary": "@earendil-works/pi-ai 的完整使用文档，覆盖统一 LLM API、多 provider 注册与查询、认证解析、工具调用、图像输入/生成、Thinking、OAuth、跨 provider 交接，以及新增 provider 的开发清单。",
+      "tags": ["documentation", "entry-point", "llm", "api-reference", "provider"],
+      "complexity": "complex",
+      "languageNotes": "约 63 个 Markdown 章节，以可运行 TypeScript 示例说明 stream/complete 事件流与 provider 工厂用法。"
+    },
+    {
+      "id": "config:packages/ai/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "packages/ai/package.json",
+      "summary": "@earendil-works/pi-ai 的 npm 包清单，定义 ESM 子路径导出、pi-ai CLI、模型目录生成与离线 build 脚本，并固定 OpenAI、Anthropic、Gemini、Bedrock 等 SDK 依赖。",
+      "tags": ["configuration", "npm-package", "build-system", "exports", "cli"],
+      "complexity": "moderate",
+      "languageNotes": "exports 映射根入口、compat、oauth 以及 providers/api/utils 通配子路径；build 先 generate-models 再经 tsconfig.build.json 编译到 dist。"
+    },
+    {
+      "id": "config:packages/ai/tsconfig.build.json",
+      "type": "config",
+      "name": "tsconfig.build.json",
+      "filePath": "packages/ai/tsconfig.build.json",
+      "summary": "packages/ai 的发布构建 TypeScript 配置，继承仓库根 tsconfig.base.json，将 src 以 NodeNext 模块解析编译到 dist。",
+      "tags": ["configuration", "typescript", "build-system"],
+      "complexity": "simple",
+      "languageNotes": "extends 根配置后覆盖 outDir/rootDir 与 NodeNext moduleResolution，排除声明文件与 dist。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:packages/ai/README.md",
+      "target": "config:packages/ai/package.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/ai/README.md",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/ai/README.md",
+      "target": "file:packages/ai/src/cli.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/ai/README.md",
+      "target": "file:packages/ai/scripts/generate-models.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/ai/README.md",
+      "target": "file:packages/ai/scripts/generate-image-models.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/ai/README.md",
+      "target": "document:packages/ai/CHANGELOG.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:packages/ai/package.json",
+      "target": "config:packages/ai/tsconfig.build.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/ai/package.json",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/ai/package.json",
+      "target": "file:packages/ai/src/cli.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/ai/package.json",
+      "target": "file:packages/ai/scripts/generate-models.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/ai/package.json",
+      "target": "file:packages/ai/scripts/generate-image-models.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/ai/package.json",
+      "target": "file:packages/ai/scripts/check-model-data.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/ai/package.json",
+      "target": "document:packages/ai/README.md",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/ai/tsconfig.build.json",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/ai/tsconfig.build.json",
+      "target": "config:tsconfig.base.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

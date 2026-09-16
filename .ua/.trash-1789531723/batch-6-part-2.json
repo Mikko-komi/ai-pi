@@ -1,0 +1,1108 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/core/export-html/ansi-to-html.ts",
+      "type": "file",
+      "name": "ansi-to-html.ts",
+      "filePath": "packages/coding-agent/src/core/export-html/ansi-to-html.ts",
+      "summary": "把终端 ANSI/SGR 颜色与样式（含 256 色与 RGB）转为带 inline CSS 的 HTML，供 session HTML 导出使用。",
+      "tags": [
+        "html-export",
+        "ansi",
+        "serialization",
+        "utility"
+      ],
+      "complexity": "complex",
+      "languageNotes": "手写 SGR 状态机，支持 30–37/90–97、256 色立方体与 truecolor。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:color256ToHex",
+      "type": "function",
+      "name": "color256ToHex",
+      "filePath": "packages/coding-agent/src/core/export-html/ansi-to-html.ts",
+      "lineRange": [
+        37,
+        58
+      ],
+      "summary": "把 256 色索引映射为 hex：0–15 标准色、16–231 立方体、232–255 灰度。",
+      "tags": [
+        "ansi",
+        "color",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:createEmptyStyle",
+      "type": "function",
+      "name": "createEmptyStyle",
+      "filePath": "packages/coding-agent/src/core/export-html/ansi-to-html.ts",
+      "lineRange": [
+        81,
+        90
+      ],
+      "summary": "创建空的 fg/bg/bold/dim/italic/underline 样式状态。",
+      "tags": [
+        "ansi",
+        "style",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:styleToInlineCSS",
+      "type": "function",
+      "name": "styleToInlineCSS",
+      "filePath": "packages/coding-agent/src/core/export-html/ansi-to-html.ts",
+      "lineRange": [
+        92,
+        101
+      ],
+      "summary": "把当前 TextStyle 编成 color/background/font-weight 等 inline CSS。",
+      "tags": [
+        "ansi",
+        "html",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:applySgrCode",
+      "type": "function",
+      "name": "applySgrCode",
+      "filePath": "packages/coding-agent/src/core/export-html/ansi-to-html.ts",
+      "lineRange": [
+        110,
+        190
+      ],
+      "summary": "解释一串 SGR 参数并就地更新样式，覆盖 reset、16/256/truecolor 与文本属性。",
+      "tags": [
+        "ansi",
+        "parser",
+        "sgr"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:ansiToHtml",
+      "type": "function",
+      "name": "ansiToHtml",
+      "filePath": "packages/coding-agent/src/core/export-html/ansi-to-html.ts",
+      "lineRange": [
+        198,
+        250
+      ],
+      "summary": "扫描 ANSI_REGEX，转义文本并用 span+inline CSS 包裹有样式的片段。",
+      "tags": [
+        "ansi",
+        "html-export",
+        "serialization"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:ansiLinesToHtml",
+      "type": "function",
+      "name": "ansiLinesToHtml",
+      "filePath": "packages/coding-agent/src/core/export-html/ansi-to-html.ts",
+      "lineRange": [
+        256,
+        258
+      ],
+      "summary": "把多行 ANSI 分别转 HTML 并包进 ansi-line div，空行用 nbsp。",
+      "tags": [
+        "ansi",
+        "html-export",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/export-html/tool-renderer.ts",
+      "type": "file",
+      "name": "tool-renderer.ts",
+      "filePath": "packages/coding-agent/src/core/export-html/tool-renderer.ts",
+      "summary": "查找 ToolDefinition 的 TUI renderer，把 renderCall/renderResult 的 ANSI 输出转成 HTML 的折叠/展开片段。",
+      "tags": [
+        "html-export",
+        "tool-renderer",
+        "tui",
+        "factory"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/tool-renderer.ts:createToolHtmlRenderer",
+      "type": "function",
+      "name": "createToolHtmlRenderer",
+      "filePath": "packages/coding-agent/src/core/export-html/tool-renderer.ts",
+      "lineRange": [
+        58,
+        172
+      ],
+      "summary": "按 toolCallId 缓存 TUI Component，调用 renderCall/renderResult 后再用 ansiLinesToHtml 产出 HTML。",
+      "tags": [
+        "html-export",
+        "tool-renderer",
+        "factory"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "type": "file",
+      "name": "runner.ts",
+      "filePath": "packages/coding-agent/src/core/extensions/runner.ts",
+      "summary": "Extension 运行时：绑定 provider 与 UI prompt、派发生命周期事件、解析命令/快捷键冲突，并向工具/命令提供统一 context。",
+      "tags": [
+        "extension",
+        "event-handler",
+        "lifecycle",
+        "service"
+      ],
+      "complexity": "complex",
+      "languageNotes": "扩展快捷键与内置 keybinding id 冲突时，保留列表中的 app/tui 动作优先。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/extensions/runner.ts:buildBuiltinKeybindings",
+      "type": "function",
+      "name": "buildBuiltinKeybindings",
+      "filePath": "packages/coding-agent/src/core/extensions/runner.ts",
+      "lineRange": [
+        95,
+        114
+      ],
+      "summary": "把已 resolve 的 KeybindingsConfig 编成 KeyId→动作表，保留列表中的动作在冲突时优先。",
+      "tags": [
+        "keybindings",
+        "extension",
+        "conflict"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/extensions/runner.ts:emitSessionShutdownEvent",
+      "type": "function",
+      "name": "emitSessionShutdownEvent",
+      "filePath": "packages/coding-agent/src/core/extensions/runner.ts",
+      "lineRange": [
+        193,
+        202
+      ],
+      "summary": "若有 session_shutdown handler 则 emit，供进程退出前通知扩展。",
+      "tags": [
+        "extension",
+        "lifecycle",
+        "event-handler"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/extensions/runner.ts:emitProjectTrustEvent",
+      "type": "function",
+      "name": "emitProjectTrustEvent",
+      "filePath": "packages/coding-agent/src/core/extensions/runner.ts",
+      "lineRange": [
+        204,
+        234
+      ],
+      "summary": "依次调用各扩展的 project_trust handler，第一个 yes/no 获胜，undecided 继续。",
+      "tags": [
+        "extension",
+        "security",
+        "event-handler"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/core/extensions/runner.ts:ExtensionRunner",
+      "type": "class",
+      "name": "ExtensionRunner",
+      "filePath": "packages/coding-agent/src/core/extensions/runner.ts",
+      "lineRange": [
+        269,
+        1286
+      ],
+      "summary": "扩展运行时核心：bindCore 注册 provider、包装 UI prompt、emit 生命周期事件，并解析命令/工具/快捷键诊断。",
+      "tags": [
+        "extension",
+        "service",
+        "lifecycle",
+        "event-handler"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "file",
+      "name": "types.ts",
+      "filePath": "packages/coding-agent/src/core/extensions/types.ts",
+      "summary": "Extension 系统的核心类型合同：UI context、ToolDefinition、生命周期事件，以及内置工具 result/call 的 type guards。",
+      "tags": [
+        "type-definition",
+        "extension",
+        "api-contract",
+        "event-handler"
+      ],
+      "complexity": "complex",
+      "languageNotes": "大量 type-only import；用声明合并与重载 type guard 收窄 ToolCallEvent。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/extensions/types.ts:defineTool",
+      "type": "function",
+      "name": "defineTool",
+      "filePath": "packages/coding-agent/src/core/extensions/types.ts",
+      "lineRange": [
+        511,
+        515
+      ],
+      "summary": "恒等辅助：在 customTools 等数组里保留 ToolDefinition 的参数推断，避免 params 被 widen 成 unknown。",
+      "tags": [
+        "type-definition",
+        "tool",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/extensions/types.ts:isBashToolResult",
+      "type": "function",
+      "name": "isBashToolResult",
+      "filePath": "packages/coding-agent/src/core/extensions/types.ts",
+      "lineRange": [
+        1024,
+        1026
+      ],
+      "summary": "当 toolName 为 bash 时把 ToolResultEvent 收窄为 BashToolResultEvent。",
+      "tags": [
+        "type-definition",
+        "validation",
+        "bash"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/extensions/types.ts:isPowerShellToolResult",
+      "type": "function",
+      "name": "isPowerShellToolResult",
+      "filePath": "packages/coding-agent/src/core/extensions/types.ts",
+      "lineRange": [
+        1027,
+        1029
+      ],
+      "summary": "当 toolName 为 powershell 时收窄 ToolResultEvent。",
+      "tags": [
+        "type-definition",
+        "validation",
+        "powershell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/extensions/types.ts:isReadToolResult",
+      "type": "function",
+      "name": "isReadToolResult",
+      "filePath": "packages/coding-agent/src/core/extensions/types.ts",
+      "lineRange": [
+        1030,
+        1032
+      ],
+      "summary": "当 toolName 为 read 时收窄 ToolResultEvent。",
+      "tags": [
+        "type-definition",
+        "validation",
+        "read"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/extensions/types.ts:isEditToolResult",
+      "type": "function",
+      "name": "isEditToolResult",
+      "filePath": "packages/coding-agent/src/core/extensions/types.ts",
+      "lineRange": [
+        1033,
+        1035
+      ],
+      "summary": "当 toolName 为 edit 时收窄 ToolResultEvent。",
+      "tags": [
+        "type-definition",
+        "validation",
+        "edit"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/extensions/types.ts:isWriteToolResult",
+      "type": "function",
+      "name": "isWriteToolResult",
+      "filePath": "packages/coding-agent/src/core/extensions/types.ts",
+      "lineRange": [
+        1036,
+        1038
+      ],
+      "summary": "当 toolName 为 write 时收窄 ToolResultEvent。",
+      "tags": [
+        "type-definition",
+        "validation",
+        "write"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/extensions/types.ts:isGrepToolResult",
+      "type": "function",
+      "name": "isGrepToolResult",
+      "filePath": "packages/coding-agent/src/core/extensions/types.ts",
+      "lineRange": [
+        1039,
+        1041
+      ],
+      "summary": "当 toolName 为 grep 时收窄 ToolResultEvent。",
+      "tags": [
+        "type-definition",
+        "validation",
+        "grep"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/extensions/types.ts:isFindToolResult",
+      "type": "function",
+      "name": "isFindToolResult",
+      "filePath": "packages/coding-agent/src/core/extensions/types.ts",
+      "lineRange": [
+        1042,
+        1044
+      ],
+      "summary": "当 toolName 为 find 时收窄 ToolResultEvent。",
+      "tags": [
+        "type-definition",
+        "validation",
+        "find"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/extensions/types.ts:isLsToolResult",
+      "type": "function",
+      "name": "isLsToolResult",
+      "filePath": "packages/coding-agent/src/core/extensions/types.ts",
+      "lineRange": [
+        1045,
+        1047
+      ],
+      "summary": "当 toolName 为 ls 时收窄 ToolResultEvent。",
+      "tags": [
+        "type-definition",
+        "validation",
+        "ls"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/extensions/types.ts:isToolCallEventType",
+      "type": "function",
+      "name": "isToolCallEventType",
+      "filePath": "packages/coding-agent/src/core/extensions/types.ts",
+      "lineRange": [
+        1081,
+        1083
+      ],
+      "summary": "按 toolName 重载收窄 ToolCallEvent，绕开 CustomToolCallEvent.toolName 为 string 导致的字面量重叠。",
+      "tags": [
+        "type-definition",
+        "validation",
+        "tool"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/extensions/wrapper.ts",
+      "type": "file",
+      "name": "wrapper.ts",
+      "filePath": "packages/coding-agent/src/core/extensions/wrapper.ts",
+      "summary": "把 RegisteredTool 包成 AgentTool：注入 runner.createContext()，并在 execute 后把新激活的工具名并入 addedToolNames。",
+      "tags": [
+        "extension",
+        "wrapper",
+        "factory",
+        "tool"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/extensions/wrapper.ts:wrapRegisteredTool",
+      "type": "function",
+      "name": "wrapRegisteredTool",
+      "filePath": "packages/coding-agent/src/core/extensions/wrapper.ts",
+      "lineRange": [
+        17,
+        37
+      ],
+      "summary": "用 wrapToolDefinition + runner.createContext 包装单工具，并把 execute 期间新增的工具名写入 addedToolNames。",
+      "tags": [
+        "wrapper",
+        "tool",
+        "extension"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/extensions/wrapper.ts:wrapRegisteredTools",
+      "type": "function",
+      "name": "wrapRegisteredTools",
+      "filePath": "packages/coding-agent/src/core/extensions/wrapper.ts",
+      "lineRange": [
+        43,
+        45
+      ],
+      "summary": "对 RegisteredTool 列表逐个调用 wrapRegisteredTool。",
+      "tags": [
+        "wrapper",
+        "tool",
+        "factory"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/tool-renderer.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/tool-renderer.ts",
+      "target": "file:packages/coding-agent/src/core/export-html/ansi-to-html.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/tool-renderer.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/tool-renderer.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/tool-renderer.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "target": "file:packages/coding-agent/src/core/diagnostics.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "target": "file:packages/coding-agent/src/core/keybindings.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "target": "file:packages/coding-agent/src/core/model-registry.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "target": "file:packages/coding-agent/src/core/model-resolver.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "target": "file:packages/coding-agent/src/core/session-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "target": "file:packages/coding-agent/src/core/system-prompt.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "file:packages/coding-agent/src/core/bash-executor.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "file:packages/coding-agent/src/core/compaction/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "file:packages/coding-agent/src/core/event-bus.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "file:packages/coding-agent/src/core/exec.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "file:packages/coding-agent/src/core/footer-data-provider.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "file:packages/coding-agent/src/core/keybindings.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "file:packages/coding-agent/src/core/messages.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "file:packages/coding-agent/src/core/model-registry.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "file:packages/coding-agent/src/core/model-resolver.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "file:packages/coding-agent/src/core/session-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "file:packages/coding-agent/src/core/slash-commands.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "file:packages/coding-agent/src/core/source-info.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "file:packages/coding-agent/src/core/system-prompt.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "file:packages/coding-agent/src/core/tools/bash.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "file:packages/coding-agent/src/core/tools/edit.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "file:packages/coding-agent/src/core/tools/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/wrapper.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/wrapper.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/wrapper.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/wrapper.ts",
+      "target": "file:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/ansi-to-html.ts",
+      "target": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:color256ToHex",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/ansi-to-html.ts",
+      "target": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:createEmptyStyle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/ansi-to-html.ts",
+      "target": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:styleToInlineCSS",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/ansi-to-html.ts",
+      "target": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:applySgrCode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/ansi-to-html.ts",
+      "target": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:ansiToHtml",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/ansi-to-html.ts",
+      "target": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:ansiToHtml",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/ansi-to-html.ts",
+      "target": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:ansiLinesToHtml",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/ansi-to-html.ts",
+      "target": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:ansiLinesToHtml",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/tool-renderer.ts",
+      "target": "function:packages/coding-agent/src/core/export-html/tool-renderer.ts:createToolHtmlRenderer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/tool-renderer.ts",
+      "target": "function:packages/coding-agent/src/core/export-html/tool-renderer.ts:createToolHtmlRenderer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/runner.ts:buildBuiltinKeybindings",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/runner.ts:emitSessionShutdownEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/runner.ts:emitSessionShutdownEvent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/runner.ts:emitProjectTrustEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/runner.ts:emitProjectTrustEvent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "target": "class:packages/coding-agent/src/core/extensions/runner.ts:ExtensionRunner",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "target": "class:packages/coding-agent/src/core/extensions/runner.ts:ExtensionRunner",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/types.ts:defineTool",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/types.ts:defineTool",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/types.ts:isBashToolResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/types.ts:isBashToolResult",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/types.ts:isPowerShellToolResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/types.ts:isPowerShellToolResult",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/types.ts:isReadToolResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/types.ts:isReadToolResult",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/types.ts:isEditToolResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/types.ts:isEditToolResult",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/types.ts:isWriteToolResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/types.ts:isWriteToolResult",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/types.ts:isGrepToolResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/types.ts:isGrepToolResult",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/types.ts:isFindToolResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/types.ts:isFindToolResult",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/types.ts:isLsToolResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/types.ts:isLsToolResult",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/types.ts:isToolCallEventType",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/types.ts:isToolCallEventType",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/wrapper.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/wrapper.ts:wrapRegisteredTool",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/wrapper.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/wrapper.ts:wrapRegisteredTool",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/wrapper.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/wrapper.ts:wrapRegisteredTools",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/extensions/wrapper.ts",
+      "target": "function:packages/coding-agent/src/core/extensions/wrapper.ts:wrapRegisteredTools",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:applySgrCode",
+      "target": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:color256ToHex",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:ansiToHtml",
+      "target": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:createEmptyStyle",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:ansiToHtml",
+      "target": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:applySgrCode",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:ansiToHtml",
+      "target": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:styleToInlineCSS",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:ansiLinesToHtml",
+      "target": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:ansiToHtml",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/export-html/tool-renderer.ts:createToolHtmlRenderer",
+      "target": "function:packages/coding-agent/src/core/export-html/ansi-to-html.ts:ansiLinesToHtml",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/extensions/wrapper.ts:wrapRegisteredTool",
+      "target": "class:packages/coding-agent/src/core/extensions/runner.ts:ExtensionRunner",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/extensions/wrapper.ts:wrapRegisteredTools",
+      "target": "function:packages/coding-agent/src/core/extensions/wrapper.ts:wrapRegisteredTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/extensions/runner.ts:ExtensionRunner",
+      "target": "function:packages/coding-agent/src/core/system-prompt.ts:buildSystemPrompt",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/extensions/wrapper.ts:wrapRegisteredTool",
+      "target": "function:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts:wrapToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

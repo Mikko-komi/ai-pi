@@ -1,0 +1,1025 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/custom-editor.ts",
+      "type": "file",
+      "name": "custom-editor.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/custom-editor.ts",
+      "summary": "继承 TUI Editor，叠加 coding-agent 应用级快捷键，并可把 StatusIndicator 嵌进顶边框。",
+      "tags": [
+        "component",
+        "editor",
+        "keybinding",
+        "tui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/custom-editor.ts:CustomEditor",
+      "type": "class",
+      "name": "CustomEditor",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/custom-editor.ts",
+      "lineRange": [
+        13,
+        148
+      ],
+      "summary": "Editor 子类：onAction/handleInput 分发 AppKeybinding，并按宽度把工作状态画进顶边框。",
+      "tags": [
+        "component",
+        "editor",
+        "keybinding"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/custom-entry.ts",
+      "type": "file",
+      "name": "custom-entry.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/custom-entry.ts",
+      "summary": "用扩展 EntryRenderer 渲染自定义 session entry，宿主负责 transcript 间距。",
+      "tags": [
+        "component",
+        "extension",
+        "session",
+        "tui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/custom-entry.ts:CustomEntryComponent",
+      "type": "class",
+      "name": "CustomEntryComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/custom-entry.ts",
+      "lineRange": [
+        11,
+        62
+      ],
+      "summary": "Container 子类，调用 renderer 得到 Component 或回退文本，并支持展开。",
+      "tags": [
+        "component",
+        "extension",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/custom-message.ts",
+      "type": "file",
+      "name": "custom-message.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/custom-message.ts",
+      "summary": "渲染扩展自定义消息：优先 MessageRenderer，否则用区别于 user message 的 Markdown/文本样式。",
+      "tags": [
+        "component",
+        "extension",
+        "chat",
+        "tui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/custom-message.ts:CustomMessageComponent",
+      "type": "class",
+      "name": "CustomMessageComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/custom-message.ts",
+      "lineRange": [
+        12,
+        113
+      ],
+      "summary": "Container 子类，rebuild 时切换自定义组件或 boxed Markdown，支持 outputPad。",
+      "tags": [
+        "component",
+        "extension",
+        "markdown"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/daxnuts.ts",
+      "type": "file",
+      "name": "daxnuts.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/daxnuts.ts",
+      "summary": "DAXNUTS 彩蛋：把 32×32 RGB 肖像渲染成半块 ANSI 图，并滚动 POWERED BY DAXNUTS 致谢。",
+      "tags": [
+        "component",
+        "easter-egg",
+        "animation",
+        "tui"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "像素来自紧凑 hex RGB，用 ▀ 半块与 24-bit ANSI 上色。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/daxnuts.ts:parseImage",
+      "type": "function",
+      "name": "parseImage",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/daxnuts.ts",
+      "lineRange": [
+        17,
+        31
+      ],
+      "summary": "把 DAX_HEX 解码为 32×32 RGB 像素矩阵。",
+      "tags": [
+        "utility",
+        "image",
+        "decoding"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/daxnuts.ts:buildImage",
+      "type": "function",
+      "name": "buildImage",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/daxnuts.ts",
+      "lineRange": [
+        39,
+        55
+      ],
+      "summary": "用半块字符与 RGB ANSI 把像素矩阵编成可显示行。",
+      "tags": [
+        "rendering",
+        "ansi",
+        "image"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/daxnuts.ts:DaxnutsComponent",
+      "type": "class",
+      "name": "DaxnutsComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/daxnuts.ts",
+      "lineRange": [
+        57,
+        164
+      ],
+      "summary": "实现 Component：缓存渲染行并做滚动字幕动画。",
+      "tags": [
+        "component",
+        "easter-egg",
+        "animation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/diff.ts",
+      "type": "file",
+      "name": "diff.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/diff.ts",
+      "summary": "把带行号的 unified-style diff 渲染成主题色文本，并用 diffWords 做行内高亮。",
+      "tags": [
+        "utility",
+        "diff",
+        "rendering",
+        "theme"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/diff.ts:renderIntraLineDiff",
+      "type": "function",
+      "name": "renderIntraLineDiff",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/diff.ts",
+      "lineRange": [
+        26,
+        66
+      ],
+      "summary": "对删除/新增行做 word-level diff，用 inverse 标出变更片段并避开缩进。",
+      "tags": [
+        "diff",
+        "highlighting",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/diff.ts:renderDiff",
+      "type": "function",
+      "name": "renderDiff",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/diff.ts",
+      "lineRange": [
+        79,
+        147
+      ],
+      "summary": "解析 +/−/上下文行，配对后调用行内 diff 并输出带主题色的完整 diff。",
+      "tags": [
+        "diff",
+        "rendering",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "file",
+      "name": "dynamic-border.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "summary": "按视口宽度绘制单行 ─ 边框；扩展经 jiti 加载时应传入显式 color，避免 theme 模块缓存分裂。",
+      "tags": [
+        "component",
+        "layout",
+        "theme",
+        "tui"
+      ],
+      "complexity": "simple",
+      "languageNotes": "jiti 可能使用独立 module cache，默认 theme.fg 在扩展上下文中可能为 undefined。"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts:DynamicBorder",
+      "type": "class",
+      "name": "DynamicBorder",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "lineRange": [
+        11,
+        25
+      ],
+      "summary": "实现 Component：render(width) 输出一条着色水平线。",
+      "tags": [
+        "component",
+        "layout",
+        "border"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts",
+      "type": "file",
+      "name": "earendil-announcement.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts",
+      "summary": "展示捆绑 clankolas 图与博客链接的一次性公告组件。",
+      "tags": [
+        "component",
+        "announcement",
+        "tui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts:loadImageBase64",
+      "type": "function",
+      "name": "loadImageBase64",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts",
+      "lineRange": [
+        13,
+        25
+      ],
+      "summary": "从捆绑 interactive asset 读取图片并缓存为 base64。",
+      "tags": [
+        "utility",
+        "asset",
+        "image"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts:EarendilAnnouncementComponent",
+      "type": "class",
+      "name": "EarendilAnnouncementComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts",
+      "lineRange": [
+        27,
+        53
+      ],
+      "summary": "Container 公告：标题、说明、可选 Image 与博客 URL。",
+      "tags": [
+        "component",
+        "announcement",
+        "tui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/extension-editor.ts",
+      "type": "file",
+      "name": "extension-editor.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/extension-editor.ts",
+      "summary": "扩展多行编辑器：内嵌 Editor，支持提交/取消，以及 Ctrl+G 打开外部编辑器。",
+      "tags": [
+        "component",
+        "editor",
+        "extension",
+        "tui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/extension-editor.ts:ExtensionEditorComponent",
+      "type": "class",
+      "name": "ExtensionEditorComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/extension-editor.ts",
+      "lineRange": [
+        22,
+        132
+      ],
+      "summary": "可聚焦 Container，包装 Editor 并在外部编辑往返时 stop/start TUI。",
+      "tags": [
+        "component",
+        "editor",
+        "extension"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/extension-input.ts",
+      "type": "file",
+      "name": "extension-input.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/extension-input.ts",
+      "summary": "扩展单行输入对话框，可选 CountdownTimer 超时自动取消。",
+      "tags": [
+        "component",
+        "input",
+        "extension",
+        "tui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/extension-input.ts:ExtensionInputComponent",
+      "type": "class",
+      "name": "ExtensionInputComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/extension-input.ts",
+      "lineRange": [
+        16,
+        87
+      ],
+      "summary": "可聚焦输入框，处理提交/取消快捷键并在 dispose 时清倒计时。",
+      "tags": [
+        "component",
+        "input",
+        "extension"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/extension-selector.ts",
+      "type": "file",
+      "name": "extension-selector.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/extension-selector.ts",
+      "summary": "扩展选项列表：键盘上下选择、可选展开工具说明与倒计时取消。",
+      "tags": [
+        "component",
+        "selector",
+        "extension",
+        "tui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/extension-selector.ts:ExtensionSelectorComponent",
+      "type": "class",
+      "name": "ExtensionSelectorComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/extension-selector.ts",
+      "lineRange": [
+        18,
+        112
+      ],
+      "summary": "Container 选择列表，updateList 高亮当前项并转发 onSelect/onCancel。",
+      "tags": [
+        "component",
+        "selector",
+        "extension"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/first-time-setup.ts",
+      "type": "file",
+      "name": "first-time-setup.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/first-time-setup.ts",
+      "summary": "首次启动向导：两步选择终端主题（可预览）与是否分享匿名分析数据。",
+      "tags": [
+        "component",
+        "onboarding",
+        "settings",
+        "tui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/first-time-setup.ts:FirstTimeSetupComponent",
+      "type": "class",
+      "name": "FirstTimeSetupComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/first-time-setup.ts",
+      "lineRange": [
+        32,
+        145
+      ],
+      "summary": "Container 向导，渲染 logo 与选项列表，回车提交、esc 取消。",
+      "tags": [
+        "component",
+        "onboarding",
+        "selector"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/custom-editor.ts",
+      "target": "file:packages/coding-agent/src/core/keybindings.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/custom-editor.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/status-indicator.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/custom-editor.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/custom-entry.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/custom-entry.ts",
+      "target": "file:packages/coding-agent/src/core/session-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/custom-entry.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/custom-entry.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/custom-message.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/custom-message.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/custom-message.ts",
+      "target": "file:packages/coding-agent/src/core/messages.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/custom-message.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/custom-message.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/daxnuts.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/daxnuts.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/diff.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-editor.ts",
+      "target": "file:packages/coding-agent/src/core/keybindings.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-editor.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-editor.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-editor.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/external-editor.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-editor.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-editor.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-input.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/countdown-timer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-input.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-input.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-input.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-input.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/countdown-timer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-selector.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/first-time-setup.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/first-time-setup.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/first-time-setup.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/first-time-setup.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/first-time-setup.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/custom-editor.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/custom-editor.ts:CustomEditor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/custom-editor.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/custom-editor.ts:CustomEditor",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/custom-entry.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/custom-entry.ts:CustomEntryComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/custom-entry.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/custom-entry.ts:CustomEntryComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/custom-message.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/custom-message.ts:CustomMessageComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/custom-message.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/custom-message.ts:CustomMessageComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/daxnuts.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/daxnuts.ts:parseImage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/daxnuts.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/daxnuts.ts:buildImage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/daxnuts.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/daxnuts.ts:DaxnutsComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/daxnuts.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/daxnuts.ts:DaxnutsComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/diff.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/diff.ts:renderIntraLineDiff",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/diff.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/diff.ts:renderDiff",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/diff.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/diff.ts:renderDiff",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts:DynamicBorder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts:DynamicBorder",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts:loadImageBase64",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts:EarendilAnnouncementComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts:EarendilAnnouncementComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-editor.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/extension-editor.ts:ExtensionEditorComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-editor.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/extension-editor.ts:ExtensionEditorComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-input.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/extension-input.ts:ExtensionInputComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-input.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/extension-input.ts:ExtensionInputComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/extension-selector.ts:ExtensionSelectorComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/extension-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/extension-selector.ts:ExtensionSelectorComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/first-time-setup.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/first-time-setup.ts:FirstTimeSetupComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/first-time-setup.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/first-time-setup.ts:FirstTimeSetupComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/daxnuts.ts:DaxnutsComponent",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/daxnuts.ts:buildImage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/modes/interactive/components/daxnuts.ts:buildImage",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/daxnuts.ts:parseImage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/modes/interactive/components/diff.ts:renderDiff",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/diff.ts:renderIntraLineDiff",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts:EarendilAnnouncementComponent",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts:loadImageBase64",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/extension-editor.ts:ExtensionEditorComponent",
+      "target": "function:packages/coding-agent/src/modes/interactive/external-editor.ts:editInExternalEditor",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts:loadImageBase64",
+      "target": "function:packages/coding-agent/src/config.ts:getBundledInteractiveAssetPath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/custom-editor.ts:CustomEditor",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/status-indicator.ts:StatusIndicator",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/custom-editor.ts:CustomEditor",
+      "target": "class:packages/tui/src/index.ts:Editor",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/custom-entry.ts:CustomEntryComponent",
+      "target": "class:packages/tui/src/index.ts:Container",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/custom-message.ts:CustomMessageComponent",
+      "target": "class:packages/tui/src/index.ts:Container",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts:EarendilAnnouncementComponent",
+      "target": "class:packages/tui/src/index.ts:Container",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/extension-editor.ts:ExtensionEditorComponent",
+      "target": "class:packages/tui/src/index.ts:Container",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/extension-input.ts:ExtensionInputComponent",
+      "target": "class:packages/tui/src/index.ts:Container",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/extension-selector.ts:ExtensionSelectorComponent",
+      "target": "class:packages/tui/src/index.ts:Container",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/first-time-setup.ts:FirstTimeSetupComponent",
+      "target": "class:packages/tui/src/index.ts:Container",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts:DynamicBorder",
+      "target": "class:packages/tui/src/index.ts:Component",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/daxnuts.ts:DaxnutsComponent",
+      "target": "class:packages/tui/src/index.ts:Component",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/extension-editor.ts:ExtensionEditorComponent",
+      "target": "class:packages/tui/src/index.ts:Focusable",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/extension-input.ts:ExtensionInputComponent",
+      "target": "class:packages/tui/src/index.ts:Focusable",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    }
+  ]
+}

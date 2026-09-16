@@ -1,0 +1,291 @@
+{
+  "projectRoot": "/Users/elex-mb0203/MyWork/agent-projects/ai-pi",
+  "batchFiles": [
+    {
+      "path": "packages/agent/src/harness/session/testing/instrumented-storage.ts",
+      "language": "typescript",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/testing/storage-decorator.ts",
+      "language": "typescript",
+      "sizeLines": 71,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/testing/types.ts",
+      "language": "typescript",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/types.ts",
+      "language": "typescript",
+      "sizeLines": 602,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/values.ts",
+      "language": "typescript",
+      "sizeLines": 195,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/skills.ts",
+      "language": "typescript",
+      "sizeLines": 396,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/system-prompt.ts",
+      "language": "typescript",
+      "sizeLines": 34,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/telemetry.ts",
+      "language": "typescript",
+      "sizeLines": 635,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/tools/bash.ts",
+      "language": "typescript",
+      "sizeLines": 145,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/tools/edit-diff.ts",
+      "language": "typescript",
+      "sizeLines": 500,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/tools/edit.ts",
+      "language": "typescript",
+      "sizeLines": 145,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/tools/file-mutation-queue.ts",
+      "language": "typescript",
+      "sizeLines": 62,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/tools/image.ts",
+      "language": "typescript",
+      "sizeLines": 104,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/tools/path-utils.ts",
+      "language": "typescript",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/tools/read.ts",
+      "language": "typescript",
+      "sizeLines": 149,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/tools/tool-context.ts",
+      "language": "typescript",
+      "sizeLines": 6,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/tools/write.ts",
+      "language": "typescript",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/types.ts",
+      "language": "typescript",
+      "sizeLines": 407,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/utils/adaptive-publisher.ts",
+      "language": "typescript",
+      "sizeLines": 87,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/utils/output-capture.ts",
+      "language": "typescript",
+      "sizeLines": 238,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/utils/shell-output.ts",
+      "language": "typescript",
+      "sizeLines": 112,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/utils/truncate.ts",
+      "language": "typescript",
+      "sizeLines": 350,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/utils/usage.ts",
+      "language": "typescript",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/proxy.ts",
+      "language": "typescript",
+      "sizeLines": 402,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/stream-fn.ts",
+      "language": "typescript",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/types.ts",
+      "language": "typescript",
+      "sizeLines": 446,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/index.ts",
+      "language": "typescript",
+      "sizeLines": 48,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/uuid.ts",
+      "language": "typescript",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "packages/agent/src/harness/session/testing/instrumented-storage.ts": [
+      "packages/agent/src/harness/context.ts",
+      "packages/agent/src/harness/session/testing/storage-decorator.ts",
+      "packages/agent/src/harness/session/types.ts"
+    ],
+    "packages/agent/src/harness/session/testing/storage-decorator.ts": [
+      "packages/agent/src/harness/context.ts",
+      "packages/agent/src/harness/session/types.ts",
+      "packages/agent/src/harness/session/values.ts"
+    ],
+    "packages/agent/src/harness/session/testing/types.ts": [
+      "packages/agent/src/harness/session/types.ts"
+    ],
+    "packages/agent/src/harness/session/types.ts": [
+      "packages/agent/src/harness/compaction/branch-summarization.ts",
+      "packages/agent/src/harness/compaction/compaction.ts",
+      "packages/agent/src/harness/context.ts",
+      "packages/agent/src/harness/session/values.ts",
+      "packages/agent/src/harness/types.ts",
+      "packages/agent/src/types.ts",
+      "packages/ai/src/index.ts",
+      "packages/chord/src/index.ts"
+    ],
+    "packages/agent/src/harness/session/values.ts": [
+      "packages/agent/src/harness/session/types.ts",
+      "packages/agent/src/types.ts",
+      "packages/ai/src/index.ts"
+    ],
+    "packages/agent/src/harness/skills.ts": [
+      "packages/agent/src/harness/context.ts",
+      "packages/agent/src/harness/types.ts"
+    ],
+    "packages/agent/src/harness/system-prompt.ts": [
+      "packages/agent/src/harness/types.ts"
+    ],
+    "packages/agent/src/harness/telemetry.ts": [
+      "packages/agent/src/harness/context.ts",
+      "packages/telemetry/src/index.ts"
+    ],
+    "packages/agent/src/harness/tools/bash.ts": [
+      "packages/agent/src/harness/context.ts",
+      "packages/agent/src/harness/tools/tool-context.ts",
+      "packages/agent/src/harness/types.ts",
+      "packages/agent/src/harness/utils/output-capture.ts",
+      "packages/agent/src/harness/utils/truncate.ts"
+    ],
+    "packages/agent/src/harness/tools/edit-diff.ts": [],
+    "packages/agent/src/harness/tools/edit.ts": [
+      "packages/agent/src/harness/tools/edit-diff.ts",
+      "packages/agent/src/harness/tools/file-mutation-queue.ts",
+      "packages/agent/src/harness/tools/path-utils.ts",
+      "packages/agent/src/harness/tools/tool-context.ts",
+      "packages/agent/src/harness/types.ts"
+    ],
+    "packages/agent/src/harness/tools/file-mutation-queue.ts": [
+      "packages/agent/src/harness/context.ts",
+      "packages/agent/src/harness/types.ts"
+    ],
+    "packages/agent/src/harness/tools/image.ts": [],
+    "packages/agent/src/harness/tools/path-utils.ts": [
+      "packages/agent/src/harness/context.ts",
+      "packages/agent/src/harness/types.ts"
+    ],
+    "packages/agent/src/harness/tools/read.ts": [
+      "packages/agent/src/harness/context.ts",
+      "packages/agent/src/harness/tools/image.ts",
+      "packages/agent/src/harness/tools/path-utils.ts",
+      "packages/agent/src/harness/tools/tool-context.ts",
+      "packages/agent/src/harness/types.ts",
+      "packages/agent/src/harness/utils/truncate.ts",
+      "packages/ai/src/index.ts"
+    ],
+    "packages/agent/src/harness/tools/tool-context.ts": [
+      "packages/agent/src/harness/types.ts"
+    ],
+    "packages/agent/src/harness/tools/write.ts": [
+      "packages/agent/src/harness/tools/file-mutation-queue.ts",
+      "packages/agent/src/harness/tools/path-utils.ts",
+      "packages/agent/src/harness/tools/tool-context.ts",
+      "packages/agent/src/harness/types.ts"
+    ],
+    "packages/agent/src/harness/types.ts": [
+      "packages/agent/src/harness/context.ts",
+      "packages/agent/src/harness/session/types.ts",
+      "packages/agent/src/harness/utils/truncate.ts",
+      "packages/agent/src/types.ts",
+      "packages/ai/src/index.ts"
+    ],
+    "packages/agent/src/harness/utils/adaptive-publisher.ts": [],
+    "packages/agent/src/harness/utils/output-capture.ts": [
+      "packages/agent/src/harness/context.ts",
+      "packages/agent/src/harness/types.ts",
+      "packages/agent/src/harness/utils/adaptive-publisher.ts",
+      "packages/agent/src/harness/utils/truncate.ts"
+    ],
+    "packages/agent/src/harness/utils/shell-output.ts": [
+      "packages/agent/src/harness/context.ts",
+      "packages/agent/src/harness/types.ts",
+      "packages/agent/src/harness/utils/output-capture.ts",
+      "packages/agent/src/harness/utils/truncate.ts"
+    ],
+    "packages/agent/src/harness/utils/truncate.ts": [],
+    "packages/agent/src/harness/utils/usage.ts": [
+      "packages/ai/src/index.ts"
+    ],
+    "packages/agent/src/proxy.ts": [
+      "packages/ai/src/index.ts"
+    ],
+    "packages/agent/src/stream-fn.ts": [
+      "packages/agent/src/types.ts"
+    ],
+    "packages/agent/src/types.ts": [
+      "packages/ai/src/index.ts"
+    ],
+    "packages/ai/src/index.ts": [],
+    "packages/ai/src/utils/uuid.ts": []
+  }
+}

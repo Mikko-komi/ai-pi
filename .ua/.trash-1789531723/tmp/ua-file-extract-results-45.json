@@ -1,0 +1,911 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 18,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 18,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 16,
+      "failed": 0,
+      "skipped": 2
+    }
+  },
+  "results": [
+    {
+      "path": "packages/coding-agent/src/core/radius.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "exports": [
+        {
+          "name": "RADIUS_PROVIDER_ID",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 107,
+      "nonEmptyLines": 84,
+      "sections": [
+        {
+          "heading": "mini",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Topology",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "Layout",
+          "level": 2,
+          "line": 40
+        },
+        {
+          "heading": "RPC",
+          "level": 2,
+          "line": 56
+        },
+        {
+          "heading": "State replication",
+          "level": 2,
+          "line": 82
+        },
+        {
+          "heading": "What it is not",
+          "level": 2,
+          "line": 98
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/plugin.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 16,
+      "nonEmptyLines": 16,
+      "exports": [
+        {
+          "name": "AgentCompactionRequest",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "AgentController",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "AgentNavigationRequest",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "AgentOperationError",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "AgentOperationResponse",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "AgentPromptRequest",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "AgentQueueResponse",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "PresentationSelectItem",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "PresentationUI",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "SlashCommandCompletion",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "SlashCommandContribution",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "SlashCommandRunResult",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "SlashCommands",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 13,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 25,
+      "nonEmptyLines": 18,
+      "sections": [
+        {
+          "heading": "Experimental client/server service slices",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/source-resolver.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 86,
+      "nonEmptyLines": 78,
+      "functions": [
+        {
+          "name": "matchAlias",
+          "startLine": 64,
+          "endLine": 68,
+          "params": [
+            "alias",
+            "specifier"
+          ]
+        },
+        {
+          "name": "resolveSourcePath",
+          "startLine": 70,
+          "endLine": 86,
+          "params": [
+            "replacement"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "resolve",
+          "callee": "matchAlias",
+          "lineNumber": 49
+        },
+        {
+          "caller": "resolve",
+          "callee": "resolveSourcePath",
+          "lineNumber": 53
+        },
+        {
+          "caller": "resolve",
+          "callee": "replacement.replace",
+          "lineNumber": 53
+        },
+        {
+          "caller": "resolve",
+          "callee": "pathToFileURL",
+          "lineNumber": 54
+        },
+        {
+          "caller": "resolve",
+          "callee": "nextResolve",
+          "lineNumber": 60
+        },
+        {
+          "caller": "matchAlias",
+          "callee": "alias.pattern.includes",
+          "lineNumber": 65
+        },
+        {
+          "caller": "matchAlias",
+          "callee": "specifier.startsWith",
+          "lineNumber": 66
+        },
+        {
+          "caller": "matchAlias",
+          "callee": "specifier.endsWith",
+          "lineNumber": 66
+        },
+        {
+          "caller": "matchAlias",
+          "callee": "specifier.slice",
+          "lineNumber": 67
+        },
+        {
+          "caller": "resolveSourcePath",
+          "callee": "resolve",
+          "lineNumber": 71
+        },
+        {
+          "caller": "resolveSourcePath",
+          "callee": "repositoryRoot.endsWith",
+          "lineNumber": 72
+        },
+        {
+          "caller": "resolveSourcePath",
+          "callee": "basePath.startsWith",
+          "lineNumber": 73
+        },
+        {
+          "caller": "resolveSourcePath",
+          "callee": "extname",
+          "lineNumber": 74
+        },
+        {
+          "caller": "resolveSourcePath",
+          "callee": "basePath.slice",
+          "lineNumber": 78
+        },
+        {
+          "caller": "resolveSourcePath",
+          "callee": "resolve",
+          "lineNumber": 81
+        },
+        {
+          "caller": "resolveSourcePath",
+          "callee": "existsSync",
+          "lineNumber": 83
+        },
+        {
+          "caller": "resolveSourcePath",
+          "callee": "statSync(candidate).isFile",
+          "lineNumber": 83
+        },
+        {
+          "caller": "resolveSourcePath",
+          "callee": "statSync",
+          "lineNumber": 83
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 38,
+      "exports": [
+        {
+          "name": "ArminComponent",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "AssistantMessageComponent",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "BashExecutionComponent",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "BorderedLoader",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "BranchSummaryMessageComponent",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "CompactionSummaryMessageComponent",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "CustomEditor",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "CustomEditorOptions",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "CustomMessageComponent",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "DaxnutsComponent",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "RenderDiffOptions",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "renderDiff",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "DynamicBorder",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "ExtensionEditorComponent",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "ExtensionInputComponent",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "ExtensionSelectorComponent",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "FirstTimeSetupComponent",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "FirstTimeSetupOptions",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "FirstTimeSetupResult",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "FooterComponent",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "keyHint",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "keyText",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "rawKeyHint",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "LoginDialogComponent",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "ModelSelectorComponent",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "OAuthSelectorComponent",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "ModelsCallbacks",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "ModelsConfig",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "ScopedModelsSelectorComponent",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "SessionSelectorComponent",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "SettingsCallbacks",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "SettingsConfig",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "SettingsSelectorComponent",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "ShowImagesSelectorComponent",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "SkillInvocationMessageComponent",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "ThemeSelectorComponent",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "ThinkingSelectorComponent",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "ToolExecutionComponent",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "ToolExecutionOptions",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "TreeSelectorComponent",
+          "line": 34,
+          "isDefault": false
+        },
+        {
+          "name": "TrustSelectorComponent",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "UserMessageComponent",
+          "line": 36,
+          "isDefault": false
+        },
+        {
+          "name": "UserMessageSelectorComponent",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "truncateToVisualLines",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "VisualTruncateResult",
+          "line": 38,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 45,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/utils/deprecation.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 11,
+      "functions": [
+        {
+          "name": "warnDeprecation",
+          "startLine": 5,
+          "endLine": 9,
+          "params": [
+            "message"
+          ]
+        },
+        {
+          "name": "clearDeprecationWarningsForTests",
+          "startLine": 12,
+          "endLine": 14,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "warnDeprecation",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "clearDeprecationWarningsForTests",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "warnDeprecation",
+          "callee": "emittedDeprecationWarnings.has",
+          "lineNumber": 6
+        },
+        {
+          "caller": "warnDeprecation",
+          "callee": "emittedDeprecationWarnings.add",
+          "lineNumber": 7
+        },
+        {
+          "caller": "warnDeprecation",
+          "callee": "console.warn",
+          "lineNumber": 8
+        },
+        {
+          "caller": "warnDeprecation",
+          "callee": "chalk.yellow",
+          "lineNumber": 8
+        },
+        {
+          "caller": "clearDeprecationWarningsForTests",
+          "callee": "emittedDeprecationWarnings.clear",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/utils/highlight-js.d.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 29,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/vitest.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 33,
+      "nonEmptyLines": 32,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/protocol/vitest.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 10,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/server/src/testing/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 5,
+      "nonEmptyLines": 5,
+      "exports": [
+        {
+          "name": "WireChannel",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "connectUnixTestClient",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "ProtocolTestClient",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "createTestServerServices",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "Deferred",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "TestHarness",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "TestServerHost",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "TestServer",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "TestServerOptions",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "createTestServer",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 10,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/server/src/transports/unix/address.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 9,
+      "nonEmptyLines": 8,
+      "functions": [
+        {
+          "name": "getUnixSocketPath",
+          "startLine": 4,
+          "endLine": 9,
+          "params": [
+            "serverId",
+            "serverDirectory"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "getUnixSocketPath",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getUnixSocketPath",
+          "callee": "/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test",
+          "lineNumber": 5
+        },
+        {
+          "caller": "getUnixSocketPath",
+          "callee": "join",
+          "lineNumber": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/server/vitest.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 28,
+      "nonEmptyLines": 26,
+      "functions": [
+        {
+          "name": "src",
+          "startLine": 4,
+          "endLine": 4,
+          "params": [
+            "path"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "src",
+          "callee": "fileURLToPath",
+          "lineNumber": 4
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 9,
+      "nonEmptyLines": 9,
+      "exports": [
+        {
+          "name": "SqliteDatabase",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "SqliteDatabaseFactory",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "SqliteRunResult",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "SqliteStatement",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/vitest.benchmark.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 29,
+      "nonEmptyLines": 27,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/vitest.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 35,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/telemetry/src/testing/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 6,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "createTelemetryAdapterConformance",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "TelemetryAdapterConformanceCase",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "TelemetryAdapterFixture",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "TelemetryAdapterFixtureFactory",
+          "line": 2,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "vitest.base.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 59,
+      "nonEmptyLines": 57,
+      "exports": [
+        {
+          "name": "workspaceSourcePaths",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

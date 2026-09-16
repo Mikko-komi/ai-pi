@@ -1,0 +1,495 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 11,
+  "filesSkipped": [
+    "pi-test.bat",
+    "pi-test.ps1"
+  ],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 11,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 11
+    }
+  },
+  "results": [
+    {
+      "path": "AGENTS.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 124,
+      "nonEmptyLines": 85,
+      "sections": [
+        {
+          "heading": "Development Rules",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Conversational Style",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Code Quality",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "Commands",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "Dependency and Install Security",
+          "level": 2,
+          "line": 42
+        },
+        {
+          "heading": "Git",
+          "level": 2,
+          "line": 51
+        },
+        {
+          "heading": "Issues and PRs",
+          "level": 2,
+          "line": 73
+        },
+        {
+          "heading": "Testing pi Interactive Mode with tmux",
+          "level": 2,
+          "line": 97
+        },
+        {
+          "heading": "Changelog",
+          "level": 2,
+          "line": 101
+        },
+        {
+          "heading": "Releasing",
+          "level": 2,
+          "line": 118
+        },
+        {
+          "heading": "User Override",
+          "level": 2,
+          "line": 122
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 102,
+      "nonEmptyLines": 56,
+      "sections": [
+        {
+          "heading": "Contributing to pi",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Philosophy",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "The One Rule",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "Contribution Gate",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Quality Bar For Issues",
+          "level": 2,
+          "line": 36
+        },
+        {
+          "heading": "Blocking",
+          "level": 2,
+          "line": 50
+        },
+        {
+          "heading": "Before Submitting a PR",
+          "level": 2,
+          "line": 56
+        },
+        {
+          "heading": "Questions?",
+          "level": 2,
+          "line": 73
+        },
+        {
+          "heading": "FAQ",
+          "level": 2,
+          "line": 77
+        },
+        {
+          "heading": "Why are new issues and PRs auto-closed?",
+          "level": 3,
+          "line": 79
+        },
+        {
+          "heading": "Why are weekend issues lower priority?",
+          "level": 3,
+          "line": 83
+        },
+        {
+          "heading": "Why do some issues get no reply?",
+          "level": 3,
+          "line": 87
+        },
+        {
+          "heading": "Why not let AI triage everything?",
+          "level": 3,
+          "line": 91
+        },
+        {
+          "heading": "Is this hostile to contributors?",
+          "level": 3,
+          "line": 95
+        },
+        {
+          "heading": "Where can I learn about plans?",
+          "level": 2,
+          "line": 99
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 15
+      }
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 115,
+      "nonEmptyLines": 80,
+      "sections": [
+        {
+          "heading": "Pi Agent Harness",
+          "level": 1,
+          "line": 13
+        },
+        {
+          "heading": "All Packages",
+          "level": 2,
+          "line": 26
+        },
+        {
+          "heading": "Permissions & Containerization",
+          "level": 2,
+          "line": 39
+        },
+        {
+          "heading": "Contributing",
+          "level": 2,
+          "line": 49
+        },
+        {
+          "heading": "Development",
+          "level": 2,
+          "line": 53
+        },
+        {
+          "heading": "Building standalone binaries from release source",
+          "level": 2,
+          "line": 64
+        },
+        {
+          "heading": "Supply-chain hardening",
+          "level": 2,
+          "line": 77
+        },
+        {
+          "heading": "Share your OSS coding agent sessions",
+          "level": 2,
+          "line": 91
+        },
+        {
+          "heading": "License",
+          "level": 2,
+          "line": 107
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "SECURITY.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 87,
+      "nonEmptyLines": 69,
+      "sections": [
+        {
+          "heading": "Security Policy",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Reporting a Vulnerability",
+          "level": 2,
+          "line": 24
+        },
+        {
+          "heading": "Scope",
+          "level": 2,
+          "line": 42
+        },
+        {
+          "heading": "Out Of Scope",
+          "level": 2,
+          "line": 48
+        },
+        {
+          "heading": "Notes for Reporters",
+          "level": 2,
+          "line": 70
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "biome.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 41,
+      "nonEmptyLines": 41,
+      "sections": [
+        {
+          "heading": "$schema",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "linter",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "formatter",
+          "level": 1,
+          "line": 19
+        },
+        {
+          "heading": "files",
+          "level": 1,
+          "line": 26
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "mini-test.sh",
+      "language": "shell",
+      "fileCategory": "script",
+      "totalLines": 46,
+      "nonEmptyLines": 39,
+      "functions": [
+        {
+          "name": "stop_server",
+          "startLine": 10,
+          "endLine": 13,
+          "params": []
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 75,
+      "nonEmptyLines": 75,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "type",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "workspaces",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 14
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 57
+        },
+        {
+          "heading": "engines",
+          "level": 1,
+          "line": 68
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 71
+        },
+        {
+          "heading": "overrides",
+          "level": 1,
+          "line": 72
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "pi-test.sh",
+      "language": "shell",
+      "fileCategory": "script",
+      "totalLines": 57,
+      "nonEmptyLines": 53,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "test.sh",
+      "language": "shell",
+      "fileCategory": "script",
+      "totalLines": 79,
+      "nonEmptyLines": 70,
+      "functions": [
+        {
+          "name": "cleanup",
+          "startLine": 16,
+          "endLine": 36,
+          "params": []
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tsconfig.base.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 25,
+      "nonEmptyLines": 25,
+      "sections": [
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 2
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "tsconfig.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 54,
+      "nonEmptyLines": 54,
+      "sections": [
+        {
+          "heading": "extends",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 52
+        },
+        {
+          "heading": "exclude",
+          "level": 1,
+          "line": 53
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    }
+  ]
+}

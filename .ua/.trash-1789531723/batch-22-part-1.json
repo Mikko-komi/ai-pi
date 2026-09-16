@@ -1,0 +1,1389 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/tui/src/fuzzy.ts",
+      "type": "file",
+      "name": "fuzzy.ts",
+      "filePath": "packages/tui/src/fuzzy.ts",
+      "summary": "提供按字符顺序（不必连续）的模糊匹配与列表过滤，分数越低表示匹配越好。",
+      "tags": [
+        "模糊匹配",
+        "utility",
+        "过滤",
+        "搜索"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/tui/src/keybindings.ts",
+      "type": "file",
+      "name": "keybindings.ts",
+      "filePath": "packages/tui/src/keybindings.ts",
+      "summary": "定义 TUI 默认快捷键表与 KeybindingsManager，支持用户覆盖、冲突检测，并用 matchesKey 匹配输入。",
+      "tags": [
+        "快捷键",
+        "event-handler",
+        "配置",
+        "键盘"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/tui/src/keys.ts",
+      "type": "file",
+      "name": "keys.ts",
+      "filePath": "packages/tui/src/keys.ts",
+      "summary": "解析终端按键输入，同时支持传统 escape 序列与 Kitty keyboard protocol，并提供 matchesKey/parseKey。",
+      "tags": [
+        "键盘协议",
+        "输入解析",
+        "kitty",
+        "event-handler"
+      ],
+      "complexity": "complex",
+      "languageNotes": "同时覆盖 legacy CSI、modifyOtherKeys 与 Kitty 协议的按键识别。"
+    },
+    {
+      "id": "file:packages/tui/src/kill-ring.ts",
+      "type": "file",
+      "name": "kill-ring.ts",
+      "filePath": "packages/tui/src/kill-ring.ts",
+      "summary": "Emacs 风格 kill/yank 环形缓冲区，支持连续删除合并与 yank-pop 轮换。",
+      "tags": [
+        "剪贴历史",
+        "编辑器",
+        "data-model",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/tui/src/latex.ts",
+      "type": "file",
+      "name": "latex.ts",
+      "filePath": "packages/tui/src/latex.ts",
+      "summary": "将受限 LaTeX 数学公式解析并渲染为等宽终端布局，覆盖符号、分数、根号与矩阵。",
+      "tags": [
+        "latex",
+        "渲染",
+        "markdown",
+        "排版"
+      ],
+      "complexity": "complex",
+      "languageNotes": "用 Unicode 数学符号与多行 layout 节点模拟分数、上下标和矩阵。"
+    },
+    {
+      "id": "file:packages/tui/src/layout-node.ts",
+      "type": "file",
+      "name": "layout-node.ts",
+      "filePath": "packages/tui/src/layout-node.ts",
+      "summary": "声明 Stack/Scroll 布局节点类型，并通过 LAYOUT_NODE symbol 从组件取出布局树。",
+      "tags": [
+        "布局",
+        "type-definition",
+        "组件协议",
+        "symbol"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/tui/src/layout.ts",
+      "type": "file",
+      "name": "layout.ts",
+      "filePath": "packages/tui/src/layout.ts",
+      "summary": "对组件树做测量、裁剪与绘制，处理滚动条几何、Kitty 图像行，并输出可命中的 LayoutFrame。",
+      "tags": [
+        "布局引擎",
+        "渲染",
+        "滚动条",
+        "hit-test"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/tui/src/fuzzy.ts:fuzzyMatch",
+      "type": "function",
+      "name": "fuzzyMatch",
+      "filePath": "packages/tui/src/fuzzy.ts",
+      "lineRange": [
+        12,
+        93
+      ],
+      "summary": "按查询字符顺序匹配文本并打分，连续命中与靠前位置得分更好。",
+      "tags": [
+        "模糊匹配",
+        "评分",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/fuzzy.ts:fuzzyFilter",
+      "type": "function",
+      "name": "fuzzyFilter",
+      "filePath": "packages/tui/src/fuzzy.ts",
+      "lineRange": [
+        99,
+        137
+      ],
+      "summary": "对列表做模糊过滤并按匹配分数排序，空查询原样返回。",
+      "tags": [
+        "模糊匹配",
+        "过滤",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/keybindings.ts:normalizeKeys",
+      "type": "function",
+      "name": "normalizeKeys",
+      "filePath": "packages/tui/src/keybindings.ts",
+      "lineRange": [
+        217,
+        229
+      ],
+      "summary": "将单个或数组 KeyId 规范成去重后的按键列表。",
+      "tags": [
+        "快捷键",
+        "normalization",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/keybindings.ts:setKeybindings",
+      "type": "function",
+      "name": "setKeybindings",
+      "filePath": "packages/tui/src/keybindings.ts",
+      "lineRange": [
+        311,
+        313
+      ],
+      "summary": "替换进程级默认 KeybindingsManager 实例。",
+      "tags": [
+        "快捷键",
+        "singleton",
+        "配置"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/keybindings.ts:getKeybindings",
+      "type": "function",
+      "name": "getKeybindings",
+      "filePath": "packages/tui/src/keybindings.ts",
+      "lineRange": [
+        315,
+        320
+      ],
+      "summary": "返回当前 KeybindingsManager，若尚未设置则惰性创建。",
+      "tags": [
+        "快捷键",
+        "singleton",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/keys.ts:setKittyProtocolActive",
+      "type": "function",
+      "name": "setKittyProtocolActive",
+      "filePath": "packages/tui/src/keys.ts",
+      "lineRange": [
+        31,
+        33
+      ],
+      "summary": "设置全局 Kitty keyboard protocol 是否已启用。",
+      "tags": [
+        "kitty",
+        "状态",
+        "键盘协议"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/keys.ts:isKittyProtocolActive",
+      "type": "function",
+      "name": "isKittyProtocolActive",
+      "filePath": "packages/tui/src/keys.ts",
+      "lineRange": [
+        38,
+        40
+      ],
+      "summary": "查询全局 Kitty keyboard protocol 是否处于活动状态。",
+      "tags": [
+        "kitty",
+        "状态",
+        "键盘协议"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/keys.ts:isKeyRelease",
+      "type": "function",
+      "name": "isKeyRelease",
+      "filePath": "packages/tui/src/keys.ts",
+      "lineRange": [
+        527,
+        551
+      ],
+      "summary": "判断输入是否为 Kitty 协议的按键释放事件。",
+      "tags": [
+        "kitty",
+        "按键事件",
+        "解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/keys.ts:isKeyRepeat",
+      "type": "function",
+      "name": "isKeyRepeat",
+      "filePath": "packages/tui/src/keys.ts",
+      "lineRange": [
+        557,
+        577
+      ],
+      "summary": "判断输入是否为 Kitty 协议的按键重复事件。",
+      "tags": [
+        "kitty",
+        "按键事件",
+        "解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/keys.ts:parseKittySequence",
+      "type": "function",
+      "name": "parseKittySequence",
+      "filePath": "packages/tui/src/keys.ts",
+      "lineRange": [
+        587,
+        651
+      ],
+      "summary": "解析 Kitty CSI u 序列，提取 codepoint、修饰键与事件类型。",
+      "tags": [
+        "kitty",
+        "csi",
+        "解析"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/keys.ts:matchesKittySequence",
+      "type": "function",
+      "name": "matchesKittySequence",
+      "filePath": "packages/tui/src/keys.ts",
+      "lineRange": [
+        653,
+        694
+      ],
+      "summary": "比较输入是否匹配期望的 Kitty codepoint 与修饰键。",
+      "tags": [
+        "kitty",
+        "匹配",
+        "键盘"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/keys.ts:rawCtrlChar",
+      "type": "function",
+      "name": "rawCtrlChar",
+      "filePath": "packages/tui/src/keys.ts",
+      "lineRange": [
+        749,
+        760
+      ],
+      "summary": "将字母键映射为对应的 raw Ctrl 控制字符。",
+      "tags": [
+        "ctrl",
+        "legacy",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/keys.ts:formatKeyNameWithModifiers",
+      "type": "function",
+      "name": "formatKeyNameWithModifiers",
+      "filePath": "packages/tui/src/keys.ts",
+      "lineRange": [
+        776,
+        786
+      ],
+      "summary": "把修饰键与主键名格式化为 ctrl+shift+key 形式的 KeyId。",
+      "tags": [
+        "格式化",
+        "keyid",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/keys.ts:parseKeyId",
+      "type": "function",
+      "name": "parseKeyId",
+      "filePath": "packages/tui/src/keys.ts",
+      "lineRange": [
+        788,
+        801
+      ],
+      "summary": "把 KeyId 字符串拆成修饰键集合与基础键名。",
+      "tags": [
+        "解析",
+        "keyid",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/keys.ts:matchesKey",
+      "type": "function",
+      "name": "matchesKey",
+      "filePath": "packages/tui/src/keys.ts",
+      "lineRange": [
+        820,
+        1204
+      ],
+      "summary": "对照 KeyId 匹配原始输入，覆盖 legacy、Kitty 与 modifyOtherKeys 路径。",
+      "tags": [
+        "按键匹配",
+        "键盘协议",
+        "核心"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/tui/src/keys.ts:formatParsedKey",
+      "type": "function",
+      "name": "formatParsedKey",
+      "filePath": "packages/tui/src/keys.ts",
+      "lineRange": [
+        1212,
+        1249
+      ],
+      "summary": "将已解析的 codepoint/修饰键格式化为规范 KeyId。",
+      "tags": [
+        "格式化",
+        "keyid",
+        "解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/keys.ts:parseKey",
+      "type": "function",
+      "name": "parseKey",
+      "filePath": "packages/tui/src/keys.ts",
+      "lineRange": [
+        1251,
+        1327
+      ],
+      "summary": "把原始输入解析为 KeyId，失败时返回 undefined。",
+      "tags": [
+        "按键解析",
+        "键盘协议",
+        "入口"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/keys.ts:decodeKittyPrintable",
+      "type": "function",
+      "name": "decodeKittyPrintable",
+      "filePath": "packages/tui/src/keys.ts",
+      "lineRange": [
+        1350,
+        1383
+      ],
+      "summary": "从 Kitty 序列解码可打印字符，处理移位字母身份。",
+      "tags": [
+        "kitty",
+        "可打印键",
+        "解码"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/keys.ts:decodeModifyOtherKeysPrintable",
+      "type": "function",
+      "name": "decodeModifyOtherKeysPrintable",
+      "filePath": "packages/tui/src/keys.ts",
+      "lineRange": [
+        1385,
+        1397
+      ],
+      "summary": "从 modifyOtherKeys 序列解码可打印字符。",
+      "tags": [
+        "modifyOtherKeys",
+        "可打印键",
+        "解码"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/keys.ts:decodePrintableKey",
+      "type": "function",
+      "name": "decodePrintableKey",
+      "filePath": "packages/tui/src/keys.ts",
+      "lineRange": [
+        1399,
+        1401
+      ],
+      "summary": "按当前协议状态选择 Kitty 或 modifyOtherKeys 可打印解码。",
+      "tags": [
+        "可打印键",
+        "分发",
+        "键盘协议"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/latex.ts:replaceCharacters",
+      "type": "function",
+      "name": "replaceCharacters",
+      "filePath": "packages/tui/src/latex.ts",
+      "lineRange": [
+        601,
+        611
+      ],
+      "summary": "按替换表逐字符改写字符串，用于符号与上下标映射。",
+      "tags": [
+        "latex",
+        "字符映射",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/latex.ts:formatScript",
+      "type": "function",
+      "name": "formatScript",
+      "filePath": "packages/tui/src/latex.ts",
+      "lineRange": [
+        613,
+        626
+      ],
+      "summary": "把内容格式化为上标或下标 Unicode 文本。",
+      "tags": [
+        "latex",
+        "上下标",
+        "排版"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/latex.ts:normalizeOutput",
+      "type": "function",
+      "name": "normalizeOutput",
+      "filePath": "packages/tui/src/latex.ts",
+      "lineRange": [
+        646,
+        657
+      ],
+      "summary": "规范化渲染结果中的空白与特殊空字符。",
+      "tags": [
+        "latex",
+        "normalization",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/latex.ts:joinLayouts",
+      "type": "function",
+      "name": "joinLayouts",
+      "filePath": "packages/tui/src/latex.ts",
+      "lineRange": [
+        698,
+        721
+      ],
+      "summary": "水平拼接多个 layout 片段并按基线对齐。",
+      "tags": [
+        "latex",
+        "布局",
+        "排版"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/latex.ts:renderLayout",
+      "type": "function",
+      "name": "renderLayout",
+      "filePath": "packages/tui/src/latex.ts",
+      "lineRange": [
+        723,
+        809
+      ],
+      "summary": "把 layout 节点树绘制成等宽多行字符串。",
+      "tags": [
+        "latex",
+        "渲染",
+        "布局"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/latex.ts:renderLatex",
+      "type": "function",
+      "name": "renderLatex",
+      "filePath": "packages/tui/src/latex.ts",
+      "lineRange": [
+        1376,
+        1394
+      ],
+      "summary": "解析并渲染 LaTeX 源，导出给 Markdown 等调用方。",
+      "tags": [
+        "latex",
+        "入口",
+        "渲染"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/layout-node.ts:getLayoutNode",
+      "type": "function",
+      "name": "getLayoutNode",
+      "filePath": "packages/tui/src/layout-node.ts",
+      "lineRange": [
+        48,
+        51
+      ],
+      "summary": "若组件实现 LAYOUT_NODE symbol 则返回其布局节点。",
+      "tags": [
+        "布局",
+        "组件协议",
+        "introspection"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/layout.ts:renderCached",
+      "type": "function",
+      "name": "renderCached",
+      "filePath": "packages/tui/src/layout.ts",
+      "lineRange": [
+        68,
+        81
+      ],
+      "summary": "按宽度缓存组件 render 结果，避免重复测量。",
+      "tags": [
+        "缓存",
+        "渲染",
+        "布局"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/layout.ts:layoutComponent",
+      "type": "function",
+      "name": "layoutComponent",
+      "filePath": "packages/tui/src/layout.ts",
+      "lineRange": [
+        106,
+        247
+      ],
+      "summary": "递归布局 Stack/Scroll/叶子组件，计算矩形、裁剪与滚动内容。",
+      "tags": [
+        "布局",
+        "递归",
+        "核心"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/layout.ts:replaceScrollbarCell",
+      "type": "function",
+      "name": "replaceScrollbarCell",
+      "filePath": "packages/tui/src/layout.ts",
+      "lineRange": [
+        249,
+        278
+      ],
+      "summary": "在图像行或普通文本行上替换滚动条单元格，尽量保留背景。",
+      "tags": [
+        "滚动条",
+        "绘制",
+        "图像行"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/layout.ts:getScrollbarGeometry",
+      "type": "function",
+      "name": "getScrollbarGeometry",
+      "filePath": "packages/tui/src/layout.ts",
+      "lineRange": [
+        280,
+        307
+      ],
+      "summary": "根据滚动状态计算轨道、滑块位置与最大 scrollTop。",
+      "tags": [
+        "滚动条",
+        "几何",
+        "hit-test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/layout.ts:paintScrollbar",
+      "type": "function",
+      "name": "paintScrollbar",
+      "filePath": "packages/tui/src/layout.ts",
+      "lineRange": [
+        309,
+        328
+      ],
+      "summary": "把滚动条轨道与滑块绘制到屏幕行缓冲。",
+      "tags": [
+        "滚动条",
+        "绘制",
+        "渲染"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/layout.ts:paintBox",
+      "type": "function",
+      "name": "paintBox",
+      "filePath": "packages/tui/src/layout.ts",
+      "lineRange": [
+        330,
+        377
+      ],
+      "summary": "将布局盒的文本/图像行合成到屏幕，并处理裁剪与 Kitty 行。",
+      "tags": [
+        "绘制",
+        "合成",
+        "图像"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/layout.ts:renderLayoutFrame",
+      "type": "function",
+      "name": "renderLayoutFrame",
+      "filePath": "packages/tui/src/layout.ts",
+      "lineRange": [
+        379,
+        408
+      ],
+      "summary": "对根组件完成一次完整布局并返回 LayoutFrame。",
+      "tags": [
+        "布局",
+        "入口",
+        "渲染"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/layout.ts:getLayoutBoxesAt",
+      "type": "function",
+      "name": "getLayoutBoxesAt",
+      "filePath": "packages/tui/src/layout.ts",
+      "lineRange": [
+        415,
+        425
+      ],
+      "summary": "收集覆盖指定坐标的布局盒，用于鼠标命中。",
+      "tags": [
+        "hit-test",
+        "鼠标",
+        "布局"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/layout.ts:getScrollViewBox",
+      "type": "function",
+      "name": "getScrollViewBox",
+      "filePath": "packages/tui/src/layout.ts",
+      "lineRange": [
+        427,
+        437
+      ],
+      "summary": "在布局帧中查找指定 ScrollView 对应的布局盒。",
+      "tags": [
+        "滚动",
+        "查找",
+        "布局"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/layout.ts:getScrollViewsAt",
+      "type": "function",
+      "name": "getScrollViewsAt",
+      "filePath": "packages/tui/src/layout.ts",
+      "lineRange": [
+        439,
+        449
+      ],
+      "summary": "返回指定坐标下的 ScrollView 布局盒列表。",
+      "tags": [
+        "滚动",
+        "hit-test",
+        "鼠标"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/tui/src/keybindings.ts:KeybindingsManager",
+      "type": "class",
+      "name": "KeybindingsManager",
+      "filePath": "packages/tui/src/keybindings.ts",
+      "lineRange": [
+        231,
+        307
+      ],
+      "summary": "管理默认与用户快捷键，重建查找表并检测冲突，用 matchesKey 匹配输入。",
+      "tags": [
+        "快捷键",
+        "注册表",
+        "冲突检测"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/tui/src/kill-ring.ts:KillRing",
+      "type": "class",
+      "name": "KillRing",
+      "filePath": "packages/tui/src/kill-ring.ts",
+      "lineRange": [
+        8,
+        46
+      ],
+      "summary": "保存被删除文本的环形缓冲，支持累积 kill 与 rotate yank-pop。",
+      "tags": [
+        "剪贴历史",
+        "环形缓冲",
+        "编辑器"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/tui/src/latex.ts:LatexParser",
+      "type": "class",
+      "name": "LatexParser",
+      "filePath": "packages/tui/src/latex.ts",
+      "lineRange": [
+        811,
+        1365
+      ],
+      "summary": "递归解析 LaTeX 命令、环境与参数，并生成可渲染的 layout 节点。",
+      "tags": [
+        "latex",
+        "解析器",
+        "递归下降"
+      ],
+      "complexity": "complex",
+      "languageNotes": "手写递归下降解析器，覆盖 command、environment 与嵌套参数。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/tui/src/keybindings.ts",
+      "target": "file:packages/tui/src/keys.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/latex.ts",
+      "target": "file:packages/tui/src/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/layout-node.ts",
+      "target": "file:packages/tui/src/tui.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/layout.ts",
+      "target": "file:packages/tui/src/components/scroll-view.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/layout.ts",
+      "target": "file:packages/tui/src/components/stack.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/layout.ts",
+      "target": "file:packages/tui/src/layout-node.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/layout.ts",
+      "target": "file:packages/tui/src/terminal-image.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/layout.ts",
+      "target": "file:packages/tui/src/tui.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/layout.ts",
+      "target": "file:packages/tui/src/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/fuzzy.ts",
+      "target": "function:packages/tui/src/fuzzy.ts:fuzzyMatch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/fuzzy.ts",
+      "target": "function:packages/tui/src/fuzzy.ts:fuzzyMatch",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/fuzzy.ts",
+      "target": "function:packages/tui/src/fuzzy.ts:fuzzyFilter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/fuzzy.ts",
+      "target": "function:packages/tui/src/fuzzy.ts:fuzzyFilter",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/keybindings.ts",
+      "target": "function:packages/tui/src/keybindings.ts:normalizeKeys",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/keybindings.ts",
+      "target": "function:packages/tui/src/keybindings.ts:setKeybindings",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/keybindings.ts",
+      "target": "function:packages/tui/src/keybindings.ts:setKeybindings",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/keybindings.ts",
+      "target": "function:packages/tui/src/keybindings.ts:getKeybindings",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/keybindings.ts",
+      "target": "function:packages/tui/src/keybindings.ts:getKeybindings",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:setKittyProtocolActive",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:setKittyProtocolActive",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:isKittyProtocolActive",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:isKittyProtocolActive",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:isKeyRelease",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:isKeyRelease",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:isKeyRepeat",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:isKeyRepeat",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:parseKittySequence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:matchesKittySequence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:rawCtrlChar",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:formatKeyNameWithModifiers",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:parseKeyId",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:matchesKey",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:matchesKey",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:formatParsedKey",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:parseKey",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:parseKey",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:decodeKittyPrintable",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:decodeKittyPrintable",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:decodeModifyOtherKeysPrintable",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:decodePrintableKey",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/keys.ts",
+      "target": "function:packages/tui/src/keys.ts:decodePrintableKey",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/latex.ts",
+      "target": "function:packages/tui/src/latex.ts:replaceCharacters",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/latex.ts",
+      "target": "function:packages/tui/src/latex.ts:formatScript",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/latex.ts",
+      "target": "function:packages/tui/src/latex.ts:normalizeOutput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/latex.ts",
+      "target": "function:packages/tui/src/latex.ts:joinLayouts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/latex.ts",
+      "target": "function:packages/tui/src/latex.ts:renderLayout",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/latex.ts",
+      "target": "function:packages/tui/src/latex.ts:renderLatex",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/latex.ts",
+      "target": "function:packages/tui/src/latex.ts:renderLatex",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/layout-node.ts",
+      "target": "function:packages/tui/src/layout-node.ts:getLayoutNode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/layout-node.ts",
+      "target": "function:packages/tui/src/layout-node.ts:getLayoutNode",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/layout.ts",
+      "target": "function:packages/tui/src/layout.ts:renderCached",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/layout.ts",
+      "target": "function:packages/tui/src/layout.ts:layoutComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/layout.ts",
+      "target": "function:packages/tui/src/layout.ts:replaceScrollbarCell",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/layout.ts",
+      "target": "function:packages/tui/src/layout.ts:getScrollbarGeometry",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/layout.ts",
+      "target": "function:packages/tui/src/layout.ts:getScrollbarGeometry",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/layout.ts",
+      "target": "function:packages/tui/src/layout.ts:paintScrollbar",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/layout.ts",
+      "target": "function:packages/tui/src/layout.ts:paintBox",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/layout.ts",
+      "target": "function:packages/tui/src/layout.ts:renderLayoutFrame",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/layout.ts",
+      "target": "function:packages/tui/src/layout.ts:renderLayoutFrame",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/layout.ts",
+      "target": "function:packages/tui/src/layout.ts:getLayoutBoxesAt",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/layout.ts",
+      "target": "function:packages/tui/src/layout.ts:getLayoutBoxesAt",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/layout.ts",
+      "target": "function:packages/tui/src/layout.ts:getScrollViewBox",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/layout.ts",
+      "target": "function:packages/tui/src/layout.ts:getScrollViewBox",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/layout.ts",
+      "target": "function:packages/tui/src/layout.ts:getScrollViewsAt",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/layout.ts",
+      "target": "function:packages/tui/src/layout.ts:getScrollViewsAt",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/keybindings.ts",
+      "target": "class:packages/tui/src/keybindings.ts:KeybindingsManager",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/keybindings.ts",
+      "target": "class:packages/tui/src/keybindings.ts:KeybindingsManager",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/kill-ring.ts",
+      "target": "class:packages/tui/src/kill-ring.ts:KillRing",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/kill-ring.ts",
+      "target": "class:packages/tui/src/kill-ring.ts:KillRing",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/latex.ts",
+      "target": "class:packages/tui/src/latex.ts:LatexParser",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:packages/tui/src/keybindings.ts:KeybindingsManager",
+      "target": "function:packages/tui/src/keys.ts:matchesKey",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/latex.ts:renderLayout",
+      "target": "function:packages/tui/src/utils.ts:visibleWidth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/latex.ts:LatexParser",
+      "target": "function:packages/tui/src/utils.ts:visibleWidth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/layout.ts:layoutComponent",
+      "target": "function:packages/tui/src/layout-node.ts:getLayoutNode",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/layout.ts:layoutComponent",
+      "target": "function:packages/tui/src/components/stack.ts:visibleStackEntries",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/layout.ts:layoutComponent",
+      "target": "function:packages/tui/src/components/stack.ts:allocateStackSizes",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/layout.ts:replaceScrollbarCell",
+      "target": "function:packages/tui/src/terminal-image.ts:isImageLine",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/layout.ts:replaceScrollbarCell",
+      "target": "function:packages/tui/src/utils.ts:getGraphemeCellRange",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/layout.ts:replaceScrollbarCell",
+      "target": "function:packages/tui/src/utils.ts:sliceByColumn",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/layout.ts:replaceScrollbarCell",
+      "target": "function:packages/tui/src/utils.ts:extractAnsiCode",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/layout.ts:replaceScrollbarCell",
+      "target": "function:packages/tui/src/utils.ts:visibleWidth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/layout.ts:replaceScrollbarCell",
+      "target": "function:packages/tui/src/utils.ts:getActiveBackgroundAnsi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/layout.ts:paintBox",
+      "target": "function:packages/tui/src/terminal-image.ts:getKittyImageMetadata",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/layout.ts:paintBox",
+      "target": "function:packages/tui/src/terminal-image.ts:cropKittyImageLine",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/layout.ts:paintBox",
+      "target": "function:packages/tui/src/terminal-image.ts:isImageLine",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/layout.ts:paintBox",
+      "target": "function:packages/tui/src/tui.ts:compositeTuiLine",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

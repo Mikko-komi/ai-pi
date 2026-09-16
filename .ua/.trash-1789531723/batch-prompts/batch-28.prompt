@@ -1,0 +1,19 @@
+Analyze these files and produce GraphNode and GraphEdge objects.
+Project root: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi`
+Project: `pi-monorepo`
+Batch: `28/45`
+Skill directory: `/Users/elex-mb0203/.cursor/plugins/local/Understand-Anything/understand-anything-plugin/skills/understand`
+Output: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-28.json` OR `batch-28-part-<k>.json`.
+UA_DIR: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua`
+Load `batchImportData` and `neighborMap` from `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-briefs/batch-28.json`.
+Pass every listed file through to `batchFiles` with path, language, sizeLines, fileCategory.
+
+> **Language directive**: Generate all textual content in **Chinese (zh)**. Keep technical terms in English when no standard translation exists.
+
+Files:
+1. .github/ISSUE_TEMPLATE/bug.yml (45 lines, language: yaml, fileCategory: config)
+2. .github/ISSUE_TEMPLATE/config.yml (5 lines, language: yaml, fileCategory: config)
+3. .github/ISSUE_TEMPLATE/contribution.yml (36 lines, language: yaml, fileCategory: config)
+4. .github/ISSUE_TEMPLATE/package-report.yml (49 lines, language: yaml, fileCategory: config)
+
+Respond with only a brief summary: parts written, total nodes/edges, files skipped.

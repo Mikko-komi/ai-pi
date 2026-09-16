@@ -1,0 +1,47 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/protocol/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/protocol/README.md",
+      "summary": "说明 @earendil-works/pi-protocol 的 v8 路由信封、CBOR 分帧与编解码 API，并划清 Chord 载荷语义与传输层的职责边界。",
+      "tags": ["documentation", "protocol", "cbor", "entry-point"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:packages/protocol/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "packages/protocol/package.json",
+      "summary": "定义 @earendil-works/pi-protocol 的 ESM 发布入口、构建/测试脚本，以及 chord 与 typebox 依赖。",
+      "tags": ["configuration", "npm-package", "build-system", "protocol"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:packages/protocol/tsconfig.build.json",
+      "type": "config",
+      "name": "tsconfig.build.json",
+      "filePath": "packages/protocol/tsconfig.build.json",
+      "summary": "协议包的 TypeScript 构建配置，继承仓库根 tsconfig.base.json，将 src 编译到 dist。",
+      "tags": ["configuration", "typescript", "build-system"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:packages/protocol/README.md",
+      "target": "config:packages/protocol/package.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:packages/protocol/package.json",
+      "target": "config:packages/protocol/tsconfig.build.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

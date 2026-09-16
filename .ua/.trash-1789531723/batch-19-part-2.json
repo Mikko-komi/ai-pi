@@ -1,0 +1,406 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/utils/tools-manager.ts",
+      "type": "file",
+      "name": "tools-manager.ts",
+      "filePath": "packages/coding-agent/src/utils/tools-manager.ts",
+      "summary": "管理 fd/ripgrep 等外部 CLI 工具：解析本地或系统路径，并从 GitHub release 下载、解压、安装到 bin 目录。",
+      "tags": [
+        "utility",
+        "service",
+        "download"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/session-backends/sqlite-node/benchmark/session/session-repo-targets.ts",
+      "type": "file",
+      "name": "session-repo-targets.ts",
+      "filePath": "packages/session-backends/sqlite-node/benchmark/session/session-repo-targets.ts",
+      "summary": "为 SQLite SessionRepo 基准测试提供 fixture：创建临时目录与 SqliteSessionRepo 实例。",
+      "tags": [
+        "test",
+        "benchmark",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/session-backends/sqlite-node/benchmark/session/session-repo.bench.ts",
+      "type": "file",
+      "name": "session-repo.bench.ts",
+      "filePath": "packages/session-backends/sqlite-node/benchmark/session/session-repo.bench.ts",
+      "summary": "注册 SessionRepo 的目录读写与 fork 写入基准场景，使用共享 harness 数据集与 seed 函数。",
+      "tags": [
+        "test",
+        "benchmark",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/session-backends/sqlite-node/benchmark/session/storage-targets.ts",
+      "type": "file",
+      "name": "storage-targets.ts",
+      "filePath": "packages/session-backends/sqlite-node/benchmark/session/storage-targets.ts",
+      "summary": "为 SQLite Storage 基准测试构建内存数据库 fixture，写入初始 schema 与空 session 行。",
+      "tags": [
+        "test",
+        "benchmark",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/session-backends/sqlite-node/benchmark/session/storage.bench.ts",
+      "type": "file",
+      "name": "storage.bench.ts",
+      "filePath": "packages/session-backends/sqlite-node/benchmark/session/storage.bench.ts",
+      "summary": "注册 SQLite Storage 的读写基准场景，并对 fixture 预置 harness 数据集。",
+      "tags": [
+        "test",
+        "benchmark",
+        "storage"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/tools-manager.ts:getToolPath",
+      "type": "function",
+      "name": "getToolPath",
+      "filePath": "packages/coding-agent/src/utils/tools-manager.ts",
+      "lineRange": [
+        83,
+        102
+      ],
+      "summary": "按优先顺序查找已安装的 fd/rg：本地 bin 目录，其次系统 PATH 中的别名。",
+      "tags": [
+        "utility",
+        "path-resolution",
+        "tooling"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/tools-manager.ts:getLatestVersion",
+      "type": "function",
+      "name": "getLatestVersion",
+      "filePath": "packages/coding-agent/src/utils/tools-manager.ts",
+      "lineRange": [
+        110,
+        138
+      ],
+      "summary": "跟随 GitHub latest release 重定向，解析 tag 并去掉工具配置的前缀。",
+      "tags": [
+        "download",
+        "utility",
+        "api-handler"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/tools-manager.ts:downloadFile",
+      "type": "function",
+      "name": "downloadFile",
+      "filePath": "packages/coding-agent/src/utils/tools-manager.ts",
+      "lineRange": [
+        141,
+        154
+      ],
+      "summary": "带超时地下载 URL 到目标路径，将 Web stream 管道写入本地文件。",
+      "tags": [
+        "download",
+        "utility",
+        "network"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/tools-manager.ts:findBinaryRecursively",
+      "type": "function",
+      "name": "findBinaryRecursively",
+      "filePath": "packages/coding-agent/src/utils/tools-manager.ts",
+      "lineRange": [
+        156,
+        176
+      ],
+      "summary": "在解压目录中递归查找指定二进制文件名。",
+      "tags": [
+        "utility",
+        "filesystem",
+        "search"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/tools-manager.ts:formatSpawnFailure",
+      "type": "function",
+      "name": "formatSpawnFailure",
+      "filePath": "packages/coding-agent/src/utils/tools-manager.ts",
+      "lineRange": [
+        178,
+        191
+      ],
+      "summary": "把 spawnSync 失败格式化为包含 stderr/stdout 的错误信息。",
+      "tags": [
+        "utility",
+        "error-handling",
+        "process"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/tools-manager.ts:getWindowsTarCommand",
+      "type": "function",
+      "name": "getWindowsTarCommand",
+      "filePath": "packages/coding-agent/src/utils/tools-manager.ts",
+      "lineRange": [
+        208,
+        217
+      ],
+      "summary": "定位 Windows 上可用的 tar.exe，优先系统32目录。",
+      "tags": [
+        "utility",
+        "windows",
+        "archive"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/tools-manager.ts:extractZipArchive",
+      "type": "function",
+      "name": "extractZipArchive",
+      "filePath": "packages/coding-agent/src/utils/tools-manager.ts",
+      "lineRange": [
+        219,
+        255
+      ],
+      "summary": "在 Windows 上依次尝试 tar/powershell/expand 解压 zip，并汇总失败原因。",
+      "tags": [
+        "utility",
+        "archive",
+        "windows"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/tools-manager.ts:downloadTool",
+      "type": "function",
+      "name": "downloadTool",
+      "filePath": "packages/coding-agent/src/utils/tools-manager.ts",
+      "lineRange": [
+        258,
+        331
+      ],
+      "summary": "按平台选择 GitHub asset，下载并解压 tar.gz/zip，再把二进制安装到 bin 目录。",
+      "tags": [
+        "download",
+        "service",
+        "install"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/tools-manager.ts:ensureTool",
+      "type": "function",
+      "name": "ensureTool",
+      "filePath": "packages/coding-agent/src/utils/tools-manager.ts",
+      "lineRange": [
+        349,
+        400
+      ],
+      "summary": "确保 fd/rg 可用：已存在则返回路径，离线模式报错，否则下载并报告状态。",
+      "tags": [
+        "service",
+        "entry-point",
+        "install"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/utils/tools-manager.ts",
+      "target": "function:packages/coding-agent/src/utils/tools-manager.ts:getToolPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/tools-manager.ts",
+      "target": "function:packages/coding-agent/src/utils/tools-manager.ts:getLatestVersion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/tools-manager.ts",
+      "target": "function:packages/coding-agent/src/utils/tools-manager.ts:downloadFile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/tools-manager.ts",
+      "target": "function:packages/coding-agent/src/utils/tools-manager.ts:findBinaryRecursively",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/tools-manager.ts",
+      "target": "function:packages/coding-agent/src/utils/tools-manager.ts:formatSpawnFailure",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/tools-manager.ts",
+      "target": "function:packages/coding-agent/src/utils/tools-manager.ts:getWindowsTarCommand",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/tools-manager.ts",
+      "target": "function:packages/coding-agent/src/utils/tools-manager.ts:extractZipArchive",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/tools-manager.ts",
+      "target": "function:packages/coding-agent/src/utils/tools-manager.ts:downloadTool",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/tools-manager.ts",
+      "target": "function:packages/coding-agent/src/utils/tools-manager.ts:ensureTool",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/tools-manager.ts",
+      "target": "function:packages/coding-agent/src/utils/tools-manager.ts:getToolPath",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/tools-manager.ts",
+      "target": "function:packages/coding-agent/src/utils/tools-manager.ts:getLatestVersion",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/tools-manager.ts",
+      "target": "function:packages/coding-agent/src/utils/tools-manager.ts:ensureTool",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/tools-manager.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/tools-manager.ts",
+      "target": "file:packages/coding-agent/src/utils/management-http.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/benchmark/session/session-repo-targets.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/benchmark/session/session-repo-targets.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/benchmark/session/session-repo.bench.ts",
+      "target": "file:packages/agent/src/harness/session/testing/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/benchmark/session/session-repo.bench.ts",
+      "target": "file:packages/session-backends/sqlite-node/benchmark/session/session-repo-targets.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/benchmark/session/storage-targets.ts",
+      "target": "file:packages/agent/src/harness/session/testing/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/benchmark/session/storage-targets.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/benchmark/session/storage-targets.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/benchmark/session/storage-targets.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/migrations.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/benchmark/session/storage.bench.ts",
+      "target": "file:packages/agent/src/harness/session/testing/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/benchmark/session/storage.bench.ts",
+      "target": "file:packages/session-backends/sqlite-node/benchmark/session/storage-targets.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/tools-manager.ts:getLatestVersion",
+      "target": "function:packages/coding-agent/src/utils/management-http.ts:fetchWithRetry",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/tools-manager.ts:downloadFile",
+      "target": "function:packages/coding-agent/src/utils/management-http.ts:fetchWithRetry",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

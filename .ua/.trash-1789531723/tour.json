@@ -1,0 +1,127 @@
+[
+  {
+    "order": 1,
+    "title": "项目概览",
+    "description": "从仓库根 README 开始，先建立对 Pi Agent Harness 的整体图景：这是一套 TypeScript monorepo，包含可自扩展的 coding agent CLI、agent 运行时、多提供方 LLM API、Chord 组合运行时、TUI 与遥测。文档同时划出权限与容器化边界、开发命令和从 release 源码构建独立二进制的路径，后面每一步都对应这里列出的某个包。",
+    "nodeIds": [
+      "document:README.md"
+    ]
+  },
+  {
+    "order": 2,
+    "title": "Monorepo 工作区",
+    "description": "根 package.json 把 README 里的各包落成 workspaces，并规定按包顺序执行的 build、check、test、publish，以及 Node >= 22.19 的引擎约束。coding-agent 的清单则声明 pi/bin 入口、SDK 导出和二进制构建脚本，说明用户面对的 CLI 与仓库内部包是如何接线的。读完这一步，就能看出后续源码分别属于哪一层依赖。",
+    "nodeIds": [
+      "config:package.json",
+      "config:packages/coding-agent/package.json"
+    ]
+  },
+  {
+    "order": 3,
+    "title": "CLI 启动入口",
+    "description": "用户执行 pi 时首先进入 coding-agent 的 main.ts：解析参数、做迁移与鉴权、确认项目信任，再分发到 interactive、print 或 rpc 模式。同包的 index.ts 是公共 API barrel，把 session、工具、扩展与 TUI 再导出给 SDK 调用方；config.ts 负责安装方式检测和用户配置目录。这一步回答“进程从哪里起来”，下一步才进入交互界面。",
+    "nodeIds": [
+      "file:packages/coding-agent/src/main.ts",
+      "file:packages/coding-agent/src/index.ts",
+      "file:packages/coding-agent/src/config.ts"
+    ],
+    "languageLesson": "TypeScript barrel（桶文件）用 export 再导出子模块，把实现细节收进单一公共表面；CLI 入口（main.ts）负责副作用与进程生命周期，index.ts 则保持可被 SDK 导入、尽量无启动副作用。"
+  },
+  {
+    "order": 4,
+    "title": "交互模式与 TUI",
+    "description": "main.ts 在默认路径上把控制权交给 interactive-mode.ts。它组装终端界面、快捷键、各类选择器和扩展 UI，并把真正的会话事件循环委托给下一步的 AgentSession。pi-tui 的公共入口提供组件、渲染、键绑定与终端图像原语，交互模式大量引用这些原语而不把 CLI 业务写进组件库。先看清“屏幕怎么转起来”，再往下看会话状态。",
+    "nodeIds": [
+      "file:packages/coding-agent/src/modes/interactive/interactive-mode.ts",
+      "file:packages/tui/src/index.ts"
+    ]
+  },
+  {
+    "order": 5,
+    "title": "会话编排核心",
+    "description": "所有运行模式（交互、打印、RPC、SDK）都汇聚到 AgentSession：提示词、工具、compaction、bash、模型切换、扩展绑定和会话树导航都在这里编排。sdk.ts 用同一套核心以编程方式组装 runtime、设置、资源与内置工具，因此 CLI 与嵌入式用法共享一份会话语义。上一步的 TUI 只是这个核心的一种呈现。",
+    "nodeIds": [
+      "file:packages/coding-agent/src/core/agent-session.ts",
+      "file:packages/coding-agent/src/core/sdk.ts"
+    ]
+  },
+  {
+    "order": 6,
+    "title": "扩展与内置工具",
+    "description": "AgentSession 能“自扩展”，是因为扩展系统先用 types.ts 约定 UI context、ToolDefinition、生命周期事件，以及内置工具结果的 type guard。tools/index.ts 再把 read、grep、find、ls 等工厂按 coding / read-only / all 组合成 AgentTool。这一层是 coding-agent 对 agent-core 工具契约的产品化包装，下一步会落到更底层的循环定义。",
+    "nodeIds": [
+      "file:packages/coding-agent/src/core/extensions/types.ts",
+      "file:packages/coding-agent/src/core/tools/index.ts"
+    ],
+    "languageLesson": "Type guard（类型守卫）把运行时检查写成 `value is SpecificType`，让 TypeScript 在分支内收窄联合类型；扩展系统用它区分内置工具的 call/result，避免把任意 JSON 当成已知工具载荷。"
+  },
+  {
+    "order": 7,
+    "title": "Agent 运行时契约",
+    "description": "跨过 CLI 产品层后，@pi/agent 的 index.ts 暴露 telemetry、compaction、harness、session 与 ExecutionEnv 等核心契约，是仓库里被依赖最多的包入口之一。types.ts 定义 StreamFn、工具执行/队列模式、AgentTool 以及 before/afterToolCall 回调，也就是上一步那些工具真正被循环调用时的语言。后面的 Harness 都建立在这套词汇上。",
+    "nodeIds": [
+      "file:packages/agent/src/index.ts",
+      "file:packages/agent/src/types.ts"
+    ]
+  },
+  {
+    "order": 8,
+    "title": "Harness 状态机",
+    "description": "AgentHarness 把“一次 agent 运行”做成可恢复的状态机：createAgentHarness 是工厂入口，runtime/harness.ts 管理 lane 生命周期并从 session 恢复未完成 operation。每条 AgentLane 把 admission、drive 与 session 写入串在同一条 mutation line 上；drive.ts 按 operation 状态分派，直到 settled、waiting 或取消调和。这是 agent-core 与 CLI 会话树之间的执行引擎。",
+    "nodeIds": [
+      "file:packages/agent/src/harness/agent-harness.ts",
+      "file:packages/agent/src/harness/runtime/harness.ts",
+      "file:packages/agent/src/harness/runtime/lane.ts",
+      "file:packages/agent/src/harness/runtime/drive.ts"
+    ],
+    "languageLesson": "Durable 状态机把长时间运行拆成可落盘的 operation：每一步根据当前状态分派，而不是依赖进程内的调用栈。这样崩溃或中止后可以从 session 恢复，而不是重放整段对话。"
+  },
+  {
+    "order": 9,
+    "title": "统一 LLM API",
+    "description": "Harness 真正发模型请求时走 pi-ai。index.ts 是无副作用核心 barrel，只重导出模型、鉴权、消息类型与辅助函数，不创建 provider。types.ts 给出 KnownApi/Provider、消息与工具、流式与图像选项，以及 Model 与成本结构——这是全仓库对“一次补全长什么样”的共同合同。下一步才看到具体厂商如何被注册进来。",
+    "nodeIds": [
+      "file:packages/ai/src/index.ts",
+      "file:packages/ai/src/types.ts"
+    ],
+    "languageLesson": "Discriminated union（可辨识联合）用字面量字段（例如 api/provider）区分变体，让每个厂商的请求与兼容选项在类型上互斥，避免用宽泛的 any 或可选字段堆叠表示多种协议。"
+  },
+  {
+    "order": 10,
+    "title": "多提供方注册",
+    "description": "providers/all.ts 从生成的模型目录构造全部内置 chat/image provider，并导出 builtinModels。models.ts 负责运行时注册、目录刷新、认证登录，以及 stream/complete/deferred 调度；model-catalog.ts 把按 API 分组的 JSON 展平为 id→Model 映射。AgentSession 里的“换模型”最终落在这一层，而不是 CLI 自己解析各厂商 SDK。",
+    "nodeIds": [
+      "file:packages/ai/src/providers/all.ts",
+      "file:packages/ai/src/models.ts",
+      "file:packages/ai/src/model-catalog.ts"
+    ]
+  },
+  {
+    "order": 11,
+    "title": "Chord 组合运行时",
+    "description": "CLI 的扩展、远程会话和 RPC 并不直接绑死在 agent-core 上，而是通过 Chord 的 facet/service 模型组装。index.ts 导出 facet/service API、远程编解码与核心类型；types.ts 定义 Context、Service/Facet 契约以及复制状态快照。Harness 的 context.ts 也再导出这套 Context，用于取消传播与 telemetry parentage。理解 Chord 后，才能看懂插件如何被打包、加载并跨进程调用。",
+    "nodeIds": [
+      "file:packages/chord/src/index.ts",
+      "file:packages/chord/src/types.ts"
+    ]
+  },
+  {
+    "order": 12,
+    "title": "会话持久化模式",
+    "description": "前面所有 session 树、operation 恢复和 usage 账本，最终要落到 SQLite。sessions 表保存会话头、父会话、storage_version 和投影缓存列；entries 表是权威条目日志，用 (session_id, id) 主键记录 parent_id、seq、类型与 JSON payload，并由触发器校验父子关系。读这张模式，可以把 AgentSession 与 Harness 的内存对象对应回可恢复的磁盘结构。",
+    "nodeIds": [
+      "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:sessions",
+      "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:entries"
+    ],
+    "languageLesson": "SQL 迁移应按序号增量、尽量可重放：表用稳定主键表达会话树，触发器在写入时强制 parent 存在并避免 id 命名空间冲突。投影列（如 message_count）用缓存加速读取，权威数据仍以 entries 为准。"
+  },
+  {
+    "order": 13,
+    "title": "CI 门禁",
+    "description": "改完上述任意一层后，代码要经过根清单里同一套脚本。ci.yml 在 main 的 push 与 pull_request 上安装系统依赖和 npm 包，再依次执行 build、check、test。它把第 2 步的 monorepo 工作流变成强制门禁，确保 CLI、agent-core、pi-ai 与 Chord 的接线在合并前仍然能一起通过。",
+    "nodeIds": [
+      "pipeline:.github/workflows/ci.yml"
+    ],
+    "languageLesson": "GitHub Actions 用 on 声明触发条件，jobs 可并行，每个 job 的 steps 按顺序执行。Monorepo 通常在同一 workflow 里先装依赖再跑跨包 build/check/test，避免只验证单个 workspace。"
+  }
+]

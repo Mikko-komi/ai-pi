@@ -1,0 +1,55 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/agent/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/agent/README.md",
+      "summary": "@earendil-works/pi-agent-core 的完整使用文档，覆盖安装、Quick Start、Agent 事件流、prompt/continue 序列、选项与状态、工具、steering，以及底层 agentLoop API。",
+      "tags": ["documentation", "entry-point", "api-reference", "agent-core", "使用指南"],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:packages/agent/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "packages/agent/package.json",
+      "summary": "定义 @earendil-works/pi-agent-core 的 npm 包元数据、多入口 exports（含 harness/session）、构建/测试脚本，以及 chord、pi-ai、pi-telemetry 等依赖。",
+      "tags": ["configuration", "npm-package", "build-system", "exports", "monorepo"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:packages/agent/tsconfig.build.json",
+      "type": "config",
+      "name": "tsconfig.build.json",
+      "filePath": "packages/agent/tsconfig.build.json",
+      "summary": "agent 包生产构建的 TypeScript 配置：继承仓库 tsconfig.base.json，将 src 编译到 dist，并为 chord、telemetry、pi-ai 设置 path 映射。",
+      "tags": ["configuration", "typescript", "build-system", "path-aliases"],
+      "complexity": "simple",
+      "languageNotes": "通过 extends 复用仓库级 tsconfig.base.json，并用 compilerOptions.paths 指向兄弟包的 dist 类型声明。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:packages/agent/README.md",
+      "target": "config:packages/agent/package.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:packages/agent/package.json",
+      "target": "config:packages/agent/tsconfig.build.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/agent/package.json",
+      "target": "document:packages/agent/README.md",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+Analyze these files and produce GraphNode and GraphEdge objects.
+Project root: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi`
+Project: `pi-monorepo`
+Batch: `26/45`
+Skill directory: `/Users/elex-mb0203/.cursor/plugins/local/Understand-Anything/understand-anything-plugin/skills/understand`
+Output: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-26.json` OR `batch-26-part-<k>.json`.
+UA_DIR: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua`
+Load `batchImportData` and `neighborMap` from `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-briefs/batch-26.json`.
+Pass every listed file through to `batchFiles` with path, language, sizeLines, fileCategory.
+
+> **Language directive**: Generate all textual content in **Chinese (zh)**. Keep technical terms in English when no standard translation exists.
+
+Files:
+1. .github/workflows/approve-contributor.yml (223 lines, language: yaml, fileCategory: infra)
+2. .github/workflows/build-binaries.yml (444 lines, language: yaml, fileCategory: infra)
+3. .github/workflows/ci.yml (42 lines, language: yaml, fileCategory: infra)
+4. .github/workflows/issue-analysis.yml (688 lines, language: yaml, fileCategory: infra)
+5. .github/workflows/issue-gate.yml (129 lines, language: yaml, fileCategory: infra)
+6. .github/workflows/issue-triage-labels.yml (142 lines, language: yaml, fileCategory: infra)
+7. .github/workflows/npm-audit.yml (31 lines, language: yaml, fileCategory: infra)
+8. .github/workflows/pr-gate.yml (128 lines, language: yaml, fileCategory: infra)
+9. .github/workflows/publish-model-catalog.yml (146 lines, language: yaml, fileCategory: infra)
+10. .github/workflows/remove-inprogress-on-close.yml (31 lines, language: yaml, fileCategory: infra)
+
+Respond with only a brief summary: parts written, total nodes/edges, files skipped.

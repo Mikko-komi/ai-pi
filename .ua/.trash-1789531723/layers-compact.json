@@ -1,0 +1,42 @@
+[
+  {
+    "id": "layer:coding-agent",
+    "name": "coding-agent CLI",
+    "description": "Pi 编程助手的 CLI 入口与交互式 TUI：会话编排、工具调用、扩展/skills，并向下依赖 agent、pi-ai、tui 与 Chord RPC。"
+  },
+  {
+    "id": "layer:agent",
+    "name": "Agent 运行时",
+    "description": "pi-agent-core 工具循环与消息状态机，提供插件、执行环境、持久化钩子，并调用 pi-ai 完成模型往返。"
+  },
+  {
+    "id": "layer:ai",
+    "name": "pi-ai 提供方",
+    "description": "多提供方 LLM API：模型目录、鉴权、流式补全与提供方适配，被 Agent 运行时和 coding-agent 共同依赖。"
+  },
+  {
+    "id": "layer:chord-rpc",
+    "name": "Chord 与 RPC",
+    "description": "Chord 组合运行时以及 client/server/protocol：facet 协议、RPC 传输与进程编排，供 CLI 与远程 Agent 会话使用。"
+  },
+  {
+    "id": "layer:tui",
+    "name": "TUI 组件库",
+    "description": "pi-tui 终端组件与渲染原语，被 coding-agent 交互模式大量引用，不包含 CLI 业务编排。"
+  },
+  {
+    "id": "layer:session-telemetry",
+    "name": "会话后端与遥测",
+    "description": "SQLite 会话持久化（含 sessions/entries 等迁移表）与 telemetry 埋点，为 Agent 运行时提供存储与可观测性。"
+  },
+  {
+    "id": "layer:ci-cd",
+    "name": "CI 与仓库配置",
+    "description": "GitHub Actions、issue 模板、根目录 tsconfig/biome/Vitest 基座，以及 monorepo 测试脚本与 husky 钩子。"
+  },
+  {
+    "id": "layer:documentation",
+    "name": "文档",
+    "description": "仓库 README、贡献与安全指南，以及 coding-agent 用户文档和 agent harness/RPC/遥测说明。"
+  }
+]

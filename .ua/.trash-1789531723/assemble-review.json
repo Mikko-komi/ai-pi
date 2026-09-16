@@ -1,0 +1,15 @@
+{
+  "fixedSectionOk": true,
+  "nodesRecovered": 0,
+  "edgesRestored": 49,
+  "crossBatchEdgesAdded": 0,
+  "typesRemapped": 0,
+  "complexityRemapped": 0,
+  "notes": [
+    "Fixed section: 13 tested_by drops is a small targeted linker cleanup (~0.15% of edges); not a systemic ID/complexity problem.",
+    "Imports recovery was already complete (0 missing file↔file imports vs 777 importMap entries).",
+    "Retargeted barrel/re-export dangling edges to defining symbol nodes (tui/chord/protocol/ai/agent/server).",
+    "Left dropped: Component/Focusable (interfaces in packages/tui/src/tui.ts, no symbol nodes); SessionDirectory/SessionManagement (defineService consts, never extracted); excluded scripts/ and CHANGELOG.md.",
+    "Interface-as-class IDs (Component, Focusable) are an upstream analyzer pattern; consider extracting interfaces in future batches."
+  ]
+}

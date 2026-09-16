@@ -1,0 +1,33 @@
+Analyze these files and produce GraphNode and GraphEdge objects.
+Project root: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi`
+Project: `pi-monorepo`
+Batch: `45/45`
+Skill directory: `/Users/elex-mb0203/.cursor/plugins/local/Understand-Anything/understand-anything-plugin/skills/understand`
+Output: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-45.json` OR `batch-45-part-<k>.json`.
+UA_DIR: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua`
+Load `batchImportData` and `neighborMap` from `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-briefs/batch-45.json`.
+Pass every listed file through to `batchFiles` with path, language, sizeLines, fileCategory.
+
+> **Language directive**: Generate all textual content in **Chinese (zh)**. Keep technical terms in English when no standard translation exists.
+
+Files:
+1. packages/coding-agent/src/core/radius.ts (1 lines, language: typescript, fileCategory: code)
+2. packages/coding-agent/src/experimental/mini/README.md (107 lines, language: markdown, fileCategory: docs)
+3. packages/coding-agent/src/experimental/plugin.ts (16 lines, language: typescript, fileCategory: code)
+4. packages/coding-agent/src/experimental/services/README.md (25 lines, language: markdown, fileCategory: docs)
+5. packages/coding-agent/src/experimental/source-resolver.ts (86 lines, language: typescript, fileCategory: code)
+6. packages/coding-agent/src/modes/interactive/components/index.ts (38 lines, language: typescript, fileCategory: code)
+7. packages/coding-agent/src/utils/deprecation.ts (14 lines, language: typescript, fileCategory: code)
+8. packages/coding-agent/src/utils/highlight-js.d.ts (36 lines, language: typescript, fileCategory: code)
+9. packages/coding-agent/vitest.config.ts (33 lines, language: typescript, fileCategory: code)
+10. packages/protocol/vitest.config.ts (11 lines, language: typescript, fileCategory: code)
+11. packages/server/src/testing/index.ts (5 lines, language: typescript, fileCategory: code)
+12. packages/server/src/transports/unix/address.ts (9 lines, language: typescript, fileCategory: code)
+13. packages/server/vitest.config.ts (28 lines, language: typescript, fileCategory: code)
+14. packages/session-backends/sqlite-node/src/sqlite/index.ts (9 lines, language: typescript, fileCategory: code)
+15. packages/session-backends/sqlite-node/vitest.benchmark.config.ts (29 lines, language: typescript, fileCategory: code)
+16. packages/session-backends/sqlite-node/vitest.config.ts (37 lines, language: typescript, fileCategory: code)
+17. packages/telemetry/src/testing/index.ts (6 lines, language: typescript, fileCategory: code)
+18. vitest.base.ts (59 lines, language: typescript, fileCategory: code)
+
+Respond with only a brief summary: parts written, total nodes/edges, files skipped.

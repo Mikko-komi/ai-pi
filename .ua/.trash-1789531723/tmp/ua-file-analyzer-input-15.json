@@ -1,0 +1,323 @@
+{
+  "projectRoot": "/Users/elex-mb0203/MyWork/agent-projects/ai-pi",
+  "batchFiles": [
+    {
+      "path": "packages/coding-agent/src/experimental/cli.ts",
+      "language": "typescript",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/index.ts",
+      "language": "typescript",
+      "sizeLines": 425,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/main.ts",
+      "language": "typescript",
+      "sizeLines": 981,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/migrations.ts",
+      "language": "typescript",
+      "sizeLines": 315,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/index.ts",
+      "language": "typescript",
+      "sizeLines": 16,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/model-catalog-refresh.ts",
+      "language": "typescript",
+      "sizeLines": 51,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/theme/theme-json.ts",
+      "language": "typescript",
+      "sizeLines": 146,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/json-event.ts",
+      "language": "typescript",
+      "sizeLines": 61,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/print-mode.ts",
+      "language": "typescript",
+      "sizeLines": 169,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/rpc/jsonl.ts",
+      "language": "typescript",
+      "sizeLines": 58,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/rpc/rpc-client.ts",
+      "language": "typescript",
+      "sizeLines": 609,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/rpc/rpc-mode.ts",
+      "language": "typescript",
+      "sizeLines": 821,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/rpc/rpc-types.ts",
+      "language": "typescript",
+      "sizeLines": 297,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/package-manager-cli.ts",
+      "language": "typescript",
+      "sizeLines": 1102,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/rpc-entry.ts",
+      "language": "typescript",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/abort.ts",
+      "language": "typescript",
+      "sizeLines": 48,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/child-process.ts",
+      "language": "typescript",
+      "sizeLines": 137,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/frontmatter.ts",
+      "language": "typescript",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/git.ts",
+      "language": "typescript",
+      "sizeLines": 226,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/json.ts",
+      "language": "typescript",
+      "sizeLines": 6,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/management-http.ts",
+      "language": "typescript",
+      "sizeLines": 78,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/paths.ts",
+      "language": "typescript",
+      "sizeLines": 139,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/pi-user-agent.ts",
+      "language": "typescript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/shell.ts",
+      "language": "typescript",
+      "sizeLines": 247,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/sleep.ts",
+      "language": "typescript",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/text.ts",
+      "language": "typescript",
+      "sizeLines": 9,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/version-check.ts",
+      "language": "typescript",
+      "sizeLines": 109,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/windows-self-update.ts",
+      "language": "typescript",
+      "sizeLines": 84,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "packages/coding-agent/src/experimental/cli.ts": [
+      "packages/coding-agent/src/cli/setup.ts",
+      "packages/coding-agent/src/experimental/commands.ts",
+      "packages/coding-agent/src/main.ts"
+    ],
+    "packages/coding-agent/src/index.ts": [],
+    "packages/coding-agent/src/main.ts": [
+      "packages/ai/src/index.ts",
+      "packages/coding-agent/src/cli/args.ts",
+      "packages/coding-agent/src/cli/auth-check.ts",
+      "packages/coding-agent/src/cli/auth-command.ts",
+      "packages/coding-agent/src/cli/credential-print.ts",
+      "packages/coding-agent/src/cli/file-processor.ts",
+      "packages/coding-agent/src/cli/initial-message.ts",
+      "packages/coding-agent/src/cli/list-models.ts",
+      "packages/coding-agent/src/cli/project-trust.ts",
+      "packages/coding-agent/src/cli/session-picker.ts",
+      "packages/coding-agent/src/cli/startup-ui.ts",
+      "packages/coding-agent/src/config.ts",
+      "packages/coding-agent/src/core/agent-session-runtime.ts",
+      "packages/coding-agent/src/core/agent-session-services.ts",
+      "packages/coding-agent/src/core/auth-guidance.ts",
+      "packages/coding-agent/src/core/auth-storage.ts",
+      "packages/coding-agent/src/core/export-html/index.ts",
+      "packages/coding-agent/src/core/extensions/types.ts",
+      "packages/coding-agent/src/core/http-dispatcher.ts",
+      "packages/coding-agent/src/core/model-resolver.ts",
+      "packages/coding-agent/src/core/model-runtime.ts",
+      "packages/coding-agent/src/core/output-guard.ts",
+      "packages/coding-agent/src/core/project-trust.ts",
+      "packages/coding-agent/src/core/sdk.ts",
+      "packages/coding-agent/src/core/session-cwd.ts",
+      "packages/coding-agent/src/core/session-manager.ts",
+      "packages/coding-agent/src/core/settings-diagnostics.ts",
+      "packages/coding-agent/src/core/settings-manager.ts",
+      "packages/coding-agent/src/core/timings.ts",
+      "packages/coding-agent/src/core/trust-manager.ts",
+      "packages/coding-agent/src/extensions/index.ts",
+      "packages/coding-agent/src/migrations.ts",
+      "packages/coding-agent/src/modes/index.ts",
+      "packages/coding-agent/src/modes/interactive/theme/theme-json.ts",
+      "packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "packages/coding-agent/src/package-manager-cli.ts",
+      "packages/coding-agent/src/utils/paths.ts",
+      "packages/coding-agent/src/utils/windows-self-update.ts",
+      "packages/tui/src/index.ts"
+    ],
+    "packages/coding-agent/src/migrations.ts": [
+      "packages/coding-agent/src/config.ts",
+      "packages/coding-agent/src/core/keybindings.ts",
+      "packages/coding-agent/src/utils/text.ts"
+    ],
+    "packages/coding-agent/src/modes/index.ts": [],
+    "packages/coding-agent/src/modes/interactive/model-catalog-refresh.ts": [
+      "packages/ai/src/index.ts",
+      "packages/coding-agent/src/core/model-runtime.ts",
+      "packages/coding-agent/src/utils/abort.ts"
+    ],
+    "packages/coding-agent/src/modes/interactive/theme/theme-json.ts": [],
+    "packages/coding-agent/src/modes/json-event.ts": [
+      "packages/ai/src/index.ts",
+      "packages/coding-agent/src/core/agent-session.ts"
+    ],
+    "packages/coding-agent/src/modes/print-mode.ts": [
+      "packages/ai/src/index.ts",
+      "packages/coding-agent/src/core/agent-session-runtime.ts",
+      "packages/coding-agent/src/core/output-guard.ts",
+      "packages/coding-agent/src/modes/json-event.ts",
+      "packages/coding-agent/src/utils/shell.ts"
+    ],
+    "packages/coding-agent/src/modes/rpc/jsonl.ts": [],
+    "packages/coding-agent/src/modes/rpc/rpc-client.ts": [
+      "packages/agent/src/index.ts",
+      "packages/ai/src/index.ts",
+      "packages/coding-agent/src/core/agent-session.ts",
+      "packages/coding-agent/src/core/bash-executor.ts",
+      "packages/coding-agent/src/core/compaction/index.ts",
+      "packages/coding-agent/src/core/session-manager.ts",
+      "packages/coding-agent/src/modes/json-event.ts",
+      "packages/coding-agent/src/modes/rpc/jsonl.ts",
+      "packages/coding-agent/src/modes/rpc/rpc-types.ts"
+    ],
+    "packages/coding-agent/src/modes/rpc/rpc-mode.ts": [
+      "packages/coding-agent/src/core/agent-session-runtime.ts",
+      "packages/coding-agent/src/core/extensions/index.ts",
+      "packages/coding-agent/src/core/output-guard.ts",
+      "packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "packages/coding-agent/src/modes/json-event.ts",
+      "packages/coding-agent/src/modes/rpc/jsonl.ts",
+      "packages/coding-agent/src/modes/rpc/rpc-types.ts",
+      "packages/coding-agent/src/utils/shell.ts"
+    ],
+    "packages/coding-agent/src/modes/rpc/rpc-types.ts": [
+      "packages/agent/src/index.ts",
+      "packages/ai/src/index.ts",
+      "packages/coding-agent/src/core/agent-session.ts",
+      "packages/coding-agent/src/core/bash-executor.ts",
+      "packages/coding-agent/src/core/compaction/index.ts",
+      "packages/coding-agent/src/core/session-manager.ts",
+      "packages/coding-agent/src/core/source-info.ts"
+    ],
+    "packages/coding-agent/src/package-manager-cli.ts": [
+      "packages/coding-agent/src/cli/config-selector.ts",
+      "packages/coding-agent/src/cli/project-trust.ts",
+      "packages/coding-agent/src/config.ts",
+      "packages/coding-agent/src/core/extensions/types.ts",
+      "packages/coding-agent/src/core/model-runtime.ts",
+      "packages/coding-agent/src/core/package-manager.ts",
+      "packages/coding-agent/src/core/project-trust.ts",
+      "packages/coding-agent/src/core/resource-loader.ts",
+      "packages/coding-agent/src/core/settings-manager.ts",
+      "packages/coding-agent/src/core/trust-manager.ts",
+      "packages/coding-agent/src/utils/child-process.ts",
+      "packages/coding-agent/src/utils/paths.ts",
+      "packages/coding-agent/src/utils/pi-user-agent.ts",
+      "packages/coding-agent/src/utils/version-check.ts",
+      "packages/coding-agent/src/utils/windows-self-update.ts",
+      "packages/tui/src/index.ts"
+    ],
+    "packages/coding-agent/src/rpc-entry.ts": [
+      "packages/coding-agent/src/config.ts",
+      "packages/coding-agent/src/core/http-dispatcher.ts",
+      "packages/coding-agent/src/main.ts"
+    ],
+    "packages/coding-agent/src/utils/abort.ts": [],
+    "packages/coding-agent/src/utils/child-process.ts": [],
+    "packages/coding-agent/src/utils/frontmatter.ts": [
+      "packages/coding-agent/src/utils/text.ts"
+    ],
+    "packages/coding-agent/src/utils/git.ts": [],
+    "packages/coding-agent/src/utils/json.ts": [],
+    "packages/coding-agent/src/utils/management-http.ts": [],
+    "packages/coding-agent/src/utils/paths.ts": [
+      "packages/coding-agent/src/utils/child-process.ts"
+    ],
+    "packages/coding-agent/src/utils/pi-user-agent.ts": [],
+    "packages/coding-agent/src/utils/shell.ts": [
+      "packages/coding-agent/src/config.ts"
+    ],
+    "packages/coding-agent/src/utils/sleep.ts": [],
+    "packages/coding-agent/src/utils/text.ts": [],
+    "packages/coding-agent/src/utils/version-check.ts": [
+      "packages/coding-agent/src/utils/management-http.ts",
+      "packages/coding-agent/src/utils/pi-user-agent.ts"
+    ],
+    "packages/coding-agent/src/utils/windows-self-update.ts": [
+      "packages/coding-agent/src/utils/paths.ts"
+    ]
+  }
+}

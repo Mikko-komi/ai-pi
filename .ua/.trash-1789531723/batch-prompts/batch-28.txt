@@ -1,0 +1,4 @@
+1. .github/ISSUE_TEMPLATE/bug.yml (45 lines, language: yaml, fileCategory: config)
+2. .github/ISSUE_TEMPLATE/config.yml (5 lines, language: yaml, fileCategory: config)
+3. .github/ISSUE_TEMPLATE/contribution.yml (36 lines, language: yaml, fileCategory: config)
+4. .github/ISSUE_TEMPLATE/package-report.yml (49 lines, language: yaml, fileCategory: config)

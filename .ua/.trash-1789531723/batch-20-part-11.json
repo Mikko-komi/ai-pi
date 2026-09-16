@@ -1,0 +1,34 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/tui/src/editor-component.ts",
+      "type": "file",
+      "name": "editor-component.ts",
+      "filePath": "packages/tui/src/editor-component.ts",
+      "summary": "自定义编辑器接口：规定文本读写、提交回调、历史与自动补全等扩展点。",
+      "tags": [
+        "type-definition",
+        "editor",
+        "extension"
+      ],
+      "complexity": "simple",
+      "languageNotes": "仅导出 TypeScript interface，无运行时实现。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/tui/src/editor-component.ts",
+      "target": "file:packages/tui/src/autocomplete.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/editor-component.ts",
+      "target": "file:packages/tui/src/tui.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

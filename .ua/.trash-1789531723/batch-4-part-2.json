@@ -1,0 +1,886 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/ai/src/providers/baseten.models.ts",
+      "type": "file",
+      "name": "baseten.models.ts",
+      "summary": "由 generate-models.ts 生成的 Baseten 静态目录：从 data JSON 经 flattenModelCatalog 得到 BASETEN_MODELS。",
+      "tags": [
+        "自动生成",
+        "模型目录",
+        "data-model"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/baseten.models.ts",
+      "languageNotes": "文件头禁止手改；应运行 npm run generate-models。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/cerebras.models.ts",
+      "type": "file",
+      "name": "cerebras.models.ts",
+      "summary": "由 generate-models.ts 生成的 Cerebras 静态目录：从 data JSON 经 flattenModelCatalog 得到 CEREBRAS_MODELS。",
+      "tags": [
+        "自动生成",
+        "模型目录",
+        "data-model"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/cerebras.models.ts",
+      "languageNotes": "文件头禁止手改；应运行 npm run generate-models。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/cloudflare-ai-gateway.models.ts",
+      "type": "file",
+      "name": "cloudflare-ai-gateway.models.ts",
+      "summary": "由 generate-models.ts 生成的 Cloudflare AI Gateway 静态目录：从 data JSON 经 flattenModelCatalog 得到 CLOUDFLARE_AI_GATEWAY_MODELS。",
+      "tags": [
+        "自动生成",
+        "模型目录",
+        "data-model"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/cloudflare-ai-gateway.models.ts",
+      "languageNotes": "文件头禁止手改；应运行 npm run generate-models。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/cloudflare-workers-ai.models.ts",
+      "type": "file",
+      "name": "cloudflare-workers-ai.models.ts",
+      "summary": "由 generate-models.ts 生成的 Cloudflare Workers AI 静态目录：从 data JSON 经 flattenModelCatalog 得到 CLOUDFLARE_WORKERS_AI_MODELS。",
+      "tags": [
+        "自动生成",
+        "模型目录",
+        "data-model"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/cloudflare-workers-ai.models.ts",
+      "languageNotes": "文件头禁止手改；应运行 npm run generate-models。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/azure-openai-responses.ts",
+      "type": "file",
+      "name": "azure-openai-responses.ts",
+      "summary": "Azure OpenAI Responses provider：环境变量 API key + azure-openai-responses 流式 API。",
+      "tags": [
+        "provider",
+        "认证",
+        "azure"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/azure-openai-responses.ts"
+    },
+    {
+      "id": "function:packages/ai/src/providers/azure-openai-responses.ts:azureOpenAIResponsesProvider",
+      "type": "function",
+      "name": "azureOpenAIResponsesProvider",
+      "summary": "用 createProvider 组装 azure-openai-responses：envApiKeyAuth 与 azureOpenAIResponsesApi。",
+      "tags": [
+        "factory",
+        "provider",
+        "azure"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/azure-openai-responses.ts",
+      "lineRange": [
+        6,
+        14
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/baseten.ts",
+      "type": "file",
+      "name": "baseten.ts",
+      "summary": "Baseten provider：环境变量 API key + OpenAI completions 兼容流。",
+      "tags": [
+        "provider",
+        "认证",
+        "factory"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/baseten.ts"
+    },
+    {
+      "id": "function:packages/ai/src/providers/baseten.ts:basetenProvider",
+      "type": "function",
+      "name": "basetenProvider",
+      "summary": "用 createProvider 组装 baseten：envApiKeyAuth 与 openAICompletionsApi。",
+      "tags": [
+        "factory",
+        "provider",
+        "认证"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/baseten.ts",
+      "lineRange": [
+        6,
+        15
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/cerebras.ts",
+      "type": "file",
+      "name": "cerebras.ts",
+      "summary": "Cerebras provider：环境变量 API key + OpenAI completions 兼容流。",
+      "tags": [
+        "provider",
+        "认证",
+        "factory"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/cerebras.ts"
+    },
+    {
+      "id": "function:packages/ai/src/providers/cerebras.ts:cerebrasProvider",
+      "type": "function",
+      "name": "cerebrasProvider",
+      "summary": "用 createProvider 组装 cerebras：envApiKeyAuth 与 openAICompletionsApi。",
+      "tags": [
+        "factory",
+        "provider",
+        "认证"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/cerebras.ts",
+      "lineRange": [
+        6,
+        15
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/cloudflare-ai-gateway.ts",
+      "type": "file",
+      "name": "cloudflare-ai-gateway.ts",
+      "summary": "Cloudflare AI Gateway provider：固定挂载三种 API（Anthropic / OpenAI completions / Responses），避免目录抖动丢掉 completions。",
+      "tags": [
+        "provider",
+        "cloudflare",
+        "gateway"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/cloudflare-ai-gateway.ts"
+    },
+    {
+      "id": "function:packages/ai/src/providers/cloudflare-ai-gateway.ts:cloudflareAIGatewayProvider",
+      "type": "function",
+      "name": "cloudflareAIGatewayProvider",
+      "summary": "用 createProvider 组装 cloudflare-ai-gateway：gateway 认证 + cloudflareStreams 包装的三套 API。",
+      "tags": [
+        "factory",
+        "provider",
+        "cloudflare"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/ai/src/providers/cloudflare-ai-gateway.ts",
+      "lineRange": [
+        11,
+        27
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/cloudflare-auth.ts",
+      "type": "file",
+      "name": "cloudflare-auth.ts",
+      "summary": "Cloudflare Workers AI 与 AI Gateway 的 ApiKeyAuth：按字段合并存储凭证与环境中的 key/account/gateway。",
+      "tags": [
+        "认证",
+        "cloudflare",
+        "api-key"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/ai/src/providers/cloudflare-auth.ts"
+    },
+    {
+      "id": "function:packages/ai/src/providers/cloudflare-auth.ts:resolveValue",
+      "type": "function",
+      "name": "resolveValue",
+      "summary": "解析单个 Cloudflare 字段：凭证优先，缺失则回退 ctx.env；API key 读 credential.key，其余读 credential.env。",
+      "tags": [
+        "认证",
+        "utility",
+        "cloudflare"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/ai/src/providers/cloudflare-auth.ts",
+      "lineRange": [
+        10,
+        29
+      ]
+    },
+    {
+      "id": "function:packages/ai/src/providers/cloudflare-auth.ts:resolveCloudflareEnv",
+      "type": "function",
+      "name": "resolveCloudflareEnv",
+      "summary": "按 workers-ai / ai-gateway 收集 apiKey、accountId 与可选 gatewayId，缺任一必需项则返回 undefined。",
+      "tags": [
+        "认证",
+        "cloudflare",
+        "validation"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/ai/src/providers/cloudflare-auth.ts",
+      "lineRange": [
+        31,
+        52
+      ]
+    },
+    {
+      "id": "function:packages/ai/src/providers/cloudflare-auth.ts:cloudflareWorkersAIAuth",
+      "type": "function",
+      "name": "cloudflareWorkersAIAuth",
+      "summary": "Workers AI 登录/解析：提示 API key 与 account id，resolve 后以 apiKey 形式返回。",
+      "tags": [
+        "认证",
+        "cloudflare",
+        "api-key"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/ai/src/providers/cloudflare-auth.ts",
+      "lineRange": [
+        54,
+        72
+      ]
+    },
+    {
+      "id": "function:packages/ai/src/providers/cloudflare-auth.ts:cloudflareAIGatewayAuth",
+      "type": "function",
+      "name": "cloudflareAIGatewayAuth",
+      "summary": "AI Gateway 登录/解析：额外收集 gateway id，并把密钥放到 cf-aig-authorization，同时清空默认 Authorization/x-api-key。",
+      "tags": [
+        "认证",
+        "cloudflare",
+        "gateway"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/ai/src/providers/cloudflare-auth.ts",
+      "lineRange": [
+        74,
+        103
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/cloudflare-stream.ts",
+      "type": "file",
+      "name": "cloudflare-stream.ts",
+      "summary": "在 dispatch 前把模型 baseUrl 中的 Cloudflare account/gateway 占位符替换为已解析 env。",
+      "tags": [
+        "streaming",
+        "cloudflare",
+        "utility"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/cloudflare-stream.ts"
+    },
+    {
+      "id": "function:packages/ai/src/providers/cloudflare-stream.ts:resolveCloudflareModel",
+      "type": "function",
+      "name": "resolveCloudflareModel",
+      "summary": "用 ProviderEnv 替换模型 baseUrl 里的 {CLOUDFLARE_ACCOUNT_ID}/{CLOUDFLARE_GATEWAY_ID}；无变化则返回原模型。",
+      "tags": [
+        "utility",
+        "cloudflare",
+        "url"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/cloudflare-stream.ts",
+      "lineRange": [
+        6,
+        15
+      ]
+    },
+    {
+      "id": "function:packages/ai/src/providers/cloudflare-stream.ts:cloudflareStreams",
+      "type": "function",
+      "name": "cloudflareStreams",
+      "summary": "包装 ProviderStreams 的 stream/streamSimple，在调用底层 API 前先 resolveCloudflareModel。",
+      "tags": [
+        "streaming",
+        "cloudflare",
+        "factory"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/cloudflare-stream.ts",
+      "lineRange": [
+        21,
+        28
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/cloudflare-workers-ai.ts",
+      "type": "file",
+      "name": "cloudflare-workers-ai.ts",
+      "summary": "Cloudflare Workers AI provider：Workers AI 认证 + 经 cloudflareStreams 包装的 OpenAI completions。",
+      "tags": [
+        "provider",
+        "cloudflare",
+        "factory"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/cloudflare-workers-ai.ts"
+    },
+    {
+      "id": "function:packages/ai/src/providers/cloudflare-workers-ai.ts:cloudflareWorkersAIProvider",
+      "type": "function",
+      "name": "cloudflareWorkersAIProvider",
+      "summary": "用 createProvider 组装 cloudflare-workers-ai：cloudflareWorkersAIAuth 与 cloudflareStreams(openAICompletionsApi)。",
+      "tags": [
+        "factory",
+        "provider",
+        "cloudflare"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/cloudflare-workers-ai.ts",
+      "lineRange": [
+        7,
+        15
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/ai/src/providers/azure-openai-responses.ts",
+      "target": "file:packages/ai/src/api/azure-openai-responses.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/azure-openai-responses.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/azure-openai-responses.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/azure-openai-responses.ts",
+      "target": "file:packages/ai/src/providers/azure-openai-responses.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/baseten.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/baseten.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/baseten.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/baseten.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/baseten.ts",
+      "target": "file:packages/ai/src/providers/baseten.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cerebras.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cerebras.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cerebras.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cerebras.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cerebras.ts",
+      "target": "file:packages/ai/src/providers/cerebras.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-ai-gateway.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-ai-gateway.ts",
+      "target": "file:packages/ai/src/api/anthropic-messages.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-ai-gateway.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-ai-gateway.ts",
+      "target": "file:packages/ai/src/api/openai-responses.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-ai-gateway.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-ai-gateway.ts",
+      "target": "file:packages/ai/src/providers/cloudflare-ai-gateway.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-ai-gateway.ts",
+      "target": "file:packages/ai/src/providers/cloudflare-auth.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-ai-gateway.ts",
+      "target": "file:packages/ai/src/providers/cloudflare-stream.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-auth.ts",
+      "target": "file:packages/ai/src/auth/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-auth.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-stream.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-workers-ai.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-workers-ai.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-workers-ai.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-workers-ai.ts",
+      "target": "file:packages/ai/src/providers/cloudflare-auth.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-workers-ai.ts",
+      "target": "file:packages/ai/src/providers/cloudflare-stream.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-workers-ai.ts",
+      "target": "file:packages/ai/src/providers/cloudflare-workers-ai.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/azure-openai-responses.ts",
+      "target": "function:packages/ai/src/providers/azure-openai-responses.ts:azureOpenAIResponsesProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/azure-openai-responses.ts",
+      "target": "function:packages/ai/src/providers/azure-openai-responses.ts:azureOpenAIResponsesProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/baseten.ts",
+      "target": "function:packages/ai/src/providers/baseten.ts:basetenProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/baseten.ts",
+      "target": "function:packages/ai/src/providers/baseten.ts:basetenProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/cerebras.ts",
+      "target": "function:packages/ai/src/providers/cerebras.ts:cerebrasProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/cerebras.ts",
+      "target": "function:packages/ai/src/providers/cerebras.ts:cerebrasProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-ai-gateway.ts",
+      "target": "function:packages/ai/src/providers/cloudflare-ai-gateway.ts:cloudflareAIGatewayProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-ai-gateway.ts",
+      "target": "function:packages/ai/src/providers/cloudflare-ai-gateway.ts:cloudflareAIGatewayProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-auth.ts",
+      "target": "function:packages/ai/src/providers/cloudflare-auth.ts:resolveValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-auth.ts",
+      "target": "function:packages/ai/src/providers/cloudflare-auth.ts:resolveCloudflareEnv",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-auth.ts",
+      "target": "function:packages/ai/src/providers/cloudflare-auth.ts:cloudflareWorkersAIAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-auth.ts",
+      "target": "function:packages/ai/src/providers/cloudflare-auth.ts:cloudflareWorkersAIAuth",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-auth.ts",
+      "target": "function:packages/ai/src/providers/cloudflare-auth.ts:cloudflareAIGatewayAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-auth.ts",
+      "target": "function:packages/ai/src/providers/cloudflare-auth.ts:cloudflareAIGatewayAuth",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-stream.ts",
+      "target": "function:packages/ai/src/providers/cloudflare-stream.ts:resolveCloudflareModel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-stream.ts",
+      "target": "function:packages/ai/src/providers/cloudflare-stream.ts:resolveCloudflareModel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-stream.ts",
+      "target": "function:packages/ai/src/providers/cloudflare-stream.ts:cloudflareStreams",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-stream.ts",
+      "target": "function:packages/ai/src/providers/cloudflare-stream.ts:cloudflareStreams",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-workers-ai.ts",
+      "target": "function:packages/ai/src/providers/cloudflare-workers-ai.ts:cloudflareWorkersAIProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-workers-ai.ts",
+      "target": "function:packages/ai/src/providers/cloudflare-workers-ai.ts:cloudflareWorkersAIProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/baseten.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/cerebras.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-ai-gateway.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/cloudflare-workers-ai.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/azure-openai-responses.ts:azureOpenAIResponsesProvider",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/azure-openai-responses.ts:azureOpenAIResponsesProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/azure-openai-responses.ts:azureOpenAIResponsesProvider",
+      "target": "function:packages/ai/src/api/azure-openai-responses.lazy.ts:azureOpenAIResponsesApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/baseten.ts:basetenProvider",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/baseten.ts:basetenProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/baseten.ts:basetenProvider",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/cerebras.ts:cerebrasProvider",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/cerebras.ts:cerebrasProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/cerebras.ts:cerebrasProvider",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/cloudflare-ai-gateway.ts:cloudflareAIGatewayProvider",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/cloudflare-ai-gateway.ts:cloudflareAIGatewayProvider",
+      "target": "function:packages/ai/src/providers/cloudflare-auth.ts:cloudflareAIGatewayAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/cloudflare-ai-gateway.ts:cloudflareAIGatewayProvider",
+      "target": "function:packages/ai/src/providers/cloudflare-stream.ts:cloudflareStreams",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/cloudflare-ai-gateway.ts:cloudflareAIGatewayProvider",
+      "target": "function:packages/ai/src/api/anthropic-messages.lazy.ts:anthropicMessagesApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/cloudflare-ai-gateway.ts:cloudflareAIGatewayProvider",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/cloudflare-ai-gateway.ts:cloudflareAIGatewayProvider",
+      "target": "function:packages/ai/src/api/openai-responses.lazy.ts:openAIResponsesApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/cloudflare-auth.ts:resolveCloudflareEnv",
+      "target": "function:packages/ai/src/providers/cloudflare-auth.ts:resolveValue",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/cloudflare-auth.ts:cloudflareWorkersAIAuth",
+      "target": "function:packages/ai/src/providers/cloudflare-auth.ts:resolveCloudflareEnv",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/cloudflare-auth.ts:cloudflareAIGatewayAuth",
+      "target": "function:packages/ai/src/providers/cloudflare-auth.ts:resolveCloudflareEnv",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/cloudflare-stream.ts:cloudflareStreams",
+      "target": "function:packages/ai/src/providers/cloudflare-stream.ts:resolveCloudflareModel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/cloudflare-workers-ai.ts:cloudflareWorkersAIProvider",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/cloudflare-workers-ai.ts:cloudflareWorkersAIProvider",
+      "target": "function:packages/ai/src/providers/cloudflare-auth.ts:cloudflareWorkersAIAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/cloudflare-workers-ai.ts:cloudflareWorkersAIProvider",
+      "target": "function:packages/ai/src/providers/cloudflare-stream.ts:cloudflareStreams",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/cloudflare-workers-ai.ts:cloudflareWorkersAIProvider",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

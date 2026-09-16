@@ -1,0 +1,367 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/tui/src/components/settings-list.ts",
+      "type": "file",
+      "name": "settings-list.ts",
+      "filePath": "packages/tui/src/components/settings-list.ts",
+      "summary": "设置列表：fuzzy 搜索、子菜单与 Input 过滤，激活项时写回 onChange。",
+      "tags": [
+        "component",
+        "settings",
+        "list"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:packages/tui/src/components/settings-list.ts:SettingsList",
+      "type": "class",
+      "name": "SettingsList",
+      "filePath": "packages/tui/src/components/settings-list.ts",
+      "lineRange": [
+        38,
+        328
+      ],
+      "summary": "设置项列表：搜索、子菜单导航，以及值编辑后的 onChange。",
+      "tags": [
+        "component",
+        "settings",
+        "list"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/tui/src/components/settings-list.ts:constructor",
+      "type": "function",
+      "name": "constructor",
+      "filePath": "packages/tui/src/components/settings-list.ts",
+      "lineRange": [
+        55,
+        75
+      ],
+      "summary": "初始化设置项、可选搜索 Input，以及子菜单状态。",
+      "tags": [
+        "settings",
+        "initialization",
+        "search"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/settings-list.ts:renderMainList",
+      "type": "function",
+      "name": "renderMainList",
+      "filePath": "packages/tui/src/components/settings-list.ts",
+      "lineRange": [
+        105,
+        178
+      ],
+      "summary": "绘制搜索框、可见设置行、值与描述，以及底部快捷键提示。",
+      "tags": [
+        "settings",
+        "rendering",
+        "list"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/components/settings-list.ts:handleMouse",
+      "type": "function",
+      "name": "handleMouse",
+      "filePath": "packages/tui/src/components/settings-list.ts",
+      "lineRange": [
+        179,
+        221
+      ],
+      "summary": "把点击分给子菜单、搜索框或主列表项并激活。",
+      "tags": [
+        "settings",
+        "mouse",
+        "event-handler"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/settings-list.ts:handleInput",
+      "type": "function",
+      "name": "handleInput",
+      "filePath": "packages/tui/src/components/settings-list.ts",
+      "lineRange": [
+        222,
+        251
+      ],
+      "summary": "处理导航、激活、取消，以及搜索输入后的过滤。",
+      "tags": [
+        "settings",
+        "keybindings",
+        "search"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/settings-list.ts:activateItem",
+      "type": "function",
+      "name": "activateItem",
+      "filePath": "packages/tui/src/components/settings-list.ts",
+      "lineRange": [
+        264,
+        293
+      ],
+      "summary": "打开子菜单或切换/提交当前设置项的值。",
+      "tags": [
+        "settings",
+        "activation",
+        "submenu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/settings-list.ts:closeSubmenu",
+      "type": "function",
+      "name": "closeSubmenu",
+      "filePath": "packages/tui/src/components/settings-list.ts",
+      "lineRange": [
+        294,
+        309
+      ],
+      "summary": "关闭子菜单并在需要时恢复主列表导航位置。",
+      "tags": [
+        "settings",
+        "submenu",
+        "navigation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/settings-list.ts:addHintLine",
+      "type": "function",
+      "name": "addHintLine",
+      "filePath": "packages/tui/src/components/settings-list.ts",
+      "lineRange": [
+        315,
+        328
+      ],
+      "summary": "在底部追加截断后的快捷键提示行。",
+      "tags": [
+        "settings",
+        "hint",
+        "rendering"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/tui/src/components/spacer.ts",
+      "type": "file",
+      "name": "spacer.ts",
+      "filePath": "packages/tui/src/components/spacer.ts",
+      "summary": "空白占位组件：按指定行数输出空行，用于撑开垂直布局。",
+      "tags": [
+        "component",
+        "layout",
+        "spacer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/tui/src/components/spacer.ts:Spacer",
+      "type": "class",
+      "name": "Spacer",
+      "filePath": "packages/tui/src/components/spacer.ts",
+      "lineRange": [
+        6,
+        28
+      ],
+      "summary": "输出固定数量空行的占位 Component。",
+      "tags": [
+        "component",
+        "layout",
+        "spacer"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/tui/src/components/settings-list.ts",
+      "target": "file:packages/tui/src/components/input.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/settings-list.ts",
+      "target": "file:packages/tui/src/fuzzy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/settings-list.ts",
+      "target": "file:packages/tui/src/keybindings.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/settings-list.ts",
+      "target": "file:packages/tui/src/tui.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/settings-list.ts",
+      "target": "file:packages/tui/src/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/settings-list.ts",
+      "target": "class:packages/tui/src/components/settings-list.ts:SettingsList",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/settings-list.ts",
+      "target": "class:packages/tui/src/components/settings-list.ts:SettingsList",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/components/settings-list.ts",
+      "target": "function:packages/tui/src/components/settings-list.ts:constructor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/settings-list.ts",
+      "target": "function:packages/tui/src/components/settings-list.ts:renderMainList",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/settings-list.ts",
+      "target": "function:packages/tui/src/components/settings-list.ts:handleMouse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/settings-list.ts",
+      "target": "function:packages/tui/src/components/settings-list.ts:handleInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/settings-list.ts",
+      "target": "function:packages/tui/src/components/settings-list.ts:activateItem",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/settings-list.ts",
+      "target": "function:packages/tui/src/components/settings-list.ts:closeSubmenu",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/settings-list.ts",
+      "target": "function:packages/tui/src/components/settings-list.ts:addHintLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/spacer.ts",
+      "target": "file:packages/tui/src/tui.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/spacer.ts",
+      "target": "class:packages/tui/src/components/spacer.ts:Spacer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/spacer.ts",
+      "target": "class:packages/tui/src/components/spacer.ts:Spacer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/settings-list.ts:constructor",
+      "target": "file:packages/tui/src/components/input.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/settings-list.ts:handleInput",
+      "target": "function:packages/tui/src/keybindings.ts:getKeybindings",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/settings-list.ts:handleInput",
+      "target": "function:packages/tui/src/fuzzy.ts:fuzzyFilter",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/settings-list.ts:handleInput",
+      "target": "function:packages/tui/src/components/settings-list.ts:activateItem",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/settings-list.ts:renderMainList",
+      "target": "function:packages/tui/src/utils.ts:truncateToWidth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/settings-list.ts:renderMainList",
+      "target": "function:packages/tui/src/utils.ts:visibleWidth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/settings-list.ts:renderMainList",
+      "target": "function:packages/tui/src/utils.ts:wrapTextWithAnsi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/settings-list.ts:renderMainList",
+      "target": "function:packages/tui/src/components/settings-list.ts:addHintLine",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/settings-list.ts:handleMouse",
+      "target": "function:packages/tui/src/components/settings-list.ts:activateItem",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

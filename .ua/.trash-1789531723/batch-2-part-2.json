@@ -1,0 +1,1432 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/experimental/session-worker-manager.ts",
+      "type": "file",
+      "name": "session-worker-manager.ts",
+      "filePath": "packages/coding-agent/src/experimental/session-worker-manager.ts",
+      "summary": "在可替换的实验 server 进程内管理 Session worker 子进程：发现、启动、demand 挂接、RPC 转发、订阅投递与关闭/替换。",
+      "tags": [
+        "session-worker",
+        "process-manager",
+        "rpc",
+        "生命周期"
+      ],
+      "complexity": "complex",
+      "languageNotes": "worker 操作没有墙钟超时，只在断开、替换或 shutdown 时结算；startup/demand/shutdown 另有独立超时。"
+    },
+    {
+      "id": "class:packages/coding-agent/src/experimental/session-worker-manager.ts:SessionPluginSelectionConflictError",
+      "type": "class",
+      "name": "SessionPluginSelectionConflictError",
+      "filePath": "packages/coding-agent/src/experimental/session-worker-manager.ts",
+      "lineRange": [
+        39,
+        44
+      ],
+      "summary": "当活动或启动中的 Session 已绑定另一组 plugin manifest 路径时抛出的冲突错误。",
+      "tags": [
+        "error",
+        "插件",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/experimental/session-worker-manager.ts:SessionWorkerManager",
+      "type": "class",
+      "name": "SessionWorkerManager",
+      "filePath": "packages/coding-agent/src/experimental/session-worker-manager.ts",
+      "lineRange": [
+        98,
+        842
+      ],
+      "summary": "通过 coordinator 控制面 spawn/discover worker，把 attach/invoke/subscribe 映射为 session_demand 与 operation 消息，并在替换时 detach 而不杀进程。",
+      "tags": [
+        "process-manager",
+        "session-worker",
+        "rpc",
+        "coordinator"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "type": "file",
+      "name": "session-worker.ts",
+      "filePath": "packages/coding-agent/src/experimental/session-worker.ts",
+      "summary": "Session worker 子进程入口：注册到 coordinator、锁住 JSONL session、创建 coding-agent harness，并按 demand/operation 协议提供服务。",
+      "tags": [
+        "entry-point",
+        "session-worker",
+        "process",
+        "lifecycle"
+      ],
+      "complexity": "complex",
+      "languageNotes": "若以内部进程角色 session-worker 直接启动，会消费 process role 并调用 runSessionWorkerProcess。"
+    },
+    {
+      "id": "class:packages/coding-agent/src/experimental/session-worker.ts:WorkerLifecycle",
+      "type": "class",
+      "name": "WorkerLifecycle",
+      "filePath": "packages/coding-agent/src/experimental/session-worker.ts",
+      "lineRange": [
+        191,
+        315
+      ],
+      "summary": "在 worker 内调和 server 世代 demand、进行中的 harness 操作与 retirement hold，空闲且无 demand 时触发退役。",
+      "tags": [
+        "lifecycle",
+        "session-worker",
+        "demand",
+        "retirement"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "初始 demand 宽限期与孤儿 demand 宽限期可通过内部环境变量覆盖，便于测试。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/session-worker.ts:connectControl",
+      "type": "function",
+      "name": "connectControl",
+      "filePath": "packages/coding-agent/src/experimental/session-worker.ts",
+      "lineRange": [
+        343,
+        373
+      ],
+      "summary": "按环境变量连接 coordinator Unix 控制套接字，发送 register_peer 并等待 peer_registered。",
+      "tags": [
+        "control-plane",
+        "unix-socket",
+        "session-worker"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/session-worker.ts:readCommands",
+      "type": "function",
+      "name": "readCommands",
+      "filePath": "packages/coding-agent/src/experimental/session-worker.ts",
+      "lineRange": [
+        375,
+        409
+      ],
+      "summary": "从 coordinator JSONL 流解析 shutdown/discover/demand/operation 与 server 连接事件并分发给 handler。",
+      "tags": [
+        "control-plane",
+        "dispatcher",
+        "session-worker"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/session-worker.ts:createJsonLineMessages",
+      "type": "function",
+      "name": "createJsonLineMessages",
+      "filePath": "packages/coding-agent/src/experimental/session-worker.ts",
+      "lineRange": [
+        411,
+        448
+      ],
+      "summary": "把控制套接字字节流拆成受 MAX_CONTROL_LINE_BYTES 限制的 JSON 行异步迭代器。",
+      "tags": [
+        "utility",
+        "jsonl",
+        "framing"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/session-worker.ts:closeResources",
+      "type": "function",
+      "name": "closeResources",
+      "filePath": "packages/coding-agent/src/experimental/session-worker.ts",
+      "lineRange": [
+        480,
+        517
+      ],
+      "summary": "按固定顺序关闭 harness、services、session、repo、executionEnv 与 lockfile，并聚合清理错误。",
+      "tags": [
+        "cleanup",
+        "lifecycle",
+        "session-worker"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/session-worker.ts:run",
+      "type": "function",
+      "name": "run",
+      "filePath": "packages/coding-agent/src/experimental/session-worker.ts",
+      "lineRange": [
+        525,
+        769
+      ],
+      "summary": "锁定 session 文件、创建 harness/services、宣告 worker_ready，并循环处理 demand、RPC 与生命周期退役。",
+      "tags": [
+        "entry-point",
+        "session-worker",
+        "rpc",
+        "lifecycle"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/session-worker.ts:runSessionWorkerWithHarness",
+      "type": "function",
+      "name": "runSessionWorkerWithHarness",
+      "filePath": "packages/coding-agent/src/experimental/session-worker.ts",
+      "lineRange": [
+        771,
+        803
+      ],
+      "summary": "解析并校验 worker JSON 选项后调用 run；失败时尽量向 coordinator 发送 worker_failed。",
+      "tags": [
+        "entry-point",
+        "validation",
+        "session-worker"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/session-worker.ts:createCodingAgentHarness",
+      "type": "function",
+      "name": "createCodingAgentHarness",
+      "filePath": "packages/coding-agent/src/experimental/session-worker.ts",
+      "lineRange": [
+        805,
+        872
+      ],
+      "summary": "解析模型、创建带 read/write/bash 工具的 AgentHarness，并加载会话插件 facet loader。",
+      "tags": [
+        "factory",
+        "harness",
+        "模型解析",
+        "tools"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/session-worker.ts:runSessionWorkerProcess",
+      "type": "function",
+      "name": "runSessionWorkerProcess",
+      "filePath": "packages/coding-agent/src/experimental/session-worker.ts",
+      "lineRange": [
+        874,
+        876
+      ],
+      "summary": "生产入口：用 createCodingAgentHarness 作为 harness 工厂启动 session worker。",
+      "tags": [
+        "entry-point",
+        "session-worker",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/protocol/src/cbor/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/protocol/src/cbor/index.ts",
+      "summary": "CBOR 编解码公共入口，重导出 encode/decode 与深度/长度限制常量。",
+      "tags": [
+        "barrel",
+        "cbor",
+        "serialization",
+        "entry-point"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/protocol/src/codec.ts",
+      "type": "file",
+      "name": "codec.ts",
+      "filePath": "packages/protocol/src/codec.ts",
+      "summary": "将 TypeBox 校验后的 Client/Server 消息经 CBOR 编码并加上长度前缀帧，同时提供增量解码器。",
+      "tags": [
+        "serialization",
+        "protocol",
+        "validation",
+        "cbor"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "编码前先 parse 再 CBOR+frame；解码失败会锁死 decoder，避免半损坏流继续产出消息。"
+    },
+    {
+      "id": "class:packages/protocol/src/codec.ts:ProtocolValidationError",
+      "type": "class",
+      "name": "ProtocolValidationError",
+      "filePath": "packages/protocol/src/codec.ts",
+      "lineRange": [
+        13,
+        18
+      ],
+      "summary": "协议消息 schema 或帧校验失败时抛出的错误类型。",
+      "tags": [
+        "error",
+        "validation",
+        "protocol"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/protocol/src/codec.ts:parseClientMessage",
+      "type": "function",
+      "name": "parseClientMessage",
+      "filePath": "packages/protocol/src/codec.ts",
+      "lineRange": [
+        20,
+        25
+      ],
+      "summary": "用 ClientMessageSchema 与 isJsonValue 校验未知值为客户端协议消息。",
+      "tags": [
+        "validation",
+        "parser",
+        "protocol"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/protocol/src/codec.ts:parseServerMessage",
+      "type": "function",
+      "name": "parseServerMessage",
+      "filePath": "packages/protocol/src/codec.ts",
+      "lineRange": [
+        27,
+        32
+      ],
+      "summary": "用 ServerMessageSchema 与 isJsonValue 校验未知值为服务端协议消息。",
+      "tags": [
+        "validation",
+        "parser",
+        "protocol"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/protocol/src/codec.ts:encodeProtocolMessage",
+      "type": "function",
+      "name": "encodeProtocolMessage",
+      "filePath": "packages/protocol/src/codec.ts",
+      "lineRange": [
+        39,
+        53
+      ],
+      "summary": "先校验再 CBOR 编码并加上 length-prefix 帧，把底层错误收敛为 ProtocolValidationError。",
+      "tags": [
+        "serialization",
+        "encoder",
+        "protocol"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/protocol/src/codec.ts:encodeClientMessage",
+      "type": "function",
+      "name": "encodeClientMessage",
+      "filePath": "packages/protocol/src/codec.ts",
+      "lineRange": [
+        56,
+        58
+      ],
+      "summary": "校验并编码一条完整的 length-prefixed 客户端消息。",
+      "tags": [
+        "serialization",
+        "encoder",
+        "protocol"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/protocol/src/codec.ts:encodeServerMessage",
+      "type": "function",
+      "name": "encodeServerMessage",
+      "filePath": "packages/protocol/src/codec.ts",
+      "lineRange": [
+        61,
+        63
+      ],
+      "summary": "校验并编码一条完整的 length-prefixed 服务端消息。",
+      "tags": [
+        "serialization",
+        "encoder",
+        "protocol"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/protocol/src/codec.ts:ValidatedMessageDecoder",
+      "type": "class",
+      "name": "ValidatedMessageDecoder",
+      "filePath": "packages/protocol/src/codec.ts",
+      "lineRange": [
+        65,
+        103
+      ],
+      "summary": "组合 FrameDecoder 与 CBOR/schema parse 的通用增量解码器，失败后拒绝后续 push。",
+      "tags": [
+        "decoder",
+        "validation",
+        "framing"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/protocol/src/codec.ts:ClientMessageDecoder",
+      "type": "class",
+      "name": "ClientMessageDecoder",
+      "filePath": "packages/protocol/src/codec.ts",
+      "lineRange": [
+        106,
+        120
+      ],
+      "summary": "面向客户端消息的增量解码器包装。",
+      "tags": [
+        "decoder",
+        "protocol",
+        "client"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/protocol/src/codec.ts:ServerMessageDecoder",
+      "type": "class",
+      "name": "ServerMessageDecoder",
+      "filePath": "packages/protocol/src/codec.ts",
+      "lineRange": [
+        123,
+        137
+      ],
+      "summary": "面向服务端消息的增量解码器包装。",
+      "tags": [
+        "decoder",
+        "protocol",
+        "server"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/protocol/src/codec.ts:isSupportedProtocolVersion",
+      "type": "function",
+      "name": "isSupportedProtocolVersion",
+      "filePath": "packages/protocol/src/codec.ts",
+      "lineRange": [
+        139,
+        141
+      ],
+      "summary": "判断整数版本是否恰好等于当前 PROTOCOL_VERSION。",
+      "tags": [
+        "validation",
+        "protocol",
+        "version"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/protocol/src/framing.ts",
+      "type": "file",
+      "name": "framing.ts",
+      "filePath": "packages/protocol/src/framing.ts",
+      "summary": "实现 4 字节大端长度前缀帧的编码与流式拆帧，默认单帧上限 16MiB。",
+      "tags": [
+        "framing",
+        "protocol",
+        "streaming",
+        "utility"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "负载按 64KiB block 收集，单 block 时可零拷贝返回，避免大帧一次分配失败导致半状态。"
+    },
+    {
+      "id": "class:packages/protocol/src/framing.ts:FrameError",
+      "type": "class",
+      "name": "FrameError",
+      "filePath": "packages/protocol/src/framing.ts",
+      "lineRange": [
+        12,
+        17
+      ],
+      "summary": "帧超限、截断或在 ended/failed 状态下继续推流时抛出的错误。",
+      "tags": [
+        "error",
+        "framing",
+        "protocol"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/protocol/src/framing.ts:encodeFrame",
+      "type": "function",
+      "name": "encodeFrame",
+      "filePath": "packages/protocol/src/framing.ts",
+      "lineRange": [
+        28,
+        39
+      ],
+      "summary": "为 Uint8Array 负载写入 4 字节无符号大端长度前缀。",
+      "tags": [
+        "encoder",
+        "framing",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/protocol/src/framing.ts:FrameDecoder",
+      "type": "class",
+      "name": "FrameDecoder",
+      "filePath": "packages/protocol/src/framing.ts",
+      "lineRange": [
+        44,
+        151
+      ],
+      "summary": "增量拆分任意字节块为完整 length-prefixed payload，并在流结束时检测截断帧。",
+      "tags": [
+        "decoder",
+        "framing",
+        "streaming"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/protocol/src/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/protocol/src/index.ts",
+      "summary": "@earendil-works/pi-protocol 包入口，重导出 CBOR、编解码、分帧以及握手/RPC 消息类型。",
+      "tags": [
+        "barrel",
+        "entry-point",
+        "protocol"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/protocol/src/protocol.ts",
+      "type": "file",
+      "name": "protocol.ts",
+      "filePath": "packages/protocol/src/protocol.ts",
+      "summary": "用 TypeBox 定义协议版本 8 的 Client/Server 消息：hello、request/cancel、response、service_update 与 attachment。",
+      "tags": [
+        "schema-definition",
+        "protocol",
+        "type-definition",
+        "rpc"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "对象 schema 使用 additionalProperties:false 的 StrictObject，ServerId 约束为 UUID v4 形态。"
+    },
+    {
+      "id": "function:packages/protocol/src/protocol.ts:isServerId",
+      "type": "function",
+      "name": "isServerId",
+      "filePath": "packages/protocol/src/protocol.ts",
+      "lineRange": [
+        17,
+        19
+      ],
+      "summary": "用 TypeBox ServerIdSchema 判断值是否为合法逻辑 server UUID。",
+      "tags": [
+        "validation",
+        "type-guard",
+        "protocol"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/server/src/connection.ts",
+      "type": "file",
+      "name": "connection.ts",
+      "filePath": "packages/server/src/connection.ts",
+      "summary": "定义已鉴权字节连接、acceptor/handler 以及 Server 连接状态机字段，并提供终态判断。",
+      "tags": [
+        "type-definition",
+        "connection",
+        "transport",
+        "state-machine"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/server/src/connection.ts:isTerminalConnection",
+      "type": "function",
+      "name": "isTerminalConnection",
+      "filePath": "packages/server/src/connection.ts",
+      "lineRange": [
+        35,
+        37
+      ],
+      "summary": "判断连接是否已断开或处于 closing/closed，供收包与分发短路。",
+      "tags": [
+        "utility",
+        "connection",
+        "state-machine"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/server/src/errors.ts",
+      "type": "file",
+      "name": "errors.ts",
+      "filePath": "packages/server/src/errors.ts",
+      "summary": "定义可安全穿越协议边界的 ServerError 族：wrong_server、session 路由失败与 draining。",
+      "tags": [
+        "error",
+        "protocol",
+        "routing",
+        "type-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/server/src/errors.ts:ServerError",
+      "type": "class",
+      "name": "ServerError",
+      "filePath": "packages/server/src/errors.ts",
+      "lineRange": [
+        14,
+        22
+      ],
+      "summary": "带稳定 error code 的主机/生命周期错误基类，供协议响应映射。",
+      "tags": [
+        "error",
+        "protocol",
+        "base-class"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/server/src/errors.ts:WrongServerError",
+      "type": "class",
+      "name": "WrongServerError",
+      "filePath": "packages/server/src/errors.ts",
+      "lineRange": [
+        24,
+        29
+      ],
+      "summary": "请求 target.serverId 指向另一逻辑 server 时抛出。",
+      "tags": [
+        "error",
+        "routing",
+        "protocol"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/server/src/errors.ts:SessionNotFoundError",
+      "type": "class",
+      "name": "SessionNotFoundError",
+      "filePath": "packages/server/src/errors.ts",
+      "lineRange": [
+        31,
+        36
+      ],
+      "summary": "无法解析到对应 durable Session 时抛出。",
+      "tags": [
+        "error",
+        "session",
+        "routing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/server/src/errors.ts:SessionAmbiguousError",
+      "type": "class",
+      "name": "SessionAmbiguousError",
+      "filePath": "packages/server/src/errors.ts",
+      "lineRange": [
+        38,
+        43
+      ],
+      "summary": "Session ID 匹配到多条记录时抛出。",
+      "tags": [
+        "error",
+        "session",
+        "routing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/server/src/errors.ts:SessionNotAttachedError",
+      "type": "class",
+      "name": "SessionNotAttachedError",
+      "filePath": "packages/server/src/errors.ts",
+      "lineRange": [
+        45,
+        50
+      ],
+      "summary": "客户端没有匹配的 Session attachment 却发起 session 调用时抛出。",
+      "tags": [
+        "error",
+        "session",
+        "attachment"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/server/src/errors.ts:ServerDrainingError",
+      "type": "class",
+      "name": "ServerDrainingError",
+      "filePath": "packages/server/src/errors.ts",
+      "lineRange": [
+        52,
+        57
+      ],
+      "summary": "服务器正在关闭或拒绝新路由时抛出。",
+      "tags": [
+        "error",
+        "lifecycle",
+        "draining"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/server/src/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/server/src/index.ts",
+      "summary": "@earendil-works/pi-server 包入口，重导出错误、listener、Server 与主机/路由类型。",
+      "tags": [
+        "barrel",
+        "entry-point",
+        "server"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/server/src/listener.ts",
+      "type": "file",
+      "name": "listener.ts",
+      "filePath": "packages/server/src/listener.ts",
+      "summary": "定义 ServerListener：在完成传输鉴权后把 ByteConnection 交给 Server.accept。",
+      "tags": [
+        "type-definition",
+        "transport",
+        "listener"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker-manager.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker-manager.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker-manager.ts",
+      "target": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker-manager.ts",
+      "target": "file:packages/coding-agent/src/experimental/process.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker-manager.ts",
+      "target": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker-manager.ts",
+      "target": "file:packages/server/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "file:packages/agent/src/node.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "file:packages/coding-agent/src/core/model-resolver.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "file:packages/coding-agent/src/core/settings-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "file:packages/coding-agent/src/experimental/plugins/bundled.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "file:packages/coding-agent/src/experimental/process.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/worker.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "file:packages/protocol/src/cbor/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "file:packages/protocol/src/framing.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "file:packages/protocol/src/protocol.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/protocol/src/protocol.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/connection.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/connection.ts",
+      "target": "file:packages/protocol/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/connection.ts",
+      "target": "file:packages/server/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/errors.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/server/src/listener.ts",
+      "target": "file:packages/server/src/connection.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker-manager.ts",
+      "target": "class:packages/coding-agent/src/experimental/session-worker-manager.ts:SessionPluginSelectionConflictError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker-manager.ts",
+      "target": "class:packages/coding-agent/src/experimental/session-worker-manager.ts:SessionWorkerManager",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "class:packages/coding-agent/src/experimental/session-worker.ts:WorkerLifecycle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "function:packages/coding-agent/src/experimental/session-worker.ts:connectControl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "function:packages/coding-agent/src/experimental/session-worker.ts:readCommands",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "function:packages/coding-agent/src/experimental/session-worker.ts:createJsonLineMessages",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "function:packages/coding-agent/src/experimental/session-worker.ts:closeResources",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "function:packages/coding-agent/src/experimental/session-worker.ts:run",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "function:packages/coding-agent/src/experimental/session-worker.ts:runSessionWorkerWithHarness",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "function:packages/coding-agent/src/experimental/session-worker.ts:createCodingAgentHarness",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "function:packages/coding-agent/src/experimental/session-worker.ts:runSessionWorkerProcess",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "class:packages/protocol/src/codec.ts:ProtocolValidationError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "function:packages/protocol/src/codec.ts:parseClientMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "function:packages/protocol/src/codec.ts:parseServerMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "function:packages/protocol/src/codec.ts:encodeProtocolMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "function:packages/protocol/src/codec.ts:encodeClientMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "function:packages/protocol/src/codec.ts:encodeServerMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "class:packages/protocol/src/codec.ts:ValidatedMessageDecoder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "class:packages/protocol/src/codec.ts:ClientMessageDecoder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "class:packages/protocol/src/codec.ts:ServerMessageDecoder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "function:packages/protocol/src/codec.ts:isSupportedProtocolVersion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/protocol/src/framing.ts",
+      "target": "class:packages/protocol/src/framing.ts:FrameError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/protocol/src/framing.ts",
+      "target": "function:packages/protocol/src/framing.ts:encodeFrame",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/protocol/src/framing.ts",
+      "target": "class:packages/protocol/src/framing.ts:FrameDecoder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/protocol/src/protocol.ts",
+      "target": "function:packages/protocol/src/protocol.ts:isServerId",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/connection.ts",
+      "target": "function:packages/server/src/connection.ts:isTerminalConnection",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/errors.ts",
+      "target": "class:packages/server/src/errors.ts:ServerError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/errors.ts",
+      "target": "class:packages/server/src/errors.ts:WrongServerError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/errors.ts",
+      "target": "class:packages/server/src/errors.ts:SessionNotFoundError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/errors.ts",
+      "target": "class:packages/server/src/errors.ts:SessionAmbiguousError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/errors.ts",
+      "target": "class:packages/server/src/errors.ts:SessionNotAttachedError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/server/src/errors.ts",
+      "target": "class:packages/server/src/errors.ts:ServerDrainingError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker-manager.ts",
+      "target": "class:packages/coding-agent/src/experimental/session-worker-manager.ts:SessionPluginSelectionConflictError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker-manager.ts",
+      "target": "class:packages/coding-agent/src/experimental/session-worker-manager.ts:SessionWorkerManager",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "class:packages/coding-agent/src/experimental/session-worker.ts:WorkerLifecycle",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "function:packages/coding-agent/src/experimental/session-worker.ts:runSessionWorkerWithHarness",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/session-worker.ts",
+      "target": "function:packages/coding-agent/src/experimental/session-worker.ts:runSessionWorkerProcess",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "class:packages/protocol/src/codec.ts:ProtocolValidationError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "function:packages/protocol/src/codec.ts:parseClientMessage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "function:packages/protocol/src/codec.ts:parseServerMessage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "function:packages/protocol/src/codec.ts:encodeClientMessage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "function:packages/protocol/src/codec.ts:encodeServerMessage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "class:packages/protocol/src/codec.ts:ClientMessageDecoder",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "class:packages/protocol/src/codec.ts:ServerMessageDecoder",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/protocol/src/codec.ts",
+      "target": "function:packages/protocol/src/codec.ts:isSupportedProtocolVersion",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/protocol/src/framing.ts",
+      "target": "class:packages/protocol/src/framing.ts:FrameError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/protocol/src/framing.ts",
+      "target": "function:packages/protocol/src/framing.ts:encodeFrame",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/protocol/src/framing.ts",
+      "target": "class:packages/protocol/src/framing.ts:FrameDecoder",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/protocol/src/protocol.ts",
+      "target": "function:packages/protocol/src/protocol.ts:isServerId",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/server/src/connection.ts",
+      "target": "function:packages/server/src/connection.ts:isTerminalConnection",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/server/src/errors.ts",
+      "target": "class:packages/server/src/errors.ts:ServerError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/server/src/errors.ts",
+      "target": "class:packages/server/src/errors.ts:WrongServerError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/server/src/errors.ts",
+      "target": "class:packages/server/src/errors.ts:SessionNotFoundError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/server/src/errors.ts",
+      "target": "class:packages/server/src/errors.ts:SessionAmbiguousError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/server/src/errors.ts",
+      "target": "class:packages/server/src/errors.ts:SessionNotAttachedError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/server/src/errors.ts",
+      "target": "class:packages/server/src/errors.ts:ServerDrainingError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/session-worker-manager.ts:SessionWorkerManager",
+      "target": "function:packages/coding-agent/src/experimental/process.ts:spawnInternalProcess",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/session-worker.ts:createCodingAgentHarness",
+      "target": "function:packages/coding-agent/src/core/model-resolver.ts:findInitialModel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/session-worker.ts:createCodingAgentHarness",
+      "target": "function:packages/coding-agent/src/core/model-resolver.ts:resolveCliModel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/session-worker.ts:createCodingAgentHarness",
+      "target": "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/session-worker.ts:createCodingAgentHarness",
+      "target": "class:packages/coding-agent/src/core/settings-manager.ts:SettingsManager",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/session-worker.ts:createCodingAgentHarness",
+      "target": "function:packages/coding-agent/src/experimental/plugins/bundled.ts:createSessionPluginFacetLoader",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/protocol/src/codec.ts:encodeProtocolMessage",
+      "target": "function:packages/protocol/src/framing.ts:encodeFrame",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/protocol/src/codec.ts:ValidatedMessageDecoder",
+      "target": "class:packages/protocol/src/framing.ts:FrameDecoder",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/server/src/errors.ts:WrongServerError",
+      "target": "class:packages/server/src/errors.ts:ServerError",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/server/src/errors.ts:SessionNotFoundError",
+      "target": "class:packages/server/src/errors.ts:ServerError",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/server/src/errors.ts:SessionAmbiguousError",
+      "target": "class:packages/server/src/errors.ts:ServerError",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/server/src/errors.ts:SessionNotAttachedError",
+      "target": "class:packages/server/src/errors.ts:ServerError",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/server/src/errors.ts:ServerDrainingError",
+      "target": "class:packages/server/src/errors.ts:ServerError",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:packages/protocol/src/index.ts",
+      "target": "file:packages/protocol/src/cbor/index.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/protocol/src/index.ts",
+      "target": "file:packages/protocol/src/codec.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/protocol/src/index.ts",
+      "target": "file:packages/protocol/src/framing.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/protocol/src/index.ts",
+      "target": "file:packages/protocol/src/protocol.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/server/src/index.ts",
+      "target": "file:packages/server/src/errors.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/server/src/index.ts",
+      "target": "file:packages/server/src/listener.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/server/src/index.ts",
+      "target": "file:packages/server/src/server.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/server/src/index.ts",
+      "target": "file:packages/server/src/types.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

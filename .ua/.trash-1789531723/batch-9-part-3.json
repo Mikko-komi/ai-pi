@@ -1,0 +1,1609 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/agent/src/harness/execution/tools.ts",
+      "type": "file",
+      "name": "tools.ts",
+      "summary": "单次 tool call 的 prepare、before-hook 决策、经 gate 执行与 finalize。",
+      "tags": [
+        "tool-execution",
+        "validation",
+        "execution"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/execution/tools.ts"
+    },
+    {
+      "id": "file:packages/agent/src/harness/hooks.ts",
+      "type": "file",
+      "name": "hooks.ts",
+      "summary": "HookRegistry：按生命周期阶段注册并聚合 before/after hooks，同时合并 stream options patch。",
+      "tags": [
+        "hooks",
+        "middleware",
+        "telemetry",
+        "aggregation"
+      ],
+      "complexity": "complex",
+      "filePath": "packages/agent/src/harness/hooks.ts"
+    },
+    {
+      "id": "file:packages/agent/src/harness/messages.ts",
+      "type": "file",
+      "name": "messages.ts",
+      "summary": "把 bashExecution/custom/branchSummary/compactionSummary 等扩展消息转换为 LLM Message。",
+      "tags": [
+        "serialization",
+        "messages",
+        "llm"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/messages.ts"
+    },
+    {
+      "id": "file:packages/agent/src/harness/prompt-templates.ts",
+      "type": "file",
+      "name": "prompt-templates.ts",
+      "summary": "从目录或文件加载带 YAML frontmatter 的 prompt 模板，并解析/替换命令参数。",
+      "tags": [
+        "prompt-templates",
+        "loader",
+        "frontmatter"
+      ],
+      "complexity": "complex",
+      "filePath": "packages/agent/src/harness/prompt-templates.ts"
+    },
+    {
+      "id": "file:packages/agent/src/harness/result.ts",
+      "type": "file",
+      "name": "result.ts",
+      "summary": "定义 Result 联合类型与 TaggedError 工厂，以及 harness 操作失败用的一组带标签错误。",
+      "tags": [
+        "type-definition",
+        "error-handling",
+        "result"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/result.ts"
+    },
+    {
+      "id": "file:packages/agent/src/harness/runtime/drive.ts",
+      "type": "file",
+      "name": "drive.ts",
+      "summary": "按 operation 状态机分派 durable 过程，直到 settled、waiting 或取消调和。",
+      "tags": [
+        "state-machine",
+        "drive",
+        "orchestrator"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/runtime/drive.ts"
+    },
+    {
+      "id": "function:packages/agent/src/harness/execution/tools.ts:prepareToolCall",
+      "type": "function",
+      "name": "prepareToolCall",
+      "summary": "查找 tool、准备并校验参数，失败则返回即时错误结果。",
+      "tags": [
+        "tool-execution",
+        "validation",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/execution/tools.ts",
+      "lineRange": [
+        78,
+        98
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/execution/tools.ts:applyBeforeToolDecision",
+      "type": "function",
+      "name": "applyBeforeToolDecision",
+      "summary": "应用 before-tool hook 的拦截或改参，并重新校验。",
+      "tags": [
+        "hooks",
+        "tool-execution",
+        "validation"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/execution/tools.ts",
+      "lineRange": [
+        101,
+        122
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/execution/tools.ts:executeToolCall",
+      "type": "function",
+      "name": "executeToolCall",
+      "summary": "经 gate.admit 执行 tool.execute，把异常转为错误 tool result。",
+      "tags": [
+        "tool-execution",
+        "gate",
+        "cancellation"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/execution/tools.ts",
+      "lineRange": [
+        125,
+        158
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/execution/tools.ts:finalizeToolCall",
+      "type": "function",
+      "name": "finalizeToolCall",
+      "summary": "合并 after-tool patch，生成最终 tool result 与是否终止标志。",
+      "tags": [
+        "tool-execution",
+        "hooks",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/execution/tools.ts",
+      "lineRange": [
+        161,
+        181
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/execution/tools.ts:toolResultFromMessage",
+      "type": "function",
+      "name": "toolResultFromMessage",
+      "summary": "从已有 toolResult 消息还原 Executed/Finalized 结构。",
+      "tags": [
+        "tool-execution",
+        "serialization",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/execution/tools.ts",
+      "lineRange": [
+        184,
+        195
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/execution/tools.ts:createToolResultMessage",
+      "type": "function",
+      "name": "createToolResultMessage",
+      "summary": "把 finalized call 编成 Agent toolResult 消息。",
+      "tags": [
+        "serialization",
+        "tool-execution",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/execution/tools.ts",
+      "lineRange": [
+        198,
+        210
+      ]
+    },
+    {
+      "id": "class:packages/agent/src/harness/hooks.ts:HookRegistry",
+      "type": "class",
+      "name": "HookRegistry",
+      "summary": "注册并按阶段聚合 hooks；经 gate 运行 tool 前后钩子，失败可 fail-closed。",
+      "tags": [
+        "hooks",
+        "registry",
+        "middleware",
+        "gate"
+      ],
+      "complexity": "complex",
+      "filePath": "packages/agent/src/harness/hooks.ts",
+      "lineRange": [
+        15,
+        444
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/hooks.ts:applyStreamOptionsPatch",
+      "type": "function",
+      "name": "applyStreamOptionsPatch",
+      "summary": "把 hook 返回的 stream options patch 浅合并到基础选项。",
+      "tags": [
+        "streaming",
+        "hooks",
+        "merge"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/hooks.ts",
+      "lineRange": [
+        446,
+        487
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/hooks.ts:createStreamOptionsPatch",
+      "type": "function",
+      "name": "createStreamOptionsPatch",
+      "summary": "比较新值与基线，生成最小 stream options patch。",
+      "tags": [
+        "streaming",
+        "hooks",
+        "diff"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/hooks.ts",
+      "lineRange": [
+        489,
+        533
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/messages.ts:bashExecutionToText",
+      "type": "function",
+      "name": "bashExecutionToText",
+      "summary": "把 bashExecution 消息格式化为可放入 user 文本的命令/输出块。",
+      "tags": [
+        "formatting",
+        "messages",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/messages.ts",
+      "lineRange": [
+        63,
+        79
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/messages.ts:createBranchSummaryMessage",
+      "type": "function",
+      "name": "createBranchSummaryMessage",
+      "summary": "构造带 fromId 的 branchSummary 消息。",
+      "tags": [
+        "factory",
+        "summarization",
+        "messages"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/messages.ts",
+      "lineRange": [
+        81,
+        92
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/messages.ts:createCompactionSummaryMessage",
+      "type": "function",
+      "name": "createCompactionSummaryMessage",
+      "summary": "构造带 tokensBefore 的 compactionSummary 消息。",
+      "tags": [
+        "factory",
+        "compaction",
+        "messages"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/messages.ts",
+      "lineRange": [
+        94,
+        105
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/messages.ts:createCustomMessage",
+      "type": "function",
+      "name": "createCustomMessage",
+      "summary": "构造 custom 角色消息，保留 display/details。",
+      "tags": [
+        "factory",
+        "messages",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/messages.ts",
+      "lineRange": [
+        107,
+        122
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/messages.ts:convertToLlm",
+      "type": "function",
+      "name": "convertToLlm",
+      "summary": "把 harness 扩展角色映射为 LLM 可消费的 user/assistant/toolResult。",
+      "tags": [
+        "serialization",
+        "llm",
+        "messages"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/messages.ts",
+      "lineRange": [
+        124,
+        168
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/prompt-templates.ts:loadPromptTemplates",
+      "type": "function",
+      "name": "loadPromptTemplates",
+      "summary": "对每个路径做 fileInfo，目录则枚举、文件则解析为模板。",
+      "tags": [
+        "loader",
+        "prompt-templates",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/prompt-templates.ts",
+      "lineRange": [
+        31,
+        64
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/prompt-templates.ts:loadSourcedPromptTemplates",
+      "type": "function",
+      "name": "loadSourcedPromptTemplates",
+      "summary": "按来源加载模板并可选 mapPromptTemplate 改写。",
+      "tags": [
+        "loader",
+        "prompt-templates",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/prompt-templates.ts",
+      "lineRange": [
+        72,
+        98
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/prompt-templates.ts:loadTemplatesFromDir",
+      "type": "function",
+      "name": "loadTemplatesFromDir",
+      "summary": "列举目录中的 markdown 文件并逐个解析模板。",
+      "tags": [
+        "loader",
+        "prompt-templates",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/prompt-templates.ts",
+      "lineRange": [
+        100,
+        127
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/prompt-templates.ts:loadTemplateFromFile",
+      "type": "function",
+      "name": "loadTemplateFromFile",
+      "summary": "读文件、解析 frontmatter，用标题或文件名作为模板名。",
+      "tags": [
+        "loader",
+        "frontmatter",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/prompt-templates.ts",
+      "lineRange": [
+        129,
+        173
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/prompt-templates.ts:resolveKind",
+      "type": "function",
+      "name": "resolveKind",
+      "summary": "canonicalize 路径并再次 fileInfo，区分文件与目录。",
+      "tags": [
+        "filesystem",
+        "loader",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/prompt-templates.ts",
+      "lineRange": [
+        175,
+        207
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/prompt-templates.ts:parseFrontmatter",
+      "type": "function",
+      "name": "parseFrontmatter",
+      "summary": "从 markdown 头部切出 YAML frontmatter 与正文。",
+      "tags": [
+        "parsing",
+        "frontmatter",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/prompt-templates.ts",
+      "lineRange": [
+        209,
+        223
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/prompt-templates.ts:parseCommandArgs",
+      "type": "function",
+      "name": "parseCommandArgs",
+      "summary": "按引号规则把命令参数字符串拆成 argv。",
+      "tags": [
+        "parsing",
+        "prompt-templates",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/prompt-templates.ts",
+      "lineRange": [
+        226,
+        249
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/prompt-templates.ts:substituteArgs",
+      "type": "function",
+      "name": "substituteArgs",
+      "summary": "把模板中的 $1/$2 占位符替换为解析后的参数。",
+      "tags": [
+        "prompt-templates",
+        "substitution",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/prompt-templates.ts",
+      "lineRange": [
+        252,
+        265
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/prompt-templates.ts:formatPromptTemplateInvocation",
+      "type": "function",
+      "name": "formatPromptTemplateInvocation",
+      "summary": "把模板名与参数格式化为一条调用文本。",
+      "tags": [
+        "formatting",
+        "prompt-templates",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/prompt-templates.ts",
+      "lineRange": [
+        268,
+        270
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/result.ts:TaggedError",
+      "type": "function",
+      "name": "TaggedError",
+      "summary": "返回带 _tag 与 toJSON/is 的 Error 子类工厂，用于可判别错误。",
+      "tags": [
+        "factory",
+        "error-handling",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/result.ts",
+      "lineRange": [
+        28,
+        51
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/result.ts:matchError",
+      "type": "function",
+      "name": "matchError",
+      "summary": "按错误构造函数匹配并调用对应 matcher。",
+      "tags": [
+        "error-handling",
+        "utility",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/result.ts",
+      "lineRange": [
+        111,
+        117
+      ]
+    },
+    {
+      "id": "class:packages/agent/src/harness/result.ts:LaneBusy",
+      "type": "class",
+      "name": "LaneBusy",
+      "summary": "目标 lane 已有进行中的 operation。",
+      "tags": [
+        "error-handling",
+        "harness",
+        "tagged-error"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/result.ts",
+      "lineRange": [
+        53,
+        58
+      ]
+    },
+    {
+      "id": "class:packages/agent/src/harness/result.ts:OperationMismatch",
+      "type": "class",
+      "name": "OperationMismatch",
+      "summary": "请求的 operation 与 lane 当前 operation 不一致。",
+      "tags": [
+        "error-handling",
+        "harness",
+        "tagged-error"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/result.ts",
+      "lineRange": [
+        59,
+        65
+      ]
+    },
+    {
+      "id": "class:packages/agent/src/harness/result.ts:NoActiveRun",
+      "type": "class",
+      "name": "NoActiveRun",
+      "summary": "当前没有可操作的 active run。",
+      "tags": [
+        "error-handling",
+        "harness",
+        "tagged-error"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/result.ts",
+      "lineRange": [
+        66,
+        66
+      ]
+    },
+    {
+      "id": "class:packages/agent/src/harness/result.ts:NoActiveOperation",
+      "type": "class",
+      "name": "NoActiveOperation",
+      "summary": "当前没有可操作的 active operation。",
+      "tags": [
+        "error-handling",
+        "harness",
+        "tagged-error"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/result.ts",
+      "lineRange": [
+        67,
+        67
+      ]
+    },
+    {
+      "id": "class:packages/agent/src/harness/result.ts:NothingToResume",
+      "type": "class",
+      "name": "NothingToResume",
+      "summary": "没有可 resume 的挂起 run。",
+      "tags": [
+        "error-handling",
+        "harness",
+        "tagged-error"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/result.ts",
+      "lineRange": [
+        68,
+        68
+      ]
+    },
+    {
+      "id": "class:packages/agent/src/harness/result.ts:NothingToCompact",
+      "type": "class",
+      "name": "NothingToCompact",
+      "summary": "没有可压缩的历史。",
+      "tags": [
+        "error-handling",
+        "harness",
+        "tagged-error"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/result.ts",
+      "lineRange": [
+        69,
+        69
+      ]
+    },
+    {
+      "id": "class:packages/agent/src/harness/result.ts:InvalidMessage",
+      "type": "class",
+      "name": "InvalidMessage",
+      "summary": "提交的消息不满足 harness 约束。",
+      "tags": [
+        "error-handling",
+        "harness",
+        "tagged-error"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/result.ts",
+      "lineRange": [
+        70,
+        74
+      ]
+    },
+    {
+      "id": "class:packages/agent/src/harness/result.ts:InvalidNavigation",
+      "type": "class",
+      "name": "InvalidNavigation",
+      "summary": "导航目标不合法。",
+      "tags": [
+        "error-handling",
+        "harness",
+        "tagged-error"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/result.ts",
+      "lineRange": [
+        75,
+        79
+      ]
+    },
+    {
+      "id": "class:packages/agent/src/harness/result.ts:UnknownSkill",
+      "type": "class",
+      "name": "UnknownSkill",
+      "summary": "引用了未知 skill。",
+      "tags": [
+        "error-handling",
+        "harness",
+        "tagged-error"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/result.ts",
+      "lineRange": [
+        80,
+        80
+      ]
+    },
+    {
+      "id": "class:packages/agent/src/harness/result.ts:UnknownTemplate",
+      "type": "class",
+      "name": "UnknownTemplate",
+      "summary": "引用了未知 prompt template。",
+      "tags": [
+        "error-handling",
+        "harness",
+        "tagged-error"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/result.ts",
+      "lineRange": [
+        81,
+        81
+      ]
+    },
+    {
+      "id": "class:packages/agent/src/harness/result.ts:UnknownTarget",
+      "type": "class",
+      "name": "UnknownTarget",
+      "summary": "引用了未知 session/entry 目标。",
+      "tags": [
+        "error-handling",
+        "harness",
+        "tagged-error"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/result.ts",
+      "lineRange": [
+        82,
+        82
+      ]
+    },
+    {
+      "id": "class:packages/agent/src/harness/result.ts:InvalidLane",
+      "type": "class",
+      "name": "InvalidLane",
+      "summary": "lane 名无效或不存在。",
+      "tags": [
+        "error-handling",
+        "harness",
+        "tagged-error"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/result.ts",
+      "lineRange": [
+        83,
+        87
+      ]
+    },
+    {
+      "id": "class:packages/agent/src/harness/result.ts:Closed",
+      "type": "class",
+      "name": "Closed",
+      "summary": "harness 已关闭，拒绝后续操作。",
+      "tags": [
+        "error-handling",
+        "harness",
+        "tagged-error"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/result.ts",
+      "lineRange": [
+        88,
+        88
+      ]
+    },
+    {
+      "id": "class:packages/agent/src/harness/result.ts:HarnessFault",
+      "type": "class",
+      "name": "HarnessFault",
+      "summary": "包装未预期的内部故障，并保留 cause。",
+      "tags": [
+        "error-handling",
+        "harness",
+        "tagged-error"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/result.ts",
+      "lineRange": [
+        90,
+        98
+      ]
+    },
+    {
+      "id": "class:packages/agent/src/harness/result.ts:HarnessClosed",
+      "type": "class",
+      "name": "HarnessClosed",
+      "summary": "在已关闭 harness 上继续操作时抛出的错误。",
+      "tags": [
+        "error-handling",
+        "harness",
+        "tagged-error"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/result.ts",
+      "lineRange": [
+        100,
+        105
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive.ts:driveOperation",
+      "type": "function",
+      "name": "driveOperation",
+      "summary": "循环读取 operation.at，分派 start/checkpoint/generation/tools/deferred/summary/navigation。",
+      "tags": [
+        "state-machine",
+        "drive",
+        "orchestrator"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/runtime/drive.ts",
+      "lineRange": [
+        29,
+        106
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/agent/src/harness/execution/tools.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/tools.ts",
+      "target": "file:packages/agent/src/harness/execution/effect-gate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/tools.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/tools.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/tools.ts",
+      "target": "file:packages/agent/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/tools.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/hooks.ts",
+      "target": "file:packages/agent/src/harness/agent-harness.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/hooks.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/hooks.ts",
+      "target": "file:packages/agent/src/harness/execution/effect-gate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/hooks.ts",
+      "target": "file:packages/agent/src/harness/telemetry.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/hooks.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/messages.ts",
+      "target": "file:packages/agent/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/messages.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/prompt-templates.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/prompt-templates.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive.ts",
+      "target": "file:packages/agent/src/harness/agent-harness.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive.ts",
+      "target": "file:packages/agent/src/harness/execution/effect-gate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/checkpoint.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/recovery.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive.ts",
+      "target": "file:packages/agent/src/harness/runtime/lane.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive.ts",
+      "target": "file:packages/agent/src/harness/runtime/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive.ts",
+      "target": "file:packages/agent/src/harness/session/session.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/tools.ts",
+      "target": "function:packages/agent/src/harness/execution/tools.ts:prepareToolCall",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/tools.ts",
+      "target": "function:packages/agent/src/harness/execution/tools.ts:prepareToolCall",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/tools.ts",
+      "target": "function:packages/agent/src/harness/execution/tools.ts:applyBeforeToolDecision",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/tools.ts",
+      "target": "function:packages/agent/src/harness/execution/tools.ts:applyBeforeToolDecision",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/tools.ts",
+      "target": "function:packages/agent/src/harness/execution/tools.ts:executeToolCall",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/tools.ts",
+      "target": "function:packages/agent/src/harness/execution/tools.ts:executeToolCall",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/tools.ts",
+      "target": "function:packages/agent/src/harness/execution/tools.ts:finalizeToolCall",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/tools.ts",
+      "target": "function:packages/agent/src/harness/execution/tools.ts:finalizeToolCall",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/tools.ts",
+      "target": "function:packages/agent/src/harness/execution/tools.ts:toolResultFromMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/tools.ts",
+      "target": "function:packages/agent/src/harness/execution/tools.ts:toolResultFromMessage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/tools.ts",
+      "target": "function:packages/agent/src/harness/execution/tools.ts:createToolResultMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/tools.ts",
+      "target": "function:packages/agent/src/harness/execution/tools.ts:createToolResultMessage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/hooks.ts",
+      "target": "class:packages/agent/src/harness/hooks.ts:HookRegistry",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/hooks.ts",
+      "target": "class:packages/agent/src/harness/hooks.ts:HookRegistry",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/hooks.ts",
+      "target": "function:packages/agent/src/harness/hooks.ts:applyStreamOptionsPatch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/hooks.ts",
+      "target": "function:packages/agent/src/harness/hooks.ts:applyStreamOptionsPatch",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/hooks.ts",
+      "target": "function:packages/agent/src/harness/hooks.ts:createStreamOptionsPatch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/messages.ts",
+      "target": "function:packages/agent/src/harness/messages.ts:bashExecutionToText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/messages.ts",
+      "target": "function:packages/agent/src/harness/messages.ts:bashExecutionToText",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/messages.ts",
+      "target": "function:packages/agent/src/harness/messages.ts:createBranchSummaryMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/messages.ts",
+      "target": "function:packages/agent/src/harness/messages.ts:createBranchSummaryMessage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/messages.ts",
+      "target": "function:packages/agent/src/harness/messages.ts:createCompactionSummaryMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/messages.ts",
+      "target": "function:packages/agent/src/harness/messages.ts:createCompactionSummaryMessage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/messages.ts",
+      "target": "function:packages/agent/src/harness/messages.ts:createCustomMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/messages.ts",
+      "target": "function:packages/agent/src/harness/messages.ts:createCustomMessage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/messages.ts",
+      "target": "function:packages/agent/src/harness/messages.ts:convertToLlm",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/messages.ts",
+      "target": "function:packages/agent/src/harness/messages.ts:convertToLlm",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/prompt-templates.ts",
+      "target": "function:packages/agent/src/harness/prompt-templates.ts:loadPromptTemplates",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/prompt-templates.ts",
+      "target": "function:packages/agent/src/harness/prompt-templates.ts:loadPromptTemplates",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/prompt-templates.ts",
+      "target": "function:packages/agent/src/harness/prompt-templates.ts:loadSourcedPromptTemplates",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/prompt-templates.ts",
+      "target": "function:packages/agent/src/harness/prompt-templates.ts:loadSourcedPromptTemplates",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/prompt-templates.ts",
+      "target": "function:packages/agent/src/harness/prompt-templates.ts:loadTemplatesFromDir",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/prompt-templates.ts",
+      "target": "function:packages/agent/src/harness/prompt-templates.ts:loadTemplateFromFile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/prompt-templates.ts",
+      "target": "function:packages/agent/src/harness/prompt-templates.ts:resolveKind",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/prompt-templates.ts",
+      "target": "function:packages/agent/src/harness/prompt-templates.ts:parseFrontmatter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/prompt-templates.ts",
+      "target": "function:packages/agent/src/harness/prompt-templates.ts:parseCommandArgs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/prompt-templates.ts",
+      "target": "function:packages/agent/src/harness/prompt-templates.ts:parseCommandArgs",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/prompt-templates.ts",
+      "target": "function:packages/agent/src/harness/prompt-templates.ts:substituteArgs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/prompt-templates.ts",
+      "target": "function:packages/agent/src/harness/prompt-templates.ts:substituteArgs",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/prompt-templates.ts",
+      "target": "function:packages/agent/src/harness/prompt-templates.ts:formatPromptTemplateInvocation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/prompt-templates.ts",
+      "target": "function:packages/agent/src/harness/prompt-templates.ts:formatPromptTemplateInvocation",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "function:packages/agent/src/harness/result.ts:TaggedError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "function:packages/agent/src/harness/result.ts:TaggedError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "function:packages/agent/src/harness/result.ts:matchError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "function:packages/agent/src/harness/result.ts:matchError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:LaneBusy",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:LaneBusy",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:OperationMismatch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:OperationMismatch",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:NoActiveRun",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:NoActiveRun",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:NoActiveOperation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:NoActiveOperation",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:NothingToResume",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:NothingToResume",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:NothingToCompact",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:NothingToCompact",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:InvalidMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:InvalidMessage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:InvalidNavigation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:InvalidNavigation",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:UnknownSkill",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:UnknownSkill",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:UnknownTemplate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:UnknownTemplate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:UnknownTarget",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:UnknownTarget",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:InvalidLane",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:InvalidLane",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:Closed",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:Closed",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:HarnessFault",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:HarnessFault",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:HarnessClosed",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/result.ts",
+      "target": "class:packages/agent/src/harness/result.ts:HarnessClosed",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive.ts:driveOperation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive.ts:driveOperation",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/execution/tools.ts:executeToolCall",
+      "target": "function:packages/chord/src/context/index.ts:withAbortSignal",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/agent/src/harness/hooks.ts:HookRegistry",
+      "target": "function:packages/chord/src/context/index.ts:withAbortSignal",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive.ts:driveOperation",
+      "target": "function:packages/agent/src/harness/runtime/drive/checkpoint.ts:startRun",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive.ts:driveOperation",
+      "target": "function:packages/agent/src/harness/runtime/drive/checkpoint.ts:runCheckpoint",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive.ts:driveOperation",
+      "target": "function:packages/agent/src/harness/runtime/drive/generation.ts:runGeneration",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive.ts:driveOperation",
+      "target": "function:packages/agent/src/harness/runtime/drive/recovery.ts:recoverAssistantGeneration",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive.ts:driveOperation",
+      "target": "function:packages/agent/src/harness/runtime/drive/tools.ts:runTools",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive.ts:driveOperation",
+      "target": "function:packages/agent/src/harness/runtime/drive/deferred.ts:runDeferred",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive.ts:driveOperation",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:runStructuralDecision",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive.ts:driveOperation",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:runStructuralGeneration",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive.ts:driveOperation",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:recoverStructuralGeneration",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive.ts:driveOperation",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:runStructuralRetryWait",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive.ts:driveOperation",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:commitNavigation",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive.ts:driveOperation",
+      "target": "function:packages/agent/src/harness/runtime/drive/reconcile.ts:reconcileOperation",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

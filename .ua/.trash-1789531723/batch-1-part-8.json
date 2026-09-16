@@ -1,0 +1,1352 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "type": "file",
+      "name": "radius-relay.ts",
+      "filePath": "packages/coding-agent/src/experimental/radius-relay.ts",
+      "summary": "Radius WebSocket 中继：服务端 RadiusRelayHost 多路复用连接，客户端工厂与自动重连，以及二进制 data frame 编解码。",
+      "tags": [
+        "radius",
+        "relay",
+        "websocket",
+        "transport"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:packages/coding-agent/src/experimental/radius-relay.ts:RadiusRelayHost",
+      "type": "class",
+      "name": "RadiusRelayHost",
+      "filePath": "packages/coding-agent/src/experimental/radius-relay.ts",
+      "lineRange": [
+        104,
+        312
+      ],
+      "summary": "维持已认证的 host WebSocket，把入站连接交给 Server.accept，断线指数退避重连。",
+      "tags": [
+        "relay",
+        "websocket",
+        "server",
+        "lifecycle"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/radius-relay.ts:createRadiusClientTransportFactory",
+      "type": "function",
+      "name": "createRadiusClientTransportFactory",
+      "filePath": "packages/coding-agent/src/experimental/radius-relay.ts",
+      "lineRange": [
+        314,
+        330
+      ],
+      "summary": "解析 auth 后打开 client 子协议 WebSocket，返回 RadiusClientByteTransport 工厂。",
+      "tags": [
+        "factory",
+        "transport",
+        "radius"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/experimental/radius-relay.ts:RadiusClientReconnect",
+      "type": "class",
+      "name": "RadiusClientReconnect",
+      "filePath": "packages/coding-agent/src/experimental/radius-relay.ts",
+      "lineRange": [
+        344,
+        402
+      ],
+      "summary": "监听 Client 连接/附件变化，在断开后按指数退避调用 reconnect。",
+      "tags": [
+        "reconnect",
+        "client",
+        "lifecycle"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/experimental/radius-relay.ts:RelayServerByteConnection",
+      "type": "class",
+      "name": "RelayServerByteConnection",
+      "filePath": "packages/coding-agent/src/experimental/radius-relay.ts",
+      "lineRange": [
+        404,
+        435
+      ],
+      "summary": "host 侧单条中继连接的 ByteTransport 适配：send 分片、close 带 optional final chunk。",
+      "tags": [
+        "transport",
+        "relay",
+        "adapter"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/experimental/radius-relay.ts:RadiusClientByteTransport",
+      "type": "class",
+      "name": "RadiusClientByteTransport",
+      "filePath": "packages/coding-agent/src/experimental/radius-relay.ts",
+      "lineRange": [
+        437,
+        494
+      ],
+      "summary": "client 侧 WebSocket ByteTransport：入站拆 frame，出站编码 connectionId。",
+      "tags": [
+        "transport",
+        "websocket",
+        "client"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/experimental/radius-relay.ts:OrderedWebSocketWriter",
+      "type": "class",
+      "name": "OrderedWebSocketWriter",
+      "filePath": "packages/coding-agent/src/experimental/radius-relay.ts",
+      "lineRange": [
+        496,
+        536
+      ],
+      "summary": "串行化 WebSocket send，避免并发 write 打乱帧序。",
+      "tags": [
+        "websocket",
+        "backpressure",
+        "queue"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/radius-relay.ts:parseHostControlMessage",
+      "type": "function",
+      "name": "parseHostControlMessage",
+      "filePath": "packages/coding-agent/src/experimental/radius-relay.ts",
+      "lineRange": [
+        557,
+        590
+      ],
+      "summary": "解析 host 控制 JSON（open/close/error 等），非法结构返回错误。",
+      "tags": [
+        "protocol",
+        "parser",
+        "relay"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/radius-relay.ts:encodeRelayDataFrame",
+      "type": "function",
+      "name": "encodeRelayDataFrame",
+      "filePath": "packages/coding-agent/src/experimental/radius-relay.ts",
+      "lineRange": [
+        592,
+        603
+      ],
+      "summary": "把 connectionId + payload 编码为带版本/类型头的二进制帧。",
+      "tags": [
+        "protocol",
+        "serialization",
+        "relay"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/radius-relay.ts:parseRelayDataFrame",
+      "type": "function",
+      "name": "parseRelayDataFrame",
+      "filePath": "packages/coding-agent/src/experimental/radius-relay.ts",
+      "lineRange": [
+        605,
+        616
+      ],
+      "summary": "校验并拆出 data frame 的 connectionId 与 payload。",
+      "tags": [
+        "protocol",
+        "parser",
+        "relay"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/radius-relay.ts:defaultWebSocketFactory",
+      "type": "function",
+      "name": "defaultWebSocketFactory",
+      "filePath": "packages/coding-agent/src/experimental/radius-relay.ts",
+      "lineRange": [
+        626,
+        635
+      ],
+      "summary": "用 undici WebSocket 建立带 Authorization 头的连接。",
+      "tags": [
+        "websocket",
+        "factory",
+        "radius"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/radius-relay.ts:openRadiusRelayWebSocket",
+      "type": "function",
+      "name": "openRadiusRelayWebSocket",
+      "filePath": "packages/coding-agent/src/experimental/radius-relay.ts",
+      "lineRange": [
+        637,
+        681
+      ],
+      "summary": "打开中继 WebSocket，等待 open，并把 close/error 映射为可取消的 Promise。",
+      "tags": [
+        "websocket",
+        "lifecycle",
+        "radius"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/radius-relay.ts:delay",
+      "type": "function",
+      "name": "delay",
+      "filePath": "packages/coding-agent/src/experimental/radius-relay.ts",
+      "lineRange": [
+        696,
+        716
+      ],
+      "summary": "可 AbortSignal 取消的延迟；unref 定时器以免挂住进程。",
+      "tags": [
+        "utility",
+        "cancellation",
+        "timer"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/server.ts",
+      "type": "file",
+      "name": "server.ts",
+      "filePath": "packages/coding-agent/src/experimental/server.ts",
+      "summary": "experimental server 生命周期：目录/锁、激活或复用 Unix server、拉起 coordinator/worker、可选 Radius 中继。",
+      "tags": [
+        "server",
+        "lifecycle",
+        "experimental",
+        "orchestration"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/server.ts:resolveServerDirectory",
+      "type": "function",
+      "name": "resolveServerDirectory",
+      "filePath": "packages/coding-agent/src/experimental/server.ts",
+      "lineRange": [
+        54,
+        56
+      ],
+      "summary": "解析 PI_SERVER_DIR 或 ~/.pi/server 为绝对 server 目录。",
+      "tags": [
+        "path",
+        "config",
+        "server"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/server.ts:ensurePrivateServerDirectory",
+      "type": "function",
+      "name": "ensurePrivateServerDirectory",
+      "filePath": "packages/coding-agent/src/experimental/server.ts",
+      "lineRange": [
+        58,
+        67
+      ],
+      "summary": "创建 0700 目录并校验属主为当前 POSIX uid。",
+      "tags": [
+        "security",
+        "filesystem",
+        "server"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/server.ts:resolveSessionDirectory",
+      "type": "function",
+      "name": "resolveSessionDirectory",
+      "filePath": "packages/coding-agent/src/experimental/server.ts",
+      "lineRange": [
+        69,
+        71
+      ],
+      "summary": "解析 sessionDir 或 <agentDir>/experimental/sessions。",
+      "tags": [
+        "path",
+        "session",
+        "config"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/server.ts:acquireServerProfile",
+      "type": "function",
+      "name": "acquireServerProfile",
+      "filePath": "packages/coding-agent/src/experimental/server.ts",
+      "lineRange": [
+        84,
+        126
+      ],
+      "summary": "在共享目录里锁定并持久化 default/requested serverId。",
+      "tags": [
+        "lock",
+        "server",
+        "persistence"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/server.ts:activateServer",
+      "type": "function",
+      "name": "activateServer",
+      "filePath": "packages/coding-agent/src/experimental/server.ts",
+      "lineRange": [
+        145,
+        198
+      ],
+      "summary": "确保目录与 profile 后连接已有 socket，否则 spawn server 进程并轮询至可连。",
+      "tags": [
+        "server",
+        "activation",
+        "process-spawn"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/server.ts:acquireServerActivation",
+      "type": "function",
+      "name": "acquireServerActivation",
+      "filePath": "packages/coding-agent/src/experimental/server.ts",
+      "lineRange": [
+        200,
+        213
+      ],
+      "summary": "对单个 serverId 的激活文件加锁，防止并发拉起。",
+      "tags": [
+        "lock",
+        "server",
+        "concurrency"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/server.ts:connect",
+      "type": "function",
+      "name": "connect",
+      "filePath": "packages/coding-agent/src/experimental/server.ts",
+      "lineRange": [
+        215,
+        242
+      ],
+      "summary": "用 Unix transport 建 Client 并完成握手，失败则 dispose。",
+      "tags": [
+        "client",
+        "unix-socket",
+        "server"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/experimental/server.ts:ServerLifetime",
+      "type": "class",
+      "name": "ServerLifetime",
+      "filePath": "packages/coding-agent/src/experimental/server.ts",
+      "lineRange": [
+        248,
+        321
+      ],
+      "summary": "跟踪连接数/worker 数，在空闲超时后 stop 已启动的 server。",
+      "tags": [
+        "lifecycle",
+        "server",
+        "idle-timeout"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/server.ts:startServerBackend",
+      "type": "function",
+      "name": "startServerBackend",
+      "filePath": "packages/coding-agent/src/experimental/server.ts",
+      "lineRange": [
+        376,
+        518
+      ],
+      "summary": "装配 SessionWorkerManager、插件包、experimental services 与 Unix listener。",
+      "tags": [
+        "server",
+        "orchestration",
+        "plugin"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/server.ts:startServer",
+      "type": "function",
+      "name": "startServer",
+      "filePath": "packages/coding-agent/src/experimental/server.ts",
+      "lineRange": [
+        521,
+        707
+      ],
+      "summary": "完整启动：coordinator、backend、RadiusRelayHost，并返回可 close 的 runtime。",
+      "tags": [
+        "server",
+        "orchestration",
+        "lifecycle"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/server.ts:startForegroundServer",
+      "type": "function",
+      "name": "startForegroundServer",
+      "filePath": "packages/coding-agent/src/experimental/server.ts",
+      "lineRange": [
+        710,
+        729
+      ],
+      "summary": "前台包装 startServer，供 CLI 阻塞运行直至 close。",
+      "tags": [
+        "server",
+        "cli",
+        "lifecycle"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/server.ts:parseServerModelOptions",
+      "type": "function",
+      "name": "parseServerModelOptions",
+      "filePath": "packages/coding-agent/src/experimental/server.ts",
+      "lineRange": [
+        731,
+        754
+      ],
+      "summary": "解析内部进程传入的 provider/model JSON。",
+      "tags": [
+        "parser",
+        "config",
+        "model"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/server.ts:runServerProcess",
+      "type": "function",
+      "name": "runServerProcess",
+      "filePath": "packages/coding-agent/src/experimental/server.ts",
+      "lineRange": [
+        757,
+        785
+      ],
+      "summary": "内部 server 进程入口：消费角色、解析参数并 startServer。",
+      "tags": [
+        "entry-point",
+        "server",
+        "process"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/services/agent-controller-provider.ts",
+      "type": "file",
+      "name": "agent-controller-provider.ts",
+      "filePath": "packages/coding-agent/src/experimental/services/agent-controller-provider.ts",
+      "summary": "把 worker 拥有的 AgentLane 适配成 presentation-safe 的 AgentController：prompt/steer/compact/navigate 等。",
+      "tags": [
+        "adapter",
+        "service",
+        "agent",
+        "factory"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/services/agent-controller-provider.ts:createAgentController",
+      "type": "function",
+      "name": "createAgentController",
+      "filePath": "packages/coding-agent/src/experimental/services/agent-controller-provider.ts",
+      "lineRange": [
+        11,
+        74
+      ],
+      "summary": "闭包包装 lane 操作，统一把成功/失败映射为 AgentOperationResponse 或 AgentQueueResponse。",
+      "tags": [
+        "factory",
+        "adapter",
+        "agent"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/services/agent-controller-provider.ts:toOperationResponse",
+      "type": "function",
+      "name": "toOperationResponse",
+      "filePath": "packages/coding-agent/src/experimental/services/agent-controller-provider.ts",
+      "lineRange": [
+        76,
+        85
+      ],
+      "summary": "从 OperationResultRecord/SuspendedRun 提取 operationId，失败时带上 error。",
+      "tags": [
+        "adapter",
+        "error-handling",
+        "agent"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/services/agent-controller-provider.ts:toAgentError",
+      "type": "function",
+      "name": "toAgentError",
+      "filePath": "packages/coding-agent/src/experimental/services/agent-controller-provider.ts",
+      "lineRange": [
+        91,
+        105
+      ],
+      "summary": "把 harness _tag 错误码映射为稳定的 AgentOperationError.code。",
+      "tags": [
+        "error-handling",
+        "adapter",
+        "agent"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/services/agent-controller.ts",
+      "type": "file",
+      "name": "agent-controller.ts",
+      "filePath": "packages/coding-agent/src/experimental/services/agent-controller.ts",
+      "summary": "定义 AgentController Chord service 契约：prompt/abort/steer/followUp/compact/navigate 及请求响应类型。",
+      "tags": [
+        "type-definition",
+        "service",
+        "agent",
+        "api-contract"
+      ],
+      "complexity": "simple",
+      "languageNotes": "用 defineService 注册为 pi.agent-controller，实现在 provider 与 worker 侧。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "target": "file:packages/client/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "target": "file:packages/coding-agent/src/experimental/radius-auth.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "target": "file:packages/protocol/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "target": "file:packages/server/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "file:packages/agent/src/node.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "file:packages/chord/src/node.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "file:packages/client/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "file:packages/client/src/unix.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "file:packages/coding-agent/src/cli/experimental/command-options.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "file:packages/coding-agent/src/experimental/coordinator.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "file:packages/coding-agent/src/experimental/plugins/bundled.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "file:packages/coding-agent/src/experimental/plugins/package.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "file:packages/coding-agent/src/experimental/process.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "file:packages/coding-agent/src/experimental/radius-auth.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/server.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/sessions.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "file:packages/coding-agent/src/experimental/session-worker-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "file:packages/coding-agent/src/utils/paths.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "file:packages/protocol/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "file:packages/server/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "file:packages/server/src/transports/unix/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/agent-controller-provider.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/agent-controller-provider.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/agent-controller-provider.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/agent-controller.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/agent-controller.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "target": "class:packages/coding-agent/src/experimental/radius-relay.ts:RadiusRelayHost",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "target": "function:packages/coding-agent/src/experimental/radius-relay.ts:createRadiusClientTransportFactory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "target": "class:packages/coding-agent/src/experimental/radius-relay.ts:RadiusClientReconnect",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "target": "class:packages/coding-agent/src/experimental/radius-relay.ts:RelayServerByteConnection",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "target": "class:packages/coding-agent/src/experimental/radius-relay.ts:RadiusClientByteTransport",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "target": "class:packages/coding-agent/src/experimental/radius-relay.ts:OrderedWebSocketWriter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "target": "function:packages/coding-agent/src/experimental/radius-relay.ts:parseHostControlMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "target": "function:packages/coding-agent/src/experimental/radius-relay.ts:encodeRelayDataFrame",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "target": "function:packages/coding-agent/src/experimental/radius-relay.ts:parseRelayDataFrame",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "target": "function:packages/coding-agent/src/experimental/radius-relay.ts:defaultWebSocketFactory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "target": "function:packages/coding-agent/src/experimental/radius-relay.ts:openRadiusRelayWebSocket",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "target": "function:packages/coding-agent/src/experimental/radius-relay.ts:delay",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "target": "class:packages/coding-agent/src/experimental/radius-relay.ts:RadiusRelayHost",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "target": "function:packages/coding-agent/src/experimental/radius-relay.ts:createRadiusClientTransportFactory",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "target": "class:packages/coding-agent/src/experimental/radius-relay.ts:RadiusClientReconnect",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "target": "function:packages/coding-agent/src/experimental/radius-relay.ts:encodeRelayDataFrame",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "target": "function:packages/coding-agent/src/experimental/radius-relay.ts:parseRelayDataFrame",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/radius-relay.ts:createRadiusClientTransportFactory",
+      "target": "function:packages/coding-agent/src/experimental/radius-relay.ts:openRadiusRelayWebSocket",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/radius-relay.ts:createRadiusClientTransportFactory",
+      "target": "class:packages/coding-agent/src/experimental/radius-auth.ts:RadiusRelayAuthResolver",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/radius-relay.ts:openRadiusRelayWebSocket",
+      "target": "function:packages/coding-agent/src/experimental/radius-relay.ts:defaultWebSocketFactory",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/radius-relay.ts:RadiusRelayHost",
+      "target": "function:packages/coding-agent/src/experimental/radius-relay.ts:openRadiusRelayWebSocket",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/radius-relay.ts:RadiusRelayHost",
+      "target": "function:packages/coding-agent/src/experimental/radius-relay.ts:parseHostControlMessage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/radius-relay.ts:RadiusRelayHost",
+      "target": "function:packages/coding-agent/src/experimental/radius-relay.ts:encodeRelayDataFrame",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/radius-relay.ts:RadiusRelayHost",
+      "target": "function:packages/coding-agent/src/experimental/radius-relay.ts:parseRelayDataFrame",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/radius-relay.ts:RadiusRelayHost",
+      "target": "function:packages/coding-agent/src/experimental/radius-relay.ts:delay",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/radius-relay.ts:RadiusClientReconnect",
+      "target": "class:packages/client/src/client.ts:Client",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/radius-relay.ts:RadiusClientByteTransport",
+      "target": "function:packages/coding-agent/src/experimental/radius-relay.ts:encodeRelayDataFrame",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/radius-relay.ts:RadiusClientByteTransport",
+      "target": "function:packages/coding-agent/src/experimental/radius-relay.ts:parseRelayDataFrame",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:resolveServerDirectory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:ensurePrivateServerDirectory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:resolveSessionDirectory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:acquireServerProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:activateServer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:acquireServerActivation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:connect",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "class:packages/coding-agent/src/experimental/server.ts:ServerLifetime",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:startServerBackend",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:startServer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:startForegroundServer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:parseServerModelOptions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:runServerProcess",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:resolveServerDirectory",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:ensurePrivateServerDirectory",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:resolveSessionDirectory",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:acquireServerProfile",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:activateServer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:acquireServerActivation",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "class:packages/coding-agent/src/experimental/server.ts:ServerLifetime",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:startServer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:startForegroundServer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:runServerProcess",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:resolveServerDirectory",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:resolvePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:resolveSessionDirectory",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:resolvePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:resolveSessionDirectory",
+      "target": "function:packages/coding-agent/src/config.ts:getAgentDir",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:acquireServerProfile",
+      "target": "function:packages/protocol/src/index.ts:isServerId",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:activateServer",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:ensurePrivateServerDirectory",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:activateServer",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:acquireServerProfile",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:activateServer",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:acquireServerActivation",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:activateServer",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:connect",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:activateServer",
+      "target": "function:packages/coding-agent/src/experimental/process.ts:spawnInternalProcess",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:activateServer",
+      "target": "function:packages/coding-agent/src/experimental/process.ts:terminateInternalProcess",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:activateServer",
+      "target": "function:packages/server/src/transports/unix/index.ts:getUnixSocketPath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:connect",
+      "target": "class:packages/client/src/client.ts:Client",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:connect",
+      "target": "function:packages/client/src/unix.ts:createUnixTransportFactory",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:startServer",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:startServerBackend",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:startServer",
+      "target": "function:packages/coding-agent/src/experimental/coordinator.ts:ensureCoordinator",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:startServer",
+      "target": "class:packages/coding-agent/src/experimental/coordinator.ts:CoordinatorConnection",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:startServer",
+      "target": "class:packages/coding-agent/src/experimental/radius-relay.ts:RadiusRelayHost",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:startServer",
+      "target": "class:packages/coding-agent/src/experimental/radius-auth.ts:RadiusRelayAuthResolver",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:startServer",
+      "target": "function:packages/coding-agent/src/experimental/plugins/bundled.ts:createPresentationFacetData",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:startServer",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:restoreServerPluginPackageProfile",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:startServer",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:createServerPluginPackage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:startServer",
+      "target": "function:packages/coding-agent/src/experimental/services/server.ts:createExperimentalServerServices",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:startServer",
+      "target": "class:packages/coding-agent/src/experimental/session-worker-manager.ts:SessionWorkerManager",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:startForegroundServer",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:startServer",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:runServerProcess",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:startServer",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:runServerProcess",
+      "target": "function:packages/coding-agent/src/experimental/process.ts:consumeInternalProcessRole",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:startServerBackend",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:readSessionPluginPackageProfile",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:startServerBackend",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:writeSessionPluginPackageProfile",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:startServerBackend",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:removeSessionPluginPackageProfile",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/server.ts:startServerBackend",
+      "target": "function:packages/coding-agent/src/experimental/plugins/bundled.ts:createSessionPluginFacetLoader",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/agent-controller-provider.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/agent-controller-provider.ts:createAgentController",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/agent-controller-provider.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/agent-controller-provider.ts:toOperationResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/agent-controller-provider.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/agent-controller-provider.ts:toAgentError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/agent-controller-provider.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/agent-controller-provider.ts:createAgentController",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/services/agent-controller-provider.ts:createAgentController",
+      "target": "function:packages/coding-agent/src/experimental/services/agent-controller-provider.ts:toOperationResponse",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/services/agent-controller-provider.ts:createAgentController",
+      "target": "function:packages/coding-agent/src/experimental/services/agent-controller-provider.ts:toAgentError",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

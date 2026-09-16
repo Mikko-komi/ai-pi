@@ -1,0 +1,77 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/session-backends/sqlite-node/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/session-backends/sqlite-node/README.md",
+      "summary": "说明 @earendil-works/pi-session-backend-sqlite-node 的用法：基于 Node node:sqlite 为 pi-agent-core 提供 Session 仓库，覆盖每 Session 一文件布局、共享容器、fork 快照与所有权约束。",
+      "tags": ["documentation", "session-backend", "sqlite", "getting-started"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:packages/session-backends/sqlite-node/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "packages/session-backends/sqlite-node/package.json",
+      "summary": "定义 @earendil-works/pi-session-backend-sqlite-node 的 npm 包元数据、ESM 导出、构建/测试脚本，以及对 pi-ai 与 pi-agent-core 的依赖；要求 Node >= 22.19.0。",
+      "tags": ["configuration", "npm-package", "build-system", "session-backend"],
+      "complexity": "simple",
+      "languageNotes": "ESM 包（type: module）；build 脚本用 tsgo 并调用 copy-migrations。"
+    },
+    {
+      "id": "config:packages/session-backends/sqlite-node/tsconfig.build.json",
+      "type": "config",
+      "name": "tsconfig.build.json",
+      "filePath": "packages/session-backends/sqlite-node/tsconfig.build.json",
+      "summary": "sqlite-node 包的 TypeScript 构建配置：继承仓库根 tsconfig.base.json，将 src 编译到 dist 并生成 declaration。",
+      "tags": ["configuration", "typescript", "build-system"],
+      "complexity": "simple",
+      "languageNotes": "通过 extends 复用 monorepo 根 tsconfig.base.json。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:packages/session-backends/sqlite-node/README.md",
+      "target": "file:packages/session-backends/sqlite-node/src/index.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/session-backends/sqlite-node/README.md",
+      "target": "config:packages/session-backends/sqlite-node/package.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:packages/session-backends/sqlite-node/package.json",
+      "target": "file:packages/session-backends/sqlite-node/src/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/session-backends/sqlite-node/package.json",
+      "target": "config:packages/session-backends/sqlite-node/tsconfig.build.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/session-backends/sqlite-node/tsconfig.build.json",
+      "target": "file:packages/session-backends/sqlite-node/src/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/session-backends/sqlite-node/tsconfig.build.json",
+      "target": "config:tsconfig.base.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

@@ -1,0 +1,773 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 3,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 3,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "packages/protocol/src/cbor/decoder.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 168,
+      "nonEmptyLines": 157,
+      "functions": [
+        {
+          "name": "decodeCbor",
+          "startLine": 161,
+          "endLine": 168,
+          "params": [
+            "bytes",
+            "options"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "CborReader",
+          "startLine": 10,
+          "endLine": 158,
+          "methods": [
+            "constructor",
+            "decode",
+            "readItem",
+            "readSimple",
+            "readLength",
+            "readArgument",
+            "readByte",
+            "readBytes"
+          ],
+          "properties": [
+            "bytes",
+            "offset",
+            "options"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "decodeCbor",
+          "line": 161,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "decode",
+          "callee": "this.readItem",
+          "lineNumber": 21
+        },
+        {
+          "caller": "readItem",
+          "callee": "this.readByte",
+          "lineNumber": 30
+        },
+        {
+          "caller": "readItem",
+          "callee": "this.readArgument",
+          "lineNumber": 36
+        },
+        {
+          "caller": "readItem",
+          "callee": "this.readArgument",
+          "lineNumber": 38
+        },
+        {
+          "caller": "readItem",
+          "callee": "Number.isSafeInteger",
+          "lineNumber": 39
+        },
+        {
+          "caller": "readItem",
+          "callee": "this.readLength",
+          "lineNumber": 43
+        },
+        {
+          "caller": "readItem",
+          "callee": "this.readBytes",
+          "lineNumber": 44
+        },
+        {
+          "caller": "readItem",
+          "callee": "this.readLength",
+          "lineNumber": 47
+        },
+        {
+          "caller": "readItem",
+          "callee": "this.readBytes",
+          "lineNumber": 48
+        },
+        {
+          "caller": "readItem",
+          "callee": "textDecoder.decode",
+          "lineNumber": 50
+        },
+        {
+          "caller": "readItem",
+          "callee": "this.readLength",
+          "lineNumber": 56
+        },
+        {
+          "caller": "readItem",
+          "callee": "result.push",
+          "lineNumber": 58
+        },
+        {
+          "caller": "readItem",
+          "callee": "this.readItem",
+          "lineNumber": 58
+        },
+        {
+          "caller": "readItem",
+          "callee": "this.readLength",
+          "lineNumber": 62
+        },
+        {
+          "caller": "readItem",
+          "callee": "this.readItem",
+          "lineNumber": 66
+        },
+        {
+          "caller": "readItem",
+          "callee": "keys.has",
+          "lineNumber": 68
+        },
+        {
+          "caller": "readItem",
+          "callee": "keys.add",
+          "lineNumber": 69
+        },
+        {
+          "caller": "readItem",
+          "callee": "Object.defineProperty",
+          "lineNumber": 70
+        },
+        {
+          "caller": "readItem",
+          "callee": "this.readItem",
+          "lineNumber": 73
+        },
+        {
+          "caller": "readItem",
+          "callee": "this.readSimple",
+          "lineNumber": 82
+        },
+        {
+          "caller": "readSimple",
+          "callee": "this.readBytes",
+          "lineNumber": 97
+        },
+        {
+          "caller": "readSimple",
+          "callee": "new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength).getFloat64",
+          "lineNumber": 98
+        },
+        {
+          "caller": "readSimple",
+          "callee": "Number.isFinite",
+          "lineNumber": 99
+        },
+        {
+          "caller": "readSimple",
+          "callee": "Number.isInteger",
+          "lineNumber": 100
+        },
+        {
+          "caller": "readSimple",
+          "callee": "Number.isSafeInteger",
+          "lineNumber": 100
+        },
+        {
+          "caller": "readLength",
+          "callee": "this.readArgument",
+          "lineNumber": 114
+        },
+        {
+          "caller": "readArgument",
+          "callee": "this.readByte",
+          "lineNumber": 123
+        },
+        {
+          "caller": "readArgument",
+          "callee": "this.readBytes",
+          "lineNumber": 125
+        },
+        {
+          "caller": "readArgument",
+          "callee": "this.readBytes",
+          "lineNumber": 129
+        },
+        {
+          "caller": "readArgument",
+          "callee": "this.readArgument",
+          "lineNumber": 133
+        },
+        {
+          "caller": "readArgument",
+          "callee": "this.readArgument",
+          "lineNumber": 134
+        },
+        {
+          "caller": "readBytes",
+          "callee": "this.bytes.subarray",
+          "lineNumber": 154
+        },
+        {
+          "caller": "decodeCbor",
+          "callee": "resolveOptions",
+          "lineNumber": 163
+        },
+        {
+          "caller": "decodeCbor",
+          "callee": "new CborReader(bytes, resolved).decode",
+          "lineNumber": 167
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/protocol/src/cbor/encoder.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 216,
+      "nonEmptyLines": 198,
+      "functions": [
+        {
+          "name": "writeArgument",
+          "startLine": 83,
+          "endLine": 100,
+          "params": [
+            "writer",
+            "majorType",
+            "value"
+          ]
+        },
+        {
+          "name": "isPlainObject",
+          "startLine": 102,
+          "endLine": 106,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "encodeText",
+          "startLine": 108,
+          "endLine": 117,
+          "params": [
+            "writer",
+            "value",
+            "options"
+          ]
+        },
+        {
+          "name": "encodeValue",
+          "startLine": 119,
+          "endLine": 208,
+          "params": [
+            "writer",
+            "value",
+            "options",
+            "depth",
+            "ancestors"
+          ]
+        },
+        {
+          "name": "encodeCbor",
+          "startLine": 211,
+          "endLine": 216,
+          "params": [
+            "value",
+            "options"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "CborWriter",
+          "startLine": 12,
+          "endLine": 81,
+          "methods": [
+            "constructor",
+            "writeByte",
+            "writeBytes",
+            "writeUint16",
+            "writeUint32",
+            "writeUint64",
+            "writeFloat64",
+            "finish",
+            "ensureCapacity"
+          ],
+          "properties": [
+            "buffer",
+            "offset",
+            "maxByteLength"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "encodeCbor",
+          "line": 211,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "Math.min",
+          "lineNumber": 19
+        },
+        {
+          "caller": "writeByte",
+          "callee": "this.ensureCapacity",
+          "lineNumber": 23
+        },
+        {
+          "caller": "writeBytes",
+          "callee": "this.ensureCapacity",
+          "lineNumber": 29
+        },
+        {
+          "caller": "writeBytes",
+          "callee": "this.buffer.set",
+          "lineNumber": 30
+        },
+        {
+          "caller": "writeUint16",
+          "callee": "this.ensureCapacity",
+          "lineNumber": 35
+        },
+        {
+          "caller": "writeUint32",
+          "callee": "this.ensureCapacity",
+          "lineNumber": 42
+        },
+        {
+          "caller": "writeUint64",
+          "callee": "Math.floor",
+          "lineNumber": 51
+        },
+        {
+          "caller": "writeUint64",
+          "callee": "this.writeUint32",
+          "lineNumber": 53
+        },
+        {
+          "caller": "writeUint64",
+          "callee": "this.writeUint32",
+          "lineNumber": 54
+        },
+        {
+          "caller": "writeFloat64",
+          "callee": "this.ensureCapacity",
+          "lineNumber": 58
+        },
+        {
+          "caller": "writeFloat64",
+          "callee": "new DataView(this.buffer.buffer).setFloat64",
+          "lineNumber": 60
+        },
+        {
+          "caller": "finish",
+          "callee": "this.buffer.slice",
+          "lineNumber": 65
+        },
+        {
+          "caller": "ensureCapacity",
+          "callee": "Math.max",
+          "lineNumber": 75
+        },
+        {
+          "caller": "ensureCapacity",
+          "callee": "Math.min",
+          "lineNumber": 76
+        },
+        {
+          "caller": "ensureCapacity",
+          "callee": "Math.max",
+          "lineNumber": 76
+        },
+        {
+          "caller": "ensureCapacity",
+          "callee": "expanded.set",
+          "lineNumber": 78
+        },
+        {
+          "caller": "writeArgument",
+          "callee": "writer.writeByte",
+          "lineNumber": 86
+        },
+        {
+          "caller": "writeArgument",
+          "callee": "writer.writeByte",
+          "lineNumber": 88
+        },
+        {
+          "caller": "writeArgument",
+          "callee": "writer.writeByte",
+          "lineNumber": 89
+        },
+        {
+          "caller": "writeArgument",
+          "callee": "writer.writeByte",
+          "lineNumber": 91
+        },
+        {
+          "caller": "writeArgument",
+          "callee": "writer.writeUint16",
+          "lineNumber": 92
+        },
+        {
+          "caller": "writeArgument",
+          "callee": "writer.writeByte",
+          "lineNumber": 94
+        },
+        {
+          "caller": "writeArgument",
+          "callee": "writer.writeUint32",
+          "lineNumber": 95
+        },
+        {
+          "caller": "writeArgument",
+          "callee": "writer.writeByte",
+          "lineNumber": 97
+        },
+        {
+          "caller": "writeArgument",
+          "callee": "writer.writeUint64",
+          "lineNumber": 98
+        },
+        {
+          "caller": "isPlainObject",
+          "callee": "Object.getPrototypeOf",
+          "lineNumber": 104
+        },
+        {
+          "caller": "encodeText",
+          "callee": "textEncoder.encode",
+          "lineNumber": 109
+        },
+        {
+          "caller": "encodeText",
+          "callee": "textDecoder.decode",
+          "lineNumber": 113
+        },
+        {
+          "caller": "encodeText",
+          "callee": "writeArgument",
+          "lineNumber": 115
+        },
+        {
+          "caller": "encodeText",
+          "callee": "writer.writeBytes",
+          "lineNumber": 116
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "writer.writeByte",
+          "lineNumber": 130
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "writer.writeByte",
+          "lineNumber": 134
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "Number.isFinite",
+          "lineNumber": 138
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "Number.isInteger",
+          "lineNumber": 139
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "Object.is",
+          "lineNumber": 139
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "Number.isSafeInteger",
+          "lineNumber": 140
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "writeArgument",
+          "lineNumber": 141
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "writeArgument",
+          "lineNumber": 142
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "writer.writeFloat64",
+          "lineNumber": 144
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "encodeText",
+          "lineNumber": 149
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "writeArgument",
+          "lineNumber": 156
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "writer.writeBytes",
+          "lineNumber": 157
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "Array.isArray",
+          "lineNumber": 160
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "ancestors.has",
+          "lineNumber": 161
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "ancestors.add",
+          "lineNumber": 165
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "writeArgument",
+          "lineNumber": 167
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "Object.hasOwn",
+          "lineNumber": 169
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "encodeValue",
+          "lineNumber": 172
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "ancestors.delete",
+          "lineNumber": 175
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "isPlainObject",
+          "lineNumber": 179
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "ancestors.has",
+          "lineNumber": 180
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "Object.getOwnPropertySymbols",
+          "lineNumber": 181
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "Object.prototype.propertyIsEnumerable.call",
+          "lineNumber": 182
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "Object.keys",
+          "lineNumber": 187
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "entries.push",
+          "lineNumber": 189
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "ancestors.add",
+          "lineNumber": 194
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "writeArgument",
+          "lineNumber": 196
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "encodeText",
+          "lineNumber": 198
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "encodeValue",
+          "lineNumber": 199
+        },
+        {
+          "caller": "encodeValue",
+          "callee": "ancestors.delete",
+          "lineNumber": 202
+        },
+        {
+          "caller": "encodeCbor",
+          "callee": "resolveOptions",
+          "lineNumber": 212
+        },
+        {
+          "caller": "encodeCbor",
+          "callee": "encodeValue",
+          "lineNumber": 214
+        },
+        {
+          "caller": "encodeCbor",
+          "callee": "writer.finish",
+          "lineNumber": 215
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 5,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/protocol/src/cbor/options.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 52,
+      "nonEmptyLines": 45,
+      "functions": [
+        {
+          "name": "resolveLimit",
+          "startLine": 35,
+          "endLine": 40,
+          "params": [
+            "name",
+            "value",
+            "maximum"
+          ]
+        },
+        {
+          "name": "resolveOptions",
+          "startLine": 42,
+          "endLine": 52,
+          "params": [
+            "options"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "CborError",
+          "startLine": 25,
+          "endLine": 30,
+          "methods": [
+            "constructor"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "UINT32_BASE",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "MAX_UINT32",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "DEFAULT_MAX_CBOR_BYTE_LENGTH",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "DEFAULT_MAX_CBOR_CONTAINER_LENGTH",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "DEFAULT_MAX_CBOR_DEPTH",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "CborError",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "textEncoder",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "textDecoder",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "resolveOptions",
+          "line": 42,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 27
+        },
+        {
+          "caller": "resolveLimit",
+          "callee": "Number.isSafeInteger",
+          "lineNumber": 36
+        },
+        {
+          "caller": "resolveOptions",
+          "callee": "resolveLimit",
+          "lineNumber": 44
+        },
+        {
+          "caller": "resolveOptions",
+          "callee": "resolveLimit",
+          "lineNumber": 45
+        },
+        {
+          "caller": "resolveOptions",
+          "callee": "resolveLimit",
+          "lineNumber": 50
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 9,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    }
+  ]
+}

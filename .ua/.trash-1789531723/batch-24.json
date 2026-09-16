@@ -1,0 +1,370 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/telemetry/src/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/telemetry/src/index.ts",
+      "summary": "telemetry 包的公共入口：定义 span/context 契约、可序列化 schema 类型，并提供 defineTelemetrySchema 与按 schema 绑定的 createTypedSpanStarter；同时再导出 noop 上下文与内存实现。",
+      "tags": ["入口点", "type-definition", "telemetry", "schema", "barrel"],
+      "complexity": "complex",
+      "languageNotes": "大量 const generic 与条件类型把 schema 定义映射为精确的 span 启动签名；运行时不做 schema 校验。"
+    },
+    {
+      "id": "function:packages/telemetry/src/index.ts:defineTelemetrySchema",
+      "type": "function",
+      "name": "defineTelemetrySchema",
+      "filePath": "packages/telemetry/src/index.ts",
+      "lineRange": [72, 74],
+      "summary": "带类型的 identity 辅助函数，原样返回 telemetry schema，用于保留 const 泛型推断。",
+      "tags": ["utility", "schema", "类型推断"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/telemetry/src/index.ts:bindTypedSpanStarter",
+      "type": "function",
+      "name": "bindTypedSpanStarter",
+      "filePath": "packages/telemetry/src/index.ts",
+      "lineRange": [324, 343],
+      "summary": "把 TelemetryContext.startSpan 包装成 TypedSpanStarter：按 schema 名称启动 span，并在回调里递归绑定子 span starter。",
+      "tags": ["factory", "telemetry", "span"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/telemetry/src/index.ts:createTypedSpanStarter",
+      "type": "function",
+      "name": "createTypedSpanStarter",
+      "filePath": "packages/telemetry/src/index.ts",
+      "lineRange": [349, 354],
+      "summary": "公开工厂：将父 TelemetryContext 绑定到一组 schema 的 span 词汇表；schema 仅用于类型推断。",
+      "tags": ["factory", "telemetry", "入口点"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/telemetry/src/memory.ts",
+      "type": "file",
+      "name": "memory.ts",
+      "filePath": "packages/telemetry/src/memory.ts",
+      "summary": "进程内参考实现：把 span、事件、属性和 status 记录到内存，并在父 span 已结束或记录失败时回退到 NOOP_TELEMETRY_CONTEXT。",
+      "tags": ["service", "telemetry", "内存实现", "reference-implementation"],
+      "complexity": "moderate",
+      "languageNotes": "记录路径用 try/catch 吞掉不可读 payload，保证 telemetry 失败不影响业务回调。"
+    },
+    {
+      "id": "function:packages/telemetry/src/memory.ts:settleSpan",
+      "type": "function",
+      "name": "settleSpan",
+      "filePath": "packages/telemetry/src/memory.ts",
+      "lineRange": [89, 99],
+      "summary": "将 span 标记为已结束并分配 endSequence；失败且未显式 setStatus 时写入自动 error status。",
+      "tags": ["lifecycle", "telemetry", "status"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/telemetry/src/memory.ts:createSpan",
+      "type": "function",
+      "name": "createSpan",
+      "filePath": "packages/telemetry/src/memory.ts",
+      "lineRange": [101, 118],
+      "summary": "分配递增 span id，拷贝起始 attributes，并创建默认 ok、未结算的可变记录。",
+      "tags": ["factory", "telemetry", "span"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/telemetry/src/memory.ts:startInMemorySpan",
+      "type": "function",
+      "name": "startInMemorySpan",
+      "filePath": "packages/telemetry/src/memory.ts",
+      "lineRange": [120, 186],
+      "summary": "内存 span 生命周期核心：创建可嵌套的 TelemetrySpan，同步/异步结束时 settle，父已结束或创建失败则委托 noop。",
+      "tags": ["lifecycle", "telemetry", "span"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/telemetry/src/memory.ts:InMemoryTelemetryContext",
+      "type": "class",
+      "name": "InMemoryTelemetryContext",
+      "filePath": "packages/telemetry/src/memory.ts",
+      "lineRange": [192, 219],
+      "summary": "实现 TelemetryContext 的后端无关参考实现：startSpan 写入内存，getSpans 返回按启动顺序的只读快照。",
+      "tags": ["service", "telemetry", "reference-implementation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/telemetry/src/noop.ts",
+      "type": "file",
+      "name": "noop.ts",
+      "filePath": "packages/telemetry/src/noop.ts",
+      "summary": "提供冻结的共享 NOOP_TELEMETRY_CONTEXT：执行回调但不记录事件、属性或 status，供未注入真实 telemetry 时使用。",
+      "tags": ["noop", "telemetry", "singleton", "fallback"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/telemetry/src/testing/conformance.ts",
+      "type": "file",
+      "name": "conformance.ts",
+      "filePath": "packages/telemetry/src/testing/conformance.ts",
+      "summary": "生成与测试框架无关的 adapter 符合性用例，覆盖回调生命周期、错误传播、status、属性/事件、嵌套 span 以及不可读 payload。",
+      "tags": ["test", "conformance", "telemetry", "validation"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/telemetry/src/testing/conformance.ts:createCase",
+      "type": "function",
+      "name": "createCase",
+      "filePath": "packages/telemetry/src/testing/conformance.ts",
+      "lineRange": [12, 26],
+      "summary": "用 fixture factory 包装单条符合性用例，run 时 await using 创建并释放 adapter fixture。",
+      "tags": ["test", "factory", "fixture"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/telemetry/src/testing/conformance.ts:unreadable",
+      "type": "function",
+      "name": "unreadable",
+      "filePath": "packages/telemetry/src/testing/conformance.ts",
+      "lineRange": [43, 58],
+      "summary": "返回在读取、枚举或探查时抛错的 Proxy，用于验证 adapter 对不可读 telemetry payload 的容错。",
+      "tags": ["test", "utility", "validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/telemetry/src/testing/conformance.ts:createTelemetryAdapterConformance",
+      "type": "function",
+      "name": "createTelemetryAdapterConformance",
+      "filePath": "packages/telemetry/src/testing/conformance.ts",
+      "lineRange": [61, 315],
+      "summary": "根据 fixture factory 组装完整符合性套件，断言 startSpan 契约、status 优先级、属性合并、结束后静默以及父子 span 关系。",
+      "tags": ["test", "conformance", "factory"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/telemetry/src/testing/types.ts",
+      "type": "file",
+      "name": "types.ts",
+      "filePath": "packages/telemetry/src/testing/types.ts",
+      "summary": "定义符合性测试夹具与用例类型：带 AsyncDisposable 的 TelemetryAdapterFixture、factory 以及可注册到任意 runner 的 case。",
+      "tags": ["type-definition", "test", "fixture", "telemetry"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/telemetry/src/index.ts",
+      "target": "function:packages/telemetry/src/index.ts:defineTelemetrySchema",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/telemetry/src/index.ts",
+      "target": "function:packages/telemetry/src/index.ts:bindTypedSpanStarter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/telemetry/src/index.ts",
+      "target": "function:packages/telemetry/src/index.ts:createTypedSpanStarter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/telemetry/src/index.ts",
+      "target": "function:packages/telemetry/src/index.ts:defineTelemetrySchema",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/telemetry/src/index.ts",
+      "target": "function:packages/telemetry/src/index.ts:createTypedSpanStarter",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/telemetry/src/index.ts",
+      "target": "class:packages/telemetry/src/memory.ts:InMemoryTelemetryContext",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/telemetry/src/memory.ts",
+      "target": "function:packages/telemetry/src/memory.ts:settleSpan",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/telemetry/src/memory.ts",
+      "target": "function:packages/telemetry/src/memory.ts:createSpan",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/telemetry/src/memory.ts",
+      "target": "function:packages/telemetry/src/memory.ts:startInMemorySpan",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/telemetry/src/memory.ts",
+      "target": "class:packages/telemetry/src/memory.ts:InMemoryTelemetryContext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/telemetry/src/memory.ts",
+      "target": "class:packages/telemetry/src/memory.ts:InMemoryTelemetryContext",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/telemetry/src/memory.ts",
+      "target": "file:packages/telemetry/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/telemetry/src/memory.ts",
+      "target": "file:packages/telemetry/src/noop.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/telemetry/src/noop.ts",
+      "target": "file:packages/telemetry/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/telemetry/src/testing/conformance.ts",
+      "target": "function:packages/telemetry/src/testing/conformance.ts:createCase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/telemetry/src/testing/conformance.ts",
+      "target": "function:packages/telemetry/src/testing/conformance.ts:unreadable",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/telemetry/src/testing/conformance.ts",
+      "target": "function:packages/telemetry/src/testing/conformance.ts:createTelemetryAdapterConformance",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/telemetry/src/testing/conformance.ts",
+      "target": "function:packages/telemetry/src/testing/conformance.ts:createTelemetryAdapterConformance",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/telemetry/src/testing/conformance.ts",
+      "target": "file:packages/telemetry/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/telemetry/src/testing/conformance.ts",
+      "target": "file:packages/telemetry/src/memory.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/telemetry/src/testing/conformance.ts",
+      "target": "file:packages/telemetry/src/testing/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/telemetry/src/testing/types.ts",
+      "target": "file:packages/telemetry/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/telemetry/src/testing/types.ts",
+      "target": "file:packages/telemetry/src/memory.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:packages/telemetry/src/index.ts:createTypedSpanStarter",
+      "target": "function:packages/telemetry/src/index.ts:bindTypedSpanStarter",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/telemetry/src/memory.ts:InMemoryTelemetryContext",
+      "target": "function:packages/telemetry/src/memory.ts:startInMemorySpan",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/telemetry/src/memory.ts:startInMemorySpan",
+      "target": "function:packages/telemetry/src/memory.ts:createSpan",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/telemetry/src/memory.ts:startInMemorySpan",
+      "target": "function:packages/telemetry/src/memory.ts:settleSpan",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/telemetry/src/testing/conformance.ts:createTelemetryAdapterConformance",
+      "target": "function:packages/telemetry/src/testing/conformance.ts:createCase",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/telemetry/src/testing/conformance.ts:createTelemetryAdapterConformance",
+      "target": "function:packages/telemetry/src/testing/conformance.ts:unreadable",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/telemetry/src/index.ts",
+      "target": "file:packages/telemetry/src/testing/conformance.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:packages/telemetry/src/memory.ts",
+      "target": "file:packages/telemetry/src/testing/conformance.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

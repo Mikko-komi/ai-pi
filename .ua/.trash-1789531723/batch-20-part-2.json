@@ -1,0 +1,277 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/tui/src/components/alt-screen-flash.ts",
+      "type": "file",
+      "name": "alt-screen-flash.ts",
+      "filePath": "packages/tui/src/components/alt-screen-flash.ts",
+      "summary": "备用屏幕短暂闪现容器：按超时叠加提示行，用 requestRender 刷新后自动移除。",
+      "tags": [
+        "component",
+        "alt-screen",
+        "notification"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/tui/src/components/alt-screen-flash.ts:AltScreenFlashContainer",
+      "type": "class",
+      "name": "AltScreenFlashContainer",
+      "filePath": "packages/tui/src/components/alt-screen-flash.ts",
+      "lineRange": [
+        13,
+        51
+      ],
+      "summary": "管理一组限时 flash 条目，到期后 splice 并请求重绘。",
+      "tags": [
+        "component",
+        "notification",
+        "timer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/alt-screen-flash.ts:flash",
+      "type": "function",
+      "name": "flash",
+      "filePath": "packages/tui/src/components/alt-screen-flash.ts",
+      "lineRange": [
+        22,
+        37
+      ],
+      "summary": "登记一条限时提示，到期移除并触发重绘。",
+      "tags": [
+        "notification",
+        "timer",
+        "ui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/tui/src/components/box.ts",
+      "type": "file",
+      "name": "box.ts",
+      "filePath": "packages/tui/src/components/box.ts",
+      "summary": "带 padding 与背景的容器：缓存子组件行、转发鼠标事件，并用背景函数铺满空白。",
+      "tags": [
+        "component",
+        "container",
+        "layout"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/tui/src/components/box.ts:Box",
+      "type": "class",
+      "name": "Box",
+      "filePath": "packages/tui/src/components/box.ts",
+      "lineRange": [
+        14,
+        167
+      ],
+      "summary": "实现 Component 的盒子容器：子节点管理、鼠标命中分发与背景铺满。",
+      "tags": [
+        "component",
+        "container",
+        "layout"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/components/box.ts:matchCache",
+      "type": "function",
+      "name": "matchCache",
+      "filePath": "packages/tui/src/components/box.ts",
+      "lineRange": [
+        57,
+        67
+      ],
+      "summary": "比较子行、宽度与背景样本，决定是否复用缓存渲染。",
+      "tags": [
+        "cache",
+        "rendering",
+        "optimization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/box.ts:handleMouse",
+      "type": "function",
+      "name": "handleMouse",
+      "filePath": "packages/tui/src/components/box.ts",
+      "lineRange": [
+        75,
+        100
+      ],
+      "summary": "按子组件布局把鼠标事件分发给命中的 child。",
+      "tags": [
+        "event-handler",
+        "mouse",
+        "container"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/box.ts:render",
+      "type": "function",
+      "name": "render",
+      "filePath": "packages/tui/src/components/box.ts",
+      "lineRange": [
+        101,
+        156
+      ],
+      "summary": "渲染子组件、加 padding，并在缓存未命中时铺背景。",
+      "tags": [
+        "rendering",
+        "container",
+        "cache"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/components/box.ts:applyBg",
+      "type": "function",
+      "name": "applyBg",
+      "filePath": "packages/tui/src/components/box.ts",
+      "lineRange": [
+        157,
+        167
+      ],
+      "summary": "按可见宽度补空格后把背景 ANSI 应用到整行。",
+      "tags": [
+        "rendering",
+        "ansi",
+        "background"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/tui/src/components/alt-screen-flash.ts",
+      "target": "file:packages/tui/src/tui.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/alt-screen-flash.ts",
+      "target": "file:packages/tui/src/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/alt-screen-flash.ts",
+      "target": "class:packages/tui/src/components/alt-screen-flash.ts:AltScreenFlashContainer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/alt-screen-flash.ts",
+      "target": "class:packages/tui/src/components/alt-screen-flash.ts:AltScreenFlashContainer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/components/alt-screen-flash.ts",
+      "target": "function:packages/tui/src/components/alt-screen-flash.ts:flash",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/box.ts",
+      "target": "file:packages/tui/src/tui.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/box.ts",
+      "target": "file:packages/tui/src/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/box.ts",
+      "target": "class:packages/tui/src/components/box.ts:Box",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/box.ts",
+      "target": "class:packages/tui/src/components/box.ts:Box",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/components/box.ts",
+      "target": "function:packages/tui/src/components/box.ts:matchCache",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/box.ts",
+      "target": "function:packages/tui/src/components/box.ts:handleMouse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/box.ts",
+      "target": "function:packages/tui/src/components/box.ts:render",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/box.ts",
+      "target": "function:packages/tui/src/components/box.ts:applyBg",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "function:packages/tui/src/components/box.ts:handleMouse",
+      "target": "function:packages/tui/src/tui.ts:dispatchMouseEvent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/box.ts:applyBg",
+      "target": "function:packages/tui/src/utils.ts:visibleWidth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/box.ts:applyBg",
+      "target": "function:packages/tui/src/utils.ts:applyBackgroundToLine",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/box.ts:render",
+      "target": "function:packages/tui/src/components/box.ts:applyBg",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/box.ts:render",
+      "target": "function:packages/tui/src/components/box.ts:matchCache",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/ai/src/legacy-api-aliases.ts",
+      "type": "file",
+      "name": "legacy-api-aliases.ts",
+      "filePath": "packages/ai/src/legacy-api-aliases.ts",
+      "summary": "已废弃的按供应商命名 stream/streamSimple 别名，内部转调各 API 的 lazy 工厂以保持旧导入路径。",
+      "tags": [
+        "barrel",
+        "deprecated",
+        "api-handler",
+        "compatibility"
+      ],
+      "complexity": "simple",
+      "languageNotes": "别名全部标记 @deprecated，指向 @earendil-works/pi-ai/api/* 的直接导出。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/ai/src/legacy-api-aliases.ts",
+      "target": "file:packages/ai/src/api/anthropic-messages.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/legacy-api-aliases.ts",
+      "target": "file:packages/ai/src/api/anthropic-messages.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/legacy-api-aliases.ts",
+      "target": "file:packages/ai/src/api/azure-openai-responses.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/legacy-api-aliases.ts",
+      "target": "file:packages/ai/src/api/azure-openai-responses.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/legacy-api-aliases.ts",
+      "target": "file:packages/ai/src/api/google-generative-ai.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/legacy-api-aliases.ts",
+      "target": "file:packages/ai/src/api/google-generative-ai.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/legacy-api-aliases.ts",
+      "target": "file:packages/ai/src/api/google-vertex.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/legacy-api-aliases.ts",
+      "target": "file:packages/ai/src/api/google-vertex.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/legacy-api-aliases.ts",
+      "target": "file:packages/ai/src/api/mistral-conversations.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/legacy-api-aliases.ts",
+      "target": "file:packages/ai/src/api/mistral-conversations.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/legacy-api-aliases.ts",
+      "target": "file:packages/ai/src/api/openai-codex-responses.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/legacy-api-aliases.ts",
+      "target": "file:packages/ai/src/api/openai-codex-responses.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/legacy-api-aliases.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/legacy-api-aliases.ts",
+      "target": "file:packages/ai/src/api/openai-completions.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/legacy-api-aliases.ts",
+      "target": "file:packages/ai/src/api/openai-responses.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/legacy-api-aliases.ts",
+      "target": "file:packages/ai/src/api/openai-responses.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/legacy-api-aliases.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

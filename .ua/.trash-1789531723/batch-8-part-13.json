@@ -1,0 +1,426 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/utils/clipboard-image.ts",
+      "type": "file",
+      "name": "clipboard-image.ts",
+      "filePath": "packages/coding-agent/src/utils/clipboard-image.ts",
+      "summary": "从 Wayland/X11/WSL PowerShell/原生剪贴板读取图片，并规范 MIME。",
+      "tags": [
+        "clipboard",
+        "images",
+        "platform",
+        "utility"
+      ],
+      "complexity": "complex",
+      "languageNotes": "按 WAYLAND_DISPLAY / WSL 探测分流；PowerShell 路径把图片存临时 PNG 再读回。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/clipboard-image.ts:isWaylandSession",
+      "type": "function",
+      "name": "isWaylandSession",
+      "filePath": "packages/coding-agent/src/utils/clipboard-image.ts",
+      "summary": "根据 WAYLAND_DISPLAY / XDG_SESSION_TYPE 判断 Wayland 会话。",
+      "tags": [
+        "clipboard",
+        "wayland",
+        "platform"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        21,
+        23
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/clipboard-image.ts:extensionForImageMimeType",
+      "type": "function",
+      "name": "extensionForImageMimeType",
+      "filePath": "packages/coding-agent/src/utils/clipboard-image.ts",
+      "summary": "把支持的图片 MIME 映射为文件扩展名。",
+      "tags": [
+        "images",
+        "mime",
+        "utility"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        29,
+        42
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/clipboard-image.ts:selectPreferredImageMimeType",
+      "type": "function",
+      "name": "selectPreferredImageMimeType",
+      "filePath": "packages/coding-agent/src/utils/clipboard-image.ts",
+      "summary": "从剪贴板声明的 MIME 列表中挑选首选图片类型。",
+      "tags": [
+        "images",
+        "mime",
+        "clipboard"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        44,
+        59
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/clipboard-image.ts:convertToPng",
+      "type": "function",
+      "name": "convertToPng",
+      "filePath": "packages/coding-agent/src/utils/clipboard-image.ts",
+      "summary": "用 Photon 把剪贴板字节转为 PNG。",
+      "tags": [
+        "images",
+        "conversion",
+        "photon"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        70,
+        86
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/clipboard-image.ts:readClipboardImageViaWlPaste",
+      "type": "function",
+      "name": "readClipboardImageViaWlPaste",
+      "filePath": "packages/coding-agent/src/utils/clipboard-image.ts",
+      "summary": "通过 wl-paste 列出 MIME 并读取首选图片。",
+      "tags": [
+        "clipboard",
+        "wayland",
+        "images"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        90,
+        110
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/clipboard-image.ts:isWSL",
+      "type": "function",
+      "name": "isWSL",
+      "filePath": "packages/coding-agent/src/utils/clipboard-image.ts",
+      "summary": "检测当前是否运行在 WSL。",
+      "tags": [
+        "platform",
+        "wsl",
+        "utility"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        112,
+        123
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/clipboard-image.ts:readClipboardImageViaPowerShell",
+      "type": "function",
+      "name": "readClipboardImageViaPowerShell",
+      "filePath": "packages/coding-agent/src/utils/clipboard-image.ts",
+      "summary": "在 WSL/Windows 上用 PowerShell 把剪贴板图像存成 PNG 再读回。",
+      "tags": [
+        "clipboard",
+        "powershell",
+        "images",
+        "wsl"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        130,
+        182
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/clipboard-image.ts:readClipboardImageViaXclip",
+      "type": "function",
+      "name": "readClipboardImageViaXclip",
+      "filePath": "packages/coding-agent/src/utils/clipboard-image.ts",
+      "summary": "通过 xclip 从 X11 剪贴板读取图片字节。",
+      "tags": [
+        "clipboard",
+        "x11",
+        "images"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        184,
+        210
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/clipboard-image.ts:readClipboardImage",
+      "type": "function",
+      "name": "readClipboardImage",
+      "filePath": "packages/coding-agent/src/utils/clipboard-image.ts",
+      "summary": "按平台依次尝试原生/Wayland/X11/PowerShell 读取剪贴板图片。",
+      "tags": [
+        "clipboard",
+        "images",
+        "platform"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        219,
+        259
+      ]
+    },
+    {
+      "id": "file:packages/coding-agent/src/utils/clipboard.ts",
+      "type": "file",
+      "name": "clipboard.ts",
+      "filePath": "packages/coding-agent/src/utils/clipboard.ts",
+      "summary": "跨平台读写剪贴板文本；远程会话复制回退 OSC 52。",
+      "tags": [
+        "clipboard",
+        "text",
+        "platform",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/clipboard.ts:readClipboardText",
+      "type": "function",
+      "name": "readClipboardText",
+      "filePath": "packages/coding-agent/src/utils/clipboard.ts",
+      "summary": "按平台调用 pbpaste/wl-paste/xclip 或原生剪贴板读取文本。",
+      "tags": [
+        "clipboard",
+        "text",
+        "platform"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        21,
+        39
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/clipboard.ts:copyToClipboard",
+      "type": "function",
+      "name": "copyToClipboard",
+      "filePath": "packages/coding-agent/src/utils/clipboard.ts",
+      "summary": "写入剪贴板文本；远程会话额外发射 OSC 52。",
+      "tags": [
+        "clipboard",
+        "text",
+        "osc52"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        41,
+        77
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard-image.ts",
+      "target": "function:packages/coding-agent/src/utils/clipboard-image.ts:isWaylandSession",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard-image.ts",
+      "target": "function:packages/coding-agent/src/utils/clipboard-image.ts:isWaylandSession",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard-image.ts",
+      "target": "function:packages/coding-agent/src/utils/clipboard-image.ts:extensionForImageMimeType",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard-image.ts",
+      "target": "function:packages/coding-agent/src/utils/clipboard-image.ts:extensionForImageMimeType",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard-image.ts",
+      "target": "function:packages/coding-agent/src/utils/clipboard-image.ts:selectPreferredImageMimeType",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard-image.ts",
+      "target": "function:packages/coding-agent/src/utils/clipboard-image.ts:convertToPng",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard-image.ts",
+      "target": "function:packages/coding-agent/src/utils/clipboard-image.ts:readClipboardImageViaWlPaste",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard-image.ts",
+      "target": "function:packages/coding-agent/src/utils/clipboard-image.ts:isWSL",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard-image.ts",
+      "target": "function:packages/coding-agent/src/utils/clipboard-image.ts:readClipboardImageViaPowerShell",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard-image.ts",
+      "target": "function:packages/coding-agent/src/utils/clipboard-image.ts:readClipboardImageViaXclip",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard-image.ts",
+      "target": "function:packages/coding-agent/src/utils/clipboard-image.ts:readClipboardImage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard-image.ts",
+      "target": "function:packages/coding-agent/src/utils/clipboard-image.ts:readClipboardImage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard-image.ts",
+      "target": "file:packages/coding-agent/src/utils/clipboard-command.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard-image.ts",
+      "target": "file:packages/coding-agent/src/utils/mime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard-image.ts",
+      "target": "file:packages/coding-agent/src/utils/photon.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard-image.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard.ts",
+      "target": "function:packages/coding-agent/src/utils/clipboard.ts:readClipboardText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard.ts",
+      "target": "function:packages/coding-agent/src/utils/clipboard.ts:readClipboardText",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard.ts",
+      "target": "function:packages/coding-agent/src/utils/clipboard.ts:copyToClipboard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard.ts",
+      "target": "function:packages/coding-agent/src/utils/clipboard.ts:copyToClipboard",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard.ts",
+      "target": "file:packages/coding-agent/src/utils/clipboard-command.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/clipboard.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/clipboard-image.ts:readClipboardImage",
+      "target": "function:packages/coding-agent/src/utils/clipboard-image.ts:isWaylandSession",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/clipboard-image.ts:readClipboardImage",
+      "target": "function:packages/coding-agent/src/utils/clipboard-image.ts:readClipboardImageViaWlPaste",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/clipboard-image.ts:readClipboardImage",
+      "target": "function:packages/coding-agent/src/utils/clipboard-image.ts:readClipboardImageViaXclip",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/clipboard-image.ts:readClipboardImage",
+      "target": "function:packages/coding-agent/src/utils/clipboard-image.ts:readClipboardImageViaPowerShell",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/clipboard-image.ts:readClipboardImageViaWlPaste",
+      "target": "function:packages/coding-agent/src/utils/clipboard-image.ts:selectPreferredImageMimeType",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/clipboard-image.ts:convertToPng",
+      "target": "function:packages/coding-agent/src/utils/photon.ts:loadPhoton",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/clipboard-image.ts:readClipboardImage",
+      "target": "function:packages/coding-agent/src/utils/mime.ts:detectSupportedImageMimeType",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

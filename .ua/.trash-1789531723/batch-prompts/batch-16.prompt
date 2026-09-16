@@ -1,0 +1,40 @@
+Analyze these files and produce GraphNode and GraphEdge objects.
+Project root: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi`
+Project: `pi-monorepo`
+Batch: `16/45`
+Skill directory: `/Users/elex-mb0203/.cursor/plugins/local/Understand-Anything/understand-anything-plugin/skills/understand`
+Output: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-16.json` OR `batch-16-part-<k>.json`.
+UA_DIR: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua`
+Load `batchImportData` and `neighborMap` from `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-briefs/batch-16.json`.
+Pass every listed file through to `batchFiles` with path, language, sizeLines, fileCategory.
+
+> **Language directive**: Generate all textual content in **Chinese (zh)**. Keep technical terms in English when no standard translation exists.
+
+Files:
+1. packages/agent/src/harness/session/testing/index.ts (35 lines, language: typescript, fileCategory: code)
+2. packages/agent/src/index.ts (152 lines, language: typescript, fileCategory: code)
+3. packages/coding-agent/src/cli/file-processor.ts (88 lines, language: typescript, fileCategory: code)
+4. packages/coding-agent/src/core/compaction/branch-summarization.ts (382 lines, language: typescript, fileCategory: code)
+5. packages/coding-agent/src/core/compaction/compaction.ts (1012 lines, language: typescript, fileCategory: code)
+6. packages/coding-agent/src/core/compaction/utils.ts (158 lines, language: typescript, fileCategory: code)
+7. packages/coding-agent/src/core/tools/bash.ts (400 lines, language: typescript, fileCategory: code)
+8. packages/coding-agent/src/core/tools/edit-diff.ts (556 lines, language: typescript, fileCategory: code)
+9. packages/coding-agent/src/core/tools/edit.ts (220 lines, language: typescript, fileCategory: code)
+10. packages/coding-agent/src/core/tools/file-mutation-queue.ts (61 lines, language: typescript, fileCategory: code)
+11. packages/coding-agent/src/core/tools/find.ts (318 lines, language: typescript, fileCategory: code)
+12. packages/coding-agent/src/core/tools/grep.ts (323 lines, language: typescript, fileCategory: code)
+13. packages/coding-agent/src/core/tools/index.ts (224 lines, language: typescript, fileCategory: code)
+14. packages/coding-agent/src/core/tools/ls.ts (175 lines, language: typescript, fileCategory: code)
+15. packages/coding-agent/src/core/tools/output-accumulator.ts (222 lines, language: typescript, fileCategory: code)
+16. packages/coding-agent/src/core/tools/path-utils.ts (118 lines, language: typescript, fileCategory: code)
+17. packages/coding-agent/src/core/tools/powershell.ts (67 lines, language: typescript, fileCategory: code)
+18. packages/coding-agent/src/core/tools/read.ts (197 lines, language: typescript, fileCategory: code)
+19. packages/coding-agent/src/core/tools/tool-definition-wrapper.ts (47 lines, language: typescript, fileCategory: code)
+20. packages/coding-agent/src/core/tools/truncate.ts (276 lines, language: typescript, fileCategory: code)
+21. packages/coding-agent/src/core/tools/write.ts (97 lines, language: typescript, fileCategory: code)
+22. packages/coding-agent/src/utils/exif-orientation.ts (182 lines, language: typescript, fileCategory: code)
+23. packages/coding-agent/src/utils/image-convert.ts (49 lines, language: typescript, fileCategory: code)
+24. packages/coding-agent/src/utils/image-process.ts (119 lines, language: typescript, fileCategory: code)
+25. packages/coding-agent/src/utils/image-resize-core.ts (164 lines, language: typescript, fileCategory: code)
+
+Respond with only a brief summary: parts written, total nodes/edges, files skipped.

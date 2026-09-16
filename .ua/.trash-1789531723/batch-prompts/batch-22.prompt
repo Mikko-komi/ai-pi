@@ -1,0 +1,35 @@
+Analyze these files and produce GraphNode and GraphEdge objects.
+Project root: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi`
+Project: `pi-monorepo`
+Batch: `22/45`
+Skill directory: `/Users/elex-mb0203/.cursor/plugins/local/Understand-Anything/understand-anything-plugin/skills/understand`
+Output: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-22.json` OR `batch-22-part-<k>.json`.
+UA_DIR: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua`
+Load `batchImportData` and `neighborMap` from `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-briefs/batch-22.json`.
+Pass every listed file through to `batchFiles` with path, language, sizeLines, fileCategory.
+
+> **Language directive**: Generate all textual content in **Chinese (zh)**. Keep technical terms in English when no standard translation exists.
+
+Files:
+1. packages/tui/src/fuzzy.ts (137 lines, language: typescript, fileCategory: code)
+2. packages/tui/src/keybindings.ts (320 lines, language: typescript, fileCategory: code)
+3. packages/tui/src/keys.ts (1401 lines, language: typescript, fileCategory: code)
+4. packages/tui/src/kill-ring.ts (46 lines, language: typescript, fileCategory: code)
+5. packages/tui/src/latex.ts (1394 lines, language: typescript, fileCategory: code)
+6. packages/tui/src/layout-node.ts (51 lines, language: typescript, fileCategory: code)
+7. packages/tui/src/layout.ts (449 lines, language: typescript, fileCategory: code)
+8. packages/tui/src/native-modifiers.ts (13 lines, language: typescript, fileCategory: code)
+9. packages/tui/src/native-module-path.ts (31 lines, language: typescript, fileCategory: code)
+10. packages/tui/src/native-platform.ts (63 lines, language: typescript, fileCategory: code)
+11. packages/tui/src/stdin-buffer.ts (444 lines, language: typescript, fileCategory: code)
+12. packages/tui/src/terminal-colors.ts (73 lines, language: typescript, fileCategory: code)
+13. packages/tui/src/terminal-image.ts (696 lines, language: typescript, fileCategory: code)
+14. packages/tui/src/terminal.ts (547 lines, language: typescript, fileCategory: code)
+15. packages/tui/src/tui-alt-screen.ts (1721 lines, language: typescript, fileCategory: code)
+16. packages/tui/src/tui-main-screen.ts (655 lines, language: typescript, fileCategory: code)
+17. packages/tui/src/tui.ts (1456 lines, language: typescript, fileCategory: code)
+18. packages/tui/src/undo-stack.ts (28 lines, language: typescript, fileCategory: code)
+19. packages/tui/src/utils.ts (1337 lines, language: typescript, fileCategory: code)
+20. packages/tui/src/word-navigation.ts (117 lines, language: typescript, fileCategory: code)
+
+Respond with only a brief summary: parts written, total nodes/edges, files skipped.

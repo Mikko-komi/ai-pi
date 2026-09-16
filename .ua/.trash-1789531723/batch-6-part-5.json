@@ -1,0 +1,857 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/core/tools/renderers/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/index.ts",
+      "summary": "内置工具 renderer 聚合入口；与执行实现分离，避免仅展示进程拖入约 17MB 的工具模块图。",
+      "tags": [
+        "barrel",
+        "tool-renderer",
+        "factory",
+        "entry-point"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "createAllToolRenderers 按 ToolName 装配；withBuiltInRenderers 只补缺 renderCall/renderResult。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/index.ts:createAllToolRenderers",
+      "type": "function",
+      "name": "createAllToolRenderers",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/index.ts",
+      "lineRange": [
+        32,
+        43
+      ],
+      "summary": "返回按 ToolName 索引的内置 renderer；bash/powershell 共用 createShellRenderers。",
+      "tags": [
+        "factory",
+        "tool-renderer",
+        "barrel"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/index.ts:withBuiltInRenderers",
+      "type": "function",
+      "name": "withBuiltInRenderers",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/index.ts",
+      "lineRange": [
+        51,
+        63
+      ],
+      "summary": "若 definition 缺少 renderCall/renderResult 则填入对应内置 renderer。",
+      "tags": [
+        "factory",
+        "tool-renderer",
+        "merge"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/tools/renderers/ls.ts",
+      "type": "file",
+      "name": "ls.ts",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/ls.ts",
+      "summary": "ls 工具的调用/结果 TUI 呈现：路径超链接、limit，以及折叠目录列表与截断提示。",
+      "tags": [
+        "tool-renderer",
+        "ls",
+        "tui",
+        "component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/ls.ts:formatLsResult",
+      "type": "function",
+      "name": "formatLsResult",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/ls.ts",
+      "lineRange": [
+        26,
+        57
+      ],
+      "summary": "折叠展示目录行（默认 20 行），附加 expand hint 与截断警告。",
+      "tags": [
+        "ls",
+        "display",
+        "truncate"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/tools/renderers/read.ts",
+      "type": "file",
+      "name": "read.ts",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/read.ts",
+      "summary": "read 工具呈现：普通路径+行范围，或把 docs/skill/AGENTS.md 收成紧凑标题，结果做语法高亮。",
+      "tags": [
+        "tool-renderer",
+        "read",
+        "syntax-highlight",
+        "tui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/read.ts:getPiDocsClassification",
+      "type": "function",
+      "name": "getPiDocsClassification",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/read.ts",
+      "lineRange": [
+        48,
+        65
+      ],
+      "summary": "若路径落在包内 docs 树，返回 kind=docs 的紧凑标签。",
+      "tags": [
+        "read",
+        "docs",
+        "classification"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/read.ts:getCompactReadClassification",
+      "type": "function",
+      "name": "getCompactReadClassification",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/read.ts",
+      "lineRange": [
+        66,
+        87
+      ],
+      "summary": "识别 skill、AGENTS.md/CLAUDE.md 或 pi docs，决定是否使用紧凑 read 标题。",
+      "tags": [
+        "read",
+        "classification",
+        "path"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/read.ts:formatCompactReadCall",
+      "type": "function",
+      "name": "formatCompactReadCall",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/read.ts",
+      "lineRange": [
+        88,
+        110
+      ],
+      "summary": "把 docs/skill/resource 读调用收成带快捷键提示的紧凑标题。",
+      "tags": [
+        "read",
+        "display",
+        "keybindings"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/read.ts:formatReadResult",
+      "type": "function",
+      "name": "formatReadResult",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/read.ts",
+      "lineRange": [
+        111,
+        148
+      ],
+      "summary": "按语言高亮文件内容，折叠行数并提示截断；错误路径走纯文本。",
+      "tags": [
+        "read",
+        "syntax-highlight",
+        "display"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/tools/renderers/write.ts",
+      "type": "file",
+      "name": "write.ts",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/write.ts",
+      "summary": "write 工具呈现：增量维护语法高亮缓存，流式追加时避免整文件重高亮。",
+      "tags": [
+        "tool-renderer",
+        "write",
+        "syntax-highlight",
+        "tui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/write.ts:refreshWriteHighlightPrefix",
+      "type": "function",
+      "name": "refreshWriteHighlightPrefix",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/write.ts",
+      "lineRange": [
+        34,
+        43
+      ],
+      "summary": "对缓存前 N 行重新 highlightCode，修复增量追加后的前缀高亮。",
+      "tags": [
+        "write",
+        "syntax-highlight",
+        "cache"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/write.ts:rebuildWriteHighlightCacheFull",
+      "type": "function",
+      "name": "rebuildWriteHighlightCacheFull",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/write.ts",
+      "lineRange": [
+        44,
+        56
+      ],
+      "summary": "按路径语言对整份内容规范化并全量高亮，重建 WriteHighlightCache。",
+      "tags": [
+        "write",
+        "syntax-highlight",
+        "cache"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/write.ts:updateWriteHighlightCacheIncremental",
+      "type": "function",
+      "name": "updateWriteHighlightCacheIncremental",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/write.ts",
+      "lineRange": [
+        57,
+        88
+      ],
+      "summary": "若内容是旧缓存前缀则只高亮增量行，否则回退全量重建。",
+      "tags": [
+        "write",
+        "syntax-highlight",
+        "incremental"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/write.ts:formatWriteCall",
+      "type": "function",
+      "name": "formatWriteCall",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/write.ts",
+      "lineRange": [
+        96,
+        127
+      ],
+      "summary": "渲染 write 路径标题与高亮文件内容，流式时走增量缓存。",
+      "tags": [
+        "write",
+        "display",
+        "syntax-highlight"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/write.ts:formatWriteResult",
+      "type": "function",
+      "name": "formatWriteResult",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/write.ts",
+      "lineRange": [
+        128,
+        143
+      ],
+      "summary": "渲染 write 结果文本（成功/错误），附带 expand hint。",
+      "tags": [
+        "write",
+        "display",
+        "tool-renderer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/usage-totals.ts",
+      "type": "file",
+      "name": "usage-totals.ts",
+      "filePath": "packages/coding-agent/src/core/usage-totals.ts",
+      "summary": "按模型聚合 assistant usage/cost，把 toolResult 与 compaction/branch summary 的用量归入 Tools/summaries 桶。",
+      "tags": [
+        "usage",
+        "cost",
+        "session",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/usage-totals.ts:createUsageTotals",
+      "type": "function",
+      "name": "createUsageTotals",
+      "filePath": "packages/coding-agent/src/core/usage-totals.ts",
+      "lineRange": [
+        12,
+        20
+      ],
+      "summary": "创建全零的 UsageTotals（input/output/cache/cost）。",
+      "tags": [
+        "usage",
+        "factory",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/usage-totals.ts:addUsageToTotals",
+      "type": "function",
+      "name": "addUsageToTotals",
+      "filePath": "packages/coding-agent/src/core/usage-totals.ts",
+      "lineRange": [
+        22,
+        28
+      ],
+      "summary": "把一条 Usage 累加进 totals，cost 取 usage.cost.total。",
+      "tags": [
+        "usage",
+        "cost",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/usage-totals.ts:getUsageCostBreakdown",
+      "type": "function",
+      "name": "getUsageCostBreakdown",
+      "filePath": "packages/coding-agent/src/core/usage-totals.ts",
+      "lineRange": [
+        37,
+        70
+      ],
+      "summary": "按 provider/model 聚合 assistant 用量，工具摘要单独分桶，再按 cost 降序。",
+      "tags": [
+        "usage",
+        "cost",
+        "session"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/index.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/index.ts",
+      "target": "file:packages/coding-agent/src/core/tools/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/index.ts",
+      "target": "file:packages/coding-agent/src/core/tools/renderers/bash.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/index.ts",
+      "target": "file:packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/index.ts",
+      "target": "file:packages/coding-agent/src/core/tools/renderers/find.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/index.ts",
+      "target": "file:packages/coding-agent/src/core/tools/renderers/grep.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/index.ts",
+      "target": "file:packages/coding-agent/src/core/tools/renderers/ls.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/index.ts",
+      "target": "file:packages/coding-agent/src/core/tools/renderers/read.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/index.ts",
+      "target": "file:packages/coding-agent/src/core/tools/renderers/write.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/ls.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/ls.ts",
+      "target": "file:packages/coding-agent/src/core/tools/ls.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/ls.ts",
+      "target": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/ls.ts",
+      "target": "file:packages/coding-agent/src/core/tools/truncate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/ls.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/ls.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/ls.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/read.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/read.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/read.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/read.ts",
+      "target": "file:packages/coding-agent/src/core/tools/path-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/read.ts",
+      "target": "file:packages/coding-agent/src/core/tools/read.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/read.ts",
+      "target": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/read.ts",
+      "target": "file:packages/coding-agent/src/core/tools/truncate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/read.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/read.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/read.ts",
+      "target": "file:packages/coding-agent/src/utils/paths.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/read.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/write.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/write.ts",
+      "target": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/write.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/write.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/write.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/usage-totals.ts",
+      "target": "file:packages/ai/src/compat.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/usage-totals.ts",
+      "target": "file:packages/coding-agent/src/core/session-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/index.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/index.ts:createAllToolRenderers",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/index.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/index.ts:createAllToolRenderers",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/index.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/index.ts:withBuiltInRenderers",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/index.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/index.ts:withBuiltInRenderers",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/ls.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/ls.ts:formatLsResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/read.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/read.ts:getPiDocsClassification",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/read.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/read.ts:getCompactReadClassification",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/read.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/read.ts:formatCompactReadCall",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/read.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/read.ts:formatReadResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/write.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/write.ts:refreshWriteHighlightPrefix",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/write.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/write.ts:rebuildWriteHighlightCacheFull",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/write.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/write.ts:updateWriteHighlightCacheIncremental",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/write.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/write.ts:formatWriteCall",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/write.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/write.ts:formatWriteResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/usage-totals.ts",
+      "target": "function:packages/coding-agent/src/core/usage-totals.ts:createUsageTotals",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/usage-totals.ts",
+      "target": "function:packages/coding-agent/src/core/usage-totals.ts:createUsageTotals",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/usage-totals.ts",
+      "target": "function:packages/coding-agent/src/core/usage-totals.ts:addUsageToTotals",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/usage-totals.ts",
+      "target": "function:packages/coding-agent/src/core/usage-totals.ts:addUsageToTotals",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/usage-totals.ts",
+      "target": "function:packages/coding-agent/src/core/usage-totals.ts:getUsageCostBreakdown",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/usage-totals.ts",
+      "target": "function:packages/coding-agent/src/core/usage-totals.ts:getUsageCostBreakdown",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/ls.ts:formatLsResult",
+      "target": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/index.ts:createAllToolRenderers",
+      "target": "file:packages/coding-agent/src/core/tools/renderers/bash.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/index.ts:withBuiltInRenderers",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/index.ts:createAllToolRenderers",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/read.ts:getCompactReadClassification",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/read.ts:getPiDocsClassification",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/read.ts:formatReadResult",
+      "target": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/write.ts:updateWriteHighlightCacheIncremental",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/write.ts:rebuildWriteHighlightCacheFull",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/write.ts:updateWriteHighlightCacheIncremental",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/write.ts:refreshWriteHighlightPrefix",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/write.ts:formatWriteCall",
+      "target": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/write.ts:formatWriteCall",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/write.ts:updateWriteHighlightCacheIncremental",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/usage-totals.ts:getUsageCostBreakdown",
+      "target": "function:packages/coding-agent/src/core/usage-totals.ts:createUsageTotals",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/usage-totals.ts:getUsageCostBreakdown",
+      "target": "function:packages/coding-agent/src/core/usage-totals.ts:addUsageToTotals",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/ls.ts:formatLsResult",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyHint",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/ls.ts:formatLsResult",
+      "target": "function:packages/coding-agent/src/core/tools/truncate.ts:formatSize",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/read.ts:getPiDocsClassification",
+      "target": "function:packages/coding-agent/src/config.ts:getReadmePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/read.ts:getCompactReadClassification",
+      "target": "function:packages/coding-agent/src/core/tools/path-utils.ts:resolveToCwd",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/read.ts:getCompactReadClassification",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:formatPathRelativeToCwdOrAbsolute",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/read.ts:formatCompactReadCall",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/read.ts:formatReadResult",
+      "target": "function:packages/coding-agent/src/modes/interactive/theme/theme.ts:highlightCode",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/read.ts:formatReadResult",
+      "target": "function:packages/coding-agent/src/modes/interactive/theme/theme.ts:getLanguageFromPath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/write.ts:rebuildWriteHighlightCacheFull",
+      "target": "function:packages/coding-agent/src/modes/interactive/theme/theme.ts:highlightCode",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/write.ts:rebuildWriteHighlightCacheFull",
+      "target": "function:packages/coding-agent/src/modes/interactive/theme/theme.ts:getLanguageFromPath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

@@ -1,0 +1,2048 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "type": "file",
+      "name": "tools.ts",
+      "filePath": "packages/agent/src/harness/runtime/drive/tools.ts",
+      "summary": "驱动 tool 批次的顺序或并行执行，覆盖准备、调用、中断恢复与结果发布。",
+      "tags": [
+        "runtime",
+        "tool-execution",
+        "service"
+      ],
+      "complexity": "complex",
+      "languageNotes": "按 sequential/parallel 分派 tool batch，并把中断检查点写回 session values。"
+    },
+    {
+      "id": "file:packages/agent/src/harness/runtime/harness.ts",
+      "type": "file",
+      "name": "harness.ts",
+      "filePath": "packages/agent/src/harness/runtime/harness.ts",
+      "summary": "AgentHarness 运行时实现：管理 lane 生命周期、全局配置，以及从 session 恢复未完成 operation。",
+      "tags": [
+        "entry-point",
+        "service",
+        "runtime"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/agent/src/harness/runtime/lane.ts",
+      "type": "file",
+      "name": "lane.ts",
+      "filePath": "packages/agent/src/harness/runtime/lane.ts",
+      "summary": "单条 AgentLane 的命令总线，把 admission、drive、队列与 session 写入串在同一条 mutation line 上。",
+      "tags": [
+        "service",
+        "runtime",
+        "event-handler"
+      ],
+      "complexity": "complex",
+      "languageNotes": "超大 Lane 类同时承担 prompt/compact/navigate 入口与 durable operation 续跑。"
+    },
+    {
+      "id": "file:packages/agent/src/harness/runtime/progress.ts",
+      "type": "file",
+      "name": "progress.ts",
+      "filePath": "packages/agent/src/harness/runtime/progress.ts",
+      "summary": "把 assistant frame 与 tool 输出写入 pending 通道，供驱动层流式展示进度。",
+      "tags": [
+        "runtime",
+        "streaming",
+        "service"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/agent/src/harness/runtime/reducer.ts",
+      "type": "file",
+      "name": "reducer.ts",
+      "filePath": "packages/agent/src/harness/runtime/reducer.ts",
+      "summary": "将 HarnessEvent 折叠进可变 LaneSnapshot；导航完成后要求调用方 rebase。",
+      "tags": [
+        "reducer",
+        "event-handler",
+        "runtime"
+      ],
+      "complexity": "complex",
+      "languageNotes": "对 snapshot 原地归约，navigation 完成返回 rebase 哨兵而非继续增量。"
+    },
+    {
+      "id": "file:packages/agent/src/harness/runtime/restore.ts",
+      "type": "file",
+      "name": "restore.ts",
+      "filePath": "packages/agent/src/harness/runtime/restore.ts",
+      "summary": "从 durable session 值重建进程内 LaneState，并校验 operation 与 intent 是否一致。",
+      "tags": [
+        "runtime",
+        "restore",
+        "service"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "type": "file",
+      "name": "transcript.ts",
+      "filePath": "packages/agent/src/harness/runtime/transcript.ts",
+      "summary": "读取有界 transcript、inbox 队列与 pending 消息，并投影 entry 生命周期事件。",
+      "tags": [
+        "runtime",
+        "transcript",
+        "serialization"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/agent/src/harness/runtime/types.ts",
+      "type": "file",
+      "name": "types.ts",
+      "filePath": "packages/agent/src/harness/runtime/types.ts",
+      "summary": "定义 harness 运行时的 Config、LaneState、LaneCommand，以及进程内 Drive 控制器。",
+      "tags": [
+        "type-definition",
+        "runtime",
+        "data-model"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Drive 用 createGate 与 AbortController 管理一次进程本地 drive pass。"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tools.ts:replaceCall",
+      "type": "function",
+      "name": "replaceCall",
+      "filePath": "packages/agent/src/harness/runtime/drive/tools.ts",
+      "lineRange": [
+        66,
+        75
+      ],
+      "summary": "按 sourceIndex/resultEntryId 替换 batch 中的一条 ToolCall。",
+      "tags": [
+        "utility",
+        "tool-execution",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tools.ts:invocationCapability",
+      "type": "function",
+      "name": "invocationCapability",
+      "filePath": "packages/agent/src/harness/runtime/drive/tools.ts",
+      "lineRange": [
+        82,
+        131
+      ],
+      "summary": "构造 tool invocation 能力对象，提供 memo 读写并校验 effect 所有权。",
+      "tags": [
+        "tool-execution",
+        "capability",
+        "runtime"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tools.ts:syntheticMessage",
+      "type": "function",
+      "name": "syntheticMessage",
+      "filePath": "packages/agent/src/harness/runtime/drive/tools.ts",
+      "lineRange": [
+        133,
+        148
+      ],
+      "summary": "为中断或截断的 tool 调用合成 ToolResultMessage。",
+      "tags": [
+        "tool-execution",
+        "serialization",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tools.ts:interruptedOutcome",
+      "type": "function",
+      "name": "interruptedOutcome",
+      "filePath": "packages/agent/src/harness/runtime/drive/tools.ts",
+      "lineRange": [
+        158,
+        168
+      ],
+      "summary": "把检查点进度包装成 interrupted tool outcome。",
+      "tags": [
+        "tool-execution",
+        "recovery",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tools.ts:truncatedOutcome",
+      "type": "function",
+      "name": "truncatedOutcome",
+      "filePath": "packages/agent/src/harness/runtime/drive/tools.ts",
+      "lineRange": [
+        170,
+        181
+      ],
+      "summary": "为被截断的 tool 调用生成 truncated outcome。",
+      "tags": [
+        "tool-execution",
+        "recovery",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tools.ts:publishToolIntent",
+      "type": "function",
+      "name": "publishToolIntent",
+      "filePath": "packages/agent/src/harness/runtime/drive/tools.ts",
+      "lineRange": [
+        187,
+        227
+      ],
+      "summary": "发布 tool 即将执行的 intent 事件，并写入 pending/args。",
+      "tags": [
+        "tool-execution",
+        "event-handler",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tools.ts:publishToolOutcome",
+      "type": "function",
+      "name": "publishToolOutcome",
+      "filePath": "packages/agent/src/harness/runtime/drive/tools.ts",
+      "lineRange": [
+        229,
+        293
+      ],
+      "summary": "把 finalized tool 结果写入 pending output 并发布 outcome 事件。",
+      "tags": [
+        "tool-execution",
+        "event-handler",
+        "runtime"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tools.ts:clearReplayCheckpoint",
+      "type": "function",
+      "name": "clearReplayCheckpoint",
+      "filePath": "packages/agent/src/harness/runtime/drive/tools.ts",
+      "lineRange": [
+        295,
+        329
+      ],
+      "summary": "清除可回放检查点，避免重复执行已完成的 tool 调用。",
+      "tags": [
+        "tool-execution",
+        "recovery",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tools.ts:readCheckpoint",
+      "type": "function",
+      "name": "readCheckpoint",
+      "filePath": "packages/agent/src/harness/runtime/drive/tools.ts",
+      "lineRange": [
+        331,
+        340
+      ],
+      "summary": "读取指定 tool call 的 durable 进度检查点。",
+      "tags": [
+        "tool-execution",
+        "recovery",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tools.ts:performToolInvocation",
+      "type": "function",
+      "name": "performToolInvocation",
+      "filePath": "packages/agent/src/harness/runtime/drive/tools.ts",
+      "lineRange": [
+        350,
+        434
+      ],
+      "summary": "执行一次已准备好的 tool 调用，处理中止、中断与截断。",
+      "tags": [
+        "tool-execution",
+        "service",
+        "runtime"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tools.ts:prepareToolInvocation",
+      "type": "function",
+      "name": "prepareToolInvocation",
+      "filePath": "packages/agent/src/harness/runtime/drive/tools.ts",
+      "lineRange": [
+        436,
+        473
+      ],
+      "summary": "准备 tool 调用参数并应用 before-tool hook 决策。",
+      "tags": [
+        "tool-execution",
+        "validation",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tools.ts:startToolInvocation",
+      "type": "function",
+      "name": "startToolInvocation",
+      "filePath": "packages/agent/src/harness/runtime/drive/tools.ts",
+      "lineRange": [
+        475,
+        513
+      ],
+      "summary": "启动一次 tool 调用：发布 intent 后进入 perform。",
+      "tags": [
+        "tool-execution",
+        "service",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tools.ts:recoverToolInvocation",
+      "type": "function",
+      "name": "recoverToolInvocation",
+      "filePath": "packages/agent/src/harness/runtime/drive/tools.ts",
+      "lineRange": [
+        515,
+        540
+      ],
+      "summary": "从取消或中断中恢复一条 tool 调用。",
+      "tags": [
+        "tool-execution",
+        "recovery",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tools.ts:runSequential",
+      "type": "function",
+      "name": "runSequential",
+      "filePath": "packages/agent/src/harness/runtime/drive/tools.ts",
+      "lineRange": [
+        542,
+        609
+      ],
+      "summary": "按顺序执行 tool batch，并在每步后物化 ready 结果。",
+      "tags": [
+        "tool-execution",
+        "sequential",
+        "runtime"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tools.ts:runParallel",
+      "type": "function",
+      "name": "runParallel",
+      "filePath": "packages/agent/src/harness/runtime/drive/tools.ts",
+      "lineRange": [
+        611,
+        653
+      ],
+      "summary": "并行启动 batch 内各 tool 调用并等待全部完成。",
+      "tags": [
+        "tool-execution",
+        "parallel",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tools.ts:runTools",
+      "type": "function",
+      "name": "runTools",
+      "filePath": "packages/agent/src/harness/runtime/drive/tools.ts",
+      "lineRange": [
+        656,
+        692
+      ],
+      "summary": "读取当前 tool batch 并按配置分派顺序或并行执行。",
+      "tags": [
+        "tool-execution",
+        "entry-point",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/agent/src/harness/runtime/harness.ts:Harness",
+      "type": "class",
+      "name": "Harness",
+      "filePath": "packages/agent/src/harness/runtime/harness.ts",
+      "lineRange": [
+        29,
+        372
+      ],
+      "summary": "AgentHarness 运行时：持有 session、hooks、事件总线，并按名称构建/缓存 Lane。",
+      "tags": [
+        "service",
+        "runtime",
+        "entry-point"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/harness.ts:createAgentHarness",
+      "type": "function",
+      "name": "createAgentHarness",
+      "filePath": "packages/agent/src/harness/runtime/harness.ts",
+      "lineRange": [
+        375,
+        408
+      ],
+      "summary": "校验配置、从 session 恢复 lane，并构造未启动副作用的 Harness。",
+      "tags": [
+        "factory",
+        "entry-point",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/lane.ts:selectAcceptedInbox",
+      "type": "function",
+      "name": "selectAcceptedInbox",
+      "filePath": "packages/agent/src/harness/runtime/lane.ts",
+      "lineRange": [
+        143,
+        167
+      ],
+      "summary": "按 steering/follow-up 模式从 inbox 选出本轮可接受的项。",
+      "tags": [
+        "queue",
+        "policy",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/lane.ts:pendingEntryWrite",
+      "type": "function",
+      "name": "pendingEntryWrite",
+      "filePath": "packages/agent/src/harness/runtime/lane.ts",
+      "lineRange": [
+        187,
+        197
+      ],
+      "summary": "构造把 pending entry 写入 session values 的 Write。",
+      "tags": [
+        "session",
+        "serialization",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/lane.ts:capturedModel",
+      "type": "function",
+      "name": "capturedModel",
+      "filePath": "packages/agent/src/harness/runtime/lane.ts",
+      "lineRange": [
+        199,
+        218
+      ],
+      "summary": "从 operation 捕获当时使用的 model 身份。",
+      "tags": [
+        "runtime",
+        "model",
+        "harness"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/agent/src/harness/runtime/lane.ts:Lane",
+      "type": "class",
+      "name": "Lane",
+      "filePath": "packages/agent/src/harness/runtime/lane.ts",
+      "lineRange": [
+        221,
+        2012
+      ],
+      "summary": "单 lane 命令执行器：admission、drive、abort、队列与配置变更都走同一条命令线。",
+      "tags": [
+        "service",
+        "runtime",
+        "event-handler"
+      ],
+      "complexity": "complex",
+      "languageNotes": "把 UI 命令与 durable operation 续跑绑在 serialized mutation line 上。"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/progress.ts:readAssistantFrames",
+      "type": "function",
+      "name": "readAssistantFrames",
+      "filePath": "packages/agent/src/harness/runtime/progress.ts",
+      "lineRange": [
+        15,
+        33
+      ],
+      "summary": "从 pending assistant frames 读取指定 response 的帧列表。",
+      "tags": [
+        "streaming",
+        "transcript",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/progress.ts:openProgress",
+      "type": "function",
+      "name": "openProgress",
+      "filePath": "packages/agent/src/harness/runtime/progress.ts",
+      "lineRange": [
+        35,
+        67
+      ],
+      "summary": "打开一个把增量写入 session 并在仍持有 effect 时提交的进度通道。",
+      "tags": [
+        "streaming",
+        "channel",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/progress.ts:openFrameProgress",
+      "type": "function",
+      "name": "openFrameProgress",
+      "filePath": "packages/agent/src/harness/runtime/progress.ts",
+      "lineRange": [
+        69,
+        88
+      ],
+      "summary": "为 assistant response 打开 frame 进度通道。",
+      "tags": [
+        "streaming",
+        "assistant",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/progress.ts:openToolProgress",
+      "type": "function",
+      "name": "openToolProgress",
+      "filePath": "packages/agent/src/harness/runtime/progress.ts",
+      "lineRange": [
+        90,
+        117
+      ],
+      "summary": "为 tool 调用打开增量输出进度通道。",
+      "tags": [
+        "streaming",
+        "tool-execution",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/reducer.ts:reduceLaneSnapshot",
+      "type": "function",
+      "name": "reduceLaneSnapshot",
+      "filePath": "packages/agent/src/harness/runtime/reducer.ts",
+      "lineRange": [
+        22,
+        232
+      ],
+      "summary": "按事件类型更新 LaneSnapshot 上的 operation、工具与队列状态。",
+      "tags": [
+        "reducer",
+        "event-handler",
+        "runtime"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/restore.ts:stateMatchesIntent",
+      "type": "function",
+      "name": "stateMatchesIntent",
+      "filePath": "packages/agent/src/harness/runtime/restore.ts",
+      "lineRange": [
+        26,
+        45
+      ],
+      "summary": "检查 durable operation state 是否仍匹配其 intent。",
+      "tags": [
+        "validation",
+        "restore",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/restore.ts:classifyLaneStorage",
+      "type": "function",
+      "name": "classifyLaneStorage",
+      "filePath": "packages/agent/src/harness/runtime/restore.ts",
+      "lineRange": [
+        63,
+        76
+      ],
+      "summary": "根据已存 values 判断 lane 是空、完整还是损坏。",
+      "tags": [
+        "restore",
+        "validation",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/restore.ts:readLaneStorage",
+      "type": "function",
+      "name": "readLaneStorage",
+      "filePath": "packages/agent/src/harness/runtime/restore.ts",
+      "lineRange": [
+        78,
+        89
+      ],
+      "summary": "读取一条 lane 的 durable 配置、状态与 operation 切片。",
+      "tags": [
+        "restore",
+        "storage",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/restore.ts:restoreSession",
+      "type": "function",
+      "name": "restoreSession",
+      "filePath": "packages/agent/src/harness/runtime/restore.ts",
+      "lineRange": [
+        92,
+        115
+      ],
+      "summary": "扫描 session 中所有 lane 并恢复其进程内状态。",
+      "tags": [
+        "restore",
+        "session",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/restore.ts:restoreLane",
+      "type": "function",
+      "name": "restoreLane",
+      "filePath": "packages/agent/src/harness/runtime/restore.ts",
+      "lineRange": [
+        118,
+        129
+      ],
+      "summary": "恢复单条 lane 的存储切片为 LaneState。",
+      "tags": [
+        "restore",
+        "session",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/restore.ts:restoreLaneState",
+      "type": "function",
+      "name": "restoreLaneState",
+      "filePath": "packages/agent/src/harness/runtime/restore.ts",
+      "lineRange": [
+        131,
+        171
+      ],
+      "summary": "把已读取的 durable 切片物化为进程内 LaneState。",
+      "tags": [
+        "restore",
+        "runtime",
+        "harness"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/transcript.ts:chainEntries",
+      "type": "function",
+      "name": "chainEntries",
+      "filePath": "packages/agent/src/harness/runtime/transcript.ts",
+      "lineRange": [
+        12,
+        21
+      ],
+      "summary": "按 parentId 把新条目链接成 transcript 链。",
+      "tags": [
+        "transcript",
+        "utility",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/transcript.ts:entryLifecycleEvents",
+      "type": "function",
+      "name": "entryLifecycleEvents",
+      "filePath": "packages/agent/src/harness/runtime/transcript.ts",
+      "lineRange": [
+        23,
+        32
+      ],
+      "summary": "为单条 entry 生成生命周期 harness 事件。",
+      "tags": [
+        "transcript",
+        "event-handler",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/transcript.ts:committedEntryEvents",
+      "type": "function",
+      "name": "committedEntryEvents",
+      "filePath": "packages/agent/src/harness/runtime/transcript.ts",
+      "lineRange": [
+        34,
+        48
+      ],
+      "summary": "把一次 commit 中的新 entry 投影为生命周期事件。",
+      "tags": [
+        "transcript",
+        "event-handler",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/transcript.ts:readBoundedEntries",
+      "type": "function",
+      "name": "readBoundedEntries",
+      "filePath": "packages/agent/src/harness/runtime/transcript.ts",
+      "lineRange": [
+        50,
+        67
+      ],
+      "summary": "按 capability 边界读取 lane 上可见的 entry。",
+      "tags": [
+        "transcript",
+        "session",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/transcript.ts:readBoundedContext",
+      "type": "function",
+      "name": "readBoundedContext",
+      "filePath": "packages/agent/src/harness/runtime/transcript.ts",
+      "lineRange": [
+        69,
+        84
+      ],
+      "summary": "读取有界 session context，供模型请求使用。",
+      "tags": [
+        "transcript",
+        "context",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/transcript.ts:readLaneQueues",
+      "type": "function",
+      "name": "readLaneQueues",
+      "filePath": "packages/agent/src/harness/runtime/transcript.ts",
+      "lineRange": [
+        86,
+        112
+      ],
+      "summary": "读取 inbox 中排队的 steering/follow-up 消息。",
+      "tags": [
+        "transcript",
+        "queue",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/transcript.ts:readPendingMessages",
+      "type": "function",
+      "name": "readPendingMessages",
+      "filePath": "packages/agent/src/harness/runtime/transcript.ts",
+      "lineRange": [
+        114,
+        129
+      ],
+      "summary": "按 id 列表读取尚未提交的 pending 消息。",
+      "tags": [
+        "transcript",
+        "pending",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/agent/src/harness/runtime/types.ts:SliceNotImplemented",
+      "type": "class",
+      "name": "SliceNotImplemented",
+      "filePath": "packages/agent/src/harness/runtime/types.ts",
+      "lineRange": [
+        18,
+        23
+      ],
+      "summary": "标记尚未实现的 AgentHarness slice 操作。",
+      "tags": [
+        "error",
+        "type-definition",
+        "runtime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/agent/src/harness/runtime/types.ts:Drive",
+      "type": "class",
+      "name": "Drive",
+      "filePath": "packages/agent/src/harness/runtime/types.ts",
+      "lineRange": [
+        85,
+        141
+      ],
+      "summary": "一次进程内 drive pass：持有 effect gate、完成 Promise 与中止信号。",
+      "tags": [
+        "runtime",
+        "controller",
+        "harness"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "settle/fail 结束 completion，beginAbort/signalAbort/closeGate 控制 Gate。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "file:packages/agent/src/harness/execution/effect-gate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "file:packages/agent/src/harness/execution/tools.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "file:packages/agent/src/harness/runtime/lane.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "file:packages/agent/src/harness/runtime/progress.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "file:packages/agent/src/harness/runtime/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "file:packages/agent/src/harness/session/session.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "file:packages/agent/src/harness/session/values.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "file:packages/agent/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/harness.ts",
+      "target": "file:packages/agent/src/harness/agent-harness.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/harness.ts",
+      "target": "file:packages/agent/src/harness/compaction/compaction.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/harness.ts",
+      "target": "file:packages/agent/src/harness/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/harness.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/harness.ts",
+      "target": "file:packages/agent/src/harness/events.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/harness.ts",
+      "target": "file:packages/agent/src/harness/hooks.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/harness.ts",
+      "target": "file:packages/agent/src/harness/messages.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/harness.ts",
+      "target": "file:packages/agent/src/harness/result.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/harness.ts",
+      "target": "file:packages/agent/src/harness/runtime/lane.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/harness.ts",
+      "target": "file:packages/agent/src/harness/runtime/restore.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/harness.ts",
+      "target": "file:packages/agent/src/harness/runtime/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/harness.ts",
+      "target": "file:packages/agent/src/harness/session/session.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/harness.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/harness.ts",
+      "target": "file:packages/agent/src/harness/session/values.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/harness.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/harness.ts",
+      "target": "file:packages/agent/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/harness.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "file:packages/agent/src/harness/agent-harness.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "file:packages/agent/src/harness/compaction/branch-summarization.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "file:packages/agent/src/harness/compaction/compaction.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "file:packages/agent/src/harness/execution/tools.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "file:packages/agent/src/harness/hooks.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "file:packages/agent/src/harness/prompt-templates.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "file:packages/agent/src/harness/result.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "file:packages/agent/src/harness/runtime/progress.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "file:packages/agent/src/harness/runtime/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "file:packages/agent/src/harness/session/commit.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "file:packages/agent/src/harness/session/session.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "file:packages/agent/src/harness/session/values.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "file:packages/agent/src/harness/skills.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "file:packages/agent/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/progress.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/progress.ts",
+      "target": "file:packages/agent/src/harness/runtime/lane.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/progress.ts",
+      "target": "file:packages/agent/src/harness/runtime/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/progress.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/progress.ts",
+      "target": "file:packages/agent/src/harness/session/values.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/progress.ts",
+      "target": "file:packages/agent/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/progress.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/reducer.ts",
+      "target": "file:packages/agent/src/harness/agent-harness.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/reducer.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/restore.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/restore.ts",
+      "target": "file:packages/agent/src/harness/runtime/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/restore.ts",
+      "target": "file:packages/agent/src/harness/session/session.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/restore.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/restore.ts",
+      "target": "file:packages/agent/src/harness/session/values.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "file:packages/agent/src/harness/agent-harness.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "file:packages/agent/src/harness/runtime/lane.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "file:packages/agent/src/harness/runtime/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "file:packages/agent/src/harness/session/commit.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "file:packages/agent/src/harness/session/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "file:packages/agent/src/harness/session/session.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "file:packages/agent/src/harness/session/values.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "file:packages/agent/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/types.ts",
+      "target": "file:packages/agent/src/harness/agent-harness.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/types.ts",
+      "target": "file:packages/agent/src/harness/compaction/compaction.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/types.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/types.ts",
+      "target": "file:packages/agent/src/harness/execution/effect-gate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/types.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/types.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/types.ts",
+      "target": "file:packages/agent/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/types.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tools.ts:replaceCall",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tools.ts:invocationCapability",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tools.ts:syntheticMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tools.ts:interruptedOutcome",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tools.ts:truncatedOutcome",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tools.ts:publishToolIntent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tools.ts:publishToolOutcome",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tools.ts:clearReplayCheckpoint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tools.ts:readCheckpoint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tools.ts:performToolInvocation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tools.ts:prepareToolInvocation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tools.ts:startToolInvocation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tools.ts:recoverToolInvocation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tools.ts:runSequential",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tools.ts:runParallel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tools.ts:runTools",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tools.ts:runTools",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/harness.ts",
+      "target": "class:packages/agent/src/harness/runtime/harness.ts:Harness",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/harness.ts",
+      "target": "class:packages/agent/src/harness/runtime/harness.ts:Harness",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/harness.ts",
+      "target": "function:packages/agent/src/harness/runtime/harness.ts:createAgentHarness",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/harness.ts",
+      "target": "function:packages/agent/src/harness/runtime/harness.ts:createAgentHarness",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "function:packages/agent/src/harness/runtime/lane.ts:selectAcceptedInbox",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "function:packages/agent/src/harness/runtime/lane.ts:pendingEntryWrite",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "function:packages/agent/src/harness/runtime/lane.ts:capturedModel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "class:packages/agent/src/harness/runtime/lane.ts:Lane",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/lane.ts",
+      "target": "class:packages/agent/src/harness/runtime/lane.ts:Lane",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/progress.ts",
+      "target": "function:packages/agent/src/harness/runtime/progress.ts:readAssistantFrames",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/progress.ts",
+      "target": "function:packages/agent/src/harness/runtime/progress.ts:readAssistantFrames",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/progress.ts",
+      "target": "function:packages/agent/src/harness/runtime/progress.ts:openProgress",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/progress.ts",
+      "target": "function:packages/agent/src/harness/runtime/progress.ts:openFrameProgress",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/progress.ts",
+      "target": "function:packages/agent/src/harness/runtime/progress.ts:openFrameProgress",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/progress.ts",
+      "target": "function:packages/agent/src/harness/runtime/progress.ts:openToolProgress",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/progress.ts",
+      "target": "function:packages/agent/src/harness/runtime/progress.ts:openToolProgress",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/reducer.ts",
+      "target": "function:packages/agent/src/harness/runtime/reducer.ts:reduceLaneSnapshot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/reducer.ts",
+      "target": "function:packages/agent/src/harness/runtime/reducer.ts:reduceLaneSnapshot",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/restore.ts",
+      "target": "function:packages/agent/src/harness/runtime/restore.ts:stateMatchesIntent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/restore.ts",
+      "target": "function:packages/agent/src/harness/runtime/restore.ts:classifyLaneStorage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/restore.ts",
+      "target": "function:packages/agent/src/harness/runtime/restore.ts:readLaneStorage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/restore.ts",
+      "target": "function:packages/agent/src/harness/runtime/restore.ts:readLaneStorage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/restore.ts",
+      "target": "function:packages/agent/src/harness/runtime/restore.ts:restoreSession",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/restore.ts",
+      "target": "function:packages/agent/src/harness/runtime/restore.ts:restoreSession",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/restore.ts",
+      "target": "function:packages/agent/src/harness/runtime/restore.ts:restoreLane",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/restore.ts",
+      "target": "function:packages/agent/src/harness/runtime/restore.ts:restoreLane",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/restore.ts",
+      "target": "function:packages/agent/src/harness/runtime/restore.ts:restoreLaneState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/restore.ts",
+      "target": "function:packages/agent/src/harness/runtime/restore.ts:restoreLaneState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:chainEntries",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:chainEntries",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:entryLifecycleEvents",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:entryLifecycleEvents",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:committedEntryEvents",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:committedEntryEvents",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:readBoundedEntries",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:readBoundedEntries",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:readBoundedContext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:readBoundedContext",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:readLaneQueues",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:readLaneQueues",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:readPendingMessages",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:readPendingMessages",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/types.ts",
+      "target": "class:packages/agent/src/harness/runtime/types.ts:SliceNotImplemented",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/types.ts",
+      "target": "class:packages/agent/src/harness/runtime/types.ts:SliceNotImplemented",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/types.ts",
+      "target": "class:packages/agent/src/harness/runtime/types.ts:Drive",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/types.ts",
+      "target": "class:packages/agent/src/harness/runtime/types.ts:Drive",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/tools.ts:runTools",
+      "target": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:readToolBatchSource",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/tools.ts:runTools",
+      "target": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:materializeReady",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/tools.ts:performToolInvocation",
+      "target": "function:packages/agent/src/harness/execution/tools.ts:executeToolCall",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/tools.ts:performToolInvocation",
+      "target": "function:packages/agent/src/harness/execution/tools.ts:finalizeToolCall",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/tools.ts:prepareToolInvocation",
+      "target": "function:packages/agent/src/harness/execution/tools.ts:prepareToolCall",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/tools.ts:prepareToolInvocation",
+      "target": "function:packages/agent/src/harness/execution/tools.ts:applyBeforeToolDecision",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/tools.ts:publishToolOutcome",
+      "target": "function:packages/agent/src/harness/execution/tools.ts:toolResultFromMessage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/tools.ts:publishToolOutcome",
+      "target": "function:packages/agent/src/harness/execution/tools.ts:createToolResultMessage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/tools.ts:startToolInvocation",
+      "target": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:toolCallFor",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/tools.ts:runSequential",
+      "target": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:withToolBatch",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/tools.ts:runParallel",
+      "target": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:withToolBatch",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/harness.ts:createAgentHarness",
+      "target": "class:packages/agent/src/harness/runtime/harness.ts:Harness",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/harness.ts:createAgentHarness",
+      "target": "function:packages/agent/src/harness/config.ts:validateToolNames",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/harness.ts:createAgentHarness",
+      "target": "function:packages/agent/src/harness/config.ts:validateRetryPolicy",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/harness.ts:createAgentHarness",
+      "target": "function:packages/agent/src/harness/config.ts:validateCompactionSettings",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/agent/src/harness/runtime/lane.ts:Lane",
+      "target": "function:packages/agent/src/harness/runtime/drive.ts:driveOperation",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/agent/src/harness/runtime/lane.ts:Lane",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:durableBranchPreparation",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/agent/src/harness/runtime/lane.ts:Lane",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:durableCompactionPreparation",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/agent/src/harness/runtime/lane.ts:Lane",
+      "target": "function:packages/agent/src/harness/execution/tools.ts:toolResultFromMessage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/agent/src/harness/runtime/lane.ts:Lane",
+      "target": "function:packages/agent/src/harness/compaction/compaction.ts:prepareCompaction",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/agent/src/harness/runtime/lane.ts:Lane",
+      "target": "function:packages/agent/src/harness/compaction/branch-summarization.ts:prepareBranchEntries",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/agent/src/harness/runtime/lane.ts:Lane",
+      "target": "function:packages/agent/src/harness/prompt-templates.ts:formatPromptTemplateInvocation",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/agent/src/harness/runtime/lane.ts:Lane",
+      "target": "function:packages/agent/src/harness/skills.ts:formatSkillInvocation",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/agent/src/harness/runtime/lane.ts:Lane",
+      "target": "function:packages/agent/src/harness/context.ts:awaitWithContext",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/agent/src/harness/runtime/types.ts:Drive",
+      "target": "function:packages/agent/src/harness/execution/effect-gate.ts:createGate",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/progress.ts:openFrameProgress",
+      "target": "function:packages/agent/src/harness/runtime/progress.ts:openProgress",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/progress.ts:openToolProgress",
+      "target": "function:packages/agent/src/harness/runtime/progress.ts:openProgress",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/restore.ts:restoreSession",
+      "target": "function:packages/agent/src/harness/runtime/restore.ts:restoreLaneState",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/restore.ts:restoreLane",
+      "target": "function:packages/agent/src/harness/runtime/restore.ts:readLaneStorage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/transcript.ts:committedEntryEvents",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:entryLifecycleEvents",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

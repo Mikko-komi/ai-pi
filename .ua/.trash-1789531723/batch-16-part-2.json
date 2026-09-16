@@ -1,0 +1,1248 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/core/compaction/branch-summarization.ts",
+      "type": "file",
+      "name": "branch-summarization.ts",
+      "filePath": "packages/coding-agent/src/core/compaction/branch-summarization.ts",
+      "summary": "会话树切分支时收集被离开路径上的条目，按 token 预算裁剪后调用 LLM 生成分支摘要，并附带读写文件清单。",
+      "tags": [
+        "compaction",
+        "summarization",
+        "session"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:collectEntriesForBranchSummary",
+      "type": "function",
+      "name": "collectEntriesForBranchSummary",
+      "filePath": "packages/coding-agent/src/core/compaction/branch-summarization.ts",
+      "lineRange": [
+        108,
+        146
+      ],
+      "summary": "从 oldLeaf 回溯到与 target 的共同祖先，收集需摘要的 SessionEntry（含 compaction 边界）。",
+      "tags": [
+        "session",
+        "traversal",
+        "compaction"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:getMessageFromEntry",
+      "type": "function",
+      "name": "getMessageFromEntry",
+      "filePath": "packages/coding-agent/src/core/compaction/branch-summarization.ts",
+      "lineRange": [
+        156,
+        180
+      ],
+      "summary": "把 SessionEntry 转成可摘要的 AgentMessage：custom/branch_summary/compaction 走专用构造，其余取 message 字段。",
+      "tags": [
+        "session",
+        "message",
+        "adapter"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:prepareBranchEntries",
+      "type": "function",
+      "name": "prepareBranchEntries",
+      "filePath": "packages/coding-agent/src/core/compaction/branch-summarization.ts",
+      "lineRange": [
+        195,
+        247
+      ],
+      "summary": "从条目抽出消息与文件操作，按 token 预算从尾部保留最近上下文，得到 BranchPreparation。",
+      "tags": [
+        "compaction",
+        "token-budget",
+        "preparation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:generateBranchSummary",
+      "type": "function",
+      "name": "generateBranchSummary",
+      "filePath": "packages/coding-agent/src/core/compaction/branch-summarization.ts",
+      "lineRange": [
+        293,
+        382
+      ],
+      "summary": "序列化分支对话并调用 completeSummarization 生成摘要，校验失败/工具调用后附加文件操作列表。",
+      "tags": [
+        "summarization",
+        "llm",
+        "compaction"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "type": "file",
+      "name": "compaction.ts",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "summary": "长会话上下文压缩：估算 token、寻找安全切点、准备待摘要消息，再经 LLM 生成/更新摘要并处理拆分 turn。",
+      "tags": [
+        "compaction",
+        "summarization",
+        "token-budget"
+      ],
+      "complexity": "complex",
+      "languageNotes": "纯函数模块：I/O 交给 SessionManager，压缩后会话需重新加载。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:extractFileOperations",
+      "type": "function",
+      "name": "extractFileOperations",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        42,
+        70
+      ],
+      "summary": "从先前 compaction.details 与当前消息的工具调用中合并读写/编辑文件集合。",
+      "tags": [
+        "file-ops",
+        "compaction",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:combineUsage",
+      "type": "function",
+      "name": "combineUsage",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        99,
+        120
+      ],
+      "summary": "把两次 LLM Usage（含 cache/reasoning/cost）按字段相加，供拆分 turn 双摘要合并。",
+      "tags": [
+        "usage",
+        "aggregation",
+        "compaction"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:calculateContextTokens",
+      "type": "function",
+      "name": "calculateContextTokens",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        146,
+        148
+      ],
+      "summary": "由 Usage 计算上下文 token：input + cacheRead + cacheWrite。",
+      "tags": [
+        "token-budget",
+        "utility",
+        "compaction"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:getAssistantUsage",
+      "type": "function",
+      "name": "getAssistantUsage",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        154,
+        167
+      ],
+      "summary": "从 assistant 消息提取 usage，缺省时回退 calculateContextTokens。",
+      "tags": [
+        "usage",
+        "message",
+        "compaction"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:getLastAssistantUsage",
+      "type": "function",
+      "name": "getLastAssistantUsage",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        172,
+        181
+      ],
+      "summary": "从会话条目中取最近一条 assistant 的 usage，供压缩阈值判断。",
+      "tags": [
+        "usage",
+        "session",
+        "compaction"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:estimateContextTokens",
+      "type": "function",
+      "name": "estimateContextTokens",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        202,
+        230
+      ],
+      "summary": "优先用真实 usage，否则按消息启发式估算上下文 token 与来源。",
+      "tags": [
+        "token-budget",
+        "estimation",
+        "compaction"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:shouldCompact",
+      "type": "function",
+      "name": "shouldCompact",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        235,
+        238
+      ],
+      "summary": "比较 contextTokens 与窗口减去 reserveTokens，决定是否触发压缩。",
+      "tags": [
+        "compaction",
+        "threshold",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:estimateTextAndImageContentChars",
+      "type": "function",
+      "name": "estimateTextAndImageContentChars",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        246,
+        260
+      ],
+      "summary": "累计文本块字符与图像占位字符，供启发式 token 估算。",
+      "tags": [
+        "estimation",
+        "content",
+        "compaction"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:estimateTokens",
+      "type": "function",
+      "name": "estimateTokens",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        266,
+        306
+      ],
+      "summary": "按角色估算单条消息 token：文本/图像、tool 参数 JSON 与结果文本分别换算。",
+      "tags": [
+        "token-budget",
+        "estimation",
+        "compaction"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:isCutPointMessage",
+      "type": "function",
+      "name": "isCutPointMessage",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        308,
+        321
+      ],
+      "summary": "判断消息是否可作为压缩切点（用户/自定义边界消息）。",
+      "tags": [
+        "compaction",
+        "cut-point",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:isTurnStartMessage",
+      "type": "function",
+      "name": "isTurnStartMessage",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        323,
+        336
+      ],
+      "summary": "判断消息是否为一轮对话起点，避免在 turn 中间误切。",
+      "tags": [
+        "compaction",
+        "turn",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:findValidCutPoints",
+      "type": "function",
+      "name": "findValidCutPoints",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        351,
+        363
+      ],
+      "summary": "在条目区间内扫描可安全切断的索引列表。",
+      "tags": [
+        "compaction",
+        "cut-point",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:findTurnStartIndex",
+      "type": "function",
+      "name": "findTurnStartIndex",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        369,
+        376
+      ],
+      "summary": "从给定条目向前找到所属 turn 的起始索引。",
+      "tags": [
+        "compaction",
+        "turn",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:findCutPoint",
+      "type": "function",
+      "name": "findCutPoint",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        403,
+        461
+      ],
+      "summary": "在 keepRecentTokens 约束下选择 firstKept 与可选拆分 turn 的 cut point，保证切在合法边界。",
+      "tags": [
+        "compaction",
+        "cut-point",
+        "token-budget"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:getSummarizationFailure",
+      "type": "function",
+      "name": "getSummarizationFailure",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        545,
+        553
+      ],
+      "summary": "把 summarization 的 error/length stopReason 转成不可落盘的失败说明。",
+      "tags": [
+        "error-handling",
+        "summarization",
+        "compaction"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:createSummarizationOptions",
+      "type": "function",
+      "name": "createSummarizationOptions",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        555,
+        570
+      ],
+      "summary": "组装 SimpleStreamOptions，并在模型支持时附上 reasoning/thinkingLevel。",
+      "tags": [
+        "llm",
+        "options",
+        "compaction"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:completeSummarization",
+      "type": "function",
+      "name": "completeSummarization",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        579,
+        599
+      ],
+      "summary": "压缩/分支摘要的统一 LLM 出口：禁用 cache、分配 sessionId，并用 retryAssistantCall 包裹 stream/completeSimple。",
+      "tags": [
+        "llm",
+        "retry",
+        "summarization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:generateSummary",
+      "type": "function",
+      "name": "generateSummary",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        605,
+        639
+      ],
+      "summary": "generateSummaryWithUsage 的薄封装，只返回摘要文本。",
+      "tags": [
+        "summarization",
+        "llm",
+        "compaction"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:buildSummarizationContext",
+      "type": "function",
+      "name": "buildSummarizationContext",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        642,
+        653
+      ],
+      "summary": "用系统提示与用户 prompt 构造一次性 Context。",
+      "tags": [
+        "summarization",
+        "context",
+        "compaction"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:generateSummaryWithUsage",
+      "type": "function",
+      "name": "generateSummaryWithUsage",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        656,
+        726
+      ],
+      "summary": "序列化对话（可合并 previousSummary），调用 LLM 生成摘要并返回 usage；拒绝不完整或带 toolCall 的响应。",
+      "tags": [
+        "summarization",
+        "llm",
+        "usage"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:prepareCompaction",
+      "type": "function",
+      "name": "prepareCompaction",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        750,
+        829
+      ],
+      "summary": "定位上次 compaction 边界、估算 token、找 cut point，拆出待摘要消息/turn 前缀与文件操作。",
+      "tags": [
+        "compaction",
+        "preparation",
+        "session"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:compact",
+      "type": "function",
+      "name": "compact",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        858,
+        964
+      ],
+      "summary": "按 preparation 生成历史摘要，必要时再摘要拆分 turn 前缀，合并 usage 并附加文件清单后返回 CompactionResult。",
+      "tags": [
+        "compaction",
+        "summarization",
+        "llm"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/compaction.ts:generateTurnPrefixSummary",
+      "type": "function",
+      "name": "generateTurnPrefixSummary",
+      "filePath": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "lineRange": [
+        969,
+        1012
+      ],
+      "summary": "对过大 turn 被切掉的前缀单独做 LLM 摘要，供 suffix 保留上下文。",
+      "tags": [
+        "summarization",
+        "turn",
+        "llm"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/compaction/utils.ts",
+      "type": "file",
+      "name": "utils.ts",
+      "filePath": "packages/coding-agent/src/core/compaction/utils.ts",
+      "summary": "压缩/分支摘要的共享工具：从消息提取文件操作、格式化文件列表，以及把对话序列化成可送入摘要 prompt 的文本。",
+      "tags": [
+        "utility",
+        "compaction",
+        "serialization"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/utils.ts:createFileOps",
+      "type": "function",
+      "name": "createFileOps",
+      "filePath": "packages/coding-agent/src/core/compaction/utils.ts",
+      "lineRange": [
+        18,
+        24
+      ],
+      "summary": "创建空的 read/written/edited 文件路径集合。",
+      "tags": [
+        "factory",
+        "file-ops",
+        "compaction"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/utils.ts:extractFileOpsFromMessage",
+      "type": "function",
+      "name": "extractFileOpsFromMessage",
+      "filePath": "packages/coding-agent/src/core/compaction/utils.ts",
+      "lineRange": [
+        29,
+        56
+      ],
+      "summary": "扫描消息中的 read/write/edit 工具调用，把路径写入 FileOperations。",
+      "tags": [
+        "file-ops",
+        "tool-call",
+        "compaction"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/utils.ts:computeFileLists",
+      "type": "function",
+      "name": "computeFileLists",
+      "filePath": "packages/coding-agent/src/core/compaction/utils.ts",
+      "lineRange": [
+        62,
+        67
+      ],
+      "summary": "从 FileOperations 算出只读文件与已修改文件的排序列表。",
+      "tags": [
+        "file-ops",
+        "aggregation",
+        "compaction"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/utils.ts:formatFileOperations",
+      "type": "function",
+      "name": "formatFileOperations",
+      "filePath": "packages/coding-agent/src/core/compaction/utils.ts",
+      "lineRange": [
+        72,
+        82
+      ],
+      "summary": "把读写文件列表格式化为可追加到摘要末尾的 Markdown 段落。",
+      "tags": [
+        "formatting",
+        "summarization",
+        "compaction"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/compaction/utils.ts:serializeConversation",
+      "type": "function",
+      "name": "serializeConversation",
+      "filePath": "packages/coding-agent/src/core/compaction/utils.ts",
+      "lineRange": [
+        109,
+        150
+      ],
+      "summary": "把 LLM 消息展平为带角色标签的文本，截断过长结果，避免模型把摘要当成对话续写。",
+      "tags": [
+        "serialization",
+        "summarization",
+        "compaction"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/branch-summarization.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/branch-summarization.ts",
+      "target": "file:packages/ai/src/compat.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/branch-summarization.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/branch-summarization.ts",
+      "target": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/branch-summarization.ts",
+      "target": "file:packages/coding-agent/src/core/compaction/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/branch-summarization.ts",
+      "target": "file:packages/coding-agent/src/core/messages.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/branch-summarization.ts",
+      "target": "file:packages/coding-agent/src/core/session-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "file:packages/ai/src/compat.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "file:packages/coding-agent/src/core/compaction/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "file:packages/coding-agent/src/core/messages.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "file:packages/coding-agent/src/core/session-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/utils.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/utils.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/branch-summarization.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:collectEntriesForBranchSummary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/branch-summarization.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:getMessageFromEntry",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/branch-summarization.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:prepareBranchEntries",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/branch-summarization.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:generateBranchSummary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:extractFileOperations",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:combineUsage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:calculateContextTokens",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:getAssistantUsage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:getLastAssistantUsage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:estimateContextTokens",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:shouldCompact",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:estimateTextAndImageContentChars",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:estimateTokens",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:isCutPointMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:isTurnStartMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:findValidCutPoints",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:findTurnStartIndex",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:findCutPoint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:getSummarizationFailure",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:createSummarizationOptions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:completeSummarization",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:generateSummary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:buildSummarizationContext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:generateSummaryWithUsage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:prepareCompaction",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:compact",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:generateTurnPrefixSummary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/utils.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/utils.ts:createFileOps",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/utils.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/utils.ts:extractFileOpsFromMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/utils.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/utils.ts:computeFileLists",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/utils.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/utils.ts:formatFileOperations",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/utils.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/utils.ts:serializeConversation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/branch-summarization.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:collectEntriesForBranchSummary",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/branch-summarization.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:prepareBranchEntries",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/branch-summarization.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:generateBranchSummary",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:calculateContextTokens",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:getLastAssistantUsage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:estimateContextTokens",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:shouldCompact",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:estimateTokens",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:findTurnStartIndex",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:findCutPoint",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:getSummarizationFailure",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:completeSummarization",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:generateSummary",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:generateSummaryWithUsage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:prepareCompaction",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/compaction.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:compact",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/utils.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/utils.ts:createFileOps",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/utils.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/utils.ts:extractFileOpsFromMessage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/utils.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/utils.ts:computeFileLists",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/utils.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/utils.ts:formatFileOperations",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/compaction/utils.ts",
+      "target": "function:packages/coding-agent/src/core/compaction/utils.ts:serializeConversation",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:getMessageFromEntry",
+      "target": "function:packages/coding-agent/src/core/messages.ts:createCustomMessage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:getMessageFromEntry",
+      "target": "function:packages/coding-agent/src/core/messages.ts:createBranchSummaryMessage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:getMessageFromEntry",
+      "target": "function:packages/coding-agent/src/core/messages.ts:createCompactionSummaryMessage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:prepareBranchEntries",
+      "target": "function:packages/coding-agent/src/core/compaction/utils.ts:createFileOps",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:prepareBranchEntries",
+      "target": "function:packages/coding-agent/src/core/compaction/utils.ts:extractFileOpsFromMessage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:prepareBranchEntries",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:estimateTokens",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:generateBranchSummary",
+      "target": "function:packages/coding-agent/src/core/messages.ts:convertToLlm",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:generateBranchSummary",
+      "target": "function:packages/coding-agent/src/core/compaction/utils.ts:serializeConversation",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:generateBranchSummary",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:completeSummarization",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:generateBranchSummary",
+      "target": "function:packages/coding-agent/src/core/compaction/compaction.ts:getSummarizationFailure",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:generateBranchSummary",
+      "target": "function:packages/ai/src/index.ts:contentText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:generateBranchSummary",
+      "target": "function:packages/coding-agent/src/core/compaction/utils.ts:computeFileLists",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/branch-summarization.ts:generateBranchSummary",
+      "target": "function:packages/coding-agent/src/core/compaction/utils.ts:formatFileOperations",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/compaction.ts:extractFileOperations",
+      "target": "function:packages/coding-agent/src/core/compaction/utils.ts:createFileOps",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/compaction.ts:extractFileOperations",
+      "target": "function:packages/coding-agent/src/core/compaction/utils.ts:extractFileOpsFromMessage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/compaction.ts:findCutPoint",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:sessionEntryToContextMessages",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/compaction.ts:completeSummarization",
+      "target": "function:packages/ai/src/index.ts:uuidv7",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/compaction.ts:completeSummarization",
+      "target": "function:packages/ai/src/compat.ts:completeSimple",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/compaction.ts:generateSummaryWithUsage",
+      "target": "function:packages/coding-agent/src/core/messages.ts:convertToLlm",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/compaction.ts:generateSummaryWithUsage",
+      "target": "function:packages/coding-agent/src/core/compaction/utils.ts:serializeConversation",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/compaction.ts:generateSummaryWithUsage",
+      "target": "function:packages/ai/src/index.ts:contentText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/compaction.ts:prepareCompaction",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:buildSessionContext",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/compaction.ts:prepareCompaction",
+      "target": "function:packages/coding-agent/src/core/compaction/utils.ts:extractFileOpsFromMessage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/compaction.ts:compact",
+      "target": "function:packages/coding-agent/src/core/compaction/utils.ts:computeFileLists",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/compaction.ts:compact",
+      "target": "function:packages/coding-agent/src/core/compaction/utils.ts:formatFileOperations",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/compaction/utils.ts:serializeConversation",
+      "target": "function:packages/ai/src/index.ts:contentText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

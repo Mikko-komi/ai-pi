@@ -1,0 +1,715 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/cli/experimental/commands/client.ts",
+      "type": "file",
+      "name": "client.ts",
+      "filePath": "packages/coding-agent/src/cli/experimental/commands/client.ts",
+      "summary": "定义 experimental client 子命令：连接、会话选择、模型/插件与 prompt，并回调 context.runClient。",
+      "tags": [
+        "cli",
+        "command",
+        "client",
+        "experimental"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/cli/experimental/commands/server.ts",
+      "type": "file",
+      "name": "server.ts",
+      "filePath": "packages/coding-agent/src/cli/experimental/commands/server.ts",
+      "summary": "定义 experimental server 子命令：serverId、sessionDir、模型与插件包，并回调 context.runServer。",
+      "tags": [
+        "cli",
+        "command",
+        "server",
+        "experimental"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/client-runtime.ts",
+      "type": "file",
+      "name": "client-runtime.ts",
+      "filePath": "packages/coding-agent/src/experimental/client-runtime.ts",
+      "summary": "打开 experimental 客户端运行时：发现或激活 Unix/Radius server，挂上 server/session 服务源并支持重连。",
+      "tags": [
+        "client",
+        "runtime",
+        "service",
+        "experimental"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/client-runtime.ts:openClientRuntime",
+      "type": "function",
+      "name": "openClientRuntime",
+      "filePath": "packages/coding-agent/src/experimental/client-runtime.ts",
+      "lineRange": [
+        53,
+        183
+      ],
+      "summary": "按 ClientCommand 解析路由、建立 Client 与服务源，自动激活本地 server，并返回可 dispose 的 ClientRuntime。",
+      "tags": [
+        "factory",
+        "client",
+        "runtime",
+        "lifecycle"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/client-runtime.ts:activateBuiltinClientServices",
+      "type": "function",
+      "name": "activateBuiltinClientServices",
+      "filePath": "packages/coding-agent/src/experimental/client-runtime.ts",
+      "lineRange": [
+        186,
+        223
+      ],
+      "summary": "打开 server/session 命名空间，绑定 SessionDirectory/Management/Plugins/Models/AgentController/Transcript。",
+      "tags": [
+        "service",
+        "activation",
+        "client"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "type": "file",
+      "name": "client-tui.ts",
+      "filePath": "packages/coding-agent/src/experimental/client-tui.ts",
+      "summary": "experimental 交互 TUI：基于复制的 main-lane snapshot 渲染聊天、斜杠命令、会话选择与主题。",
+      "tags": [
+        "tui",
+        "component",
+        "client",
+        "experimental"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:packages/coding-agent/src/experimental/client-tui.ts:ExperimentalClientTui",
+      "type": "class",
+      "name": "ExperimentalClientTui",
+      "filePath": "packages/coding-agent/src/experimental/client-tui.ts",
+      "lineRange": [
+        91,
+        627
+      ],
+      "summary": "实现 TUI Component：组装 viewport/editor/slash-command，驱动 AgentController 与 PresentationUI。",
+      "tags": [
+        "tui",
+        "component",
+        "client"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/client-tui.ts:prepareClientSession",
+      "type": "function",
+      "name": "prepareClientSession",
+      "filePath": "packages/coding-agent/src/experimental/client-tui.ts",
+      "lineRange": [
+        629,
+        725
+      ],
+      "summary": "打开 runtime、列举或创建 session，加载 presentation plugin artifacts，返回 PreparedClientSession。",
+      "tags": [
+        "session",
+        "client",
+        "plugin"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/client-tui.ts:runClientTui",
+      "type": "function",
+      "name": "runClientTui",
+      "filePath": "packages/coding-agent/src/experimental/client-tui.ts",
+      "lineRange": [
+        727,
+        795
+      ],
+      "summary": "创建 interactive TUI 与 ExperimentalClientTui，处理会话选择后进入主循环。",
+      "tags": [
+        "entry-point",
+        "tui",
+        "client"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/commands/client.ts",
+      "target": "file:packages/coding-agent/src/cli/experimental/command-options.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/commands/client.ts",
+      "target": "file:packages/coding-agent/src/cli/experimental/command.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/commands/server.ts",
+      "target": "file:packages/coding-agent/src/cli/experimental/command-options.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/commands/server.ts",
+      "target": "file:packages/coding-agent/src/cli/experimental/command.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/commands/server.ts",
+      "target": "file:packages/protocol/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-runtime.ts",
+      "target": "file:packages/chord/src/context/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-runtime.ts",
+      "target": "file:packages/client/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-runtime.ts",
+      "target": "file:packages/client/src/unix.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-runtime.ts",
+      "target": "file:packages/coding-agent/src/cli/experimental/commands/client.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-runtime.ts",
+      "target": "file:packages/coding-agent/src/experimental/radius-auth.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-runtime.ts",
+      "target": "file:packages/coding-agent/src/experimental/radius-relay.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-runtime.ts",
+      "target": "file:packages/coding-agent/src/experimental/server.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-runtime.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/agent-controller.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-runtime.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/connection.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-runtime.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-runtime.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/plugins.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-runtime.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/sessions.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-runtime.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/transcript.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-runtime.ts",
+      "target": "file:packages/protocol/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/chord/src/context/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/coding-agent/src/cli/experimental/commands/client.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/coding-agent/src/core/keybindings.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/coding-agent/src/core/resource-loader.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/coding-agent/src/core/settings-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/coding-agent/src/experimental/client-runtime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/coding-agent/src/experimental/client-tui-chat.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/coding-agent/src/experimental/plugins/bundled.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/agent-controller.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/connection.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/plugins.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/presentation-ui.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/sessions.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/slash-commands.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/transcript.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/chat-viewport.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/custom-editor.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme-controller.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/tui-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-runtime.ts",
+      "target": "function:packages/coding-agent/src/experimental/client-runtime.ts:openClientRuntime",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-runtime.ts",
+      "target": "function:packages/coding-agent/src/experimental/client-runtime.ts:activateBuiltinClientServices",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-runtime.ts",
+      "target": "function:packages/coding-agent/src/experimental/client-runtime.ts:openClientRuntime",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-runtime.ts",
+      "target": "function:packages/coding-agent/src/experimental/client-runtime.ts:activateBuiltinClientServices",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/client-runtime.ts:openClientRuntime",
+      "target": "function:packages/client/src/unix.ts:discoverUnixServers",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/client-runtime.ts:openClientRuntime",
+      "target": "function:packages/client/src/unix.ts:createUnixTransportFactory",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/client-runtime.ts:openClientRuntime",
+      "target": "class:packages/client/src/client.ts:Client",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/client-runtime.ts:openClientRuntime",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:resolveServerDirectory",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/client-runtime.ts:openClientRuntime",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:resolveSessionDirectory",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/client-runtime.ts:openClientRuntime",
+      "target": "function:packages/coding-agent/src/experimental/server.ts:activateServer",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/client-runtime.ts:openClientRuntime",
+      "target": "function:packages/coding-agent/src/experimental/radius-relay.ts:createRadiusClientTransportFactory",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/client-runtime.ts:openClientRuntime",
+      "target": "class:packages/coding-agent/src/experimental/radius-relay.ts:RadiusClientReconnect",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/client-runtime.ts:openClientRuntime",
+      "target": "class:packages/coding-agent/src/experimental/radius-auth.ts:RadiusRelayAuthResolver",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/client-runtime.ts:openClientRuntime",
+      "target": "function:packages/coding-agent/src/experimental/services/connection.ts:createServerServiceSource",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/client-runtime.ts:openClientRuntime",
+      "target": "function:packages/coding-agent/src/experimental/services/connection.ts:createSessionServiceSource",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/client-runtime.ts:activateBuiltinClientServices",
+      "target": "class:packages/coding-agent/src/experimental/services/sessions.ts:SessionDirectory",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/client-runtime.ts:activateBuiltinClientServices",
+      "target": "class:packages/coding-agent/src/experimental/services/sessions.ts:SessionManagement",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "class:packages/coding-agent/src/experimental/client-tui.ts:ExperimentalClientTui",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "function:packages/coding-agent/src/experimental/client-tui.ts:prepareClientSession",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "function:packages/coding-agent/src/experimental/client-tui.ts:runClientTui",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "class:packages/coding-agent/src/experimental/client-tui.ts:ExperimentalClientTui",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui.ts",
+      "target": "function:packages/coding-agent/src/experimental/client-tui.ts:runClientTui",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/client-tui.ts:ExperimentalClientTui",
+      "target": "function:packages/coding-agent/src/experimental/client-tui.ts:prepareClientSession",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/client-tui.ts:runClientTui",
+      "target": "class:packages/coding-agent/src/experimental/client-tui.ts:ExperimentalClientTui",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/client-tui.ts:prepareClientSession",
+      "target": "function:packages/coding-agent/src/experimental/client-runtime.ts:openClientRuntime",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/client-tui.ts:runClientTui",
+      "target": "function:packages/coding-agent/src/experimental/client-runtime.ts:openClientRuntime",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/client-tui.ts:ExperimentalClientTui",
+      "target": "function:packages/tui/src/index.ts:setKeybindings",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/client-tui.ts:ExperimentalClientTui",
+      "target": "function:packages/coding-agent/src/modes/interactive/chat-viewport.ts:createChatViewport",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/client-tui.ts:ExperimentalClientTui",
+      "target": "function:packages/coding-agent/src/modes/interactive/tui-renderer.ts:createInteractiveTui",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/client-tui.ts:ExperimentalClientTui",
+      "target": "class:packages/coding-agent/src/experimental/client-tui-chat.ts:ExperimentalChatView",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/client-tui.ts:ExperimentalClientTui",
+      "target": "class:packages/coding-agent/src/core/keybindings.ts:KeybindingsManager",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/client-tui.ts:prepareClientSession",
+      "target": "function:packages/coding-agent/src/experimental/plugins/bundled.ts:createPresentationFacetLoaders",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/client-tui.ts:ExperimentalClientTui",
+      "target": "class:packages/tui/src/index.ts:Component",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/commands/client.ts",
+      "target": "class:packages/coding-agent/src/cli/experimental/command.ts:Command",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/commands/client.ts",
+      "target": "function:packages/coding-agent/src/cli/experimental/command-options.ts:parseAuth",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/commands/server.ts",
+      "target": "class:packages/coding-agent/src/cli/experimental/command.ts:Command",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/commands/server.ts",
+      "target": "function:packages/coding-agent/src/cli/experimental/command-options.ts:parseAuth",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/experimental/commands/server.ts",
+      "target": "function:packages/protocol/src/index.ts:isServerId",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

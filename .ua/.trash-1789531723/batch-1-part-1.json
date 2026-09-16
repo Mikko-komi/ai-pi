@@ -1,0 +1,365 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/agent/src/node.ts",
+      "type": "file",
+      "name": "node.ts",
+      "filePath": "packages/agent/src/node.ts",
+      "summary": "Node 运行时 barrel：再导出 NodeExecutionEnv 以及 @pi-agent-core 公共 API，供 experimental server 绑定本机执行环境。",
+      "tags": [
+        "barrel",
+        "入口点",
+        "node",
+        "execution-env"
+      ],
+      "complexity": "simple",
+      "languageNotes": "仅做 export 转发，不包含实现。"
+    },
+    {
+      "id": "file:packages/chord/src/bundler.ts",
+      "type": "file",
+      "name": "bundler.ts",
+      "filePath": "packages/chord/src/bundler.ts",
+      "summary": "Chord Node bundler 的公开入口：再导出 bundleFacets / bundleFacetPackage 及对应类型，供插件打包使用。",
+      "tags": [
+        "barrel",
+        "bundler",
+        "plugin",
+        "node"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/chord/src/context/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/chord/src/context/index.ts",
+      "summary": "实现 Chord Context：不可变键值链、AbortSignal 派生，以及可随 context 取消的 awaitWithContext。",
+      "tags": [
+        "context",
+        "cancellation",
+        "utility",
+        "type-definition"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "采用类似 Go context 的不可变派生：withContextValue / withAbortSignal / withCancel 返回新 Context，不修改父级。"
+    },
+    {
+      "id": "function:packages/chord/src/context/index.ts:createContextKey",
+      "type": "function",
+      "name": "createContextKey",
+      "filePath": "packages/chord/src/context/index.ts",
+      "lineRange": [
+        58,
+        60
+      ],
+      "summary": "用 Symbol token 创建冻结的 ContextKey，供 withContextValue 存取类型安全的上下文值。",
+      "tags": [
+        "factory",
+        "context",
+        "type-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/chord/src/context/index.ts:withContextValue",
+      "type": "function",
+      "name": "withContextValue",
+      "filePath": "packages/chord/src/context/index.ts",
+      "lineRange": [
+        63,
+        65
+      ],
+      "summary": "从 parent 派生一层 ContextValue，覆盖或新增单个 key。",
+      "tags": [
+        "context",
+        "factory",
+        "immutable"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/chord/src/context/index.ts:withAbortSignal",
+      "type": "function",
+      "name": "withAbortSignal",
+      "filePath": "packages/chord/src/context/index.ts",
+      "lineRange": [
+        71,
+        75
+      ],
+      "summary": "把外部 AbortSignal 与父 context 信号用 AbortSignal.any 合并后写入新 context。",
+      "tags": [
+        "context",
+        "cancellation",
+        "abort-signal"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/chord/src/context/index.ts:withoutAbortSignal",
+      "type": "function",
+      "name": "withoutAbortSignal",
+      "filePath": "packages/chord/src/context/index.ts",
+      "lineRange": [
+        78,
+        80
+      ],
+      "summary": "派生一个清除了 AbortSignal 的 context，使后续 await 不再跟随父级取消。",
+      "tags": [
+        "context",
+        "cancellation",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/chord/src/context/index.ts:withCancel",
+      "type": "function",
+      "name": "withCancel",
+      "filePath": "packages/chord/src/context/index.ts",
+      "lineRange": [
+        83,
+        92
+      ],
+      "summary": "派生带独立 AbortController 的 context，并返回 cancel 回调。",
+      "tags": [
+        "context",
+        "cancellation",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/chord/src/context/index.ts:awaitWithContext",
+      "type": "function",
+      "name": "awaitWithContext",
+      "filePath": "packages/chord/src/context/index.ts",
+      "lineRange": [
+        98,
+        116
+      ],
+      "summary": "等待 promise，同时在 context AbortSignal 触发时立刻 reject，并清理 listener。",
+      "tags": [
+        "context",
+        "cancellation",
+        "promise"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/chord/src/context/index.ts:BaseContext",
+      "type": "class",
+      "name": "BaseContext",
+      "filePath": "packages/chord/src/context/index.ts",
+      "lineRange": [
+        7,
+        14
+      ],
+      "summary": "Context 抽象基类：约定 value/toString，并通过固定 key 暴露 abortSignal。",
+      "tags": [
+        "context",
+        "abstract",
+        "base-class"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/chord/src/context/index.ts:EmptyContext",
+      "type": "class",
+      "name": "EmptyContext",
+      "filePath": "packages/chord/src/context/index.ts",
+      "lineRange": [
+        16,
+        31
+      ],
+      "summary": "空上下文实现：lookup 恒为 undefined，用作 BACKGROUND_CONTEXT / TODO_CONTEXT。",
+      "tags": [
+        "context",
+        "sentinel",
+        "immutable"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/chord/src/context/index.ts:ContextValue",
+      "type": "class",
+      "name": "ContextValue",
+      "filePath": "packages/chord/src/context/index.ts",
+      "lineRange": [
+        33,
+        53
+      ],
+      "summary": "单键覆盖的链表节点：本层命中则返回值，否则委托 parent.value。",
+      "tags": [
+        "context",
+        "immutable",
+        "linked-list"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/chord/src/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/chord/src/index.ts",
+      "summary": "Chord 组合运行时的公共 barrel：导出 facet/service API、远程服务编解码与全部核心类型。",
+      "tags": [
+        "barrel",
+        "入口点",
+        "facet",
+        "service"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "纯再导出，实现分别在 api.ts、services/* 与 types.ts。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/chord/src/context/index.ts",
+      "target": "file:packages/chord/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/context/index.ts",
+      "target": "function:packages/chord/src/context/index.ts:createContextKey",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/chord/src/context/index.ts",
+      "target": "function:packages/chord/src/context/index.ts:withContextValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/chord/src/context/index.ts",
+      "target": "function:packages/chord/src/context/index.ts:withAbortSignal",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/chord/src/context/index.ts",
+      "target": "function:packages/chord/src/context/index.ts:withoutAbortSignal",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/chord/src/context/index.ts",
+      "target": "function:packages/chord/src/context/index.ts:withCancel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/chord/src/context/index.ts",
+      "target": "function:packages/chord/src/context/index.ts:awaitWithContext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/chord/src/context/index.ts",
+      "target": "class:packages/chord/src/context/index.ts:BaseContext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/chord/src/context/index.ts",
+      "target": "class:packages/chord/src/context/index.ts:EmptyContext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/chord/src/context/index.ts",
+      "target": "class:packages/chord/src/context/index.ts:ContextValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/chord/src/context/index.ts",
+      "target": "function:packages/chord/src/context/index.ts:createContextKey",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/context/index.ts",
+      "target": "function:packages/chord/src/context/index.ts:withContextValue",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/context/index.ts",
+      "target": "function:packages/chord/src/context/index.ts:withAbortSignal",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/context/index.ts",
+      "target": "function:packages/chord/src/context/index.ts:withoutAbortSignal",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/context/index.ts",
+      "target": "function:packages/chord/src/context/index.ts:withCancel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/context/index.ts",
+      "target": "function:packages/chord/src/context/index.ts:awaitWithContext",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/chord/src/context/index.ts:EmptyContext",
+      "target": "class:packages/chord/src/context/index.ts:BaseContext",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/chord/src/context/index.ts:ContextValue",
+      "target": "class:packages/chord/src/context/index.ts:BaseContext",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "function:packages/chord/src/context/index.ts:withAbortSignal",
+      "target": "function:packages/chord/src/context/index.ts:withContextValue",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/chord/src/context/index.ts:withoutAbortSignal",
+      "target": "function:packages/chord/src/context/index.ts:withContextValue",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/chord/src/context/index.ts:withCancel",
+      "target": "function:packages/chord/src/context/index.ts:withAbortSignal",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

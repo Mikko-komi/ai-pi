@@ -1,0 +1,33 @@
+{
+  "projectRoot": "/Users/elex-mb0203/MyWork/agent-projects/ai-pi",
+  "batchFiles": [
+    {"path": "AGENTS.md", "language": "markdown", "sizeLines": 124, "fileCategory": "docs"},
+    {"path": "CONTRIBUTING.md", "language": "markdown", "sizeLines": 102, "fileCategory": "docs"},
+    {"path": "README.md", "language": "markdown", "sizeLines": 115, "fileCategory": "docs"},
+    {"path": "SECURITY.md", "language": "markdown", "sizeLines": 87, "fileCategory": "docs"},
+    {"path": "biome.json", "language": "json", "sizeLines": 41, "fileCategory": "config"},
+    {"path": "mini-test.sh", "language": "shell", "sizeLines": 46, "fileCategory": "script"},
+    {"path": "package.json", "language": "json", "sizeLines": 75, "fileCategory": "config"},
+    {"path": "pi-test.bat", "language": "batch", "sizeLines": 14, "fileCategory": "script"},
+    {"path": "pi-test.ps1", "language": "powershell", "sizeLines": 71, "fileCategory": "script"},
+    {"path": "pi-test.sh", "language": "shell", "sizeLines": 57, "fileCategory": "script"},
+    {"path": "test.sh", "language": "shell", "sizeLines": 79, "fileCategory": "script"},
+    {"path": "tsconfig.base.json", "language": "json", "sizeLines": 25, "fileCategory": "config"},
+    {"path": "tsconfig.json", "language": "json", "sizeLines": 54, "fileCategory": "config"}
+  ],
+  "batchImportData": {
+    "AGENTS.md": [],
+    "CONTRIBUTING.md": [],
+    "README.md": [],
+    "SECURITY.md": [],
+    "biome.json": [],
+    "mini-test.sh": [],
+    "package.json": [],
+    "pi-test.bat": [],
+    "pi-test.ps1": [],
+    "pi-test.sh": [],
+    "test.sh": [],
+    "tsconfig.base.json": [],
+    "tsconfig.json": []
+  }
+}

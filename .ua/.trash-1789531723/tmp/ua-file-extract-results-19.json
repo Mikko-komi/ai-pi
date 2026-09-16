@@ -1,0 +1,5765 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 24,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 24,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 24,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "packages/coding-agent/src/utils/image-resize-worker.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 42,
+      "nonEmptyLines": 37,
+      "functions": [
+        {
+          "name": "isResizeImageWorkerRequest",
+          "startLine": 15,
+          "endLine": 19,
+          "params": [
+            "value"
+          ]
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/utils/image-resize.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 123,
+      "nonEmptyLines": 111,
+      "functions": [
+        {
+          "name": "toTransferableBytes",
+          "startLine": 11,
+          "endLine": 15,
+          "params": [
+            "input"
+          ]
+        },
+        {
+          "name": "isResizeImageWorkerResponse",
+          "startLine": 17,
+          "endLine": 19,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "createResizeWorker",
+          "startLine": 21,
+          "endLine": 23,
+          "params": [
+            "workerSpecifier"
+          ]
+        },
+        {
+          "name": "resizeImageInWorker",
+          "startLine": 25,
+          "endLine": 76,
+          "params": [
+            "workerSpecifier",
+            "inputBytes",
+            "mimeType",
+            "options"
+          ]
+        },
+        {
+          "name": "resizeImage",
+          "startLine": 85,
+          "endLine": 110,
+          "params": [
+            "inputBytes",
+            "mimeType",
+            "options"
+          ]
+        },
+        {
+          "name": "formatDimensionNote",
+          "startLine": 116,
+          "endLine": 123,
+          "params": [
+            "result"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ImageResizeOptions",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "ResizedImage",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "resizeImage",
+          "line": 85,
+          "isDefault": false
+        },
+        {
+          "name": "formatDimensionNote",
+          "line": 116,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "resizeImageInWorker",
+          "callee": "createResizeWorker",
+          "lineNumber": 31
+        },
+        {
+          "caller": "resizeImageInWorker",
+          "callee": "toTransferableBytes",
+          "lineNumber": 33
+        },
+        {
+          "caller": "settle",
+          "callee": "resolve",
+          "lineNumber": 39
+        },
+        {
+          "caller": "fail",
+          "callee": "reject",
+          "lineNumber": 44
+        },
+        {
+          "caller": "resizeImageInWorker",
+          "callee": "worker.once",
+          "lineNumber": 47
+        },
+        {
+          "caller": "resizeImageInWorker",
+          "callee": "isResizeImageWorkerResponse",
+          "lineNumber": 48
+        },
+        {
+          "caller": "resizeImageInWorker",
+          "callee": "fail",
+          "lineNumber": 49
+        },
+        {
+          "caller": "resizeImageInWorker",
+          "callee": "fail",
+          "lineNumber": 53
+        },
+        {
+          "caller": "resizeImageInWorker",
+          "callee": "settle",
+          "lineNumber": 56
+        },
+        {
+          "caller": "resizeImageInWorker",
+          "callee": "worker.once",
+          "lineNumber": 58
+        },
+        {
+          "caller": "resizeImageInWorker",
+          "callee": "worker.once",
+          "lineNumber": 59
+        },
+        {
+          "caller": "resizeImageInWorker",
+          "callee": "fail",
+          "lineNumber": 61
+        },
+        {
+          "caller": "resizeImageInWorker",
+          "callee": "worker.postMessage",
+          "lineNumber": 64
+        },
+        {
+          "caller": "resizeImageInWorker",
+          "callee": "worker.terminate().catch",
+          "lineNumber": 74
+        },
+        {
+          "caller": "resizeImageInWorker",
+          "callee": "worker.terminate",
+          "lineNumber": 74
+        },
+        {
+          "caller": "resizeImage",
+          "callee": "import.meta.url.endsWith",
+          "lineNumber": 90
+        },
+        {
+          "caller": "resizeImage",
+          "callee": "resizeImageInWorker",
+          "lineNumber": 101
+        },
+        {
+          "caller": "resizeImage",
+          "callee": "resizeImageInWorker",
+          "lineNumber": 106
+        },
+        {
+          "caller": "resizeImage",
+          "callee": "resizeImageInProcess",
+          "lineNumber": 108
+        },
+        {
+          "caller": "formatDimensionNote",
+          "callee": "scale.toFixed",
+          "lineNumber": 122
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 4,
+        "functionCount": 6,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/utils/mime.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 116,
+      "nonEmptyLines": 101,
+      "functions": [
+        {
+          "name": "detectSupportedImageMimeType",
+          "startLine": 6,
+          "endLine": 23,
+          "params": [
+            "buffer"
+          ]
+        },
+        {
+          "name": "detectSupportedImageMimeTypeFromFile",
+          "startLine": 25,
+          "endLine": 34,
+          "params": [
+            "filePath"
+          ]
+        },
+        {
+          "name": "isPng",
+          "startLine": 36,
+          "endLine": 40,
+          "params": [
+            "buffer"
+          ]
+        },
+        {
+          "name": "isAnimatedPng",
+          "startLine": 42,
+          "endLine": 55,
+          "params": [
+            "buffer"
+          ]
+        },
+        {
+          "name": "isBmp",
+          "startLine": 57,
+          "endLine": 81,
+          "params": [
+            "buffer"
+          ]
+        },
+        {
+          "name": "readUint16LE",
+          "startLine": 83,
+          "endLine": 85,
+          "params": [
+            "buffer",
+            "offset"
+          ]
+        },
+        {
+          "name": "readUint32BE",
+          "startLine": 87,
+          "endLine": 94,
+          "params": [
+            "buffer",
+            "offset"
+          ]
+        },
+        {
+          "name": "readUint32LE",
+          "startLine": 96,
+          "endLine": 103,
+          "params": [
+            "buffer",
+            "offset"
+          ]
+        },
+        {
+          "name": "startsWith",
+          "startLine": 105,
+          "endLine": 108,
+          "params": [
+            "buffer",
+            "bytes"
+          ]
+        },
+        {
+          "name": "startsWithAscii",
+          "startLine": 110,
+          "endLine": 116,
+          "params": [
+            "buffer",
+            "offset",
+            "text"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "detectSupportedImageMimeType",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "detectSupportedImageMimeTypeFromFile",
+          "line": 25,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "detectSupportedImageMimeType",
+          "callee": "startsWith",
+          "lineNumber": 7
+        },
+        {
+          "caller": "detectSupportedImageMimeType",
+          "callee": "startsWith",
+          "lineNumber": 10
+        },
+        {
+          "caller": "detectSupportedImageMimeType",
+          "callee": "isPng",
+          "lineNumber": 11
+        },
+        {
+          "caller": "detectSupportedImageMimeType",
+          "callee": "isAnimatedPng",
+          "lineNumber": 11
+        },
+        {
+          "caller": "detectSupportedImageMimeType",
+          "callee": "startsWithAscii",
+          "lineNumber": 13
+        },
+        {
+          "caller": "detectSupportedImageMimeType",
+          "callee": "startsWithAscii",
+          "lineNumber": 16
+        },
+        {
+          "caller": "detectSupportedImageMimeType",
+          "callee": "startsWithAscii",
+          "lineNumber": 16
+        },
+        {
+          "caller": "detectSupportedImageMimeType",
+          "callee": "startsWithAscii",
+          "lineNumber": 19
+        },
+        {
+          "caller": "detectSupportedImageMimeType",
+          "callee": "isBmp",
+          "lineNumber": 19
+        },
+        {
+          "caller": "detectSupportedImageMimeTypeFromFile",
+          "callee": "open",
+          "lineNumber": 26
+        },
+        {
+          "caller": "detectSupportedImageMimeTypeFromFile",
+          "callee": "Buffer.alloc",
+          "lineNumber": 28
+        },
+        {
+          "caller": "detectSupportedImageMimeTypeFromFile",
+          "callee": "fileHandle.read",
+          "lineNumber": 29
+        },
+        {
+          "caller": "detectSupportedImageMimeTypeFromFile",
+          "callee": "detectSupportedImageMimeType",
+          "lineNumber": 30
+        },
+        {
+          "caller": "detectSupportedImageMimeTypeFromFile",
+          "callee": "buffer.subarray",
+          "lineNumber": 30
+        },
+        {
+          "caller": "detectSupportedImageMimeTypeFromFile",
+          "callee": "fileHandle.close",
+          "lineNumber": 32
+        },
+        {
+          "caller": "isPng",
+          "callee": "readUint32BE",
+          "lineNumber": 38
+        },
+        {
+          "caller": "isPng",
+          "callee": "startsWithAscii",
+          "lineNumber": 38
+        },
+        {
+          "caller": "isAnimatedPng",
+          "callee": "readUint32BE",
+          "lineNumber": 45
+        },
+        {
+          "caller": "isAnimatedPng",
+          "callee": "startsWithAscii",
+          "lineNumber": 47
+        },
+        {
+          "caller": "isAnimatedPng",
+          "callee": "startsWithAscii",
+          "lineNumber": 48
+        },
+        {
+          "caller": "isBmp",
+          "callee": "readUint32LE",
+          "lineNumber": 60
+        },
+        {
+          "caller": "isBmp",
+          "callee": "readUint32LE",
+          "lineNumber": 61
+        },
+        {
+          "caller": "isBmp",
+          "callee": "readUint32LE",
+          "lineNumber": 62
+        },
+        {
+          "caller": "isBmp",
+          "callee": "readUint16LE",
+          "lineNumber": 70
+        },
+        {
+          "caller": "isBmp",
+          "callee": "readUint16LE",
+          "lineNumber": 71
+        },
+        {
+          "caller": "isBmp",
+          "callee": "readUint16LE",
+          "lineNumber": 74
+        },
+        {
+          "caller": "isBmp",
+          "callee": "readUint16LE",
+          "lineNumber": 75
+        },
+        {
+          "caller": "isBmp",
+          "callee": "[1, 4, 8, 16, 24, 32].includes",
+          "lineNumber": 80
+        },
+        {
+          "caller": "startsWith",
+          "callee": "bytes.every",
+          "lineNumber": 107
+        },
+        {
+          "caller": "startsWithAscii",
+          "callee": "text.charCodeAt",
+          "lineNumber": 113
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 10,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/utils/photon.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 139,
+      "nonEmptyLines": 119,
+      "functions": [
+        {
+          "name": "pathOrNull",
+          "startLine": 35,
+          "endLine": 43,
+          "params": [
+            "file"
+          ]
+        },
+        {
+          "name": "getFallbackWasmPaths",
+          "startLine": 45,
+          "endLine": 52,
+          "params": []
+        },
+        {
+          "name": "patchPhotonWasmRead",
+          "startLine": 54,
+          "endLine": 110,
+          "params": []
+        },
+        {
+          "name": "loadPhoton",
+          "startLine": 116,
+          "endLine": 139,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "PhotonImageType",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "loadPhoton",
+          "line": 116,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "pathOrNull",
+          "callee": "fileURLToPath",
+          "lineNumber": 40
+        },
+        {
+          "caller": "getFallbackWasmPaths",
+          "callee": "path.dirname",
+          "lineNumber": 46
+        },
+        {
+          "caller": "getFallbackWasmPaths",
+          "callee": "path.join",
+          "lineNumber": 48
+        },
+        {
+          "caller": "getFallbackWasmPaths",
+          "callee": "path.join",
+          "lineNumber": 49
+        },
+        {
+          "caller": "getFallbackWasmPaths",
+          "callee": "path.join",
+          "lineNumber": 50
+        },
+        {
+          "caller": "getFallbackWasmPaths",
+          "callee": "process.cwd",
+          "lineNumber": 50
+        },
+        {
+          "caller": "patchPhotonWasmRead",
+          "callee": "fs.readFileSync.bind",
+          "lineNumber": 55
+        },
+        {
+          "caller": "patchPhotonWasmRead",
+          "callee": "getFallbackWasmPaths",
+          "lineNumber": 56
+        },
+        {
+          "caller": "patchPhotonWasmRead",
+          "callee": "pathOrNull",
+          "lineNumber": 61
+        },
+        {
+          "caller": "patchPhotonWasmRead",
+          "callee": "resolvedPath?.endsWith",
+          "lineNumber": 63
+        },
+        {
+          "caller": "patchPhotonWasmRead",
+          "callee": "originalReadFileSync",
+          "lineNumber": 65
+        },
+        {
+          "caller": "patchPhotonWasmRead",
+          "callee": "fs.existsSync",
+          "lineNumber": 73
+        },
+        {
+          "caller": "patchPhotonWasmRead",
+          "callee": "originalReadFileSync",
+          "lineNumber": 77
+        },
+        {
+          "caller": "patchPhotonWasmRead",
+          "callee": "originalReadFileSync",
+          "lineNumber": 79
+        },
+        {
+          "caller": "patchPhotonWasmRead",
+          "callee": "originalReadFileSync",
+          "lineNumber": 86
+        },
+        {
+          "caller": "patchPhotonWasmRead",
+          "callee": "Object.defineProperty",
+          "lineNumber": 92
+        },
+        {
+          "caller": "patchPhotonWasmRead",
+          "callee": "Object.defineProperty",
+          "lineNumber": 103
+        },
+        {
+          "caller": "loadPhoton",
+          "callee": "import",
+          "lineNumber": 116
+        },
+        {
+          "caller": "loadPhoton",
+          "callee": "(async () => {\n\t\tconst restoreReadFileSync = patchPhotonWasmRead();\n\t\ttry {\n\t\t\tphotonModule = await import(\"@silvia-odwyer/photon-node\");\n\t\t\treturn photonModule;\n\t\t} catch {\n\t\t\tphotonModule = null;\n\t\t\treturn photonModule;\n\t\t} finally {\n\t\t\trestoreReadFileSync();\n\t\t}\n\t})",
+          "lineNumber": 125
+        },
+        {
+          "caller": "loadPhoton",
+          "callee": "patchPhotonWasmRead",
+          "lineNumber": 126
+        },
+        {
+          "caller": "loadPhoton",
+          "callee": "import",
+          "lineNumber": 128
+        },
+        {
+          "caller": "loadPhoton",
+          "callee": "restoreReadFileSync",
+          "lineNumber": 134
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/utils/tool-result-images.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 62,
+      "nonEmptyLines": 53,
+      "functions": [
+        {
+          "name": "normalizeToolResultImages",
+          "startLine": 22,
+          "endLine": 62,
+          "params": [
+            "content",
+            "options"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "normalizeToolResultImages",
+          "line": 22,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "normalizeToolResultImages",
+          "callee": "content.some",
+          "lineNumber": 26
+        },
+        {
+          "caller": "normalizeToolResultImages",
+          "callee": "normalized.push",
+          "lineNumber": 36
+        },
+        {
+          "caller": "normalizeToolResultImages",
+          "callee": "processImage",
+          "lineNumber": 40
+        },
+        {
+          "caller": "normalizeToolResultImages",
+          "callee": "Buffer.from",
+          "lineNumber": 40
+        },
+        {
+          "caller": "normalizeToolResultImages",
+          "callee": "normalized.push",
+          "lineNumber": 45
+        },
+        {
+          "caller": "normalizeToolResultImages",
+          "callee": "normalized.push",
+          "lineNumber": 50
+        },
+        {
+          "caller": "normalizeToolResultImages",
+          "callee": "normalized.push",
+          "lineNumber": 54
+        },
+        {
+          "caller": "normalizeToolResultImages",
+          "callee": "normalized.push",
+          "lineNumber": 56
+        },
+        {
+          "caller": "normalizeToolResultImages",
+          "callee": "processed.hints.join",
+          "lineNumber": 56
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/utils/tools-manager.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 400,
+      "nonEmptyLines": 348,
+      "functions": [
+        {
+          "name": "isOfflineModeEnabled",
+          "startLine": 14,
+          "endLine": 18,
+          "params": []
+        },
+        {
+          "name": "commandExists",
+          "startLine": 72,
+          "endLine": 80,
+          "params": [
+            "cmd"
+          ]
+        },
+        {
+          "name": "getToolPath",
+          "startLine": 83,
+          "endLine": 102,
+          "params": [
+            "tool"
+          ]
+        },
+        {
+          "name": "getLatestVersion",
+          "startLine": 110,
+          "endLine": 138,
+          "params": [
+            "repo"
+          ]
+        },
+        {
+          "name": "downloadFile",
+          "startLine": 141,
+          "endLine": 154,
+          "params": [
+            "url",
+            "dest"
+          ]
+        },
+        {
+          "name": "findBinaryRecursively",
+          "startLine": 156,
+          "endLine": 176,
+          "params": [
+            "rootDir",
+            "binaryFileName"
+          ]
+        },
+        {
+          "name": "formatSpawnFailure",
+          "startLine": 178,
+          "endLine": 191,
+          "params": [
+            "result"
+          ]
+        },
+        {
+          "name": "runExtractionCommand",
+          "startLine": 193,
+          "endLine": 199,
+          "params": [
+            "command",
+            "args"
+          ]
+        },
+        {
+          "name": "extractTarGzArchive",
+          "startLine": 201,
+          "endLine": 206,
+          "params": [
+            "archivePath",
+            "extractDir",
+            "assetName"
+          ]
+        },
+        {
+          "name": "getWindowsTarCommand",
+          "startLine": 208,
+          "endLine": 217,
+          "params": []
+        },
+        {
+          "name": "extractZipArchive",
+          "startLine": 219,
+          "endLine": 255,
+          "params": [
+            "archivePath",
+            "extractDir",
+            "assetName"
+          ]
+        },
+        {
+          "name": "downloadTool",
+          "startLine": 258,
+          "endLine": 331,
+          "params": [
+            "tool"
+          ]
+        },
+        {
+          "name": "ensureTool",
+          "startLine": 349,
+          "endLine": 400,
+          "params": [
+            "tool",
+            "onStatus"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "getToolPath",
+          "line": 83,
+          "isDefault": false
+        },
+        {
+          "name": "getLatestVersion",
+          "line": 110,
+          "isDefault": false
+        },
+        {
+          "name": "ensureTool",
+          "line": 349,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "isOfflineModeEnabled",
+          "callee": "value.toLowerCase",
+          "lineNumber": 17
+        },
+        {
+          "caller": "isOfflineModeEnabled",
+          "callee": "value.toLowerCase",
+          "lineNumber": 17
+        },
+        {
+          "caller": "commandExists",
+          "callee": "spawnSync",
+          "lineNumber": 74
+        },
+        {
+          "caller": "getToolPath",
+          "callee": "join",
+          "lineNumber": 88
+        },
+        {
+          "caller": "getToolPath",
+          "callee": "platform",
+          "lineNumber": 88
+        },
+        {
+          "caller": "getToolPath",
+          "callee": "existsSync",
+          "lineNumber": 89
+        },
+        {
+          "caller": "getToolPath",
+          "callee": "commandExists",
+          "lineNumber": 96
+        },
+        {
+          "caller": "getLatestVersion",
+          "callee": "fetchWithRetry",
+          "lineNumber": 111
+        },
+        {
+          "caller": "getLatestVersion",
+          "callee": "response.body?.cancel",
+          "lineNumber": 123
+        },
+        {
+          "caller": "getLatestVersion",
+          "callee": "response.headers.get",
+          "lineNumber": 128
+        },
+        {
+          "caller": "getLatestVersion",
+          "callee": "new URL(location, \"https://github.com\").pathname.split(\"/\").pop",
+          "lineNumber": 133
+        },
+        {
+          "caller": "getLatestVersion",
+          "callee": "new URL(location, \"https://github.com\").pathname.split",
+          "lineNumber": 133
+        },
+        {
+          "caller": "getLatestVersion",
+          "callee": "location.includes",
+          "lineNumber": 134
+        },
+        {
+          "caller": "getLatestVersion",
+          "callee": "decodeURIComponent(tag).replace",
+          "lineNumber": 137
+        },
+        {
+          "caller": "getLatestVersion",
+          "callee": "decodeURIComponent",
+          "lineNumber": 137
+        },
+        {
+          "caller": "downloadFile",
+          "callee": "fetchWithRetry",
+          "lineNumber": 142
+        },
+        {
+          "caller": "downloadFile",
+          "callee": "createWriteStream",
+          "lineNumber": 152
+        },
+        {
+          "caller": "downloadFile",
+          "callee": "pipeline",
+          "lineNumber": 153
+        },
+        {
+          "caller": "downloadFile",
+          "callee": "Readable.fromWeb",
+          "lineNumber": 153
+        },
+        {
+          "caller": "findBinaryRecursively",
+          "callee": "stack.pop",
+          "lineNumber": 160
+        },
+        {
+          "caller": "findBinaryRecursively",
+          "callee": "readdirSync",
+          "lineNumber": 163
+        },
+        {
+          "caller": "findBinaryRecursively",
+          "callee": "join",
+          "lineNumber": 165
+        },
+        {
+          "caller": "findBinaryRecursively",
+          "callee": "entry.isFile",
+          "lineNumber": 166
+        },
+        {
+          "caller": "findBinaryRecursively",
+          "callee": "entry.isDirectory",
+          "lineNumber": 169
+        },
+        {
+          "caller": "findBinaryRecursively",
+          "callee": "stack.push",
+          "lineNumber": 170
+        },
+        {
+          "caller": "formatSpawnFailure",
+          "callee": "result.stderr?.toString().trim",
+          "lineNumber": 182
+        },
+        {
+          "caller": "formatSpawnFailure",
+          "callee": "result.stderr?.toString",
+          "lineNumber": 182
+        },
+        {
+          "caller": "formatSpawnFailure",
+          "callee": "result.stdout?.toString().trim",
+          "lineNumber": 186
+        },
+        {
+          "caller": "formatSpawnFailure",
+          "callee": "result.stdout?.toString",
+          "lineNumber": 186
+        },
+        {
+          "caller": "runExtractionCommand",
+          "callee": "spawnSync",
+          "lineNumber": 194
+        },
+        {
+          "caller": "runExtractionCommand",
+          "callee": "formatSpawnFailure",
+          "lineNumber": 198
+        },
+        {
+          "caller": "extractTarGzArchive",
+          "callee": "runExtractionCommand",
+          "lineNumber": 202
+        },
+        {
+          "caller": "getWindowsTarCommand",
+          "callee": "join",
+          "lineNumber": 211
+        },
+        {
+          "caller": "getWindowsTarCommand",
+          "callee": "existsSync",
+          "lineNumber": 212
+        },
+        {
+          "caller": "extractZipArchive",
+          "callee": "platform",
+          "lineNumber": 222
+        },
+        {
+          "caller": "extractZipArchive",
+          "callee": "runExtractionCommand",
+          "lineNumber": 225
+        },
+        {
+          "caller": "extractZipArchive",
+          "callee": "getWindowsTarCommand",
+          "lineNumber": 225
+        },
+        {
+          "caller": "extractZipArchive",
+          "callee": "failures.push",
+          "lineNumber": 227
+        },
+        {
+          "caller": "extractZipArchive",
+          "callee": "runExtractionCommand",
+          "lineNumber": 231
+        },
+        {
+          "caller": "extractZipArchive",
+          "callee": "failures.push",
+          "lineNumber": 243
+        },
+        {
+          "caller": "extractZipArchive",
+          "callee": "runExtractionCommand",
+          "lineNumber": 245
+        },
+        {
+          "caller": "extractZipArchive",
+          "callee": "failures.push",
+          "lineNumber": 247
+        },
+        {
+          "caller": "extractZipArchive",
+          "callee": "runExtractionCommand",
+          "lineNumber": 249
+        },
+        {
+          "caller": "extractZipArchive",
+          "callee": "failures.push",
+          "lineNumber": 251
+        },
+        {
+          "caller": "extractZipArchive",
+          "callee": "failures.join",
+          "lineNumber": 254
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "platform",
+          "lineNumber": 262
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "arch",
+          "lineNumber": 263
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "getLatestVersion",
+          "lineNumber": 267
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "config.getAssetName",
+          "lineNumber": 270
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "mkdirSync",
+          "lineNumber": 276
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "join",
+          "lineNumber": 279
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "join",
+          "lineNumber": 281
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "downloadFile",
+          "lineNumber": 284
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "join",
+          "lineNumber": 288
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "Date.now",
+          "lineNumber": 290
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "Math.random().toString(36).slice",
+          "lineNumber": 290
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "Math.random().toString",
+          "lineNumber": 290
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "Math.random",
+          "lineNumber": 290
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "mkdirSync",
+          "lineNumber": 292
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "assetName.endsWith",
+          "lineNumber": 295
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "extractTarGzArchive",
+          "lineNumber": 296
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "assetName.endsWith",
+          "lineNumber": 297
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "extractZipArchive",
+          "lineNumber": 298
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "join",
+          "lineNumber": 306
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "assetName.replace",
+          "lineNumber": 306
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "join",
+          "lineNumber": 307
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "join",
+          "lineNumber": 307
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "extractedBinaryCandidates.find",
+          "lineNumber": 308
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "existsSync",
+          "lineNumber": 308
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "findBinaryRecursively",
+          "lineNumber": 311
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "renameSync",
+          "lineNumber": 315
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "chmodSync",
+          "lineNumber": 322
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "rmSync",
+          "lineNumber": 326
+        },
+        {
+          "caller": "downloadTool",
+          "callee": "rmSync",
+          "lineNumber": 327
+        },
+        {
+          "caller": "ensureTool",
+          "callee": "getToolPath",
+          "lineNumber": 353
+        },
+        {
+          "caller": "ensureTool",
+          "callee": "isOfflineModeEnabled",
+          "lineNumber": 361
+        },
+        {
+          "caller": "ensureTool",
+          "callee": "onStatus",
+          "lineNumber": 362
+        },
+        {
+          "caller": "ensureTool",
+          "callee": "platform",
+          "lineNumber": 368
+        },
+        {
+          "caller": "ensureTool",
+          "callee": "onStatus",
+          "lineNumber": 370
+        },
+        {
+          "caller": "ensureTool",
+          "callee": "onStatus",
+          "lineNumber": 375
+        },
+        {
+          "caller": "ensureTool",
+          "callee": "downloadTool",
+          "lineNumber": 378
+        },
+        {
+          "caller": "ensureTool",
+          "callee": "onStatus",
+          "lineNumber": 379
+        },
+        {
+          "caller": "ensureTool",
+          "callee": "messages.includes",
+          "lineNumber": 392
+        },
+        {
+          "caller": "ensureTool",
+          "callee": "messages.push",
+          "lineNumber": 392
+        },
+        {
+          "caller": "ensureTool",
+          "callee": "onStatus",
+          "lineNumber": 394
+        },
+        {
+          "caller": "ensureTool",
+          "callee": "messages.join",
+          "lineNumber": 396
+        },
+        {
+          "caller": "ensureTool",
+          "callee": "String",
+          "lineNumber": 396
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 13,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/benchmark/session/session-repo-targets.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 33,
+      "nonEmptyLines": 30,
+      "exports": [
+        {
+          "name": "sessionRepoBenchmarkTargets",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "createFixture",
+          "callee": "mkdtemp",
+          "lineNumber": 18
+        },
+        {
+          "caller": "createFixture",
+          "callee": "join",
+          "lineNumber": 18
+        },
+        {
+          "caller": "createFixture",
+          "callee": "tmpdir",
+          "lineNumber": 18
+        },
+        {
+          "caller": "createFixture",
+          "callee": "createNodeSqliteFactory",
+          "lineNumber": 21
+        },
+        {
+          "caller": "createFixture",
+          "callee": "repo.close",
+          "lineNumber": 27
+        },
+        {
+          "caller": "createFixture",
+          "callee": "rm",
+          "lineNumber": 28
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/benchmark/session/session-repo.bench.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 62,
+      "nonEmptyLines": 58,
+      "callGraph": [
+        {
+          "caller": "prepare",
+          "callee": "seedSessionRepoCatalogBenchmark",
+          "lineNumber": 18
+        },
+        {
+          "caller": "prepare",
+          "callee": "scenario.prepare",
+          "lineNumber": 29
+        },
+        {
+          "caller": "run",
+          "callee": "operation.run",
+          "lineNumber": 35
+        },
+        {
+          "caller": "prepare",
+          "callee": "seedSessionRepoForkBenchmark",
+          "lineNumber": 53
+        },
+        {
+          "caller": "expectedResult",
+          "callee": "benchmark.scenario.expectedResult",
+          "lineNumber": 57
+        },
+        {
+          "caller": "run",
+          "callee": "benchmark.scenario.run",
+          "lineNumber": 60
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/benchmark/session/storage-targets.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 48,
+      "nonEmptyLines": 46,
+      "exports": [
+        {
+          "name": "storageBenchmarkTargets",
+          "line": 18,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "createFixture",
+          "callee": "createNodeSqliteFactory().open",
+          "lineNumber": 22
+        },
+        {
+          "caller": "createFixture",
+          "callee": "createNodeSqliteFactory",
+          "lineNumber": 22
+        },
+        {
+          "caller": "createFixture",
+          "callee": "db.exec",
+          "lineNumber": 24
+        },
+        {
+          "caller": "createFixture",
+          "callee": "applyInitialSchema",
+          "lineNumber": 25
+        },
+        {
+          "caller": "createFixture",
+          "callee": "sql`INSERT INTO sessions\n\t\t\t\t\t(id, created_at, parent_session_id, storage_version, metadata, message_count, usage_payload, next_seq)\n\t\t\t\t\tVALUES (${SESSION_ID}, ${NOW}, ${null}, ${SQLITE_STORAGE_VERSION}, ${null}, ${0}, ${JSON.stringify(EMPTY_USAGE)}, ${1})`.run",
+          "lineNumber": 26
+        },
+        {
+          "caller": "createFixture",
+          "callee": "sql",
+          "lineNumber": 26
+        },
+        {
+          "caller": "createFixture",
+          "callee": "JSON.stringify",
+          "lineNumber": 28
+        },
+        {
+          "caller": "createFixture",
+          "callee": "storage.close",
+          "lineNumber": 36
+        },
+        {
+          "caller": "createFixture",
+          "callee": "db.close",
+          "lineNumber": 38
+        },
+        {
+          "caller": "createFixture",
+          "callee": "db.close",
+          "lineNumber": 43
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/benchmark/session/storage.bench.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 33,
+      "callGraph": [
+        {
+          "caller": "prepare",
+          "callee": "seedStorageBenchmark",
+          "lineNumber": 15
+        },
+        {
+          "caller": "prepare",
+          "callee": "scenario.prepare",
+          "lineNumber": 26
+        },
+        {
+          "caller": "run",
+          "callee": "scenario.run",
+          "lineNumber": 33
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 123,
+      "nonEmptyLines": 106,
+      "functions": [
+        {
+          "name": "isNamedParameters",
+          "startLine": 7,
+          "endLine": 11,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "isAsyncResult",
+          "startLine": 13,
+          "endLine": 15,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "wrapNodeSqliteDatabase",
+          "startLine": 102,
+          "endLine": 104,
+          "params": [
+            "db"
+          ]
+        },
+        {
+          "name": "createNodeSqliteFactory",
+          "startLine": 106,
+          "endLine": 120,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "NodeSqliteStatement",
+          "startLine": 17,
+          "endLine": 61,
+          "methods": [
+            "constructor",
+            "run",
+            "get",
+            "all",
+            "iterate"
+          ],
+          "properties": [
+            "statement"
+          ]
+        },
+        {
+          "name": "NodeSqliteDatabase",
+          "startLine": 63,
+          "endLine": 100,
+          "methods": [
+            "constructor",
+            "exec",
+            "prepare",
+            "transaction",
+            "close"
+          ],
+          "properties": [
+            "db"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "wrapNodeSqliteDatabase",
+          "line": 102,
+          "isDefault": false
+        },
+        {
+          "name": "createNodeSqliteFactory",
+          "line": 106,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "isNamedParameters",
+          "callee": "Array.isArray",
+          "lineNumber": 9
+        },
+        {
+          "caller": "isNamedParameters",
+          "callee": "ArrayBuffer.isView",
+          "lineNumber": 9
+        },
+        {
+          "caller": "run",
+          "callee": "isNamedParameters",
+          "lineNumber": 26
+        },
+        {
+          "caller": "run",
+          "callee": "this.statement.run",
+          "lineNumber": 27
+        },
+        {
+          "caller": "run",
+          "callee": "this.statement.run",
+          "lineNumber": 28
+        },
+        {
+          "caller": "run",
+          "callee": "Number",
+          "lineNumber": 30
+        },
+        {
+          "caller": "run",
+          "callee": "Number",
+          "lineNumber": 31
+        },
+        {
+          "caller": "get",
+          "callee": "isNamedParameters",
+          "lineNumber": 38
+        },
+        {
+          "caller": "get",
+          "callee": "this.statement.get",
+          "lineNumber": 39
+        },
+        {
+          "caller": "get",
+          "callee": "this.statement.get",
+          "lineNumber": 40
+        },
+        {
+          "caller": "all",
+          "callee": "isNamedParameters",
+          "lineNumber": 47
+        },
+        {
+          "caller": "all",
+          "callee": "this.statement.all",
+          "lineNumber": 48
+        },
+        {
+          "caller": "all",
+          "callee": "this.statement.all",
+          "lineNumber": 49
+        },
+        {
+          "caller": "iterate",
+          "callee": "isNamedParameters",
+          "lineNumber": 56
+        },
+        {
+          "caller": "iterate",
+          "callee": "this.statement.iterate",
+          "lineNumber": 57
+        },
+        {
+          "caller": "iterate",
+          "callee": "this.statement.iterate",
+          "lineNumber": 58
+        },
+        {
+          "caller": "exec",
+          "callee": "this.db.exec",
+          "lineNumber": 71
+        },
+        {
+          "caller": "prepare",
+          "callee": "this.db.prepare",
+          "lineNumber": 75
+        },
+        {
+          "caller": "transaction",
+          "callee": "sql`BEGIN IMMEDIATE`.exec",
+          "lineNumber": 79
+        },
+        {
+          "caller": "transaction",
+          "callee": "sql",
+          "lineNumber": 79
+        },
+        {
+          "caller": "transaction",
+          "callee": "fn",
+          "lineNumber": 81
+        },
+        {
+          "caller": "transaction",
+          "callee": "isAsyncResult",
+          "lineNumber": 82
+        },
+        {
+          "caller": "transaction",
+          "callee": "sql`COMMIT`.exec",
+          "lineNumber": 85
+        },
+        {
+          "caller": "transaction",
+          "callee": "sql",
+          "lineNumber": 85
+        },
+        {
+          "caller": "transaction",
+          "callee": "sql`ROLLBACK`.exec",
+          "lineNumber": 89
+        },
+        {
+          "caller": "transaction",
+          "callee": "sql",
+          "lineNumber": 89
+        },
+        {
+          "caller": "close",
+          "callee": "this.db.close",
+          "lineNumber": 98
+        },
+        {
+          "caller": "openExisting",
+          "callee": "pathToFileURL",
+          "lineNumber": 112
+        },
+        {
+          "caller": "openExisting",
+          "callee": "url.searchParams.set",
+          "lineNumber": 113
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 4,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/migrations.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 7,
+      "functions": [
+        {
+          "name": "applyInitialSchema",
+          "startLine": 5,
+          "endLine": 8,
+          "params": [
+            "db"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "applyInitialSchema",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "applyInitialSchema",
+          "callee": "readFile",
+          "lineNumber": 6
+        },
+        {
+          "caller": "applyInitialSchema",
+          "callee": "fileURLToPath",
+          "lineNumber": 6
+        },
+        {
+          "caller": "applyInitialSchema",
+          "callee": "db.exec",
+          "lineNumber": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 453,
+      "nonEmptyLines": 417,
+      "functions": [
+        {
+          "name": "sessionFileName",
+          "startLine": 40,
+          "endLine": 44,
+          "params": [
+            "id"
+          ]
+        },
+        {
+          "name": "sessionPath",
+          "startLine": 46,
+          "endLine": 48,
+          "params": [
+            "directory",
+            "id"
+          ]
+        },
+        {
+          "name": "storageIdentity",
+          "startLine": 50,
+          "endLine": 52,
+          "params": [
+            "path",
+            "sessionId"
+          ]
+        },
+        {
+          "name": "isErrorWithCode",
+          "startLine": 54,
+          "endLine": 56,
+          "params": [
+            "error",
+            "code"
+          ]
+        },
+        {
+          "name": "removeSessionFiles",
+          "startLine": 58,
+          "endLine": 62,
+          "params": [
+            "path",
+            "options"
+          ]
+        },
+        {
+          "name": "configureWritableConnection",
+          "startLine": 64,
+          "endLine": 66,
+          "params": [
+            "db"
+          ]
+        },
+        {
+          "name": "configureReadOnlyConnection",
+          "startLine": 68,
+          "endLine": 70,
+          "params": [
+            "db"
+          ]
+        },
+        {
+          "name": "readSourceEntries",
+          "startLine": 79,
+          "endLine": 84,
+          "params": [
+            "db",
+            "sessionId"
+          ]
+        },
+        {
+          "name": "buildForkSnapshot",
+          "startLine": 86,
+          "endLine": 102,
+          "params": [
+            "source",
+            "options"
+          ]
+        },
+        {
+          "name": "readForkSourceEntries",
+          "startLine": 105,
+          "endLine": 120,
+          "params": [
+            "db",
+            "sessionId",
+            "scalarValues",
+            "options"
+          ]
+        },
+        {
+          "name": "createSqliteForkSnapshot",
+          "startLine": 122,
+          "endLine": 147,
+          "params": [
+            "sourceDb",
+            "source",
+            "options"
+          ]
+        },
+        {
+          "name": "insertForkValue",
+          "startLine": 149,
+          "endLine": 151,
+          "params": [
+            "db",
+            "sessionId",
+            "stored"
+          ]
+        },
+        {
+          "name": "updateForkSessionStats",
+          "startLine": 153,
+          "endLine": 155,
+          "params": [
+            "db",
+            "sessionId",
+            "messageCount"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "SqliteSessionRepo",
+          "startLine": 157,
+          "endLine": 453,
+          "methods": [
+            "constructor",
+            "create",
+            "open",
+            "list",
+            "delete",
+            "fork",
+            "close",
+            "createForkSnapshotFromExternalSource",
+            "closeOpenSessions",
+            "openStorageBackedSession",
+            "repositoryPathForMetadata",
+            "reserveId",
+            "pathForSession",
+            "usesSharedDatabase",
+            "assertOpen"
+          ],
+          "properties": [
+            "directory",
+            "databasePath",
+            "databaseFactory",
+            "now",
+            "pendingIds",
+            "openStorages",
+            "openSessions",
+            "closed",
+            "closePromise"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SQLITE_STORAGE_VERSION",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "SQLITE_SESSION_EXTENSION",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "SqliteSessionRepo",
+          "line": 157,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "sessionFileName",
+          "callee": "SAFE_SESSION_FILE_ID.test",
+          "lineNumber": 41
+        },
+        {
+          "caller": "sessionFileName",
+          "callee": "Buffer.from(id, \"utf16le\").toString",
+          "lineNumber": 42
+        },
+        {
+          "caller": "sessionFileName",
+          "callee": "Buffer.from",
+          "lineNumber": 42
+        },
+        {
+          "caller": "sessionPath",
+          "callee": "join",
+          "lineNumber": 47
+        },
+        {
+          "caller": "sessionPath",
+          "callee": "sessionFileName",
+          "lineNumber": 47
+        },
+        {
+          "caller": "storageIdentity",
+          "callee": "JSON.stringify",
+          "lineNumber": 51
+        },
+        {
+          "caller": "removeSessionFiles",
+          "callee": "rm",
+          "lineNumber": 59
+        },
+        {
+          "caller": "removeSessionFiles",
+          "callee": "rm",
+          "lineNumber": 60
+        },
+        {
+          "caller": "removeSessionFiles",
+          "callee": "rm",
+          "lineNumber": 61
+        },
+        {
+          "caller": "configureWritableConnection",
+          "callee": "db.exec",
+          "lineNumber": 65
+        },
+        {
+          "caller": "configureReadOnlyConnection",
+          "callee": "db.exec",
+          "lineNumber": 69
+        },
+        {
+          "caller": "readSourceEntries",
+          "callee": "sql`SELECT id, parent_id, seq, type, custom_type, timestamp, payload\n\t\tFROM entries WHERE session_id = ${sessionId} ORDER BY seq ASC`\n\t\t.all<EntryRow>(db)\n\t\t.map",
+          "lineNumber": 80
+        },
+        {
+          "caller": "readSourceEntries",
+          "callee": "sql`SELECT id, parent_id, seq, type, custom_type, timestamp, payload\n\t\tFROM entries WHERE session_id = ${sessionId} ORDER BY seq ASC`\n\t\t.all",
+          "lineNumber": 80
+        },
+        {
+          "caller": "readSourceEntries",
+          "callee": "sql",
+          "lineNumber": 80
+        },
+        {
+          "caller": "buildForkSnapshot",
+          "callee": "createForkSnapshot",
+          "lineNumber": 87
+        },
+        {
+          "caller": "buildForkSnapshot",
+          "callee": "[...snapshot.entries.values()].sort",
+          "lineNumber": 95
+        },
+        {
+          "caller": "buildForkSnapshot",
+          "callee": "snapshot.entries.values",
+          "lineNumber": 95
+        },
+        {
+          "caller": "buildForkSnapshot",
+          "callee": "entries.filter",
+          "lineNumber": 99
+        },
+        {
+          "caller": "readForkSourceEntries",
+          "callee": "readSourceEntries",
+          "lineNumber": 111
+        },
+        {
+          "caller": "readForkSourceEntries",
+          "callee": "branchTip",
+          "lineNumber": 112
+        },
+        {
+          "caller": "readForkSourceEntries",
+          "callee": "scalarValues.find",
+          "lineNumber": 113
+        },
+        {
+          "caller": "readForkSourceEntries",
+          "callee": "scanBranchEntries",
+          "lineNumber": 119
+        },
+        {
+          "caller": "createSqliteForkSnapshot",
+          "callee": "sourceDb.exec",
+          "lineNumber": 127
+        },
+        {
+          "caller": "createSqliteForkSnapshot",
+          "callee": "metadataFromSessionRow",
+          "lineNumber": 130
+        },
+        {
+          "caller": "createSqliteForkSnapshot",
+          "callee": "readSessionRow",
+          "lineNumber": 130
+        },
+        {
+          "caller": "createSqliteForkSnapshot",
+          "callee": "readAllScalarValueRows",
+          "lineNumber": 131
+        },
+        {
+          "caller": "createSqliteForkSnapshot",
+          "callee": "buildForkSnapshot",
+          "lineNumber": 132
+        },
+        {
+          "caller": "createSqliteForkSnapshot",
+          "callee": "readForkSourceEntries",
+          "lineNumber": 134
+        },
+        {
+          "caller": "createSqliteForkSnapshot",
+          "callee": "sourceDb.exec",
+          "lineNumber": 140
+        },
+        {
+          "caller": "createSqliteForkSnapshot",
+          "callee": "sourceDb.exec",
+          "lineNumber": 144
+        },
+        {
+          "caller": "insertForkValue",
+          "callee": "setScalarValueRow",
+          "lineNumber": 150
+        },
+        {
+          "caller": "updateForkSessionStats",
+          "callee": "sql`UPDATE sessions SET message_count = ${messageCount} WHERE id = ${sessionId}`.run",
+          "lineNumber": 154
+        },
+        {
+          "caller": "updateForkSessionStats",
+          "callee": "sql",
+          "lineNumber": 154
+        },
+        {
+          "caller": "create",
+          "callee": "this.assertOpen",
+          "lineNumber": 176
+        },
+        {
+          "caller": "create",
+          "callee": "this.now",
+          "lineNumber": 178
+        },
+        {
+          "caller": "create",
+          "callee": "uuidv7",
+          "lineNumber": 179
+        },
+        {
+          "caller": "create",
+          "callee": "this.reserveId",
+          "lineNumber": 180
+        },
+        {
+          "caller": "create",
+          "callee": "this.pathForSession",
+          "lineNumber": 181
+        },
+        {
+          "caller": "create",
+          "callee": "mkdir",
+          "lineNumber": 187
+        },
+        {
+          "caller": "create",
+          "callee": "dirname",
+          "lineNumber": 187
+        },
+        {
+          "caller": "create",
+          "callee": "this.usesSharedDatabase",
+          "lineNumber": 188
+        },
+        {
+          "caller": "create",
+          "callee": "openFile",
+          "lineNumber": 189
+        },
+        {
+          "caller": "create",
+          "callee": "file.close",
+          "lineNumber": 190
+        },
+        {
+          "caller": "create",
+          "callee": "this.databaseFactory.open",
+          "lineNumber": 193
+        },
+        {
+          "caller": "create",
+          "callee": "configureWritableConnection",
+          "lineNumber": 195
+        },
+        {
+          "caller": "create",
+          "callee": "applyInitialSchema",
+          "lineNumber": 196
+        },
+        {
+          "caller": "create",
+          "callee": "realpath",
+          "lineNumber": 197
+        },
+        {
+          "caller": "create",
+          "callee": "activeDb.transaction",
+          "lineNumber": 205
+        },
+        {
+          "caller": "create",
+          "callee": "hasSessionRow",
+          "lineNumber": 206
+        },
+        {
+          "caller": "create",
+          "callee": "insertSessionRow",
+          "lineNumber": 207
+        },
+        {
+          "caller": "create",
+          "callee": "this.openStorageBackedSession",
+          "lineNumber": 210
+        },
+        {
+          "caller": "create",
+          "callee": "removeSessionFiles",
+          "lineNumber": 213
+        },
+        {
+          "caller": "create",
+          "callee": "db?.close",
+          "lineNumber": 218
+        },
+        {
+          "caller": "create",
+          "callee": "this.pendingIds.delete",
+          "lineNumber": 220
+        },
+        {
+          "caller": "open",
+          "callee": "this.assertOpen",
+          "lineNumber": 227
+        },
+        {
+          "caller": "open",
+          "callee": "this.reserveId",
+          "lineNumber": 228
+        },
+        {
+          "caller": "open",
+          "callee": "this.repositoryPathForMetadata",
+          "lineNumber": 232
+        },
+        {
+          "caller": "open",
+          "callee": "this.databaseFactory.openExisting",
+          "lineNumber": 233
+        },
+        {
+          "caller": "open",
+          "callee": "configureWritableConnection",
+          "lineNumber": 235
+        },
+        {
+          "caller": "open",
+          "callee": "metadataFromSessionRow",
+          "lineNumber": 236
+        },
+        {
+          "caller": "open",
+          "callee": "readSessionRow",
+          "lineNumber": 236
+        },
+        {
+          "caller": "open",
+          "callee": "this.openStorageBackedSession",
+          "lineNumber": 237
+        },
+        {
+          "caller": "open",
+          "callee": "db?.close",
+          "lineNumber": 242
+        },
+        {
+          "caller": "open",
+          "callee": "this.pendingIds.delete",
+          "lineNumber": 244
+        },
+        {
+          "caller": "list",
+          "callee": "this.assertOpen",
+          "lineNumber": 251
+        },
+        {
+          "caller": "list",
+          "callee": "this.usesSharedDatabase",
+          "lineNumber": 253
+        },
+        {
+          "caller": "list",
+          "callee": "readdir",
+          "lineNumber": 258
+        },
+        {
+          "caller": "list",
+          "callee": "isErrorWithCode",
+          "lineNumber": 260
+        },
+        {
+          "caller": "list",
+          "callee": "names\n\t\t\t\t.filter((name) => name.endsWith(SQLITE_SESSION_EXTENSION))\n\t\t\t\t.map",
+          "lineNumber": 263
+        },
+        {
+          "caller": "list",
+          "callee": "names\n\t\t\t\t.filter",
+          "lineNumber": 263
+        },
+        {
+          "caller": "list",
+          "callee": "name.endsWith",
+          "lineNumber": 264
+        },
+        {
+          "caller": "list",
+          "callee": "join",
+          "lineNumber": 265
+        },
+        {
+          "caller": "list",
+          "callee": "realpath",
+          "lineNumber": 271
+        },
+        {
+          "caller": "list",
+          "callee": "this.databaseFactory.openReadOnly",
+          "lineNumber": 272
+        },
+        {
+          "caller": "list",
+          "callee": "configureReadOnlyConnection",
+          "lineNumber": 273
+        },
+        {
+          "caller": "list",
+          "callee": "readAllSessionRows",
+          "lineNumber": 274
+        },
+        {
+          "caller": "list",
+          "callee": "sessions.push",
+          "lineNumber": 275
+        },
+        {
+          "caller": "list",
+          "callee": "metadataFromSessionRow",
+          "lineNumber": 275
+        },
+        {
+          "caller": "list",
+          "callee": "db?.close",
+          "lineNumber": 281
+        },
+        {
+          "caller": "list",
+          "callee": "sessions.sort",
+          "lineNumber": 284
+        },
+        {
+          "caller": "delete",
+          "callee": "this.assertOpen",
+          "lineNumber": 288
+        },
+        {
+          "caller": "delete",
+          "callee": "this.reserveId",
+          "lineNumber": 289
+        },
+        {
+          "caller": "delete",
+          "callee": "this.repositoryPathForMetadata",
+          "lineNumber": 291
+        },
+        {
+          "caller": "delete",
+          "callee": "this.databaseFactory.openExisting",
+          "lineNumber": 292
+        },
+        {
+          "caller": "delete",
+          "callee": "configureWritableConnection",
+          "lineNumber": 294
+        },
+        {
+          "caller": "delete",
+          "callee": "this.usesSharedDatabase",
+          "lineNumber": 295
+        },
+        {
+          "caller": "delete",
+          "callee": "db.transaction",
+          "lineNumber": 296
+        },
+        {
+          "caller": "delete",
+          "callee": "metadataFromSessionRow",
+          "lineNumber": 297
+        },
+        {
+          "caller": "delete",
+          "callee": "readSessionRow",
+          "lineNumber": 297
+        },
+        {
+          "caller": "delete",
+          "callee": "deleteSessionRows",
+          "lineNumber": 298
+        },
+        {
+          "caller": "delete",
+          "callee": "metadataFromSessionRow",
+          "lineNumber": 301
+        },
+        {
+          "caller": "delete",
+          "callee": "readSessionRow",
+          "lineNumber": 301
+        },
+        {
+          "caller": "delete",
+          "callee": "db.close",
+          "lineNumber": 304
+        },
+        {
+          "caller": "delete",
+          "callee": "this.usesSharedDatabase",
+          "lineNumber": 306
+        },
+        {
+          "caller": "delete",
+          "callee": "removeSessionFiles",
+          "lineNumber": 306
+        },
+        {
+          "caller": "delete",
+          "callee": "this.pendingIds.delete",
+          "lineNumber": 308
+        },
+        {
+          "caller": "fork",
+          "callee": "this.assertOpen",
+          "lineNumber": 313
+        },
+        {
+          "caller": "fork",
+          "callee": "this.now",
+          "lineNumber": 314
+        },
+        {
+          "caller": "fork",
+          "callee": "uuidv7",
+          "lineNumber": 315
+        },
+        {
+          "caller": "fork",
+          "callee": "this.reserveId",
+          "lineNumber": 316
+        },
+        {
+          "caller": "fork",
+          "callee": "this.openStorages.get",
+          "lineNumber": 317
+        },
+        {
+          "caller": "fork",
+          "callee": "storageIdentity",
+          "lineNumber": 317
+        },
+        {
+          "caller": "fork",
+          "callee": "sourceStorage?.snapshot",
+          "lineNumber": 318
+        },
+        {
+          "caller": "fork",
+          "callee": "activeSourceSnapshot?.catch",
+          "lineNumber": 319
+        },
+        {
+          "caller": "fork",
+          "callee": "this.pathForSession",
+          "lineNumber": 320
+        },
+        {
+          "caller": "fork",
+          "callee": "mkdir",
+          "lineNumber": 326
+        },
+        {
+          "caller": "fork",
+          "callee": "dirname",
+          "lineNumber": 326
+        },
+        {
+          "caller": "fork",
+          "callee": "this.usesSharedDatabase",
+          "lineNumber": 327
+        },
+        {
+          "caller": "fork",
+          "callee": "openFile",
+          "lineNumber": 328
+        },
+        {
+          "caller": "fork",
+          "callee": "file.close",
+          "lineNumber": 329
+        },
+        {
+          "caller": "fork",
+          "callee": "this.createForkSnapshotFromExternalSource",
+          "lineNumber": 335
+        },
+        {
+          "caller": "fork",
+          "callee": "buildForkSnapshot",
+          "lineNumber": 336
+        },
+        {
+          "caller": "fork",
+          "callee": "this.databaseFactory.open",
+          "lineNumber": 338
+        },
+        {
+          "caller": "fork",
+          "callee": "configureWritableConnection",
+          "lineNumber": 340
+        },
+        {
+          "caller": "fork",
+          "callee": "applyInitialSchema",
+          "lineNumber": 341
+        },
+        {
+          "caller": "fork",
+          "callee": "realpath",
+          "lineNumber": 342
+        },
+        {
+          "caller": "fork",
+          "callee": "activeDb.transaction",
+          "lineNumber": 350
+        },
+        {
+          "caller": "fork",
+          "callee": "hasSessionRow",
+          "lineNumber": 351
+        },
+        {
+          "caller": "fork",
+          "callee": "insertSessionRow",
+          "lineNumber": 352
+        },
+        {
+          "caller": "fork",
+          "callee": "entryWriter.insert",
+          "lineNumber": 355
+        },
+        {
+          "caller": "fork",
+          "callee": "appendEntryToBranchIndex",
+          "lineNumber": 356
+        },
+        {
+          "caller": "fork",
+          "callee": "insertForkValue",
+          "lineNumber": 358
+        },
+        {
+          "caller": "fork",
+          "callee": "updateForkSessionStats",
+          "lineNumber": 359
+        },
+        {
+          "caller": "fork",
+          "callee": "this.openStorageBackedSession",
+          "lineNumber": 362
+        },
+        {
+          "caller": "fork",
+          "callee": "removeSessionFiles",
+          "lineNumber": 365
+        },
+        {
+          "caller": "fork",
+          "callee": "db?.close",
+          "lineNumber": 370
+        },
+        {
+          "caller": "fork",
+          "callee": "this.pendingIds.delete",
+          "lineNumber": 372
+        },
+        {
+          "caller": "close",
+          "callee": "this.closeOpenSessions",
+          "lineNumber": 381
+        },
+        {
+          "caller": "createForkSnapshotFromExternalSource",
+          "callee": "realpath",
+          "lineNumber": 389
+        },
+        {
+          "caller": "createForkSnapshotFromExternalSource",
+          "callee": "this.databaseFactory.openReadOnly",
+          "lineNumber": 390
+        },
+        {
+          "caller": "createForkSnapshotFromExternalSource",
+          "callee": "configureReadOnlyConnection",
+          "lineNumber": 392
+        },
+        {
+          "caller": "createForkSnapshotFromExternalSource",
+          "callee": "createSqliteForkSnapshot",
+          "lineNumber": 393
+        },
+        {
+          "caller": "createForkSnapshotFromExternalSource",
+          "callee": "sourceDb.close",
+          "lineNumber": 395
+        },
+        {
+          "caller": "closeOpenSessions",
+          "callee": "Promise.allSettled",
+          "lineNumber": 400
+        },
+        {
+          "caller": "closeOpenSessions",
+          "callee": "[...this.openSessions].map",
+          "lineNumber": 400
+        },
+        {
+          "caller": "closeOpenSessions",
+          "callee": "session.close",
+          "lineNumber": 400
+        },
+        {
+          "caller": "closeOpenSessions",
+          "callee": "results.flatMap",
+          "lineNumber": 401
+        },
+        {
+          "caller": "openStorageBackedSession",
+          "callee": "storageIdentity",
+          "lineNumber": 407
+        },
+        {
+          "caller": "openStorageBackedSession",
+          "callee": "this.openStorages.set",
+          "lineNumber": 409
+        },
+        {
+          "caller": "openStorageBackedSession",
+          "callee": "db.close",
+          "lineNumber": 414
+        },
+        {
+          "caller": "openStorageBackedSession",
+          "callee": "this.openStorages.get",
+          "lineNumber": 416
+        },
+        {
+          "caller": "openStorageBackedSession",
+          "callee": "this.openStorages.delete",
+          "lineNumber": 416
+        },
+        {
+          "caller": "openStorageBackedSession",
+          "callee": "this.openSessions.delete",
+          "lineNumber": 417
+        },
+        {
+          "caller": "openStorageBackedSession",
+          "callee": "this.pendingIds.delete",
+          "lineNumber": 418
+        },
+        {
+          "caller": "openStorageBackedSession",
+          "callee": "this.openSessions.add",
+          "lineNumber": 422
+        },
+        {
+          "caller": "repositoryPathForMetadata",
+          "callee": "Promise.all",
+          "lineNumber": 427
+        },
+        {
+          "caller": "repositoryPathForMetadata",
+          "callee": "realpath",
+          "lineNumber": 428
+        },
+        {
+          "caller": "repositoryPathForMetadata",
+          "callee": "this.pathForSession",
+          "lineNumber": 428
+        },
+        {
+          "caller": "repositoryPathForMetadata",
+          "callee": "realpath",
+          "lineNumber": 429
+        },
+        {
+          "caller": "reserveId",
+          "callee": "this.pendingIds.has",
+          "lineNumber": 438
+        },
+        {
+          "caller": "reserveId",
+          "callee": "this.pendingIds.add",
+          "lineNumber": 439
+        },
+        {
+          "caller": "pathForSession",
+          "callee": "sessionPath",
+          "lineNumber": 443
+        }
+      ],
+      "metrics": {
+        "importCount": 11,
+        "exportCount": 3,
+        "functionCount": 13,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/session.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 213,
+      "nonEmptyLines": 186,
+      "classes": [
+        {
+          "name": "SqliteOpenSession",
+          "startLine": 24,
+          "endLine": 213,
+          "methods": [
+            "constructor",
+            "beginMutation",
+            "mutate",
+            "getEntries",
+            "getEntry",
+            "getValue",
+            "scanValues",
+            "readList",
+            "scanBranch",
+            "getStats",
+            "getName",
+            "getLabel",
+            "findEntries",
+            "findEntry",
+            "branch",
+            "createBranch",
+            "setValue",
+            "deleteValue",
+            "appendList",
+            "deleteList",
+            "setName",
+            "setLabel",
+            "close",
+            "wrapBranch",
+            "admit"
+          ],
+          "properties": [
+            "metadata",
+            "idGenerator",
+            "session",
+            "onClose",
+            "admitted",
+            "closedError",
+            "state",
+            "closePromise"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SqliteOpenSession",
+          "line": 24,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "beginMutation",
+          "callee": "this.admitted.add",
+          "lineNumber": 46
+        },
+        {
+          "caller": "beginMutation",
+          "callee": "this.admit",
+          "lineNumber": 49
+        },
+        {
+          "caller": "beginMutation",
+          "callee": "this.session.beginMutation",
+          "lineNumber": 49
+        },
+        {
+          "caller": "beginMutation",
+          "callee": "this.admitted.delete",
+          "lineNumber": 51
+        },
+        {
+          "caller": "beginMutation",
+          "callee": "resolveFinished",
+          "lineNumber": 52
+        },
+        {
+          "caller": "beginMutation",
+          "callee": "source.end",
+          "lineNumber": 56
+        },
+        {
+          "caller": "beginMutation",
+          "callee": "this.admitted.delete",
+          "lineNumber": 57
+        },
+        {
+          "caller": "beginMutation",
+          "callee": "resolveFinished",
+          "lineNumber": 58
+        },
+        {
+          "caller": "beginMutation",
+          "callee": "source.commit",
+          "lineNumber": 63
+        },
+        {
+          "caller": "beginMutation",
+          "callee": "source.end",
+          "lineNumber": 66
+        },
+        {
+          "caller": "beginMutation",
+          "callee": "this.admitted.delete",
+          "lineNumber": 70
+        },
+        {
+          "caller": "beginMutation",
+          "callee": "resolveFinished",
+          "lineNumber": 71
+        },
+        {
+          "caller": "beginMutation",
+          "callee": "source.getEntries",
+          "lineNumber": 75
+        },
+        {
+          "caller": "beginMutation",
+          "callee": "source.getStats",
+          "lineNumber": 76
+        },
+        {
+          "caller": "beginMutation",
+          "callee": "source.getValue",
+          "lineNumber": 77
+        },
+        {
+          "caller": "beginMutation",
+          "callee": "source.scanValues",
+          "lineNumber": 78
+        },
+        {
+          "caller": "beginMutation",
+          "callee": "source.readList",
+          "lineNumber": 79
+        },
+        {
+          "caller": "beginMutation",
+          "callee": "source.scanBranch",
+          "lineNumber": 80
+        },
+        {
+          "caller": "mutate",
+          "callee": "this.admit",
+          "lineNumber": 85
+        },
+        {
+          "caller": "mutate",
+          "callee": "this.session.mutate",
+          "lineNumber": 86
+        },
+        {
+          "caller": "mutate",
+          "callee": "mutation",
+          "lineNumber": 88
+        },
+        {
+          "caller": "getEntries",
+          "callee": "this.admit",
+          "lineNumber": 94
+        },
+        {
+          "caller": "getEntries",
+          "callee": "this.session.getEntries",
+          "lineNumber": 94
+        },
+        {
+          "caller": "getEntry",
+          "callee": "this.admit",
+          "lineNumber": 98
+        },
+        {
+          "caller": "getEntry",
+          "callee": "this.session.getEntry",
+          "lineNumber": 98
+        },
+        {
+          "caller": "getValue",
+          "callee": "this.admit",
+          "lineNumber": 102
+        },
+        {
+          "caller": "getValue",
+          "callee": "this.session.getValue",
+          "lineNumber": 102
+        },
+        {
+          "caller": "scanValues",
+          "callee": "this.admit",
+          "lineNumber": 106
+        },
+        {
+          "caller": "scanValues",
+          "callee": "this.session.scanValues",
+          "lineNumber": 106
+        },
+        {
+          "caller": "readList",
+          "callee": "this.admit",
+          "lineNumber": 114
+        },
+        {
+          "caller": "readList",
+          "callee": "this.session.readList",
+          "lineNumber": 114
+        },
+        {
+          "caller": "scanBranch",
+          "callee": "this.admit",
+          "lineNumber": 118
+        },
+        {
+          "caller": "scanBranch",
+          "callee": "this.session.scanBranch",
+          "lineNumber": 118
+        },
+        {
+          "caller": "getStats",
+          "callee": "this.admit",
+          "lineNumber": 122
+        },
+        {
+          "caller": "getStats",
+          "callee": "this.session.getStats",
+          "lineNumber": 122
+        },
+        {
+          "caller": "getName",
+          "callee": "this.admit",
+          "lineNumber": 126
+        },
+        {
+          "caller": "getName",
+          "callee": "this.session.getName",
+          "lineNumber": 126
+        },
+        {
+          "caller": "getLabel",
+          "callee": "this.admit",
+          "lineNumber": 130
+        },
+        {
+          "caller": "getLabel",
+          "callee": "this.session.getLabel",
+          "lineNumber": 130
+        },
+        {
+          "caller": "findEntries",
+          "callee": "this.admit",
+          "lineNumber": 134
+        },
+        {
+          "caller": "findEntries",
+          "callee": "this.session.findEntries",
+          "lineNumber": 134
+        },
+        {
+          "caller": "findEntry",
+          "callee": "this.admit",
+          "lineNumber": 138
+        },
+        {
+          "caller": "findEntry",
+          "callee": "this.session.findEntry",
+          "lineNumber": 138
+        },
+        {
+          "caller": "branch",
+          "callee": "this.admit",
+          "lineNumber": 142
+        },
+        {
+          "caller": "branch",
+          "callee": "this.session.branch",
+          "lineNumber": 142
+        },
+        {
+          "caller": "branch",
+          "callee": "this.wrapBranch",
+          "lineNumber": 143
+        },
+        {
+          "caller": "createBranch",
+          "callee": "this.wrapBranch",
+          "lineNumber": 147
+        },
+        {
+          "caller": "createBranch",
+          "callee": "this.admit",
+          "lineNumber": 147
+        },
+        {
+          "caller": "createBranch",
+          "callee": "this.session.createBranch",
+          "lineNumber": 147
+        },
+        {
+          "caller": "setValue",
+          "callee": "this.admit",
+          "lineNumber": 151
+        },
+        {
+          "caller": "setValue",
+          "callee": "this.session.setValue",
+          "lineNumber": 151
+        },
+        {
+          "caller": "deleteValue",
+          "callee": "this.admit",
+          "lineNumber": 155
+        },
+        {
+          "caller": "deleteValue",
+          "callee": "this.session.deleteValue",
+          "lineNumber": 155
+        },
+        {
+          "caller": "appendList",
+          "callee": "this.admit",
+          "lineNumber": 159
+        },
+        {
+          "caller": "appendList",
+          "callee": "this.session.appendList",
+          "lineNumber": 159
+        },
+        {
+          "caller": "deleteList",
+          "callee": "this.admit",
+          "lineNumber": 163
+        },
+        {
+          "caller": "deleteList",
+          "callee": "this.session.deleteList",
+          "lineNumber": 163
+        },
+        {
+          "caller": "setName",
+          "callee": "this.admit",
+          "lineNumber": 167
+        },
+        {
+          "caller": "setName",
+          "callee": "this.session.setName",
+          "lineNumber": 167
+        },
+        {
+          "caller": "setLabel",
+          "callee": "this.admit",
+          "lineNumber": 171
+        },
+        {
+          "caller": "setLabel",
+          "callee": "this.session.setLabel",
+          "lineNumber": 171
+        },
+        {
+          "caller": "close",
+          "callee": "Promise.allSettled([...this.admitted])\n\t\t\t.then(() => this.session.close(context))\n\t\t\t.finally",
+          "lineNumber": 177
+        },
+        {
+          "caller": "close",
+          "callee": "Promise.allSettled([...this.admitted])\n\t\t\t.then",
+          "lineNumber": 177
+        },
+        {
+          "caller": "close",
+          "callee": "Promise.allSettled",
+          "lineNumber": 177
+        },
+        {
+          "caller": "close",
+          "callee": "this.session.close",
+          "lineNumber": 178
+        },
+        {
+          "caller": "close",
+          "callee": "this.onClose",
+          "lineNumber": 181
+        },
+        {
+          "caller": "wrapBranch",
+          "callee": "this.admit",
+          "lineNumber": 189
+        },
+        {
+          "caller": "wrapBranch",
+          "callee": "branch.getTipId",
+          "lineNumber": 189
+        },
+        {
+          "caller": "wrapBranch",
+          "callee": "this.admit",
+          "lineNumber": 190
+        },
+        {
+          "caller": "wrapBranch",
+          "callee": "branch.findEntries",
+          "lineNumber": 190
+        },
+        {
+          "caller": "wrapBranch",
+          "callee": "this.admit",
+          "lineNumber": 191
+        },
+        {
+          "caller": "wrapBranch",
+          "callee": "branch.findEntry",
+          "lineNumber": 191
+        },
+        {
+          "caller": "wrapBranch",
+          "callee": "this.admit",
+          "lineNumber": 192
+        },
+        {
+          "caller": "wrapBranch",
+          "callee": "branch.appendMessage",
+          "lineNumber": 192
+        },
+        {
+          "caller": "wrapBranch",
+          "callee": "this.admit",
+          "lineNumber": 194
+        },
+        {
+          "caller": "wrapBranch",
+          "callee": "branch.appendCustomEntry",
+          "lineNumber": 194
+        },
+        {
+          "caller": "admit",
+          "callee": "Promise.reject",
+          "lineNumber": 199
+        },
+        {
+          "caller": "admit",
+          "callee": "operation",
+          "lineNumber": 202
+        },
+        {
+          "caller": "admit",
+          "callee": "Promise.reject",
+          "lineNumber": 204
+        },
+        {
+          "caller": "admit",
+          "callee": "this.admitted.add",
+          "lineNumber": 206
+        },
+        {
+          "caller": "admit",
+          "callee": "result.then",
+          "lineNumber": 207
+        },
+        {
+          "caller": "admit",
+          "callee": "this.admitted.delete",
+          "lineNumber": 208
+        },
+        {
+          "caller": "admit",
+          "callee": "this.admitted.delete",
+          "lineNumber": 209
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 324,
+      "nonEmptyLines": 293,
+      "functions": [
+        {
+          "name": "readBranchMembership",
+          "startLine": 51,
+          "endLine": 63,
+          "params": [
+            "db",
+            "sessionId",
+            "entryId"
+          ]
+        },
+        {
+          "name": "readBranchMeta",
+          "startLine": 65,
+          "endLine": 71,
+          "params": [
+            "db",
+            "sessionId",
+            "branchId"
+          ]
+        },
+        {
+          "name": "insertBranchEntry",
+          "startLine": 73,
+          "endLine": 76,
+          "params": [
+            "db",
+            "sessionId",
+            "branchId",
+            "entry"
+          ]
+        },
+        {
+          "name": "readBranchTipForParent",
+          "startLine": 78,
+          "endLine": 82,
+          "params": [
+            "db",
+            "sessionId",
+            "parentId"
+          ]
+        },
+        {
+          "name": "createRootBranchForEntry",
+          "startLine": 84,
+          "endLine": 88,
+          "params": [
+            "db",
+            "sessionId",
+            "entry"
+          ]
+        },
+        {
+          "name": "appendEntryToExistingBranch",
+          "startLine": 90,
+          "endLine": 96,
+          "params": [
+            "db",
+            "sessionId",
+            "branchId",
+            "entry"
+          ]
+        },
+        {
+          "name": "readBranchSegmentsNewestFirst",
+          "startLine": 98,
+          "endLine": 111,
+          "params": [
+            "db",
+            "sessionId",
+            "start"
+          ]
+        },
+        {
+          "name": "readNewestCompactionBoundary",
+          "startLine": 113,
+          "endLine": 130,
+          "params": [
+            "db",
+            "sessionId",
+            "segmentsNewestFirst"
+          ]
+        },
+        {
+          "name": "copyBranchEntriesAfterSeqThroughParent",
+          "startLine": 132,
+          "endLine": 150,
+          "params": [
+            "db",
+            "sessionId",
+            "targetBranchId",
+            "segmentsNewestFirst",
+            "afterSeq"
+          ]
+        },
+        {
+          "name": "createDivergentBranchForEntry",
+          "startLine": 152,
+          "endLine": 164,
+          "params": [
+            "db",
+            "sessionId",
+            "entry"
+          ]
+        },
+        {
+          "name": "appendEntryToBranchIndex",
+          "startLine": 166,
+          "endLine": 178,
+          "params": [
+            "db",
+            "sessionId",
+            "entry"
+          ]
+        },
+        {
+          "name": "stopPredicates",
+          "startLine": 180,
+          "endLine": 185,
+          "params": [
+            "query"
+          ]
+        },
+        {
+          "name": "readStopSeq",
+          "startLine": 187,
+          "endLine": 205,
+          "params": [
+            "db",
+            "sessionId",
+            "segment",
+            "query",
+            "oldestFirst"
+          ]
+        },
+        {
+          "name": "branchScanPredicates",
+          "startLine": 207,
+          "endLine": 229,
+          "params": [
+            "sessionId",
+            "segment",
+            "query",
+            "oldestFirst",
+            "stopSeq"
+          ]
+        },
+        {
+          "name": "limitSql",
+          "startLine": 231,
+          "endLine": 233,
+          "params": [
+            "limit"
+          ]
+        },
+        {
+          "name": "scanEntrySegmentRows",
+          "startLine": 235,
+          "endLine": 251,
+          "params": [
+            "db",
+            "sessionId",
+            "segment",
+            "query",
+            "oldestFirst",
+            "stopSeq",
+            "limit"
+          ]
+        },
+        {
+          "name": "decodeEntryStructureRow",
+          "startLine": 253,
+          "endLine": 262,
+          "params": [
+            "row"
+          ]
+        },
+        {
+          "name": "scanStructureSegmentRows",
+          "startLine": 264,
+          "endLine": 281,
+          "params": [
+            "db",
+            "sessionId",
+            "segment",
+            "query",
+            "oldestFirst",
+            "stopSeq",
+            "limit"
+          ]
+        },
+        {
+          "name": "scanBranchSegments",
+          "startLine": 283,
+          "endLine": 312,
+          "params": [
+            "db",
+            "sessionId",
+            "query",
+            "readSegment"
+          ]
+        },
+        {
+          "name": "scanBranchEntries",
+          "startLine": 314,
+          "endLine": 316,
+          "params": [
+            "db",
+            "sessionId",
+            "query"
+          ]
+        },
+        {
+          "name": "scanBranchEntryStructures",
+          "startLine": 318,
+          "endLine": 324,
+          "params": [
+            "db",
+            "sessionId",
+            "query"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "appendEntryToBranchIndex",
+          "line": 166,
+          "isDefault": false
+        },
+        {
+          "name": "scanBranchEntries",
+          "line": 314,
+          "isDefault": false
+        },
+        {
+          "name": "scanBranchEntryStructures",
+          "line": 318,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "readBranchMembership",
+          "callee": "sql`SELECT b.branch_id, b.entry_seq\n\t\tFROM branch_entries b\n\t\tJOIN branch_meta m ON m.session_id = b.session_id AND m.branch_id = b.branch_id\n\t\tWHERE b.session_id = ${sessionId}\n\t\t\tAND b.entry_id = ${entryId}\n\t\t\tAND ((m.base_seq IS NULL AND b.entry_seq > 0) OR (m.base_seq IS NOT NULL AND b.entry_seq > m.base_seq))\n\t\t\tAND b.entry_seq <= m.tip_seq\n\t\tORDER BY m.tip_seq DESC, b.branch_id\n\t\tLIMIT 1`.get",
+          "lineNumber": 52
+        },
+        {
+          "caller": "readBranchMembership",
+          "callee": "sql",
+          "lineNumber": 52
+        },
+        {
+          "caller": "readBranchMeta",
+          "callee": "sql`SELECT branch_id, tip_entry_id, tip_seq, base_branch_id, base_seq\n\t\tFROM branch_meta\n\t\tWHERE session_id = ${sessionId} AND branch_id = ${branchId}`.get",
+          "lineNumber": 66
+        },
+        {
+          "caller": "readBranchMeta",
+          "callee": "sql",
+          "lineNumber": 66
+        },
+        {
+          "caller": "insertBranchEntry",
+          "callee": "sql`INSERT INTO branch_entries (session_id, branch_id, entry_id, entry_seq, entry_type)\n\t\tVALUES (${sessionId}, ${branchId}, ${entry.id}, ${entry.seq}, ${entry.type})`.run",
+          "lineNumber": 74
+        },
+        {
+          "caller": "insertBranchEntry",
+          "callee": "sql",
+          "lineNumber": 74
+        },
+        {
+          "caller": "readBranchTipForParent",
+          "callee": "sql`SELECT branch_id\n\t\tFROM branch_meta\n\t\tWHERE session_id = ${sessionId} AND tip_entry_id = ${parentId}`.get",
+          "lineNumber": 79
+        },
+        {
+          "caller": "readBranchTipForParent",
+          "callee": "sql",
+          "lineNumber": 79
+        },
+        {
+          "caller": "createRootBranchForEntry",
+          "callee": "sql`INSERT INTO branch_meta (session_id, branch_id, tip_entry_id, tip_seq, base_branch_id, base_seq)\n\t\tVALUES (${sessionId}, ${entry.id}, ${entry.id}, ${entry.seq}, ${null}, ${null})`.run",
+          "lineNumber": 85
+        },
+        {
+          "caller": "createRootBranchForEntry",
+          "callee": "sql",
+          "lineNumber": 85
+        },
+        {
+          "caller": "createRootBranchForEntry",
+          "callee": "insertBranchEntry",
+          "lineNumber": 87
+        },
+        {
+          "caller": "appendEntryToExistingBranch",
+          "callee": "insertBranchEntry",
+          "lineNumber": 91
+        },
+        {
+          "caller": "appendEntryToExistingBranch",
+          "callee": "sql`UPDATE branch_meta\n\t\tSET tip_entry_id = ${entry.id}, tip_seq = ${entry.seq}\n\t\tWHERE session_id = ${sessionId} AND branch_id = ${branchId}`.run",
+          "lineNumber": 92
+        },
+        {
+          "caller": "appendEntryToExistingBranch",
+          "callee": "sql",
+          "lineNumber": 92
+        },
+        {
+          "caller": "readBranchSegmentsNewestFirst",
+          "callee": "readBranchMembership",
+          "lineNumber": 99
+        },
+        {
+          "caller": "readBranchSegmentsNewestFirst",
+          "callee": "readBranchMeta",
+          "lineNumber": 102
+        },
+        {
+          "caller": "readBranchSegmentsNewestFirst",
+          "callee": "segments.push",
+          "lineNumber": 104
+        },
+        {
+          "caller": "readNewestCompactionBoundary",
+          "callee": "sql`SELECT MAX(entry_seq) AS entry_seq\n\t\t\tFROM branch_entries\n\t\t\tWHERE session_id = ${sessionId}\n\t\t\t\tAND branch_id = ${segment.branchId}\n\t\t\t\tAND entry_seq > ${segment.lowerSeq}\n\t\t\t\tAND entry_seq <= ${segment.upperSeq}\n\t\t\t\tAND entry_type = ${\"compaction\"}`.get",
+          "lineNumber": 119
+        },
+        {
+          "caller": "readNewestCompactionBoundary",
+          "callee": "sql",
+          "lineNumber": 119
+        },
+        {
+          "caller": "copyBranchEntriesAfterSeqThroughParent",
+          "callee": "[...segmentsNewestFirst].reverse",
+          "lineNumber": 139
+        },
+        {
+          "caller": "copyBranchEntriesAfterSeqThroughParent",
+          "callee": "Math.max",
+          "lineNumber": 140
+        },
+        {
+          "caller": "copyBranchEntriesAfterSeqThroughParent",
+          "callee": "sql`INSERT INTO branch_entries (session_id, branch_id, entry_id, entry_seq, entry_type)\n\t\t\tSELECT ${sessionId}, ${targetBranchId}, entry_id, entry_seq, entry_type\n\t\t\tFROM branch_entries\n\t\t\tWHERE session_id = ${sessionId}\n\t\t\t\tAND branch_id = ${segment.branchId}\n\t\t\t\tAND entry_seq > ${lowerSeq}\n\t\t\t\tAND entry_seq <= ${segment.upperSeq}`.run",
+          "lineNumber": 142
+        },
+        {
+          "caller": "copyBranchEntriesAfterSeqThroughParent",
+          "callee": "sql",
+          "lineNumber": 142
+        },
+        {
+          "caller": "createDivergentBranchForEntry",
+          "callee": "readBranchSegmentsNewestFirst",
+          "lineNumber": 154
+        },
+        {
+          "caller": "createDivergentBranchForEntry",
+          "callee": "readNewestCompactionBoundary",
+          "lineNumber": 155
+        },
+        {
+          "caller": "createDivergentBranchForEntry",
+          "callee": "sql`INSERT INTO branch_meta (session_id, branch_id, tip_entry_id, tip_seq, base_branch_id, base_seq)\n\t\tVALUES (${sessionId}, ${branchId}, ${entry.id}, ${entry.seq}, ${compaction?.branchId ?? null}, ${compaction?.seq ?? null})`.run",
+          "lineNumber": 158
+        },
+        {
+          "caller": "createDivergentBranchForEntry",
+          "callee": "sql",
+          "lineNumber": 158
+        },
+        {
+          "caller": "createDivergentBranchForEntry",
+          "callee": "copyBranchEntriesAfterSeqThroughParent",
+          "lineNumber": 162
+        },
+        {
+          "caller": "createDivergentBranchForEntry",
+          "callee": "insertBranchEntry",
+          "lineNumber": 163
+        },
+        {
+          "caller": "appendEntryToBranchIndex",
+          "callee": "createRootBranchForEntry",
+          "lineNumber": 168
+        },
+        {
+          "caller": "appendEntryToBranchIndex",
+          "callee": "readBranchTipForParent",
+          "lineNumber": 172
+        },
+        {
+          "caller": "appendEntryToBranchIndex",
+          "callee": "createDivergentBranchForEntry",
+          "lineNumber": 174
+        },
+        {
+          "caller": "appendEntryToBranchIndex",
+          "callee": "appendEntryToExistingBranch",
+          "lineNumber": 177
+        },
+        {
+          "caller": "stopPredicates",
+          "callee": "predicates.push",
+          "lineNumber": 182
+        },
+        {
+          "caller": "stopPredicates",
+          "callee": "sql",
+          "lineNumber": 182
+        },
+        {
+          "caller": "stopPredicates",
+          "callee": "predicates.push",
+          "lineNumber": 183
+        },
+        {
+          "caller": "stopPredicates",
+          "callee": "sql",
+          "lineNumber": 183
+        },
+        {
+          "caller": "readStopSeq",
+          "callee": "stopPredicates",
+          "lineNumber": 194
+        },
+        {
+          "caller": "readStopSeq",
+          "callee": "sql",
+          "lineNumber": 196
+        },
+        {
+          "caller": "readStopSeq",
+          "callee": "sql",
+          "lineNumber": 196
+        },
+        {
+          "caller": "readStopSeq",
+          "callee": "sql`SELECT ${aggregate} AS stop_seq\n\t\tFROM branch_entries b\n\t\tWHERE b.session_id = ${sessionId}\n\t\t\tAND b.branch_id = ${segment.branchId}\n\t\t\tAND b.entry_seq > ${segment.lowerSeq}\n\t\t\tAND b.entry_seq <= ${segment.upperSeq}\n\t\t\tAND (${joinSqlFragments(stop, \" OR \")})`.get",
+          "lineNumber": 197
+        },
+        {
+          "caller": "readStopSeq",
+          "callee": "sql",
+          "lineNumber": 197
+        },
+        {
+          "caller": "readStopSeq",
+          "callee": "joinSqlFragments",
+          "lineNumber": 203
+        },
+        {
+          "caller": "branchScanPredicates",
+          "callee": "sql",
+          "lineNumber": 215
+        },
+        {
+          "caller": "branchScanPredicates",
+          "callee": "sql",
+          "lineNumber": 216
+        },
+        {
+          "caller": "branchScanPredicates",
+          "callee": "sql",
+          "lineNumber": 217
+        },
+        {
+          "caller": "branchScanPredicates",
+          "callee": "sql",
+          "lineNumber": 218
+        },
+        {
+          "caller": "branchScanPredicates",
+          "callee": "sql",
+          "lineNumber": 219
+        },
+        {
+          "caller": "branchScanPredicates",
+          "callee": "predicates.push",
+          "lineNumber": 222
+        },
+        {
+          "caller": "branchScanPredicates",
+          "callee": "sql",
+          "lineNumber": 222
+        },
+        {
+          "caller": "branchScanPredicates",
+          "callee": "sql",
+          "lineNumber": 222
+        },
+        {
+          "caller": "branchScanPredicates",
+          "callee": "predicates.push",
+          "lineNumber": 223
+        },
+        {
+          "caller": "branchScanPredicates",
+          "callee": "sql",
+          "lineNumber": 223
+        },
+        {
+          "caller": "branchScanPredicates",
+          "callee": "predicates.push",
+          "lineNumber": 224
+        },
+        {
+          "caller": "branchScanPredicates",
+          "callee": "sql",
+          "lineNumber": 224
+        },
+        {
+          "caller": "branchScanPredicates",
+          "callee": "predicates.push",
+          "lineNumber": 226
+        },
+        {
+          "caller": "branchScanPredicates",
+          "callee": "sql",
+          "lineNumber": 226
+        },
+        {
+          "caller": "branchScanPredicates",
+          "callee": "sql",
+          "lineNumber": 226
+        },
+        {
+          "caller": "limitSql",
+          "callee": "sql",
+          "lineNumber": 232
+        },
+        {
+          "caller": "limitSql",
+          "callee": "sql",
+          "lineNumber": 232
+        },
+        {
+          "caller": "limitSql",
+          "callee": "Math.max",
+          "lineNumber": 232
+        },
+        {
+          "caller": "scanEntrySegmentRows",
+          "callee": "branchScanPredicates",
+          "lineNumber": 244
+        },
+        {
+          "caller": "scanEntrySegmentRows",
+          "callee": "sql",
+          "lineNumber": 245
+        },
+        {
+          "caller": "scanEntrySegmentRows",
+          "callee": "sql",
+          "lineNumber": 245
+        },
+        {
+          "caller": "scanEntrySegmentRows",
+          "callee": "sql`SELECT e.id, e.parent_id, e.seq, e.type, e.custom_type, e.timestamp, e.payload\n\t\tFROM branch_entries b\n\t\tCROSS JOIN entries e ON e.session_id = b.session_id AND e.id = b.entry_id\n\t\tWHERE ${joinSqlFragments(predicates, \" AND \")}\n\t\tORDER BY b.entry_seq ${order} ${limitSql(limit)}`.all",
+          "lineNumber": 246
+        },
+        {
+          "caller": "scanEntrySegmentRows",
+          "callee": "sql",
+          "lineNumber": 246
+        },
+        {
+          "caller": "scanEntrySegmentRows",
+          "callee": "joinSqlFragments",
+          "lineNumber": 249
+        },
+        {
+          "caller": "scanEntrySegmentRows",
+          "callee": "limitSql",
+          "lineNumber": 250
+        },
+        {
+          "caller": "scanStructureSegmentRows",
+          "callee": "branchScanPredicates",
+          "lineNumber": 273
+        },
+        {
+          "caller": "scanStructureSegmentRows",
+          "callee": "sql",
+          "lineNumber": 274
+        },
+        {
+          "caller": "scanStructureSegmentRows",
+          "callee": "sql",
+          "lineNumber": 274
+        },
+        {
+          "caller": "scanStructureSegmentRows",
+          "callee": "sql`SELECT e.id, e.parent_id, e.seq, e.type, e.custom_type, e.timestamp\n\t\tFROM branch_entries b\n\t\tCROSS JOIN entries e ON e.session_id = b.session_id AND e.id = b.entry_id\n\t\tWHERE ${joinSqlFragments(predicates, \" AND \")}\n\t\tORDER BY b.entry_seq ${order} ${limitSql(limit)}`.all",
+          "lineNumber": 275
+        },
+        {
+          "caller": "scanStructureSegmentRows",
+          "callee": "sql",
+          "lineNumber": 275
+        },
+        {
+          "caller": "scanStructureSegmentRows",
+          "callee": "joinSqlFragments",
+          "lineNumber": 278
+        },
+        {
+          "caller": "scanStructureSegmentRows",
+          "callee": "limitSql",
+          "lineNumber": 279
+        },
+        {
+          "caller": "scanStructureSegmentRows",
+          "callee": "rows.map",
+          "lineNumber": 280
+        },
+        {
+          "caller": "scanBranchSegments",
+          "callee": "readBranchSegmentsNewestFirst",
+          "lineNumber": 298
+        },
+        {
+          "caller": "scanBranchSegments",
+          "callee": "[...segmentsNewestFirst].reverse",
+          "lineNumber": 299
+        },
+        {
+          "caller": "scanBranchSegments",
+          "callee": "Math.max",
+          "lineNumber": 300
+        },
+        {
+          "caller": "scanBranchSegments",
+          "callee": "readStopSeq",
+          "lineNumber": 307
+        },
+        {
+          "caller": "scanBranchSegments",
+          "callee": "rows.push",
+          "lineNumber": 308
+        },
+        {
+          "caller": "scanBranchSegments",
+          "callee": "readSegment",
+          "lineNumber": 308
+        },
+        {
+          "caller": "scanBranchEntries",
+          "callee": "scanBranchSegments(db, sessionId, query, scanEntrySegmentRows).map",
+          "lineNumber": 315
+        },
+        {
+          "caller": "scanBranchEntries",
+          "callee": "scanBranchSegments",
+          "lineNumber": 315
+        },
+        {
+          "caller": "scanBranchEntryStructures",
+          "callee": "scanBranchSegments",
+          "lineNumber": 323
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 3,
+        "functionCount": 21,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 161,
+      "nonEmptyLines": 145,
+      "functions": [
+        {
+          "name": "entryPayload",
+          "startLine": 28,
+          "endLine": 63,
+          "params": [
+            "entry"
+          ]
+        },
+        {
+          "name": "parsePayload",
+          "startLine": 65,
+          "endLine": 67,
+          "params": [
+            "row"
+          ]
+        },
+        {
+          "name": "entryRowParams",
+          "startLine": 72,
+          "endLine": 83,
+          "params": [
+            "sessionId",
+            "entry"
+          ]
+        },
+        {
+          "name": "insertEntryRow",
+          "startLine": 99,
+          "endLine": 101,
+          "params": [
+            "db",
+            "sessionId",
+            "entry"
+          ]
+        },
+        {
+          "name": "decodeEntryRow",
+          "startLine": 103,
+          "endLine": 121,
+          "params": [
+            "row"
+          ]
+        },
+        {
+          "name": "entryStructureFromRow",
+          "startLine": 123,
+          "endLine": 132,
+          "params": [
+            "row"
+          ]
+        },
+        {
+          "name": "readEntryRows",
+          "startLine": 134,
+          "endLine": 143,
+          "params": [
+            "db",
+            "sessionId",
+            "ids"
+          ]
+        },
+        {
+          "name": "readAllEntryRows",
+          "startLine": 145,
+          "endLine": 148,
+          "params": [
+            "db",
+            "sessionId"
+          ]
+        },
+        {
+          "name": "scanEntryRows",
+          "startLine": 150,
+          "endLine": 161,
+          "params": [
+            "db",
+            "sessionId",
+            "query"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "EntryRowWriter",
+          "startLine": 85,
+          "endLine": 97,
+          "methods": [
+            "constructor",
+            "insert"
+          ],
+          "properties": [
+            "insertStatement",
+            "sessionId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "EntryRowWriter",
+          "line": 85,
+          "isDefault": false
+        },
+        {
+          "name": "insertEntryRow",
+          "line": 99,
+          "isDefault": false
+        },
+        {
+          "name": "decodeEntryRow",
+          "line": 103,
+          "isDefault": false
+        },
+        {
+          "name": "entryStructureFromRow",
+          "line": 123,
+          "isDefault": false
+        },
+        {
+          "name": "readEntryRows",
+          "line": 134,
+          "isDefault": false
+        },
+        {
+          "name": "readAllEntryRows",
+          "line": 145,
+          "isDefault": false
+        },
+        {
+          "name": "scanEntryRows",
+          "line": 150,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "parsePayload",
+          "callee": "JSON.parse",
+          "lineNumber": 66
+        },
+        {
+          "caller": "entryRowParams",
+          "callee": "JSON.stringify",
+          "lineNumber": 81
+        },
+        {
+          "caller": "entryRowParams",
+          "callee": "entryPayload",
+          "lineNumber": 81
+        },
+        {
+          "caller": "constructor",
+          "callee": "db.prepare",
+          "lineNumber": 90
+        },
+        {
+          "caller": "insert",
+          "callee": "this.insertStatement.run",
+          "lineNumber": 95
+        },
+        {
+          "caller": "insert",
+          "callee": "entryRowParams",
+          "lineNumber": 95
+        },
+        {
+          "caller": "insertEntryRow",
+          "callee": "db.prepare(INSERT_ENTRY_SQL).run",
+          "lineNumber": 100
+        },
+        {
+          "caller": "insertEntryRow",
+          "callee": "db.prepare",
+          "lineNumber": 100
+        },
+        {
+          "caller": "insertEntryRow",
+          "callee": "entryRowParams",
+          "lineNumber": 100
+        },
+        {
+          "caller": "decodeEntryRow",
+          "callee": "parsePayload",
+          "lineNumber": 112
+        },
+        {
+          "caller": "decodeEntryRow",
+          "callee": "parsePayload",
+          "lineNumber": 114
+        },
+        {
+          "caller": "decodeEntryRow",
+          "callee": "parsePayload",
+          "lineNumber": 116
+        },
+        {
+          "caller": "decodeEntryRow",
+          "callee": "parsePayload",
+          "lineNumber": 119
+        },
+        {
+          "caller": "readEntryRows",
+          "callee": "joinSqlFragments",
+          "lineNumber": 136
+        },
+        {
+          "caller": "readEntryRows",
+          "callee": "ids.map",
+          "lineNumber": 137
+        },
+        {
+          "caller": "readEntryRows",
+          "callee": "sql",
+          "lineNumber": 137
+        },
+        {
+          "caller": "readEntryRows",
+          "callee": "sql`SELECT id, parent_id, seq, type, custom_type, timestamp, payload\n\t\tFROM entries\n\t\tWHERE session_id = ${sessionId} AND id IN (${placeholders})`.all",
+          "lineNumber": 140
+        },
+        {
+          "caller": "readEntryRows",
+          "callee": "sql",
+          "lineNumber": 140
+        },
+        {
+          "caller": "readAllEntryRows",
+          "callee": "sql`SELECT id, parent_id, seq, type, custom_type, timestamp, payload\n\t\tFROM entries WHERE session_id = ${sessionId} ORDER BY seq ASC`.all",
+          "lineNumber": 146
+        },
+        {
+          "caller": "readAllEntryRows",
+          "callee": "sql",
+          "lineNumber": 146
+        },
+        {
+          "caller": "scanEntryRows",
+          "callee": "sql",
+          "lineNumber": 151
+        },
+        {
+          "caller": "scanEntryRows",
+          "callee": "filters.push",
+          "lineNumber": 152
+        },
+        {
+          "caller": "scanEntryRows",
+          "callee": "sql",
+          "lineNumber": 152
+        },
+        {
+          "caller": "scanEntryRows",
+          "callee": "filters.push",
+          "lineNumber": 153
+        },
+        {
+          "caller": "scanEntryRows",
+          "callee": "sql",
+          "lineNumber": 153
+        },
+        {
+          "caller": "scanEntryRows",
+          "callee": "filters.push",
+          "lineNumber": 154
+        },
+        {
+          "caller": "scanEntryRows",
+          "callee": "sql",
+          "lineNumber": 154
+        },
+        {
+          "caller": "scanEntryRows",
+          "callee": "filters.push",
+          "lineNumber": 155
+        },
+        {
+          "caller": "scanEntryRows",
+          "callee": "sql",
+          "lineNumber": 155
+        },
+        {
+          "caller": "scanEntryRows",
+          "callee": "sql",
+          "lineNumber": 157
+        },
+        {
+          "caller": "scanEntryRows",
+          "callee": "sql",
+          "lineNumber": 157
+        },
+        {
+          "caller": "scanEntryRows",
+          "callee": "sql",
+          "lineNumber": 158
+        },
+        {
+          "caller": "scanEntryRows",
+          "callee": "sql",
+          "lineNumber": 158
+        },
+        {
+          "caller": "scanEntryRows",
+          "callee": "Math.max",
+          "lineNumber": 158
+        },
+        {
+          "caller": "scanEntryRows",
+          "callee": "sql`SELECT id, parent_id, seq, type, custom_type, timestamp, payload\n\t\tFROM entries WHERE ${joinSqlFragments(filters, \" AND \")} ${order} ${limit}`.all",
+          "lineNumber": 159
+        },
+        {
+          "caller": "scanEntryRows",
+          "callee": "sql",
+          "lineNumber": 159
+        },
+        {
+          "caller": "scanEntryRows",
+          "callee": "joinSqlFragments",
+          "lineNumber": 160
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 7,
+        "functionCount": 9,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 102,
+      "nonEmptyLines": 93,
+      "functions": [
+        {
+          "name": "zeroUsage",
+          "startLine": 22,
+          "endLine": 31,
+          "params": []
+        },
+        {
+          "name": "readSessionRow",
+          "startLine": 33,
+          "endLine": 40,
+          "params": [
+            "db",
+            "sessionId"
+          ]
+        },
+        {
+          "name": "readAllSessionRows",
+          "startLine": 42,
+          "endLine": 46,
+          "params": [
+            "db"
+          ]
+        },
+        {
+          "name": "hasSessionRow",
+          "startLine": 48,
+          "endLine": 50,
+          "params": [
+            "db",
+            "sessionId"
+          ]
+        },
+        {
+          "name": "metadataFromSessionRow",
+          "startLine": 52,
+          "endLine": 70,
+          "params": [
+            "path",
+            "row",
+            "currentStorageVersion"
+          ]
+        },
+        {
+          "name": "insertSessionRow",
+          "startLine": 72,
+          "endLine": 90,
+          "params": [
+            "db",
+            "metadata",
+            "storageVersion",
+            "nextSeq"
+          ]
+        },
+        {
+          "name": "deleteSessionRows",
+          "startLine": 92,
+          "endLine": 102,
+          "params": [
+            "db",
+            "sessionId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "readSessionRow",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "readAllSessionRows",
+          "line": 42,
+          "isDefault": false
+        },
+        {
+          "name": "hasSessionRow",
+          "line": 48,
+          "isDefault": false
+        },
+        {
+          "name": "metadataFromSessionRow",
+          "line": 52,
+          "isDefault": false
+        },
+        {
+          "name": "insertSessionRow",
+          "line": 72,
+          "isDefault": false
+        },
+        {
+          "name": "deleteSessionRows",
+          "line": 92,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "readSessionRow",
+          "callee": "sql`SELECT id, created_at, parent_session_id, storage_version, metadata,\n\t\t\tmessage_count, usage_payload, next_seq\n\t\tFROM sessions\n\t\tWHERE id = ${sessionId}`.get",
+          "lineNumber": 34
+        },
+        {
+          "caller": "readSessionRow",
+          "callee": "sql",
+          "lineNumber": 34
+        },
+        {
+          "caller": "readAllSessionRows",
+          "callee": "sql`SELECT id, created_at, parent_session_id, storage_version, metadata,\n\t\t\tmessage_count, usage_payload, next_seq\n\t\tFROM sessions`.all",
+          "lineNumber": 43
+        },
+        {
+          "caller": "readAllSessionRows",
+          "callee": "sql",
+          "lineNumber": 43
+        },
+        {
+          "caller": "hasSessionRow",
+          "callee": "sql`SELECT id FROM sessions WHERE id = ${sessionId}`.get",
+          "lineNumber": 49
+        },
+        {
+          "caller": "hasSessionRow",
+          "callee": "sql",
+          "lineNumber": 49
+        },
+        {
+          "caller": "insertSessionRow",
+          "callee": "sql`INSERT INTO sessions\n\t\t\t(id, created_at, parent_session_id, storage_version, metadata, message_count, usage_payload, next_seq)\n\t\tVALUES (\n\t\t\t${metadata.id},\n\t\t\t${metadata.createdAt},\n\t\t\t${metadata.parentSessionId ?? null},\n\t\t\t${storageVersion},\n\t\t\t${null},\n\t\t\t${0},\n\t\t\t${JSON.stringify(zeroUsage())},\n\t\t\t${nextSeq}\n\t\t)`.run",
+          "lineNumber": 78
+        },
+        {
+          "caller": "insertSessionRow",
+          "callee": "sql",
+          "lineNumber": 78
+        },
+        {
+          "caller": "insertSessionRow",
+          "callee": "JSON.stringify",
+          "lineNumber": 87
+        },
+        {
+          "caller": "insertSessionRow",
+          "callee": "zeroUsage",
+          "lineNumber": 87
+        },
+        {
+          "caller": "deleteSessionRows",
+          "callee": "sql`DELETE FROM entries WHERE session_id = ${sessionId}`.run",
+          "lineNumber": 93
+        },
+        {
+          "caller": "deleteSessionRows",
+          "callee": "sql",
+          "lineNumber": 93
+        },
+        {
+          "caller": "deleteSessionRows",
+          "callee": "sql`DELETE FROM scalar_values WHERE session_id = ${sessionId}`.run",
+          "lineNumber": 94
+        },
+        {
+          "caller": "deleteSessionRows",
+          "callee": "sql",
+          "lineNumber": 94
+        },
+        {
+          "caller": "deleteSessionRows",
+          "callee": "sql`DELETE FROM list_values WHERE session_id = ${sessionId}`.run",
+          "lineNumber": 95
+        },
+        {
+          "caller": "deleteSessionRows",
+          "callee": "sql",
+          "lineNumber": 95
+        },
+        {
+          "caller": "deleteSessionRows",
+          "callee": "sql`DELETE FROM usage_ledger WHERE session_id = ${sessionId}`.run",
+          "lineNumber": 96
+        },
+        {
+          "caller": "deleteSessionRows",
+          "callee": "sql",
+          "lineNumber": 96
+        },
+        {
+          "caller": "deleteSessionRows",
+          "callee": "sql`DELETE FROM branch_entries WHERE session_id = ${sessionId}`.run",
+          "lineNumber": 97
+        },
+        {
+          "caller": "deleteSessionRows",
+          "callee": "sql",
+          "lineNumber": 97
+        },
+        {
+          "caller": "deleteSessionRows",
+          "callee": "sql`DELETE FROM branch_meta WHERE session_id = ${sessionId}`.run",
+          "lineNumber": 98
+        },
+        {
+          "caller": "deleteSessionRows",
+          "callee": "sql",
+          "lineNumber": 98
+        },
+        {
+          "caller": "deleteSessionRows",
+          "callee": "sql`DELETE FROM sessions WHERE id = ${sessionId}`.run",
+          "lineNumber": 99
+        },
+        {
+          "caller": "deleteSessionRows",
+          "callee": "sql",
+          "lineNumber": 99
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 6,
+        "functionCount": 7,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/session/session-sequences.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 12,
+      "functions": [
+        {
+          "name": "readNextSeq",
+          "startLine": 4,
+          "endLine": 8,
+          "params": [
+            "db",
+            "sessionId"
+          ]
+        },
+        {
+          "name": "advanceNextSeq",
+          "startLine": 10,
+          "endLine": 14,
+          "params": [
+            "db",
+            "sessionId",
+            "nextSeq"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "readNextSeq",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "advanceNextSeq",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "readNextSeq",
+          "callee": "sql`SELECT next_seq FROM sessions WHERE id = ${sessionId}`.get",
+          "lineNumber": 5
+        },
+        {
+          "caller": "readNextSeq",
+          "callee": "sql",
+          "lineNumber": 5
+        },
+        {
+          "caller": "advanceNextSeq",
+          "callee": "sql`UPDATE sessions SET next_seq = ${nextSeq} WHERE id = ${sessionId}`.run",
+          "lineNumber": 11
+        },
+        {
+          "caller": "advanceNextSeq",
+          "callee": "sql",
+          "lineNumber": 11
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 45,
+      "nonEmptyLines": 41,
+      "functions": [
+        {
+          "name": "addUsage",
+          "startLine": 7,
+          "endLine": 28,
+          "params": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "name": "readSessionStats",
+          "startLine": 30,
+          "endLine": 36,
+          "params": [
+            "db",
+            "sessionId"
+          ]
+        },
+        {
+          "name": "incrementMessageCount",
+          "startLine": 38,
+          "endLine": 40,
+          "params": [
+            "db",
+            "sessionId"
+          ]
+        },
+        {
+          "name": "addUsageToSessionStats",
+          "startLine": 42,
+          "endLine": 45,
+          "params": [
+            "db",
+            "sessionId",
+            "usage"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "readSessionStats",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "incrementMessageCount",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "addUsageToSessionStats",
+          "line": 42,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "readSessionStats",
+          "callee": "readSessionRow",
+          "lineNumber": 31
+        },
+        {
+          "caller": "readSessionStats",
+          "callee": "JSON.parse",
+          "lineNumber": 34
+        },
+        {
+          "caller": "incrementMessageCount",
+          "callee": "sql`UPDATE sessions SET message_count = message_count + 1 WHERE id = ${sessionId}`.run",
+          "lineNumber": 39
+        },
+        {
+          "caller": "incrementMessageCount",
+          "callee": "sql",
+          "lineNumber": 39
+        },
+        {
+          "caller": "addUsageToSessionStats",
+          "callee": "readSessionStats",
+          "lineNumber": 43
+        },
+        {
+          "caller": "addUsageToSessionStats",
+          "callee": "sql`UPDATE sessions SET usage_payload = ${JSON.stringify(addUsage(current, usage))} WHERE id = ${sessionId}`.run",
+          "lineNumber": 44
+        },
+        {
+          "caller": "addUsageToSessionStats",
+          "callee": "sql",
+          "lineNumber": 44
+        },
+        {
+          "caller": "addUsageToSessionStats",
+          "callee": "JSON.stringify",
+          "lineNumber": 44
+        },
+        {
+          "caller": "addUsageToSessionStats",
+          "callee": "addUsage",
+          "lineNumber": 44
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 3,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 67,
+      "nonEmptyLines": 57,
+      "functions": [
+        {
+          "name": "usageLedgerRowParams",
+          "startLine": 17,
+          "endLine": 27,
+          "params": [
+            "sessionId",
+            "row"
+          ]
+        },
+        {
+          "name": "insertUsageLedgerRow",
+          "startLine": 43,
+          "endLine": 45,
+          "params": [
+            "db",
+            "sessionId",
+            "row"
+          ]
+        },
+        {
+          "name": "decodeUsageLedgerRow",
+          "startLine": 47,
+          "endLine": 56,
+          "params": [
+            "row"
+          ]
+        },
+        {
+          "name": "scanUsageLedgerRows",
+          "startLine": 58,
+          "endLine": 67,
+          "params": [
+            "db",
+            "sessionId",
+            "query"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "UsageLedgerRowWriter",
+          "startLine": 29,
+          "endLine": 41,
+          "methods": [
+            "constructor",
+            "insert"
+          ],
+          "properties": [
+            "insertStatement",
+            "sessionId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "UsageLedgerRowWriter",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "insertUsageLedgerRow",
+          "line": 43,
+          "isDefault": false
+        },
+        {
+          "name": "decodeUsageLedgerRow",
+          "line": 47,
+          "isDefault": false
+        },
+        {
+          "name": "scanUsageLedgerRows",
+          "line": 58,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "usageLedgerRowParams",
+          "callee": "JSON.stringify",
+          "lineNumber": 24
+        },
+        {
+          "caller": "usageLedgerRowParams",
+          "callee": "JSON.stringify",
+          "lineNumber": 25
+        },
+        {
+          "caller": "constructor",
+          "callee": "db.prepare",
+          "lineNumber": 34
+        },
+        {
+          "caller": "insert",
+          "callee": "this.insertStatement.run",
+          "lineNumber": 39
+        },
+        {
+          "caller": "insert",
+          "callee": "usageLedgerRowParams",
+          "lineNumber": 39
+        },
+        {
+          "caller": "insertUsageLedgerRow",
+          "callee": "db.prepare(INSERT_USAGE_LEDGER_SQL).run",
+          "lineNumber": 44
+        },
+        {
+          "caller": "insertUsageLedgerRow",
+          "callee": "db.prepare",
+          "lineNumber": 44
+        },
+        {
+          "caller": "insertUsageLedgerRow",
+          "callee": "usageLedgerRowParams",
+          "lineNumber": 44
+        },
+        {
+          "caller": "decodeUsageLedgerRow",
+          "callee": "JSON.parse",
+          "lineNumber": 51
+        },
+        {
+          "caller": "decodeUsageLedgerRow",
+          "callee": "JSON.parse",
+          "lineNumber": 54
+        },
+        {
+          "caller": "scanUsageLedgerRows",
+          "callee": "sql",
+          "lineNumber": 59
+        },
+        {
+          "caller": "scanUsageLedgerRows",
+          "callee": "filters.push",
+          "lineNumber": 60
+        },
+        {
+          "caller": "scanUsageLedgerRows",
+          "callee": "sql",
+          "lineNumber": 60
+        },
+        {
+          "caller": "scanUsageLedgerRows",
+          "callee": "filters.push",
+          "lineNumber": 61
+        },
+        {
+          "caller": "scanUsageLedgerRows",
+          "callee": "sql",
+          "lineNumber": 61
+        },
+        {
+          "caller": "scanUsageLedgerRows",
+          "callee": "sql",
+          "lineNumber": 63
+        },
+        {
+          "caller": "scanUsageLedgerRows",
+          "callee": "sql",
+          "lineNumber": 63
+        },
+        {
+          "caller": "scanUsageLedgerRows",
+          "callee": "sql",
+          "lineNumber": 64
+        },
+        {
+          "caller": "scanUsageLedgerRows",
+          "callee": "sql",
+          "lineNumber": 64
+        },
+        {
+          "caller": "scanUsageLedgerRows",
+          "callee": "Math.max",
+          "lineNumber": 64
+        },
+        {
+          "caller": "scanUsageLedgerRows",
+          "callee": "sql`SELECT id, seq, entry_id, adjustment, usage, details\n\t\tFROM usage_ledger WHERE ${joinSqlFragments(filters, \" AND \")} ${order} ${limit}`.all",
+          "lineNumber": 65
+        },
+        {
+          "caller": "scanUsageLedgerRows",
+          "callee": "sql",
+          "lineNumber": 65
+        },
+        {
+          "caller": "scanUsageLedgerRows",
+          "callee": "joinSqlFragments",
+          "lineNumber": 66
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 4,
+        "functionCount": 4,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/session/values.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 146,
+      "nonEmptyLines": 133,
+      "functions": [
+        {
+          "name": "setScalarValueRow",
+          "startLine": 25,
+          "endLine": 36,
+          "params": [
+            "db",
+            "sessionId",
+            "namespace",
+            "key",
+            "seq",
+            "storedValue"
+          ]
+        },
+        {
+          "name": "deleteScalarValueRow",
+          "startLine": 38,
+          "endLine": 41,
+          "params": [
+            "db",
+            "sessionId",
+            "namespace",
+            "key"
+          ]
+        },
+        {
+          "name": "appendListValueRow",
+          "startLine": 43,
+          "endLine": 53,
+          "params": [
+            "db",
+            "sessionId",
+            "namespace",
+            "key",
+            "seq",
+            "element"
+          ]
+        },
+        {
+          "name": "deleteListValueRows",
+          "startLine": 55,
+          "endLine": 58,
+          "params": [
+            "db",
+            "sessionId",
+            "namespace",
+            "key"
+          ]
+        },
+        {
+          "name": "decodeScalarValueRow",
+          "startLine": 60,
+          "endLine": 65,
+          "params": [
+            "address",
+            "row"
+          ]
+        },
+        {
+          "name": "readScalarValueRow",
+          "startLine": 67,
+          "endLine": 77,
+          "params": [
+            "db",
+            "sessionId",
+            "address"
+          ]
+        },
+        {
+          "name": "readAllScalarValueRows",
+          "startLine": 79,
+          "endLine": 88,
+          "params": [
+            "db",
+            "sessionId"
+          ]
+        },
+        {
+          "name": "nextPrefixBoundary",
+          "startLine": 90,
+          "endLine": 102,
+          "params": [
+            "prefix"
+          ]
+        },
+        {
+          "name": "scanScalarValueRows",
+          "startLine": 104,
+          "endLine": 115,
+          "params": [
+            "db",
+            "sessionId",
+            "prefix"
+          ]
+        },
+        {
+          "name": "listValueReadQuery",
+          "startLine": 117,
+          "endLine": 135,
+          "params": [
+            "sessionId",
+            "address",
+            "options"
+          ]
+        },
+        {
+          "name": "readListValueRows",
+          "startLine": 137,
+          "endLine": 146,
+          "params": [
+            "db",
+            "sessionId",
+            "address",
+            "options"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "setScalarValueRow",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "deleteScalarValueRow",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "appendListValueRow",
+          "line": 43,
+          "isDefault": false
+        },
+        {
+          "name": "deleteListValueRows",
+          "line": 55,
+          "isDefault": false
+        },
+        {
+          "name": "readScalarValueRow",
+          "line": 67,
+          "isDefault": false
+        },
+        {
+          "name": "readAllScalarValueRows",
+          "line": 79,
+          "isDefault": false
+        },
+        {
+          "name": "scanScalarValueRows",
+          "line": 104,
+          "isDefault": false
+        },
+        {
+          "name": "listValueReadQuery",
+          "line": 117,
+          "isDefault": false
+        },
+        {
+          "name": "readListValueRows",
+          "line": 137,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "setScalarValueRow",
+          "callee": "sql`INSERT INTO scalar_values (session_id, namespace, key, seq, value)\n\t\tVALUES (${sessionId}, ${namespace}, ${key}, ${seq}, ${JSON.stringify(storedValue)})\n\t\tON CONFLICT(session_id, namespace, key) DO UPDATE SET seq = excluded.seq, value = excluded.value`.run",
+          "lineNumber": 33
+        },
+        {
+          "caller": "setScalarValueRow",
+          "callee": "sql",
+          "lineNumber": 33
+        },
+        {
+          "caller": "setScalarValueRow",
+          "callee": "JSON.stringify",
+          "lineNumber": 34
+        },
+        {
+          "caller": "deleteScalarValueRow",
+          "callee": "sql`DELETE FROM scalar_values\n\t\tWHERE session_id = ${sessionId} AND namespace = ${namespace} AND key = ${key}`.run",
+          "lineNumber": 39
+        },
+        {
+          "caller": "deleteScalarValueRow",
+          "callee": "sql",
+          "lineNumber": 39
+        },
+        {
+          "caller": "appendListValueRow",
+          "callee": "sql`INSERT INTO list_values (session_id, namespace, key, seq, value)\n\t\tVALUES (${sessionId}, ${namespace}, ${key}, ${seq}, ${JSON.stringify(element)})`.run",
+          "lineNumber": 51
+        },
+        {
+          "caller": "appendListValueRow",
+          "callee": "sql",
+          "lineNumber": 51
+        },
+        {
+          "caller": "appendListValueRow",
+          "callee": "JSON.stringify",
+          "lineNumber": 52
+        },
+        {
+          "caller": "deleteListValueRows",
+          "callee": "sql`DELETE FROM list_values\n\t\tWHERE session_id = ${sessionId} AND namespace = ${namespace} AND key = ${key}`.run",
+          "lineNumber": 56
+        },
+        {
+          "caller": "deleteListValueRows",
+          "callee": "sql",
+          "lineNumber": 56
+        },
+        {
+          "caller": "decodeScalarValueRow",
+          "callee": "JSON.parse",
+          "lineNumber": 64
+        },
+        {
+          "caller": "readScalarValueRow",
+          "callee": "sql`SELECT namespace, key, seq, value FROM scalar_values\n\t\tWHERE session_id = ${sessionId} AND namespace = ${address.namespace} AND key = ${address.key}`.get",
+          "lineNumber": 72
+        },
+        {
+          "caller": "readScalarValueRow",
+          "callee": "sql",
+          "lineNumber": 72
+        },
+        {
+          "caller": "readScalarValueRow",
+          "callee": "decodeScalarValueRow",
+          "lineNumber": 76
+        },
+        {
+          "caller": "readAllScalarValueRows",
+          "callee": "sql`SELECT namespace, key, seq, value FROM scalar_values\n\t\tWHERE session_id = ${sessionId} ORDER BY seq ASC`\n\t\t.all<ScalarValueRow>(db)\n\t\t.map",
+          "lineNumber": 80
+        },
+        {
+          "caller": "readAllScalarValueRows",
+          "callee": "sql`SELECT namespace, key, seq, value FROM scalar_values\n\t\tWHERE session_id = ${sessionId} ORDER BY seq ASC`\n\t\t.all",
+          "lineNumber": 80
+        },
+        {
+          "caller": "readAllScalarValueRows",
+          "callee": "sql",
+          "lineNumber": 80
+        },
+        {
+          "caller": "readAllScalarValueRows",
+          "callee": "value",
+          "lineNumber": 84
+        },
+        {
+          "caller": "readAllScalarValueRows",
+          "callee": "JSON.parse",
+          "lineNumber": 86
+        },
+        {
+          "caller": "nextPrefixBoundary",
+          "callee": "Array.from",
+          "lineNumber": 92
+        },
+        {
+          "caller": "nextPrefixBoundary",
+          "callee": "codePoints[index]?.codePointAt",
+          "lineNumber": 94
+        },
+        {
+          "caller": "nextPrefixBoundary",
+          "callee": "codePoints.slice(0, index).join",
+          "lineNumber": 98
+        },
+        {
+          "caller": "nextPrefixBoundary",
+          "callee": "codePoints.slice",
+          "lineNumber": 98
+        },
+        {
+          "caller": "nextPrefixBoundary",
+          "callee": "String.fromCodePoint",
+          "lineNumber": 98
+        },
+        {
+          "caller": "scanScalarValueRows",
+          "callee": "nextPrefixBoundary",
+          "lineNumber": 105
+        },
+        {
+          "caller": "scanScalarValueRows",
+          "callee": "sql`SELECT namespace, key, seq, value FROM scalar_values\n\t\t\t\tWHERE session_id = ${sessionId} AND namespace = ${prefix.namespace} AND key >= ${prefix.key}\n\t\t\t\tORDER BY key ASC`.all",
+          "lineNumber": 108
+        },
+        {
+          "caller": "scanScalarValueRows",
+          "callee": "sql",
+          "lineNumber": 108
+        },
+        {
+          "caller": "scanScalarValueRows",
+          "callee": "sql`SELECT namespace, key, seq, value FROM scalar_values\n\t\t\t\tWHERE session_id = ${sessionId} AND namespace = ${prefix.namespace} AND key >= ${prefix.key} AND key < ${upperBound}\n\t\t\t\tORDER BY key ASC`.all",
+          "lineNumber": 111
+        },
+        {
+          "caller": "scanScalarValueRows",
+          "callee": "sql",
+          "lineNumber": 111
+        },
+        {
+          "caller": "scanScalarValueRows",
+          "callee": "rows.map",
+          "lineNumber": 114
+        },
+        {
+          "caller": "scanScalarValueRows",
+          "callee": "decodeScalarValueRow",
+          "lineNumber": 114
+        },
+        {
+          "caller": "scanScalarValueRows",
+          "callee": "value",
+          "lineNumber": 114
+        },
+        {
+          "caller": "listValueReadQuery",
+          "callee": "resolveListReadOptions",
+          "lineNumber": 118
+        },
+        {
+          "caller": "listValueReadQuery",
+          "callee": "sql",
+          "lineNumber": 121
+        },
+        {
+          "caller": "listValueReadQuery",
+          "callee": "sql",
+          "lineNumber": 124
+        },
+        {
+          "caller": "listValueReadQuery",
+          "callee": "sql",
+          "lineNumber": 129
+        },
+        {
+          "caller": "listValueReadQuery",
+          "callee": "sql",
+          "lineNumber": 132
+        },
+        {
+          "caller": "readListValueRows",
+          "callee": "listValueReadQuery(sessionId, address, options)\n\t\t.all<ListValueRow>(db)\n\t\t.map",
+          "lineNumber": 143
+        },
+        {
+          "caller": "readListValueRows",
+          "callee": "listValueReadQuery(sessionId, address, options)\n\t\t.all",
+          "lineNumber": 143
+        },
+        {
+          "caller": "readListValueRows",
+          "callee": "listValueReadQuery",
+          "lineNumber": 143
+        },
+        {
+          "caller": "readListValueRows",
+          "callee": "JSON.parse",
+          "lineNumber": 145
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 9,
+        "functionCount": 11,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/sql.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 66,
+      "nonEmptyLines": 56,
+      "functions": [
+        {
+          "name": "sql",
+          "startLine": 38,
+          "endLine": 53,
+          "params": [
+            "strings",
+            "...values"
+          ]
+        },
+        {
+          "name": "joinSqlFragments",
+          "startLine": 56,
+          "endLine": 66,
+          "params": [
+            "fragments",
+            "separator"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "SqlQuery",
+          "startLine": 6,
+          "endLine": 35,
+          "methods": [
+            "constructor",
+            "exec",
+            "run",
+            "get",
+            "all",
+            "iterate"
+          ],
+          "properties": [
+            "queryText",
+            "params"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SqlQuery",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "sql",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "joinSqlFragments",
+          "line": 56,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "exec",
+          "callee": "db.exec",
+          "lineNumber": 17
+        },
+        {
+          "caller": "run",
+          "callee": "db.prepare(this.queryText).run",
+          "lineNumber": 21
+        },
+        {
+          "caller": "run",
+          "callee": "db.prepare",
+          "lineNumber": 21
+        },
+        {
+          "caller": "get",
+          "callee": "db.prepare(this.queryText).get",
+          "lineNumber": 25
+        },
+        {
+          "caller": "get",
+          "callee": "db.prepare",
+          "lineNumber": 25
+        },
+        {
+          "caller": "all",
+          "callee": "db.prepare(this.queryText).all",
+          "lineNumber": 29
+        },
+        {
+          "caller": "all",
+          "callee": "db.prepare",
+          "lineNumber": 29
+        },
+        {
+          "caller": "iterate",
+          "callee": "db.prepare(this.queryText).iterate",
+          "lineNumber": 33
+        },
+        {
+          "caller": "iterate",
+          "callee": "db.prepare",
+          "lineNumber": 33
+        },
+        {
+          "caller": "sql",
+          "callee": "params.push",
+          "lineNumber": 45
+        },
+        {
+          "caller": "sql",
+          "callee": "params.push",
+          "lineNumber": 48
+        },
+        {
+          "caller": "joinSqlFragments",
+          "callee": "params.push",
+          "lineNumber": 63
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/storage.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 211,
+      "nonEmptyLines": 192,
+      "classes": [
+        {
+          "name": "SqliteStorage",
+          "startLine": 49,
+          "endLine": 211,
+          "methods": [
+            "constructor",
+            "commit",
+            "getEntries",
+            "getValue",
+            "scanValues",
+            "readList",
+            "scanBranch",
+            "scanBranchStructure",
+            "scanEntries",
+            "scanUsage",
+            "getStats",
+            "snapshot",
+            "readSnapshot",
+            "readSnapshotEntries",
+            "applyCommit",
+            "close"
+          ],
+          "properties": [
+            "db",
+            "sessionId",
+            "now",
+            "entryWriter",
+            "usageWriter",
+            "commitQueue",
+            "state",
+            "closePromise"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SqliteStorage",
+          "line": 49,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "commit",
+          "callee": "this.commitQueue.then",
+          "lineNumber": 69
+        },
+        {
+          "caller": "commit",
+          "callee": "this.applyCommit",
+          "lineNumber": 69
+        },
+        {
+          "caller": "commit",
+          "callee": "result.then",
+          "lineNumber": 70
+        },
+        {
+          "caller": "getEntries",
+          "callee": "Promise.reject",
+          "lineNumber": 78
+        },
+        {
+          "caller": "getEntries",
+          "callee": "readEntryRows(this.db, this.sessionId, ids).map",
+          "lineNumber": 79
+        },
+        {
+          "caller": "getEntries",
+          "callee": "readEntryRows",
+          "lineNumber": 79
+        },
+        {
+          "caller": "getEntries",
+          "callee": "rowsById.get",
+          "lineNumber": 82
+        },
+        {
+          "caller": "getEntries",
+          "callee": "entries.set",
+          "lineNumber": 83
+        },
+        {
+          "caller": "getEntries",
+          "callee": "decodeEntryRow",
+          "lineNumber": 83
+        },
+        {
+          "caller": "getEntries",
+          "callee": "Promise.resolve",
+          "lineNumber": 85
+        },
+        {
+          "caller": "getValue",
+          "callee": "Promise.reject",
+          "lineNumber": 89
+        },
+        {
+          "caller": "getValue",
+          "callee": "Promise.resolve",
+          "lineNumber": 90
+        },
+        {
+          "caller": "getValue",
+          "callee": "readScalarValueRow",
+          "lineNumber": 90
+        },
+        {
+          "caller": "scanValues",
+          "callee": "Promise.reject",
+          "lineNumber": 94
+        },
+        {
+          "caller": "scanValues",
+          "callee": "Promise.resolve",
+          "lineNumber": 95
+        },
+        {
+          "caller": "scanValues",
+          "callee": "scanScalarValueRows",
+          "lineNumber": 95
+        },
+        {
+          "caller": "readList",
+          "callee": "readListValueRows",
+          "lineNumber": 104
+        },
+        {
+          "caller": "scanBranch",
+          "callee": "Promise.reject",
+          "lineNumber": 108
+        },
+        {
+          "caller": "scanBranch",
+          "callee": "Promise.resolve().then",
+          "lineNumber": 109
+        },
+        {
+          "caller": "scanBranch",
+          "callee": "Promise.resolve",
+          "lineNumber": 109
+        },
+        {
+          "caller": "scanBranch",
+          "callee": "scanBranchEntries",
+          "lineNumber": 109
+        },
+        {
+          "caller": "scanBranchStructure",
+          "callee": "Promise.reject",
+          "lineNumber": 113
+        },
+        {
+          "caller": "scanBranchStructure",
+          "callee": "Promise.resolve().then",
+          "lineNumber": 114
+        },
+        {
+          "caller": "scanBranchStructure",
+          "callee": "Promise.resolve",
+          "lineNumber": 114
+        },
+        {
+          "caller": "scanBranchStructure",
+          "callee": "scanBranchEntryStructures",
+          "lineNumber": 114
+        },
+        {
+          "caller": "scanEntries",
+          "callee": "Promise.reject",
+          "lineNumber": 118
+        },
+        {
+          "caller": "scanEntries",
+          "callee": "Promise.resolve",
+          "lineNumber": 119
+        },
+        {
+          "caller": "scanEntries",
+          "callee": "scanEntryRows(this.db, this.sessionId, query).map",
+          "lineNumber": 119
+        },
+        {
+          "caller": "scanEntries",
+          "callee": "scanEntryRows",
+          "lineNumber": 119
+        },
+        {
+          "caller": "scanUsage",
+          "callee": "Promise.reject",
+          "lineNumber": 123
+        },
+        {
+          "caller": "scanUsage",
+          "callee": "Promise.resolve",
+          "lineNumber": 124
+        },
+        {
+          "caller": "scanUsage",
+          "callee": "scanUsageLedgerRows(this.db, this.sessionId, query).map",
+          "lineNumber": 124
+        },
+        {
+          "caller": "scanUsage",
+          "callee": "scanUsageLedgerRows",
+          "lineNumber": 124
+        },
+        {
+          "caller": "getStats",
+          "callee": "Promise.reject",
+          "lineNumber": 128
+        },
+        {
+          "caller": "getStats",
+          "callee": "Promise.resolve",
+          "lineNumber": 129
+        },
+        {
+          "caller": "getStats",
+          "callee": "readSessionStats",
+          "lineNumber": 129
+        },
+        {
+          "caller": "snapshot",
+          "callee": "Promise.reject",
+          "lineNumber": 133
+        },
+        {
+          "caller": "snapshot",
+          "callee": "this.commitQueue.then",
+          "lineNumber": 134
+        },
+        {
+          "caller": "snapshot",
+          "callee": "this.readSnapshot",
+          "lineNumber": 134
+        },
+        {
+          "caller": "snapshot",
+          "callee": "result.then",
+          "lineNumber": 135
+        },
+        {
+          "caller": "readSnapshot",
+          "callee": "readAllScalarValueRows",
+          "lineNumber": 143
+        },
+        {
+          "caller": "readSnapshot",
+          "callee": "this.readSnapshotEntries",
+          "lineNumber": 145
+        },
+        {
+          "caller": "readSnapshotEntries",
+          "callee": "readAllEntryRows(this.db, this.sessionId).map",
+          "lineNumber": 152
+        },
+        {
+          "caller": "readSnapshotEntries",
+          "callee": "readAllEntryRows",
+          "lineNumber": 152
+        },
+        {
+          "caller": "readSnapshotEntries",
+          "callee": "branchTip",
+          "lineNumber": 153
+        },
+        {
+          "caller": "readSnapshotEntries",
+          "callee": "scalarValues.find",
+          "lineNumber": 154
+        },
+        {
+          "caller": "readSnapshotEntries",
+          "callee": "scanBranchEntries",
+          "lineNumber": 160
+        },
+        {
+          "caller": "applyCommit",
+          "callee": "this.db.transaction",
+          "lineNumber": 164
+        },
+        {
+          "caller": "applyCommit",
+          "callee": "readNextSeq",
+          "lineNumber": 165
+        },
+        {
+          "caller": "applyCommit",
+          "callee": "prepareStorageCommit",
+          "lineNumber": 166
+        },
+        {
+          "caller": "applyCommit",
+          "callee": "this.now",
+          "lineNumber": 166
+        },
+        {
+          "caller": "applyCommit",
+          "callee": "this.entryWriter.insert",
+          "lineNumber": 171
+        },
+        {
+          "caller": "applyCommit",
+          "callee": "appendEntryToBranchIndex",
+          "lineNumber": 172
+        },
+        {
+          "caller": "applyCommit",
+          "callee": "incrementMessageCount",
+          "lineNumber": 173
+        },
+        {
+          "caller": "applyCommit",
+          "callee": "this.usageWriter.insert",
+          "lineNumber": 178
+        },
+        {
+          "caller": "applyCommit",
+          "callee": "addUsageToSessionStats",
+          "lineNumber": 179
+        },
+        {
+          "caller": "applyCommit",
+          "callee": "deleteScalarValueRow",
+          "lineNumber": 184
+        },
+        {
+          "caller": "applyCommit",
+          "callee": "setScalarValueRow",
+          "lineNumber": 186
+        },
+        {
+          "caller": "applyCommit",
+          "callee": "deleteListValueRows",
+          "lineNumber": 191
+        },
+        {
+          "caller": "applyCommit",
+          "callee": "appendListValueRow",
+          "lineNumber": 193
+        },
+        {
+          "caller": "applyCommit",
+          "callee": "advanceNextSeq",
+          "lineNumber": 198
+        },
+        {
+          "caller": "applyCommit",
+          "callee": "readSessionStats",
+          "lineNumber": 199
+        },
+        {
+          "caller": "close",
+          "callee": "this.commitQueue.then",
+          "lineNumber": 206
+        }
+      ],
+      "metrics": {
+        "importCount": 8,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/types.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 28,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/ai/src/bedrock-provider.ts",
+      "type": "file",
+      "name": "bedrock-provider.ts",
+      "filePath": "packages/ai/src/bedrock-provider.ts",
+      "summary": "将 Bedrock Converse 的 stream/streamSimple 打包为 bedrockProviderModule，供 Bun 运行时注入到 pi-ai compat 层。",
+      "tags": [
+        "barrel",
+        "provider",
+        "bedrock",
+        "entry-point"
+      ],
+      "complexity": "simple",
+      "languageNotes": "薄封装：只转发 stream API，不实现协议细节。"
+    },
+    {
+      "id": "file:packages/ai/src/oauth.ts",
+      "type": "file",
+      "name": "oauth.ts",
+      "filePath": "packages/ai/src/oauth.ts",
+      "summary": "为 coding-agent 扩展声明提供 OAuth 相关类型的 type-only 兼容入口，从 extension-oauth-types 再导出。",
+      "tags": [
+        "type-definition",
+        "oauth",
+        "barrel"
+      ],
+      "complexity": "simple",
+      "languageNotes": "仅 export type，运行时无代码。"
+    },
+    {
+      "id": "file:packages/coding-agent/src/bun/cli.ts",
+      "type": "file",
+      "name": "cli.ts",
+      "filePath": "packages/coding-agent/src/bun/cli.ts",
+      "summary": "Bun 编译入口：先恢复 sandbox 环境并完成 runtime 注入，再转入通用 CLI。",
+      "tags": [
+        "entry-point",
+        "bun",
+        "cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/bun/restore-sandbox-env.ts",
+      "type": "file",
+      "name": "restore-sandbox-env.ts",
+      "filePath": "packages/coding-agent/src/bun/restore-sandbox-env.ts",
+      "summary": "在 Bun 编译二进制于 sandbox 中 process.env 为空时，从 /proc/self/environ 恢复环境变量。",
+      "tags": [
+        "utility",
+        "bun",
+        "sandbox",
+        "workaround"
+      ],
+      "complexity": "simple",
+      "languageNotes": "规避 oven-sh/bun#27802；需与 ai 包 provider-env 查找逻辑保持同步。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/bun/restore-sandbox-env.ts:restoreSandboxEnv",
+      "type": "function",
+      "name": "restoreSandboxEnv",
+      "filePath": "packages/coding-agent/src/bun/restore-sandbox-env.ts",
+      "lineRange": [
+        19,
+        36
+      ],
+      "summary": "当 Bun sandbox 下 process.env 为空时，从 /proc/self/environ 回填键值。",
+      "tags": [
+        "utility",
+        "bun",
+        "sandbox"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/ai/src/bedrock-provider.ts",
+      "target": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/bun/cli.ts",
+      "target": "file:packages/coding-agent/src/bun/runtime-setup.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/bun/cli.ts",
+      "target": "file:packages/coding-agent/src/bun/sandbox-env-setup.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/bun/cli.ts",
+      "target": "file:packages/coding-agent/src/cli.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/bun/restore-sandbox-env.ts",
+      "target": "function:packages/coding-agent/src/bun/restore-sandbox-env.ts:restoreSandboxEnv",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/bun/restore-sandbox-env.ts",
+      "target": "function:packages/coding-agent/src/bun/restore-sandbox-env.ts:restoreSandboxEnv",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

@@ -1,0 +1,297 @@
+{
+  "projectRoot": "/Users/elex-mb0203/MyWork/agent-projects/ai-pi",
+  "batchFiles": [
+    {
+      "path": "packages/ai/src/providers/qwen-token-plan-cn.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/qwen-token-plan-cn.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/qwen-token-plan-individual.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/qwen-token-plan-individual.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/qwen-token-plan.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/qwen-token-plan.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/radius-config.ts",
+      "language": "typescript",
+      "sizeLines": 96,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/radius.ts",
+      "language": "typescript",
+      "sizeLines": 82,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/together.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/together.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/vercel-ai-gateway.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/vercel-ai-gateway.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/xai.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/xai.ts",
+      "language": "typescript",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi-token-plan-ams.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi-token-plan-ams.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi-token-plan-cn.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi-token-plan-cn.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi-token-plan-sgp.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi-token-plan-sgp.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/zai-coding-cn.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/zai-coding-cn.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/zai.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/zai.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/abort.ts",
+      "language": "typescript",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/sleep.ts",
+      "language": "typescript",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "packages/ai/src/providers/qwen-token-plan-cn.models.ts": [
+      "packages/ai/src/model-catalog.ts"
+    ],
+    "packages/ai/src/providers/qwen-token-plan-cn.ts": [
+      "packages/ai/src/api/openai-completions.lazy.ts",
+      "packages/ai/src/auth/helpers.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/providers/qwen-token-plan-cn.models.ts"
+    ],
+    "packages/ai/src/providers/qwen-token-plan-individual.models.ts": [
+      "packages/ai/src/model-catalog.ts"
+    ],
+    "packages/ai/src/providers/qwen-token-plan-individual.ts": [
+      "packages/ai/src/api/openai-completions.lazy.ts",
+      "packages/ai/src/auth/helpers.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/providers/qwen-token-plan-individual.models.ts"
+    ],
+    "packages/ai/src/providers/qwen-token-plan.models.ts": [
+      "packages/ai/src/model-catalog.ts"
+    ],
+    "packages/ai/src/providers/qwen-token-plan.ts": [
+      "packages/ai/src/api/openai-completions.lazy.ts",
+      "packages/ai/src/auth/helpers.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/providers/qwen-token-plan.models.ts"
+    ],
+    "packages/ai/src/providers/radius-config.ts": [
+      "packages/ai/src/auth/types.ts",
+      "packages/ai/src/types.ts"
+    ],
+    "packages/ai/src/providers/radius.ts": [
+      "packages/ai/src/api/pi-messages.lazy.ts",
+      "packages/ai/src/auth/helpers.ts",
+      "packages/ai/src/auth/oauth/load.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/providers/radius-config.ts"
+    ],
+    "packages/ai/src/providers/together.models.ts": [
+      "packages/ai/src/model-catalog.ts"
+    ],
+    "packages/ai/src/providers/together.ts": [
+      "packages/ai/src/api/openai-completions.lazy.ts",
+      "packages/ai/src/auth/helpers.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/providers/together.models.ts"
+    ],
+    "packages/ai/src/providers/vercel-ai-gateway.models.ts": [
+      "packages/ai/src/model-catalog.ts"
+    ],
+    "packages/ai/src/providers/vercel-ai-gateway.ts": [
+      "packages/ai/src/api/anthropic-messages.lazy.ts",
+      "packages/ai/src/auth/helpers.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/providers/vercel-ai-gateway.models.ts"
+    ],
+    "packages/ai/src/providers/xai.models.ts": [
+      "packages/ai/src/model-catalog.ts"
+    ],
+    "packages/ai/src/providers/xai.ts": [
+      "packages/ai/src/api/openai-responses.lazy.ts",
+      "packages/ai/src/auth/helpers.ts",
+      "packages/ai/src/auth/oauth/load.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/providers/xai.models.ts"
+    ],
+    "packages/ai/src/providers/xiaomi-token-plan-ams.models.ts": [
+      "packages/ai/src/model-catalog.ts"
+    ],
+    "packages/ai/src/providers/xiaomi-token-plan-ams.ts": [
+      "packages/ai/src/api/openai-completions.lazy.ts",
+      "packages/ai/src/auth/helpers.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/providers/xiaomi-token-plan-ams.models.ts"
+    ],
+    "packages/ai/src/providers/xiaomi-token-plan-cn.models.ts": [
+      "packages/ai/src/model-catalog.ts"
+    ],
+    "packages/ai/src/providers/xiaomi-token-plan-cn.ts": [
+      "packages/ai/src/api/openai-completions.lazy.ts",
+      "packages/ai/src/auth/helpers.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/providers/xiaomi-token-plan-cn.models.ts"
+    ],
+    "packages/ai/src/providers/xiaomi-token-plan-sgp.models.ts": [
+      "packages/ai/src/model-catalog.ts"
+    ],
+    "packages/ai/src/providers/xiaomi-token-plan-sgp.ts": [
+      "packages/ai/src/api/openai-completions.lazy.ts",
+      "packages/ai/src/auth/helpers.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/providers/xiaomi-token-plan-sgp.models.ts"
+    ],
+    "packages/ai/src/providers/xiaomi.models.ts": [
+      "packages/ai/src/model-catalog.ts"
+    ],
+    "packages/ai/src/providers/xiaomi.ts": [
+      "packages/ai/src/api/openai-completions.lazy.ts",
+      "packages/ai/src/auth/helpers.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/providers/xiaomi.models.ts"
+    ],
+    "packages/ai/src/providers/zai-coding-cn.models.ts": [
+      "packages/ai/src/model-catalog.ts"
+    ],
+    "packages/ai/src/providers/zai-coding-cn.ts": [
+      "packages/ai/src/api/openai-completions.lazy.ts",
+      "packages/ai/src/auth/helpers.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/providers/zai-coding-cn.models.ts"
+    ],
+    "packages/ai/src/providers/zai.models.ts": [
+      "packages/ai/src/model-catalog.ts"
+    ],
+    "packages/ai/src/providers/zai.ts": [
+      "packages/ai/src/api/openai-completions.lazy.ts",
+      "packages/ai/src/auth/helpers.ts",
+      "packages/ai/src/models.ts",
+      "packages/ai/src/providers/zai.models.ts"
+    ],
+    "packages/ai/src/utils/abort.ts": [],
+    "packages/ai/src/utils/sleep.ts": []
+  }
+}

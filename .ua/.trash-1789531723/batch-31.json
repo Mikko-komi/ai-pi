@@ -1,0 +1,187 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/agent/docs/assistant-durability.md",
+      "type": "document",
+      "name": "assistant-durability.md",
+      "filePath": "packages/agent/docs/assistant-durability.md",
+      "summary": "Assistant 部分消息持久化的实现交接文档：用可回放的 stream frames 在进程丢失后重建最新 committed partial，并与 values 地址及 harness 的 intent/effect/settlement 状态机对齐。覆盖存储、帧契约、结算与未知结果恢复、取消、deferred polling、快照重连、不变量与必测项。",
+      "tags": ["documentation", "durability", "assistant", "handoff", "harness"],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:packages/agent/docs/harness.md",
+      "type": "document",
+      "name": "harness.md",
+      "filePath": "packages/agent/docs/harness.md",
+      "summary": "AgentHarness 的规范性实现规格，按章节定义三存储模型、会话树与 Branch/Lane、operation 状态机、Drive/恢复/中止/关闭、公共表面、schema 演进、工作包以及 38 条不变量与测试分层。",
+      "tags": ["documentation", "specification", "harness", "entry-point", "state-machine"],
+      "complexity": "complex",
+      "languageNotes": "长篇编号规范（§N.M），附录含术语表与 coding-agent v3 格式兼容说明。"
+    },
+    {
+      "id": "document:packages/agent/docs/plugins.md",
+      "type": "document",
+      "name": "plugins.md",
+      "filePath": "packages/agent/docs/plugins.md",
+      "summary": "说明 Pi 如何用 Chord 的 facet/service/replicated-state 运行时组装 session、presentation（TUI/web）与 server 等独立宿主，以及扩展 facet 的依赖装配、路由、deferred 交互、热替换与生命周期。实验性设计规格。",
+      "tags": ["documentation", "plugins", "facets", "architecture", "extensions"],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:packages/agent/docs/rpc.md",
+      "type": "document",
+      "name": "rpc.md",
+      "filePath": "packages/agent/docs/rpc.md",
+      "summary": "Facet 服务 RPC 的 Pi 侧线协议设计：Chord 负责中立语义，Pi 负责 wire envelope、路由、attachment 与错误适配。覆盖 provide/use 契约、绑定身份、复制状态、私有远程引用、取消与安全生命周期。",
+      "tags": ["documentation", "rpc", "facets", "transport", "protocol"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:packages/agent/docs/runtime-simplification.md",
+      "type": "document",
+      "name": "runtime-simplification.md",
+      "filePath": "packages/agent/docs/runtime-simplification.md",
+      "summary": "记录现有 AgentHarness runtime 的简化：扁平 durable types、continueOperation/settleOperation 突变 API、取消与 close 边界，以及分七阶段去掉 ownership-loss 机械并完成 WP05 的实施与验证状态。",
+      "tags": ["documentation", "runtime", "refactor", "harness", "handoff"],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:packages/agent/docs/telemetry-schema.md",
+      "type": "document",
+      "name": "telemetry-schema.md",
+      "filePath": "packages/agent/docs/telemetry-schema.md",
+      "summary": "由 generate-telemetry-docs.ts 生成的 Pi Agent telemetry span 词汇表，列出 pi.ai.request 与 harness run/compaction/navigation/checkpoint/turn/step/tool/hook/sleep/event_handler 以及 pi.session.write 的起止属性与事件。",
+      "tags": ["documentation", "telemetry", "schema-definition", "generated", "observability"],
+      "complexity": "complex",
+      "languageNotes": "生成文件，禁止手改；与 telemetry.md / harness.md 中的 span 声明对应。"
+    },
+    {
+      "id": "document:packages/agent/docs/telemetry.md",
+      "type": "document",
+      "name": "telemetry.md",
+      "filePath": "packages/agent/docs/telemetry.md",
+      "summary": "调用 Context 与 telemetry 的设计笔记（非正式规范）：显式 trailing Context、并发 parentage、hook/事件、Drive joiners、invocation 取消与 durable 取消的区分，以及 RPC trace 传播。最终行为应回写 harness.md。",
+      "tags": ["documentation", "telemetry", "context", "design-notes", "observability"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:packages/agent/docs/tool-durability.md",
+      "type": "document",
+      "name": "tool-durability.md",
+      "filePath": "packages/agent/docs/tool-durability.md",
+      "summary": "Tool-call 持久化实现交接：在外部 effect 结算与 source-order 会话落盘之间引入 outcome_ready，并支持可选的 onUpdate checkpoint。覆盖并行执行、安全/不安全恢复、invocation memos、step.do、取消与快照重连。",
+      "tags": ["documentation", "durability", "tools", "handoff", "harness"],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:packages/agent/docs/values.md",
+      "type": "document",
+      "name": "values.md",
+      "filePath": "packages/agent/docs/values.md",
+      "summary": "Session/harness/应用共用的绑定类型化 value/list 地址模型：精确地址、无全局 value map、事务写、标量与列表语义，以及 Memory/SQLite/JSONL 后端、fork/rewrite 与 schema 演进。assistant-durability 是首个 list 消费者。",
+      "tags": ["documentation", "storage", "values", "session", "schema-definition"],
+      "complexity": "complex"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:packages/agent/docs/assistant-durability.md",
+      "target": "document:packages/agent/docs/harness.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/agent/docs/assistant-durability.md",
+      "target": "document:packages/agent/docs/values.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/agent/docs/values.md",
+      "target": "document:packages/agent/docs/harness.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/agent/docs/values.md",
+      "target": "document:packages/agent/docs/assistant-durability.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/agent/docs/values.md",
+      "target": "document:packages/agent/docs/telemetry-schema.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/agent/docs/tool-durability.md",
+      "target": "document:packages/agent/docs/harness.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/agent/docs/runtime-simplification.md",
+      "target": "document:packages/agent/docs/harness.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/agent/docs/telemetry.md",
+      "target": "document:packages/agent/docs/harness.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/agent/docs/telemetry.md",
+      "target": "document:packages/agent/docs/telemetry-schema.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/agent/docs/harness.md",
+      "target": "document:packages/agent/docs/telemetry-schema.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/agent/docs/plugins.md",
+      "target": "document:packages/agent/docs/rpc.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/agent/docs/plugins.md",
+      "target": "document:packages/agent/docs/telemetry.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/agent/docs/plugins.md",
+      "target": "document:packages/agent/docs/values.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/agent/docs/plugins.md",
+      "target": "document:packages/agent/docs/harness.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

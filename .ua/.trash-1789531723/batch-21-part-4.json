@@ -1,0 +1,934 @@
+{
+  "nodes": [
+    {
+      "filePath": "packages/chord/src/services/state-codec.ts",
+      "id": "file:packages/chord/src/services/state-codec.ts",
+      "type": "file",
+      "name": "state-codec.ts",
+      "summary": "按订阅内每个复制状态成员维护成对 encoder/decoder，把 snapshot/update 在 Op 与 WireOp 间转换。",
+      "tags": [
+        "编解码",
+        "状态同步",
+        "订阅"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/services/state-codec.ts",
+      "id": "class:packages/chord/src/services/state-codec.ts:StateCodecRegistry",
+      "type": "class",
+      "name": "StateCodecRegistry",
+      "lineRange": [
+        27,
+        58
+      ],
+      "summary": "按实例地址+成员名登记有状态编解码器，支持 reset 与按实例删除。",
+      "tags": [
+        "注册表",
+        "编解码",
+        "状态同步"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/services/state-codec.ts",
+      "id": "function:packages/chord/src/services/state-codec.ts:createServiceStateEncoder",
+      "type": "function",
+      "name": "createServiceStateEncoder",
+      "lineRange": [
+        60,
+        88
+      ],
+      "summary": "创建订阅级 Encoder：快照重建字典，update 按类型编码或清理。",
+      "tags": [
+        "工厂",
+        "编解码",
+        "状态同步"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/services/state-codec.ts",
+      "id": "function:packages/chord/src/services/state-codec.ts:createServiceStateDecoder",
+      "type": "function",
+      "name": "createServiceStateDecoder",
+      "lineRange": [
+        90,
+        118
+      ],
+      "summary": "创建订阅级 Decoder：与 encoder 对称地展开 snapshot/update。",
+      "tags": [
+        "工厂",
+        "编解码",
+        "状态同步"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/services/state-codec.ts",
+      "id": "function:packages/chord/src/services/state-codec.ts:encodeInstance",
+      "type": "function",
+      "name": "encodeInstance",
+      "lineRange": [
+        120,
+        132
+      ],
+      "summary": "为实例中每个 state 成员分配 encoder 并编码其 ops。",
+      "tags": [
+        "编解码",
+        "快照",
+        "实例"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/services/state-codec.ts",
+      "id": "function:packages/chord/src/services/state-codec.ts:decodeInstance",
+      "type": "function",
+      "name": "decodeInstance",
+      "lineRange": [
+        134,
+        146
+      ],
+      "summary": "为实例中每个 state 成员分配 decoder 并解码其 ops。",
+      "tags": [
+        "编解码",
+        "快照",
+        "实例"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/services/state-internals.ts",
+      "id": "file:packages/chord/src/services/state-internals.ts",
+      "type": "file",
+      "name": "state-internals.ts",
+      "summary": "用 WeakMap 把复制状态对象挂到内部 sequence/publish/subscribe，供 provider 发现。",
+      "tags": [
+        "状态同步",
+        "内部",
+        "注册表"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/services/state-internals.ts",
+      "id": "function:packages/chord/src/services/state-internals.ts:registerReplicatedStateInternals",
+      "type": "function",
+      "name": "registerReplicatedStateInternals",
+      "lineRange": [
+        13,
+        15
+      ],
+      "summary": "把内部源登记到 WeakMap，避免泄漏到公开 API。",
+      "tags": [
+        "注册表",
+        "状态同步",
+        "内部"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/services/state-internals.ts",
+      "id": "function:packages/chord/src/services/state-internals.ts:getReplicatedStateInternals",
+      "type": "function",
+      "name": "getReplicatedStateInternals",
+      "lineRange": [
+        17,
+        20
+      ],
+      "summary": "按对象取出内部源；非对象返回 undefined。",
+      "tags": [
+        "注册表",
+        "状态同步",
+        "内部"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/services/state.ts",
+      "id": "file:packages/chord/src/services/state.ts",
+      "type": "file",
+      "name": "state.ts",
+      "summary": "可变复制状态与只读副本：用 delta tracker 发布 ops，按序号 hydrate/update。",
+      "tags": [
+        "状态同步",
+        "增量",
+        "发布订阅"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/services/state.ts",
+      "id": "class:packages/chord/src/services/state.ts:MutableReplicatedStateImpl",
+      "type": "class",
+      "name": "MutableReplicatedStateImpl",
+      "lineRange": [
+        6,
+        57
+      ],
+      "summary": "可写端：track 突变，publish 刷新 ops 并通知源监听与值监听。",
+      "tags": [
+        "状态同步",
+        "发布",
+        "可变"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/services/state.ts",
+      "id": "class:packages/chord/src/services/state.ts:ReplicatedStateReplica",
+      "type": "class",
+      "name": "ReplicatedStateReplica",
+      "lineRange": [
+        60,
+        129
+      ],
+      "summary": "只读副本：必须先收到 base hydrate，序号必须连续否则 clear。",
+      "tags": [
+        "状态同步",
+        "副本",
+        "订阅"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/services/state.ts",
+      "id": "function:packages/chord/src/services/state.ts:serviceDeliveryContext",
+      "type": "function",
+      "name": "serviceDeliveryContext",
+      "lineRange": [
+        132,
+        135
+      ],
+      "summary": "合成投递使用的 BACKGROUND_CONTEXT，尚无投递级取消。",
+      "tags": [
+        "上下文",
+        "投递",
+        "内部"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/services/wire.ts",
+      "id": "file:packages/chord/src/services/wire.ts",
+      "type": "file",
+      "name": "wire.ts",
+      "summary": "远程服务控制面呼叫与 catalogue/snapshot/update 的解析校验，区分解码 Op 与 WireOp。",
+      "tags": [
+        "编解码",
+        "校验",
+        "控制面",
+        "远程服务"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "filePath": "packages/chord/src/services/wire.ts",
+      "id": "function:packages/chord/src/services/wire.ts:createServiceCatalogueCall",
+      "type": "function",
+      "name": "createServiceCatalogueCall",
+      "lineRange": [
+        54,
+        56
+      ],
+      "summary": "构造 $chord.service/catalogue 控制呼叫。",
+      "tags": [
+        "工厂",
+        "控制面",
+        "catalogue"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/services/wire.ts",
+      "id": "function:packages/chord/src/services/wire.ts:createServiceSubscribeCall",
+      "type": "function",
+      "name": "createServiceSubscribeCall",
+      "lineRange": [
+        58,
+        60
+      ],
+      "summary": "构造带 subscriptionId/serviceId/mode 的 subscribe 控制呼叫。",
+      "tags": [
+        "工厂",
+        "控制面",
+        "订阅"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/services/wire.ts",
+      "id": "function:packages/chord/src/services/wire.ts:createServiceUnsubscribeCall",
+      "type": "function",
+      "name": "createServiceUnsubscribeCall",
+      "lineRange": [
+        62,
+        64
+      ],
+      "summary": "构造按 subscriptionId 取消订阅的控制呼叫。",
+      "tags": [
+        "工厂",
+        "控制面",
+        "订阅"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/services/wire.ts",
+      "id": "function:packages/chord/src/services/wire.ts:decodeServiceControlCall",
+      "type": "function",
+      "name": "decodeServiceControlCall",
+      "lineRange": [
+        66,
+        87
+      ],
+      "summary": "识别 $chord.service 控制呼叫；形状不符返回 undefined。",
+      "tags": [
+        "控制面",
+        "解析",
+        "远程服务"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/services/wire.ts",
+      "id": "function:packages/chord/src/services/wire.ts:parseServiceCall",
+      "type": "function",
+      "name": "parseServiceCall",
+      "lineRange": [
+        89,
+        97
+      ],
+      "summary": "校验普通 ServiceCall 的必选键、id 与可选 instance。",
+      "tags": [
+        "校验",
+        "解析",
+        "呼叫"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/services/wire.ts",
+      "id": "function:packages/chord/src/services/wire.ts:parseServiceCatalogue",
+      "type": "function",
+      "name": "parseServiceCatalogue",
+      "lineRange": [
+        99,
+        111
+      ],
+      "summary": "校验目录数组：唯一 serviceId 与合法 mode。",
+      "tags": [
+        "校验",
+        "解析",
+        "catalogue"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/services/wire.ts",
+      "id": "function:packages/chord/src/services/wire.ts:parseServiceSubscriptionSnapshot",
+      "type": "function",
+      "name": "parseServiceSubscriptionSnapshot",
+      "lineRange": [
+        113,
+        116
+      ],
+      "summary": "按已解码 Op 文法校验订阅快照。",
+      "tags": [
+        "校验",
+        "快照",
+        "增量"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/services/wire.ts",
+      "id": "function:packages/chord/src/services/wire.ts:parseWireServiceSubscriptionSnapshot",
+      "type": "function",
+      "name": "parseWireServiceSubscriptionSnapshot",
+      "lineRange": [
+        118,
+        121
+      ],
+      "summary": "按 WireOp 文法校验线上订阅快照。",
+      "tags": [
+        "校验",
+        "快照",
+        "编解码"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/services/wire.ts",
+      "id": "function:packages/chord/src/services/wire.ts:parseServiceProviderUpdate",
+      "type": "function",
+      "name": "parseServiceProviderUpdate",
+      "lineRange": [
+        123,
+        126
+      ],
+      "summary": "按已解码 Op 文法校验 provider 更新。",
+      "tags": [
+        "校验",
+        "更新",
+        "增量"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/services/wire.ts",
+      "id": "function:packages/chord/src/services/wire.ts:parseWireServiceProviderUpdate",
+      "type": "function",
+      "name": "parseWireServiceProviderUpdate",
+      "lineRange": [
+        128,
+        131
+      ],
+      "summary": "按 WireOp 文法校验线上 provider 更新。",
+      "tags": [
+        "校验",
+        "更新",
+        "编解码"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/services/wire.ts",
+      "id": "function:packages/chord/src/services/wire.ts:assertProviderUpdate",
+      "type": "function",
+      "name": "assertProviderUpdate",
+      "lineRange": [
+        142,
+        171
+      ],
+      "summary": "按 type 分发校验 state/unavailable/replaced/spawned/closed 形状。",
+      "tags": [
+        "校验",
+        "更新",
+        "分发"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/services/wire.ts",
+      "id": "function:packages/chord/src/services/wire.ts:assertInstance",
+      "type": "function",
+      "name": "assertInstance",
+      "lineRange": [
+        173,
+        195
+      ],
+      "summary": "校验实例 snapshot 的地址与 method/state 成员，并对 ops 调用 assertOp。",
+      "tags": [
+        "校验",
+        "快照",
+        "实例"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/services/wire.ts",
+      "id": "function:packages/chord/src/services/wire.ts:assertKeys",
+      "type": "function",
+      "name": "assertKeys",
+      "lineRange": [
+        212,
+        222
+      ],
+      "summary": "断言对象恰好包含必选键且无未知键。",
+      "tags": [
+        "校验",
+        "形状",
+        "工具函数"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/types.ts",
+      "id": "file:packages/chord/src/types.ts",
+      "type": "file",
+      "name": "types.ts",
+      "summary": "Chord 核心类型：Context、JsonValue、Service/Facet 契约，以及远程调用与复制状态的快照形状。",
+      "tags": [
+        "类型定义",
+        "契约",
+        "远程服务",
+        "facet"
+      ],
+      "complexity": "complex",
+      "languageNotes": "RemoteServiceContract 用条件类型把非 JSON 方法参数/返回值与非法成员从契约中排除。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/chord/src/services/state-codec.ts",
+      "target": "file:packages/chord/src/delta/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/services/state-codec.ts",
+      "target": "file:packages/chord/src/services/wire.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/services/state-codec.ts",
+      "target": "file:packages/chord/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/services/state-internals.ts",
+      "target": "file:packages/chord/src/delta/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/services/state-internals.ts",
+      "target": "file:packages/chord/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/services/state.ts",
+      "target": "file:packages/chord/src/context/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/services/state.ts",
+      "target": "file:packages/chord/src/delta/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/services/state.ts",
+      "target": "file:packages/chord/src/services/state-internals.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/services/state.ts",
+      "target": "file:packages/chord/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "file:packages/chord/src/delta/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "file:packages/chord/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/types.ts",
+      "target": "file:packages/chord/src/delta/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/types.ts",
+      "target": "file:packages/chord/src/services/provider.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/services/state-codec.ts",
+      "target": "class:packages/chord/src/services/state-codec.ts:StateCodecRegistry",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/state-codec.ts",
+      "target": "function:packages/chord/src/services/state-codec.ts:createServiceStateEncoder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/state-codec.ts",
+      "target": "function:packages/chord/src/services/state-codec.ts:createServiceStateDecoder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/state-codec.ts",
+      "target": "function:packages/chord/src/services/state-codec.ts:encodeInstance",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/state-codec.ts",
+      "target": "function:packages/chord/src/services/state-codec.ts:decodeInstance",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/state-internals.ts",
+      "target": "function:packages/chord/src/services/state-internals.ts:registerReplicatedStateInternals",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/state-internals.ts",
+      "target": "function:packages/chord/src/services/state-internals.ts:getReplicatedStateInternals",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/state.ts",
+      "target": "class:packages/chord/src/services/state.ts:MutableReplicatedStateImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/state.ts",
+      "target": "class:packages/chord/src/services/state.ts:ReplicatedStateReplica",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/state.ts",
+      "target": "function:packages/chord/src/services/state.ts:serviceDeliveryContext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:createServiceCatalogueCall",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:createServiceSubscribeCall",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:createServiceUnsubscribeCall",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:decodeServiceControlCall",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:parseServiceCall",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:parseServiceCatalogue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:parseServiceSubscriptionSnapshot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:parseWireServiceSubscriptionSnapshot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:parseServiceProviderUpdate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:parseWireServiceProviderUpdate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:assertProviderUpdate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:assertInstance",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:assertKeys",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/services/state-codec.ts",
+      "target": "function:packages/chord/src/services/state-codec.ts:createServiceStateEncoder",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/services/state-codec.ts",
+      "target": "function:packages/chord/src/services/state-codec.ts:createServiceStateDecoder",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/services/state-internals.ts",
+      "target": "function:packages/chord/src/services/state-internals.ts:registerReplicatedStateInternals",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/services/state-internals.ts",
+      "target": "function:packages/chord/src/services/state-internals.ts:getReplicatedStateInternals",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/services/state.ts",
+      "target": "class:packages/chord/src/services/state.ts:MutableReplicatedStateImpl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/services/state.ts",
+      "target": "class:packages/chord/src/services/state.ts:ReplicatedStateReplica",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/services/state.ts",
+      "target": "function:packages/chord/src/services/state.ts:serviceDeliveryContext",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:createServiceCatalogueCall",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:createServiceSubscribeCall",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:createServiceUnsubscribeCall",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:decodeServiceControlCall",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:parseServiceCall",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:parseServiceCatalogue",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:parseServiceSubscriptionSnapshot",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:parseWireServiceSubscriptionSnapshot",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:parseServiceProviderUpdate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/services/wire.ts",
+      "target": "function:packages/chord/src/services/wire.ts:parseWireServiceProviderUpdate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/chord/src/services/state-codec.ts:createServiceStateEncoder",
+      "target": "function:packages/chord/src/delta/index.ts:encoder",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/chord/src/services/state-codec.ts:createServiceStateDecoder",
+      "target": "function:packages/chord/src/delta/index.ts:decoder",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/chord/src/services/state-codec.ts:createServiceStateEncoder",
+      "target": "function:packages/chord/src/services/state-codec.ts:encodeInstance",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/chord/src/services/state-codec.ts:createServiceStateDecoder",
+      "target": "function:packages/chord/src/services/state-codec.ts:decodeInstance",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/chord/src/services/state.ts:MutableReplicatedStateImpl",
+      "target": "function:packages/chord/src/delta/index.ts:track",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/chord/src/services/state.ts:MutableReplicatedStateImpl",
+      "target": "function:packages/chord/src/delta/index.ts:applyImmutable",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/chord/src/services/state.ts:MutableReplicatedStateImpl",
+      "target": "function:packages/chord/src/services/state-internals.ts:registerReplicatedStateInternals",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/chord/src/services/state.ts:ReplicatedStateReplica",
+      "target": "function:packages/chord/src/delta/index.ts:isBase",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/chord/src/services/state.ts:ReplicatedStateReplica",
+      "target": "function:packages/chord/src/delta/index.ts:applyImmutable",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/chord/src/services/wire.ts:parseServiceSubscriptionSnapshot",
+      "target": "function:packages/chord/src/delta/index.ts:assertValidOp",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/chord/src/services/wire.ts:parseWireServiceSubscriptionSnapshot",
+      "target": "function:packages/chord/src/delta/index.ts:assertValidWireOp",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/chord/src/services/wire.ts:parseServiceProviderUpdate",
+      "target": "function:packages/chord/src/delta/index.ts:assertValidOp",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/chord/src/services/wire.ts:parseWireServiceProviderUpdate",
+      "target": "function:packages/chord/src/delta/index.ts:assertValidWireOp",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/chord/src/services/wire.ts:parseServiceProviderUpdate",
+      "target": "function:packages/chord/src/services/wire.ts:assertProviderUpdate",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

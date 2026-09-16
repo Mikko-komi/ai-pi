@@ -1,0 +1,4698 @@
+{
+  "scriptCompleted": true,
+  "contentDigest": "faedfa2a68b114f151d57d7bcb9893f6eb6b1405b10e4b8319f82c89ac66b432",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "language": "unknown",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".github/APPROVED_CONTRIBUTORS",
+      "language": "unknown",
+      "sizeLines": 395,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug.yml",
+      "language": "yaml",
+      "sizeLines": 45,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/config.yml",
+      "language": "yaml",
+      "sizeLines": 5,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/contribution.yml",
+      "language": "yaml",
+      "sizeLines": 36,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/package-report.yml",
+      "language": "yaml",
+      "sizeLines": 49,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".github/workflows/approve-contributor.yml",
+      "language": "yaml",
+      "sizeLines": 223,
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".github/workflows/build-binaries.yml",
+      "language": "yaml",
+      "sizeLines": 444,
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "language": "yaml",
+      "sizeLines": 42,
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".github/workflows/issue-analysis.yml",
+      "language": "yaml",
+      "sizeLines": 688,
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".github/workflows/issue-gate.yml",
+      "language": "yaml",
+      "sizeLines": 129,
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".github/workflows/issue-triage-labels.yml",
+      "language": "yaml",
+      "sizeLines": 142,
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".github/workflows/npm-audit.yml",
+      "language": "yaml",
+      "sizeLines": 31,
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".github/workflows/pr-gate.yml",
+      "language": "yaml",
+      "sizeLines": 128,
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".github/workflows/publish-model-catalog.yml",
+      "language": "yaml",
+      "sizeLines": 146,
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".github/workflows/remove-inprogress-on-close.yml",
+      "language": "yaml",
+      "sizeLines": 31,
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".husky/pre-commit",
+      "language": "unknown",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".npmrc",
+      "language": "unknown",
+      "sizeLines": 2,
+      "fileCategory": "code"
+    },
+    {
+      "path": "AGENTS.md",
+      "language": "markdown",
+      "sizeLines": 124,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "language": "markdown",
+      "sizeLines": 102,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "sizeLines": 115,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "SECURITY.md",
+      "language": "markdown",
+      "sizeLines": 87,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "biome.json",
+      "language": "json",
+      "sizeLines": 41,
+      "fileCategory": "config"
+    },
+    {
+      "path": "mini-test.sh",
+      "language": "shell",
+      "sizeLines": 46,
+      "fileCategory": "script"
+    },
+    {
+      "path": "package.json",
+      "language": "json",
+      "sizeLines": 75,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/agent/README.md",
+      "language": "markdown",
+      "sizeLines": 517,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/agent/docs/assistant-durability.md",
+      "language": "markdown",
+      "sizeLines": 355,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/agent/docs/harness.md",
+      "language": "markdown",
+      "sizeLines": 1468,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/agent/docs/plugins.md",
+      "language": "markdown",
+      "sizeLines": 1158,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/agent/docs/rpc.md",
+      "language": "markdown",
+      "sizeLines": 215,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/agent/docs/runtime-simplification.md",
+      "language": "markdown",
+      "sizeLines": 391,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/agent/docs/telemetry-schema.md",
+      "language": "markdown",
+      "sizeLines": 383,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/agent/docs/telemetry.md",
+      "language": "markdown",
+      "sizeLines": 251,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/agent/docs/tool-durability.md",
+      "language": "markdown",
+      "sizeLines": 704,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/agent/docs/values.md",
+      "language": "markdown",
+      "sizeLines": 735,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/agent/package.json",
+      "language": "json",
+      "sizeLines": 89,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/agent/src/agent-loop.ts",
+      "language": "typescript",
+      "sizeLines": 803,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/agent.ts",
+      "language": "typescript",
+      "sizeLines": 592,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/agent-harness.ts",
+      "language": "typescript",
+      "sizeLines": 622,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/compaction/branch-summarization.ts",
+      "language": "typescript",
+      "sizeLines": 300,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/compaction/compaction.ts",
+      "language": "typescript",
+      "sizeLines": 865,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/compaction/utils.ts",
+      "language": "typescript",
+      "sizeLines": 132,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/config.ts",
+      "language": "typescript",
+      "sizeLines": 42,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/context.ts",
+      "language": "typescript",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/env/nodejs.ts",
+      "language": "typescript",
+      "sizeLines": 924,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/events.ts",
+      "language": "typescript",
+      "sizeLines": 286,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/execution/assistant.ts",
+      "language": "typescript",
+      "sizeLines": 175,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/execution/effect-gate.ts",
+      "language": "typescript",
+      "sizeLines": 64,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/execution/tools.ts",
+      "language": "typescript",
+      "sizeLines": 210,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/hooks.ts",
+      "language": "typescript",
+      "sizeLines": 533,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/messages.ts",
+      "language": "typescript",
+      "sizeLines": 168,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/prompt-templates.ts",
+      "language": "typescript",
+      "sizeLines": 270,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/result.ts",
+      "language": "typescript",
+      "sizeLines": 117,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/runtime/drive.ts",
+      "language": "typescript",
+      "sizeLines": 106,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/runtime/drive/boundary.ts",
+      "language": "typescript",
+      "sizeLines": 262,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/runtime/drive/checkpoint.ts",
+      "language": "typescript",
+      "sizeLines": 190,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/runtime/drive/deferred.ts",
+      "language": "typescript",
+      "sizeLines": 287,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/runtime/drive/generation.ts",
+      "language": "typescript",
+      "sizeLines": 302,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "language": "typescript",
+      "sizeLines": 173,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/runtime/drive/recovery.ts",
+      "language": "typescript",
+      "sizeLines": 126,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/runtime/drive/response.ts",
+      "language": "typescript",
+      "sizeLines": 485,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/runtime/drive/retry.ts",
+      "language": "typescript",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "language": "typescript",
+      "sizeLines": 1222,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/runtime/drive/terminal.ts",
+      "language": "typescript",
+      "sizeLines": 82,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "language": "typescript",
+      "sizeLines": 326,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/runtime/drive/tools.ts",
+      "language": "typescript",
+      "sizeLines": 692,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/runtime/harness.ts",
+      "language": "typescript",
+      "sizeLines": 408,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/runtime/index.ts",
+      "language": "typescript",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/runtime/lane.ts",
+      "language": "typescript",
+      "sizeLines": 2012,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/runtime/progress.ts",
+      "language": "typescript",
+      "sizeLines": 117,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/runtime/reducer.ts",
+      "language": "typescript",
+      "sizeLines": 232,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/runtime/restore.ts",
+      "language": "typescript",
+      "sizeLines": 171,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/runtime/transcript.ts",
+      "language": "typescript",
+      "sizeLines": 129,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/runtime/types.ts",
+      "language": "typescript",
+      "sizeLines": 146,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/commit.ts",
+      "language": "typescript",
+      "sizeLines": 116,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/context.ts",
+      "language": "typescript",
+      "sizeLines": 64,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/fork-policy.ts",
+      "language": "typescript",
+      "sizeLines": 67,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/fork.ts",
+      "language": "typescript",
+      "sizeLines": 119,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/in-memory-storage-state.ts",
+      "language": "typescript",
+      "sizeLines": 349,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/index.ts",
+      "language": "typescript",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/jsonl/codec.ts",
+      "language": "typescript",
+      "sizeLines": 63,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/jsonl/fork.ts",
+      "language": "typescript",
+      "sizeLines": 328,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/jsonl/index.ts",
+      "language": "typescript",
+      "sizeLines": 3,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/jsonl/io.ts",
+      "language": "typescript",
+      "sizeLines": 118,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/jsonl/legacy-v3.ts",
+      "language": "typescript",
+      "sizeLines": 681,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/jsonl/repo.ts",
+      "language": "typescript",
+      "sizeLines": 389,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/jsonl/storage.ts",
+      "language": "typescript",
+      "sizeLines": 267,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/jsonl/types.ts",
+      "language": "typescript",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/memory.ts",
+      "language": "typescript",
+      "sizeLines": 453,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/mutation-line.ts",
+      "language": "typescript",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/session.ts",
+      "language": "typescript",
+      "sizeLines": 475,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/testing/benchmark/datasets.ts",
+      "language": "typescript",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/testing/benchmark/session-repo.ts",
+      "language": "typescript",
+      "sizeLines": 181,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/testing/benchmark/storage.ts",
+      "language": "typescript",
+      "sizeLines": 143,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/testing/conformance/session-repo.ts",
+      "language": "typescript",
+      "sizeLines": 1185,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/testing/conformance/storage.ts",
+      "language": "typescript",
+      "sizeLines": 920,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/testing/gating-storage.ts",
+      "language": "typescript",
+      "sizeLines": 114,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/testing/index.ts",
+      "language": "typescript",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/testing/instrumented-storage.ts",
+      "language": "typescript",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/testing/storage-decorator.ts",
+      "language": "typescript",
+      "sizeLines": 71,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/testing/types.ts",
+      "language": "typescript",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/types.ts",
+      "language": "typescript",
+      "sizeLines": 602,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/session/values.ts",
+      "language": "typescript",
+      "sizeLines": 195,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/skills.ts",
+      "language": "typescript",
+      "sizeLines": 396,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/system-prompt.ts",
+      "language": "typescript",
+      "sizeLines": 34,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/telemetry.ts",
+      "language": "typescript",
+      "sizeLines": 635,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/tools/bash.ts",
+      "language": "typescript",
+      "sizeLines": 145,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/tools/edit-diff.ts",
+      "language": "typescript",
+      "sizeLines": 500,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/tools/edit.ts",
+      "language": "typescript",
+      "sizeLines": 145,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/tools/file-mutation-queue.ts",
+      "language": "typescript",
+      "sizeLines": 62,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/tools/image.ts",
+      "language": "typescript",
+      "sizeLines": 104,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/tools/index.ts",
+      "language": "typescript",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/tools/path-utils.ts",
+      "language": "typescript",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/tools/read.ts",
+      "language": "typescript",
+      "sizeLines": 149,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/tools/tool-context.ts",
+      "language": "typescript",
+      "sizeLines": 6,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/tools/write.ts",
+      "language": "typescript",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/types.ts",
+      "language": "typescript",
+      "sizeLines": 407,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/utils/adaptive-publisher.ts",
+      "language": "typescript",
+      "sizeLines": 87,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/utils/output-capture.ts",
+      "language": "typescript",
+      "sizeLines": 238,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/utils/shell-output.ts",
+      "language": "typescript",
+      "sizeLines": 112,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/utils/truncate.ts",
+      "language": "typescript",
+      "sizeLines": 350,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/harness/utils/usage.ts",
+      "language": "typescript",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/index.ts",
+      "language": "typescript",
+      "sizeLines": 152,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/node.ts",
+      "language": "typescript",
+      "sizeLines": 2,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/proxy.ts",
+      "language": "typescript",
+      "sizeLines": 402,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/search/index.ts",
+      "language": "typescript",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/stream-fn.ts",
+      "language": "typescript",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/src/types.ts",
+      "language": "typescript",
+      "sizeLines": 446,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/tsconfig.build.json",
+      "language": "json",
+      "sizeLines": 15,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/agent/vitest.benchmark.config.ts",
+      "language": "typescript",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/vitest.config.ts",
+      "language": "typescript",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/agent/vitest.harness.config.ts",
+      "language": "typescript",
+      "sizeLines": 34,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/README.md",
+      "language": "markdown",
+      "sizeLines": 1715,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/ai/bedrock-provider.d.ts",
+      "language": "typescript",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/bedrock-provider.js",
+      "language": "javascript",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/package.json",
+      "language": "json",
+      "sizeLines": 103,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/ai/src/api/anthropic-messages.lazy.ts",
+      "language": "typescript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/anthropic-messages.ts",
+      "language": "typescript",
+      "sizeLines": 1490,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/azure-openai-responses.lazy.ts",
+      "language": "typescript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/azure-openai-responses.ts",
+      "language": "typescript",
+      "sizeLines": 338,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/bedrock-converse-stream.lazy.ts",
+      "language": "typescript",
+      "sizeLines": 30,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "language": "typescript",
+      "sizeLines": 1325,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/cloudflare-ai-binding.ts",
+      "language": "typescript",
+      "sizeLines": 90,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/cloudflare.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/constrained-sampling.ts",
+      "language": "typescript",
+      "sizeLines": 277,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/github-copilot-headers.ts",
+      "language": "typescript",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/google-generative-ai.lazy.ts",
+      "language": "typescript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/google-generative-ai.ts",
+      "language": "typescript",
+      "sizeLines": 526,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/google-shared.ts",
+      "language": "typescript",
+      "sizeLines": 453,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/google-vertex.lazy.ts",
+      "language": "typescript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/google-vertex.ts",
+      "language": "typescript",
+      "sizeLines": 598,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/lazy.ts",
+      "language": "typescript",
+      "sizeLines": 98,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/mistral-conversations.lazy.ts",
+      "language": "typescript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/mistral-conversations.ts",
+      "language": "typescript",
+      "sizeLines": 941,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/openai-codex-responses.lazy.ts",
+      "language": "typescript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/openai-codex-responses.ts",
+      "language": "typescript",
+      "sizeLines": 1657,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/openai-completions.lazy.ts",
+      "language": "typescript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/openai-completions.ts",
+      "language": "typescript",
+      "sizeLines": 1717,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/openai-prompt-cache.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/openai-responses-shared.ts",
+      "language": "typescript",
+      "sizeLines": 793,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/openai-responses.lazy.ts",
+      "language": "typescript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/openai-responses.ts",
+      "language": "typescript",
+      "sizeLines": 389,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/openrouter-images.lazy.ts",
+      "language": "typescript",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/openrouter-images.ts",
+      "language": "typescript",
+      "sizeLines": 196,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/pi-messages.lazy.ts",
+      "language": "typescript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/pi-messages.ts",
+      "language": "typescript",
+      "sizeLines": 441,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/simple-options.ts",
+      "language": "typescript",
+      "sizeLines": 95,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/api/transform-messages.ts",
+      "language": "typescript",
+      "sizeLines": 223,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/auth/context.ts",
+      "language": "typescript",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/auth/credential-store.ts",
+      "language": "typescript",
+      "sizeLines": 67,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/auth/helpers.ts",
+      "language": "typescript",
+      "sizeLines": 59,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/anthropic.ts",
+      "language": "typescript",
+      "sizeLines": 364,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/device-code.ts",
+      "language": "typescript",
+      "sizeLines": 98,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/github-copilot.ts",
+      "language": "typescript",
+      "sizeLines": 507,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/kimi-coding.ts",
+      "language": "typescript",
+      "sizeLines": 296,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/load.ts",
+      "language": "typescript",
+      "sizeLines": 68,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/oauth-page.ts",
+      "language": "typescript",
+      "sizeLines": 109,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/openai-codex.ts",
+      "language": "typescript",
+      "sizeLines": 544,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/openrouter.ts",
+      "language": "typescript",
+      "sizeLines": 311,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/pkce.ts",
+      "language": "typescript",
+      "sizeLines": 34,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/radius.ts",
+      "language": "typescript",
+      "sizeLines": 403,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/auth/oauth/xai.ts",
+      "language": "typescript",
+      "sizeLines": 239,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/auth/resolve.ts",
+      "language": "typescript",
+      "sizeLines": 205,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/auth/types.ts",
+      "language": "typescript",
+      "sizeLines": 240,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/bedrock-provider.ts",
+      "language": "typescript",
+      "sizeLines": 6,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/bun-oauth.ts",
+      "language": "typescript",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/cli.ts",
+      "language": "typescript",
+      "sizeLines": 119,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/compat.ts",
+      "language": "typescript",
+      "sizeLines": 298,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/compat/extension-oauth-types.ts",
+      "language": "typescript",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/env-api-keys.ts",
+      "language": "typescript",
+      "sizeLines": 188,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/image-models.ts",
+      "language": "typescript",
+      "sizeLines": 42,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/images-api-registry.ts",
+      "language": "typescript",
+      "sizeLines": 53,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/images-models.ts",
+      "language": "typescript",
+      "sizeLines": 275,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/images.ts",
+      "language": "typescript",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/index.ts",
+      "language": "typescript",
+      "sizeLines": 48,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/legacy-api-aliases.ts",
+      "language": "typescript",
+      "sizeLines": 108,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/model-catalog.ts",
+      "language": "typescript",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/models-store.ts",
+      "language": "typescript",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/models.ts",
+      "language": "typescript",
+      "sizeLines": 957,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/oauth.ts",
+      "language": "typescript",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/all.ts",
+      "language": "typescript",
+      "sizeLines": 155,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/amazon-bedrock.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/amazon-bedrock.ts",
+      "language": "typescript",
+      "sizeLines": 90,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/ant-ling.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/ant-ling.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/anthropic.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/anthropic.ts",
+      "language": "typescript",
+      "sizeLines": 59,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/azure-openai-responses.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/azure-openai-responses.ts",
+      "language": "typescript",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/baseten.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/baseten.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/cerebras.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/cerebras.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/cloudflare-ai-gateway.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/cloudflare-ai-gateway.ts",
+      "language": "typescript",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/cloudflare-auth.ts",
+      "language": "typescript",
+      "sizeLines": 103,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/cloudflare-stream.ts",
+      "language": "typescript",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/cloudflare-workers-ai.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/cloudflare-workers-ai.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/data-json.d.ts",
+      "language": "typescript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/deepseek.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/deepseek.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/faux.ts",
+      "language": "typescript",
+      "sizeLines": 708,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/fireworks.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/fireworks.ts",
+      "language": "typescript",
+      "sizeLines": 19,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/github-copilot.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/github-copilot.ts",
+      "language": "typescript",
+      "sizeLines": 34,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/google-vertex.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/google-vertex.ts",
+      "language": "typescript",
+      "sizeLines": 100,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/google.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/google.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/groq.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/groq.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/huggingface.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/huggingface.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/images/register-builtins.ts",
+      "language": "typescript",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/kimi-coding.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/kimi-coding.ts",
+      "language": "typescript",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/minimax-cn.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/minimax-cn.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/minimax.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/minimax.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/mistral.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/mistral.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/moonshotai-cn.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/moonshotai-cn.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/moonshotai.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/moonshotai.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/nvidia.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/nvidia.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/openai-codex.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/openai-codex.ts",
+      "language": "typescript",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/openai.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/openai.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/opencode-go.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/opencode-go.ts",
+      "language": "typescript",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/opencode-headers.ts",
+      "language": "typescript",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/opencode.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/opencode.ts",
+      "language": "typescript",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/openrouter-images.ts",
+      "language": "typescript",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/openrouter.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/openrouter.ts",
+      "language": "typescript",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/qwen-token-plan-cn.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/qwen-token-plan-cn.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/qwen-token-plan-individual.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/qwen-token-plan-individual.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/qwen-token-plan.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/qwen-token-plan.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/radius-config.ts",
+      "language": "typescript",
+      "sizeLines": 96,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/radius.ts",
+      "language": "typescript",
+      "sizeLines": 82,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/together.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/together.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/vercel-ai-gateway.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/vercel-ai-gateway.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/xai.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/xai.ts",
+      "language": "typescript",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi-token-plan-ams.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi-token-plan-ams.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi-token-plan-cn.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi-token-plan-cn.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi-token-plan-sgp.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi-token-plan-sgp.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/zai-coding-cn.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/zai-coding-cn.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/zai.models.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/providers/zai.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/session-resources.ts",
+      "language": "typescript",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/types.ts",
+      "language": "typescript",
+      "sizeLines": 881,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/abort-signals.ts",
+      "language": "typescript",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/abort.ts",
+      "language": "typescript",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/assistant-message-frame.ts",
+      "language": "typescript",
+      "sizeLines": 490,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/deferred-tools.ts",
+      "language": "typescript",
+      "sizeLines": 39,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/diagnostics.ts",
+      "language": "typescript",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/error-body.ts",
+      "language": "typescript",
+      "sizeLines": 149,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/estimate.ts",
+      "language": "typescript",
+      "sizeLines": 143,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/event-stream.ts",
+      "language": "typescript",
+      "sizeLines": 110,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/hash.ts",
+      "language": "typescript",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/headers.ts",
+      "language": "typescript",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/json-parse.ts",
+      "language": "typescript",
+      "sizeLines": 124,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/node-http-proxy.ts",
+      "language": "typescript",
+      "sizeLines": 161,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/overflow.ts",
+      "language": "typescript",
+      "sizeLines": 180,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/pi-user-agent.ts",
+      "language": "typescript",
+      "sizeLines": 19,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/provider-env.ts",
+      "language": "typescript",
+      "sizeLines": 52,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/provider-retry.ts",
+      "language": "typescript",
+      "sizeLines": 125,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/retry.ts",
+      "language": "typescript",
+      "sizeLines": 240,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/sanitize-unicode.ts",
+      "language": "typescript",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/sleep.ts",
+      "language": "typescript",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/text.ts",
+      "language": "typescript",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/typebox-helpers.ts",
+      "language": "typescript",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/uuid.ts",
+      "language": "typescript",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/src/utils/validation.ts",
+      "language": "typescript",
+      "sizeLines": 350,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ai/tsconfig.build.json",
+      "language": "json",
+      "sizeLines": 10,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/ai/vitest.config.ts",
+      "language": "typescript",
+      "sizeLines": 16,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/PLANNING.md",
+      "language": "markdown",
+      "sizeLines": 860,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/chord/README.md",
+      "language": "markdown",
+      "sizeLines": 205,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/chord/package.json",
+      "language": "json",
+      "sizeLines": 72,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/chord/src/api.ts",
+      "language": "typescript",
+      "sizeLines": 90,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/bundler.ts",
+      "language": "typescript",
+      "sizeLines": 9,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/context/index.ts",
+      "language": "typescript",
+      "sizeLines": 121,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/delta/README.md",
+      "language": "markdown",
+      "sizeLines": 319,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/chord/src/delta/index.ts",
+      "language": "typescript",
+      "sizeLines": 1267,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/facets/host.ts",
+      "language": "typescript",
+      "sizeLines": 906,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/facets/loader.ts",
+      "language": "typescript",
+      "sizeLines": 6,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/index.ts",
+      "language": "typescript",
+      "sizeLines": 79,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/json.ts",
+      "language": "typescript",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/node.ts",
+      "language": "typescript",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/node/bundle-loader.ts",
+      "language": "typescript",
+      "sizeLines": 416,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/node/bundle.ts",
+      "language": "typescript",
+      "sizeLines": 222,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/node/manifest.ts",
+      "language": "typescript",
+      "sizeLines": 39,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/node/package.ts",
+      "language": "typescript",
+      "sizeLines": 232,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/services/consumer.ts",
+      "language": "typescript",
+      "sizeLines": 660,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/services/errors.ts",
+      "language": "typescript",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/services/handle.ts",
+      "language": "typescript",
+      "sizeLines": 113,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/services/instances.ts",
+      "language": "typescript",
+      "sizeLines": 147,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/services/loopback.ts",
+      "language": "typescript",
+      "sizeLines": 17,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/services/provider.ts",
+      "language": "typescript",
+      "sizeLines": 586,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/services/state-codec.ts",
+      "language": "typescript",
+      "sizeLines": 158,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/services/state-internals.ts",
+      "language": "typescript",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/services/state.ts",
+      "language": "typescript",
+      "sizeLines": 139,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/services/wire.ts",
+      "language": "typescript",
+      "sizeLines": 234,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/src/types.ts",
+      "language": "typescript",
+      "sizeLines": 261,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/chord/tsconfig.build.json",
+      "language": "json",
+      "sizeLines": 9,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/client/README.md",
+      "language": "markdown",
+      "sizeLines": 72,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/client/package.json",
+      "language": "json",
+      "sizeLines": 57,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/client/src/client.ts",
+      "language": "typescript",
+      "sizeLines": 479,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/client/src/connection.ts",
+      "language": "typescript",
+      "sizeLines": 245,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/client/src/errors.ts",
+      "language": "typescript",
+      "sizeLines": 34,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/client/src/index.ts",
+      "language": "typescript",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/client/src/promise.ts",
+      "language": "typescript",
+      "sizeLines": 16,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/client/src/transport.ts",
+      "language": "typescript",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/client/src/types.ts",
+      "language": "typescript",
+      "sizeLines": 32,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/client/src/unix.ts",
+      "language": "typescript",
+      "sizeLines": 299,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/client/tsconfig.build.json",
+      "language": "json",
+      "sizeLines": 12,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/client/vitest.config.ts",
+      "language": "typescript",
+      "sizeLines": 17,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/README.md",
+      "language": "markdown",
+      "sizeLines": 718,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/compaction.md",
+      "language": "markdown",
+      "sizeLines": 444,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/containerization.md",
+      "language": "markdown",
+      "sizeLines": 156,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/custom-provider.md",
+      "language": "markdown",
+      "sizeLines": 777,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/development.md",
+      "language": "markdown",
+      "sizeLines": 90,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/docs.json",
+      "language": "json",
+      "sizeLines": 160,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/coding-agent/docs/environment-variables.md",
+      "language": "markdown",
+      "sizeLines": 99,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/extensions.md",
+      "language": "markdown",
+      "sizeLines": 3033,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/index.md",
+      "language": "markdown",
+      "sizeLines": 84,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/json.md",
+      "language": "markdown",
+      "sizeLines": 98,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/keybindings.md",
+      "language": "markdown",
+      "sizeLines": 239,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/llama-cpp.md",
+      "language": "markdown",
+      "sizeLines": 101,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/models.md",
+      "language": "markdown",
+      "sizeLines": 574,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/packages.md",
+      "language": "markdown",
+      "sizeLines": 228,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/prompt-templates.md",
+      "language": "markdown",
+      "sizeLines": 96,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/providers.md",
+      "language": "markdown",
+      "sizeLines": 317,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/quickstart.md",
+      "language": "markdown",
+      "sizeLines": 167,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/rpc.md",
+      "language": "markdown",
+      "sizeLines": 1618,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/sdk.md",
+      "language": "markdown",
+      "sizeLines": 1226,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/security.md",
+      "language": "markdown",
+      "sizeLines": 59,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/session-format.md",
+      "language": "markdown",
+      "sizeLines": 450,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/sessions.md",
+      "language": "markdown",
+      "sizeLines": 145,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/settings.md",
+      "language": "markdown",
+      "sizeLines": 405,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/shell-aliases.md",
+      "language": "markdown",
+      "sizeLines": 13,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/skills.md",
+      "language": "markdown",
+      "sizeLines": 232,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/terminal-setup.md",
+      "language": "markdown",
+      "sizeLines": 192,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/termux.md",
+      "language": "markdown",
+      "sizeLines": 126,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/themes.md",
+      "language": "markdown",
+      "sizeLines": 322,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/tmux.md",
+      "language": "markdown",
+      "sizeLines": 63,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/tui.md",
+      "language": "markdown",
+      "sizeLines": 961,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/usage.md",
+      "language": "markdown",
+      "sizeLines": 311,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/docs/windows.md",
+      "language": "markdown",
+      "sizeLines": 39,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/install-lock/package.json",
+      "language": "json",
+      "sizeLines": 15,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/coding-agent/package.json",
+      "language": "json",
+      "sizeLines": 107,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/coding-agent/src/bun/cli.ts",
+      "language": "typescript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/bun/restore-sandbox-env.ts",
+      "language": "typescript",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/bun/runtime-setup.ts",
+      "language": "typescript",
+      "sizeLines": 9,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/bun/sandbox-env-setup.ts",
+      "language": "typescript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli.ts",
+      "language": "typescript",
+      "sizeLines": 6,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/args.ts",
+      "language": "typescript",
+      "sizeLines": 447,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/auth-check.ts",
+      "language": "typescript",
+      "sizeLines": 73,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/auth-command.ts",
+      "language": "typescript",
+      "sizeLines": 126,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/config-selector.ts",
+      "language": "typescript",
+      "sizeLines": 61,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/credential-print.ts",
+      "language": "typescript",
+      "sizeLines": 87,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/experimental/cli.ts",
+      "language": "typescript",
+      "sizeLines": 16,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/experimental/command-options.ts",
+      "language": "typescript",
+      "sizeLines": 106,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/experimental/command.ts",
+      "language": "typescript",
+      "sizeLines": 225,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/experimental/commands/client.ts",
+      "language": "typescript",
+      "sizeLines": 91,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/experimental/commands/server.ts",
+      "language": "typescript",
+      "sizeLines": 66,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/file-processor.ts",
+      "language": "typescript",
+      "sizeLines": 88,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/initial-message.ts",
+      "language": "typescript",
+      "sizeLines": 43,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/list-models.ts",
+      "language": "typescript",
+      "sizeLines": 115,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/project-trust.ts",
+      "language": "typescript",
+      "sizeLines": 62,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/session-picker.ts",
+      "language": "typescript",
+      "sizeLines": 55,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/setup.ts",
+      "language": "typescript",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/cli/startup-ui.ts",
+      "language": "typescript",
+      "sizeLines": 246,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/client/index.ts",
+      "language": "typescript",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/config.ts",
+      "language": "typescript",
+      "sizeLines": 579,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/agent-session-runtime.ts",
+      "language": "typescript",
+      "sizeLines": 449,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/agent-session-services.ts",
+      "language": "typescript",
+      "sizeLines": 221,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/agent-session.ts",
+      "language": "typescript",
+      "sizeLines": 3552,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/auth-guidance.ts",
+      "language": "typescript",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/auth-storage.ts",
+      "language": "typescript",
+      "sizeLines": 506,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/bash-executor.ts",
+      "language": "typescript",
+      "sizeLines": 156,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/cache-stats.ts",
+      "language": "typescript",
+      "sizeLines": 164,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/compaction/branch-summarization.ts",
+      "language": "typescript",
+      "sizeLines": 382,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/compaction/compaction.ts",
+      "language": "typescript",
+      "sizeLines": 1012,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/compaction/index.ts",
+      "language": "typescript",
+      "sizeLines": 7,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/compaction/utils.ts",
+      "language": "typescript",
+      "sizeLines": 158,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/defaults.ts",
+      "language": "typescript",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/diagnostics.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/event-bus.ts",
+      "language": "typescript",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/exec.ts",
+      "language": "typescript",
+      "sizeLines": 107,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/experimental.ts",
+      "language": "typescript",
+      "sizeLines": 3,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/export-html/ansi-to-html.ts",
+      "language": "typescript",
+      "sizeLines": 258,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/export-html/index.ts",
+      "language": "typescript",
+      "sizeLines": 316,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/export-html/template.css",
+      "language": "css",
+      "sizeLines": 1066,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/coding-agent/src/core/export-html/template.html",
+      "language": "html",
+      "sizeLines": 55,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/coding-agent/src/core/export-html/template.js",
+      "language": "javascript",
+      "sizeLines": 1864,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/export-html/tool-renderer.ts",
+      "language": "typescript",
+      "sizeLines": 172,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/extensions/index.ts",
+      "language": "typescript",
+      "sizeLines": 193,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/extensions/loader.ts",
+      "language": "typescript",
+      "sizeLines": 809,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/extensions/runner.ts",
+      "language": "typescript",
+      "sizeLines": 1286,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/extensions/types.ts",
+      "language": "typescript",
+      "sizeLines": 1797,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/extensions/wrapper.ts",
+      "language": "typescript",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/footer-data-provider.ts",
+      "language": "typescript",
+      "sizeLines": 388,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/http-dispatcher.ts",
+      "language": "typescript",
+      "sizeLines": 113,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/index.ts",
+      "language": "typescript",
+      "sizeLines": 80,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/keybindings.ts",
+      "language": "typescript",
+      "sizeLines": 401,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/messages.ts",
+      "language": "typescript",
+      "sizeLines": 195,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/model-config.ts",
+      "language": "typescript",
+      "sizeLines": 303,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/model-registry.ts",
+      "language": "typescript",
+      "sizeLines": 173,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/model-resolver.ts",
+      "language": "typescript",
+      "sizeLines": 782,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/model-runtime.ts",
+      "language": "typescript",
+      "sizeLines": 795,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/models-store.ts",
+      "language": "typescript",
+      "sizeLines": 147,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/output-guard.ts",
+      "language": "typescript",
+      "sizeLines": 108,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/package-manager.ts",
+      "language": "typescript",
+      "sizeLines": 2699,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/pi-manifest.ts",
+      "language": "typescript",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/project-trust.ts",
+      "language": "typescript",
+      "sizeLines": 96,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/prompt-templates.ts",
+      "language": "typescript",
+      "sizeLines": 285,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/provider-attribution.ts",
+      "language": "typescript",
+      "sizeLines": 97,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/provider-composer.ts",
+      "language": "typescript",
+      "sizeLines": 581,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/radius.ts",
+      "language": "typescript",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/remote-catalog-provider.ts",
+      "language": "typescript",
+      "sizeLines": 137,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/resolve-config-value.ts",
+      "language": "typescript",
+      "sizeLines": 287,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/resource-loader.ts",
+      "language": "typescript",
+      "sizeLines": 1097,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/runtime-credentials.ts",
+      "language": "typescript",
+      "sizeLines": 52,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/sdk.ts",
+      "language": "typescript",
+      "sizeLines": 410,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/session-cwd.ts",
+      "language": "typescript",
+      "sizeLines": 59,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/session-export.ts",
+      "language": "typescript",
+      "sizeLines": 42,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/session-manager.ts",
+      "language": "typescript",
+      "sizeLines": 1746,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/settings-diagnostics.ts",
+      "language": "typescript",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/settings-manager.ts",
+      "language": "typescript",
+      "sizeLines": 1417,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/skills.ts",
+      "language": "typescript",
+      "sizeLines": 509,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/slash-commands.ts",
+      "language": "typescript",
+      "sizeLines": 43,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/source-info.ts",
+      "language": "typescript",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/system-prompt.ts",
+      "language": "typescript",
+      "sizeLines": 168,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/telemetry.ts",
+      "language": "typescript",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/timings.ts",
+      "language": "typescript",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/bash.ts",
+      "language": "typescript",
+      "sizeLines": 400,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/edit-diff.ts",
+      "language": "typescript",
+      "sizeLines": 556,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/edit.ts",
+      "language": "typescript",
+      "sizeLines": 220,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/file-mutation-queue.ts",
+      "language": "typescript",
+      "sizeLines": 61,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/find.ts",
+      "language": "typescript",
+      "sizeLines": 318,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/grep.ts",
+      "language": "typescript",
+      "sizeLines": 323,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/index.ts",
+      "language": "typescript",
+      "sizeLines": 224,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/ls.ts",
+      "language": "typescript",
+      "sizeLines": 175,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/output-accumulator.ts",
+      "language": "typescript",
+      "sizeLines": 222,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/path-utils.ts",
+      "language": "typescript",
+      "sizeLines": 118,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/powershell.ts",
+      "language": "typescript",
+      "sizeLines": 67,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/read.ts",
+      "language": "typescript",
+      "sizeLines": 197,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/render-utils.ts",
+      "language": "typescript",
+      "sizeLines": 85,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/renderers/bash.ts",
+      "language": "typescript",
+      "sizeLines": 163,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "language": "typescript",
+      "sizeLines": 238,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/renderers/find.ts",
+      "language": "typescript",
+      "sizeLines": 77,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/renderers/grep.ts",
+      "language": "typescript",
+      "sizeLines": 82,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/renderers/index.ts",
+      "language": "typescript",
+      "sizeLines": 63,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/renderers/ls.ts",
+      "language": "typescript",
+      "sizeLines": 70,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/renderers/read.ts",
+      "language": "typescript",
+      "sizeLines": 175,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/renderers/write.ts",
+      "language": "typescript",
+      "sizeLines": 181,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/tool-definition-wrapper.ts",
+      "language": "typescript",
+      "sizeLines": 47,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/truncate.ts",
+      "language": "typescript",
+      "sizeLines": 276,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/tools/write.ts",
+      "language": "typescript",
+      "sizeLines": 97,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/trust-manager.ts",
+      "language": "typescript",
+      "sizeLines": 245,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/core/usage-totals.ts",
+      "language": "typescript",
+      "sizeLines": 70,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/cli.ts",
+      "language": "typescript",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/client-runtime.ts",
+      "language": "typescript",
+      "sizeLines": 230,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/client-tui-chat.ts",
+      "language": "typescript",
+      "sizeLines": 184,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/client-tui.ts",
+      "language": "typescript",
+      "sizeLines": 804,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/client.ts",
+      "language": "typescript",
+      "sizeLines": 124,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/commands.ts",
+      "language": "typescript",
+      "sizeLines": 106,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/coordinator-entry.ts",
+      "language": "typescript",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/coordinator.ts",
+      "language": "typescript",
+      "sizeLines": 612,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/README.md",
+      "language": "markdown",
+      "sizeLines": 107,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/main.ts",
+      "language": "typescript",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/server/entry.ts",
+      "language": "typescript",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/server/run.ts",
+      "language": "typescript",
+      "sizeLines": 160,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/shared/protocol.ts",
+      "language": "typescript",
+      "sizeLines": 138,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/shared/rpc.ts",
+      "language": "typescript",
+      "sizeLines": 233,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/shared/transport.ts",
+      "language": "typescript",
+      "sizeLines": 119,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/tui/run.ts",
+      "language": "typescript",
+      "sizeLines": 68,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/tui/session.ts",
+      "language": "typescript",
+      "sizeLines": 117,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "language": "typescript",
+      "sizeLines": 555,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/worker/entry.ts",
+      "language": "typescript",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/worker/lane-service.ts",
+      "language": "typescript",
+      "sizeLines": 126,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/worker/models-service.ts",
+      "language": "typescript",
+      "sizeLines": 148,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/mini/worker/run.ts",
+      "language": "typescript",
+      "sizeLines": 113,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/plugin.ts",
+      "language": "typescript",
+      "sizeLines": 16,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/plugins/bundled.ts",
+      "language": "typescript",
+      "sizeLines": 55,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/plugins/package.ts",
+      "language": "typescript",
+      "sizeLines": 171,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/process.ts",
+      "language": "typescript",
+      "sizeLines": 105,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/radius-auth.ts",
+      "language": "typescript",
+      "sizeLines": 66,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/radius-relay.ts",
+      "language": "typescript",
+      "sizeLines": 724,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/server.ts",
+      "language": "typescript",
+      "sizeLines": 798,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/README.md",
+      "language": "markdown",
+      "sizeLines": 25,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/agent-controller-provider.ts",
+      "language": "typescript",
+      "sizeLines": 109,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/agent-controller.ts",
+      "language": "typescript",
+      "sizeLines": 54,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/connection.ts",
+      "language": "typescript",
+      "sizeLines": 405,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/models-provider.ts",
+      "language": "typescript",
+      "sizeLines": 143,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/models.ts",
+      "language": "typescript",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/plugins.ts",
+      "language": "typescript",
+      "sizeLines": 19,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/presentation-ui.ts",
+      "language": "typescript",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/server.ts",
+      "language": "typescript",
+      "sizeLines": 150,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/sessions.ts",
+      "language": "typescript",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "language": "typescript",
+      "sizeLines": 225,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/slash-commands.ts",
+      "language": "typescript",
+      "sizeLines": 30,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/transcript-provider.ts",
+      "language": "typescript",
+      "sizeLines": 128,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/transcript.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/worker.ts",
+      "language": "typescript",
+      "sizeLines": 152,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/session-worker-manager.ts",
+      "language": "typescript",
+      "sizeLines": 859,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/session-worker.ts",
+      "language": "typescript",
+      "sizeLines": 884,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/source-resolver.ts",
+      "language": "typescript",
+      "sizeLines": 86,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/extensions/index.ts",
+      "language": "typescript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/extensions/llama/client.ts",
+      "language": "typescript",
+      "sizeLines": 343,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/extensions/llama/huggingface.ts",
+      "language": "typescript",
+      "sizeLines": 158,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/extensions/llama/index.ts",
+      "language": "typescript",
+      "sizeLines": 230,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/extensions/llama/provider.ts",
+      "language": "typescript",
+      "sizeLines": 180,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/extensions/llama/ui.ts",
+      "language": "typescript",
+      "sizeLines": 542,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/index.ts",
+      "language": "typescript",
+      "sizeLines": 425,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/main.ts",
+      "language": "typescript",
+      "sizeLines": 981,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/migrations.ts",
+      "language": "typescript",
+      "sizeLines": 315,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/index.ts",
+      "language": "typescript",
+      "sizeLines": 16,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/chat-viewport.ts",
+      "language": "typescript",
+      "sizeLines": 46,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/armin.ts",
+      "language": "typescript",
+      "sizeLines": 382,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/assistant-message.ts",
+      "language": "typescript",
+      "sizeLines": 202,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/bash-execution.ts",
+      "language": "typescript",
+      "sizeLines": 220,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/bordered-loader.ts",
+      "language": "typescript",
+      "sizeLines": 68,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts",
+      "language": "typescript",
+      "sizeLines": 58,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts",
+      "language": "typescript",
+      "sizeLines": 59,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/config-selector.ts",
+      "language": "typescript",
+      "sizeLines": 942,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/countdown-timer.ts",
+      "language": "typescript",
+      "sizeLines": 39,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/custom-editor.ts",
+      "language": "typescript",
+      "sizeLines": 148,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/custom-entry.ts",
+      "language": "typescript",
+      "sizeLines": 62,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/custom-message.ts",
+      "language": "typescript",
+      "sizeLines": 113,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/daxnuts.ts",
+      "language": "typescript",
+      "sizeLines": 164,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/diff.ts",
+      "language": "typescript",
+      "sizeLines": 147,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "language": "typescript",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts",
+      "language": "typescript",
+      "sizeLines": 53,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/extension-editor.ts",
+      "language": "typescript",
+      "sizeLines": 132,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/extension-input.ts",
+      "language": "typescript",
+      "sizeLines": 87,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/extension-selector.ts",
+      "language": "typescript",
+      "sizeLines": 112,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/first-time-setup.ts",
+      "language": "typescript",
+      "sizeLines": 145,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/footer.ts",
+      "language": "typescript",
+      "sizeLines": 245,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/index.ts",
+      "language": "typescript",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "language": "typescript",
+      "sizeLines": 48,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/login-dialog.ts",
+      "language": "typescript",
+      "sizeLines": 233,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/markdown-transform.ts",
+      "language": "typescript",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/mermaid.ts",
+      "language": "typescript",
+      "sizeLines": 89,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/model-selector.ts",
+      "language": "typescript",
+      "sizeLines": 421,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/oauth-selector.ts",
+      "language": "typescript",
+      "sizeLines": 214,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts",
+      "language": "typescript",
+      "sizeLines": 401,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/session-selector-search.ts",
+      "language": "typescript",
+      "sizeLines": 194,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "language": "typescript",
+      "sizeLines": 1031,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "language": "typescript",
+      "sizeLines": 945,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/settings-submenu.ts",
+      "language": "typescript",
+      "sizeLines": 258,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/show-images-selector.ts",
+      "language": "typescript",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/skill-invocation-message.ts",
+      "language": "typescript",
+      "sizeLines": 55,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/status-indicator.ts",
+      "language": "typescript",
+      "sizeLines": 123,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/theme-selector.ts",
+      "language": "typescript",
+      "sizeLines": 67,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/thinking-selector.ts",
+      "language": "typescript",
+      "sizeLines": 154,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/tool-execution.ts",
+      "language": "typescript",
+      "sizeLines": 421,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "language": "typescript",
+      "sizeLines": 1427,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/trust-selector.ts",
+      "language": "typescript",
+      "sizeLines": 134,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/user-message-selector.ts",
+      "language": "typescript",
+      "sizeLines": 155,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/user-message.ts",
+      "language": "typescript",
+      "sizeLines": 70,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/components/visual-truncate.ts",
+      "language": "typescript",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/external-editor.ts",
+      "language": "typescript",
+      "sizeLines": 46,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/interactive-mode.ts",
+      "language": "typescript",
+      "sizeLines": 6620,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/model-catalog-refresh.ts",
+      "language": "typescript",
+      "sizeLines": 51,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/model-search.ts",
+      "language": "typescript",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/session-share.ts",
+      "language": "typescript",
+      "sizeLines": 206,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/theme/dark.json",
+      "language": "json",
+      "sizeLines": 91,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/theme/light.json",
+      "language": "json",
+      "sizeLines": 90,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/theme/theme-controller.ts",
+      "language": "typescript",
+      "sizeLines": 172,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/theme/theme-json.ts",
+      "language": "typescript",
+      "sizeLines": 146,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/theme/theme-schema.json",
+      "language": "json",
+      "sizeLines": 356,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "language": "typescript",
+      "sizeLines": 1234,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/tui-renderer.ts",
+      "language": "typescript",
+      "sizeLines": 79,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/json-event.ts",
+      "language": "typescript",
+      "sizeLines": 61,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/print-mode.ts",
+      "language": "typescript",
+      "sizeLines": 169,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/rpc/jsonl.ts",
+      "language": "typescript",
+      "sizeLines": 58,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/rpc/rpc-client.ts",
+      "language": "typescript",
+      "sizeLines": 609,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/rpc/rpc-mode.ts",
+      "language": "typescript",
+      "sizeLines": 821,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/modes/rpc/rpc-types.ts",
+      "language": "typescript",
+      "sizeLines": 297,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/package-manager-cli.ts",
+      "language": "typescript",
+      "sizeLines": 1102,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/rpc-entry.ts",
+      "language": "typescript",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/abort.ts",
+      "language": "typescript",
+      "sizeLines": 48,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/ansi.ts",
+      "language": "typescript",
+      "sizeLines": 60,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/changelog.ts",
+      "language": "typescript",
+      "sizeLines": 196,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/child-process.ts",
+      "language": "typescript",
+      "sizeLines": 137,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/clipboard-command.ts",
+      "language": "typescript",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/clipboard-image.ts",
+      "language": "typescript",
+      "sizeLines": 259,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/clipboard.ts",
+      "language": "typescript",
+      "sizeLines": 77,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/deprecation.ts",
+      "language": "typescript",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/exif-orientation.ts",
+      "language": "typescript",
+      "sizeLines": 182,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/frontmatter.ts",
+      "language": "typescript",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/fs-watch.ts",
+      "language": "typescript",
+      "sizeLines": 30,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/git.ts",
+      "language": "typescript",
+      "sizeLines": 226,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/highlight-js.d.ts",
+      "language": "typescript",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/html.ts",
+      "language": "typescript",
+      "sizeLines": 51,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/image-convert.ts",
+      "language": "typescript",
+      "sizeLines": 49,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/image-process.ts",
+      "language": "typescript",
+      "sizeLines": 119,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/image-resize-core.ts",
+      "language": "typescript",
+      "sizeLines": 164,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/image-resize-worker.ts",
+      "language": "typescript",
+      "sizeLines": 42,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/image-resize.ts",
+      "language": "typescript",
+      "sizeLines": 123,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/json.ts",
+      "language": "typescript",
+      "sizeLines": 6,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/management-http.ts",
+      "language": "typescript",
+      "sizeLines": 78,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/mime.ts",
+      "language": "typescript",
+      "sizeLines": 116,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/open-browser.ts",
+      "language": "typescript",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/paths.ts",
+      "language": "typescript",
+      "sizeLines": 139,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/photon.ts",
+      "language": "typescript",
+      "sizeLines": 139,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/pi-user-agent.ts",
+      "language": "typescript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/shell.ts",
+      "language": "typescript",
+      "sizeLines": 247,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/sleep.ts",
+      "language": "typescript",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/syntax-highlight.ts",
+      "language": "typescript",
+      "sizeLines": 212,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/text.ts",
+      "language": "typescript",
+      "sizeLines": 9,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/tool-result-images.ts",
+      "language": "typescript",
+      "sizeLines": 62,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/tools-manager.ts",
+      "language": "typescript",
+      "sizeLines": 400,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/version-check.ts",
+      "language": "typescript",
+      "sizeLines": 109,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/src/utils/windows-self-update.ts",
+      "language": "typescript",
+      "sizeLines": 84,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/coding-agent/tsconfig.build.json",
+      "language": "json",
+      "sizeLines": 20,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/coding-agent/tsconfig.examples.json",
+      "language": "json",
+      "sizeLines": 16,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/coding-agent/vitest.config.ts",
+      "language": "typescript",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/protocol/README.md",
+      "language": "markdown",
+      "sizeLines": 41,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/protocol/package.json",
+      "language": "json",
+      "sizeLines": 49,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/protocol/src/cbor/decoder.ts",
+      "language": "typescript",
+      "sizeLines": 168,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/protocol/src/cbor/encoder.ts",
+      "language": "typescript",
+      "sizeLines": 216,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/protocol/src/cbor/index.ts",
+      "language": "typescript",
+      "sizeLines": 9,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/protocol/src/cbor/options.ts",
+      "language": "typescript",
+      "sizeLines": 52,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/protocol/src/codec.ts",
+      "language": "typescript",
+      "sizeLines": 141,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/protocol/src/framing.ts",
+      "language": "typescript",
+      "sizeLines": 151,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/protocol/src/index.ts",
+      "language": "typescript",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/protocol/src/protocol.ts",
+      "language": "typescript",
+      "sizeLines": 110,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/protocol/tsconfig.build.json",
+      "language": "json",
+      "sizeLines": 9,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/protocol/vitest.config.ts",
+      "language": "typescript",
+      "sizeLines": 11,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/server/README.md",
+      "language": "markdown",
+      "sizeLines": 79,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/server/package.json",
+      "language": "json",
+      "sizeLines": 58,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/server/src/connection.ts",
+      "language": "typescript",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/server/src/errors.ts",
+      "language": "typescript",
+      "sizeLines": 57,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/server/src/index.ts",
+      "language": "typescript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/server/src/listener.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/server/src/server.ts",
+      "language": "typescript",
+      "sizeLines": 576,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/server/src/session-router.ts",
+      "language": "typescript",
+      "sizeLines": 312,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/server/src/testing/client.ts",
+      "language": "typescript",
+      "sizeLines": 183,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/server/src/testing/host.ts",
+      "language": "typescript",
+      "sizeLines": 215,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/server/src/testing/index.ts",
+      "language": "typescript",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/server/src/testing/server.ts",
+      "language": "typescript",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/server/src/transports/unix/address.ts",
+      "language": "typescript",
+      "sizeLines": 9,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/server/src/transports/unix/index.ts",
+      "language": "typescript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/server/src/transports/unix/listener.ts",
+      "language": "typescript",
+      "sizeLines": 421,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/server/src/transports/unix/preset.ts",
+      "language": "typescript",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/server/src/transports/unix/types.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/server/src/types.ts",
+      "language": "typescript",
+      "sizeLines": 64,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/server/tsconfig.build.json",
+      "language": "json",
+      "sizeLines": 9,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/server/vitest.config.ts",
+      "language": "typescript",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/README.md",
+      "language": "markdown",
+      "sizeLines": 33,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/benchmark/session/session-repo-targets.ts",
+      "language": "typescript",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/benchmark/session/session-repo.bench.ts",
+      "language": "typescript",
+      "sizeLines": 62,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/benchmark/session/storage-targets.ts",
+      "language": "typescript",
+      "sizeLines": 48,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/benchmark/session/storage.bench.ts",
+      "language": "typescript",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/package.json",
+      "language": "json",
+      "sizeLines": 45,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/index.ts",
+      "language": "typescript",
+      "sizeLines": 123,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/index.ts",
+      "language": "typescript",
+      "sizeLines": 9,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/migrations.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql",
+      "language": "sql",
+      "sizeLines": 121,
+      "fileCategory": "data"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "language": "typescript",
+      "sizeLines": 453,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/session.ts",
+      "language": "typescript",
+      "sizeLines": 213,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "language": "typescript",
+      "sizeLines": 324,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "language": "typescript",
+      "sizeLines": 161,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "language": "typescript",
+      "sizeLines": 102,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/session/session-sequences.ts",
+      "language": "typescript",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/session/session-stats.ts",
+      "language": "typescript",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/session/usage-ledger.ts",
+      "language": "typescript",
+      "sizeLines": 67,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/session/values.ts",
+      "language": "typescript",
+      "sizeLines": 146,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/sql.ts",
+      "language": "typescript",
+      "sizeLines": 66,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/storage.ts",
+      "language": "typescript",
+      "sizeLines": 211,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/types.ts",
+      "language": "typescript",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/tsconfig.build.json",
+      "language": "json",
+      "sizeLines": 11,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/vitest.benchmark.config.ts",
+      "language": "typescript",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/vitest.config.ts",
+      "language": "typescript",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/telemetry/README.md",
+      "language": "markdown",
+      "sizeLines": 464,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/telemetry/package.json",
+      "language": "json",
+      "sizeLines": 47,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/telemetry/src/index.ts",
+      "language": "typescript",
+      "sizeLines": 357,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/telemetry/src/memory.ts",
+      "language": "typescript",
+      "sizeLines": 219,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/telemetry/src/noop.ts",
+      "language": "typescript",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/telemetry/src/testing/conformance.ts",
+      "language": "typescript",
+      "sizeLines": 315,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/telemetry/src/testing/index.ts",
+      "language": "typescript",
+      "sizeLines": 6,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/telemetry/src/testing/types.ts",
+      "language": "typescript",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/telemetry/tsconfig.build.json",
+      "language": "json",
+      "sizeLines": 9,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/tui/README.md",
+      "language": "markdown",
+      "sizeLines": 903,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/tui/package.json",
+      "language": "json",
+      "sizeLines": 62,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/tui/src/alt-screen-search.ts",
+      "language": "typescript",
+      "sizeLines": 327,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/autocomplete.ts",
+      "language": "typescript",
+      "sizeLines": 826,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/components/alt-screen-flash.ts",
+      "language": "typescript",
+      "sizeLines": 51,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/components/box.ts",
+      "language": "typescript",
+      "sizeLines": 167,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/components/cancellable-loader.ts",
+      "language": "typescript",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/components/editor.ts",
+      "language": "typescript",
+      "sizeLines": 2461,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/components/h-stack.ts",
+      "language": "typescript",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/components/image.ts",
+      "language": "typescript",
+      "sizeLines": 127,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/components/input.ts",
+      "language": "typescript",
+      "sizeLines": 494,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/components/loader.ts",
+      "language": "typescript",
+      "sizeLines": 101,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/components/markdown.ts",
+      "language": "typescript",
+      "sizeLines": 1015,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/components/mouse-region.ts",
+      "language": "typescript",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/components/scroll-view.ts",
+      "language": "typescript",
+      "sizeLines": 224,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/components/select-list.ts",
+      "language": "typescript",
+      "sizeLines": 273,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/components/settings-list.ts",
+      "language": "typescript",
+      "sizeLines": 328,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/components/spacer.ts",
+      "language": "typescript",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/components/stack.ts",
+      "language": "typescript",
+      "sizeLines": 154,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/components/text.ts",
+      "language": "typescript",
+      "sizeLines": 107,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/components/truncated-text.ts",
+      "language": "typescript",
+      "sizeLines": 65,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/components/v-stack.ts",
+      "language": "typescript",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/editor-component.ts",
+      "language": "typescript",
+      "sizeLines": 74,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/fuzzy.ts",
+      "language": "typescript",
+      "sizeLines": 137,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/index.ts",
+      "language": "typescript",
+      "sizeLines": 156,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/keybindings.ts",
+      "language": "typescript",
+      "sizeLines": 320,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/keys.ts",
+      "language": "typescript",
+      "sizeLines": 1401,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/kill-ring.ts",
+      "language": "typescript",
+      "sizeLines": 46,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/latex.ts",
+      "language": "typescript",
+      "sizeLines": 1394,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/layout-node.ts",
+      "language": "typescript",
+      "sizeLines": 51,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/layout.ts",
+      "language": "typescript",
+      "sizeLines": 449,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/native-modifiers.ts",
+      "language": "typescript",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/native-module-path.ts",
+      "language": "typescript",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/native-platform.ts",
+      "language": "typescript",
+      "sizeLines": 63,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/stdin-buffer.ts",
+      "language": "typescript",
+      "sizeLines": 444,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/terminal-colors.ts",
+      "language": "typescript",
+      "sizeLines": 73,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/terminal-image.ts",
+      "language": "typescript",
+      "sizeLines": 696,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/terminal.ts",
+      "language": "typescript",
+      "sizeLines": 547,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/tui-alt-screen.ts",
+      "language": "typescript",
+      "sizeLines": 1721,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/tui-main-screen.ts",
+      "language": "typescript",
+      "sizeLines": 655,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/tui.ts",
+      "language": "typescript",
+      "sizeLines": 1456,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/undo-stack.ts",
+      "language": "typescript",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/utils.ts",
+      "language": "typescript",
+      "sizeLines": 1337,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/src/word-navigation.ts",
+      "language": "typescript",
+      "sizeLines": 117,
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/tui/tsconfig.build.json",
+      "language": "json",
+      "sizeLines": 8,
+      "fileCategory": "config"
+    },
+    {
+      "path": "pi-test.bat",
+      "language": "batch",
+      "sizeLines": 14,
+      "fileCategory": "script"
+    },
+    {
+      "path": "pi-test.ps1",
+      "language": "powershell",
+      "sizeLines": 71,
+      "fileCategory": "script"
+    },
+    {
+      "path": "pi-test.sh",
+      "language": "shell",
+      "sizeLines": 57,
+      "fileCategory": "script"
+    },
+    {
+      "path": "test.sh",
+      "language": "shell",
+      "sizeLines": 79,
+      "fileCategory": "script"
+    },
+    {
+      "path": "tsconfig.base.json",
+      "language": "json",
+      "sizeLines": 25,
+      "fileCategory": "config"
+    },
+    {
+      "path": "tsconfig.json",
+      "language": "json",
+      "sizeLines": 54,
+      "fileCategory": "config"
+    },
+    {
+      "path": "vitest.base.ts",
+      "language": "typescript",
+      "sizeLines": 59,
+      "fileCategory": "code"
+    }
+  ],
+  "totalFiles": 777,
+  "filteredByIgnore": 911,
+  "estimatedComplexity": "very-large",
+  "failures": [],
+  "stats": {
+    "filesScanned": 777,
+    "byCategory": {
+      "code": 668,
+      "config": 34,
+      "infra": 10,
+      "docs": 57,
+      "script": 5,
+      "markup": 2,
+      "data": 1
+    },
+    "byLanguage": {
+      "unknown": 4,
+      "yaml": 14,
+      "markdown": 57,
+      "json": 30,
+      "shell": 3,
+      "typescript": 662,
+      "javascript": 2,
+      "css": 1,
+      "html": 1,
+      "sql": 1,
+      "batch": 1,
+      "powershell": 1
+    }
+  }
+}

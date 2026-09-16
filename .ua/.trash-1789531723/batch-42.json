@@ -1,0 +1,50 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/telemetry/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/telemetry/README.md",
+      "summary": "@earendil-works/pi-telemetry 的完整文档：说明 vendor-neutral 的 TelemetryContext/TelemetrySpan 契约、NOOP 与 InMemory 参考实现、适配器一致性套件、可序列化 typed schema，以及与 pi-ai / pi-agent-core 的职责边界。",
+      "tags": ["documentation", "entry-point", "telemetry", "observability", "api-reference"],
+      "complexity": "complex",
+      "languageNotes": "英文 API 参考，含 TypeScript 示例与按导出分组的表格清单。"
+    },
+    {
+      "id": "config:packages/telemetry/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "packages/telemetry/package.json",
+      "summary": "定义 @earendil-works/pi-telemetry 的包元数据、根模块与 ./testing 双入口 exports、构建/测试脚本，以及 Node >=22.19.0 引擎约束。",
+      "tags": ["configuration", "package-manifest", "telemetry", "build-system"],
+      "complexity": "simple",
+      "languageNotes": "ESM 包（type: module），通过 exports 同时暴露运行时契约与 runner-independent 测试子路径。"
+    },
+    {
+      "id": "config:packages/telemetry/tsconfig.build.json",
+      "type": "config",
+      "name": "tsconfig.build.json",
+      "filePath": "packages/telemetry/tsconfig.build.json",
+      "summary": "telemetry 包的 TypeScript 构建配置：继承仓库根 tsconfig.base.json，将 src 编译到 dist。",
+      "tags": ["configuration", "typescript", "build-system"],
+      "complexity": "simple",
+      "languageNotes": "通过 extends 复用 monorepo 公共 compilerOptions，仅覆盖 outDir/rootDir 与 include/exclude。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:packages/telemetry/README.md",
+      "target": "config:packages/telemetry/package.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:packages/telemetry/package.json",
+      "target": "config:packages/telemetry/tsconfig.build.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

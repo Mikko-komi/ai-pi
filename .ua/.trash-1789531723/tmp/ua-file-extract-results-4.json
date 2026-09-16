@@ -1,0 +1,2949 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 31,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 31,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 31,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "packages/ai/src/images-models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 275,
+      "nonEmptyLines": 241,
+      "functions": [
+        {
+          "name": "createImagesModels",
+          "startLine": 227,
+          "endLine": 229,
+          "params": [
+            "options"
+          ]
+        },
+        {
+          "name": "createImagesProvider",
+          "startLine": 251,
+          "endLine": 275,
+          "params": [
+            "input"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ImagesModelsImpl",
+          "startLine": 97,
+          "endLine": 225,
+          "methods": [
+            "constructor",
+            "setProvider",
+            "deleteProvider",
+            "clearProviders",
+            "getProviders",
+            "getProvider",
+            "getModels",
+            "getModel",
+            "refresh",
+            "getAuth",
+            "generateImages"
+          ],
+          "properties": [
+            "providers",
+            "credentials",
+            "authContext"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "createImagesModels",
+          "line": 227,
+          "isDefault": false
+        },
+        {
+          "name": "createImagesProvider",
+          "line": 251,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "defaultAuthContext",
+          "lineNumber": 104
+        },
+        {
+          "caller": "setProvider",
+          "callee": "this.providers.set",
+          "lineNumber": 108
+        },
+        {
+          "caller": "deleteProvider",
+          "callee": "this.providers.delete",
+          "lineNumber": 112
+        },
+        {
+          "caller": "clearProviders",
+          "callee": "this.providers.clear",
+          "lineNumber": 116
+        },
+        {
+          "caller": "getProviders",
+          "callee": "Array.from",
+          "lineNumber": 120
+        },
+        {
+          "caller": "getProviders",
+          "callee": "this.providers.values",
+          "lineNumber": 120
+        },
+        {
+          "caller": "getProvider",
+          "callee": "this.providers.get",
+          "lineNumber": 124
+        },
+        {
+          "caller": "getModels",
+          "callee": "this.providers.get",
+          "lineNumber": 129
+        },
+        {
+          "caller": "getModels",
+          "callee": "entry.getModels",
+          "lineNumber": 132
+        },
+        {
+          "caller": "getModels",
+          "callee": "this.providers.values",
+          "lineNumber": 139
+        },
+        {
+          "caller": "getModels",
+          "callee": "models.push",
+          "lineNumber": 141
+        },
+        {
+          "caller": "getModels",
+          "callee": "entry.getModels",
+          "lineNumber": 141
+        },
+        {
+          "caller": "getModel",
+          "callee": "this.getModels(provider).find",
+          "lineNumber": 150
+        },
+        {
+          "caller": "getModel",
+          "callee": "this.getModels",
+          "lineNumber": 150
+        },
+        {
+          "caller": "refresh",
+          "callee": "this.providers.get",
+          "lineNumber": 155
+        },
+        {
+          "caller": "refresh",
+          "callee": "entry.refreshModels",
+          "lineNumber": 158
+        },
+        {
+          "caller": "refresh",
+          "callee": "Promise.allSettled",
+          "lineNumber": 168
+        },
+        {
+          "caller": "refresh",
+          "callee": "Array.from",
+          "lineNumber": 168
+        },
+        {
+          "caller": "refresh",
+          "callee": "this.providers.values",
+          "lineNumber": 168
+        },
+        {
+          "caller": "refresh",
+          "callee": "entry.refreshModels",
+          "lineNumber": 168
+        },
+        {
+          "caller": "getAuth",
+          "callee": "this.providers.get",
+          "lineNumber": 178
+        },
+        {
+          "caller": "getAuth",
+          "callee": "resolveProviderAuth",
+          "lineNumber": 180
+        },
+        {
+          "caller": "generateImages",
+          "callee": "this.providers.get",
+          "lineNumber": 189
+        },
+        {
+          "caller": "generateImages",
+          "callee": "this.getAuth",
+          "lineNumber": 194
+        },
+        {
+          "caller": "generateImages",
+          "callee": "provider.generateImages",
+          "lineNumber": 201
+        },
+        {
+          "caller": "generateImages",
+          "callee": "provider.generateImages",
+          "lineNumber": 212
+        },
+        {
+          "caller": "generateImages",
+          "callee": "String",
+          "lineNumber": 220
+        },
+        {
+          "caller": "generateImages",
+          "callee": "Date.now",
+          "lineNumber": 221
+        },
+        {
+          "caller": "createImagesProvider",
+          "callee": "(async () => {\n\t\t\t\t\t\ttry {\n\t\t\t\t\t\t\tmodels = await refreshModels();\n\t\t\t\t\t\t} finally {\n\t\t\t\t\t\t\tinflightRefresh = undefined;\n\t\t\t\t\t\t}\n\t\t\t\t\t})",
+          "lineNumber": 263
+        },
+        {
+          "caller": "createImagesProvider",
+          "callee": "refreshModels",
+          "lineNumber": 265
+        },
+        {
+          "caller": "createImagesProvider",
+          "callee": "input.api.generateImages",
+          "lineNumber": 273
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/ai/src/model-catalog.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 27,
+      "nonEmptyLines": 22,
+      "functions": [
+        {
+          "name": "flattenModelCatalog",
+          "startLine": 22,
+          "endLine": 27,
+          "params": [
+            "_provider",
+            "groups"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "flattenModelCatalog",
+          "line": 22,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "flattenModelCatalog",
+          "callee": "Object.assign",
+          "lineNumber": 26
+        },
+        {
+          "caller": "flattenModelCatalog",
+          "callee": "Object.values",
+          "lineNumber": 26
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 957,
+      "nonEmptyLines": 865,
+      "functions": [
+        {
+          "name": "mergeHeaders",
+          "startLine": 243,
+          "endLine": 257,
+          "params": [
+            "base",
+            "override"
+          ]
+        },
+        {
+          "name": "createModels",
+          "startLine": 748,
+          "endLine": 750,
+          "params": [
+            "options"
+          ]
+        },
+        {
+          "name": "createProvider",
+          "startLine": 775,
+          "endLine": 875,
+          "params": [
+            "input"
+          ]
+        },
+        {
+          "name": "hasApi",
+          "startLine": 887,
+          "endLine": 889,
+          "params": [
+            "model",
+            "api"
+          ]
+        },
+        {
+          "name": "calculateCost",
+          "startLine": 891,
+          "endLine": 911,
+          "params": [
+            "model",
+            "usage"
+          ]
+        },
+        {
+          "name": "getSupportedThinkingLevels",
+          "startLine": 915,
+          "endLine": 924,
+          "params": [
+            "model"
+          ]
+        },
+        {
+          "name": "clampThinkingLevel",
+          "startLine": 926,
+          "endLine": 945,
+          "params": [
+            "model",
+            "level"
+          ]
+        },
+        {
+          "name": "modelsAreEqual",
+          "startLine": 951,
+          "endLine": 957,
+          "params": [
+            "a",
+            "b"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ModelsImpl",
+          "startLine": 259,
+          "endLine": 746,
+          "methods": [
+            "constructor",
+            "setProvider",
+            "deleteProvider",
+            "clearProviders",
+            "getProviders",
+            "getProvider",
+            "getModels",
+            "getModel",
+            "supersedeProviderRefresh",
+            "beginProviderRefresh",
+            "publishProviderModels",
+            "runProviderRefreshPhase",
+            "refresh",
+            "resolveRefreshCredential",
+            "readCredential",
+            "checkProviderAuth",
+            "checkAuth",
+            "getAvailable",
+            "getAuth",
+            "login",
+            "logout",
+            "requireProvider",
+            "applyAuth",
+            "stream",
+            "complete",
+            "streamSimple",
+            "completeSimple",
+            "streamDeferred",
+            "fetchDeferred",
+            "cancelDeferred"
+          ],
+          "properties": [
+            "providers",
+            "credentials",
+            "modelsStore",
+            "authContext",
+            "refreshGenerations",
+            "refreshControllers",
+            "publicationChains"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ModelsError",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "ModelsErrorCode",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "createModels",
+          "line": 748,
+          "isDefault": false
+        },
+        {
+          "name": "createProvider",
+          "line": 775,
+          "isDefault": false
+        },
+        {
+          "name": "hasApi",
+          "line": 887,
+          "isDefault": false
+        },
+        {
+          "name": "calculateCost",
+          "line": 891,
+          "isDefault": false
+        },
+        {
+          "name": "getSupportedThinkingLevels",
+          "line": 915,
+          "isDefault": false
+        },
+        {
+          "name": "clampThinkingLevel",
+          "line": 926,
+          "isDefault": false
+        },
+        {
+          "name": "modelsAreEqual",
+          "line": 951,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "mergeHeaders",
+          "callee": "Object.entries",
+          "lineNumber": 249
+        },
+        {
+          "caller": "mergeHeaders",
+          "callee": "name.toLowerCase",
+          "lineNumber": 250
+        },
+        {
+          "caller": "mergeHeaders",
+          "callee": "Object.keys",
+          "lineNumber": 251
+        },
+        {
+          "caller": "mergeHeaders",
+          "callee": "existingName.toLowerCase",
+          "lineNumber": 252
+        },
+        {
+          "caller": "constructor",
+          "callee": "defaultAuthContext",
+          "lineNumber": 271
+        },
+        {
+          "caller": "setProvider",
+          "callee": "this.supersedeProviderRefresh",
+          "lineNumber": 275
+        },
+        {
+          "caller": "setProvider",
+          "callee": "this.providers.set",
+          "lineNumber": 276
+        },
+        {
+          "caller": "deleteProvider",
+          "callee": "this.supersedeProviderRefresh",
+          "lineNumber": 280
+        },
+        {
+          "caller": "deleteProvider",
+          "callee": "this.providers.delete",
+          "lineNumber": 281
+        },
+        {
+          "caller": "clearProviders",
+          "callee": "this.providers.keys",
+          "lineNumber": 285
+        },
+        {
+          "caller": "clearProviders",
+          "callee": "this.refreshControllers.keys",
+          "lineNumber": 285
+        },
+        {
+          "caller": "clearProviders",
+          "callee": "this.supersedeProviderRefresh",
+          "lineNumber": 286
+        },
+        {
+          "caller": "clearProviders",
+          "callee": "this.providers.clear",
+          "lineNumber": 288
+        },
+        {
+          "caller": "getProviders",
+          "callee": "Array.from",
+          "lineNumber": 292
+        },
+        {
+          "caller": "getProviders",
+          "callee": "this.providers.values",
+          "lineNumber": 292
+        },
+        {
+          "caller": "getProvider",
+          "callee": "this.providers.get",
+          "lineNumber": 296
+        },
+        {
+          "caller": "getModels",
+          "callee": "this.providers.get",
+          "lineNumber": 301
+        },
+        {
+          "caller": "getModels",
+          "callee": "entry.getModels",
+          "lineNumber": 304
+        },
+        {
+          "caller": "getModels",
+          "callee": "this.providers.values",
+          "lineNumber": 311
+        },
+        {
+          "caller": "getModels",
+          "callee": "models.push",
+          "lineNumber": 313
+        },
+        {
+          "caller": "getModels",
+          "callee": "entry.getModels",
+          "lineNumber": 313
+        },
+        {
+          "caller": "getModel",
+          "callee": "this.getModels(provider).find",
+          "lineNumber": 322
+        },
+        {
+          "caller": "getModel",
+          "callee": "this.getModels",
+          "lineNumber": 322
+        },
+        {
+          "caller": "supersedeProviderRefresh",
+          "callee": "this.refreshGenerations.get",
+          "lineNumber": 326
+        },
+        {
+          "caller": "supersedeProviderRefresh",
+          "callee": "this.refreshGenerations.set",
+          "lineNumber": 327
+        },
+        {
+          "caller": "supersedeProviderRefresh",
+          "callee": "this.refreshControllers.get",
+          "lineNumber": 328
+        },
+        {
+          "caller": "supersedeProviderRefresh",
+          "callee": "this.refreshControllers.delete",
+          "lineNumber": 330
+        },
+        {
+          "caller": "supersedeProviderRefresh",
+          "callee": "previous.abort",
+          "lineNumber": 331
+        },
+        {
+          "caller": "beginProviderRefresh",
+          "callee": "this.supersedeProviderRefresh",
+          "lineNumber": 337
+        },
+        {
+          "caller": "beginProviderRefresh",
+          "callee": "this.refreshControllers.set",
+          "lineNumber": 339
+        },
+        {
+          "caller": "publishProviderModels",
+          "callee": "this.publicationChains.get",
+          "lineNumber": 349
+        },
+        {
+          "caller": "publishProviderModels",
+          "callee": "Promise.resolve",
+          "lineNumber": 349
+        },
+        {
+          "caller": "publishProviderModels",
+          "callee": "(async () => {\n\t\t\tawait previous.catch(() => {});\n\t\t\tif (signal.aborted || this.refreshGenerations.get(providerId) !== generation) return false;\n\n\t\t\tif (publication.persist === null) {\n\t\t\t\tawait this.modelsStore.delete(providerId, { signal });\n\t\t\t} else if (publication.persist !== undefined) {\n\t\t\t\tawait this.modelsStore.write(providerId, structuredClone(publication.persist), { signal });\n\t\t\t}\n\n\t\t\tif (signal.aborted || this.refreshGenerations.get(providerId) !== generation) return false;\n\t\t\tpublication.update?.();\n\t\t\treturn true;\n\t\t})",
+          "lineNumber": 350
+        },
+        {
+          "caller": "publishProviderModels",
+          "callee": "previous.catch",
+          "lineNumber": 351
+        },
+        {
+          "caller": "publishProviderModels",
+          "callee": "this.refreshGenerations.get",
+          "lineNumber": 352
+        },
+        {
+          "caller": "publishProviderModels",
+          "callee": "this.modelsStore.delete",
+          "lineNumber": 355
+        },
+        {
+          "caller": "publishProviderModels",
+          "callee": "this.modelsStore.write",
+          "lineNumber": 357
+        },
+        {
+          "caller": "publishProviderModels",
+          "callee": "structuredClone",
+          "lineNumber": 357
+        },
+        {
+          "caller": "publishProviderModels",
+          "callee": "this.refreshGenerations.get",
+          "lineNumber": 360
+        },
+        {
+          "caller": "publishProviderModels",
+          "callee": "publication.update",
+          "lineNumber": 361
+        },
+        {
+          "caller": "publishProviderModels",
+          "callee": "queued.catch",
+          "lineNumber": 364
+        },
+        {
+          "caller": "publishProviderModels",
+          "callee": "this.publicationChains.set",
+          "lineNumber": 365
+        },
+        {
+          "caller": "publishProviderModels",
+          "callee": "tail.then",
+          "lineNumber": 366
+        },
+        {
+          "caller": "publishProviderModels",
+          "callee": "this.publicationChains.get",
+          "lineNumber": 367
+        },
+        {
+          "caller": "publishProviderModels",
+          "callee": "this.publicationChains.delete",
+          "lineNumber": 367
+        },
+        {
+          "caller": "publishProviderModels",
+          "callee": "raceWithAbortSignal",
+          "lineNumber": 369
+        },
+        {
+          "caller": "runProviderRefreshPhase",
+          "callee": "this.modelsStore.read",
+          "lineNumber": 380
+        },
+        {
+          "caller": "runProviderRefreshPhase",
+          "callee": "provider.refreshModels",
+          "lineNumber": 381
+        },
+        {
+          "caller": "runProviderRefreshPhase",
+          "callee": "structuredClone",
+          "lineNumber": 383
+        },
+        {
+          "caller": "runProviderRefreshPhase",
+          "callee": "this.publishProviderModels",
+          "lineNumber": 384
+        },
+        {
+          "caller": "refresh",
+          "callee": "operationSignal",
+          "lineNumber": 393
+        },
+        {
+          "caller": "refresh",
+          "callee": "Array.from(this.providers.values()).filter",
+          "lineNumber": 397
+        },
+        {
+          "caller": "refresh",
+          "callee": "Array.from",
+          "lineNumber": 397
+        },
+        {
+          "caller": "refresh",
+          "callee": "this.providers.values",
+          "lineNumber": 397
+        },
+        {
+          "caller": "refresh",
+          "callee": "selected.has",
+          "lineNumber": 399
+        },
+        {
+          "caller": "refresh",
+          "callee": "Promise.all",
+          "lineNumber": 402
+        },
+        {
+          "caller": "refresh",
+          "callee": "refreshable.map",
+          "lineNumber": 403
+        },
+        {
+          "caller": "refresh",
+          "callee": "this.beginProviderRefresh",
+          "lineNumber": 404
+        },
+        {
+          "caller": "refresh",
+          "callee": "AbortSignal.any",
+          "lineNumber": 405
+        },
+        {
+          "caller": "refresh",
+          "callee": "(async () => {\n\t\t\t\t\tlet storedCredential: Credential | undefined;\n\t\t\t\t\tlet credentialError: unknown;\n\t\t\t\t\ttry {\n\t\t\t\t\t\tstoredCredential = await this.readCredential(provider.id, signal);\n\t\t\t\t\t} catch (error) {\n\t\t\t\t\t\tcredentialError = error;\n\t\t\t\t\t}\n\n\t\t\t\t\t// Restore cached provider state before auth resolution or network access.\n\t\t\t\t\tawait this.runProviderRefreshPhase(provider, storedCredential, false, undefined, generation, signal);\n\t\t\t\t\tif (credentialError !== undefined) throw credentialError;\n\t\t\t\t\tif (!allowNetwork || signal.aborted) return;\n\n\t\t\t\t\tconst credential = await this.resolveRefreshCredential(provider, storedCredential, signal);\n\t\t\t\t\tif (!credential) return;\n\t\t\t\t\tawait this.runProviderRefreshPhase(provider, credential, true, options.force, generation, signal);\n\t\t\t\t})",
+          "lineNumber": 406
+        },
+        {
+          "caller": "refresh",
+          "callee": "this.readCredential",
+          "lineNumber": 410
+        },
+        {
+          "caller": "refresh",
+          "callee": "this.runProviderRefreshPhase",
+          "lineNumber": 416
+        },
+        {
+          "caller": "refresh",
+          "callee": "this.resolveRefreshCredential",
+          "lineNumber": 420
+        },
+        {
+          "caller": "refresh",
+          "callee": "this.runProviderRefreshPhase",
+          "lineNumber": 422
+        },
+        {
+          "caller": "refresh",
+          "callee": "raceWithAbortSignal",
+          "lineNumber": 426
+        },
+        {
+          "caller": "refresh",
+          "callee": "errors.set",
+          "lineNumber": 429
+        },
+        {
+          "caller": "refresh",
+          "callee": "this.refreshControllers.get",
+          "lineNumber": 437
+        },
+        {
+          "caller": "refresh",
+          "callee": "this.refreshControllers.delete",
+          "lineNumber": 438
+        },
+        {
+          "caller": "refresh",
+          "callee": "raceWithAbortSignal",
+          "lineNumber": 445
+        },
+        {
+          "caller": "resolveRefreshCredential",
+          "callee": "Date.now",
+          "lineNumber": 461
+        },
+        {
+          "caller": "resolveRefreshCredential",
+          "callee": "this.credentials.modify",
+          "lineNumber": 463
+        },
+        {
+          "caller": "resolveRefreshCredential",
+          "callee": "Date.now",
+          "lineNumber": 466
+        },
+        {
+          "caller": "resolveRefreshCredential",
+          "callee": "oauth.refresh",
+          "lineNumber": 467
+        },
+        {
+          "caller": "resolveRefreshCredential",
+          "callee": "apiKey.resolve",
+          "lineNumber": 477
+        },
+        {
+          "caller": "readCredential",
+          "callee": "this.credentials.read",
+          "lineNumber": 484
+        },
+        {
+          "caller": "checkProviderAuth",
+          "callee": "apiKey.check",
+          "lineNumber": 502
+        },
+        {
+          "caller": "checkProviderAuth",
+          "callee": "resolveProviderAuth",
+          "lineNumber": 512
+        },
+        {
+          "caller": "checkAuth",
+          "callee": "operationSignal",
+          "lineNumber": 517
+        },
+        {
+          "caller": "checkAuth",
+          "callee": "(async () => {\n\t\t\tsignal.throwIfAborted();\n\t\t\tconst provider = this.providers.get(providerId);\n\t\t\tif (!provider) return undefined;\n\t\t\treturn this.checkProviderAuth(provider, await this.readCredential(providerId, signal), signal);\n\t\t})",
+          "lineNumber": 518
+        },
+        {
+          "caller": "checkAuth",
+          "callee": "signal.throwIfAborted",
+          "lineNumber": 519
+        },
+        {
+          "caller": "checkAuth",
+          "callee": "this.providers.get",
+          "lineNumber": 520
+        },
+        {
+          "caller": "checkAuth",
+          "callee": "this.checkProviderAuth",
+          "lineNumber": 522
+        },
+        {
+          "caller": "checkAuth",
+          "callee": "this.readCredential",
+          "lineNumber": 522
+        },
+        {
+          "caller": "checkAuth",
+          "callee": "raceWithAbortSignal",
+          "lineNumber": 524
+        },
+        {
+          "caller": "getAvailable",
+          "callee": "operationSignal",
+          "lineNumber": 528
+        },
+        {
+          "caller": "getAvailable",
+          "callee": "(async () => {\n\t\t\tsignal.throwIfAborted();\n\t\t\tconst providers = providerId\n\t\t\t\t? [this.providers.get(providerId)].filter((entry) => entry !== undefined)\n\t\t\t\t: this.getProviders();\n\t\t\tconst checks = await Promise.all(\n\t\t\t\tproviders.map(async (provider) => {\n\t\t\t\t\tconst credential = await this.readCredential(provider.id, signal);\n\t\t\t\t\treturn { provider, credential, auth: await this.checkProviderAuth(provider, credential, signal) };\n\t\t\t\t}),\n\t\t\t);\n\t\t\treturn checks.flatMap(({ provider, credential, auth }) => {\n\t\t\t\tif (!auth) return [];\n\t\t\t\tconst models = provider.getModels();\n\t\t\t\treturn provider.filterModels?.(models, credential) ?? models;\n\t\t\t});\n\t\t})",
+          "lineNumber": 529
+        },
+        {
+          "caller": "getAvailable",
+          "callee": "signal.throwIfAborted",
+          "lineNumber": 530
+        },
+        {
+          "caller": "getAvailable",
+          "callee": "[this.providers.get(providerId)].filter",
+          "lineNumber": 532
+        },
+        {
+          "caller": "getAvailable",
+          "callee": "this.providers.get",
+          "lineNumber": 532
+        },
+        {
+          "caller": "getAvailable",
+          "callee": "this.getProviders",
+          "lineNumber": 533
+        },
+        {
+          "caller": "getAvailable",
+          "callee": "Promise.all",
+          "lineNumber": 534
+        },
+        {
+          "caller": "getAvailable",
+          "callee": "providers.map",
+          "lineNumber": 535
+        },
+        {
+          "caller": "getAvailable",
+          "callee": "this.readCredential",
+          "lineNumber": 536
+        },
+        {
+          "caller": "getAvailable",
+          "callee": "this.checkProviderAuth",
+          "lineNumber": 537
+        },
+        {
+          "caller": "getAvailable",
+          "callee": "checks.flatMap",
+          "lineNumber": 540
+        },
+        {
+          "caller": "getAvailable",
+          "callee": "provider.getModels",
+          "lineNumber": 542
+        },
+        {
+          "caller": "getAvailable",
+          "callee": "provider.filterModels",
+          "lineNumber": 543
+        },
+        {
+          "caller": "getAvailable",
+          "callee": "raceWithAbortSignal",
+          "lineNumber": 546
+        },
+        {
+          "caller": "getAuth",
+          "callee": "operationSignal",
+          "lineNumber": 555
+        },
+        {
+          "caller": "getAuth",
+          "callee": "this.providers.get",
+          "lineNumber": 557
+        },
+        {
+          "caller": "getAuth",
+          "callee": "resolveProviderAuth",
+          "lineNumber": 559
+        },
+        {
+          "caller": "getAuth",
+          "callee": "mergeHeaders",
+          "lineNumber": 565
+        },
+        {
+          "caller": "login",
+          "callee": "operationSignal",
+          "lineNumber": 571
+        },
+        {
+          "caller": "login",
+          "callee": "signal.throwIfAborted",
+          "lineNumber": 572
+        },
+        {
+          "caller": "login",
+          "callee": "this.providers.get",
+          "lineNumber": 573
+        },
+        {
+          "caller": "login",
+          "callee": "method.login",
+          "lineNumber": 579
+        },
+        {
+          "caller": "login",
+          "callee": "raceWithAbortSignal",
+          "lineNumber": 580
+        },
+        {
+          "caller": "login",
+          "callee": "this.credentials.modify",
+          "lineNumber": 586
+        },
+        {
+          "caller": "login",
+          "callee": "markMutationStarted",
+          "lineNumber": 590
+        },
+        {
+          "caller": "login",
+          "callee": "mutation.catch",
+          "lineNumber": 595
+        },
+        {
+          "caller": "onAbort",
+          "callee": "reject",
+          "lineNumber": 599
+        },
+        {
+          "caller": "login",
+          "callee": "signal.addEventListener",
+          "lineNumber": 601
+        },
+        {
+          "caller": "login",
+          "callee": "Promise.race([started, mutation]).then",
+          "lineNumber": 602
+        },
+        {
+          "caller": "login",
+          "callee": "Promise.race",
+          "lineNumber": 602
+        },
+        {
+          "caller": "login",
+          "callee": "signal.removeEventListener",
+          "lineNumber": 604
+        },
+        {
+          "caller": "login",
+          "callee": "resolve",
+          "lineNumber": 605
+        },
+        {
+          "caller": "login",
+          "callee": "signal.removeEventListener",
+          "lineNumber": 608
+        },
+        {
+          "caller": "login",
+          "callee": "reject",
+          "lineNumber": 609
+        },
+        {
+          "caller": "login",
+          "callee": "onAbort",
+          "lineNumber": 612
+        },
+        {
+          "caller": "login",
+          "callee": "signal.throwIfAborted",
+          "lineNumber": 616
+        },
+        {
+          "caller": "logout",
+          "callee": "operationSignal",
+          "lineNumber": 623
+        },
+        {
+          "caller": "logout",
+          "callee": "signal.throwIfAborted",
+          "lineNumber": 624
+        },
+        {
+          "caller": "logout",
+          "callee": "this.credentials.delete",
+          "lineNumber": 626
+        },
+        {
+          "caller": "logout",
+          "callee": "signal.throwIfAborted",
+          "lineNumber": 628
+        },
+        {
+          "caller": "requireProvider",
+          "callee": "this.providers.get",
+          "lineNumber": 634
+        },
+        {
+          "caller": "applyAuth",
+          "callee": "this.requireProvider",
+          "lineNumber": 648
+        },
+        {
+          "caller": "applyAuth",
+          "callee": "this.getAuth",
+          "lineNumber": 649
+        },
+        {
+          "caller": "applyAuth",
+          "callee": "mergeHeaders",
+          "lineNumber": 661
+        },
+        {
+          "caller": "applyAuth",
+          "callee": "options.transformHeaders",
+          "lineNumber": 662
+        },
+        {
+          "caller": "stream",
+          "callee": "lazyStream",
+          "lineNumber": 677
+        },
+        {
+          "caller": "stream",
+          "callee": "this.requireProvider",
+          "lineNumber": 678
+        },
+        {
+          "caller": "stream",
+          "callee": "this.applyAuth",
+          "lineNumber": 679
+        },
+        {
+          "caller": "stream",
+          "callee": "provider.stream",
+          "lineNumber": 683
+        },
+        {
+          "caller": "complete",
+          "callee": "this.stream(model, context, options).result",
+          "lineNumber": 692
+        },
+        {
+          "caller": "complete",
+          "callee": "this.stream",
+          "lineNumber": 692
+        },
+        {
+          "caller": "streamSimple",
+          "callee": "lazyStream",
+          "lineNumber": 696
+        },
+        {
+          "caller": "streamSimple",
+          "callee": "this.requireProvider",
+          "lineNumber": 697
+        },
+        {
+          "caller": "streamSimple",
+          "callee": "this.applyAuth",
+          "lineNumber": 698
+        },
+        {
+          "caller": "streamSimple",
+          "callee": "provider.streamSimple",
+          "lineNumber": 699
+        },
+        {
+          "caller": "completeSimple",
+          "callee": "this.streamSimple(model, context, options).result",
+          "lineNumber": 708
+        },
+        {
+          "caller": "completeSimple",
+          "callee": "this.streamSimple",
+          "lineNumber": 708
+        },
+        {
+          "caller": "streamDeferred",
+          "callee": "lazyStream",
+          "lineNumber": 716
+        },
+        {
+          "caller": "streamDeferred",
+          "callee": "this.requireProvider",
+          "lineNumber": 717
+        },
+        {
+          "caller": "streamDeferred",
+          "callee": "this.applyAuth",
+          "lineNumber": 721
+        },
+        {
+          "caller": "streamDeferred",
+          "callee": "provider.fetchDeferred",
+          "lineNumber": 722
+        },
+        {
+          "caller": "fetchDeferred",
+          "callee": "this.streamDeferred(model, handle, options).result",
+          "lineNumber": 731
+        },
+        {
+          "caller": "fetchDeferred",
+          "callee": "this.streamDeferred",
+          "lineNumber": 731
+        },
+        {
+          "caller": "cancelDeferred",
+          "callee": "this.requireProvider",
+          "lineNumber": 739
+        },
+        {
+          "caller": "cancelDeferred",
+          "callee": "this.applyAuth",
+          "lineNumber": 743
+        },
+        {
+          "caller": "cancelDeferred",
+          "callee": "provider.cancelDeferred",
+          "lineNumber": 744
+        },
+        {
+          "caller": "currentModels",
+          "callee": "merged.findIndex",
+          "lineNumber": 782
+        },
+        {
+          "caller": "currentModels",
+          "callee": "merged.push",
+          "lineNumber": 784
+        },
+        {
+          "caller": "dispatch",
+          "callee": "apiFor",
+          "lineNumber": 798
+        },
+        {
+          "caller": "dispatch",
+          "callee": "lazyStream",
+          "lineNumber": 800
+        },
+        {
+          "caller": "dispatch",
+          "callee": "run",
+          "lineNumber": 804
+        },
+        {
+          "caller": "createProvider",
+          "callee": "context.stored.models\n\t\t\t\t\t\t\t.filter((model) => model.provider === input.id)\n\t\t\t\t\t\t\t.map",
+          "lineNumber": 817
+        },
+        {
+          "caller": "createProvider",
+          "callee": "context.stored.models\n\t\t\t\t\t\t\t.filter",
+          "lineNumber": 817
+        },
+        {
+          "caller": "createProvider",
+          "callee": "context.publish",
+          "lineNumber": 821
+        },
+        {
+          "caller": "createProvider",
+          "callee": "fetchModels",
+          "lineNumber": 831
+        },
+        {
+          "caller": "createProvider",
+          "callee": "context.publish",
+          "lineNumber": 833
+        },
+        {
+          "caller": "createProvider",
+          "callee": "Date.now",
+          "lineNumber": 834
+        },
+        {
+          "caller": "createProvider",
+          "callee": "dispatch",
+          "lineNumber": 842
+        },
+        {
+          "caller": "createProvider",
+          "callee": "streams.stream",
+          "lineNumber": 842
+        },
+        {
+          "caller": "createProvider",
+          "callee": "dispatch",
+          "lineNumber": 844
+        },
+        {
+          "caller": "createProvider",
+          "callee": "streams.streamSimple",
+          "lineNumber": 844
+        },
+        {
+          "caller": "createProvider",
+          "callee": "Object.values(byApi ?? {}).filter",
+          "lineNumber": 847
+        },
+        {
+          "caller": "createProvider",
+          "callee": "Object.values",
+          "lineNumber": 847
+        },
+        {
+          "caller": "createProvider",
+          "callee": "streams.some",
+          "lineNumber": 848
+        },
+        {
+          "caller": "createProvider",
+          "callee": "lazyStream",
+          "lineNumber": 850
+        },
+        {
+          "caller": "createProvider",
+          "callee": "apiFor",
+          "lineNumber": 851
+        },
+        {
+          "caller": "createProvider",
+          "callee": "implementation.fetchDeferred",
+          "lineNumber": 858
+        },
+        {
+          "caller": "createProvider",
+          "callee": "streams.some",
+          "lineNumber": 861
+        },
+        {
+          "caller": "createProvider",
+          "callee": "apiFor",
+          "lineNumber": 863
+        },
+        {
+          "caller": "createProvider",
+          "callee": "implementation.cancelDeferred",
+          "lineNumber": 870
+        },
+        {
+          "caller": "getSupportedThinkingLevels",
+          "callee": "EXTENDED_THINKING_LEVELS.filter",
+          "lineNumber": 918
+        },
+        {
+          "caller": "clampThinkingLevel",
+          "callee": "getSupportedThinkingLevels",
+          "lineNumber": 930
+        },
+        {
+          "caller": "clampThinkingLevel",
+          "callee": "availableLevels.includes",
+          "lineNumber": 931
+        },
+        {
+          "caller": "clampThinkingLevel",
+          "callee": "EXTENDED_THINKING_LEVELS.indexOf",
+          "lineNumber": 933
+        },
+        {
+          "caller": "clampThinkingLevel",
+          "callee": "availableLevels.includes",
+          "lineNumber": 938
+        },
+        {
+          "caller": "clampThinkingLevel",
+          "callee": "availableLevels.includes",
+          "lineNumber": 942
+        }
+      ],
+      "metrics": {
+        "importCount": 8,
+        "exportCount": 9,
+        "functionCount": 8,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/all.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 155,
+      "nonEmptyLines": 144,
+      "functions": [
+        {
+          "name": "getBuiltinModel",
+          "startLine": 61,
+          "endLine": 67,
+          "params": [
+            "provider",
+            "modelId"
+          ]
+        },
+        {
+          "name": "getBuiltinProviders",
+          "startLine": 69,
+          "endLine": 71,
+          "params": []
+        },
+        {
+          "name": "getBuiltinModelDataGeneratedAt",
+          "startLine": 74,
+          "endLine": 77,
+          "params": []
+        },
+        {
+          "name": "getBuiltinModels",
+          "startLine": 79,
+          "endLine": 86,
+          "params": [
+            "provider"
+          ]
+        },
+        {
+          "name": "builtinProviders",
+          "startLine": 89,
+          "endLine": 132,
+          "params": []
+        },
+        {
+          "name": "builtinModels",
+          "startLine": 135,
+          "endLine": 141,
+          "params": [
+            "options"
+          ]
+        },
+        {
+          "name": "builtinImagesProviders",
+          "startLine": 144,
+          "endLine": 146,
+          "params": []
+        },
+        {
+          "name": "builtinImagesModels",
+          "startLine": 149,
+          "endLine": 155,
+          "params": [
+            "options"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "radiusProvider",
+          "line": 48,
+          "isDefault": false
+        },
+        {
+          "name": "getBuiltinModel",
+          "line": 61,
+          "isDefault": false
+        },
+        {
+          "name": "getBuiltinProviders",
+          "line": 69,
+          "isDefault": false
+        },
+        {
+          "name": "getBuiltinModelDataGeneratedAt",
+          "line": 74,
+          "isDefault": false
+        },
+        {
+          "name": "getBuiltinModels",
+          "line": 79,
+          "isDefault": false
+        },
+        {
+          "name": "builtinProviders",
+          "line": 89,
+          "isDefault": false
+        },
+        {
+          "name": "builtinModels",
+          "line": 135,
+          "isDefault": false
+        },
+        {
+          "name": "builtinImagesProviders",
+          "line": 144,
+          "isDefault": false
+        },
+        {
+          "name": "builtinImagesModels",
+          "line": 149,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getBuiltinProviders",
+          "callee": "Object.keys",
+          "lineNumber": 70
+        },
+        {
+          "caller": "getBuiltinModelDataGeneratedAt",
+          "callee": "Date.parse",
+          "lineNumber": 75
+        },
+        {
+          "caller": "getBuiltinModelDataGeneratedAt",
+          "callee": "Number.isNaN",
+          "lineNumber": 76
+        },
+        {
+          "caller": "getBuiltinModels",
+          "callee": "Object.values",
+          "lineNumber": 84
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "amazonBedrockProvider",
+          "lineNumber": 91
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "antLingProvider",
+          "lineNumber": 92
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "anthropicProvider",
+          "lineNumber": 93
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "azureOpenAIResponsesProvider",
+          "lineNumber": 94
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "basetenProvider",
+          "lineNumber": 95
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "cerebrasProvider",
+          "lineNumber": 96
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "cloudflareAIGatewayProvider",
+          "lineNumber": 97
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "cloudflareWorkersAIProvider",
+          "lineNumber": 98
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "deepseekProvider",
+          "lineNumber": 99
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "fireworksProvider",
+          "lineNumber": 100
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "githubCopilotProvider",
+          "lineNumber": 101
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "googleProvider",
+          "lineNumber": 102
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "googleVertexProvider",
+          "lineNumber": 103
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "groqProvider",
+          "lineNumber": 104
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "huggingfaceProvider",
+          "lineNumber": 105
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "kimiCodingProvider",
+          "lineNumber": 106
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "minimaxProvider",
+          "lineNumber": 107
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "minimaxCnProvider",
+          "lineNumber": 108
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "mistralProvider",
+          "lineNumber": 109
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "moonshotaiProvider",
+          "lineNumber": 110
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "moonshotaiCnProvider",
+          "lineNumber": 111
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "nvidiaProvider",
+          "lineNumber": 112
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "openaiProvider",
+          "lineNumber": 113
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "openaiCodexProvider",
+          "lineNumber": 114
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "opencodeProvider",
+          "lineNumber": 115
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "opencodeGoProvider",
+          "lineNumber": 116
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "openrouterProvider",
+          "lineNumber": 117
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "qwenTokenPlanProvider",
+          "lineNumber": 118
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "qwenTokenPlanCnProvider",
+          "lineNumber": 119
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "qwenTokenPlanIndividualProvider",
+          "lineNumber": 120
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "radiusProvider",
+          "lineNumber": 121
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "togetherProvider",
+          "lineNumber": 122
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "vercelAIGatewayProvider",
+          "lineNumber": 123
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "xaiProvider",
+          "lineNumber": 124
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "xiaomiProvider",
+          "lineNumber": 125
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "xiaomiTokenPlanAmsProvider",
+          "lineNumber": 126
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "xiaomiTokenPlanCnProvider",
+          "lineNumber": 127
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "xiaomiTokenPlanSgpProvider",
+          "lineNumber": 128
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "zaiProvider",
+          "lineNumber": 129
+        },
+        {
+          "caller": "builtinProviders",
+          "callee": "zaiCodingCnProvider",
+          "lineNumber": 130
+        },
+        {
+          "caller": "builtinModels",
+          "callee": "createModels",
+          "lineNumber": 136
+        },
+        {
+          "caller": "builtinModels",
+          "callee": "builtinProviders",
+          "lineNumber": 137
+        },
+        {
+          "caller": "builtinModels",
+          "callee": "models.setProvider",
+          "lineNumber": 138
+        },
+        {
+          "caller": "builtinImagesProviders",
+          "callee": "openrouterImagesProvider",
+          "lineNumber": 145
+        },
+        {
+          "caller": "builtinImagesModels",
+          "callee": "createImagesModels",
+          "lineNumber": 150
+        },
+        {
+          "caller": "builtinImagesModels",
+          "callee": "builtinImagesProviders",
+          "lineNumber": 151
+        },
+        {
+          "caller": "builtinImagesModels",
+          "callee": "models.setProvider",
+          "lineNumber": 152
+        }
+      ],
+      "metrics": {
+        "importCount": 44,
+        "exportCount": 9,
+        "functionCount": 8,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/amazon-bedrock.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "AMAZON_BEDROCK_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/amazon-bedrock.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 90,
+      "nonEmptyLines": 88,
+      "functions": [
+        {
+          "name": "amazonBedrockProvider",
+          "startLine": 82,
+          "endLine": 90,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "amazonBedrockProvider",
+          "line": 82,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "env",
+          "callee": "signal.throwIfAborted",
+          "lineNumber": 56
+        },
+        {
+          "caller": "env",
+          "callee": "ctx.env",
+          "lineNumber": 57
+        },
+        {
+          "caller": "env",
+          "callee": "signal.throwIfAborted",
+          "lineNumber": 58
+        },
+        {
+          "caller": "amazonBedrockProvider",
+          "callee": "createProvider",
+          "lineNumber": 83
+        },
+        {
+          "caller": "amazonBedrockProvider",
+          "callee": "Object.values",
+          "lineNumber": 87
+        },
+        {
+          "caller": "amazonBedrockProvider",
+          "callee": "bedrockConverseStreamApi",
+          "lineNumber": 88
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/ant-ling.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "ANT_LING_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/ant-ling.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "antLingProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "antLingProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "antLingProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "antLingProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "antLingProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "antLingProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/anthropic.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "ANTHROPIC_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/anthropic.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 59,
+      "nonEmptyLines": 55,
+      "functions": [
+        {
+          "name": "anthropicApiKeyAuth",
+          "startLine": 9,
+          "endLine": 41,
+          "params": []
+        },
+        {
+          "name": "anthropicProvider",
+          "startLine": 43,
+          "endLine": 59,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "anthropicProvider",
+          "line": 43,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "anthropicApiKeyAuth",
+          "callee": "interaction.signal.throwIfAborted",
+          "lineNumber": 13
+        },
+        {
+          "caller": "anthropicApiKeyAuth",
+          "callee": "interaction.prompt",
+          "lineNumber": 14
+        },
+        {
+          "caller": "anthropicApiKeyAuth",
+          "callee": "interaction.signal.throwIfAborted",
+          "lineNumber": 15
+        },
+        {
+          "caller": "anthropicApiKeyAuth",
+          "callee": "signal.throwIfAborted",
+          "lineNumber": 19
+        },
+        {
+          "caller": "anthropicApiKeyAuth",
+          "callee": "ctx.env",
+          "lineNumber": 24
+        },
+        {
+          "caller": "anthropicApiKeyAuth",
+          "callee": "signal.throwIfAborted",
+          "lineNumber": 25
+        },
+        {
+          "caller": "anthropicApiKeyAuth",
+          "callee": "ctx.env",
+          "lineNumber": 34
+        },
+        {
+          "caller": "anthropicApiKeyAuth",
+          "callee": "signal.throwIfAborted",
+          "lineNumber": 35
+        },
+        {
+          "caller": "anthropicProvider",
+          "callee": "createProvider",
+          "lineNumber": 44
+        },
+        {
+          "caller": "anthropicProvider",
+          "callee": "anthropicApiKeyAuth",
+          "lineNumber": 49
+        },
+        {
+          "caller": "anthropicProvider",
+          "callee": "lazyOAuth",
+          "lineNumber": 50
+        },
+        {
+          "caller": "anthropicProvider",
+          "callee": "Object.values",
+          "lineNumber": 56
+        },
+        {
+          "caller": "anthropicProvider",
+          "callee": "anthropicMessagesApi",
+          "lineNumber": 57
+        }
+      ],
+      "metrics": {
+        "importCount": 7,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/azure-openai-responses.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "AZURE_OPENAI_RESPONSES_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/azure-openai-responses.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 13,
+      "functions": [
+        {
+          "name": "azureOpenAIResponsesProvider",
+          "startLine": 6,
+          "endLine": 14,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "azureOpenAIResponsesProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "azureOpenAIResponsesProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "azureOpenAIResponsesProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 10
+        },
+        {
+          "caller": "azureOpenAIResponsesProvider",
+          "callee": "Object.values",
+          "lineNumber": 11
+        },
+        {
+          "caller": "azureOpenAIResponsesProvider",
+          "callee": "azureOpenAIResponsesApi",
+          "lineNumber": 12
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/baseten.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "BASETEN_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/baseten.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "basetenProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "basetenProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "basetenProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "basetenProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "basetenProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "basetenProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/cerebras.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "CEREBRAS_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/cerebras.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "cerebrasProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "cerebrasProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "cerebrasProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "cerebrasProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "cerebrasProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "cerebrasProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/cloudflare-ai-gateway.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "CLOUDFLARE_AI_GATEWAY_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/cloudflare-ai-gateway.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 27,
+      "nonEmptyLines": 25,
+      "functions": [
+        {
+          "name": "cloudflareAIGatewayProvider",
+          "startLine": 11,
+          "endLine": 27,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "cloudflareAIGatewayProvider",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "cloudflareAIGatewayProvider",
+          "callee": "createProvider",
+          "lineNumber": 16
+        },
+        {
+          "caller": "cloudflareAIGatewayProvider",
+          "callee": "cloudflareAIGatewayAuth",
+          "lineNumber": 19
+        },
+        {
+          "caller": "cloudflareAIGatewayProvider",
+          "callee": "Object.values",
+          "lineNumber": 20
+        },
+        {
+          "caller": "cloudflareAIGatewayProvider",
+          "callee": "cloudflareStreams",
+          "lineNumber": 22
+        },
+        {
+          "caller": "cloudflareAIGatewayProvider",
+          "callee": "anthropicMessagesApi",
+          "lineNumber": 22
+        },
+        {
+          "caller": "cloudflareAIGatewayProvider",
+          "callee": "cloudflareStreams",
+          "lineNumber": 23
+        },
+        {
+          "caller": "cloudflareAIGatewayProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 23
+        },
+        {
+          "caller": "cloudflareAIGatewayProvider",
+          "callee": "cloudflareStreams",
+          "lineNumber": 24
+        },
+        {
+          "caller": "cloudflareAIGatewayProvider",
+          "callee": "openAIResponsesApi",
+          "lineNumber": 24
+        }
+      ],
+      "metrics": {
+        "importCount": 7,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/cloudflare-auth.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 103,
+      "nonEmptyLines": 95,
+      "functions": [
+        {
+          "name": "resolveValue",
+          "startLine": 10,
+          "endLine": 29,
+          "params": [
+            "name",
+            "ctx",
+            "credential",
+            "signal"
+          ]
+        },
+        {
+          "name": "resolveCloudflareEnv",
+          "startLine": 31,
+          "endLine": 52,
+          "params": [
+            "kind",
+            "ctx",
+            "credential",
+            "signal"
+          ]
+        },
+        {
+          "name": "cloudflareWorkersAIAuth",
+          "startLine": 54,
+          "endLine": 72,
+          "params": []
+        },
+        {
+          "name": "cloudflareAIGatewayAuth",
+          "startLine": 74,
+          "endLine": 103,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "cloudflareWorkersAIAuth",
+          "line": 54,
+          "isDefault": false
+        },
+        {
+          "name": "cloudflareAIGatewayAuth",
+          "line": 74,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "resolveValue",
+          "callee": "signal.throwIfAborted",
+          "lineNumber": 25
+        },
+        {
+          "caller": "resolveValue",
+          "callee": "ctx.env",
+          "lineNumber": 26
+        },
+        {
+          "caller": "resolveValue",
+          "callee": "signal.throwIfAborted",
+          "lineNumber": 27
+        },
+        {
+          "caller": "resolveCloudflareEnv",
+          "callee": "resolveValue",
+          "lineNumber": 37
+        },
+        {
+          "caller": "resolveCloudflareEnv",
+          "callee": "resolveValue",
+          "lineNumber": 38
+        },
+        {
+          "caller": "resolveCloudflareEnv",
+          "callee": "resolveValue",
+          "lineNumber": 40
+        },
+        {
+          "caller": "cloudflareWorkersAIAuth",
+          "callee": "interaction.prompt",
+          "lineNumber": 58
+        },
+        {
+          "caller": "cloudflareWorkersAIAuth",
+          "callee": "interaction.prompt",
+          "lineNumber": 59
+        },
+        {
+          "caller": "cloudflareWorkersAIAuth",
+          "callee": "resolveCloudflareEnv",
+          "lineNumber": 63
+        },
+        {
+          "caller": "cloudflareAIGatewayAuth",
+          "callee": "interaction.prompt",
+          "lineNumber": 78
+        },
+        {
+          "caller": "cloudflareAIGatewayAuth",
+          "callee": "interaction.prompt",
+          "lineNumber": 79
+        },
+        {
+          "caller": "cloudflareAIGatewayAuth",
+          "callee": "interaction.prompt",
+          "lineNumber": 80
+        },
+        {
+          "caller": "cloudflareAIGatewayAuth",
+          "callee": "resolveCloudflareEnv",
+          "lineNumber": 88
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/cloudflare-stream.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 28,
+      "nonEmptyLines": 25,
+      "functions": [
+        {
+          "name": "resolveCloudflareModel",
+          "startLine": 6,
+          "endLine": 15,
+          "params": [
+            "model",
+            "env"
+          ]
+        },
+        {
+          "name": "cloudflareStreams",
+          "startLine": 21,
+          "endLine": 28,
+          "params": [
+            "streams"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "resolveCloudflareModel",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "cloudflareStreams",
+          "line": 21,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "resolveCloudflareModel",
+          "callee": "model.baseUrl\n\t\t.replaceAll(`{${CLOUDFLARE_ACCOUNT_ID}}`, env[CLOUDFLARE_ACCOUNT_ID] ?? `{${CLOUDFLARE_ACCOUNT_ID}}`)\n\t\t.replaceAll",
+          "lineNumber": 11
+        },
+        {
+          "caller": "resolveCloudflareModel",
+          "callee": "model.baseUrl\n\t\t.replaceAll",
+          "lineNumber": 11
+        },
+        {
+          "caller": "cloudflareStreams",
+          "callee": "streams.stream",
+          "lineNumber": 24
+        },
+        {
+          "caller": "cloudflareStreams",
+          "callee": "resolveCloudflareModel",
+          "lineNumber": 24
+        },
+        {
+          "caller": "cloudflareStreams",
+          "callee": "streams.streamSimple",
+          "lineNumber": 26
+        },
+        {
+          "caller": "cloudflareStreams",
+          "callee": "resolveCloudflareModel",
+          "lineNumber": 26
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/cloudflare-workers-ai.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "CLOUDFLARE_WORKERS_AI_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/cloudflare-workers-ai.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "cloudflareWorkersAIProvider",
+          "startLine": 7,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "cloudflareWorkersAIProvider",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "cloudflareWorkersAIProvider",
+          "callee": "createProvider",
+          "lineNumber": 8
+        },
+        {
+          "caller": "cloudflareWorkersAIProvider",
+          "callee": "cloudflareWorkersAIAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "cloudflareWorkersAIProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "cloudflareWorkersAIProvider",
+          "callee": "cloudflareStreams",
+          "lineNumber": 13
+        },
+        {
+          "caller": "cloudflareWorkersAIProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/deepseek.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "DEEPSEEK_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/deepseek.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "deepseekProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "deepseekProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "deepseekProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "deepseekProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "deepseekProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "deepseekProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/fireworks.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "FIREWORKS_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/fireworks.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 19,
+      "nonEmptyLines": 18,
+      "functions": [
+        {
+          "name": "fireworksProvider",
+          "startLine": 7,
+          "endLine": 19,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "fireworksProvider",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fireworksProvider",
+          "callee": "createProvider",
+          "lineNumber": 8
+        },
+        {
+          "caller": "fireworksProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 12
+        },
+        {
+          "caller": "fireworksProvider",
+          "callee": "Object.values",
+          "lineNumber": 13
+        },
+        {
+          "caller": "fireworksProvider",
+          "callee": "anthropicMessagesApi",
+          "lineNumber": 15
+        },
+        {
+          "caller": "fireworksProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 16
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/github-copilot.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "GITHUB_COPILOT_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/github-copilot.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 34,
+      "nonEmptyLines": 33,
+      "functions": [
+        {
+          "name": "githubCopilotProvider",
+          "startLine": 9,
+          "endLine": 34,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "githubCopilotProvider",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "githubCopilotProvider",
+          "callee": "createProvider",
+          "lineNumber": 10
+        },
+        {
+          "caller": "githubCopilotProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 15
+        },
+        {
+          "caller": "githubCopilotProvider",
+          "callee": "lazyOAuth",
+          "lineNumber": 16
+        },
+        {
+          "caller": "githubCopilotProvider",
+          "callee": "Object.values",
+          "lineNumber": 18
+        },
+        {
+          "caller": "githubCopilotProvider",
+          "callee": "Array.isArray",
+          "lineNumber": 22
+        },
+        {
+          "caller": "githubCopilotProvider",
+          "callee": "availableModelIds.every",
+          "lineNumber": 22
+        },
+        {
+          "caller": "githubCopilotProvider",
+          "callee": "models.filter",
+          "lineNumber": 26
+        },
+        {
+          "caller": "githubCopilotProvider",
+          "callee": "available.has",
+          "lineNumber": 26
+        },
+        {
+          "caller": "githubCopilotProvider",
+          "callee": "anthropicMessagesApi",
+          "lineNumber": 29
+        },
+        {
+          "caller": "githubCopilotProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 30
+        },
+        {
+          "caller": "githubCopilotProvider",
+          "callee": "openAIResponsesApi",
+          "lineNumber": 31
+        }
+      ],
+      "metrics": {
+        "importCount": 7,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/google-vertex.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "GOOGLE_VERTEX_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/google-vertex.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 100,
+      "nonEmptyLines": 96,
+      "functions": [
+        {
+          "name": "googleVertexProvider",
+          "startLine": 92,
+          "endLine": 100,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "googleVertexProvider",
+          "line": 92,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "env",
+          "callee": "signal.throwIfAborted",
+          "lineNumber": 66
+        },
+        {
+          "caller": "env",
+          "callee": "ctx.env",
+          "lineNumber": 67
+        },
+        {
+          "caller": "env",
+          "callee": "signal.throwIfAborted",
+          "lineNumber": 68
+        },
+        {
+          "caller": "googleVertexProvider",
+          "callee": "createProvider",
+          "lineNumber": 93
+        },
+        {
+          "caller": "googleVertexProvider",
+          "callee": "Object.values",
+          "lineNumber": 97
+        },
+        {
+          "caller": "googleVertexProvider",
+          "callee": "googleVertexApi",
+          "lineNumber": 98
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/google.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "GOOGLE_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

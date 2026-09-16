@@ -1,0 +1,40 @@
+Analyze these files and produce GraphNode and GraphEdge objects.
+Project root: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi`
+Project: `pi-monorepo`
+Batch: `17/45`
+Skill directory: `/Users/elex-mb0203/.cursor/plugins/local/Understand-Anything/understand-anything-plugin/skills/understand`
+Output: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-17.json` OR `batch-17-part-<k>.json`.
+UA_DIR: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua`
+Load `batchImportData` and `neighborMap` from `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-briefs/batch-17.json`.
+Pass every listed file through to `batchFiles` with path, language, sizeLines, fileCategory.
+
+> **Language directive**: Generate all textual content in **Chinese (zh)**. Keep technical terms in English when no standard translation exists.
+
+Files:
+1. packages/ai/src/api/anthropic-messages.ts (1490 lines, language: typescript, fileCategory: code)
+2. packages/ai/src/api/azure-openai-responses.ts (338 lines, language: typescript, fileCategory: code)
+3. packages/ai/src/api/bedrock-converse-stream.ts (1325 lines, language: typescript, fileCategory: code)
+4. packages/ai/src/api/cloudflare-ai-binding.ts (90 lines, language: typescript, fileCategory: code)
+5. packages/ai/src/api/constrained-sampling.ts (277 lines, language: typescript, fileCategory: code)
+6. packages/ai/src/api/github-copilot-headers.ts (37 lines, language: typescript, fileCategory: code)
+7. packages/ai/src/api/google-generative-ai.ts (526 lines, language: typescript, fileCategory: code)
+8. packages/ai/src/api/google-shared.ts (453 lines, language: typescript, fileCategory: code)
+9. packages/ai/src/api/google-vertex.ts (598 lines, language: typescript, fileCategory: code)
+10. packages/ai/src/api/mistral-conversations.ts (941 lines, language: typescript, fileCategory: code)
+11. packages/ai/src/api/openai-codex-responses.ts (1657 lines, language: typescript, fileCategory: code)
+12. packages/ai/src/api/openai-completions.ts (1717 lines, language: typescript, fileCategory: code)
+13. packages/ai/src/api/openai-prompt-cache.ts (8 lines, language: typescript, fileCategory: code)
+14. packages/ai/src/api/openai-responses-shared.ts (793 lines, language: typescript, fileCategory: code)
+15. packages/ai/src/api/openai-responses.ts (389 lines, language: typescript, fileCategory: code)
+16. packages/ai/src/api/openrouter-images.lazy.ts (10 lines, language: typescript, fileCategory: code)
+17. packages/ai/src/api/openrouter-images.ts (196 lines, language: typescript, fileCategory: code)
+18. packages/ai/src/api/pi-messages.ts (441 lines, language: typescript, fileCategory: code)
+19. packages/ai/src/api/simple-options.ts (95 lines, language: typescript, fileCategory: code)
+20. packages/ai/src/api/transform-messages.ts (223 lines, language: typescript, fileCategory: code)
+21. packages/ai/src/env-api-keys.ts (188 lines, language: typescript, fileCategory: code)
+22. packages/ai/src/image-models.ts (42 lines, language: typescript, fileCategory: code)
+23. packages/ai/src/images-api-registry.ts (53 lines, language: typescript, fileCategory: code)
+24. packages/ai/src/images.ts (21 lines, language: typescript, fileCategory: code)
+25. packages/ai/src/legacy-api-aliases.ts (108 lines, language: typescript, fileCategory: code)
+
+Respond with only a brief summary: parts written, total nodes/edges, files skipped.

@@ -1,0 +1,449 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts",
+      "type": "file",
+      "name": "tool-definition-wrapper.ts",
+      "filePath": "packages/coding-agent/src/core/tools/tool-definition-wrapper.ts",
+      "summary": "把 ToolDefinition 与可选 ctxFactory 包成 AgentTool，或从已有 AgentTool 反构定义。",
+      "tags": [
+        "adapter",
+        "tool",
+        "wrapper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts:wrapToolDefinition",
+      "type": "function",
+      "name": "wrapToolDefinition",
+      "filePath": "packages/coding-agent/src/core/tools/tool-definition-wrapper.ts",
+      "lineRange": [
+        5,
+        20
+      ],
+      "summary": "用 ctxFactory 注入执行上下文后调用 definition.execute。",
+      "tags": [
+        "adapter",
+        "wrapper",
+        "tool"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts:wrapToolDefinitions",
+      "type": "function",
+      "name": "wrapToolDefinitions",
+      "filePath": "packages/coding-agent/src/core/tools/tool-definition-wrapper.ts",
+      "lineRange": [
+        23,
+        28
+      ],
+      "summary": "批量 wrap 一组 ToolDefinition。",
+      "tags": [
+        "adapter",
+        "factory",
+        "tool"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts:createToolDefinitionFromAgentTool",
+      "type": "function",
+      "name": "createToolDefinitionFromAgentTool",
+      "filePath": "packages/coding-agent/src/core/tools/tool-definition-wrapper.ts",
+      "lineRange": [
+        36,
+        47
+      ],
+      "summary": "从 AgentTool 还原 ToolDefinition（execute 直接转发）。",
+      "tags": [
+        "adapter",
+        "tool",
+        "coding-agent"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/tools/truncate.ts",
+      "type": "file",
+      "name": "truncate.ts",
+      "filePath": "packages/coding-agent/src/core/tools/truncate.ts",
+      "summary": "按行数与字节上限截断工具输出：truncateHead/Tail、单行截断与人类可读 formatSize。",
+      "tags": [
+        "truncation",
+        "utility",
+        "output"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/truncate.ts:splitLinesForCounting",
+      "type": "function",
+      "name": "splitLinesForCounting",
+      "filePath": "packages/coding-agent/src/core/tools/truncate.ts",
+      "lineRange": [
+        47,
+        56
+      ],
+      "summary": "按换行拆行并去掉末尾空行，供行数统计。",
+      "tags": [
+        "text",
+        "utility",
+        "tool"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/truncate.ts:formatSize",
+      "type": "function",
+      "name": "formatSize",
+      "filePath": "packages/coding-agent/src/core/tools/truncate.ts",
+      "lineRange": [
+        61,
+        69
+      ],
+      "summary": "把字节数格式化为 B/KB/MB。",
+      "tags": [
+        "formatting",
+        "utility",
+        "tool"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/truncate.ts:truncateHead",
+      "type": "function",
+      "name": "truncateHead",
+      "filePath": "packages/coding-agent/src/core/tools/truncate.ts",
+      "lineRange": [
+        78,
+        160
+      ],
+      "summary": "从开头保留内容直到行或字节上限，标记 truncatedBy 与 firstLineExceedsLimit。",
+      "tags": [
+        "truncation",
+        "output",
+        "tool"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/truncate.ts:truncateTail",
+      "type": "function",
+      "name": "truncateTail",
+      "filePath": "packages/coding-agent/src/core/tools/truncate.ts",
+      "lineRange": [
+        168,
+        241
+      ],
+      "summary": "从末尾保留最近输出，超字节时按 UTF-8 边界裁剪。",
+      "tags": [
+        "truncation",
+        "output",
+        "tool"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/truncate.ts:truncateStringToBytesFromEnd",
+      "type": "function",
+      "name": "truncateStringToBytesFromEnd",
+      "filePath": "packages/coding-agent/src/core/tools/truncate.ts",
+      "lineRange": [
+        247,
+        262
+      ],
+      "summary": "从字符串末尾截到 maxBytes，避开 UTF-8 续字节。",
+      "tags": [
+        "truncation",
+        "utf8",
+        "tool"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/truncate.ts:truncateLine",
+      "type": "function",
+      "name": "truncateLine",
+      "filePath": "packages/coding-agent/src/core/tools/truncate.ts",
+      "lineRange": [
+        268,
+        276
+      ],
+      "summary": "把单行截到 maxChars（grep 默认 GREP_MAX_LINE_LENGTH）。",
+      "tags": [
+        "truncation",
+        "text",
+        "tool"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/tools/write.ts",
+      "type": "file",
+      "name": "write.ts",
+      "filePath": "packages/coding-agent/src/core/tools/write.ts",
+      "summary": "write 工具：在变更队列中 mkdir 后写入完整文件内容。",
+      "tags": [
+        "tool",
+        "filesystem",
+        "factory"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/write.ts:createWriteToolDefinition",
+      "type": "function",
+      "name": "createWriteToolDefinition",
+      "filePath": "packages/coding-agent/src/core/tools/write.ts",
+      "lineRange": [
+        44,
+        93
+      ],
+      "summary": "定义 write：解析路径、队列内创建父目录并写入，支持 abort。",
+      "tags": [
+        "tool",
+        "filesystem",
+        "factory"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/write.ts:createWriteTool",
+      "type": "function",
+      "name": "createWriteTool",
+      "filePath": "packages/coding-agent/src/core/tools/write.ts",
+      "lineRange": [
+        95,
+        97
+      ],
+      "summary": "wrap write ToolDefinition 为 AgentTool。",
+      "tags": [
+        "factory",
+        "tool",
+        "coding-agent"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/write.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/write.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/write.ts",
+      "target": "file:packages/coding-agent/src/core/tools/file-mutation-queue.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/write.ts",
+      "target": "file:packages/coding-agent/src/core/tools/path-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/write.ts",
+      "target": "file:packages/coding-agent/src/core/tools/renderers/write.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/write.ts",
+      "target": "file:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts",
+      "target": "function:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts:wrapToolDefinition",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts",
+      "target": "function:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts:wrapToolDefinitions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts",
+      "target": "function:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts:createToolDefinitionFromAgentTool",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/truncate.ts",
+      "target": "function:packages/coding-agent/src/core/tools/truncate.ts:splitLinesForCounting",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/truncate.ts",
+      "target": "function:packages/coding-agent/src/core/tools/truncate.ts:formatSize",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/truncate.ts",
+      "target": "function:packages/coding-agent/src/core/tools/truncate.ts:truncateHead",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/truncate.ts",
+      "target": "function:packages/coding-agent/src/core/tools/truncate.ts:truncateTail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/truncate.ts",
+      "target": "function:packages/coding-agent/src/core/tools/truncate.ts:truncateStringToBytesFromEnd",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/truncate.ts",
+      "target": "function:packages/coding-agent/src/core/tools/truncate.ts:truncateLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/write.ts",
+      "target": "function:packages/coding-agent/src/core/tools/write.ts:createWriteToolDefinition",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/write.ts",
+      "target": "function:packages/coding-agent/src/core/tools/write.ts:createWriteTool",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts",
+      "target": "function:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts:wrapToolDefinition",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts",
+      "target": "function:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts:wrapToolDefinitions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts",
+      "target": "function:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts:createToolDefinitionFromAgentTool",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/truncate.ts",
+      "target": "function:packages/coding-agent/src/core/tools/truncate.ts:formatSize",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/truncate.ts",
+      "target": "function:packages/coding-agent/src/core/tools/truncate.ts:truncateHead",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/truncate.ts",
+      "target": "function:packages/coding-agent/src/core/tools/truncate.ts:truncateTail",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/truncate.ts",
+      "target": "function:packages/coding-agent/src/core/tools/truncate.ts:truncateLine",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/write.ts",
+      "target": "function:packages/coding-agent/src/core/tools/write.ts:createWriteToolDefinition",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/write.ts",
+      "target": "function:packages/coding-agent/src/core/tools/write.ts:createWriteTool",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/write.ts:createWriteToolDefinition",
+      "target": "function:packages/coding-agent/src/core/tools/path-utils.ts:resolveToCwd",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/write.ts:createWriteToolDefinition",
+      "target": "function:packages/coding-agent/src/core/tools/file-mutation-queue.ts:withFileMutationQueue",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/write.ts:createWriteTool",
+      "target": "function:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts:wrapToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

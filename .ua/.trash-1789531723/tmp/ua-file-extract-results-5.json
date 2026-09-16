@@ -1,0 +1,1273 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 31,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 31,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 31,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "packages/ai/src/providers/google.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "googleProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "googleProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "googleProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "googleProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "googleProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "googleProvider",
+          "callee": "googleGenerativeAIApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/groq.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "GROQ_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/groq.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "groqProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "groqProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "groqProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "groqProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "groqProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "groqProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/huggingface.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "HUGGINGFACE_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/huggingface.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "huggingfaceProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "huggingfaceProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "huggingfaceProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "huggingfaceProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "huggingfaceProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "huggingfaceProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/kimi-coding.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "KIMI_CODING_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/kimi-coding.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 24,
+      "nonEmptyLines": 23,
+      "functions": [
+        {
+          "name": "kimiCodingProvider",
+          "startLine": 7,
+          "endLine": 24,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "kimiCodingProvider",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "kimiCodingProvider",
+          "callee": "createProvider",
+          "lineNumber": 8
+        },
+        {
+          "caller": "kimiCodingProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 13
+        },
+        {
+          "caller": "kimiCodingProvider",
+          "callee": "lazyOAuth",
+          "lineNumber": 14
+        },
+        {
+          "caller": "kimiCodingProvider",
+          "callee": "Object.values",
+          "lineNumber": 21
+        },
+        {
+          "caller": "kimiCodingProvider",
+          "callee": "anthropicMessagesApi",
+          "lineNumber": 22
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/minimax-cn.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "MINIMAX_CN_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/minimax-cn.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "minimaxCnProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "minimaxCnProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "minimaxCnProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "minimaxCnProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "minimaxCnProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "minimaxCnProvider",
+          "callee": "anthropicMessagesApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/minimax.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "MINIMAX_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/minimax.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "minimaxProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "minimaxProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "minimaxProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "minimaxProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "minimaxProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "minimaxProvider",
+          "callee": "anthropicMessagesApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/mistral.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "MISTRAL_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/mistral.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "mistralProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "mistralProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "mistralProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "mistralProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "mistralProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "mistralProvider",
+          "callee": "mistralConversationsApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/moonshotai-cn.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "MOONSHOTAI_CN_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/moonshotai-cn.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "moonshotaiCnProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "moonshotaiCnProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "moonshotaiCnProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "moonshotaiCnProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "moonshotaiCnProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "moonshotaiCnProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/moonshotai.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "MOONSHOTAI_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/moonshotai.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "moonshotaiProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "moonshotaiProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "moonshotaiProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "moonshotaiProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "moonshotaiProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "moonshotaiProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/nvidia.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "NVIDIA_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/nvidia.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "nvidiaProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "nvidiaProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "nvidiaProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "nvidiaProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "nvidiaProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "nvidiaProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/openai-codex.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "OPENAI_CODEX_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/openai-codex.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 22,
+      "nonEmptyLines": 21,
+      "functions": [
+        {
+          "name": "openaiCodexProvider",
+          "startLine": 7,
+          "endLine": 22,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "openaiCodexProvider",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "openaiCodexProvider",
+          "callee": "createProvider",
+          "lineNumber": 8
+        },
+        {
+          "caller": "openaiCodexProvider",
+          "callee": "lazyOAuth",
+          "lineNumber": 13
+        },
+        {
+          "caller": "openaiCodexProvider",
+          "callee": "Object.values",
+          "lineNumber": 19
+        },
+        {
+          "caller": "openaiCodexProvider",
+          "callee": "openAICodexResponsesApi",
+          "lineNumber": 20
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/openai.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "OPENAI_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/openai.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "openaiProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "openaiProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "openaiProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "openaiProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "openaiProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "openaiProvider",
+          "callee": "openAIResponsesApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/opencode-go.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "OPENCODE_GO_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/opencode-go.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 21,
+      "nonEmptyLines": 20,
+      "functions": [
+        {
+          "name": "opencodeGoProvider",
+          "startLine": 9,
+          "endLine": 21,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "opencodeGoProvider",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "opencodeGoProvider",
+          "callee": "createProvider",
+          "lineNumber": 10
+        },
+        {
+          "caller": "opencodeGoProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 13
+        },
+        {
+          "caller": "opencodeGoProvider",
+          "callee": "Object.values",
+          "lineNumber": 14
+        },
+        {
+          "caller": "opencodeGoProvider",
+          "callee": "withOpenCodeSessionHeader",
+          "lineNumber": 16
+        },
+        {
+          "caller": "opencodeGoProvider",
+          "callee": "anthropicMessagesApi",
+          "lineNumber": 16
+        },
+        {
+          "caller": "opencodeGoProvider",
+          "callee": "withOpenCodeSessionHeader",
+          "lineNumber": 17
+        },
+        {
+          "caller": "opencodeGoProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 17
+        },
+        {
+          "caller": "opencodeGoProvider",
+          "callee": "withOpenCodeSessionHeader",
+          "lineNumber": 18
+        },
+        {
+          "caller": "opencodeGoProvider",
+          "callee": "openAIResponsesApi",
+          "lineNumber": 18
+        }
+      ],
+      "metrics": {
+        "importCount": 7,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/opencode-headers.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 25,
+      "nonEmptyLines": 21,
+      "functions": [
+        {
+          "name": "hasHeader",
+          "startLine": 5,
+          "endLine": 8,
+          "params": [
+            "headers",
+            "name"
+          ]
+        },
+        {
+          "name": "withSessionHeader",
+          "startLine": 10,
+          "endLine": 16,
+          "params": [
+            "options"
+          ]
+        },
+        {
+          "name": "withOpenCodeSessionHeader",
+          "startLine": 19,
+          "endLine": 25,
+          "params": [
+            "streams"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "withOpenCodeSessionHeader",
+          "line": 19,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "hasHeader",
+          "callee": "name.toLowerCase",
+          "lineNumber": 6
+        },
+        {
+          "caller": "hasHeader",
+          "callee": "Object.keys(headers ?? {}).some",
+          "lineNumber": 7
+        },
+        {
+          "caller": "hasHeader",
+          "callee": "Object.keys",
+          "lineNumber": 7
+        },
+        {
+          "caller": "hasHeader",
+          "callee": "key.toLowerCase",
+          "lineNumber": 7
+        },
+        {
+          "caller": "withSessionHeader",
+          "callee": "hasHeader",
+          "lineNumber": 11
+        },
+        {
+          "caller": "withOpenCodeSessionHeader",
+          "callee": "streams.stream",
+          "lineNumber": 22
+        },
+        {
+          "caller": "withOpenCodeSessionHeader",
+          "callee": "withSessionHeader",
+          "lineNumber": 22
+        },
+        {
+          "caller": "withOpenCodeSessionHeader",
+          "callee": "streams.streamSimple",
+          "lineNumber": 23
+        },
+        {
+          "caller": "withOpenCodeSessionHeader",
+          "callee": "withSessionHeader",
+          "lineNumber": 23
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/opencode.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "OPENCODE_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/opencode.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 25,
+      "nonEmptyLines": 24,
+      "functions": [
+        {
+          "name": "opencodeProvider",
+          "startLine": 10,
+          "endLine": 25,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "opencodeProvider",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "opencodeProvider",
+          "callee": "createProvider",
+          "lineNumber": 13
+        },
+        {
+          "caller": "opencodeProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 16
+        },
+        {
+          "caller": "opencodeProvider",
+          "callee": "Object.values",
+          "lineNumber": 17
+        },
+        {
+          "caller": "opencodeProvider",
+          "callee": "withOpenCodeSessionHeader",
+          "lineNumber": 19
+        },
+        {
+          "caller": "opencodeProvider",
+          "callee": "anthropicMessagesApi",
+          "lineNumber": 19
+        },
+        {
+          "caller": "opencodeProvider",
+          "callee": "withOpenCodeSessionHeader",
+          "lineNumber": 20
+        },
+        {
+          "caller": "opencodeProvider",
+          "callee": "googleGenerativeAIApi",
+          "lineNumber": 20
+        },
+        {
+          "caller": "opencodeProvider",
+          "callee": "withOpenCodeSessionHeader",
+          "lineNumber": 21
+        },
+        {
+          "caller": "opencodeProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 21
+        },
+        {
+          "caller": "opencodeProvider",
+          "callee": "withOpenCodeSessionHeader",
+          "lineNumber": 22
+        },
+        {
+          "caller": "opencodeProvider",
+          "callee": "openAIResponsesApi",
+          "lineNumber": 22
+        }
+      ],
+      "metrics": {
+        "importCount": 8,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/openrouter-images.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 22,
+      "nonEmptyLines": 21,
+      "functions": [
+        {
+          "name": "openrouterImagesProvider",
+          "startLine": 7,
+          "endLine": 22,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "openrouterImagesProvider",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "openrouterImagesProvider",
+          "callee": "createImagesProvider",
+          "lineNumber": 8
+        },
+        {
+          "caller": "openrouterImagesProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 12
+        },
+        {
+          "caller": "openrouterImagesProvider",
+          "callee": "lazyOAuth",
+          "lineNumber": 13
+        },
+        {
+          "caller": "openrouterImagesProvider",
+          "callee": "Object.values",
+          "lineNumber": 19
+        },
+        {
+          "caller": "openrouterImagesProvider",
+          "callee": "openrouterImagesApi",
+          "lineNumber": 20
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/openrouter.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "OPENROUTER_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/openrouter.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 27,
+      "nonEmptyLines": 26,
+      "functions": [
+        {
+          "name": "openrouterProvider",
+          "startLine": 8,
+          "endLine": 27,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "openrouterProvider",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "openrouterProvider",
+          "callee": "createProvider",
+          "lineNumber": 9
+        },
+        {
+          "caller": "openrouterProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 14
+        },
+        {
+          "caller": "openrouterProvider",
+          "callee": "lazyOAuth",
+          "lineNumber": 15
+        },
+        {
+          "caller": "openrouterProvider",
+          "callee": "Object.values",
+          "lineNumber": 21
+        },
+        {
+          "caller": "openrouterProvider",
+          "callee": "anthropicMessagesApi",
+          "lineNumber": 23
+        },
+        {
+          "caller": "openrouterProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 24
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

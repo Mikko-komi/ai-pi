@@ -1,0 +1,1133 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/agent/src/harness/telemetry.ts",
+      "type": "file",
+      "name": "telemetry.ts",
+      "filePath": "packages/agent/src/harness/telemetry.ts",
+      "summary": "定义 AI 请求与 harness 运行的 typed telemetry schema，并提供 startAiSpan/startHarnessSpan 包装器。",
+      "tags": [
+        "telemetry",
+        "schema-definition",
+        "observability",
+        "type-definition"
+      ],
+      "complexity": "complex",
+      "languageNotes": "schema 用 as const satisfies TelemetrySchemaDefinition，再派生 span 名与属性类型。"
+    },
+    {
+      "id": "file:packages/agent/src/harness/tools/bash.ts",
+      "type": "file",
+      "name": "bash.ts",
+      "filePath": "packages/agent/src/harness/tools/bash.ts",
+      "summary": "工厂函数 createBashTool：经 ExecutionEnv.exec 跑命令，流式合并截断输出，并支持 timeout 与 prepare 钩子。",
+      "tags": [
+        "factory",
+        "tool",
+        "shell",
+        "bash"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "type": "file",
+      "name": "edit-diff.ts",
+      "filePath": "packages/agent/src/harness/tools/edit-diff.ts",
+      "summary": "精确/模糊文本替换与 unified diff 工具：规范化换行与 Unicode，再生成展示 diff 与补丁。",
+      "tags": [
+        "utility",
+        "diff",
+        "编辑",
+        "文本处理"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/agent/src/harness/tools/edit.ts",
+      "type": "file",
+      "name": "edit.ts",
+      "filePath": "packages/agent/src/harness/tools/edit.ts",
+      "summary": "createEditTool 实现按 oldText/newText 批量替换单文件，兼容遗留参数，并在变异队列中写回。",
+      "tags": [
+        "factory",
+        "tool",
+        "编辑",
+        "文件系统"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/agent/src/harness/tools/file-mutation-queue.ts",
+      "type": "file",
+      "name": "file-mutation-queue.ts",
+      "filePath": "packages/agent/src/harness/tools/file-mutation-queue.ts",
+      "summary": "按 ExecutionEnv 与规范路径串行化文件写操作，避免 edit/write 并发互相覆盖。",
+      "tags": [
+        "concurrency",
+        "filesystem",
+        "queue",
+        "工具函数"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/agent/src/harness/tools/image.ts",
+      "type": "file",
+      "name": "image.ts",
+      "filePath": "packages/agent/src/harness/tools/image.ts",
+      "summary": "用魔数识别 jpeg/png/gif/webp/bmp（排除动画 PNG），并提供无依赖的 Base64 编码。",
+      "tags": [
+        "utility",
+        "image",
+        "mime",
+        "编码"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/agent/src/harness/tools/path-utils.ts",
+      "type": "file",
+      "name": "path-utils.ts",
+      "filePath": "packages/agent/src/harness/tools/path-utils.ts",
+      "summary": "规范化工具路径（Unicode 空格、前导 @），解析绝对路径，并为 read 尝试若干 Unicode 变体。",
+      "tags": [
+        "utility",
+        "path",
+        "filesystem",
+        "工具函数"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/telemetry.ts:startAiSpan",
+      "type": "function",
+      "name": "startAiSpan",
+      "filePath": "packages/agent/src/harness/telemetry.ts",
+      "lineRange": [
+        138,
+        147
+      ],
+      "summary": "按 AI_TELEMETRY_SCHEMA 启动 typed span，并把 span 写入 Context。",
+      "tags": [
+        "telemetry",
+        "span",
+        "ai",
+        "context"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/telemetry.ts:startHarnessSpan",
+      "type": "function",
+      "name": "startHarnessSpan",
+      "filePath": "packages/agent/src/harness/telemetry.ts",
+      "lineRange": [
+        622,
+        635
+      ],
+      "summary": "按 HARNESS_TELEMETRY_SCHEMA 启动 typed span，并把 span 写入 Context。",
+      "tags": [
+        "telemetry",
+        "span",
+        "harness",
+        "context"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/bash.ts:createBashTool",
+      "type": "function",
+      "name": "createBashTool",
+      "filePath": "packages/agent/src/harness/tools/bash.ts",
+      "lineRange": [
+        51,
+        145
+      ],
+      "summary": "创建 bash 工具：校验 timeout、可选 prepare，再流式截断合并 stdout/stderr。",
+      "tags": [
+        "factory",
+        "tool",
+        "bash",
+        "shell"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/edit-diff.ts:detectLineEnding",
+      "type": "function",
+      "name": "detectLineEnding",
+      "filePath": "packages/agent/src/harness/tools/edit-diff.ts",
+      "lineRange": [
+        7,
+        13
+      ],
+      "summary": "根据首个换行判断文件使用 CRLF 还是 LF。",
+      "tags": [
+        "utility",
+        "newline",
+        "diff",
+        "检测"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/edit-diff.ts:normalizeToLF",
+      "type": "function",
+      "name": "normalizeToLF",
+      "filePath": "packages/agent/src/harness/tools/edit-diff.ts",
+      "lineRange": [
+        15,
+        17
+      ],
+      "summary": "把 CRLF/CR 统一成 LF，供后续匹配。",
+      "tags": [
+        "utility",
+        "newline",
+        "normalize",
+        "diff"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/edit-diff.ts:restoreLineEndings",
+      "type": "function",
+      "name": "restoreLineEndings",
+      "filePath": "packages/agent/src/harness/tools/edit-diff.ts",
+      "lineRange": [
+        19,
+        21
+      ],
+      "summary": "把 LF 文本恢复为原始 CRLF 或 LF 换行。",
+      "tags": [
+        "utility",
+        "newline",
+        "restore",
+        "diff"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/edit-diff.ts:normalizeForFuzzyMatch",
+      "type": "function",
+      "name": "normalizeForFuzzyMatch",
+      "filePath": "packages/agent/src/harness/tools/edit-diff.ts",
+      "lineRange": [
+        30,
+        51
+      ],
+      "summary": "为模糊匹配规范化空白、智能引号、破折号与特殊空格。",
+      "tags": [
+        "utility",
+        "fuzzy-match",
+        "unicode",
+        "normalize"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/edit-diff.ts:getReplacementLineRange",
+      "type": "function",
+      "name": "getReplacementLineRange",
+      "filePath": "packages/agent/src/harness/tools/edit-diff.ts",
+      "lineRange": [
+        80,
+        105
+      ],
+      "summary": "把字节偏移替换区间映射到受影响的行范围。",
+      "tags": [
+        "utility",
+        "diff",
+        "line-range",
+        "编辑"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/edit-diff.ts:applyReplacements",
+      "type": "function",
+      "name": "applyReplacements",
+      "filePath": "packages/agent/src/harness/tools/edit-diff.ts",
+      "lineRange": [
+        107,
+        116
+      ],
+      "summary": "按从后往前顺序应用不重叠替换，避免偏移失效。",
+      "tags": [
+        "utility",
+        "diff",
+        "replacement",
+        "编辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/edit-diff.ts:applyReplacementsPreservingUnchangedLines",
+      "type": "function",
+      "name": "applyReplacementsPreservingUnchangedLines",
+      "filePath": "packages/agent/src/harness/tools/edit-diff.ts",
+      "lineRange": [
+        128,
+        169
+      ],
+      "summary": "在规范化空间替换后，把未改行块从原文拷回以保留原始字节。",
+      "tags": [
+        "utility",
+        "diff",
+        "fuzzy-match",
+        "preservation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/edit-diff.ts:fuzzyFindText",
+      "type": "function",
+      "name": "fuzzyFindText",
+      "filePath": "packages/agent/src/harness/tools/edit-diff.ts",
+      "lineRange": [
+        203,
+        241
+      ],
+      "summary": "先精确再模糊查找 oldText，模糊命中时返回规范化空间偏移。",
+      "tags": [
+        "utility",
+        "fuzzy-match",
+        "search",
+        "编辑"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/edit-diff.ts:stripBom",
+      "type": "function",
+      "name": "stripBom",
+      "filePath": "packages/agent/src/harness/tools/edit-diff.ts",
+      "lineRange": [
+        244,
+        246
+      ],
+      "summary": "剥离 UTF-8 BOM 并单独返回，便于写回时还原。",
+      "tags": [
+        "utility",
+        "bom",
+        "encoding",
+        "编辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/edit-diff.ts:getNotFoundError",
+      "type": "function",
+      "name": "getNotFoundError",
+      "filePath": "packages/agent/src/harness/tools/edit-diff.ts",
+      "lineRange": [
+        254,
+        263
+      ],
+      "summary": "构造 oldText 未命中时的单编辑/多编辑错误信息。",
+      "tags": [
+        "error-handling",
+        "edit",
+        "validation",
+        "消息"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/edit-diff.ts:getDuplicateError",
+      "type": "function",
+      "name": "getDuplicateError",
+      "filePath": "packages/agent/src/harness/tools/edit-diff.ts",
+      "lineRange": [
+        265,
+        274
+      ],
+      "summary": "构造 oldText 出现多次、无法唯一定位时的错误。",
+      "tags": [
+        "error-handling",
+        "edit",
+        "validation",
+        "消息"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/edit-diff.ts:applyEditsToNormalizedContent",
+      "type": "function",
+      "name": "applyEditsToNormalizedContent",
+      "filePath": "packages/agent/src/harness/tools/edit-diff.ts",
+      "lineRange": [
+        301,
+        363
+      ],
+      "summary": "对 LF 文本做唯一、不重叠的精确/模糊替换，必要时保留未改行。",
+      "tags": [
+        "edit",
+        "diff",
+        "validation",
+        "核心"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/edit-diff.ts:generateUnifiedPatch",
+      "type": "function",
+      "name": "generateUnifiedPatch",
+      "filePath": "packages/agent/src/harness/tools/edit-diff.ts",
+      "lineRange": [
+        366,
+        371
+      ],
+      "summary": "用 diff 库生成标准 unified patch。",
+      "tags": [
+        "diff",
+        "patch",
+        "utility",
+        "输出"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/edit-diff.ts:generateDiffString",
+      "type": "function",
+      "name": "generateDiffString",
+      "filePath": "packages/agent/src/harness/tools/edit-diff.ts",
+      "lineRange": [
+        377,
+        500
+      ],
+      "summary": "生成带行号的展示 diff，并返回新文件中首个变更行号。",
+      "tags": [
+        "diff",
+        "display",
+        "utility",
+        "行号"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/edit.ts:prepareEditArguments",
+      "type": "function",
+      "name": "prepareEditArguments",
+      "filePath": "packages/agent/src/harness/tools/edit.ts",
+      "lineRange": [
+        55,
+        77
+      ],
+      "summary": "规范化 edits：解析 JSON 字符串、单对象 edits，以及遗留的顶层 oldText/newText。",
+      "tags": [
+        "validation",
+        "edit",
+        "compatibility",
+        "arguments"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/edit.ts:createEditTool",
+      "type": "function",
+      "name": "createEditTool",
+      "filePath": "packages/agent/src/harness/tools/edit.ts",
+      "lineRange": [
+        90,
+        145
+      ],
+      "summary": "创建 edit 工具：解析路径、排队写文件，应用替换后返回 diff/patch。",
+      "tags": [
+        "factory",
+        "tool",
+        "edit",
+        "filesystem"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/file-mutation-queue.ts:withFileMutationQueue",
+      "type": "function",
+      "name": "withFileMutationQueue",
+      "filePath": "packages/agent/src/harness/tools/file-mutation-queue.ts",
+      "lineRange": [
+        30,
+        62
+      ],
+      "summary": "按规范路径把回调串到该 env 的每路径队列上，结束后释放后继。",
+      "tags": [
+        "concurrency",
+        "queue",
+        "filesystem",
+        "serialization"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/image.ts:detectSupportedImageMimeType",
+      "type": "function",
+      "name": "detectSupportedImageMimeType",
+      "filePath": "packages/agent/src/harness/tools/image.ts",
+      "lineRange": [
+        3,
+        10
+      ],
+      "summary": "按魔数识别受支持静态图片 MIME；动画 PNG 与 JPEG-XT 返回 undefined。",
+      "tags": [
+        "image",
+        "mime",
+        "detection",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/image.ts:encodeBase64",
+      "type": "function",
+      "name": "encodeBase64",
+      "filePath": "packages/agent/src/harness/tools/image.ts",
+      "lineRange": [
+        12,
+        25
+      ],
+      "summary": "纯 JS Base64 编码，避免依赖 Node Buffer。",
+      "tags": [
+        "encoding",
+        "base64",
+        "image",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/image.ts:isAnimatedPng",
+      "type": "function",
+      "name": "isAnimatedPng",
+      "filePath": "packages/agent/src/harness/tools/image.ts",
+      "lineRange": [
+        33,
+        45
+      ],
+      "summary": "扫描 PNG chunk，若在 IDAT 前出现 acTL 则视为动画 PNG。",
+      "tags": [
+        "image",
+        "png",
+        "animation",
+        "detection"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/image.ts:isBmp",
+      "type": "function",
+      "name": "isBmp",
+      "filePath": "packages/agent/src/harness/tools/image.ts",
+      "lineRange": [
+        47,
+        69
+      ],
+      "summary": "校验 BMP 文件头、DIB 大小、色平面与 bitsPerPixel。",
+      "tags": [
+        "image",
+        "bmp",
+        "validation",
+        "detection"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/path-utils.ts:resolveToolPath",
+      "type": "function",
+      "name": "resolveToolPath",
+      "filePath": "packages/agent/src/harness/tools/path-utils.ts",
+      "lineRange": [
+        13,
+        15
+      ],
+      "summary": "规范化后经 ExecutionEnv.absolutePath 解析为绝对路径。",
+      "tags": [
+        "path",
+        "filesystem",
+        "utility",
+        "resolve"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/path-utils.ts:resolveReadToolPath",
+      "type": "function",
+      "name": "resolveReadToolPath",
+      "filePath": "packages/agent/src/harness/tools/path-utils.ts",
+      "lineRange": [
+        17,
+        31
+      ],
+      "summary": "在绝对路径上尝试窄空格、NFD 与弯引号变体，命中存在路径则返回。",
+      "tags": [
+        "path",
+        "filesystem",
+        "unicode",
+        "read"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/agent/src/harness/telemetry.ts",
+      "target": "function:packages/agent/src/harness/telemetry.ts:startAiSpan",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/telemetry.ts",
+      "target": "function:packages/agent/src/harness/telemetry.ts:startAiSpan",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/telemetry.ts",
+      "target": "function:packages/agent/src/harness/telemetry.ts:startHarnessSpan",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/telemetry.ts",
+      "target": "function:packages/agent/src/harness/telemetry.ts:startHarnessSpan",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/bash.ts",
+      "target": "function:packages/agent/src/harness/tools/bash.ts:createBashTool",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/bash.ts",
+      "target": "function:packages/agent/src/harness/tools/bash.ts:createBashTool",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:detectLineEnding",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:detectLineEnding",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:normalizeToLF",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:normalizeToLF",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:restoreLineEndings",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:restoreLineEndings",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:normalizeForFuzzyMatch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:normalizeForFuzzyMatch",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:getReplacementLineRange",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:applyReplacements",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:applyReplacementsPreservingUnchangedLines",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:applyReplacementsPreservingUnchangedLines",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:fuzzyFindText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:fuzzyFindText",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:stripBom",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:stripBom",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:getNotFoundError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:getDuplicateError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:applyEditsToNormalizedContent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:applyEditsToNormalizedContent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:generateUnifiedPatch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:generateUnifiedPatch",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:generateDiffString",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:generateDiffString",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit.ts",
+      "target": "function:packages/agent/src/harness/tools/edit.ts:prepareEditArguments",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit.ts",
+      "target": "function:packages/agent/src/harness/tools/edit.ts:createEditTool",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit.ts",
+      "target": "function:packages/agent/src/harness/tools/edit.ts:createEditTool",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/file-mutation-queue.ts",
+      "target": "function:packages/agent/src/harness/tools/file-mutation-queue.ts:withFileMutationQueue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/file-mutation-queue.ts",
+      "target": "function:packages/agent/src/harness/tools/file-mutation-queue.ts:withFileMutationQueue",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/image.ts",
+      "target": "function:packages/agent/src/harness/tools/image.ts:detectSupportedImageMimeType",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/image.ts",
+      "target": "function:packages/agent/src/harness/tools/image.ts:detectSupportedImageMimeType",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/image.ts",
+      "target": "function:packages/agent/src/harness/tools/image.ts:encodeBase64",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/image.ts",
+      "target": "function:packages/agent/src/harness/tools/image.ts:encodeBase64",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/image.ts",
+      "target": "function:packages/agent/src/harness/tools/image.ts:isAnimatedPng",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/image.ts",
+      "target": "function:packages/agent/src/harness/tools/image.ts:isBmp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/path-utils.ts",
+      "target": "function:packages/agent/src/harness/tools/path-utils.ts:resolveToolPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/path-utils.ts",
+      "target": "function:packages/agent/src/harness/tools/path-utils.ts:resolveToolPath",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/path-utils.ts",
+      "target": "function:packages/agent/src/harness/tools/path-utils.ts:resolveReadToolPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/path-utils.ts",
+      "target": "function:packages/agent/src/harness/tools/path-utils.ts:resolveReadToolPath",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/telemetry.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/telemetry.ts",
+      "target": "file:packages/telemetry/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/bash.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/bash.ts",
+      "target": "file:packages/agent/src/harness/tools/tool-context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/bash.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/bash.ts",
+      "target": "file:packages/agent/src/harness/utils/output-capture.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/bash.ts",
+      "target": "file:packages/agent/src/harness/utils/truncate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit.ts",
+      "target": "file:packages/agent/src/harness/tools/edit-diff.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit.ts",
+      "target": "file:packages/agent/src/harness/tools/file-mutation-queue.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit.ts",
+      "target": "file:packages/agent/src/harness/tools/path-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit.ts",
+      "target": "file:packages/agent/src/harness/tools/tool-context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/edit.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/file-mutation-queue.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/file-mutation-queue.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/path-utils.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/path-utils.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:packages/agent/src/harness/telemetry.ts:startAiSpan",
+      "target": "function:packages/agent/src/harness/context.ts:getTelemetryContext",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/telemetry.ts:startAiSpan",
+      "target": "function:packages/agent/src/harness/context.ts:withTelemetryContext",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/telemetry.ts:startHarnessSpan",
+      "target": "function:packages/agent/src/harness/context.ts:getTelemetryContext",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/telemetry.ts:startHarnessSpan",
+      "target": "function:packages/agent/src/harness/context.ts:withTelemetryContext",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/bash.ts:createBashTool",
+      "target": "function:packages/agent/src/harness/utils/output-capture.ts:applyShellOutputUpdate",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/bash.ts:createBashTool",
+      "target": "function:packages/agent/src/harness/utils/truncate.ts:formatSize",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/edit.ts:createEditTool",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:applyEditsToNormalizedContent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/edit.ts:createEditTool",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:detectLineEnding",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/edit.ts:createEditTool",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:generateDiffString",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/edit.ts:createEditTool",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:generateUnifiedPatch",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/edit.ts:createEditTool",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:normalizeToLF",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/edit.ts:createEditTool",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:restoreLineEndings",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/edit.ts:createEditTool",
+      "target": "function:packages/agent/src/harness/tools/edit-diff.ts:stripBom",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/edit.ts:createEditTool",
+      "target": "function:packages/agent/src/harness/tools/file-mutation-queue.ts:withFileMutationQueue",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/edit.ts:createEditTool",
+      "target": "function:packages/agent/src/harness/tools/path-utils.ts:resolveToolPath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/file-mutation-queue.ts:withFileMutationQueue",
+      "target": "function:packages/agent/src/harness/types.ts:getOrThrow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/path-utils.ts:resolveToolPath",
+      "target": "function:packages/agent/src/harness/types.ts:getOrThrow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/path-utils.ts:resolveReadToolPath",
+      "target": "function:packages/agent/src/harness/types.ts:getOrThrow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/path-utils.ts:resolveReadToolPath",
+      "target": "function:packages/agent/src/harness/tools/path-utils.ts:resolveToolPath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

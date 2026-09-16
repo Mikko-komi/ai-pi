@@ -1,0 +1,954 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/agent/src/harness/tools/read.ts",
+      "type": "file",
+      "name": "read.ts",
+      "filePath": "packages/agent/src/harness/tools/read.ts",
+      "summary": "createReadTool：读文本（offset/limit + 头部截断）或把受支持图片作为 image 附件返回。",
+      "tags": [
+        "factory",
+        "tool",
+        "read",
+        "文件系统"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/agent/src/harness/tools/tool-context.ts",
+      "type": "file",
+      "name": "tool-context.ts",
+      "filePath": "packages/agent/src/harness/tools/tool-context.ts",
+      "summary": "内置执行工具共享的 ExecutionToolContext，仅要求提供 ExecutionEnv。",
+      "tags": [
+        "type-definition",
+        "tool",
+        "context",
+        "类型定义"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/agent/src/harness/tools/write.ts",
+      "type": "file",
+      "name": "write.ts",
+      "filePath": "packages/agent/src/harness/tools/write.ts",
+      "summary": "createWriteTool：在文件变异队列中创建或覆盖文件，失败时通过 getOrThrow 抛出 FileError。",
+      "tags": [
+        "factory",
+        "tool",
+        "write",
+        "文件系统"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/agent/src/harness/types.ts",
+      "type": "file",
+      "name": "types.ts",
+      "filePath": "packages/agent/src/harness/types.ts",
+      "summary": "Harness 公共类型：Result 助手、Skill/PromptTemplate、FileSystem/ExecutionEnv，以及带稳定 code 的错误类。",
+      "tags": [
+        "type-definition",
+        "error-handling",
+        "filesystem",
+        "result"
+      ],
+      "complexity": "complex",
+      "languageNotes": "文件系统与 exec 约定永不 throw，失败一律编码进 Result。"
+    },
+    {
+      "id": "file:packages/agent/src/harness/utils/adaptive-publisher.ts",
+      "type": "file",
+      "name": "adaptive-publisher.ts",
+      "filePath": "packages/agent/src/harness/utils/adaptive-publisher.ts",
+      "summary": "AdaptivePublisher 只发布最新快照：空闲后首次立即发出，之后按字节量与最小间隔节流。",
+      "tags": [
+        "utility",
+        "rate-limit",
+        "publisher",
+        "流式输出"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/agent/src/harness/utils/output-capture.ts",
+      "type": "file",
+      "name": "output-capture.ts",
+      "filePath": "packages/agent/src/harness/utils/output-capture.ts",
+      "summary": "OutputCapture 维护有界 shell 输出窗口，经 AdaptivePublisher 发布 replace/append/slide 增量。",
+      "tags": [
+        "utility",
+        "shell",
+        "truncation",
+        "流式输出"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/agent/src/harness/utils/shell-output.ts",
+      "type": "file",
+      "name": "shell-output.ts",
+      "filePath": "packages/agent/src/harness/utils/shell-output.ts",
+      "summary": "executeShellWithCapture 兼容层：用 env.exec 收集最终有界输出，并把 sanitizeShellOutput 别名为 sanitizeBinaryOutput。",
+      "tags": [
+        "utility",
+        "shell",
+        "compatibility",
+        "执行"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/read.ts:createReadTool",
+      "type": "function",
+      "name": "createReadTool",
+      "filePath": "packages/agent/src/harness/tools/read.ts",
+      "lineRange": [
+        47,
+        149
+      ],
+      "summary": "创建 read 工具：图片走 MIME/可选 processor，文本按 offset/limit 并做头部截断。",
+      "tags": [
+        "factory",
+        "tool",
+        "read",
+        "image"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/agent/src/harness/tools/write.ts:createWriteTool",
+      "type": "function",
+      "name": "createWriteTool",
+      "filePath": "packages/agent/src/harness/tools/write.ts",
+      "lineRange": [
+        15,
+        44
+      ],
+      "summary": "创建 write 工具：排队后覆盖写入并返回成功文本。",
+      "tags": [
+        "factory",
+        "tool",
+        "write",
+        "filesystem"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/types.ts:ok",
+      "type": "function",
+      "name": "ok",
+      "filePath": "packages/agent/src/harness/types.ts",
+      "lineRange": [
+        12,
+        14
+      ],
+      "summary": "构造成功 Result。",
+      "tags": [
+        "result",
+        "utility",
+        "error-handling",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/types.ts:err",
+      "type": "function",
+      "name": "err",
+      "filePath": "packages/agent/src/harness/types.ts",
+      "lineRange": [
+        17,
+        19
+      ],
+      "summary": "构造失败 Result。",
+      "tags": [
+        "result",
+        "utility",
+        "error-handling",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/types.ts:getOrThrow",
+      "type": "function",
+      "name": "getOrThrow",
+      "filePath": "packages/agent/src/harness/types.ts",
+      "lineRange": [
+        22,
+        25
+      ],
+      "summary": "成功则解包 value，失败则抛出 error；供测试与适配边界使用。",
+      "tags": [
+        "result",
+        "utility",
+        "error-handling",
+        "unwrap"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/types.ts:getOrUndefined",
+      "type": "function",
+      "name": "getOrUndefined",
+      "filePath": "packages/agent/src/harness/types.ts",
+      "lineRange": [
+        28,
+        30
+      ],
+      "summary": "对象成功值解包为 T，失败返回 undefined，避免原语假值问题。",
+      "tags": [
+        "result",
+        "utility",
+        "error-handling",
+        "unwrap"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/types.ts:toError",
+      "type": "function",
+      "name": "toError",
+      "filePath": "packages/agent/src/harness/types.ts",
+      "lineRange": [
+        33,
+        41
+      ],
+      "summary": "把 unknown throw 规范成 Error，供 typed cause 使用。",
+      "tags": [
+        "error-handling",
+        "utility",
+        "normalize",
+        "result"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/agent/src/harness/types.ts:FileError",
+      "type": "class",
+      "name": "FileError",
+      "filePath": "packages/agent/src/harness/types.ts",
+      "lineRange": [
+        173,
+        185
+      ],
+      "summary": "文件系统失败：稳定 FileErrorCode 与可选 addressed path。",
+      "tags": [
+        "error-handling",
+        "filesystem",
+        "class",
+        "result"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/agent/src/harness/types.ts:ExecutionError",
+      "type": "class",
+      "name": "ExecutionError",
+      "filePath": "packages/agent/src/harness/types.ts",
+      "lineRange": [
+        197,
+        206
+      ],
+      "summary": "ExecutionEnv.exec 失败：aborted/timeout/spawn 等稳定 code。",
+      "tags": [
+        "error-handling",
+        "shell",
+        "class",
+        "execution"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/agent/src/harness/types.ts:CompactionError",
+      "type": "class",
+      "name": "CompactionError",
+      "filePath": "packages/agent/src/harness/types.ts",
+      "lineRange": [
+        212,
+        221
+      ],
+      "summary": "compaction 助手错误：aborted 或 summarization_failed。",
+      "tags": [
+        "error-handling",
+        "compaction",
+        "class",
+        "summarization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/agent/src/harness/types.ts:BranchSummaryError",
+      "type": "class",
+      "name": "BranchSummaryError",
+      "filePath": "packages/agent/src/harness/types.ts",
+      "lineRange": [
+        227,
+        236
+      ],
+      "summary": "分支摘要助手错误：aborted 或 summarization_failed。",
+      "tags": [
+        "error-handling",
+        "branch",
+        "class",
+        "summarization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/agent/src/harness/utils/adaptive-publisher.ts:AdaptivePublisher",
+      "type": "class",
+      "name": "AdaptivePublisher",
+      "filePath": "packages/agent/src/harness/utils/adaptive-publisher.ts",
+      "lineRange": [
+        18,
+        87
+      ],
+      "summary": "脏状态折叠为最新快照；按编码字节与最小间隔安排下一次发布。",
+      "tags": [
+        "publisher",
+        "rate-limit",
+        "class",
+        "streaming"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/agent/src/harness/utils/output-capture.ts:OutputCapture",
+      "type": "class",
+      "name": "OutputCapture",
+      "filePath": "packages/agent/src/harness/utils/output-capture.ts",
+      "lineRange": [
+        26,
+        151
+      ],
+      "summary": "解码增量字节，按 head/tail 限额截断，并经 AdaptivePublisher 发布视图。",
+      "tags": [
+        "shell",
+        "capture",
+        "class",
+        "truncation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/agent/src/harness/utils/output-capture.ts:applyShellOutputUpdate",
+      "type": "function",
+      "name": "applyShellOutputUpdate",
+      "filePath": "packages/agent/src/harness/utils/output-capture.ts",
+      "lineRange": [
+        153,
+        167
+      ],
+      "summary": "把 replace/append/slide/metadata 增量应用到当前 ShellOutputView。",
+      "tags": [
+        "shell",
+        "update",
+        "reducer",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/utils/output-capture.ts:updateFrom",
+      "type": "function",
+      "name": "updateFrom",
+      "filePath": "packages/agent/src/harness/utils/output-capture.ts",
+      "lineRange": [
+        169,
+        194
+      ],
+      "summary": "比较前后视图，选择最小增量（append、slide 或整窗 replace）。",
+      "tags": [
+        "shell",
+        "diff",
+        "update",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/utils/output-capture.ts:suffixPrefixOverlap",
+      "type": "function",
+      "name": "suffixPrefixOverlap",
+      "filePath": "packages/agent/src/harness/utils/output-capture.ts",
+      "lineRange": [
+        196,
+        212
+      ],
+      "summary": "计算旧文本后缀与新文本前缀重叠长度，供 slide 更新使用。",
+      "tags": [
+        "shell",
+        "overlap",
+        "algorithm",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/utils/output-capture.ts:sanitizeShellOutput",
+      "type": "function",
+      "name": "sanitizeShellOutput",
+      "filePath": "packages/agent/src/harness/utils/output-capture.ts",
+      "lineRange": [
+        214,
+        216
+      ],
+      "summary": "去掉控制字符与 Unicode 特殊标记，避免污染终端/模型上下文。",
+      "tags": [
+        "shell",
+        "sanitize",
+        "security",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/utils/shell-output.ts:executeShellWithCapture",
+      "type": "function",
+      "name": "executeShellWithCapture",
+      "filePath": "packages/agent/src/harness/utils/shell-output.ts",
+      "lineRange": [
+        48,
+        110
+      ],
+      "summary": "兼容收集器：执行命令、合并有界输出，取消或可选把 ExecutionError 编进成功结果。",
+      "tags": [
+        "shell",
+        "execution",
+        "compatibility",
+        "result"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/agent/src/harness/tools/read.ts",
+      "target": "function:packages/agent/src/harness/tools/read.ts:createReadTool",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/read.ts",
+      "target": "function:packages/agent/src/harness/tools/read.ts:createReadTool",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/write.ts",
+      "target": "function:packages/agent/src/harness/tools/write.ts:createWriteTool",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/write.ts",
+      "target": "function:packages/agent/src/harness/tools/write.ts:createWriteTool",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "function:packages/agent/src/harness/types.ts:ok",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "function:packages/agent/src/harness/types.ts:ok",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "function:packages/agent/src/harness/types.ts:err",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "function:packages/agent/src/harness/types.ts:err",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "function:packages/agent/src/harness/types.ts:getOrThrow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "function:packages/agent/src/harness/types.ts:getOrThrow",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "function:packages/agent/src/harness/types.ts:getOrUndefined",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "function:packages/agent/src/harness/types.ts:getOrUndefined",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "function:packages/agent/src/harness/types.ts:toError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "function:packages/agent/src/harness/types.ts:toError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "class:packages/agent/src/harness/types.ts:FileError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "class:packages/agent/src/harness/types.ts:FileError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "class:packages/agent/src/harness/types.ts:ExecutionError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "class:packages/agent/src/harness/types.ts:ExecutionError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "class:packages/agent/src/harness/types.ts:CompactionError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "class:packages/agent/src/harness/types.ts:CompactionError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "class:packages/agent/src/harness/types.ts:BranchSummaryError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "class:packages/agent/src/harness/types.ts:BranchSummaryError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/adaptive-publisher.ts",
+      "target": "class:packages/agent/src/harness/utils/adaptive-publisher.ts:AdaptivePublisher",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/adaptive-publisher.ts",
+      "target": "class:packages/agent/src/harness/utils/adaptive-publisher.ts:AdaptivePublisher",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/output-capture.ts",
+      "target": "class:packages/agent/src/harness/utils/output-capture.ts:OutputCapture",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/output-capture.ts",
+      "target": "class:packages/agent/src/harness/utils/output-capture.ts:OutputCapture",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/output-capture.ts",
+      "target": "function:packages/agent/src/harness/utils/output-capture.ts:applyShellOutputUpdate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/output-capture.ts",
+      "target": "function:packages/agent/src/harness/utils/output-capture.ts:applyShellOutputUpdate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/output-capture.ts",
+      "target": "function:packages/agent/src/harness/utils/output-capture.ts:updateFrom",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/output-capture.ts",
+      "target": "function:packages/agent/src/harness/utils/output-capture.ts:suffixPrefixOverlap",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/output-capture.ts",
+      "target": "function:packages/agent/src/harness/utils/output-capture.ts:sanitizeShellOutput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/output-capture.ts",
+      "target": "function:packages/agent/src/harness/utils/output-capture.ts:sanitizeShellOutput",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/shell-output.ts",
+      "target": "function:packages/agent/src/harness/utils/shell-output.ts:executeShellWithCapture",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/shell-output.ts",
+      "target": "function:packages/agent/src/harness/utils/shell-output.ts:executeShellWithCapture",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/read.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/read.ts",
+      "target": "file:packages/agent/src/harness/tools/image.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/read.ts",
+      "target": "file:packages/agent/src/harness/tools/path-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/read.ts",
+      "target": "file:packages/agent/src/harness/tools/tool-context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/read.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/read.ts",
+      "target": "file:packages/agent/src/harness/utils/truncate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/read.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/tool-context.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/write.ts",
+      "target": "file:packages/agent/src/harness/tools/file-mutation-queue.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/write.ts",
+      "target": "file:packages/agent/src/harness/tools/path-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/write.ts",
+      "target": "file:packages/agent/src/harness/tools/tool-context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/tools/write.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "file:packages/agent/src/harness/utils/truncate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "file:packages/agent/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/types.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/output-capture.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/output-capture.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/output-capture.ts",
+      "target": "file:packages/agent/src/harness/utils/adaptive-publisher.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/output-capture.ts",
+      "target": "file:packages/agent/src/harness/utils/truncate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/shell-output.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/shell-output.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/shell-output.ts",
+      "target": "file:packages/agent/src/harness/utils/output-capture.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/utils/shell-output.ts",
+      "target": "file:packages/agent/src/harness/utils/truncate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/write.ts:createWriteTool",
+      "target": "function:packages/agent/src/harness/types.ts:getOrThrow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/write.ts:createWriteTool",
+      "target": "function:packages/agent/src/harness/tools/file-mutation-queue.ts:withFileMutationQueue",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/write.ts:createWriteTool",
+      "target": "function:packages/agent/src/harness/tools/path-utils.ts:resolveToolPath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/read.ts:createReadTool",
+      "target": "function:packages/agent/src/harness/tools/path-utils.ts:resolveReadToolPath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/read.ts:createReadTool",
+      "target": "function:packages/agent/src/harness/types.ts:getOrThrow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/read.ts:createReadTool",
+      "target": "function:packages/agent/src/harness/tools/image.ts:detectSupportedImageMimeType",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/read.ts:createReadTool",
+      "target": "function:packages/agent/src/harness/tools/image.ts:encodeBase64",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/read.ts:createReadTool",
+      "target": "function:packages/agent/src/harness/utils/truncate.ts:formatSize",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/tools/read.ts:createReadTool",
+      "target": "function:packages/agent/src/harness/utils/truncate.ts:truncateHead",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/utils/shell-output.ts:executeShellWithCapture",
+      "target": "function:packages/agent/src/harness/utils/output-capture.ts:applyShellOutputUpdate",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/utils/shell-output.ts:executeShellWithCapture",
+      "target": "function:packages/agent/src/harness/utils/truncate.ts:truncateTail",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/utils/shell-output.ts:executeShellWithCapture",
+      "target": "function:packages/agent/src/harness/types.ts:ok",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/utils/shell-output.ts:executeShellWithCapture",
+      "target": "function:packages/agent/src/harness/types.ts:err",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/agent/src/harness/utils/output-capture.ts:OutputCapture",
+      "target": "function:packages/agent/src/harness/utils/truncate.ts:truncateHead",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/agent/src/harness/utils/output-capture.ts:OutputCapture",
+      "target": "function:packages/agent/src/harness/utils/truncate.ts:truncateTail",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/agent/src/harness/utils/output-capture.ts:OutputCapture",
+      "target": "function:packages/agent/src/harness/utils/truncate.ts:utf8ByteLength",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

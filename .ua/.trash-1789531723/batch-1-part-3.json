@@ -1,0 +1,111 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/client/src/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/client/src/index.ts",
+      "summary": "pi-client 包公共 barrel：再导出 Client、错误类型与连接/订阅相关类型。",
+      "tags": [
+        "barrel",
+        "入口点",
+        "client"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/client/src/promise.ts",
+      "type": "file",
+      "name": "promise.ts",
+      "filePath": "packages/client/src/promise.ts",
+      "summary": "提供 createPromiseResolvers，在 TypeScript lib 升到 ES2024 前替代 Promise.withResolvers。",
+      "tags": [
+        "utility",
+        "promise",
+        "polyfill"
+      ],
+      "complexity": "simple",
+      "languageNotes": "注释标明待基线升级后删除。"
+    },
+    {
+      "id": "function:packages/client/src/promise.ts:createPromiseResolvers",
+      "type": "function",
+      "name": "createPromiseResolvers",
+      "filePath": "packages/client/src/promise.ts",
+      "lineRange": [
+        8,
+        16
+      ],
+      "summary": "返回 {promise, resolve, reject}，供握手与 request 在类字段上挂起。",
+      "tags": [
+        "utility",
+        "promise",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/client/src/transport.ts",
+      "type": "file",
+      "name": "transport.ts",
+      "filePath": "packages/client/src/transport.ts",
+      "summary": "定义 ByteTransport / ByteTransportFactory / ByteTransportHandlers：有序字节块发送与单一终态回调。",
+      "tags": [
+        "type-definition",
+        "transport",
+        "interface"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/client/src/types.ts",
+      "type": "file",
+      "name": "types.ts",
+      "filePath": "packages/client/src/types.ts",
+      "summary": "客户端公开类型：ConnectionState、ClientOptions、ServiceSubscription 与各类 listener 签名。",
+      "tags": [
+        "type-definition",
+        "client",
+        "service"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/client/src/types.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/client/src/types.ts",
+      "target": "file:packages/client/src/transport.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/client/src/types.ts",
+      "target": "file:packages/protocol/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/client/src/promise.ts",
+      "target": "function:packages/client/src/promise.ts:createPromiseResolvers",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/client/src/promise.ts",
+      "target": "function:packages/client/src/promise.ts:createPromiseResolvers",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

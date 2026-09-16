@@ -1,0 +1,428 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 4,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 4,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 4
+    }
+  },
+  "results": [
+    {
+      "path": "packages/coding-agent/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 718,
+      "nonEmptyLines": 515,
+      "sections": [
+        {
+          "heading": "Share your OSS coding agent sessions",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Table of Contents",
+          "level": 2,
+          "line": 37
+        },
+        {
+          "heading": "Quick Start",
+          "level": 2,
+          "line": 63
+        },
+        {
+          "heading": "Providers & Models",
+          "level": 2,
+          "line": 97
+        },
+        {
+          "heading": "Interactive Mode",
+          "level": 2,
+          "line": 147
+        },
+        {
+          "heading": "Editor",
+          "level": 3,
+          "line": 160
+        },
+        {
+          "heading": "Commands",
+          "level": 3,
+          "line": 173
+        },
+        {
+          "heading": "Keyboard Shortcuts",
+          "level": 3,
+          "line": 203
+        },
+        {
+          "heading": "Message Queue",
+          "level": 3,
+          "line": 222
+        },
+        {
+          "heading": "Sessions",
+          "level": 2,
+          "line": 237
+        },
+        {
+          "heading": "Management",
+          "level": 3,
+          "line": 241
+        },
+        {
+          "heading": "Branching",
+          "level": 3,
+          "line": 256
+        },
+        {
+          "heading": "Compaction",
+          "level": 3,
+          "line": 273
+        },
+        {
+          "heading": "Settings",
+          "level": 2,
+          "line": 285
+        },
+        {
+          "heading": "Project Trust",
+          "level": 3,
+          "line": 296
+        },
+        {
+          "heading": "Telemetry and update checks",
+          "level": 3,
+          "line": 310
+        },
+        {
+          "heading": "Context Files",
+          "level": 2,
+          "line": 321
+        },
+        {
+          "heading": "System Prompt",
+          "level": 3,
+          "line": 334
+        },
+        {
+          "heading": "Customization",
+          "level": 2,
+          "line": 340
+        },
+        {
+          "heading": "Prompt Templates",
+          "level": 3,
+          "line": 342
+        },
+        {
+          "heading": "Skills",
+          "level": 3,
+          "line": 354
+        },
+        {
+          "heading": "Extensions",
+          "level": 3,
+          "line": 370
+        },
+        {
+          "heading": "Themes",
+          "level": 3,
+          "line": 402
+        },
+        {
+          "heading": "Pi Packages",
+          "level": 3,
+          "line": 408
+        },
+        {
+          "heading": "Programmatic Usage",
+          "level": 2,
+          "line": 461
+        },
+        {
+          "heading": "SDK",
+          "level": 3,
+          "line": 463
+        },
+        {
+          "heading": "RPC Mode",
+          "level": 3,
+          "line": 481
+        },
+        {
+          "heading": "Philosophy",
+          "level": 2,
+          "line": 495
+        },
+        {
+          "heading": "CLI Reference",
+          "level": 2,
+          "line": 515
+        },
+        {
+          "heading": "Package Commands",
+          "level": 3,
+          "line": 521
+        },
+        {
+          "heading": "Modes",
+          "level": 3,
+          "line": 540
+        },
+        {
+          "heading": "Model Options",
+          "level": 3,
+          "line": 556
+        },
+        {
+          "heading": "Session Options",
+          "level": 3,
+          "line": 567
+        },
+        {
+          "heading": "Tool Options",
+          "level": 3,
+          "line": 579
+        },
+        {
+          "heading": "Resource Options",
+          "level": 3,
+          "line": 590
+        },
+        {
+          "heading": "Other Options",
+          "level": 3,
+          "line": 606
+        },
+        {
+          "heading": "File Arguments",
+          "level": 3,
+          "line": 621
+        },
+        {
+          "heading": "Examples",
+          "level": 3,
+          "line": 631
+        },
+        {
+          "heading": "Environment Variables",
+          "level": 3,
+          "line": 671
+        },
+        {
+          "heading": "Contributing & Development",
+          "level": 2,
+          "line": 700
+        },
+        {
+          "heading": "License",
+          "level": 2,
+          "line": 704
+        },
+        {
+          "heading": "See Also",
+          "level": 2,
+          "line": 708
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 42
+      }
+    },
+    {
+      "path": "packages/coding-agent/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 107,
+      "nonEmptyLines": 107,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "description",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "type",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "piConfig",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "bin",
+          "level": 1,
+          "line": 9
+        },
+        {
+          "heading": "main",
+          "level": 1,
+          "line": 12
+        },
+        {
+          "heading": "types",
+          "level": 1,
+          "line": 13
+        },
+        {
+          "heading": "exports",
+          "level": 1,
+          "line": 14
+        },
+        {
+          "heading": "files",
+          "level": 1,
+          "line": 29
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 40
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 51
+        },
+        {
+          "heading": "overrides",
+          "level": 1,
+          "line": 72
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 75
+        },
+        {
+          "heading": "keywords",
+          "level": 1,
+          "line": 89
+        },
+        {
+          "heading": "author",
+          "level": 1,
+          "line": 97
+        },
+        {
+          "heading": "license",
+          "level": 1,
+          "line": 98
+        },
+        {
+          "heading": "repository",
+          "level": 1,
+          "line": 99
+        },
+        {
+          "heading": "engines",
+          "level": 1,
+          "line": 104
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 19
+      }
+    },
+    {
+      "path": "packages/coding-agent/tsconfig.build.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 20,
+      "nonEmptyLines": 20,
+      "sections": [
+        {
+          "heading": "extends",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 18
+        },
+        {
+          "heading": "exclude",
+          "level": 1,
+          "line": 19
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "packages/coding-agent/tsconfig.examples.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 16,
+      "nonEmptyLines": 16,
+      "sections": [
+        {
+          "heading": "extends",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 14
+        },
+        {
+          "heading": "exclude",
+          "level": 1,
+          "line": 15
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    }
+  ]
+}

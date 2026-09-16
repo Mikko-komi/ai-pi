@@ -1,0 +1,431 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/utils/exif-orientation.ts",
+      "type": "file",
+      "name": "exif-orientation.ts",
+      "filePath": "packages/coding-agent/src/utils/exif-orientation.ts",
+      "summary": "从 JPEG/WebP EXIF 读取 Orientation，并用 Photon 做翻转/旋转以纠正显示方向。",
+      "tags": [
+        "image",
+        "exif",
+        "orientation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/exif-orientation.ts:readOrientationFromTiff",
+      "type": "function",
+      "name": "readOrientationFromTiff",
+      "filePath": "packages/coding-agent/src/utils/exif-orientation.ts",
+      "lineRange": [
+        5,
+        37
+      ],
+      "summary": "解析 TIFF IFD 中的 Orientation tag（大小端）。",
+      "tags": [
+        "exif",
+        "binary",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/exif-orientation.ts:findJpegTiffOffset",
+      "type": "function",
+      "name": "findJpegTiffOffset",
+      "filePath": "packages/coding-agent/src/utils/exif-orientation.ts",
+      "lineRange": [
+        39,
+        62
+      ],
+      "summary": "在 JPEG APP1/EXIF 段中定位 TIFF 头偏移。",
+      "tags": [
+        "exif",
+        "jpeg",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/exif-orientation.ts:findWebpTiffOffset",
+      "type": "function",
+      "name": "findWebpTiffOffset",
+      "filePath": "packages/coding-agent/src/utils/exif-orientation.ts",
+      "lineRange": [
+        64,
+        84
+      ],
+      "summary": "在 WebP EXIF chunk 中定位 TIFF 头。",
+      "tags": [
+        "exif",
+        "webp",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/exif-orientation.ts:hasExifHeader",
+      "type": "function",
+      "name": "hasExifHeader",
+      "filePath": "packages/coding-agent/src/utils/exif-orientation.ts",
+      "lineRange": [
+        86,
+        95
+      ],
+      "summary": "检查给定偏移是否为 Exif\\0\\0 头。",
+      "tags": [
+        "exif",
+        "validation",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/exif-orientation.ts:getExifOrientation",
+      "type": "function",
+      "name": "getExifOrientation",
+      "filePath": "packages/coding-agent/src/utils/exif-orientation.ts",
+      "lineRange": [
+        97,
+        121
+      ],
+      "summary": "按 JPEG/WebP 容器找到 TIFF 并读取 Orientation。",
+      "tags": [
+        "exif",
+        "orientation",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/exif-orientation.ts:rotate90",
+      "type": "function",
+      "name": "rotate90",
+      "filePath": "packages/coding-agent/src/utils/exif-orientation.ts",
+      "lineRange": [
+        125,
+        143
+      ],
+      "summary": "用 Photon 原始像素做 90° 旋转。",
+      "tags": [
+        "image",
+        "transform",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/exif-orientation.ts:applyExifOrientation",
+      "type": "function",
+      "name": "applyExifOrientation",
+      "filePath": "packages/coding-agent/src/utils/exif-orientation.ts",
+      "lineRange": [
+        146,
+        182
+      ],
+      "summary": "按 Orientation 1–8 组合 fliph/flipv/rotate90，使像素与显示方向一致。",
+      "tags": [
+        "image",
+        "exif",
+        "transform"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/utils/image-convert.ts",
+      "type": "file",
+      "name": "image-convert.ts",
+      "filePath": "packages/coding-agent/src/utils/image-convert.ts",
+      "summary": "用 Photon 把任意支持格式字节/base64 转为 PNG，并先应用 EXIF 方向。",
+      "tags": [
+        "image",
+        "conversion",
+        "png"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/image-convert.ts:convertImageBytesToPng",
+      "type": "function",
+      "name": "convertImageBytesToPng",
+      "filePath": "packages/coding-agent/src/utils/image-convert.ts",
+      "lineRange": [
+        4,
+        24
+      ],
+      "summary": "loadPhoton 解码、applyExifOrientation 后导出 PNG 字节。",
+      "tags": [
+        "image",
+        "conversion",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/image-convert.ts:convertToPng",
+      "type": "function",
+      "name": "convertToPng",
+      "filePath": "packages/coding-agent/src/utils/image-convert.ts",
+      "lineRange": [
+        30,
+        49
+      ],
+      "summary": "base64 + mime 入口，内部调用 convertImageBytesToPng 再编码回 base64。",
+      "tags": [
+        "image",
+        "conversion",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/utils/image-process.ts",
+      "type": "file",
+      "name": "image-process.ts",
+      "filePath": "packages/coding-agent/src/utils/image-process.ts",
+      "summary": "统一图片预处理：规范化 MIME、非 PNG 转 PNG、按选项 resize，并收集转换/尺寸 hint。",
+      "tags": [
+        "image",
+        "preprocessing",
+        "resize"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/image-process.ts:normalizeSupportedImageMimeType",
+      "type": "function",
+      "name": "normalizeSupportedImageMimeType",
+      "filePath": "packages/coding-agent/src/utils/image-process.ts",
+      "lineRange": [
+        33,
+        47
+      ],
+      "summary": "去掉参数并把别名映射到支持的 image MIME。",
+      "tags": [
+        "mime",
+        "normalization",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/image-process.ts:normalizeImage",
+      "type": "function",
+      "name": "normalizeImage",
+      "filePath": "packages/coding-agent/src/utils/image-process.ts",
+      "lineRange": [
+        49,
+        65
+      ],
+      "summary": "校验 MIME；非 PNG 则 convertImageBytesToPng。",
+      "tags": [
+        "image",
+        "normalization",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/image-process.ts:processImage",
+      "type": "function",
+      "name": "processImage",
+      "filePath": "packages/coding-agent/src/utils/image-process.ts",
+      "lineRange": [
+        72,
+        119
+      ],
+      "summary": "规范化后按需 resizeImage，返回 ok/data/mimeType/hints，失败则带错误消息。",
+      "tags": [
+        "image",
+        "preprocessing",
+        "utility"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/utils/exif-orientation.ts",
+      "target": "file:packages/coding-agent/src/utils/photon.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/image-convert.ts",
+      "target": "file:packages/coding-agent/src/utils/exif-orientation.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/image-convert.ts",
+      "target": "file:packages/coding-agent/src/utils/photon.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/image-process.ts",
+      "target": "file:packages/coding-agent/src/utils/image-convert.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/image-process.ts",
+      "target": "file:packages/coding-agent/src/utils/image-resize.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/exif-orientation.ts",
+      "target": "function:packages/coding-agent/src/utils/exif-orientation.ts:readOrientationFromTiff",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/exif-orientation.ts",
+      "target": "function:packages/coding-agent/src/utils/exif-orientation.ts:findJpegTiffOffset",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/exif-orientation.ts",
+      "target": "function:packages/coding-agent/src/utils/exif-orientation.ts:findWebpTiffOffset",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/exif-orientation.ts",
+      "target": "function:packages/coding-agent/src/utils/exif-orientation.ts:hasExifHeader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/exif-orientation.ts",
+      "target": "function:packages/coding-agent/src/utils/exif-orientation.ts:getExifOrientation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/exif-orientation.ts",
+      "target": "function:packages/coding-agent/src/utils/exif-orientation.ts:rotate90",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/exif-orientation.ts",
+      "target": "function:packages/coding-agent/src/utils/exif-orientation.ts:applyExifOrientation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/image-convert.ts",
+      "target": "function:packages/coding-agent/src/utils/image-convert.ts:convertImageBytesToPng",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/image-convert.ts",
+      "target": "function:packages/coding-agent/src/utils/image-convert.ts:convertToPng",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/image-process.ts",
+      "target": "function:packages/coding-agent/src/utils/image-process.ts:normalizeSupportedImageMimeType",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/image-process.ts",
+      "target": "function:packages/coding-agent/src/utils/image-process.ts:normalizeImage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/image-process.ts",
+      "target": "function:packages/coding-agent/src/utils/image-process.ts:processImage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/exif-orientation.ts",
+      "target": "function:packages/coding-agent/src/utils/exif-orientation.ts:applyExifOrientation",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/image-convert.ts",
+      "target": "function:packages/coding-agent/src/utils/image-convert.ts:convertImageBytesToPng",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/image-convert.ts",
+      "target": "function:packages/coding-agent/src/utils/image-convert.ts:convertToPng",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/image-process.ts",
+      "target": "function:packages/coding-agent/src/utils/image-process.ts:processImage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/image-convert.ts:convertImageBytesToPng",
+      "target": "function:packages/coding-agent/src/utils/photon.ts:loadPhoton",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/image-convert.ts:convertImageBytesToPng",
+      "target": "function:packages/coding-agent/src/utils/exif-orientation.ts:applyExifOrientation",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/image-process.ts:normalizeImage",
+      "target": "function:packages/coding-agent/src/utils/image-convert.ts:convertImageBytesToPng",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/image-process.ts:processImage",
+      "target": "function:packages/coding-agent/src/utils/image-resize.ts:resizeImage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/image-process.ts:processImage",
+      "target": "function:packages/coding-agent/src/utils/image-resize.ts:formatDimensionNote",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

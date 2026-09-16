@@ -1,0 +1,1039 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "type": "file",
+      "name": "render-utils.ts",
+      "filePath": "packages/coding-agent/src/core/tools/render-utils.ts",
+      "summary": "工具 TUI 渲染共享辅助：家目录缩短、OSC-8 超链接、参数校验文案，以及文本/图片输出规范化。",
+      "tags": [
+        "utility",
+        "tool-renderer",
+        "tui",
+        "path"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/render-utils.ts:shortenPath",
+      "type": "function",
+      "name": "shortenPath",
+      "filePath": "packages/coding-agent/src/core/tools/render-utils.ts",
+      "lineRange": [
+        10,
+        17
+      ],
+      "summary": "把家目录前缀换成 ~；非字符串返回空串。",
+      "tags": [
+        "path",
+        "utility",
+        "display"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/render-utils.ts:linkPath",
+      "type": "function",
+      "name": "linkPath",
+      "filePath": "packages/coding-agent/src/core/tools/render-utils.ts",
+      "lineRange": [
+        19,
+        23
+      ],
+      "summary": "终端支持 OSC-8 时把已样式文本链到 file:// URL。",
+      "tags": [
+        "path",
+        "tui",
+        "hyperlink"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/render-utils.ts:str",
+      "type": "function",
+      "name": "str",
+      "filePath": "packages/coding-agent/src/core/tools/render-utils.ts",
+      "lineRange": [
+        25,
+        29
+      ],
+      "summary": "把 unknown 收成 string：非字符串非空返回 null，便于标记非法参数。",
+      "tags": [
+        "validation",
+        "utility",
+        "type-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/render-utils.ts:replaceTabs",
+      "type": "function",
+      "name": "replaceTabs",
+      "filePath": "packages/coding-agent/src/core/tools/render-utils.ts",
+      "lineRange": [
+        31,
+        33
+      ],
+      "summary": "把制表符替换为三个空格，便于等宽渲染。",
+      "tags": [
+        "display",
+        "utility",
+        "formatting"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/render-utils.ts:normalizeDisplayText",
+      "type": "function",
+      "name": "normalizeDisplayText",
+      "filePath": "packages/coding-agent/src/core/tools/render-utils.ts",
+      "lineRange": [
+        35,
+        37
+      ],
+      "summary": "去掉 CR，统一为 LF 显示文本。",
+      "tags": [
+        "display",
+        "utility",
+        "formatting"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/render-utils.ts:getTextOutput",
+      "type": "function",
+      "name": "getTextOutput",
+      "filePath": "packages/coding-agent/src/core/tools/render-utils.ts",
+      "lineRange": [
+        39,
+        64
+      ],
+      "summary": "拼接 tool result 文本块，剥离 ANSI/二进制；无图像能力时用 imageFallback。",
+      "tags": [
+        "tool-renderer",
+        "display",
+        "image"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/render-utils.ts:invalidArgText",
+      "type": "function",
+      "name": "invalidArgText",
+      "filePath": "packages/coding-agent/src/core/tools/render-utils.ts",
+      "lineRange": [
+        71,
+        73
+      ],
+      "summary": "返回 theme 着色的 `[invalid arg]` 占位。",
+      "tags": [
+        "validation",
+        "theme",
+        "display"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/render-utils.ts:renderToolPath",
+      "type": "function",
+      "name": "renderToolPath",
+      "filePath": "packages/coding-agent/src/core/tools/render-utils.ts",
+      "lineRange": [
+        75,
+        85
+      ],
+      "summary": "校验路径后 shorten + 着色 + 可选超链接；null 显示 invalid arg。",
+      "tags": [
+        "path",
+        "tool-renderer",
+        "display"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/tools/renderers/bash.ts",
+      "type": "file",
+      "name": "bash.ts",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/bash.ts",
+      "summary": "bash/powershell 的纯展示 renderer：命令行、预览截断、耗时与更新节流；不加载执行路径或 typebox schema。",
+      "tags": [
+        "tool-renderer",
+        "bash",
+        "tui",
+        "component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/bash.ts:rebuildBashResultRenderComponent",
+      "type": "function",
+      "name": "rebuildBashResultRenderComponent",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/bash.ts",
+      "lineRange": [
+        42,
+        122
+      ],
+      "summary": "重建 bash 结果 Container：着色输出、折叠预览、截断提示与耗时页脚。",
+      "tags": [
+        "bash",
+        "tool-renderer",
+        "component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/bash.ts:createShellRenderers",
+      "type": "function",
+      "name": "createShellRenderers",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/bash.ts",
+      "lineRange": [
+        125,
+        163
+      ],
+      "summary": "为 bash/powershell 生成共享 renderer，仅 prompt 不同；结果更新按秒 invalidate。",
+      "tags": [
+        "bash",
+        "factory",
+        "tool-renderer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "type": "file",
+      "name": "edit.ts",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "summary": "edit 工具的调用预览与结果 diff 渲染，异步 computeEditsDiff 并按错误/pending 切换 header 背景。",
+      "tags": [
+        "tool-renderer",
+        "edit",
+        "diff",
+        "tui"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/edit.ts:getEditCallRenderComponent",
+      "type": "function",
+      "name": "getEditCallRenderComponent",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "lineRange": [
+        46,
+        58
+      ],
+      "summary": "复用 last Box 作为 EditCallRenderComponent，否则新建并写入 state。",
+      "tags": [
+        "edit",
+        "component",
+        "tui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/edit.ts:getRenderablePreviewInput",
+      "type": "function",
+      "name": "getRenderablePreviewInput",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "lineRange": [
+        59,
+        82
+      ],
+      "summary": "从 args 抽出 path 与 edits（兼容 file_path/oldText/newText），非法结构返回 undefined。",
+      "tags": [
+        "edit",
+        "validation",
+        "diff"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/edit.ts:formatEditResult",
+      "type": "function",
+      "name": "formatEditResult",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "lineRange": [
+        87,
+        114
+      ],
+      "summary": "错误时显示文本；成功则用 renderDiff 展示最终 diff。",
+      "tags": [
+        "edit",
+        "diff",
+        "display"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/edit.ts:getEditHeaderBg",
+      "type": "function",
+      "name": "getEditHeaderBg",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "lineRange": [
+        115,
+        130
+      ],
+      "summary": "按 preview 错误/pending/成功选择 header 背景色。",
+      "tags": [
+        "edit",
+        "theme",
+        "display"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/edit.ts:buildEditCallComponent",
+      "type": "function",
+      "name": "buildEditCallComponent",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "lineRange": [
+        131,
+        150
+      ],
+      "summary": "清空并填充 edit 调用组件：路径标题与可选 diff 预览。",
+      "tags": [
+        "edit",
+        "component",
+        "diff"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/edit.ts:setEditPreview",
+      "type": "function",
+      "name": "setEditPreview",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "lineRange": [
+        151,
+        169
+      ],
+      "summary": "在 argsKey 未变时写入 preview，避免过期异步 diff 覆盖新调用。",
+      "tags": [
+        "edit",
+        "diff",
+        "async"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/tools/renderers/find.ts",
+      "type": "file",
+      "name": "find.ts",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/find.ts",
+      "summary": "find 工具的调用/结果 TUI 呈现：pattern、path、limit，以及折叠行数与截断提示。",
+      "tags": [
+        "tool-renderer",
+        "find",
+        "tui",
+        "component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/find.ts:formatFindCall",
+      "type": "function",
+      "name": "formatFindCall",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/find.ts",
+      "lineRange": [
+        17,
+        32
+      ],
+      "summary": "着色渲染 `find <pattern> in <path>`，可选 limit。",
+      "tags": [
+        "find",
+        "display",
+        "tool-renderer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/find.ts:formatFindResult",
+      "type": "function",
+      "name": "formatFindResult",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/find.ts",
+      "lineRange": [
+        33,
+        64
+      ],
+      "summary": "折叠展示匹配路径行，附加 expand hint 与截断/体积警告。",
+      "tags": [
+        "find",
+        "display",
+        "truncate"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/tools/renderers/grep.ts",
+      "type": "file",
+      "name": "grep.ts",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/grep.ts",
+      "summary": "grep 工具的调用/结果 TUI 呈现：正则 pattern、path、glob/limit，以及折叠与截断提示。",
+      "tags": [
+        "tool-renderer",
+        "grep",
+        "tui",
+        "component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/grep.ts:formatGrepCall",
+      "type": "function",
+      "name": "formatGrepCall",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/grep.ts",
+      "lineRange": [
+        17,
+        35
+      ],
+      "summary": "着色渲染 `grep /pattern/ in <path>`，附加 glob 与 limit。",
+      "tags": [
+        "grep",
+        "display",
+        "tool-renderer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/renderers/grep.ts:formatGrepResult",
+      "type": "function",
+      "name": "formatGrepResult",
+      "filePath": "packages/coding-agent/src/core/tools/renderers/grep.ts",
+      "lineRange": [
+        36,
+        69
+      ],
+      "summary": "折叠展示匹配行，附加 expand hint 与行长/体积截断警告。",
+      "tags": [
+        "grep",
+        "display",
+        "truncate"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "file:packages/coding-agent/src/utils/ansi.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "file:packages/coding-agent/src/utils/paths.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "file:packages/coding-agent/src/utils/shell.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/bash.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/bash.ts",
+      "target": "file:packages/coding-agent/src/core/tools/bash.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/bash.ts",
+      "target": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/bash.ts",
+      "target": "file:packages/coding-agent/src/core/tools/truncate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/bash.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/bash.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/visual-truncate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/bash.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/bash.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "target": "file:packages/coding-agent/src/core/tools/edit-diff.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "target": "file:packages/coding-agent/src/core/tools/edit.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "target": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/diff.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/find.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/find.ts",
+      "target": "file:packages/coding-agent/src/core/tools/find.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/find.ts",
+      "target": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/find.ts",
+      "target": "file:packages/coding-agent/src/core/tools/truncate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/find.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/find.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/find.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/grep.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/grep.ts",
+      "target": "file:packages/coding-agent/src/core/tools/grep.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/grep.ts",
+      "target": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/grep.ts",
+      "target": "file:packages/coding-agent/src/core/tools/truncate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/grep.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/grep.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/grep.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:shortenPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:shortenPath",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:linkPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:linkPath",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:str",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:str",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:replaceTabs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:replaceTabs",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:normalizeDisplayText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:normalizeDisplayText",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:getTextOutput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:getTextOutput",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:invalidArgText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:invalidArgText",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:renderToolPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:renderToolPath",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/bash.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/bash.ts:rebuildBashResultRenderComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/bash.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/bash.ts:createShellRenderers",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/bash.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/bash.ts:createShellRenderers",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/edit.ts:getEditCallRenderComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/edit.ts:getRenderablePreviewInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/edit.ts:formatEditResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/edit.ts:getEditHeaderBg",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/edit.ts:buildEditCallComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/edit.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/edit.ts:setEditPreview",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/find.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/find.ts:formatFindCall",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/find.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/find.ts:formatFindResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/grep.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/grep.ts:formatGrepCall",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/renderers/grep.ts",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/grep.ts:formatGrepResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/render-utils.ts:renderToolPath",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:invalidArgText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/render-utils.ts:renderToolPath",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:linkPath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/render-utils.ts:renderToolPath",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:shortenPath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/bash.ts:rebuildBashResultRenderComponent",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:getTextOutput",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/bash.ts:createShellRenderers",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/bash.ts:rebuildBashResultRenderComponent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/edit.ts:formatEditResult",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:str",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/edit.ts:buildEditCallComponent",
+      "target": "function:packages/coding-agent/src/core/tools/renderers/edit.ts:getEditHeaderBg",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/find.ts:formatFindCall",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:shortenPath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/find.ts:formatFindCall",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:invalidArgText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/find.ts:formatFindResult",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:getTextOutput",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/grep.ts:formatGrepCall",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:shortenPath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/grep.ts:formatGrepCall",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:invalidArgText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/grep.ts:formatGrepResult",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:getTextOutput",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/render-utils.ts:linkPath",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:resolvePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/render-utils.ts:getTextOutput",
+      "target": "function:packages/coding-agent/src/utils/ansi.ts:stripAnsi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/render-utils.ts:getTextOutput",
+      "target": "function:packages/coding-agent/src/utils/shell.ts:sanitizeBinaryOutput",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/bash.ts:rebuildBashResultRenderComponent",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/visual-truncate.ts:truncateToVisualLines",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/bash.ts:rebuildBashResultRenderComponent",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyHint",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/bash.ts:rebuildBashResultRenderComponent",
+      "target": "function:packages/coding-agent/src/core/tools/truncate.ts:formatSize",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/edit.ts:formatEditResult",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/diff.ts:renderDiff",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/edit.ts:buildEditCallComponent",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/diff.ts:renderDiff",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/find.ts:formatFindResult",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyHint",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/find.ts:formatFindResult",
+      "target": "function:packages/coding-agent/src/core/tools/truncate.ts:formatSize",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/grep.ts:formatGrepResult",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyHint",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/renderers/grep.ts:formatGrepResult",
+      "target": "function:packages/coding-agent/src/core/tools/truncate.ts:formatSize",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

@@ -1,0 +1,1473 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/agent/src/harness/session/testing/instrumented-storage.ts",
+      "type": "file",
+      "name": "instrumented-storage.ts",
+      "filePath": "packages/agent/src/harness/session/testing/instrumented-storage.ts",
+      "summary": "测试用 Storage 装饰器，记录每次 commit 提交的 Write 批次以便断言准入与提交顺序。",
+      "tags": [
+        "test",
+        "storage",
+        "装饰器",
+        "会话存储"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/agent/src/harness/session/testing/storage-decorator.ts",
+      "type": "file",
+      "name": "storage-decorator.ts",
+      "filePath": "packages/agent/src/harness/session/testing/storage-decorator.ts",
+      "summary": "测试专用 Storage 转发基类，把读写扫描全部委托给底层存储，供子类只覆盖某一行为。",
+      "tags": [
+        "test",
+        "storage",
+        "装饰器",
+        "会话存储"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/agent/src/harness/session/testing/types.ts",
+      "type": "file",
+      "name": "types.ts",
+      "filePath": "packages/agent/src/harness/session/testing/types.ts",
+      "summary": "定义 StorageFixture 与框架无关的 ConformanceCase，供会话存储一致性测试与基准复用。",
+      "tags": [
+        "type-definition",
+        "test",
+        "storage",
+        "类型定义"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/agent/src/harness/session/types.ts",
+      "type": "file",
+      "name": "types.ts",
+      "filePath": "packages/agent/src/harness/session/types.ts",
+      "summary": "会话存储核心类型：Entry/Operation/Lane、Write 事务、Storage 与 SessionRepo 接口，以及 operationScopeOf 作用域拷贝。",
+      "tags": [
+        "type-definition",
+        "data-model",
+        "storage",
+        "会话"
+      ],
+      "complexity": "complex",
+      "languageNotes": "以可辨识联合类型描述 OperationState 各阶段，并与 chord JsonValue、compaction 准备结构交叉引用。"
+    },
+    {
+      "id": "file:packages/agent/src/harness/session/values.ts",
+      "type": "file",
+      "name": "values.ts",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "summary": "会话 KV/列表地址与写操作工厂，冻结 namespace/key，并提供 lane、operation、pending 等约定地址。",
+      "tags": [
+        "data-model",
+        "factory",
+        "storage",
+        "地址空间"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "用 unique symbol 做 Value<T>/ValueList<T> 名义类型，阻止地址被结构赋值混用。"
+    },
+    {
+      "id": "file:packages/agent/src/harness/skills.ts",
+      "type": "file",
+      "name": "skills.ts",
+      "filePath": "packages/agent/src/harness/skills.ts",
+      "summary": "从目录递归加载 SKILL.md 与带 frontmatter 的根级 markdown，应用 ignore 规则并产出 Skill 与诊断。",
+      "tags": [
+        "service",
+        "skills",
+        "loader",
+        "文件系统"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/agent/src/harness/system-prompt.ts",
+      "type": "file",
+      "name": "system-prompt.ts",
+      "filePath": "packages/agent/src/harness/system-prompt.ts",
+      "summary": "把可见 Skill 格式化为 agentskills.io 风格的 XML 系统提示块，并对名称、描述、路径做 XML 转义。",
+      "tags": [
+        "utility",
+        "skills",
+        "system-prompt",
+        "格式化"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/agent/src/harness/session/testing/instrumented-storage.ts:InstrumentedStorage",
+      "type": "class",
+      "name": "InstrumentedStorage",
+      "filePath": "packages/agent/src/harness/session/testing/instrumented-storage.ts",
+      "lineRange": [
+        6,
+        21
+      ],
+      "summary": "记录每次 commit 的 Write 数组，再转发给底层 Storage，便于测试检查提交内容。",
+      "tags": [
+        "test",
+        "storage",
+        "装饰器",
+        "class"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/agent/src/harness/session/testing/storage-decorator.ts:StorageDecorator",
+      "type": "class",
+      "name": "StorageDecorator",
+      "filePath": "packages/agent/src/harness/session/testing/storage-decorator.ts",
+      "lineRange": [
+        17,
+        71
+      ],
+      "summary": "实现 Storage 的透明转发基类，子类只需覆盖 commit 或其他个别方法。",
+      "tags": [
+        "test",
+        "storage",
+        "装饰器",
+        "class"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/types.ts:operationScopeOf",
+      "type": "function",
+      "name": "operationScopeOf",
+      "filePath": "packages/agent/src/harness/session/types.ts",
+      "lineRange": [
+        334,
+        340
+      ],
+      "summary": "从 OperationState 拷贝 control、settings 与 latestAssistantEntryId，用于构造后继叶子。",
+      "tags": [
+        "utility",
+        "operation",
+        "会话",
+        "拷贝"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:value",
+      "type": "function",
+      "name": "value",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        98,
+        101
+      ],
+      "summary": "校验并冻结一个标量 Value<T> 地址（namespace + key）。",
+      "tags": [
+        "factory",
+        "storage",
+        "地址",
+        "value"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:list",
+      "type": "function",
+      "name": "list",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        103,
+        106
+      ],
+      "summary": "校验并冻结一个 ValueList<T> 列表地址。",
+      "tags": [
+        "factory",
+        "storage",
+        "地址",
+        "list"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:setValue",
+      "type": "function",
+      "name": "setValue",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        108,
+        116
+      ],
+      "summary": "由 Value 地址构造 value/set 写操作。",
+      "tags": [
+        "factory",
+        "storage",
+        "write",
+        "value"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:deleteValue",
+      "type": "function",
+      "name": "deleteValue",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        118,
+        125
+      ],
+      "summary": "由 Value 地址构造 value/delete 写操作。",
+      "tags": [
+        "factory",
+        "storage",
+        "write",
+        "value"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:appendList",
+      "type": "function",
+      "name": "appendList",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        127,
+        135
+      ],
+      "summary": "由 ValueList 地址构造 list/append 写操作。",
+      "tags": [
+        "factory",
+        "storage",
+        "write",
+        "list"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:deleteList",
+      "type": "function",
+      "name": "deleteList",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        137,
+        144
+      ],
+      "summary": "由 ValueList 地址构造 list/delete 写操作。",
+      "tags": [
+        "factory",
+        "storage",
+        "write",
+        "list"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:resolveListReadOptions",
+      "type": "function",
+      "name": "resolveListReadOptions",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        146,
+        156
+      ],
+      "summary": "规范化列表读取的 order/limit（默认升序、上限夹到 10000）。",
+      "tags": [
+        "validation",
+        "storage",
+        "list",
+        "options"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:branchTip",
+      "type": "function",
+      "name": "branchTip",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        158,
+        158
+      ],
+      "summary": "返回分支 tip 的 Value 地址（pi.branch.tip）。",
+      "tags": [
+        "factory",
+        "address",
+        "branch",
+        "会话"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:branchTipInventoryPrefix",
+      "type": "function",
+      "name": "branchTipInventoryPrefix",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        159,
+        159
+      ],
+      "summary": "返回扫描全部 branch tip 的前缀地址。",
+      "tags": [
+        "factory",
+        "address",
+        "branch",
+        "前缀"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:laneConfig",
+      "type": "function",
+      "name": "laneConfig",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        160,
+        160
+      ],
+      "summary": "返回指定 lane 的 LaneConfiguration 地址。",
+      "tags": [
+        "factory",
+        "address",
+        "lane",
+        "配置"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:laneState",
+      "type": "function",
+      "name": "laneState",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        161,
+        161
+      ],
+      "summary": "返回指定 lane 的 LaneState 地址。",
+      "tags": [
+        "factory",
+        "address",
+        "lane",
+        "状态"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:operationResult",
+      "type": "function",
+      "name": "operationResult",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        162,
+        162
+      ],
+      "summary": "返回 operation 结果记录地址（pi.result）。",
+      "tags": [
+        "factory",
+        "address",
+        "operation",
+        "结果"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:operationMeta",
+      "type": "function",
+      "name": "operationMeta",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        164,
+        164
+      ],
+      "summary": "返回 operation 元数据地址（pi.op.meta）。",
+      "tags": [
+        "factory",
+        "address",
+        "operation",
+        "元数据"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:operationState",
+      "type": "function",
+      "name": "operationState",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        165,
+        165
+      ],
+      "summary": "返回 operation 状态机叶子地址（pi.op.state）。",
+      "tags": [
+        "factory",
+        "address",
+        "operation",
+        "状态"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:operationToolArgs",
+      "type": "function",
+      "name": "operationToolArgs",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        166,
+        167
+      ],
+      "summary": "返回某 step/sourceIndex 的工具参数地址。",
+      "tags": [
+        "factory",
+        "address",
+        "tool",
+        "operation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:operationToolMemo",
+      "type": "function",
+      "name": "operationToolMemo",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        168,
+        169
+      ],
+      "summary": "返回某 invocation 的工具 memo 地址。",
+      "tags": [
+        "factory",
+        "address",
+        "tool",
+        "operation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:operationPreparation",
+      "type": "function",
+      "name": "operationPreparation",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        170,
+        171
+      ],
+      "summary": "返回结构性任务（compaction/branch_summary）准备数据地址。",
+      "tags": [
+        "factory",
+        "address",
+        "compaction",
+        "operation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:operationToolArgsPrefix",
+      "type": "function",
+      "name": "operationToolArgsPrefix",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        173,
+        177
+      ],
+      "summary": "返回扫描某 operation（可选 step）全部 tool args 的前缀地址。",
+      "tags": [
+        "factory",
+        "address",
+        "prefix",
+        "tool"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:operationToolMemoPrefix",
+      "type": "function",
+      "name": "operationToolMemoPrefix",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        178,
+        182
+      ],
+      "summary": "返回扫描某 operation（可选 invocation）全部 memo 的前缀地址。",
+      "tags": [
+        "factory",
+        "address",
+        "prefix",
+        "tool"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:operationPreparationPrefix",
+      "type": "function",
+      "name": "operationPreparationPrefix",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        183,
+        184
+      ],
+      "summary": "返回扫描某 operation 全部 preparation 的前缀地址。",
+      "tags": [
+        "factory",
+        "address",
+        "prefix",
+        "compaction"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:pendingEntry",
+      "type": "function",
+      "name": "pendingEntry",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        186,
+        186
+      ],
+      "summary": "返回未提交 pending entry 的地址。",
+      "tags": [
+        "factory",
+        "address",
+        "pending",
+        "entry"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:pendingToolOutput",
+      "type": "function",
+      "name": "pendingToolOutput",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        187,
+        188
+      ],
+      "summary": "返回某 invocation 待提交工具输出地址。",
+      "tags": [
+        "factory",
+        "address",
+        "pending",
+        "tool"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:pendingAssistantFrames",
+      "type": "function",
+      "name": "pendingAssistantFrames",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        189,
+        190
+      ],
+      "summary": "返回助手流式 frame 的列表地址。",
+      "tags": [
+        "factory",
+        "address",
+        "pending",
+        "streaming"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:pendingToolOutputPrefix",
+      "type": "function",
+      "name": "pendingToolOutputPrefix",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        191,
+        192
+      ],
+      "summary": "返回扫描某 operation 全部 pending 工具输出的前缀地址。",
+      "tags": [
+        "factory",
+        "address",
+        "prefix",
+        "pending"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/session/values.ts:entryLabel",
+      "type": "function",
+      "name": "entryLabel",
+      "filePath": "packages/agent/src/harness/session/values.ts",
+      "lineRange": [
+        195,
+        195
+      ],
+      "summary": "返回 entry 标签字符串的 Value 地址。",
+      "tags": [
+        "factory",
+        "address",
+        "entry",
+        "label"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/skills.ts:formatSkillInvocation",
+      "type": "function",
+      "name": "formatSkillInvocation",
+      "filePath": "packages/agent/src/harness/skills.ts",
+      "lineRange": [
+        39,
+        42
+      ],
+      "summary": "把 skill 正文包进带 name/location 的 XML 块，可选追加用户附加指令。",
+      "tags": [
+        "utility",
+        "skills",
+        "formatting",
+        "prompt"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/skills.ts:loadSkills",
+      "type": "function",
+      "name": "loadSkills",
+      "filePath": "packages/agent/src/harness/skills.ts",
+      "lineRange": [
+        51,
+        78
+      ],
+      "summary": "从若干根目录加载 skill：跳过缺失目录，递归扫描并合并诊断。",
+      "tags": [
+        "loader",
+        "skills",
+        "filesystem",
+        "entry-point"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/skills.ts:loadSourcedSkills",
+      "type": "function",
+      "name": "loadSourcedSkills",
+      "filePath": "packages/agent/src/harness/skills.ts",
+      "lineRange": [
+        86,
+        108
+      ],
+      "summary": "按来源标签批量 loadSkills，并把 source 原样挂到 skill 与诊断上。",
+      "tags": [
+        "loader",
+        "skills",
+        "provenance",
+        "factory"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/skills.ts:loadSkillsFromDirInternal",
+      "type": "function",
+      "name": "loadSkillsFromDirInternal",
+      "filePath": "packages/agent/src/harness/skills.ts",
+      "lineRange": [
+        110,
+        183
+      ],
+      "summary": "递归遍历目录：处理 ignore、根级 .md 与 SKILL.md，并跟随可解析 symlink。",
+      "tags": [
+        "loader",
+        "skills",
+        "recursion",
+        "ignore"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/agent/src/harness/skills.ts:addIgnoreRules",
+      "type": "function",
+      "name": "addIgnoreRules",
+      "filePath": "packages/agent/src/harness/skills.ts",
+      "lineRange": [
+        185,
+        232
+      ],
+      "summary": "读取 .gitignore/.ignore/.fdignore 并把模式按相对根目录重写后加入 matcher。",
+      "tags": [
+        "ignore",
+        "skills",
+        "filesystem",
+        "loader"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/skills.ts:prefixIgnorePattern",
+      "type": "function",
+      "name": "prefixIgnorePattern",
+      "filePath": "packages/agent/src/harness/skills.ts",
+      "lineRange": [
+        234,
+        250
+      ],
+      "summary": "把单条 ignore 模式加上目录前缀，保留否定与锚定语义。",
+      "tags": [
+        "ignore",
+        "skills",
+        "path",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/skills.ts:loadSkillFromFile",
+      "type": "function",
+      "name": "loadSkillFromFile",
+      "filePath": "packages/agent/src/harness/skills.ts",
+      "lineRange": [
+        252,
+        308
+      ],
+      "summary": "解析 YAML frontmatter，校验 name/description，组装 Skill；非 SKILL.md 缺描述则跳过。",
+      "tags": [
+        "parser",
+        "skills",
+        "frontmatter",
+        "validation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/skills.ts:validateName",
+      "type": "function",
+      "name": "validateName",
+      "filePath": "packages/agent/src/harness/skills.ts",
+      "lineRange": [
+        310,
+        320
+      ],
+      "summary": "校验 skill 名与父目录一致，且符合小写、连字符与长度规则。",
+      "tags": [
+        "validation",
+        "skills",
+        "naming",
+        "metadata"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/skills.ts:parseFrontmatter",
+      "type": "function",
+      "name": "parseFrontmatter",
+      "filePath": "packages/agent/src/harness/skills.ts",
+      "lineRange": [
+        332,
+        346
+      ],
+      "summary": "从 --- YAML --- 块解析 frontmatter；失败时用 toError 包成 Result。",
+      "tags": [
+        "parser",
+        "yaml",
+        "frontmatter",
+        "skills"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/agent/src/harness/skills.ts:resolveKind",
+      "type": "function",
+      "name": "resolveKind",
+      "filePath": "packages/agent/src/harness/skills.ts",
+      "lineRange": [
+        348,
+        380
+      ],
+      "summary": "把 FileInfo 解析为 file/directory，必要时跟随 symlink 的 canonical 目标。",
+      "tags": [
+        "filesystem",
+        "skills",
+        "symlink",
+        "loader"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/agent/src/harness/system-prompt.ts:formatSkillsForSystemPrompt",
+      "type": "function",
+      "name": "formatSkillsForSystemPrompt",
+      "filePath": "packages/agent/src/harness/system-prompt.ts",
+      "lineRange": [
+        3,
+        25
+      ],
+      "summary": "过滤 disableModelInvocation 的 skill，输出 <available_skills> XML 列表。",
+      "tags": [
+        "utility",
+        "skills",
+        "system-prompt",
+        "xml"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/agent/src/harness/session/testing/instrumented-storage.ts",
+      "target": "class:packages/agent/src/harness/session/testing/instrumented-storage.ts:InstrumentedStorage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/testing/instrumented-storage.ts",
+      "target": "class:packages/agent/src/harness/session/testing/instrumented-storage.ts:InstrumentedStorage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/testing/storage-decorator.ts",
+      "target": "class:packages/agent/src/harness/session/testing/storage-decorator.ts:StorageDecorator",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/testing/storage-decorator.ts",
+      "target": "class:packages/agent/src/harness/session/testing/storage-decorator.ts:StorageDecorator",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/types.ts",
+      "target": "function:packages/agent/src/harness/session/types.ts:operationScopeOf",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/types.ts",
+      "target": "function:packages/agent/src/harness/session/types.ts:operationScopeOf",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:value",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:value",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:list",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:list",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:setValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:setValue",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:deleteValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:deleteValue",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:appendList",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:appendList",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:deleteList",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:deleteList",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:resolveListReadOptions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:resolveListReadOptions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:branchTip",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:branchTip",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:branchTipInventoryPrefix",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:branchTipInventoryPrefix",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:laneConfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:laneConfig",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:laneState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:laneState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:operationResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:operationResult",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:operationMeta",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:operationMeta",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:operationState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:operationState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:operationToolArgs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:operationToolArgs",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:operationToolMemo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:operationToolMemo",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:operationPreparation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:operationPreparation",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:operationToolArgsPrefix",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:operationToolArgsPrefix",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:operationToolMemoPrefix",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:operationToolMemoPrefix",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:operationPreparationPrefix",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:operationPreparationPrefix",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:pendingEntry",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:pendingEntry",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:pendingToolOutput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:pendingToolOutput",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:pendingAssistantFrames",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:pendingAssistantFrames",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:pendingToolOutputPrefix",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:pendingToolOutputPrefix",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:entryLabel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "function:packages/agent/src/harness/session/values.ts:entryLabel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/skills.ts",
+      "target": "function:packages/agent/src/harness/skills.ts:formatSkillInvocation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/skills.ts",
+      "target": "function:packages/agent/src/harness/skills.ts:formatSkillInvocation",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/skills.ts",
+      "target": "function:packages/agent/src/harness/skills.ts:loadSkills",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/skills.ts",
+      "target": "function:packages/agent/src/harness/skills.ts:loadSkills",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/skills.ts",
+      "target": "function:packages/agent/src/harness/skills.ts:loadSourcedSkills",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/skills.ts",
+      "target": "function:packages/agent/src/harness/skills.ts:loadSourcedSkills",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/skills.ts",
+      "target": "function:packages/agent/src/harness/skills.ts:loadSkillsFromDirInternal",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/skills.ts",
+      "target": "function:packages/agent/src/harness/skills.ts:addIgnoreRules",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/skills.ts",
+      "target": "function:packages/agent/src/harness/skills.ts:prefixIgnorePattern",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/skills.ts",
+      "target": "function:packages/agent/src/harness/skills.ts:loadSkillFromFile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/skills.ts",
+      "target": "function:packages/agent/src/harness/skills.ts:validateName",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/skills.ts",
+      "target": "function:packages/agent/src/harness/skills.ts:parseFrontmatter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/skills.ts",
+      "target": "function:packages/agent/src/harness/skills.ts:resolveKind",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/system-prompt.ts",
+      "target": "function:packages/agent/src/harness/system-prompt.ts:formatSkillsForSystemPrompt",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/agent/src/harness/system-prompt.ts",
+      "target": "function:packages/agent/src/harness/system-prompt.ts:formatSkillsForSystemPrompt",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/testing/instrumented-storage.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/testing/instrumented-storage.ts",
+      "target": "file:packages/agent/src/harness/session/testing/storage-decorator.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/testing/instrumented-storage.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/testing/storage-decorator.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/testing/storage-decorator.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/testing/storage-decorator.ts",
+      "target": "file:packages/agent/src/harness/session/values.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/testing/types.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/types.ts",
+      "target": "file:packages/agent/src/harness/compaction/branch-summarization.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/types.ts",
+      "target": "file:packages/agent/src/harness/compaction/compaction.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/types.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/types.ts",
+      "target": "file:packages/agent/src/harness/session/values.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/types.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/types.ts",
+      "target": "file:packages/agent/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/types.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/types.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "file:packages/agent/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/session/values.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/skills.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/skills.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/system-prompt.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:packages/agent/src/harness/session/testing/instrumented-storage.ts:InstrumentedStorage",
+      "target": "class:packages/agent/src/harness/session/testing/storage-decorator.ts:StorageDecorator",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "function:packages/agent/src/harness/skills.ts:parseFrontmatter",
+      "target": "function:packages/agent/src/harness/types.ts:toError",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/skills.ts:loadSourcedSkills",
+      "target": "function:packages/agent/src/harness/skills.ts:loadSkills",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

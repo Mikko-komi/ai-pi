@@ -1,0 +1,20 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/tui/src/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/tui/src/index.ts",
+      "summary": "@earendil-works/pi-tui 的公共 barrel：重导出组件、TUI、键绑定、模糊匹配与终端图像 API。",
+      "tags": [
+        "barrel",
+        "entry-point",
+        "tui",
+        "exports"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "纯 TypeScript 再导出，不包含实现；实现分布在 tui 包内各模块。"
+    }
+  ],
+  "edges": []
+}

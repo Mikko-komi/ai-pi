@@ -1,0 +1,788 @@
+{
+  "files": {
+    "packages/coding-agent/src/core/extensions/loader.ts": {
+      "summary": "通过 jiti 发现并加载 TypeScript 扩展，向编译二进制注入 virtualModules，并构建 ExtensionAPI 与 runtime。",
+      "tags": ["entry-point", "service", "factory", "extension-loader"],
+      "complexity": "complex",
+      "languageNotes": "编译二进制用 virtualModules 暴露捆绑包；Node 构建则用 jiti aliases 解析同一组依赖。"
+    },
+    "packages/coding-agent/src/core/http-dispatcher.ts": {
+      "summary": "配置 undici HTTP dispatcher 的空闲超时与代理，供设置层和出站请求复用。",
+      "tags": ["service", "http", "configuration"],
+      "complexity": "moderate"
+    },
+    "packages/coding-agent/src/core/model-config.ts": {
+      "summary": "解析并冻结 models.json 中的 provider 配置，对外提供 ModelConfig 查询与校验错误。",
+      "tags": ["config", "data-model", "validation"],
+      "complexity": "complex"
+    },
+    "packages/coding-agent/src/core/model-registry.ts": {
+      "summary": "在 ModelRuntime 之上提供模型枚举、鉴权查询以及 stream/complete 门面。",
+      "tags": ["service", "facade", "registry"],
+      "complexity": "moderate"
+    },
+    "packages/coding-agent/src/core/model-resolver.ts": {
+      "summary": "按 CLI、设置默认、别名与会话记录解析模型作用域，处理模糊匹配、回退和恢复。",
+      "tags": ["service", "resolver", "cli"],
+      "complexity": "complex"
+    },
+    "packages/coding-agent/src/core/model-runtime.ts": {
+      "summary": "组合内置与扩展 provider、同步凭证并刷新可用性，对外提供 stream/complete 运行时。",
+      "tags": ["service", "runtime", "auth"],
+      "complexity": "complex",
+      "languageNotes": "凭证写操作串行入队，避免 auth.json 与运行时覆盖互相踩踏。"
+    },
+    "packages/coding-agent/src/core/models-store.ts": {
+      "summary": "以内存或文件存储 models.json，带 revision 检测与可中止读写。",
+      "tags": ["data-model", "persistence", "storage"],
+      "complexity": "moderate"
+    },
+    "packages/coding-agent/src/core/output-guard.ts": {
+      "summary": "接管 process.stdout.write，支持原始字节输出、背压等待与恢复。",
+      "tags": ["utility", "io", "stdout"],
+      "complexity": "moderate",
+      "languageNotes": "接管 stdout 是为了在 TUI 渲染期间仍能写出不受控的原始输出。"
+    },
+    "packages/coding-agent/src/core/package-manager.ts": {
+      "summary": "解析 npm/git/本地包源，安装更新并按 manifest 与 ignore 规则收集 skills、prompts、themes、extensions。",
+      "tags": ["service", "package-manager", "resource-discovery"],
+      "complexity": "complex",
+      "languageNotes": "同一套 collect/applyPatterns 路径同时服务显式包与自动发现资源。"
+    },
+    "packages/coding-agent/src/core/pi-manifest.ts": {
+      "summary": "从 package.json 读取 pi 清单字段，定位扩展、skills 等资源入口。",
+      "tags": ["config", "manifest", "parser"],
+      "complexity": "simple"
+    },
+    "packages/coding-agent/src/core/project-trust.ts": {
+      "summary": "综合设置、扩展事件与用户提示，解析并持久化项目信任决策。",
+      "tags": ["security", "trust", "service"],
+      "complexity": "moderate"
+    },
+    "packages/coding-agent/src/core/prompt-templates.ts": {
+      "summary": "从多来源加载 prompt 模板，解析参数并在文本中展开模板引用。",
+      "tags": ["service", "prompt", "template"],
+      "complexity": "complex"
+    },
+    "packages/coding-agent/src/core/provider-attribution.ts": {
+      "summary": "为 OpenRouter、NIM、Cloudflare 等请求合并归因头与会话级 headers。",
+      "tags": ["http", "telemetry", "headers"],
+      "complexity": "moderate"
+    },
+    "packages/coding-agent/src/core/provider-composer.ts": {
+      "summary": "将内置 provider、models.json 与扩展配置合成为可请求的 ModelProvider。",
+      "tags": ["factory", "service", "provider-composition"],
+      "complexity": "complex"
+    },
+    "packages/coding-agent/src/core/remote-catalog-provider.ts": {
+      "summary": "周期性拉取远程模型目录，并与本地内置目录合并后包装 provider。",
+      "tags": ["service", "catalog", "http"],
+      "complexity": "moderate"
+    },
+    "packages/coding-agent/src/core/resolve-config-value.ts": {
+      "summary": "解析环境变量模板、command 型配置值与 headers，并缓存命令执行结果。",
+      "tags": ["config", "resolver", "validation"],
+      "complexity": "complex",
+      "languageNotes": "配置值可以是字面量、${ENV} 模板或 shell command。"
+    },
+    "packages/coding-agent/src/core/resource-loader.ts": {
+      "summary": "统一发现并重载扩展、skills、prompt、主题、system prompt 与项目上下文文件。",
+      "tags": ["service", "resource-loader", "orchestration"],
+      "complexity": "complex"
+    },
+    "packages/coding-agent/src/core/runtime-credentials.ts": {
+      "summary": "在持久化凭证存储之上叠加会话级 API key 覆盖。",
+      "tags": ["auth", "credentials", "runtime"],
+      "complexity": "simple"
+    },
+    "packages/coding-agent/src/core/sdk.ts": {
+      "summary": "编程式创建 AgentSession 的 SDK 入口，组装 runtime、设置、资源与内置工具。",
+      "tags": ["entry-point", "sdk", "factory"],
+      "complexity": "complex"
+    },
+    "packages/coding-agent/src/core/session-cwd.ts": {
+      "summary": "校验会话工作目录是否存在，并格式化缺失 cwd 的错误与提示。",
+      "tags": ["validation", "session", "error-handling"],
+      "complexity": "simple"
+    },
+    "packages/coding-agent/src/core/settings-diagnostics.ts": {
+      "summary": "从 SettingsManager 收集加载/写入诊断并按消息去重。",
+      "tags": ["diagnostics", "settings", "utility"],
+      "complexity": "simple"
+    },
+    "packages/coding-agent/src/core/settings-manager.ts": {
+      "summary": "加载、合并并持久化全局与项目 settings，提供模型、主题、包路径等全部偏好读写。",
+      "tags": ["service", "settings", "persistence"],
+      "complexity": "complex",
+      "languageNotes": "写操作按作用域排队，并用文件锁保护全局/项目 settings.json。"
+    },
+    "packages/coding-agent/src/core/skills.ts": {
+      "summary": "扫描目录加载 SKILL.md，校验 frontmatter，并格式化为 system prompt 片段。",
+      "tags": ["service", "skills", "prompt"],
+      "complexity": "complex"
+    },
+    "packages/coding-agent/src/core/slash-commands.ts": {
+      "summary": "声明内置斜杠命令名称列表，供交互模式与补全使用。",
+      "tags": ["config", "slash-commands", "constants"],
+      "complexity": "simple"
+    },
+    "packages/coding-agent/src/core/source-info.ts": {
+      "summary": "为磁盘资源或合成来源构造 SourceInfo 元数据。",
+      "tags": ["data-model", "source-info", "utility"],
+      "complexity": "simple"
+    },
+    "packages/coding-agent/src/core/system-prompt.ts": {
+      "summary": "组装 agent system prompt，注入 skills、项目上下文与附加指令。",
+      "tags": ["prompt", "system-prompt", "service"],
+      "complexity": "moderate"
+    },
+    "packages/coding-agent/src/core/telemetry.ts": {
+      "summary": "根据 SettingsManager 与环境变量判断是否启用安装遥测。",
+      "tags": ["telemetry", "settings", "feature-flag"],
+      "complexity": "simple"
+    },
+    "packages/coding-agent/src/core/timings.ts": {
+      "summary": "按命名空间记录启动阶段耗时，并支持分组打印。",
+      "tags": ["utility", "timing", "diagnostics"],
+      "complexity": "simple"
+    },
+    "packages/coding-agent/src/core/trust-manager.ts": {
+      "summary": "读写项目信任文件，查找最近祖先条目，并用文件锁保护更新。",
+      "tags": ["security", "trust", "persistence"],
+      "complexity": "complex"
+    }
+  },
+  "symbols": {
+    "function:packages/coding-agent/src/core/extensions/loader.ts:getAliases": {
+      "summary": "为 jiti 构建包路径别名，使 Node 构建模式下扩展能解析捆绑依赖。",
+      "tags": ["utility", "module-resolution", "jiti"]
+    },
+    "function:packages/coding-agent/src/core/extensions/loader.ts:clearExtensionCache": {
+      "summary": "清空扩展模块缓存与 cwd token，强制下次重新加载。",
+      "tags": ["cache", "lifecycle", "extension-loader"]
+    },
+    "function:packages/coding-agent/src/core/extensions/loader.ts:createExtensionRuntime": {
+      "summary": "创建扩展运行时，注入 cwd、事件总线与共享执行能力。",
+      "tags": ["factory", "runtime", "extension"]
+    },
+    "function:packages/coding-agent/src/core/extensions/loader.ts:createExtensionAPI": {
+      "summary": "为单个扩展构造 registerCommand、tool、provider 等 ExtensionAPI。",
+      "tags": ["factory", "api", "extension"],
+      "complexity": "complex"
+    },
+    "function:packages/coding-agent/src/core/extensions/loader.ts:loadExtensionModule": {
+      "summary": "用 jiti 或动态 import 加载扩展模块并校验导出形态。",
+      "tags": ["loader", "module-resolution", "extension"]
+    },
+    "function:packages/coding-agent/src/core/extensions/loader.ts:createExtension": {
+      "summary": "将已解析模块包装为 Extension，并附加合成 SourceInfo。",
+      "tags": ["factory", "extension", "source-info"]
+    },
+    "function:packages/coding-agent/src/core/extensions/loader.ts:initializeExtension": {
+      "summary": "调用 factory 初始化扩展实例并记录耗时。",
+      "tags": ["lifecycle", "extension", "timing"]
+    },
+    "function:packages/coding-agent/src/core/extensions/loader.ts:loadExtension": {
+      "summary": "解析路径、加载模块并初始化单个扩展。",
+      "tags": ["loader", "extension", "lifecycle"]
+    },
+    "function:packages/coding-agent/src/core/extensions/loader.ts:loadExtensionFromFactory": {
+      "summary": "从内存中的 factory 直接初始化扩展，跳过磁盘加载。",
+      "tags": ["factory", "extension", "loader"]
+    },
+    "function:packages/coding-agent/src/core/extensions/loader.ts:loadExtensionsInternal": {
+      "summary": "批量加载扩展路径，处理缓存命中与错误聚合。",
+      "tags": ["loader", "batch", "extension"]
+    },
+    "function:packages/coding-agent/src/core/extensions/loader.ts:loadExtensions": {
+      "summary": "不使用模块缓存地加载一组扩展路径。",
+      "tags": ["loader", "extension", "entry-point"]
+    },
+    "function:packages/coding-agent/src/core/extensions/loader.ts:loadExtensionsCached": {
+      "summary": "使用模块缓存加载一组扩展路径。",
+      "tags": ["loader", "cache", "extension"]
+    },
+    "function:packages/coding-agent/src/core/extensions/loader.ts:resolveExtensionEntries": {
+      "summary": "读取目录或 pi manifest，解析扩展入口文件列表。",
+      "tags": ["discovery", "manifest", "extension"]
+    },
+    "function:packages/coding-agent/src/core/extensions/loader.ts:discoverExtensionsInDir": {
+      "summary": "扫描目录发现可作为扩展的入口文件。",
+      "tags": ["discovery", "extension", "filesystem"]
+    },
+    "function:packages/coding-agent/src/core/extensions/loader.ts:discoverAndLoadExtensions": {
+      "summary": "合并配置路径与自动发现路径后加载全部扩展。",
+      "tags": ["entry-point", "discovery", "extension"]
+    },
+    "function:packages/coding-agent/src/core/http-dispatcher.ts:parseHttpIdleTimeoutMs": {
+      "summary": "将设置值解析为 HTTP 空闲超时毫秒数。",
+      "tags": ["parser", "http", "settings"]
+    },
+    "function:packages/coding-agent/src/core/http-dispatcher.ts:formatHttpIdleTimeoutMs": {
+      "summary": "把超时毫秒格式化为可读的选项文本。",
+      "tags": ["formatting", "http", "settings"]
+    },
+    "function:packages/coding-agent/src/core/http-dispatcher.ts:applyHttpProxySettings": {
+      "summary": "把 HTTP 代理设置应用到 undici dispatcher。",
+      "tags": ["http", "proxy", "configuration"]
+    },
+    "function:packages/coding-agent/src/core/http-dispatcher.ts:createUndiciOriginDispatcher": {
+      "summary": "为指定 origin 创建带超时选项的 undici dispatcher。",
+      "tags": ["factory", "http", "undici"]
+    },
+    "function:packages/coding-agent/src/core/http-dispatcher.ts:configureHttpDispatcher": {
+      "summary": "按超时配置全局 undici dispatcher 与错误监听。",
+      "tags": ["http", "configuration", "undici"]
+    },
+    "function:packages/coding-agent/src/core/model-config.ts:formatValidationPath": {
+      "summary": "把校验错误路径格式化为可读的 JSON 指针。",
+      "tags": ["validation", "formatting", "error-handling"]
+    },
+    "class:packages/coding-agent/src/core/model-config.ts:ModelConfig": {
+      "summary": "加载并冻结 models.json，提供 provider 查询与错误状态。",
+      "tags": ["data-model", "config", "validation"]
+    },
+    "class:packages/coding-agent/src/core/model-registry.ts:ModelRegistry": {
+      "summary": "包装 ModelRuntime，提供模型列表、鉴权状态与 stream/complete API。",
+      "tags": ["facade", "registry", "service"]
+    },
+    "function:packages/coding-agent/src/core/model-resolver.ts:findExactModelReferenceMatch": {
+      "summary": "在可用模型中做精确的 provider/model 引用匹配。",
+      "tags": ["resolver", "matching", "models"]
+    },
+    "function:packages/coding-agent/src/core/model-resolver.ts:tryMatchModel": {
+      "summary": "用模式对可用模型做模糊或前缀匹配。",
+      "tags": ["resolver", "matching", "models"]
+    },
+    "function:packages/coding-agent/src/core/model-resolver.ts:buildFallbackModel": {
+      "summary": "在无精确匹配时构造回退模型引用。",
+      "tags": ["resolver", "fallback", "models"]
+    },
+    "function:packages/coding-agent/src/core/model-resolver.ts:parseModelPattern": {
+      "summary": "解析 CLI 模型模式，支持别名与 thinking level 后缀。",
+      "tags": ["parser", "cli", "models"]
+    },
+    "function:packages/coding-agent/src/core/model-resolver.ts:resolveModelScopeFromModels": {
+      "summary": "将多条模式解析为一组 ScopedModel，并产出诊断。",
+      "tags": ["resolver", "scope", "diagnostics"]
+    },
+    "function:packages/coding-agent/src/core/model-resolver.ts:resolveModelScopeWithDiagnostics": {
+      "summary": "从 ModelRuntime 取模型后解析作用域并返回诊断。",
+      "tags": ["resolver", "diagnostics", "models"]
+    },
+    "function:packages/coding-agent/src/core/model-resolver.ts:resolveModelScope": {
+      "summary": "解析模型作用域，忽略诊断细节只返回结果。",
+      "tags": ["resolver", "scope", "models"]
+    },
+    "function:packages/coding-agent/src/core/model-resolver.ts:resolveCliModel": {
+      "summary": "综合 CLI 参数、设置默认与可用性，解析当前应使用的模型。",
+      "tags": ["resolver", "cli", "models"],
+      "complexity": "complex"
+    },
+    "function:packages/coding-agent/src/core/model-resolver.ts:findInitialModel": {
+      "summary": "按设置默认、provider 默认与可用性选择会话初始模型。",
+      "tags": ["resolver", "defaults", "models"]
+    },
+    "function:packages/coding-agent/src/core/model-resolver.ts:restoreModelFromSession": {
+      "summary": "从会话保存的 provider/modelId 恢复模型，失败则回退当前模型。",
+      "tags": ["resolver", "session", "restore"]
+    },
+    "function:packages/coding-agent/src/core/model-runtime.ts:mergeHeaders": {
+      "summary": "浅合并请求头，后者覆盖前者的同名键。",
+      "tags": ["utility", "headers", "merge"]
+    },
+    "class:packages/coding-agent/src/core/model-runtime.ts:CredentialSynchronizationError": {
+      "summary": "凭证同步失败时携带 provider、操作类型与凭证上下文。",
+      "tags": ["error-handling", "auth", "credentials"]
+    },
+    "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime": {
+      "summary": "组合 provider、同步凭证、刷新可用性，并执行 stream/complete 与登录登出。",
+      "tags": ["runtime", "service", "auth"],
+      "complexity": "complex"
+    },
+    "class:packages/coding-agent/src/core/models-store.ts:InMemoryCodingAgentModelsStore": {
+      "summary": "内存版 models 存储，用于测试或不落盘场景。",
+      "tags": ["storage", "in-memory", "models"]
+    },
+    "class:packages/coding-agent/src/core/models-store.ts:FileModelsStore": {
+      "summary": "文件版 models.json 存储，带 revision 检测与可中止读写。",
+      "tags": ["storage", "persistence", "models"]
+    },
+    "function:packages/coding-agent/src/core/output-guard.ts:writeRawStdoutChunk": {
+      "summary": "向原始 stdout 写入一块文本，并处理背压。",
+      "tags": ["io", "stdout", "backpressure"]
+    },
+    "function:packages/coding-agent/src/core/output-guard.ts:takeOverStdout": {
+      "summary": "接管 process.stdout.write，避免 TUI 干扰原始输出。",
+      "tags": ["io", "stdout", "lifecycle"]
+    },
+    "function:packages/coding-agent/src/core/output-guard.ts:restoreStdout": {
+      "summary": "恢复被接管的 process.stdout.write。",
+      "tags": ["io", "stdout", "lifecycle"]
+    },
+    "function:packages/coding-agent/src/core/output-guard.ts:isStdoutTakenOver": {
+      "summary": "查询 stdout 是否已被接管。",
+      "tags": ["io", "stdout", "predicate"]
+    },
+    "function:packages/coding-agent/src/core/output-guard.ts:writeRawStdout": {
+      "summary": "对外写入原始 stdout 文本，必要时分块写出。",
+      "tags": ["io", "stdout", "utility"]
+    },
+    "function:packages/coding-agent/src/core/output-guard.ts:waitForRawStdoutBackpressure": {
+      "summary": "等待原始 stdout 背压解除后再继续写入。",
+      "tags": ["io", "stdout", "backpressure"]
+    },
+    "function:packages/coding-agent/src/core/output-guard.ts:flushRawStdout": {
+      "summary": "刷新原始 stdout 缓冲区。",
+      "tags": ["io", "stdout", "flush"]
+    },
+    "function:packages/coding-agent/src/core/package-manager.ts:getEnv": {
+      "summary": "在 Linux 空 process.env 时从 /proc/self/environ 重建环境变量。",
+      "tags": ["utility", "environment", "linux"]
+    },
+    "function:packages/coding-agent/src/core/package-manager.ts:getExtensionTempFolder": {
+      "summary": "返回 agent 目录下的扩展临时文件夹路径。",
+      "tags": ["utility", "paths", "extension"]
+    },
+    "function:packages/coding-agent/src/core/package-manager.ts:prefixIgnorePattern": {
+      "summary": "为 ignore 规则加上目录前缀，使其相对包根生效。",
+      "tags": ["ignore", "path", "utility"]
+    },
+    "function:packages/coding-agent/src/core/package-manager.ts:addIgnoreRules": {
+      "summary": "读取目录中的 ignore 文件并加入 matcher。",
+      "tags": ["ignore", "filesystem", "discovery"]
+    },
+    "function:packages/coding-agent/src/core/package-manager.ts:expandPackageGlob": {
+      "summary": "在包根目录下展开 glob 模式为文件路径。",
+      "tags": ["glob", "discovery", "filesystem"]
+    },
+    "function:packages/coding-agent/src/core/package-manager.ts:splitPatterns": {
+      "summary": "把资源条目拆成包含与排除模式两组。",
+      "tags": ["parser", "patterns", "filtering"]
+    },
+    "function:packages/coding-agent/src/core/package-manager.ts:collectFiles": {
+      "summary": "递归收集匹配文件，可跳过 node_modules 并应用 ignore。",
+      "tags": ["discovery", "filesystem", "filtering"]
+    },
+    "function:packages/coding-agent/src/core/package-manager.ts:collectSkillEntries": {
+      "summary": "按模式收集 skill 文件条目，支持目录与单文件。",
+      "tags": ["discovery", "skills", "filesystem"]
+    },
+    "function:packages/coding-agent/src/core/package-manager.ts:findGitRepoRoot": {
+      "summary": "从起始目录向上查找 git 仓库根。",
+      "tags": ["git", "filesystem", "utility"]
+    },
+    "function:packages/coding-agent/src/core/package-manager.ts:collectAncestorAgentsSkillDirs": {
+      "summary": "收集祖先目录中的 agents/skills 路径。",
+      "tags": ["discovery", "skills", "filesystem"]
+    },
+    "function:packages/coding-agent/src/core/package-manager.ts:collectAutoPromptEntries": {
+      "summary": "自动发现可加载的 prompt 模板文件。",
+      "tags": ["discovery", "prompt", "autoload"]
+    },
+    "function:packages/coding-agent/src/core/package-manager.ts:collectAutoThemeEntries": {
+      "summary": "自动发现可加载的主题文件。",
+      "tags": ["discovery", "theme", "autoload"]
+    },
+    "function:packages/coding-agent/src/core/package-manager.ts:resolveExtensionEntries": {
+      "summary": "解析包内扩展入口，优先读取 pi manifest。",
+      "tags": ["discovery", "extension", "manifest"]
+    },
+    "function:packages/coding-agent/src/core/package-manager.ts:collectAutoExtensionEntries": {
+      "summary": "自动发现可加载的扩展入口文件。",
+      "tags": ["discovery", "extension", "autoload"]
+    },
+    "function:packages/coding-agent/src/core/package-manager.ts:matchesAnyPattern": {
+      "summary": "判断路径是否匹配任一 glob 模式。",
+      "tags": ["matching", "glob", "filtering"]
+    },
+    "function:packages/coding-agent/src/core/package-manager.ts:matchesAnyExactPattern": {
+      "summary": "判断路径是否精确匹配给定模式。",
+      "tags": ["matching", "path", "filtering"]
+    },
+    "function:packages/coding-agent/src/core/package-manager.ts:isEnabledByOverrides": {
+      "summary": "按 override 模式决定某资源路径是否启用。",
+      "tags": ["override", "filtering", "settings"]
+    },
+    "function:packages/coding-agent/src/core/package-manager.ts:applyPatterns": {
+      "summary": "对路径列表应用包含与排除模式，得到最终集合。",
+      "tags": ["filtering", "patterns", "discovery"]
+    },
+    "function:packages/coding-agent/src/core/package-manager.ts:applyAutoloadDisabledPatterns": {
+      "summary": "过滤被禁用自动加载规则命中的路径。",
+      "tags": ["filtering", "autoload", "settings"]
+    },
+    "class:packages/coding-agent/src/core/package-manager.ts:DefaultPackageManager": {
+      "summary": "安装、更新、移除 npm/git/本地包，并收集可加载的扩展与资源文件。",
+      "tags": ["package-manager", "service", "installer"],
+      "complexity": "complex"
+    },
+    "function:packages/coding-agent/src/core/pi-manifest.ts:readPiManifest": {
+      "summary": "读取 package.json 中的 pi 清单字段并做基本校验。",
+      "tags": ["parser", "manifest", "config"]
+    },
+    "function:packages/coding-agent/src/core/project-trust.ts:selectProjectTrustOption": {
+      "summary": "展示当前目录的信任选项并返回用户选择。",
+      "tags": ["trust", "ui-prompt", "security"]
+    },
+    "function:packages/coding-agent/src/core/project-trust.ts:resolveProjectTrusted": {
+      "summary": "综合设置、扩展事件与提示，解析项目是否受信任。",
+      "tags": ["trust", "security", "resolver"]
+    },
+    "function:packages/coding-agent/src/core/prompt-templates.ts:parseCommandArgs": {
+      "summary": "解析模板调用参数字符串为键值或位置参数。",
+      "tags": ["parser", "template", "args"]
+    },
+    "function:packages/coding-agent/src/core/prompt-templates.ts:substituteArgs": {
+      "summary": "将解析后的参数替换进模板正文。",
+      "tags": ["template", "substitution", "prompt"]
+    },
+    "function:packages/coding-agent/src/core/prompt-templates.ts:loadTemplateFromFile": {
+      "summary": "从单文件解析 frontmatter 并加载为 PromptTemplate。",
+      "tags": ["loader", "template", "frontmatter"]
+    },
+    "function:packages/coding-agent/src/core/prompt-templates.ts:loadTemplatesFromDir": {
+      "summary": "扫描目录加载全部 prompt 模板文件。",
+      "tags": ["loader", "template", "discovery"]
+    },
+    "function:packages/coding-agent/src/core/prompt-templates.ts:loadPromptTemplates": {
+      "summary": "合并多来源路径，加载并去重 prompt 模板。",
+      "tags": ["loader", "template", "prompt"]
+    },
+    "function:packages/coding-agent/src/core/prompt-templates.ts:expandPromptTemplate": {
+      "summary": "在文本中查找并展开已加载的模板引用。",
+      "tags": ["template", "expansion", "prompt"]
+    },
+    "function:packages/coding-agent/src/core/provider-attribution.ts:getDefaultAttributionHeaders": {
+      "summary": "按 provider 主机生成默认归因 headers。",
+      "tags": ["headers", "attribution", "telemetry"]
+    },
+    "function:packages/coding-agent/src/core/provider-attribution.ts:getSessionHeaders": {
+      "summary": "生成绑定 sessionId 的会话级 attribution headers。",
+      "tags": ["headers", "session", "attribution"]
+    },
+    "function:packages/coding-agent/src/core/provider-attribution.ts:mergeProviderAttributionHeaders": {
+      "summary": "合并默认、会话与调用方提供的 attribution headers。",
+      "tags": ["headers", "merge", "attribution"]
+    },
+    "function:packages/coding-agent/src/core/provider-composer.ts:mergeCompat": {
+      "summary": "合并兼容层 provider 选项，后者覆盖前者。",
+      "tags": ["merge", "compat", "provider"]
+    },
+    "function:packages/coding-agent/src/core/provider-composer.ts:applyModelOverride": {
+      "summary": "将 override 字段应用到单个 Model 定义。",
+      "tags": ["override", "models", "composition"]
+    },
+    "function:packages/coding-agent/src/core/provider-composer.ts:modelFromJson": {
+      "summary": "从 JSON 模型定义构造运行时 Model。",
+      "tags": ["factory", "models", "json"]
+    },
+    "function:packages/coding-agent/src/core/provider-composer.ts:applyModelsJson": {
+      "summary": "把 models.json 覆盖应用到基础模型列表。",
+      "tags": ["composition", "models", "config"]
+    },
+    "function:packages/coding-agent/src/core/provider-composer.ts:applyExtension": {
+      "summary": "把扩展提供的模型配置应用到现有列表。",
+      "tags": ["composition", "extension", "models"]
+    },
+    "function:packages/coding-agent/src/core/provider-composer.ts:adaptOAuth": {
+      "summary": "把配置中的 OAuth 信息适配为运行时 auth。",
+      "tags": ["oauth", "auth", "adapter"]
+    },
+    "function:packages/coding-agent/src/core/provider-composer.ts:withConfiguredAuth": {
+      "summary": "为已有 auth 附加配置层 headers 与鉴权头。",
+      "tags": ["auth", "headers", "composition"]
+    },
+    "function:packages/coding-agent/src/core/provider-composer.ts:configContextEnv": {
+      "summary": "解析配置上下文里声明的环境变量映射。",
+      "tags": ["config", "environment", "resolver"]
+    },
+    "function:packages/coding-agent/src/core/provider-composer.ts:composeApiKeyAuth": {
+      "summary": "合成 API key 鉴权，支持 env 模板与 command 配置值。",
+      "tags": ["auth", "api-key", "composition"]
+    },
+    "function:packages/coding-agent/src/core/provider-composer.ts:composeOAuthAuth": {
+      "summary": "合成 OAuth 鉴权并解析相关 headers。",
+      "tags": ["auth", "oauth", "composition"]
+    },
+    "function:packages/coding-agent/src/core/provider-composer.ts:rawModelHeaders": {
+      "summary": "收集模型级尚未解析的原始 headers。",
+      "tags": ["headers", "models", "composition"]
+    },
+    "function:packages/coding-agent/src/core/provider-composer.ts:validateExtensionProvider": {
+      "summary": "校验扩展 provider 是否具备可注册的模型与鉴权。",
+      "tags": ["validation", "extension", "provider"]
+    },
+    "function:packages/coding-agent/src/core/provider-composer.ts:composeModelProvider": {
+      "summary": "合成完整 ModelProvider，包含模型列表、鉴权与 stream 适配。",
+      "tags": ["factory", "provider", "composition"]
+    },
+    "function:packages/coding-agent/src/core/provider-composer.ts:resolveConfiguredModelHeaders": {
+      "summary": "解析已配置模型的 headers，缺失则抛错。",
+      "tags": ["headers", "resolver", "models"]
+    },
+    "function:packages/coding-agent/src/core/provider-composer.ts:resolveCompatibilityRequestConfig": {
+      "summary": "解析兼容层请求配置中的 headers 与选项。",
+      "tags": ["compat", "resolver", "http"]
+    },
+    "function:packages/coding-agent/src/core/provider-composer.ts:configuredRequestAuthStatus": {
+      "summary": "判断配置侧鉴权是否已就绪（含 command/env）。",
+      "tags": ["auth", "status", "validation"]
+    },
+    "function:packages/coding-agent/src/core/remote-catalog-provider.ts:parseCatalog": {
+      "summary": "解析远程目录 JSON 为模型列表。",
+      "tags": ["parser", "catalog", "models"]
+    },
+    "function:packages/coding-agent/src/core/remote-catalog-provider.ts:remoteModels": {
+      "summary": "按本地生成时间戳合并远程与基线模型。",
+      "tags": ["catalog", "merge", "models"]
+    },
+    "function:packages/coding-agent/src/core/remote-catalog-provider.ts:withRemoteCatalog": {
+      "summary": "包装内置 provider，定时拉取并合并远程模型目录。",
+      "tags": ["catalog", "http", "provider"]
+    },
+    "function:packages/coding-agent/src/core/resolve-config-value.ts:parseConfigValueTemplate": {
+      "summary": "把配置字符串解析为字面量与环境变量模板片段。",
+      "tags": ["parser", "template", "config"]
+    },
+    "function:packages/coding-agent/src/core/resolve-config-value.ts:resolveTemplate": {
+      "summary": "用当前环境变量展开模板片段。",
+      "tags": ["resolver", "template", "environment"]
+    },
+    "function:packages/coding-agent/src/core/resolve-config-value.ts:getConfigValueEnvVarName": {
+      "summary": "取出单个配置值引用的环境变量名。",
+      "tags": ["config", "environment", "utility"]
+    },
+    "function:packages/coding-agent/src/core/resolve-config-value.ts:getConfigValueEnvVarNames": {
+      "summary": "列出配置值引用的全部环境变量名。",
+      "tags": ["config", "environment", "utility"]
+    },
+    "function:packages/coding-agent/src/core/resolve-config-value.ts:getMissingConfigValueEnvVarNames": {
+      "summary": "列出当前环境中缺失的配置环境变量。",
+      "tags": ["config", "validation", "environment"]
+    },
+    "function:packages/coding-agent/src/core/resolve-config-value.ts:isCommandConfigValue": {
+      "summary": "判断配置是否为 command 类型。",
+      "tags": ["config", "predicate", "command"]
+    },
+    "function:packages/coding-agent/src/core/resolve-config-value.ts:isConfigValueConfigured": {
+      "summary": "判断配置值在当前环境下是否已就绪。",
+      "tags": ["config", "validation", "predicate"]
+    },
+    "function:packages/coding-agent/src/core/resolve-config-value.ts:resolveConfigValue": {
+      "summary": "解析配置值（命令结果带缓存）。",
+      "tags": ["resolver", "config", "cache"]
+    },
+    "function:packages/coding-agent/src/core/resolve-config-value.ts:executeWithConfiguredShell": {
+      "summary": "用用户配置的 shell 执行 command 型配置。",
+      "tags": ["shell", "command", "config"]
+    },
+    "function:packages/coding-agent/src/core/resolve-config-value.ts:executeWithDefaultShell": {
+      "summary": "用默认 shell 执行 command 型配置。",
+      "tags": ["shell", "command", "config"]
+    },
+    "function:packages/coding-agent/src/core/resolve-config-value.ts:resolveConfigValueUncached": {
+      "summary": "不走缓存地解析配置值。",
+      "tags": ["resolver", "config", "cache"]
+    },
+    "function:packages/coding-agent/src/core/resolve-config-value.ts:resolveConfigValueOrThrow": {
+      "summary": "解析配置值，失败则抛出带描述的错误。",
+      "tags": ["resolver", "config", "error-handling"]
+    },
+    "function:packages/coding-agent/src/core/resolve-config-value.ts:resolveHeaders": {
+      "summary": "解析 header 映射中的每个配置值。",
+      "tags": ["headers", "resolver", "config"]
+    },
+    "function:packages/coding-agent/src/core/resolve-config-value.ts:resolveHeadersOrThrow": {
+      "summary": "解析 headers，任一失败则抛错。",
+      "tags": ["headers", "resolver", "error-handling"]
+    },
+    "function:packages/coding-agent/src/core/resolve-config-value.ts:clearConfigValueCache": {
+      "summary": "清空 command 型配置值的执行缓存。",
+      "tags": ["cache", "config", "lifecycle"]
+    },
+    "function:packages/coding-agent/src/core/resource-loader.ts:resolvePromptInput": {
+      "summary": "把 system prompt 输入解析为文件内容或字面量。",
+      "tags": ["prompt", "resolver", "filesystem"]
+    },
+    "function:packages/coding-agent/src/core/resource-loader.ts:loadContextFileFromDir": {
+      "summary": "从目录加载 AGENTS 或项目上下文文件。",
+      "tags": ["loader", "context", "filesystem"]
+    },
+    "function:packages/coding-agent/src/core/resource-loader.ts:findShadowedContextFile": {
+      "summary": "查找被 git 工作树路径遮蔽的上下文文件。",
+      "tags": ["context", "git", "discovery"]
+    },
+    "function:packages/coding-agent/src/core/resource-loader.ts:loadProjectContextFiles": {
+      "summary": "按优先级加载项目上下文文件集合。",
+      "tags": ["loader", "context", "project"]
+    },
+    "class:packages/coding-agent/src/core/resource-loader.ts:DefaultResourceLoader": {
+      "summary": "协调扩展、skills、prompts、themes 与 system prompt 的发现、去重与重载。",
+      "tags": ["resource-loader", "orchestration", "service"],
+      "complexity": "complex"
+    },
+    "class:packages/coding-agent/src/core/runtime-credentials.ts:RuntimeCredentials": {
+      "summary": "在底层凭证存储上叠加会话级 API key 覆盖。",
+      "tags": ["auth", "credentials", "runtime"]
+    },
+    "function:packages/coding-agent/src/core/sdk.ts:createAgentSession": {
+      "summary": "组装 ModelRuntime、Settings、资源与工具，创建可编程 AgentSession。",
+      "tags": ["factory", "sdk", "entry-point"],
+      "complexity": "complex"
+    },
+    "function:packages/coding-agent/src/core/session-cwd.ts:getMissingSessionCwdIssue": {
+      "summary": "检测会话 cwd 是否缺失，并返回问题描述。",
+      "tags": ["validation", "session", "cwd"]
+    },
+    "function:packages/coding-agent/src/core/session-cwd.ts:formatMissingSessionCwdError": {
+      "summary": "把缺失 cwd 问题格式化为错误消息。",
+      "tags": ["formatting", "error-handling", "session"]
+    },
+    "function:packages/coding-agent/src/core/session-cwd.ts:formatMissingSessionCwdPrompt": {
+      "summary": "把缺失 cwd 问题格式化为用户提示。",
+      "tags": ["formatting", "prompt", "session"]
+    },
+    "function:packages/coding-agent/src/core/session-cwd.ts:assertSessionCwdExists": {
+      "summary": "断言会话 cwd 存在，否则抛出 MissingSessionCwdError。",
+      "tags": ["validation", "session", "error-handling"]
+    },
+    "class:packages/coding-agent/src/core/session-cwd.ts:MissingSessionCwdError": {
+      "summary": "会话工作目录不存在时抛出的错误类型。",
+      "tags": ["error-handling", "session", "cwd"]
+    },
+    "function:packages/coding-agent/src/core/settings-diagnostics.ts:collectSettingsDiagnostics": {
+      "summary": "从 SettingsManager 收集加载与写入诊断。",
+      "tags": ["diagnostics", "settings", "collector"]
+    },
+    "function:packages/coding-agent/src/core/settings-diagnostics.ts:deduplicateDiagnostics": {
+      "summary": "按消息去重诊断条目。",
+      "tags": ["diagnostics", "dedupe", "utility"]
+    },
+    "function:packages/coding-agent/src/core/settings-manager.ts:deepMergeObjects": {
+      "summary": "深度合并普通对象，用于叠加项目设置覆盖。",
+      "tags": ["merge", "settings", "utility"]
+    },
+    "function:packages/coding-agent/src/core/settings-manager.ts:parseTimeoutSetting": {
+      "summary": "解析超时类设置值，复用 HTTP idle timeout 解析。",
+      "tags": ["parser", "settings", "timeout"]
+    },
+    "class:packages/coding-agent/src/core/settings-manager.ts:FileSettingsStorage": {
+      "summary": "带文件锁的全局/项目 settings.json 存储。",
+      "tags": ["persistence", "settings", "locking"]
+    },
+    "class:packages/coding-agent/src/core/settings-manager.ts:InMemorySettingsStorage": {
+      "summary": "内存 settings 存储，用于测试与不落盘场景。",
+      "tags": ["in-memory", "settings", "storage"]
+    },
+    "class:packages/coding-agent/src/core/settings-manager.ts:SettingsManager": {
+      "summary": "加载合并持久化全局与项目设置，并提供全部偏好 getter/setter。",
+      "tags": ["settings", "service", "persistence"],
+      "complexity": "complex"
+    },
+    "function:packages/coding-agent/src/core/skills.ts:prefixIgnorePattern": {
+      "summary": "为 skill ignore 规则加上目录前缀。",
+      "tags": ["ignore", "skills", "utility"]
+    },
+    "function:packages/coding-agent/src/core/skills.ts:addIgnoreRules": {
+      "summary": "读取目录 ignore 文件并加入 skill 扫描 matcher。",
+      "tags": ["ignore", "skills", "filesystem"]
+    },
+    "function:packages/coding-agent/src/core/skills.ts:validateName": {
+      "summary": "校验 skill 名称是否符合 frontmatter 规则。",
+      "tags": ["validation", "skills", "frontmatter"]
+    },
+    "function:packages/coding-agent/src/core/skills.ts:validateDescription": {
+      "summary": "校验 skill description 是否非空且合法。",
+      "tags": ["validation", "skills", "frontmatter"]
+    },
+    "function:packages/coding-agent/src/core/skills.ts:createSkillSourceInfo": {
+      "summary": "为 skill 文件构造 SourceInfo，区分包来源与合成来源。",
+      "tags": ["source-info", "skills", "factory"]
+    },
+    "function:packages/coding-agent/src/core/skills.ts:loadSkillsFromDir": {
+      "summary": "从单目录加载 skills 的薄封装入口。",
+      "tags": ["loader", "skills", "entry-point"]
+    },
+    "function:packages/coding-agent/src/core/skills.ts:loadSkillsFromDirInternal": {
+      "summary": "递归扫描目录，解析 SKILL.md 并应用 ignore。",
+      "tags": ["loader", "skills", "discovery"]
+    },
+    "function:packages/coding-agent/src/core/skills.ts:loadSkillFromFile": {
+      "summary": "解析单个 skill 文件的 frontmatter 与正文。",
+      "tags": ["parser", "skills", "frontmatter"]
+    },
+    "function:packages/coding-agent/src/core/skills.ts:formatSkillsForPrompt": {
+      "summary": "将 skills 格式化为 XML 片段，供 system prompt 引用。",
+      "tags": ["formatting", "skills", "prompt"]
+    },
+    "function:packages/coding-agent/src/core/skills.ts:loadSkills": {
+      "summary": "合并多路径、处理覆盖与诊断后加载全部 skills。",
+      "tags": ["loader", "skills", "diagnostics"]
+    },
+    "function:packages/coding-agent/src/core/source-info.ts:createSourceInfo": {
+      "summary": "从路径与包元数据创建 SourceInfo。",
+      "tags": ["factory", "source-info", "metadata"]
+    },
+    "function:packages/coding-agent/src/core/source-info.ts:createSyntheticSourceInfo": {
+      "summary": "为非包资源创建合成 SourceInfo。",
+      "tags": ["factory", "source-info", "metadata"]
+    },
+    "function:packages/coding-agent/src/core/system-prompt.ts:buildSystemPrompt": {
+      "summary": "拼接基础指令、skills 与项目上下文，生成 agent system prompt。",
+      "tags": ["prompt", "system-prompt", "builder"]
+    },
+    "function:packages/coding-agent/src/core/telemetry.ts:isInstallTelemetryEnabled": {
+      "summary": "结合设置与环境变量判断安装遥测是否开启。",
+      "tags": ["telemetry", "feature-flag", "settings"]
+    },
+    "function:packages/coding-agent/src/core/timings.ts:resetTimings": {
+      "summary": "重置指定命名空间的计时记录。",
+      "tags": ["timing", "lifecycle", "utility"]
+    },
+    "function:packages/coding-agent/src/core/timings.ts:time": {
+      "summary": "记录一个标签相对于上次打点的耗时。",
+      "tags": ["timing", "diagnostics", "utility"]
+    },
+    "function:packages/coding-agent/src/core/timings.ts:printTimingGroup": {
+      "summary": "打印一组计时结果。",
+      "tags": ["timing", "diagnostics", "logging"]
+    },
+    "function:packages/coding-agent/src/core/timings.ts:printTimings": {
+      "summary": "打印全部命名空间的计时分组。",
+      "tags": ["timing", "diagnostics", "logging"]
+    },
+    "function:packages/coding-agent/src/core/trust-manager.ts:findNearestTrustEntry": {
+      "summary": "在信任文件中查找覆盖当前 cwd 的最近祖先条目。",
+      "tags": ["trust", "lookup", "filesystem"]
+    },
+    "function:packages/coding-agent/src/core/trust-manager.ts:getProjectTrustParentPath": {
+      "summary": "返回用于查找父级信任记录的路径。",
+      "tags": ["trust", "paths", "utility"]
+    },
+    "function:packages/coding-agent/src/core/trust-manager.ts:getProjectTrustOptions": {
+      "summary": "生成当前目录可用的项目信任选项列表。",
+      "tags": ["trust", "options", "security"]
+    },
+    "function:packages/coding-agent/src/core/trust-manager.ts:readTrustFile": {
+      "summary": "读取并解析项目信任 JSON 文件。",
+      "tags": ["trust", "persistence", "parser"]
+    },
+    "function:packages/coding-agent/src/core/trust-manager.ts:writeTrustFile": {
+      "summary": "把信任数据写回 JSON 文件。",
+      "tags": ["trust", "persistence", "writer"]
+    },
+    "function:packages/coding-agent/src/core/trust-manager.ts:acquireTrustLockSync": {
+      "summary": "同步获取信任文件锁，防止并发写入。",
+      "tags": ["trust", "locking", "concurrency"]
+    },
+    "function:packages/coding-agent/src/core/trust-manager.ts:hasTrustRequiringProjectResources": {
+      "summary": "检测目录是否包含必须先信任才能加载的项目资源。",
+      "tags": ["trust", "security", "discovery"]
+    },
+    "class:packages/coding-agent/src/core/trust-manager.ts:ProjectTrustStore": {
+      "summary": "对信任文件的 get/set 封装，支持单条与批量更新。",
+      "tags": ["trust", "storage", "persistence"]
+    }
+  }
+}

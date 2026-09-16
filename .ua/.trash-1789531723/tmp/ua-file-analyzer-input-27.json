@@ -1,0 +1,9 @@
+{
+  "projectRoot": "/Users/elex-mb0203/MyWork/agent-projects/ai-pi",
+  "batchFiles": [
+    {"path": "packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql", "language": "sql", "sizeLines": 121, "fileCategory": "data"}
+  ],
+  "batchImportData": {
+    "packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql": []
+  }
+}

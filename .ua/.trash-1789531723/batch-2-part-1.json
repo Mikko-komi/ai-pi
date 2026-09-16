@@ -1,0 +1,996 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/experimental/services/models-provider.ts",
+      "type": "file",
+      "name": "models-provider.ts",
+      "filePath": "packages/coding-agent/src/experimental/services/models-provider.ts",
+      "summary": "实现 pi.models Chord service：从 AgentLane 与 ModelRuntime 同步模型目录、当前配置与 thinking level，并提供选择/刷新/循环推理档位的 facet。",
+      "tags": [
+        "service",
+        "factory",
+        "chord-facet",
+        "模型目录",
+        "replicated-state"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/services/models-provider.ts:createModelsService",
+      "type": "function",
+      "name": "createModelsService",
+      "filePath": "packages/coding-agent/src/experimental/services/models-provider.ts",
+      "lineRange": [
+        14,
+        116
+      ],
+      "summary": "构造 Models service runtime：发布 catalog/configuration/refresh 复制状态，并实现 cycleThinking、select、refresh 等操作。",
+      "tags": [
+        "factory",
+        "service",
+        "replicated-state",
+        "模型选择"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/services/models-provider.ts:createModelsServiceFacet",
+      "type": "function",
+      "name": "createModelsServiceFacet",
+      "filePath": "packages/coding-agent/src/experimental/services/models-provider.ts",
+      "lineRange": [
+        118,
+        136
+      ],
+      "summary": "将 Models service 包装为 @pi/models facet，在激活时用 BACKGROUND_CONTEXT 填充初始目录与配置。",
+      "tags": [
+        "factory",
+        "chord-facet",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/services/models.ts",
+      "type": "file",
+      "name": "models.ts",
+      "filePath": "packages/coding-agent/src/experimental/services/models.ts",
+      "summary": "定义 pi.models Chord service 契约：模型引用、目录摘要、复制状态以及选择/刷新/thinking 操作。",
+      "tags": [
+        "type-definition",
+        "service",
+        "契约",
+        "models"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/services/plugins.ts",
+      "type": "file",
+      "name": "plugins.ts",
+      "filePath": "packages/coding-agent/src/experimental/services/plugins.ts",
+      "summary": "定义演示侧 PresentationPlugins 与会话侧 SessionPlugins 两个 Chord service，分别负责准备/重载插件包。",
+      "tags": [
+        "type-definition",
+        "service",
+        "插件",
+        "契约"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/services/presentation-ui.ts",
+      "type": "file",
+      "name": "presentation-ui.ts",
+      "filePath": "packages/coding-agent/src/experimental/services/presentation-ui.ts",
+      "summary": "定义进程本地 PresentationUI service，向 presentation facet 暴露 select 与 showStatus 窄 UI 能力。",
+      "tags": [
+        "type-definition",
+        "service",
+        "local-ui",
+        "契约"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/services/server.ts",
+      "type": "file",
+      "name": "server.ts",
+      "filePath": "packages/coding-agent/src/experimental/services/server.ts",
+      "summary": "为实验服务器组装 RoutedServerServiceHost：串行化会话目录刷新，并向客户端提供 SessionDirectory、SessionManagement 与 PresentationPlugins。",
+      "tags": [
+        "service",
+        "factory",
+        "会话管理",
+        "server-host"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/services/server.ts:createExperimentalServerServices",
+      "type": "function",
+      "name": "createExperimentalServerServices",
+      "filePath": "packages/coding-agent/src/experimental/services/server.ts",
+      "lineRange": [
+        25,
+        129
+      ],
+      "summary": "创建实验服务器服务主机，用 mutation 队列串行化创建/删除/挂接会话与插件准备，并复制会话目录状态。",
+      "tags": [
+        "factory",
+        "service",
+        "会话管理",
+        "remote-service"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/services/server.ts:createProviderAttachment",
+      "type": "function",
+      "name": "createProviderAttachment",
+      "filePath": "packages/coding-agent/src/experimental/services/server.ts",
+      "lineRange": [
+        131,
+        150
+      ],
+      "summary": "把 RemoteServiceProvider 包成 RoutedServerServiceAttachment，支持 invoke 与一次性 release。",
+      "tags": [
+        "adapter",
+        "remote-service",
+        "attachment"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/services/sessions.ts",
+      "type": "file",
+      "name": "sessions.ts",
+      "filePath": "packages/coding-agent/src/experimental/services/sessions.ts",
+      "summary": "定义会话地址/摘要类型，以及 SessionDirectory 与 SessionManagement 两个 Chord service 契约。",
+      "tags": [
+        "type-definition",
+        "service",
+        "会话管理",
+        "契约"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "type": "file",
+      "name": "slash-commands-provider.ts",
+      "filePath": "packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "summary": "实现 SlashCommandRegistry 与内置 /model、/thinking、/compact、/reload 命令 facet，对接 Models、AgentController 与 PresentationUI。",
+      "tags": [
+        "service",
+        "slash-command",
+        "chord-facet",
+        "registry"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:SlashCommandRegistry",
+      "type": "class",
+      "name": "SlashCommandRegistry",
+      "filePath": "packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "lineRange": [
+        24,
+        75
+      ],
+      "summary": "进程内斜杠命令注册表：校验名称、支持同名 replace 世代、以及 list/subscribe 通知。",
+      "tags": [
+        "registry",
+        "slash-command",
+        "local-service"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:createSlashCommandsRuntimeFacet",
+      "type": "function",
+      "name": "createSlashCommandsRuntimeFacet",
+      "filePath": "packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "lineRange": [
+        77,
+        84
+      ],
+      "summary": "提供 @pi/slash-commands-runtime facet，把 SlashCommandRegistry 注入 SlashCommands service。",
+      "tags": [
+        "factory",
+        "chord-facet",
+        "slash-command"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:createBuiltInSlashCommandsFacet",
+      "type": "function",
+      "name": "createBuiltInSlashCommandsFacet",
+      "filePath": "packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "lineRange": [
+        86,
+        119
+      ],
+      "summary": "在激活时注册内置 /model、/thinking、/compact、/reload，并在 facet 退役时收回替换世代。",
+      "tags": [
+        "factory",
+        "chord-facet",
+        "slash-command",
+        "builtin"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:modelCommand",
+      "type": "function",
+      "name": "modelCommand",
+      "filePath": "packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "lineRange": [
+        121,
+        169
+      ],
+      "summary": "构造 /model 命令：按 provider/modelId 补全或弹出 PresentationUI 选择器，再调用 Models.select。",
+      "tags": [
+        "slash-command",
+        "模型选择",
+        "ui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:thinkingCommand",
+      "type": "function",
+      "name": "thinkingCommand",
+      "filePath": "packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "lineRange": [
+        171,
+        202
+      ],
+      "summary": "构造 /thinking 命令：校验或选择 thinking level，并写回 Models.selectThinking。",
+      "tags": [
+        "slash-command",
+        "thinking-level",
+        "ui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:compactCommand",
+      "type": "function",
+      "name": "compactCommand",
+      "filePath": "packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "lineRange": [
+        204,
+        214
+      ],
+      "summary": "构造 /compact 命令，把可选自定义指令转发给 AgentController.compact。",
+      "tags": [
+        "slash-command",
+        "compaction",
+        "agent-controller"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:exactModel",
+      "type": "function",
+      "name": "exactModel",
+      "filePath": "packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "lineRange": [
+        216,
+        225
+      ],
+      "summary": "按 provider/modelId 或仅 modelId 精确匹配目录中的唯一模型，歧义时返回 undefined。",
+      "tags": [
+        "utility",
+        "模型匹配",
+        "lookup"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/services/slash-commands.ts",
+      "type": "file",
+      "name": "slash-commands.ts",
+      "filePath": "packages/coding-agent/src/experimental/services/slash-commands.ts",
+      "summary": "定义进程本地 SlashCommands service：命令贡献形状、补全、run 结果，以及 register/replace/list/subscribe。",
+      "tags": [
+        "type-definition",
+        "service",
+        "slash-command",
+        "契约"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/services/transcript-provider.ts",
+      "type": "file",
+      "name": "transcript-provider.ts",
+      "filePath": "packages/coding-agent/src/experimental/services/transcript-provider.ts",
+      "summary": "把 AgentLane watch 事件折叠进 Transcript 复制状态，必要时 rebase 快照，并过滤不向前端转发的 harness 事件。",
+      "tags": [
+        "service",
+        "transcript",
+        "chord-facet",
+        "replicated-state"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/services/transcript-provider.ts:createTranscriptService",
+      "type": "function",
+      "name": "createTranscriptService",
+      "filePath": "packages/coding-agent/src/experimental/services/transcript-provider.ts",
+      "lineRange": [
+        20,
+        91
+      ],
+      "summary": "订阅 lane.watch，用 reduceLaneSnapshot 增量更新或 rebase，并向 Transcript.state 发布 snapshot/event。",
+      "tags": [
+        "factory",
+        "transcript",
+        "replicated-state",
+        "event-handler"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/services/transcript-provider.ts:createTranscriptServiceFacet",
+      "type": "function",
+      "name": "createTranscriptServiceFacet",
+      "filePath": "packages/coding-agent/src/experimental/services/transcript-provider.ts",
+      "lineRange": [
+        93,
+        103
+      ],
+      "summary": "将 Transcript service 注册为 @pi/transcript facet，激活时 watch、退役时 dispose。",
+      "tags": [
+        "factory",
+        "chord-facet",
+        "transcript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/services/transcript-provider.ts:toLaneWatchEvent",
+      "type": "function",
+      "name": "toLaneWatchEvent",
+      "filePath": "packages/coding-agent/src/experimental/services/transcript-provider.ts",
+      "lineRange": [
+        105,
+        128
+      ],
+      "summary": "把 HarnessEvent 筛成可复制的 LaneWatchEvent，丢弃 turn/handler 噪声并剥掉 message_update 的 provider 事件。",
+      "tags": [
+        "utility",
+        "event-filter",
+        "transcript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/services/transcript.ts",
+      "type": "file",
+      "name": "transcript.ts",
+      "filePath": "packages/coding-agent/src/experimental/services/transcript.ts",
+      "summary": "定义 pi.transcript Chord service：复制主 lane 的 LaneTranscriptSnapshot 与最近一次 watch 事件。",
+      "tags": [
+        "type-definition",
+        "service",
+        "transcript",
+        "契约"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/services/worker.ts",
+      "type": "file",
+      "name": "worker.ts",
+      "filePath": "packages/coding-agent/src/experimental/services/worker.ts",
+      "summary": "为 Session worker 组装 FacetHost：内置 AgentController/Models/Transcript/SessionPlugins，并按连接 attachment 作用域调用远程 service。",
+      "tags": [
+        "factory",
+        "session-worker",
+        "chord-facet",
+        "service"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices",
+      "type": "function",
+      "name": "createSessionWorkerServices",
+      "filePath": "packages/coding-agent/src/experimental/services/worker.ts",
+      "lineRange": [
+        47,
+        148
+      ],
+      "summary": "加载内置与插件 facet、支持串行 reload，并按 serverConnectionId+attachmentId 复用 RemoteServiceEndpoint。",
+      "tags": [
+        "factory",
+        "session-worker",
+        "facet-host",
+        "remote-service"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "插件 reload 走 reloadTail 串行队列，失败时 dispose 候选世代以免泄漏 facet。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/models-provider.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/models-provider.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/models-provider.ts",
+      "target": "file:packages/chord/src/context/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/models-provider.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/models-provider.ts",
+      "target": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/models-provider.ts",
+      "target": "file:packages/coding-agent/src/core/settings-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/models-provider.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/models.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/models.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/plugins.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/presentation-ui.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/server.ts",
+      "target": "file:packages/chord/src/context/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/server.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/server.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/plugins.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/server.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/sessions.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/server.ts",
+      "target": "file:packages/server/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/sessions.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/sessions.ts",
+      "target": "file:packages/protocol/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/agent-controller.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/plugins.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/presentation-ui.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/slash-commands.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/slash-commands.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/slash-commands.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/agent-controller.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/transcript-provider.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/transcript-provider.ts",
+      "target": "file:packages/chord/src/context/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/transcript-provider.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/transcript-provider.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/transcript.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/transcript.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/transcript.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/worker.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/worker.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/worker.ts",
+      "target": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/worker.ts",
+      "target": "file:packages/coding-agent/src/core/settings-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/worker.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/agent-controller-provider.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/worker.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/agent-controller.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/worker.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/models-provider.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/worker.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/plugins.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/worker.ts",
+      "target": "file:packages/coding-agent/src/experimental/services/transcript-provider.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/models-provider.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/models-provider.ts:createModelsService",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/models-provider.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/models-provider.ts:createModelsServiceFacet",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/server.ts:createExperimentalServerServices",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/server.ts:createProviderAttachment",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "target": "class:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:SlashCommandRegistry",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:createSlashCommandsRuntimeFacet",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:createBuiltInSlashCommandsFacet",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:modelCommand",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:thinkingCommand",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:compactCommand",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:exactModel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/transcript-provider.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/transcript-provider.ts:createTranscriptService",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/transcript-provider.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/transcript-provider.ts:createTranscriptServiceFacet",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/transcript-provider.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/transcript-provider.ts:toLaneWatchEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/worker.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/models-provider.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/models-provider.ts:createModelsService",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/models-provider.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/models-provider.ts:createModelsServiceFacet",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/server.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/server.ts:createExperimentalServerServices",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "target": "class:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:SlashCommandRegistry",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:createSlashCommandsRuntimeFacet",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:createBuiltInSlashCommandsFacet",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/transcript-provider.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/transcript-provider.ts:createTranscriptService",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/transcript-provider.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/transcript-provider.ts:createTranscriptServiceFacet",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/services/worker.ts",
+      "target": "function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/services/models-provider.ts:createModelsService",
+      "target": "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/services/models-provider.ts:createModelsService",
+      "target": "class:packages/coding-agent/src/core/settings-manager.ts:SettingsManager",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/services/models-provider.ts:createModelsServiceFacet",
+      "target": "function:packages/chord/src/index.ts:defineFacet",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/services/server.ts:createExperimentalServerServices",
+      "target": "function:packages/chord/src/index.ts:createRemoteServiceEndpoint",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/services/server.ts:createExperimentalServerServices",
+      "target": "function:packages/chord/src/index.ts:replicatedState",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:createSlashCommandsRuntimeFacet",
+      "target": "function:packages/chord/src/index.ts:defineFacet",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:createBuiltInSlashCommandsFacet",
+      "target": "function:packages/chord/src/index.ts:defineFacet",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/services/transcript-provider.ts:createTranscriptService",
+      "target": "function:packages/agent/src/index.ts:reduceLaneSnapshot",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/services/transcript-provider.ts:createTranscriptServiceFacet",
+      "target": "function:packages/chord/src/index.ts:defineFacet",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices",
+      "target": "function:packages/coding-agent/src/experimental/services/agent-controller-provider.ts:createAgentController",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices",
+      "target": "function:packages/coding-agent/src/experimental/services/models-provider.ts:createModelsServiceFacet",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices",
+      "target": "function:packages/coding-agent/src/experimental/services/transcript-provider.ts:createTranscriptServiceFacet",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices",
+      "target": "function:packages/chord/src/index.ts:createFacetHost",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices",
+      "target": "function:packages/chord/src/index.ts:createStaticFacetLoader",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices",
+      "target": "function:packages/chord/src/index.ts:createRemoteServiceEndpoint",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices",
+      "target": "function:packages/chord/src/index.ts:defineFacet",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

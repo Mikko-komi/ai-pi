@@ -1,0 +1,955 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/ai/src/providers/google.ts",
+      "type": "file",
+      "name": "google.ts",
+      "filePath": "packages/ai/src/providers/google.ts",
+      "summary": "定义 Google Gemini 内置 provider：指向 generativelanguage.googleapis.com，用 GEMINI_API_KEY 鉴权，并通过 googleGenerativeAIApi 对接官方 Generative Language API。",
+      "tags": [
+        "provider",
+        "factory",
+        "认证",
+        "google"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/google.ts:googleProvider",
+      "type": "function",
+      "name": "googleProvider",
+      "filePath": "packages/ai/src/providers/google.ts",
+      "summary": "工厂函数：创建 Google Gemini provider，绑定 GEMINI_API_KEY、GOOGLE_MODELS 与 googleGenerativeAIApi。",
+      "tags": [
+        "factory",
+        "provider",
+        "google"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        6,
+        15
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/groq.models.ts",
+      "type": "file",
+      "name": "groq.models.ts",
+      "filePath": "packages/ai/src/providers/groq.models.ts",
+      "summary": "导出 GROQ_MODELS：将 Groq 的生成模型目录 JSON 展平为 ModelCatalog，供 groqProvider 枚举可用模型。",
+      "tags": [
+        "模型目录",
+        "generated",
+        "type-definition",
+        "groq"
+      ],
+      "complexity": "simple",
+      "languageNotes": "由 scripts/generate-models.ts 自动生成，通过 JSON import attributes 载入对应 data/*.json 再经 flattenModelCatalog 展平。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/groq.ts",
+      "type": "file",
+      "name": "groq.ts",
+      "filePath": "packages/ai/src/providers/groq.ts",
+      "summary": "定义 Groq 内置 provider：对接 api.groq.com 的 OpenAI 兼容 Completions 端点，使用 GROQ_API_KEY 环境变量鉴权。",
+      "tags": [
+        "provider",
+        "factory",
+        "认证",
+        "openai-compatible"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/groq.ts:groqProvider",
+      "type": "function",
+      "name": "groqProvider",
+      "filePath": "packages/ai/src/providers/groq.ts",
+      "summary": "工厂函数：创建 Groq provider，绑定 GROQ_API_KEY、GROQ_MODELS 与 OpenAI Completions 兼容 API。",
+      "tags": [
+        "factory",
+        "provider",
+        "openai-compatible"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        6,
+        15
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/huggingface.models.ts",
+      "type": "file",
+      "name": "huggingface.models.ts",
+      "filePath": "packages/ai/src/providers/huggingface.models.ts",
+      "summary": "导出 HUGGINGFACE_MODELS：展平 Hugging Face 生成模型目录，供 huggingfaceProvider 注册可用模型。",
+      "tags": [
+        "模型目录",
+        "generated",
+        "type-definition",
+        "huggingface"
+      ],
+      "complexity": "simple",
+      "languageNotes": "由 scripts/generate-models.ts 自动生成，通过 JSON import attributes 载入对应 data/*.json 再经 flattenModelCatalog 展平。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/huggingface.ts",
+      "type": "file",
+      "name": "huggingface.ts",
+      "filePath": "packages/ai/src/providers/huggingface.ts",
+      "summary": "定义 Hugging Face 内置 provider：走 router.huggingface.co 的 OpenAI 兼容 Completions API，使用 HF_TOKEN 鉴权。",
+      "tags": [
+        "provider",
+        "factory",
+        "认证",
+        "openai-compatible"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/huggingface.ts:huggingfaceProvider",
+      "type": "function",
+      "name": "huggingfaceProvider",
+      "filePath": "packages/ai/src/providers/huggingface.ts",
+      "summary": "工厂函数：创建 Hugging Face provider，绑定 HF_TOKEN、HUGGINGFACE_MODELS 与 OpenAI Completions 兼容 API。",
+      "tags": [
+        "factory",
+        "provider",
+        "openai-compatible"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        6,
+        15
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/kimi-coding.models.ts",
+      "type": "file",
+      "name": "kimi-coding.models.ts",
+      "filePath": "packages/ai/src/providers/kimi-coding.models.ts",
+      "summary": "导出 KIMI_CODING_MODELS：展平 Kimi For Coding 的生成模型目录。",
+      "tags": [
+        "模型目录",
+        "generated",
+        "type-definition",
+        "kimi"
+      ],
+      "complexity": "simple",
+      "languageNotes": "由 scripts/generate-models.ts 自动生成，通过 JSON import attributes 载入对应 data/*.json 再经 flattenModelCatalog 展平。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/kimi-coding.ts",
+      "type": "file",
+      "name": "kimi-coding.ts",
+      "filePath": "packages/ai/src/providers/kimi-coding.ts",
+      "summary": "定义 Kimi For Coding provider：对接 api.kimi.com/coding，同时支持 KIMI_API_KEY 与订阅制 Kimi Code OAuth，底层使用 Anthropic Messages API。",
+      "tags": [
+        "provider",
+        "factory",
+        "oauth",
+        "认证"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/kimi-coding.ts:kimiCodingProvider",
+      "type": "function",
+      "name": "kimiCodingProvider",
+      "filePath": "packages/ai/src/providers/kimi-coding.ts",
+      "summary": "工厂函数：创建 Kimi For Coding provider，同时挂载环境变量 API key 与 loadKimiCodingOAuth 订阅登录，使用 Anthropic Messages API。",
+      "tags": [
+        "factory",
+        "provider",
+        "oauth"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        7,
+        24
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/minimax-cn.models.ts",
+      "type": "file",
+      "name": "minimax-cn.models.ts",
+      "filePath": "packages/ai/src/providers/minimax-cn.models.ts",
+      "summary": "导出 MINIMAX_CN_MODELS：展平 MiniMax 中国区生成模型目录。",
+      "tags": [
+        "模型目录",
+        "generated",
+        "type-definition",
+        "minimax"
+      ],
+      "complexity": "simple",
+      "languageNotes": "由 scripts/generate-models.ts 自动生成，通过 JSON import attributes 载入对应 data/*.json 再经 flattenModelCatalog 展平。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/minimax-cn.ts",
+      "type": "file",
+      "name": "minimax-cn.ts",
+      "filePath": "packages/ai/src/providers/minimax-cn.ts",
+      "summary": "定义 MiniMax 中国区 provider：指向 api.minimaxi.com 的 Anthropic 兼容端点，使用 MINIMAX_CN_API_KEY 鉴权。",
+      "tags": [
+        "provider",
+        "factory",
+        "认证",
+        "anthropic-compatible"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/minimax-cn.ts:minimaxCnProvider",
+      "type": "function",
+      "name": "minimaxCnProvider",
+      "filePath": "packages/ai/src/providers/minimax-cn.ts",
+      "summary": "工厂函数：创建 MiniMax 中国区 provider，绑定 MINIMAX_CN_API_KEY 与 Anthropic Messages API。",
+      "tags": [
+        "factory",
+        "provider",
+        "anthropic-compatible"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        6,
+        15
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/minimax.models.ts",
+      "type": "file",
+      "name": "minimax.models.ts",
+      "filePath": "packages/ai/src/providers/minimax.models.ts",
+      "summary": "导出 MINIMAX_MODELS：展平 MiniMax 国际区生成模型目录。",
+      "tags": [
+        "模型目录",
+        "generated",
+        "type-definition",
+        "minimax"
+      ],
+      "complexity": "simple",
+      "languageNotes": "由 scripts/generate-models.ts 自动生成，通过 JSON import attributes 载入对应 data/*.json 再经 flattenModelCatalog 展平。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/minimax.ts",
+      "type": "file",
+      "name": "minimax.ts",
+      "filePath": "packages/ai/src/providers/minimax.ts",
+      "summary": "定义 MiniMax 国际区 provider：指向 api.minimax.io 的 Anthropic 兼容端点，使用 MINIMAX_API_KEY 鉴权。",
+      "tags": [
+        "provider",
+        "factory",
+        "认证",
+        "anthropic-compatible"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/minimax.ts:minimaxProvider",
+      "type": "function",
+      "name": "minimaxProvider",
+      "filePath": "packages/ai/src/providers/minimax.ts",
+      "summary": "工厂函数：创建 MiniMax 国际区 provider，绑定 MINIMAX_API_KEY 与 Anthropic Messages API。",
+      "tags": [
+        "factory",
+        "provider",
+        "anthropic-compatible"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        6,
+        15
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/mistral.models.ts",
+      "type": "file",
+      "name": "mistral.models.ts",
+      "filePath": "packages/ai/src/providers/mistral.models.ts",
+      "summary": "导出 MISTRAL_MODELS：展平 Mistral 生成模型目录。",
+      "tags": [
+        "模型目录",
+        "generated",
+        "type-definition",
+        "mistral"
+      ],
+      "complexity": "simple",
+      "languageNotes": "由 scripts/generate-models.ts 自动生成，通过 JSON import attributes 载入对应 data/*.json 再经 flattenModelCatalog 展平。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/mistral.ts",
+      "type": "file",
+      "name": "mistral.ts",
+      "filePath": "packages/ai/src/providers/mistral.ts",
+      "summary": "定义 Mistral 内置 provider：对接 api.mistral.ai，使用 MISTRAL_API_KEY，并通过 mistralConversationsApi 走官方 Conversations 协议。",
+      "tags": [
+        "provider",
+        "factory",
+        "认证",
+        "mistral"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/mistral.ts:mistralProvider",
+      "type": "function",
+      "name": "mistralProvider",
+      "filePath": "packages/ai/src/providers/mistral.ts",
+      "summary": "工厂函数：创建 Mistral provider，绑定 MISTRAL_API_KEY、MISTRAL_MODELS 与 mistralConversationsApi。",
+      "tags": [
+        "factory",
+        "provider",
+        "mistral"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        6,
+        15
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/moonshotai-cn.models.ts",
+      "type": "file",
+      "name": "moonshotai-cn.models.ts",
+      "filePath": "packages/ai/src/providers/moonshotai-cn.models.ts",
+      "summary": "导出 MOONSHOTAI_CN_MODELS：展平 Moonshot AI 中国区生成模型目录。",
+      "tags": [
+        "模型目录",
+        "generated",
+        "type-definition",
+        "moonshot"
+      ],
+      "complexity": "simple",
+      "languageNotes": "由 scripts/generate-models.ts 自动生成，通过 JSON import attributes 载入对应 data/*.json 再经 flattenModelCatalog 展平。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/moonshotai-cn.ts",
+      "type": "file",
+      "name": "moonshotai-cn.ts",
+      "filePath": "packages/ai/src/providers/moonshotai-cn.ts",
+      "summary": "定义 Moonshot AI 中国区 provider：指向 api.moonshot.cn 的 OpenAI 兼容 Completions 端点，使用 MOONSHOT_API_KEY 鉴权。",
+      "tags": [
+        "provider",
+        "factory",
+        "认证",
+        "openai-compatible"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/moonshotai-cn.ts:moonshotaiCnProvider",
+      "type": "function",
+      "name": "moonshotaiCnProvider",
+      "filePath": "packages/ai/src/providers/moonshotai-cn.ts",
+      "summary": "工厂函数：创建 Moonshot AI 中国区 provider，绑定 MOONSHOT_API_KEY 与 OpenAI Completions 兼容 API。",
+      "tags": [
+        "factory",
+        "provider",
+        "openai-compatible"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        6,
+        15
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/moonshotai.models.ts",
+      "type": "file",
+      "name": "moonshotai.models.ts",
+      "filePath": "packages/ai/src/providers/moonshotai.models.ts",
+      "summary": "导出 MOONSHOTAI_MODELS：展平 Moonshot AI 国际区生成模型目录。",
+      "tags": [
+        "模型目录",
+        "generated",
+        "type-definition",
+        "moonshot"
+      ],
+      "complexity": "simple",
+      "languageNotes": "由 scripts/generate-models.ts 自动生成，通过 JSON import attributes 载入对应 data/*.json 再经 flattenModelCatalog 展平。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/ai/src/providers/google.ts",
+      "target": "file:packages/ai/src/api/google-generative-ai.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/google.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/google.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/google.ts",
+      "target": "file:packages/ai/src/providers/google.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/google.ts",
+      "target": "function:packages/ai/src/providers/google.ts:googleProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/google.ts",
+      "target": "function:packages/ai/src/providers/google.ts:googleProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/google.ts:googleProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/google.ts:googleProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/google.ts:googleProvider",
+      "target": "function:packages/ai/src/api/google-generative-ai.lazy.ts:googleGenerativeAIApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/groq.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/groq.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/groq.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/groq.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/groq.ts",
+      "target": "file:packages/ai/src/providers/groq.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/groq.ts",
+      "target": "function:packages/ai/src/providers/groq.ts:groqProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/groq.ts",
+      "target": "function:packages/ai/src/providers/groq.ts:groqProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/groq.ts:groqProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/groq.ts:groqProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/groq.ts:groqProvider",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/huggingface.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/huggingface.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/huggingface.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/huggingface.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/huggingface.ts",
+      "target": "file:packages/ai/src/providers/huggingface.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/huggingface.ts",
+      "target": "function:packages/ai/src/providers/huggingface.ts:huggingfaceProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/huggingface.ts",
+      "target": "function:packages/ai/src/providers/huggingface.ts:huggingfaceProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/huggingface.ts:huggingfaceProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/huggingface.ts:huggingfaceProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/huggingface.ts:huggingfaceProvider",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/kimi-coding.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/kimi-coding.ts",
+      "target": "file:packages/ai/src/api/anthropic-messages.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/kimi-coding.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/kimi-coding.ts",
+      "target": "file:packages/ai/src/auth/oauth/load.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/kimi-coding.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/kimi-coding.ts",
+      "target": "file:packages/ai/src/providers/kimi-coding.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/kimi-coding.ts",
+      "target": "function:packages/ai/src/providers/kimi-coding.ts:kimiCodingProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/kimi-coding.ts",
+      "target": "function:packages/ai/src/providers/kimi-coding.ts:kimiCodingProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/kimi-coding.ts:kimiCodingProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/kimi-coding.ts:kimiCodingProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/kimi-coding.ts:kimiCodingProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:lazyOAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/kimi-coding.ts:kimiCodingProvider",
+      "target": "function:packages/ai/src/auth/oauth/load.ts:loadKimiCodingOAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/kimi-coding.ts:kimiCodingProvider",
+      "target": "function:packages/ai/src/api/anthropic-messages.lazy.ts:anthropicMessagesApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/minimax-cn.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/minimax-cn.ts",
+      "target": "file:packages/ai/src/api/anthropic-messages.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/minimax-cn.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/minimax-cn.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/minimax-cn.ts",
+      "target": "file:packages/ai/src/providers/minimax-cn.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/minimax-cn.ts",
+      "target": "function:packages/ai/src/providers/minimax-cn.ts:minimaxCnProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/minimax-cn.ts",
+      "target": "function:packages/ai/src/providers/minimax-cn.ts:minimaxCnProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/minimax-cn.ts:minimaxCnProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/minimax-cn.ts:minimaxCnProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/minimax-cn.ts:minimaxCnProvider",
+      "target": "function:packages/ai/src/api/anthropic-messages.lazy.ts:anthropicMessagesApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/minimax.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/minimax.ts",
+      "target": "file:packages/ai/src/api/anthropic-messages.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/minimax.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/minimax.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/minimax.ts",
+      "target": "file:packages/ai/src/providers/minimax.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/minimax.ts",
+      "target": "function:packages/ai/src/providers/minimax.ts:minimaxProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/minimax.ts",
+      "target": "function:packages/ai/src/providers/minimax.ts:minimaxProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/minimax.ts:minimaxProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/minimax.ts:minimaxProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/minimax.ts:minimaxProvider",
+      "target": "function:packages/ai/src/api/anthropic-messages.lazy.ts:anthropicMessagesApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/mistral.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/mistral.ts",
+      "target": "file:packages/ai/src/api/mistral-conversations.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/mistral.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/mistral.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/mistral.ts",
+      "target": "file:packages/ai/src/providers/mistral.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/mistral.ts",
+      "target": "function:packages/ai/src/providers/mistral.ts:mistralProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/mistral.ts",
+      "target": "function:packages/ai/src/providers/mistral.ts:mistralProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/mistral.ts:mistralProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/mistral.ts:mistralProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/mistral.ts:mistralProvider",
+      "target": "function:packages/ai/src/api/mistral-conversations.lazy.ts:mistralConversationsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/moonshotai-cn.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/moonshotai-cn.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/moonshotai-cn.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/moonshotai-cn.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/moonshotai-cn.ts",
+      "target": "file:packages/ai/src/providers/moonshotai-cn.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/moonshotai-cn.ts",
+      "target": "function:packages/ai/src/providers/moonshotai-cn.ts:moonshotaiCnProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/moonshotai-cn.ts",
+      "target": "function:packages/ai/src/providers/moonshotai-cn.ts:moonshotaiCnProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/moonshotai-cn.ts:moonshotaiCnProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/moonshotai-cn.ts:moonshotaiCnProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/moonshotai-cn.ts:moonshotaiCnProvider",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/moonshotai.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

@@ -1,0 +1,1411 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/core/footer-data-provider.ts",
+      "type": "file",
+      "name": "footer-data-provider.ts",
+      "filePath": "packages/coding-agent/src/core/footer-data-provider.ts",
+      "summary": "为 footer 提供 git 分支（支持 worktree 与 WSL 挂载盘轮询）和 extension 状态，并监听 HEAD/reftable 变化。",
+      "tags": [
+        "footer",
+        "git",
+        "fs-watch",
+        "service"
+      ],
+      "complexity": "complex",
+      "languageNotes": "WSL 下访问 /mnt/<drive> 时改用 watchFile 轮询，避免 inotify 在 DrvFs 上失效。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/footer-data-provider.ts:findGitPaths",
+      "type": "function",
+      "name": "findGitPaths",
+      "filePath": "packages/coding-agent/src/core/footer-data-provider.ts",
+      "lineRange": [
+        16,
+        48
+      ],
+      "summary": "从 cwd 向上找 .git（目录或 gitdir 文件），解析 worktree commondir 与 HEAD 路径。",
+      "tags": [
+        "git",
+        "path",
+        "worktree"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/footer-data-provider.ts:resolveBranchWithGitAsync",
+      "type": "function",
+      "name": "resolveBranchWithGitAsync",
+      "filePath": "packages/coding-agent/src/core/footer-data-provider.ts",
+      "lineRange": [
+        62,
+        81
+      ],
+      "summary": "异步 execFile `git symbolic-ref` 读取当前分支，detached HEAD 返回 null。",
+      "tags": [
+        "git",
+        "async",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/core/footer-data-provider.ts:FooterDataProvider",
+      "type": "class",
+      "name": "FooterDataProvider",
+      "filePath": "packages/coding-agent/src/core/footer-data-provider.ts",
+      "lineRange": [
+        99,
+        382
+      ],
+      "summary": "缓存 git 分支与 extension 状态，debounce 刷新，并在 HEAD/reftable 变化或 WSL 轮询时通知订阅者。",
+      "tags": [
+        "footer",
+        "git",
+        "fs-watch",
+        "service"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/keybindings.ts",
+      "type": "file",
+      "name": "keybindings.ts",
+      "filePath": "packages/coding-agent/src/core/keybindings.ts",
+      "summary": "定义 app/TUI 默认快捷键（含 Windows/WSL 变体），迁移旧 key 名，并从 agentDir/keybindings.json 加载用户覆盖。",
+      "tags": [
+        "keybindings",
+        "configuration",
+        "tui",
+        "windows"
+      ],
+      "complexity": "complex",
+      "languageNotes": "通过 declare module 把 AppKeybindings 合并进 @earendil-works/pi-tui 的 Keybindings。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/keybindings.ts:useWindowsKeybindings",
+      "type": "function",
+      "name": "useWindowsKeybindings",
+      "filePath": "packages/coding-agent/src/core/keybindings.ts",
+      "lineRange": [
+        62,
+        67
+      ],
+      "summary": "win32 或带 WSL_DISTRO_NAME/WSL_INTEROP 的 linux 时使用 Windows 快捷键变体。",
+      "tags": [
+        "keybindings",
+        "windows",
+        "wsl"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/keybindings.ts:toKeybindingsConfig",
+      "type": "function",
+      "name": "toKeybindingsConfig",
+      "filePath": "packages/coding-agent/src/core/keybindings.ts",
+      "lineRange": [
+        306,
+        318
+      ],
+      "summary": "把 JSON 对象收成 KeybindingsConfig，只接受 string 或 string[] 绑定。",
+      "tags": [
+        "keybindings",
+        "validation",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/keybindings.ts:migrateKeybindingsConfig",
+      "type": "function",
+      "name": "migrateKeybindingsConfig",
+      "filePath": "packages/coding-agent/src/core/keybindings.ts",
+      "lineRange": [
+        320,
+        340
+      ],
+      "summary": "把旧 keybinding 名称映射到 app.* 规范名，并按 KEYBINDINGS 顺序重排。",
+      "tags": [
+        "keybindings",
+        "migration",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/keybindings.ts:orderKeybindingsConfig",
+      "type": "function",
+      "name": "orderKeybindingsConfig",
+      "filePath": "packages/coding-agent/src/core/keybindings.ts",
+      "lineRange": [
+        342,
+        358
+      ],
+      "summary": "先按内置 KEYBINDINGS 顺序输出已知键，再按字母序追加未知键。",
+      "tags": [
+        "keybindings",
+        "serialization",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/keybindings.ts:loadRawConfig",
+      "type": "function",
+      "name": "loadRawConfig",
+      "filePath": "packages/coding-agent/src/core/keybindings.ts",
+      "lineRange": [
+        360,
+        369
+      ],
+      "summary": "读取 keybindings.json，stripBom 后 JSON.parse；缺失或非法则 undefined。",
+      "tags": [
+        "keybindings",
+        "io",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/core/keybindings.ts:KeybindingsManager",
+      "type": "class",
+      "name": "KeybindingsManager",
+      "filePath": "packages/coding-agent/src/core/keybindings.ts",
+      "lineRange": [
+        371,
+        399
+      ],
+      "summary": "继承 TUI KeybindingsManager：从 agentDir/keybindings.json 加载用户绑定，支持 reload 与 getEffectiveConfig。",
+      "tags": [
+        "keybindings",
+        "service",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/messages.ts",
+      "type": "file",
+      "name": "messages.ts",
+      "filePath": "packages/coding-agent/src/core/messages.ts",
+      "summary": "为 coding-agent 扩展 AgentMessage（bashExecution/custom/branchSummary/compactionSummary），并转换为 LLM 可消费消息。",
+      "tags": [
+        "data-model",
+        "message",
+        "compaction",
+        "serialization"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "用 declaration merging 扩展 @earendil-works/pi-agent-core 的 CustomAgentMessages。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/messages.ts:bashExecutionToText",
+      "type": "function",
+      "name": "bashExecutionToText",
+      "filePath": "packages/coding-agent/src/core/messages.ts",
+      "lineRange": [
+        82,
+        98
+      ],
+      "summary": "把 ! 命令的 BashExecutionMessage 编成带 exit/cancelled/truncated 标记的 user 文本。",
+      "tags": [
+        "message",
+        "bash",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/messages.ts:createBranchSummaryMessage",
+      "type": "function",
+      "name": "createBranchSummaryMessage",
+      "filePath": "packages/coding-agent/src/core/messages.ts",
+      "lineRange": [
+        100,
+        107
+      ],
+      "summary": "构造 branchSummary 自定义消息，timestamp 规范化为毫秒。",
+      "tags": [
+        "message",
+        "factory",
+        "branch"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/messages.ts:createCompactionSummaryMessage",
+      "type": "function",
+      "name": "createCompactionSummaryMessage",
+      "filePath": "packages/coding-agent/src/core/messages.ts",
+      "lineRange": [
+        109,
+        120
+      ],
+      "summary": "构造 compactionSummary 自定义消息，记录压缩前 token 数。",
+      "tags": [
+        "message",
+        "factory",
+        "compaction"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/messages.ts:createCustomMessage",
+      "type": "function",
+      "name": "createCustomMessage",
+      "filePath": "packages/coding-agent/src/core/messages.ts",
+      "lineRange": [
+        123,
+        138
+      ],
+      "summary": "构造 extension 注入的 custom 消息，含 display 与 details。",
+      "tags": [
+        "message",
+        "factory",
+        "extension"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/messages.ts:convertToLlm",
+      "type": "function",
+      "name": "convertToLlm",
+      "filePath": "packages/coding-agent/src/core/messages.ts",
+      "lineRange": [
+        148,
+        195
+      ],
+      "summary": "把 bash/custom/branch/compaction 消息转成 LLM user 文本；excludeFromContext 的 bash 被丢弃。",
+      "tags": [
+        "message",
+        "serialization",
+        "llm"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/session-export.ts",
+      "type": "file",
+      "name": "session-export.ts",
+      "filePath": "packages/coding-agent/src/core/session-export.ts",
+      "summary": "把当前 session 分支写成 JSONL：session header、沿 leaf 的 entries，以及可选的导出专用 trailing entries。",
+      "tags": [
+        "session",
+        "export",
+        "jsonl",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-export.ts:exportSessionToJsonl",
+      "type": "function",
+      "name": "exportSessionToJsonl",
+      "filePath": "packages/coding-agent/src/core/session-export.ts",
+      "lineRange": [
+        7,
+        42
+      ],
+      "summary": "写入 session header 与当前 branch 的 JSONL，并可追加导出专用 trailing entries。",
+      "tags": [
+        "session",
+        "export",
+        "jsonl"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/session-manager.ts",
+      "type": "file",
+      "name": "session-manager.ts",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "summary": "JSONL session 的树形存储与发现：创建/打开/继续/分支、compaction 上下文重建，以及按 cwd 列出会话。",
+      "tags": [
+        "session",
+        "data-model",
+        "persistence",
+        "service"
+      ],
+      "complexity": "complex",
+      "languageNotes": "append-only JSONL + parentId 树；CURRENT_SESSION_VERSION=3，读取时自动 migrate。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-manager.ts:assertValidSessionId",
+      "type": "function",
+      "name": "assertValidSessionId",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        212,
+        218
+      ],
+      "summary": "校验 session id 只含字母数字与 .-_，且首尾为字母数字。",
+      "tags": [
+        "session",
+        "validation",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-manager.ts:migrateV1ToV2",
+      "type": "function",
+      "name": "migrateV1ToV2",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        231,
+        257
+      ],
+      "summary": "为 v1 entries 补 id/parentId，把线性日志升成可分支的树。",
+      "tags": [
+        "session",
+        "migration",
+        "data-model"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-manager.ts:migrateV2ToV3",
+      "type": "function",
+      "name": "migrateV2ToV3",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        260,
+        275
+      ],
+      "summary": "把 v2 结构迁到 CURRENT_SESSION_VERSION=3 的字段形状。",
+      "tags": [
+        "session",
+        "migration",
+        "data-model"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-manager.ts:migrateToCurrentVersion",
+      "type": "function",
+      "name": "migrateToCurrentVersion",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        281,
+        291
+      ],
+      "summary": "按 header version 依次调用 v1→v2、v2→v3 migrate。",
+      "tags": [
+        "session",
+        "migration",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-manager.ts:migrateSessionEntries",
+      "type": "function",
+      "name": "migrateSessionEntries",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        294,
+        296
+      ],
+      "summary": "导出入口：把任意版本 entries 迁到当前 session 版本。",
+      "tags": [
+        "session",
+        "migration",
+        "entry-point"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-manager.ts:parseSessionEntries",
+      "type": "function",
+      "name": "parseSessionEntries",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        299,
+        314
+      ],
+      "summary": "按行 JSON.parse session 文件内容，跳过空行，收集 FileEntry。",
+      "tags": [
+        "session",
+        "parser",
+        "jsonl"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-manager.ts:getLatestCompactionEntry",
+      "type": "function",
+      "name": "getLatestCompactionEntry",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        316,
+        323
+      ],
+      "summary": "从 entries 中取时间线上最近的 compaction 条目。",
+      "tags": [
+        "session",
+        "compaction",
+        "lookup"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-manager.ts:buildSessionPath",
+      "type": "function",
+      "name": "buildSessionPath",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        334,
+        360
+      ],
+      "summary": "从 leaf 沿 parentId 回溯到根，返回该分支的 entry 路径。",
+      "tags": [
+        "session",
+        "tree",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-manager.ts:getSessionContextSettings",
+      "type": "function",
+      "name": "getSessionContextSettings",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        362,
+        377
+      ],
+      "summary": "沿路径提取 thinking level 与当前 model 等上下文设置。",
+      "tags": [
+        "session",
+        "context",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-manager.ts:sessionEntryToContextMessages",
+      "type": "function",
+      "name": "sessionEntryToContextMessages",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        383,
+        408
+      ],
+      "summary": "把单条 SessionEntry 转成 AgentMessage；custom/branch/compaction 走 messages factory。",
+      "tags": [
+        "session",
+        "message",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-manager.ts:buildContextEntries",
+      "type": "function",
+      "name": "buildContextEntries",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        418,
+        454
+      ],
+      "summary": "沿 leaf 路径收集参与 LLM 上下文的 entries，compaction 之后只保留 firstKept 之后的节点。",
+      "tags": [
+        "session",
+        "compaction",
+        "context"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-manager.ts:buildSessionContext",
+      "type": "function",
+      "name": "buildSessionContext",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        461,
+        470
+      ],
+      "summary": "组合路径、设置与 entries，产出给 LLM 的 messages/thinkingLevel/model。",
+      "tags": [
+        "session",
+        "context",
+        "llm"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-manager.ts:getDefaultSessionDir",
+      "type": "function",
+      "name": "getDefaultSessionDir",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        483,
+        489
+      ],
+      "summary": "按 cwd 与 agentDir 计算默认 sessions 目录并确保可用。",
+      "tags": [
+        "session",
+        "path",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-manager.ts:loadEntriesFromFile",
+      "type": "function",
+      "name": "loadEntriesFromFile",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        514,
+        557
+      ],
+      "summary": "流式读取 JSONL session 文件，解析 header/entries，超限扫描抛 SessionHeaderScanLimitError。",
+      "tags": [
+        "session",
+        "io",
+        "parser"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-manager.ts:readSessionHeader",
+      "type": "function",
+      "name": "readSessionHeader",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        572,
+        614
+      ],
+      "summary": "只读文件头部以获取 session header，避免为发现流程加载全部 entries。",
+      "tags": [
+        "session",
+        "io",
+        "discovery"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-manager.ts:findMostRecentSession",
+      "type": "function",
+      "name": "findMostRecentSession",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        636,
+        657
+      ],
+      "summary": "在 sessionDir 中找与 cwd 匹配、修改时间最新的 session 文件。",
+      "tags": [
+        "session",
+        "discovery",
+        "lookup"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-manager.ts:extractTextContent",
+      "type": "function",
+      "name": "extractTextContent",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        663,
+        672
+      ],
+      "summary": "从 user/assistant 消息提取可检索的纯文本，供 SessionInfo.firstMessage 使用。",
+      "tags": [
+        "session",
+        "message",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-manager.ts:getMessageActivityTime",
+      "type": "function",
+      "name": "getMessageActivityTime",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        674,
+        686
+      ],
+      "summary": "取 entry 的活动时间（消息 timestamp 或文件 mtime），用于列表排序。",
+      "tags": [
+        "session",
+        "discovery",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-manager.ts:buildSessionInfo",
+      "type": "function",
+      "name": "buildSessionInfo",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        688,
+        766
+      ],
+      "summary": "从文件头与消息扫描构造 SessionInfo：cwd、name、parent、计数与可搜索文本。",
+      "tags": [
+        "session",
+        "discovery",
+        "data-model"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-manager.ts:buildSessionInfosWithConcurrency",
+      "type": "function",
+      "name": "buildSessionInfosWithConcurrency",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        772,
+        810
+      ],
+      "summary": "有限并发地为文件列表构建 SessionInfo，并通过 onLoaded 汇报进度。",
+      "tags": [
+        "session",
+        "discovery",
+        "concurrency"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/session-manager.ts:listSessionsFromDir",
+      "type": "function",
+      "name": "listSessionsFromDir",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        812,
+        843
+      ],
+      "summary": "列出目录中的 session 文件并构建 SessionInfo，支持进度回调。",
+      "tags": [
+        "session",
+        "discovery",
+        "listing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/core/session-manager.ts:SessionManager",
+      "type": "class",
+      "name": "SessionManager",
+      "filePath": "packages/coding-agent/src/core/session-manager.ts",
+      "lineRange": [
+        856,
+        1746
+      ],
+      "summary": "append-only JSONL session 管理器：new/open/continue/fork/branch、persist entries，并按 leaf 重建上下文。",
+      "tags": [
+        "session",
+        "persistence",
+        "service",
+        "data-model"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/core/footer-data-provider.ts",
+      "target": "file:packages/coding-agent/src/utils/fs-watch.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/keybindings.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/keybindings.ts",
+      "target": "file:packages/coding-agent/src/utils/text.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/keybindings.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/messages.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/messages.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-export.ts",
+      "target": "file:packages/coding-agent/src/core/session-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-export.ts",
+      "target": "file:packages/coding-agent/src/utils/paths.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "file:packages/coding-agent/src/core/messages.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "file:packages/coding-agent/src/utils/paths.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/footer-data-provider.ts",
+      "target": "function:packages/coding-agent/src/core/footer-data-provider.ts:findGitPaths",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/footer-data-provider.ts",
+      "target": "function:packages/coding-agent/src/core/footer-data-provider.ts:findGitPaths",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/footer-data-provider.ts",
+      "target": "function:packages/coding-agent/src/core/footer-data-provider.ts:resolveBranchWithGitAsync",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/footer-data-provider.ts",
+      "target": "class:packages/coding-agent/src/core/footer-data-provider.ts:FooterDataProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/footer-data-provider.ts",
+      "target": "class:packages/coding-agent/src/core/footer-data-provider.ts:FooterDataProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/keybindings.ts",
+      "target": "function:packages/coding-agent/src/core/keybindings.ts:useWindowsKeybindings",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/keybindings.ts",
+      "target": "function:packages/coding-agent/src/core/keybindings.ts:useWindowsKeybindings",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/keybindings.ts",
+      "target": "function:packages/coding-agent/src/core/keybindings.ts:toKeybindingsConfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/keybindings.ts",
+      "target": "function:packages/coding-agent/src/core/keybindings.ts:migrateKeybindingsConfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/keybindings.ts",
+      "target": "function:packages/coding-agent/src/core/keybindings.ts:migrateKeybindingsConfig",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/keybindings.ts",
+      "target": "function:packages/coding-agent/src/core/keybindings.ts:orderKeybindingsConfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/keybindings.ts",
+      "target": "function:packages/coding-agent/src/core/keybindings.ts:loadRawConfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/keybindings.ts",
+      "target": "class:packages/coding-agent/src/core/keybindings.ts:KeybindingsManager",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/keybindings.ts",
+      "target": "class:packages/coding-agent/src/core/keybindings.ts:KeybindingsManager",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/messages.ts",
+      "target": "function:packages/coding-agent/src/core/messages.ts:bashExecutionToText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/messages.ts",
+      "target": "function:packages/coding-agent/src/core/messages.ts:bashExecutionToText",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/messages.ts",
+      "target": "function:packages/coding-agent/src/core/messages.ts:createBranchSummaryMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/messages.ts",
+      "target": "function:packages/coding-agent/src/core/messages.ts:createBranchSummaryMessage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/messages.ts",
+      "target": "function:packages/coding-agent/src/core/messages.ts:createCompactionSummaryMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/messages.ts",
+      "target": "function:packages/coding-agent/src/core/messages.ts:createCompactionSummaryMessage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/messages.ts",
+      "target": "function:packages/coding-agent/src/core/messages.ts:createCustomMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/messages.ts",
+      "target": "function:packages/coding-agent/src/core/messages.ts:createCustomMessage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/messages.ts",
+      "target": "function:packages/coding-agent/src/core/messages.ts:convertToLlm",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/messages.ts",
+      "target": "function:packages/coding-agent/src/core/messages.ts:convertToLlm",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-export.ts",
+      "target": "function:packages/coding-agent/src/core/session-export.ts:exportSessionToJsonl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-export.ts",
+      "target": "function:packages/coding-agent/src/core/session-export.ts:exportSessionToJsonl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:assertValidSessionId",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:assertValidSessionId",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:migrateV1ToV2",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:migrateV2ToV3",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:migrateToCurrentVersion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:migrateSessionEntries",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:migrateSessionEntries",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:parseSessionEntries",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:parseSessionEntries",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:getLatestCompactionEntry",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:getLatestCompactionEntry",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:buildSessionPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:getSessionContextSettings",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:sessionEntryToContextMessages",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:sessionEntryToContextMessages",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:buildContextEntries",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:buildContextEntries",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:buildSessionContext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:buildSessionContext",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:getDefaultSessionDir",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:getDefaultSessionDir",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:loadEntriesFromFile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:loadEntriesFromFile",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:readSessionHeader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:findMostRecentSession",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:findMostRecentSession",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:extractTextContent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:getMessageActivityTime",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:buildSessionInfo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:buildSessionInfosWithConcurrency",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:listSessionsFromDir",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "class:packages/coding-agent/src/core/session-manager.ts:SessionManager",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/session-manager.ts",
+      "target": "class:packages/coding-agent/src/core/session-manager.ts:SessionManager",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/footer-data-provider.ts:FooterDataProvider",
+      "target": "function:packages/coding-agent/src/core/footer-data-provider.ts:findGitPaths",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/keybindings.ts:migrateKeybindingsConfig",
+      "target": "function:packages/coding-agent/src/core/keybindings.ts:orderKeybindingsConfig",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/keybindings.ts:KeybindingsManager",
+      "target": "function:packages/coding-agent/src/core/keybindings.ts:loadRawConfig",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/keybindings.ts:KeybindingsManager",
+      "target": "function:packages/coding-agent/src/core/keybindings.ts:toKeybindingsConfig",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/keybindings.ts:KeybindingsManager",
+      "target": "function:packages/coding-agent/src/core/keybindings.ts:migrateKeybindingsConfig",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/messages.ts:convertToLlm",
+      "target": "function:packages/coding-agent/src/core/messages.ts:bashExecutionToText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/session-export.ts:exportSessionToJsonl",
+      "target": "class:packages/coding-agent/src/core/session-manager.ts:SessionManager",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/session-manager.ts:migrateToCurrentVersion",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:migrateV1ToV2",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/session-manager.ts:migrateToCurrentVersion",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:migrateV2ToV3",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/session-manager.ts:migrateSessionEntries",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:migrateToCurrentVersion",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/session-manager.ts:sessionEntryToContextMessages",
+      "target": "function:packages/coding-agent/src/core/messages.ts:createCustomMessage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/session-manager.ts:sessionEntryToContextMessages",
+      "target": "function:packages/coding-agent/src/core/messages.ts:createBranchSummaryMessage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/session-manager.ts:sessionEntryToContextMessages",
+      "target": "function:packages/coding-agent/src/core/messages.ts:createCompactionSummaryMessage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/session-manager.ts:buildContextEntries",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:buildSessionPath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/session-manager.ts:buildSessionContext",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:buildContextEntries",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/session-manager.ts:buildSessionContext",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:getSessionContextSettings",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/session-manager.ts:findMostRecentSession",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:readSessionHeader",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/session-manager.ts:buildSessionInfo",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:extractTextContent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/session-manager.ts:buildSessionInfo",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:getMessageActivityTime",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/session-manager.ts:buildSessionInfosWithConcurrency",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:buildSessionInfo",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/session-manager.ts:listSessionsFromDir",
+      "target": "function:packages/coding-agent/src/core/session-manager.ts:buildSessionInfosWithConcurrency",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/footer-data-provider.ts:FooterDataProvider",
+      "target": "function:packages/coding-agent/src/utils/fs-watch.ts:watchWithErrorHandler",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/footer-data-provider.ts:FooterDataProvider",
+      "target": "function:packages/coding-agent/src/utils/fs-watch.ts:closeWatcher",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/keybindings.ts:KeybindingsManager",
+      "target": "function:packages/coding-agent/src/config.ts:getAgentDir",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/keybindings.ts:loadRawConfig",
+      "target": "function:packages/coding-agent/src/utils/text.ts:stripBom",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/session-export.ts:exportSessionToJsonl",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:resolvePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/session-manager.ts:SessionManager",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:resolvePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/session-manager.ts:SessionManager",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:normalizePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

@@ -1,0 +1,205 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 1,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 1,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 1
+    }
+  },
+  "results": [
+    {
+      "path": "packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 121,
+      "nonEmptyLines": 107,
+      "definitions": [
+        {
+          "name": "sessions",
+          "kind": "table",
+          "fields": [
+            "id",
+            "created_at",
+            "parent_session_id",
+            "storage_version",
+            "metadata",
+            "message_count",
+            "usage_payload",
+            "next_seq",
+            "id",
+            "parent_id",
+            "seq",
+            "type",
+            "custom_type",
+            "timestamp",
+            "payload"
+          ],
+          "startLine": 9,
+          "endLine": 32
+        },
+        {
+          "name": "entries",
+          "kind": "table",
+          "fields": [
+            "session_id",
+            "id",
+            "parent_id",
+            "seq",
+            "type",
+            "custom_type",
+            "timestamp",
+            "payload"
+          ],
+          "startLine": 20,
+          "endLine": 32
+        },
+        {
+          "name": "scalar_values",
+          "kind": "table",
+          "fields": [
+            "session_id",
+            "namespace",
+            "seq",
+            "value",
+            "namespace",
+            "seq",
+            "value",
+            "id",
+            "seq",
+            "entry_id",
+            "adjustment",
+            "usage",
+            "details"
+          ],
+          "startLine": 35,
+          "endLine": 64
+        },
+        {
+          "name": "list_values",
+          "kind": "table",
+          "fields": [
+            "session_id",
+            "namespace",
+            "seq",
+            "value",
+            "id",
+            "seq",
+            "entry_id",
+            "adjustment",
+            "usage",
+            "details"
+          ],
+          "startLine": 44,
+          "endLine": 64
+        },
+        {
+          "name": "usage_ledger",
+          "kind": "table",
+          "fields": [
+            "session_id",
+            "id",
+            "seq",
+            "entry_id",
+            "adjustment",
+            "usage",
+            "details"
+          ],
+          "startLine": 53,
+          "endLine": 64
+        },
+        {
+          "name": "branch_entries",
+          "kind": "table",
+          "fields": [
+            "session_id",
+            "branch_id",
+            "entry_id",
+            "entry_seq",
+            "entry_type",
+            "branch_id"
+          ],
+          "startLine": 94,
+          "endLine": 106
+        },
+        {
+          "name": "branch_meta",
+          "kind": "table",
+          "fields": [
+            "session_id",
+            "branch_id",
+            "tip_entry_id",
+            "tip_seq",
+            "base_branch_id",
+            "base_seq"
+          ],
+          "startLine": 111,
+          "endLine": 121
+        },
+        {
+          "name": "ix_entry_parent",
+          "kind": "index",
+          "fields": [],
+          "startLine": 32,
+          "endLine": 32
+        },
+        {
+          "name": "ix_entry_seq",
+          "kind": "index",
+          "fields": [],
+          "startLine": 33,
+          "endLine": 33
+        },
+        {
+          "name": "ix_usage_seq",
+          "kind": "index",
+          "fields": [],
+          "startLine": 64,
+          "endLine": 64
+        },
+        {
+          "name": "ix_be_seq",
+          "kind": "index",
+          "fields": [],
+          "startLine": 106,
+          "endLine": 106
+        },
+        {
+          "name": "ix_be_type",
+          "kind": "index",
+          "fields": [],
+          "startLine": 108,
+          "endLine": 108
+        },
+        {
+          "name": "ix_be_entry",
+          "kind": "index",
+          "fields": [],
+          "startLine": 109,
+          "endLine": 109
+        },
+        {
+          "name": "ix_bm_tip",
+          "kind": "index",
+          "fields": [],
+          "startLine": 121,
+          "endLine": 121
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 14
+      }
+    }
+  ]
+}

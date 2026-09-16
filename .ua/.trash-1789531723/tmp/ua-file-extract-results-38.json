@@ -1,0 +1,157 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 3,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 3
+    }
+  },
+  "results": [
+    {
+      "path": "packages/coding-agent/src/modes/interactive/theme/dark.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 91,
+      "nonEmptyLines": 85,
+      "sections": [
+        {
+          "heading": "$schema",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "vars",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "colors",
+          "level": 1,
+          "line": 22
+        },
+        {
+          "heading": "export",
+          "level": 1,
+          "line": 86
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/theme/light.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 90,
+      "nonEmptyLines": 84,
+      "sections": [
+        {
+          "heading": "$schema",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "vars",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "colors",
+          "level": 1,
+          "line": 21
+        },
+        {
+          "heading": "export",
+          "level": 1,
+          "line": 85
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/modes/interactive/theme/theme-schema.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 356,
+      "nonEmptyLines": 356,
+      "sections": [
+        {
+          "heading": "$schema",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "title",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "description",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "type",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "required",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "properties",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "additionalProperties",
+          "level": 1,
+          "line": 20
+        },
+        {
+          "heading": "$defs",
+          "level": 1,
+          "line": 340
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    }
+  ]
+}

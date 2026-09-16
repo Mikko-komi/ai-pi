@@ -1,0 +1,198 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql",
+      "type": "file",
+      "name": "001_initial.sql",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql",
+      "summary": "AgentHarness storage format 4（storageVersion 1）的 SQLite 初始迁移：在会话容器库中创建权威持久化表与 branch 投影缓存，并用 BEFORE INSERT 触发器校验 parent 存在以及 entries/usage_ledger 的共享 id 命名空间。",
+      "tags": ["迁移", "数据库", "sqlite", "schema-definition", "会话存储"],
+      "complexity": "moderate",
+      "languageNotes": "全部业务表使用 WITHOUT ROWID 与复合主键；完整性由 SQLite 触发器在库内强制，避免 TypeScript 预检。"
+    },
+    {
+      "id": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:sessions",
+      "type": "table",
+      "name": "sessions",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql",
+      "lineRange": [9, 18],
+      "summary": "会话头表，以 id 为主键，保存创建时间、父会话、storage_version、metadata，以及 message_count、usage_payload、next_seq 等投影缓存列。",
+      "tags": ["数据表", "sqlite", "会话存储", "缓存"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:entries",
+      "type": "table",
+      "name": "entries",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql",
+      "lineRange": [20, 30],
+      "summary": "权威会话条目表，主键为 (session_id, id)，记录 parent_id、seq、type/custom_type、timestamp 与 JSON payload；插入时由触发器校验 parent 并禁止与 usage id 冲突。",
+      "tags": ["数据表", "sqlite", "会话存储", "权威状态"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:scalar_values",
+      "type": "table",
+      "name": "scalar_values",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql",
+      "lineRange": [35, 42],
+      "summary": "标量键值表，主键 (session_id, namespace, key) 只保留每个键的最新 value 及其写入序号 seq。",
+      "tags": ["数据表", "sqlite", "键值存储", "权威状态"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:list_values",
+      "type": "table",
+      "name": "list_values",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql",
+      "lineRange": [44, 51],
+      "summary": "列表键值表，主键包含 seq，按 (session_id, namespace, key, seq) 追加同一键的历史 value。",
+      "tags": ["数据表", "sqlite", "键值存储", "权威状态"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:usage_ledger",
+      "type": "table",
+      "name": "usage_ledger",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql",
+      "lineRange": [53, 62],
+      "summary": "用量账本，主键 (session_id, id)，记录可选 entry_id、adjustment 与 usage/details；id 与 entries 共享命名空间并由触发器互斥。",
+      "tags": ["数据表", "sqlite", "用量", "权威状态"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:branch_entries",
+      "type": "table",
+      "name": "branch_entries",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql",
+      "lineRange": [94, 101],
+      "summary": "私有分支索引，把 entry 挂到 (session_id, branch_id)，并冗余 entry_seq/entry_type 以覆盖有序与按类型扫描；其他 backend 无对等表。",
+      "tags": ["数据表", "sqlite", "分支索引", "投影"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:branch_meta",
+      "type": "table",
+      "name": "branch_meta",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql",
+      "lineRange": [111, 119],
+      "summary": "分支元数据表，按 (session_id, branch_id) 记录 tip_entry_id/tip_seq 以及可选的 base_branch 分叉点。",
+      "tags": ["数据表", "sqlite", "分支元数据", "投影"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql",
+      "target": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:sessions",
+      "type": "migrates",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql",
+      "target": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:entries",
+      "type": "migrates",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql",
+      "target": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:scalar_values",
+      "type": "migrates",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql",
+      "target": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:list_values",
+      "type": "migrates",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql",
+      "target": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:usage_ledger",
+      "type": "migrates",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql",
+      "target": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:branch_entries",
+      "type": "migrates",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql",
+      "target": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:branch_meta",
+      "type": "migrates",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:entries",
+      "target": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:sessions",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:scalar_values",
+      "target": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:sessions",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:list_values",
+      "target": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:sessions",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:usage_ledger",
+      "target": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:sessions",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:usage_ledger",
+      "target": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:entries",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:branch_entries",
+      "target": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:sessions",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:branch_entries",
+      "target": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:entries",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:branch_meta",
+      "target": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:sessions",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:branch_meta",
+      "target": "table:packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql:branch_entries",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

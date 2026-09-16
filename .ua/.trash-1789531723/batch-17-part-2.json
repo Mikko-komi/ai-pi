@@ -1,0 +1,911 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "type": "file",
+      "name": "bedrock-converse-stream.ts",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "summary": "AWS Bedrock Converse Stream 适配器：处理凭证/代理/区域、Claude 缓存与 thinking，并把内容块增量映射为内部事件。",
+      "tags": [
+        "api-handler",
+        "provider",
+        "bedrock",
+        "streaming"
+      ],
+      "complexity": "complex",
+      "languageNotes": "通过 Smithy middleware 注入自定义头并观察 HTTP 响应，而不是改 SDK 客户端构造参数。"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:stream",
+      "type": "function",
+      "name": "stream",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        116,
+        343
+      ],
+      "summary": "调用 Bedrock ConverseStream：配置客户端/代理，转换消息，并把内容块事件推入内部流。",
+      "tags": [
+        "exports",
+        "api-handler",
+        "streaming"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:formatBedrockError",
+      "type": "function",
+      "name": "formatBedrockError",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        373,
+        390
+      ],
+      "summary": "把 Bedrock/SDK 异常规范成可读的供应商错误文本。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:appendBedrockFailureDiagnostic",
+      "type": "function",
+      "name": "appendBedrockFailureDiagnostic",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        419,
+        438
+      ],
+      "summary": "在失败的 assistant 消息上附加 Bedrock 诊断（错误码、request id）。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:addCustomHeadersMiddleware",
+      "type": "function",
+      "name": "addCustomHeadersMiddleware",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        460,
+        474
+      ],
+      "summary": "向 Smithy 客户端注册中间件，注入非保留自定义请求头。",
+      "tags": [
+        "utility",
+        "headers",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:addResponseHeadersMiddleware",
+      "type": "function",
+      "name": "addResponseHeadersMiddleware",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        493,
+        509
+      ],
+      "summary": "观察 Bedrock HTTP 响应头并回调 onResponse/onObserved。",
+      "tags": [
+        "utility",
+        "headers",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:streamSimple",
+      "type": "function",
+      "name": "streamSimple",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        511,
+        560
+      ],
+      "summary": "夹紧 token/thinking 后把 SimpleStreamOptions 交给 stream。",
+      "tags": [
+        "exports",
+        "api-handler",
+        "streaming"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:handleContentBlockStart",
+      "type": "function",
+      "name": "handleContentBlockStart",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        562,
+        583
+      ],
+      "summary": "处理 contentBlockStart：为文本、工具或 reasoning 块建立流式状态。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:handleContentBlockDelta",
+      "type": "function",
+      "name": "handleContentBlockDelta",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        585,
+        661
+      ],
+      "summary": "处理 contentBlockDelta：追加文本/JSON/reasoning，必要时 parseStreamingJson。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:handleMetadata",
+      "type": "function",
+      "name": "handleMetadata",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        685,
+        698
+      ],
+      "summary": "从 metadata 事件提取 usage 并计算费用。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:handleContentBlockStop",
+      "type": "function",
+      "name": "handleContentBlockStop",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        700,
+        727
+      ],
+      "summary": "结束一个内容块，冲刷缓冲并闭合工具参数。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:supportsAdaptiveThinking",
+      "type": "function",
+      "name": "supportsAdaptiveThinking",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        742,
+        754
+      ],
+      "summary": "判断模型是否支持 Bedrock 自适应 thinking。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:supportsNativeXhighEffort",
+      "type": "function",
+      "name": "supportsNativeXhighEffort",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        756,
+        766
+      ],
+      "summary": "判断模型是否原生支持 xhigh effort。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:mapThinkingLevelToEffort",
+      "type": "function",
+      "name": "mapThinkingLevelToEffort",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        768,
+        788
+      ],
+      "summary": "把 ThinkingLevel 映射为 Bedrock additionalModelRequestFields 中的 effort。",
+      "tags": [
+        "mapping",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:isAnthropicClaudeModel",
+      "type": "function",
+      "name": "isAnthropicClaudeModel",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        809,
+        819
+      ],
+      "summary": "根据模型 id/name 判断是否为 Bedrock 上的 Anthropic Claude。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:supportsPromptCaching",
+      "type": "function",
+      "name": "supportsPromptCaching",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        833,
+        852
+      ],
+      "summary": "结合模型与环境判断是否启用 Bedrock prompt cache。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:buildSystemPrompt",
+      "type": "function",
+      "name": "buildSystemPrompt",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        866,
+        884
+      ],
+      "summary": "构造带可选 cachePoint 的 system 数组，并清洗 surrogate。",
+      "tags": [
+        "factory",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:sanitizeBedrockDocument",
+      "type": "function",
+      "name": "sanitizeBedrockDocument",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        900,
+        912
+      ],
+      "summary": "清洗文档/JSON 值，去掉 Bedrock 不接受的内容。",
+      "tags": [
+        "validation",
+        "utility",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:convertToolResultContent",
+      "type": "function",
+      "name": "convertToolResultContent",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        914,
+        926
+      ],
+      "summary": "把内部工具结果内容转成 Bedrock toolResult content 块。",
+      "tags": [
+        "serialization",
+        "转换",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:convertMessages",
+      "type": "function",
+      "name": "convertMessages",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        928,
+        1100
+      ],
+      "summary": "将内部对话转为 Converse messages，处理图片、工具与 Claude 缓存点。",
+      "tags": [
+        "serialization",
+        "转换",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:convertToolConfig",
+      "type": "function",
+      "name": "convertToolConfig",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        1102,
+        1137
+      ],
+      "summary": "把 Tool 列表与 toolChoice 转为 Bedrock toolConfig，可选 strict schema。",
+      "tags": [
+        "serialization",
+        "转换",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:mapStopReason",
+      "type": "function",
+      "name": "mapStopReason",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        1139,
+        1154
+      ],
+      "summary": "把 Bedrock stopReason 映射为内部 stop 语义。",
+      "tags": [
+        "mapping",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:getConfiguredBedrockCredentials",
+      "type": "function",
+      "name": "getConfiguredBedrockCredentials",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        1165,
+        1177
+      ],
+      "summary": "从 ProviderEnv 读取显式 AWS 访问密钥与 session token。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:getStandardBedrockEndpointRegion",
+      "type": "function",
+      "name": "getStandardBedrockEndpointRegion",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        1179,
+        1191
+      ],
+      "summary": "从自定义 baseUrl 解析标准 Bedrock 端点区域。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:shouldUseExplicitBedrockEndpoint",
+      "type": "function",
+      "name": "shouldUseExplicitBedrockEndpoint",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        1193,
+        1204
+      ],
+      "summary": "判断是否必须设置显式 endpoint（自定义 URL、区域或 profile）。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:buildAdditionalModelRequestFields",
+      "type": "function",
+      "name": "buildAdditionalModelRequestFields",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        1216,
+        1264
+      ],
+      "summary": "组装 thinking/effort 等 additionalModelRequestFields。",
+      "tags": [
+        "factory",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:createImageBlock",
+      "type": "function",
+      "name": "createImageBlock",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        1266,
+        1287
+      ],
+      "summary": "把 mime+base64 转成 Bedrock image 内容块。",
+      "tags": [
+        "factory",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/bedrock-converse-stream.ts:bytesToBase64",
+      "type": "function",
+      "name": "bytesToBase64",
+      "filePath": "packages/ai/src/api/bedrock-converse-stream.ts",
+      "lineRange": [
+        1313,
+        1325
+      ],
+      "summary": "把 Uint8Array 分片拼接为 base64 字符串。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/api/cloudflare-ai-binding.ts",
+      "type": "file",
+      "name": "cloudflare-ai-binding.ts",
+      "filePath": "packages/ai/src/api/cloudflare-ai-binding.ts",
+      "summary": "把 Cloudflare Workers AI binding 的 fetch 包装成普通 FetchFunction，并用鉴权哨兵满足网关预认证请求。",
+      "tags": [
+        "utility",
+        "cloudflare",
+        "fetch",
+        "workers"
+      ],
+      "complexity": "simple",
+      "languageNotes": "AiBinding 用结构类型描述 env.AI，避免依赖尚未声明 fetch 的 @cloudflare/workers-types。"
+    },
+    {
+      "id": "function:packages/ai/src/api/cloudflare-ai-binding.ts:createAiBindingFetch",
+      "type": "function",
+      "name": "createAiBindingFetch",
+      "filePath": "packages/ai/src/api/cloudflare-ai-binding.ts",
+      "lineRange": [
+        80,
+        90
+      ],
+      "summary": "校验 binding.fetch 存在后绑定为 FetchFunction，请求原样穿过 AI Gateway binding。",
+      "tags": [
+        "exports",
+        "factory",
+        "typescript"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:stream",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:stream",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:formatBedrockError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:appendBedrockFailureDiagnostic",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:addCustomHeadersMiddleware",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:addResponseHeadersMiddleware",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:streamSimple",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:streamSimple",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:handleContentBlockStart",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:handleContentBlockDelta",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:handleMetadata",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:handleContentBlockStop",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:supportsAdaptiveThinking",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:supportsNativeXhighEffort",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:mapThinkingLevelToEffort",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:isAnthropicClaudeModel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:supportsPromptCaching",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:buildSystemPrompt",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:sanitizeBedrockDocument",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:convertToolResultContent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:convertMessages",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:convertToolConfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:mapStopReason",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:getConfiguredBedrockCredentials",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:getStandardBedrockEndpointRegion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:shouldUseExplicitBedrockEndpoint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:buildAdditionalModelRequestFields",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:createImageBlock",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "function:packages/ai/src/api/bedrock-converse-stream.ts:bytesToBase64",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "file:packages/ai/src/api/constrained-sampling.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "file:packages/ai/src/api/simple-options.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "file:packages/ai/src/api/transform-messages.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "file:packages/ai/src/utils/diagnostics.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "file:packages/ai/src/utils/error-body.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "file:packages/ai/src/utils/event-stream.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "file:packages/ai/src/utils/headers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "file:packages/ai/src/utils/json-parse.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "file:packages/ai/src/utils/node-http-proxy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "file:packages/ai/src/utils/provider-env.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/bedrock-converse-stream.ts",
+      "target": "file:packages/ai/src/utils/sanitize-unicode.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/cloudflare-ai-binding.ts",
+      "target": "function:packages/ai/src/api/cloudflare-ai-binding.ts:createAiBindingFetch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/cloudflare-ai-binding.ts",
+      "target": "function:packages/ai/src/api/cloudflare-ai-binding.ts:createAiBindingFetch",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/cloudflare-ai-binding.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:packages/ai/src/api/bedrock-converse-stream.ts:stream",
+      "target": "function:packages/ai/src/utils/provider-env.ts:getProviderEnvValue",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/bedrock-converse-stream.ts:stream",
+      "target": "function:packages/ai/src/utils/node-http-proxy.ts:resolveHttpProxyUrlForTarget",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/bedrock-converse-stream.ts:stream",
+      "target": "function:packages/ai/src/utils/headers.ts:providerHeadersToRecord",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/bedrock-converse-stream.ts:formatBedrockError",
+      "target": "function:packages/ai/src/utils/error-body.ts:normalizeProviderError",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/bedrock-converse-stream.ts:appendBedrockFailureDiagnostic",
+      "target": "function:packages/ai/src/utils/diagnostics.ts:appendAssistantMessageDiagnostic",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/bedrock-converse-stream.ts:handleContentBlockDelta",
+      "target": "function:packages/ai/src/utils/json-parse.ts:parseStreamingJson",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/bedrock-converse-stream.ts:handleMetadata",
+      "target": "function:packages/ai/src/models.ts:calculateCost",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/bedrock-converse-stream.ts:handleContentBlockStop",
+      "target": "function:packages/ai/src/utils/json-parse.ts:parseStreamingJson",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/bedrock-converse-stream.ts:supportsPromptCaching",
+      "target": "function:packages/ai/src/utils/provider-env.ts:getProviderEnvValue",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/bedrock-converse-stream.ts:buildSystemPrompt",
+      "target": "function:packages/ai/src/utils/sanitize-unicode.ts:sanitizeSurrogates",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/bedrock-converse-stream.ts:convertMessages",
+      "target": "function:packages/ai/src/utils/sanitize-unicode.ts:sanitizeSurrogates",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/bedrock-converse-stream.ts:getConfiguredBedrockCredentials",
+      "target": "function:packages/ai/src/utils/provider-env.ts:getProviderEnvValue",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

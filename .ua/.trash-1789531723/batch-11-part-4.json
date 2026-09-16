@@ -1,0 +1,1377 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/cli/list-models.ts",
+      "type": "file",
+      "name": "list-models.ts",
+      "filePath": "packages/coding-agent/src/cli/list-models.ts",
+      "summary": "列出可用模型，支持模糊搜索，并以对齐表格输出上下文窗口、max-out、thinking 与图片能力。",
+      "tags": [
+        "cli",
+        "models",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/cli/project-trust.ts",
+      "type": "file",
+      "name": "project-trust.ts",
+      "filePath": "packages/coding-agent/src/cli/project-trust.ts",
+      "summary": "构造 ProjectTrustContext，在交互 TUI 下用启动选择器/输入框完成项目信任决策。",
+      "tags": [
+        "cli",
+        "security",
+        "project-trust"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/cli/setup.ts",
+      "type": "file",
+      "name": "setup.ts",
+      "filePath": "packages/coding-agent/src/cli/setup.ts",
+      "summary": "设置进程标题与 PI_CODING_AGENT/AI_AGENT 环境，并在 provider SDK 发请求前配置 undici HTTP dispatcher。",
+      "tags": [
+        "cli",
+        "entry-point",
+        "http"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/config.ts",
+      "type": "file",
+      "name": "config.ts",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "summary": "检测安装方式与自更新命令，并解析包资源路径与用户配置目录（agent/auth/models/sessions 等）。",
+      "tags": [
+        "config",
+        "paths",
+        "install",
+        "utility"
+      ],
+      "complexity": "complex",
+      "languageNotes": "同时覆盖 Bun 编译二进制、bundled Node 与 npm/pnpm/yarn 全局安装路径差异。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/list-models.ts:formatTokenCount",
+      "type": "function",
+      "name": "formatTokenCount",
+      "filePath": "packages/coding-agent/src/cli/list-models.ts",
+      "lineRange": [
+        14,
+        24
+      ],
+      "summary": "把 token 数量格式化为 K/M 可读形式。",
+      "tags": [
+        "utility",
+        "formatting",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/list-models.ts:listModels",
+      "type": "function",
+      "name": "listModels",
+      "filePath": "packages/coding-agent/src/cli/list-models.ts",
+      "lineRange": [
+        29,
+        115
+      ],
+      "summary": "拉取可用模型，可选模糊过滤后打印对齐表格。",
+      "tags": [
+        "cli",
+        "models",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/project-trust.ts:createProjectTrustContext",
+      "type": "function",
+      "name": "createProjectTrustContext",
+      "filePath": "packages/coding-agent/src/cli/project-trust.ts",
+      "lineRange": [
+        7,
+        62
+      ],
+      "summary": "组装项目信任 UI 回调（select/input/confirm），非交互模式返回 undefined。",
+      "tags": [
+        "factory",
+        "security",
+        "project-trust"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/setup.ts:setupCli",
+      "type": "function",
+      "name": "setupCli",
+      "filePath": "packages/coding-agent/src/cli/setup.ts",
+      "lineRange": [
+        4,
+        13
+      ],
+      "summary": "设置进程身份环境变量并配置 HTTP dispatcher。",
+      "tags": [
+        "cli",
+        "entry-point",
+        "http"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:makeSelfUpdateCommand",
+      "type": "function",
+      "name": "makeSelfUpdateCommand",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        58,
+        68
+      ],
+      "summary": "把安装/卸载步骤合成带 display 的 SelfUpdateCommand。",
+      "tags": [
+        "utility",
+        "install",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:detectInstallMethod",
+      "type": "function",
+      "name": "detectInstallMethod",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        78,
+        99
+      ],
+      "summary": "根据 Bun 二进制标记与路径片段判断 npm/pnpm/yarn/bun 安装方式。",
+      "tags": [
+        "detection",
+        "install",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getInferredNpmInstall",
+      "type": "function",
+      "name": "getInferredNpmInstall",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        101,
+        118
+      ],
+      "summary": "从 package 目录形状推断 npm 全局 root/prefix（Windows 自定义 prefix 不推断）。",
+      "tags": [
+        "install",
+        "paths",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getSelfUpdateCommandForMethod",
+      "type": "function",
+      "name": "getSelfUpdateCommandForMethod",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        120,
+        192
+      ],
+      "summary": "按安装方式生成自更新命令（含 npm/pnpm/yarn/bun）。",
+      "tags": [
+        "install",
+        "update",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:readCommandOutput",
+      "type": "function",
+      "name": "readCommandOutput",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        194,
+        209
+      ],
+      "summary": "同步执行命令并返回 stdout，失败则 undefined。",
+      "tags": [
+        "utility",
+        "process",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getGlobalPackageRoots",
+      "type": "function",
+      "name": "getGlobalPackageRoots",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        211,
+        254
+      ],
+      "summary": "查询各包管理器全局 node_modules 根路径。",
+      "tags": [
+        "install",
+        "paths",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:normalizeExistingPathForComparison",
+      "type": "function",
+      "name": "normalizeExistingPathForComparison",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        256,
+        273
+      ],
+      "summary": "规范化已存在路径，可选解析 symlink。",
+      "tags": [
+        "paths",
+        "utility",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getEntrypointPackageDir",
+      "type": "function",
+      "name": "getEntrypointPackageDir",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        285,
+        296
+      ],
+      "summary": "从当前模块 URL 向上查找入口包目录。",
+      "tags": [
+        "paths",
+        "utility",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:isSelfUpdatePathWritable",
+      "type": "function",
+      "name": "isSelfUpdatePathWritable",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        298,
+        307
+      ],
+      "summary": "检测安装路径是否可写以决定能否自动自更新。",
+      "tags": [
+        "install",
+        "validation",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:isManagedByGlobalPackageManager",
+      "type": "function",
+      "name": "isManagedByGlobalPackageManager",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        309,
+        318
+      ],
+      "summary": "判断当前安装是否位于全局包管理器 root 下。",
+      "tags": [
+        "install",
+        "validation",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getSelfUpdateCommand",
+      "type": "function",
+      "name": "getSelfUpdateCommand",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        320,
+        331
+      ],
+      "summary": "仅当全局安装且路径可写时返回自更新命令。",
+      "tags": [
+        "install",
+        "update",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getSelfUpdateUnavailableInstruction",
+      "type": "function",
+      "name": "getSelfUpdateUnavailableInstruction",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        333,
+        351
+      ],
+      "summary": "生成无法自动更新时的人工操作说明。",
+      "tags": [
+        "install",
+        "update",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getUpdateInstruction",
+      "type": "function",
+      "name": "getUpdateInstruction",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        353,
+        360
+      ],
+      "summary": "优先返回可执行更新命令，否则返回不可用说明。",
+      "tags": [
+        "install",
+        "update",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:findNodePackageDir",
+      "type": "function",
+      "name": "findNodePackageDir",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        372,
+        387
+      ],
+      "summary": "从 startDir 向上寻找 package.json，并跳过 dist 套娃。",
+      "tags": [
+        "paths",
+        "utility",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getPackageDir",
+      "type": "function",
+      "name": "getPackageDir",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        389,
+        401
+      ],
+      "summary": "解析包资源根目录，支持 PI_PACKAGE_DIR 与 Bun 二进制 execPath。",
+      "tags": [
+        "paths",
+        "utility",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getThemesDir",
+      "type": "function",
+      "name": "getThemesDir",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        409,
+        417
+      ],
+      "summary": "返回随包装运的主题目录。",
+      "tags": [
+        "paths",
+        "themes",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getExportTemplateDir",
+      "type": "function",
+      "name": "getExportTemplateDir",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        425,
+        432
+      ],
+      "summary": "返回 HTML 导出模板目录。",
+      "tags": [
+        "paths",
+        "export",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getPackageJsonPath",
+      "type": "function",
+      "name": "getPackageJsonPath",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        435,
+        437
+      ],
+      "summary": "返回包装运 package.json 路径。",
+      "tags": [
+        "paths",
+        "utility",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getReadmePath",
+      "type": "function",
+      "name": "getReadmePath",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        440,
+        442
+      ],
+      "summary": "返回包装运 README 路径。",
+      "tags": [
+        "paths",
+        "utility",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getDocsPath",
+      "type": "function",
+      "name": "getDocsPath",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        445,
+        447
+      ],
+      "summary": "返回包装运 docs 目录。",
+      "tags": [
+        "paths",
+        "documentation",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getExamplesPath",
+      "type": "function",
+      "name": "getExamplesPath",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        450,
+        452
+      ],
+      "summary": "返回包装运 examples 目录。",
+      "tags": [
+        "paths",
+        "utility",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getChangelogPath",
+      "type": "function",
+      "name": "getChangelogPath",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        455,
+        457
+      ],
+      "summary": "返回包装运 CHANGELOG 路径。",
+      "tags": [
+        "paths",
+        "utility",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getInteractiveAssetsDir",
+      "type": "function",
+      "name": "getInteractiveAssetsDir",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        465,
+        472
+      ],
+      "summary": "返回交互模式静态资源目录。",
+      "tags": [
+        "paths",
+        "assets",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getBundledInteractiveAssetPath",
+      "type": "function",
+      "name": "getBundledInteractiveAssetPath",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        475,
+        477
+      ],
+      "summary": "拼接交互模式打包资源文件路径。",
+      "tags": [
+        "paths",
+        "assets",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:expandTildePath",
+      "type": "function",
+      "name": "expandTildePath",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        511,
+        513
+      ],
+      "summary": "对用户路径做 normalizePath（当前实现不单独展开 ~）。",
+      "tags": [
+        "paths",
+        "utility",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getShareViewerUrl",
+      "type": "function",
+      "name": "getShareViewerUrl",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        518,
+        521
+      ],
+      "summary": "生成会话分享查看器 URL（可用 PI_SHARE_VIEWER_URL 覆盖）。",
+      "tags": [
+        "utility",
+        "share",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getAgentDir",
+      "type": "function",
+      "name": "getAgentDir",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        528,
+        534
+      ],
+      "summary": "解析用户 agent 配置目录，优先环境变量再回落到 ~/.pi/agent。",
+      "tags": [
+        "paths",
+        "config",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getCustomThemesDir",
+      "type": "function",
+      "name": "getCustomThemesDir",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        537,
+        539
+      ],
+      "summary": "返回用户自定义主题目录。",
+      "tags": [
+        "paths",
+        "themes",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getModelsPath",
+      "type": "function",
+      "name": "getModelsPath",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        542,
+        544
+      ],
+      "summary": "返回 models.json 路径。",
+      "tags": [
+        "paths",
+        "models",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getAuthPath",
+      "type": "function",
+      "name": "getAuthPath",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        547,
+        549
+      ],
+      "summary": "返回 auth.json 路径。",
+      "tags": [
+        "paths",
+        "auth",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getSettingsPath",
+      "type": "function",
+      "name": "getSettingsPath",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        552,
+        554
+      ],
+      "summary": "返回 settings.json 路径。",
+      "tags": [
+        "paths",
+        "config",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getToolsDir",
+      "type": "function",
+      "name": "getToolsDir",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        557,
+        559
+      ],
+      "summary": "返回用户 tools 目录。",
+      "tags": [
+        "paths",
+        "tools",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getBinDir",
+      "type": "function",
+      "name": "getBinDir",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        562,
+        564
+      ],
+      "summary": "返回托管二进制（fd/rg）目录。",
+      "tags": [
+        "paths",
+        "tools",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getPromptsDir",
+      "type": "function",
+      "name": "getPromptsDir",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        567,
+        569
+      ],
+      "summary": "返回 prompt templates 目录。",
+      "tags": [
+        "paths",
+        "prompts",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getSessionsDir",
+      "type": "function",
+      "name": "getSessionsDir",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        572,
+        574
+      ],
+      "summary": "返回 sessions 目录。",
+      "tags": [
+        "paths",
+        "session",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/config.ts:getDebugLogPath",
+      "type": "function",
+      "name": "getDebugLogPath",
+      "filePath": "packages/coding-agent/src/config.ts",
+      "lineRange": [
+        577,
+        579
+      ],
+      "summary": "返回调试日志文件路径。",
+      "tags": [
+        "paths",
+        "logging",
+        "typescript"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/cli/list-models.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/list-models.ts",
+      "target": "file:packages/coding-agent/src/core/auth-guidance.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/list-models.ts",
+      "target": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/list-models.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/project-trust.ts",
+      "target": "file:packages/coding-agent/src/cli/startup-ui.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/project-trust.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/project-trust.ts",
+      "target": "file:packages/coding-agent/src/core/project-trust.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/project-trust.ts",
+      "target": "file:packages/coding-agent/src/core/settings-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/setup.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/setup.ts",
+      "target": "file:packages/coding-agent/src/core/http-dispatcher.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "file:packages/coding-agent/src/utils/child-process.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "file:packages/coding-agent/src/utils/paths.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "file:packages/coding-agent/src/utils/text.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/list-models.ts",
+      "target": "function:packages/coding-agent/src/cli/list-models.ts:formatTokenCount",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/list-models.ts",
+      "target": "function:packages/coding-agent/src/cli/list-models.ts:listModels",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/list-models.ts",
+      "target": "function:packages/coding-agent/src/cli/list-models.ts:listModels",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/project-trust.ts",
+      "target": "function:packages/coding-agent/src/cli/project-trust.ts:createProjectTrustContext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/project-trust.ts",
+      "target": "function:packages/coding-agent/src/cli/project-trust.ts:createProjectTrustContext",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/setup.ts",
+      "target": "function:packages/coding-agent/src/cli/setup.ts:setupCli",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/setup.ts",
+      "target": "function:packages/coding-agent/src/cli/setup.ts:setupCli",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:makeSelfUpdateCommand",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:detectInstallMethod",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:detectInstallMethod",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getInferredNpmInstall",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getSelfUpdateCommandForMethod",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:readCommandOutput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getGlobalPackageRoots",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:normalizeExistingPathForComparison",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getEntrypointPackageDir",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:isSelfUpdatePathWritable",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:isManagedByGlobalPackageManager",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getSelfUpdateCommand",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getSelfUpdateCommand",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getSelfUpdateUnavailableInstruction",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getSelfUpdateUnavailableInstruction",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getUpdateInstruction",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getUpdateInstruction",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:findNodePackageDir",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:findNodePackageDir",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getPackageDir",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getPackageDir",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getThemesDir",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getThemesDir",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getExportTemplateDir",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getExportTemplateDir",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getPackageJsonPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getPackageJsonPath",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getReadmePath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getReadmePath",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getDocsPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getDocsPath",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getExamplesPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getExamplesPath",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getChangelogPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getChangelogPath",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getInteractiveAssetsDir",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getInteractiveAssetsDir",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getBundledInteractiveAssetPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getBundledInteractiveAssetPath",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:expandTildePath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:expandTildePath",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getShareViewerUrl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getShareViewerUrl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getAgentDir",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getAgentDir",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getCustomThemesDir",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getCustomThemesDir",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getModelsPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getModelsPath",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getAuthPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getAuthPath",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getSettingsPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getSettingsPath",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getToolsDir",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getToolsDir",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getBinDir",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getBinDir",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getPromptsDir",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getPromptsDir",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getSessionsDir",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getSessionsDir",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getDebugLogPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/config.ts",
+      "target": "function:packages/coding-agent/src/config.ts:getDebugLogPath",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/list-models.ts:listModels",
+      "target": "function:packages/coding-agent/src/core/auth-guidance.ts:formatNoModelsAvailableMessage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/list-models.ts:listModels",
+      "target": "function:packages/tui/src/index.ts:fuzzyFilter",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/project-trust.ts:createProjectTrustContext",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:showStartupSelector",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/project-trust.ts:createProjectTrustContext",
+      "target": "function:packages/coding-agent/src/cli/startup-ui.ts:showStartupInput",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/setup.ts:setupCli",
+      "target": "function:packages/coding-agent/src/core/http-dispatcher.ts:configureHttpDispatcher",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/config.ts:readCommandOutput",
+      "target": "function:packages/coding-agent/src/utils/child-process.ts:spawnProcessSync",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/config.ts:getPackageDir",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:normalizePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/config.ts:expandTildePath",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:normalizePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

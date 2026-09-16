@@ -1,0 +1,1 @@
+{"batchIndex": 27, "files": [{"path": "packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql", "language": "sql", "sizeLines": 121, "fileCategory": "data"}], "batchImportData": {"packages/session-backends/sqlite-node/src/sqlite/migrations/001_initial.sql": []}, "neighborMap": {}}

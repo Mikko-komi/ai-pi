@@ -1,0 +1,13 @@
+{
+  "projectRoot": "/Users/elex-mb0203/MyWork/agent-projects/ai-pi",
+  "batchFiles": [
+    {"path": "packages/ai/README.md", "language": "markdown", "sizeLines": 1715, "fileCategory": "docs"},
+    {"path": "packages/ai/package.json", "language": "json", "sizeLines": 103, "fileCategory": "config"},
+    {"path": "packages/ai/tsconfig.build.json", "language": "json", "sizeLines": 10, "fileCategory": "config"}
+  ],
+  "batchImportData": {
+    "packages/ai/README.md": [],
+    "packages/ai/package.json": [],
+    "packages/ai/tsconfig.build.json": []
+  }
+}

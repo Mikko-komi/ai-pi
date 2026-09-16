@@ -1,0 +1,1045 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/core/tools/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/coding-agent/src/core/tools/index.ts",
+      "summary": "coding-agent 内置工具桶：再导出各工具类型/工厂，并按 coding/read-only/all 组合定义或 AgentTool。",
+      "tags": [
+        "barrel",
+        "factory",
+        "tool"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/index.ts:createToolDefinition",
+      "type": "function",
+      "name": "createToolDefinition",
+      "filePath": "packages/coding-agent/src/core/tools/index.ts",
+      "lineRange": [
+        118,
+        139
+      ],
+      "summary": "按 ToolName 分发到对应 createXToolDefinition。",
+      "tags": [
+        "factory",
+        "dispatch",
+        "tool"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/index.ts:createTool",
+      "type": "function",
+      "name": "createTool",
+      "filePath": "packages/coding-agent/src/core/tools/index.ts",
+      "lineRange": [
+        141,
+        162
+      ],
+      "summary": "按 ToolName 分发到对应 createXTool。",
+      "tags": [
+        "factory",
+        "dispatch",
+        "tool"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/index.ts:createCodingToolDefinitions",
+      "type": "function",
+      "name": "createCodingToolDefinitions",
+      "filePath": "packages/coding-agent/src/core/tools/index.ts",
+      "lineRange": [
+        164,
+        171
+      ],
+      "summary": "返回 read/bash/edit/write 的 ToolDefinition 列表。",
+      "tags": [
+        "factory",
+        "tool",
+        "coding-agent"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/index.ts:createReadOnlyToolDefinitions",
+      "type": "function",
+      "name": "createReadOnlyToolDefinitions",
+      "filePath": "packages/coding-agent/src/core/tools/index.ts",
+      "lineRange": [
+        173,
+        180
+      ],
+      "summary": "返回 read/grep/find/ls 的只读 ToolDefinition 列表。",
+      "tags": [
+        "factory",
+        "tool",
+        "coding-agent"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/index.ts:createAllToolDefinitions",
+      "type": "function",
+      "name": "createAllToolDefinitions",
+      "filePath": "packages/coding-agent/src/core/tools/index.ts",
+      "lineRange": [
+        182,
+        193
+      ],
+      "summary": "返回全部 ToolName 到 ToolDefinition 的记录。",
+      "tags": [
+        "factory",
+        "tool",
+        "coding-agent"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/index.ts:createCodingTools",
+      "type": "function",
+      "name": "createCodingTools",
+      "filePath": "packages/coding-agent/src/core/tools/index.ts",
+      "lineRange": [
+        195,
+        202
+      ],
+      "summary": "返回 read/bash/edit/write 的 AgentTool 列表。",
+      "tags": [
+        "factory",
+        "tool",
+        "coding-agent"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/index.ts:createReadOnlyTools",
+      "type": "function",
+      "name": "createReadOnlyTools",
+      "filePath": "packages/coding-agent/src/core/tools/index.ts",
+      "lineRange": [
+        204,
+        211
+      ],
+      "summary": "返回 read/grep/find/ls 的只读 AgentTool 列表。",
+      "tags": [
+        "factory",
+        "tool",
+        "coding-agent"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/index.ts:createAllTools",
+      "type": "function",
+      "name": "createAllTools",
+      "filePath": "packages/coding-agent/src/core/tools/index.ts",
+      "lineRange": [
+        213,
+        224
+      ],
+      "summary": "返回全部内置 AgentTool 的记录。",
+      "tags": [
+        "factory",
+        "tool",
+        "coding-agent"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/tools/ls.ts",
+      "type": "file",
+      "name": "ls.ts",
+      "filePath": "packages/coding-agent/src/core/tools/ls.ts",
+      "summary": "ls 工具：列出目录条目（目录加 /），按 limit 与字节上限截断并给出续读提示。",
+      "tags": [
+        "tool",
+        "filesystem",
+        "factory"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/ls.ts:createLsToolDefinition",
+      "type": "function",
+      "name": "createLsToolDefinition",
+      "filePath": "packages/coding-agent/src/core/tools/ls.ts",
+      "lineRange": [
+        54,
+        171
+      ],
+      "summary": "实现 ls：校验目录、不区分大小写排序、stat 标注目录，并报告条目/字节截断。",
+      "tags": [
+        "tool",
+        "filesystem",
+        "factory"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/ls.ts:createLsTool",
+      "type": "function",
+      "name": "createLsTool",
+      "filePath": "packages/coding-agent/src/core/tools/ls.ts",
+      "lineRange": [
+        173,
+        175
+      ],
+      "summary": "wrap ls ToolDefinition 为 AgentTool。",
+      "tags": [
+        "factory",
+        "tool",
+        "coding-agent"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/tools/output-accumulator.ts",
+      "type": "file",
+      "name": "output-accumulator.ts",
+      "filePath": "packages/coding-agent/src/core/tools/output-accumulator.ts",
+      "summary": "流式输出累加器：解码 UTF-8、只保留滚动 tail 供快照，超限时落临时文件并报告截断。",
+      "tags": [
+        "streaming",
+        "buffering",
+        "truncation"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "用流式 TextDecoder 与按字节裁 tail，避免超大命令输出撑爆内存。"
+    },
+    {
+      "id": "class:packages/coding-agent/src/core/tools/output-accumulator.ts:OutputAccumulator",
+      "type": "class",
+      "name": "OutputAccumulator",
+      "filePath": "packages/coding-agent/src/core/tools/output-accumulator.ts",
+      "lineRange": [
+        35,
+        222
+      ],
+      "summary": "有界内存的输出收集器：append/finish/snapshot，超限写临时文件，snapshot 用 truncateTail。",
+      "tags": [
+        "streaming",
+        "buffering",
+        "class"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/output-accumulator.ts:append",
+      "type": "function",
+      "name": "append",
+      "filePath": "packages/coding-agent/src/core/tools/output-accumulator.ts",
+      "lineRange": [
+        64,
+        78
+      ],
+      "summary": "追加原始 Buffer：流式解码并按需写入临时文件或内存 chunk。",
+      "tags": [
+        "streaming",
+        "buffering",
+        "tool"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/output-accumulator.ts:finish",
+      "type": "function",
+      "name": "finish",
+      "filePath": "packages/coding-agent/src/core/tools/output-accumulator.ts",
+      "lineRange": [
+        80,
+        89
+      ],
+      "summary": "结束累加：冲刷 decoder，必要时打开临时文件。",
+      "tags": [
+        "streaming",
+        "tool",
+        "coding-agent"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/output-accumulator.ts:snapshot",
+      "type": "function",
+      "name": "snapshot",
+      "filePath": "packages/coding-agent/src/core/tools/output-accumulator.ts",
+      "lineRange": [
+        91,
+        119
+      ],
+      "summary": "对 tail 做 truncateTail，汇总行/字节截断，可选在截断时持久化全文。",
+      "tags": [
+        "snapshot",
+        "truncation",
+        "tool"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/output-accumulator.ts:closeTempFile",
+      "type": "function",
+      "name": "closeTempFile",
+      "filePath": "packages/coding-agent/src/core/tools/output-accumulator.ts",
+      "lineRange": [
+        121,
+        142
+      ],
+      "summary": "结束并等待临时文件 WriteStream finish。",
+      "tags": [
+        "file-io",
+        "async",
+        "tool"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/output-accumulator.ts:appendDecodedText",
+      "type": "function",
+      "name": "appendDecodedText",
+      "filePath": "packages/coding-agent/src/core/tools/output-accumulator.ts",
+      "lineRange": [
+        148,
+        177
+      ],
+      "summary": "更新 decoded 统计与行计数，tail 过大时 trim。",
+      "tags": [
+        "streaming",
+        "text",
+        "tool"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/output-accumulator.ts:trimTail",
+      "type": "function",
+      "name": "trimTail",
+      "filePath": "packages/coding-agent/src/core/tools/output-accumulator.ts",
+      "lineRange": [
+        179,
+        194
+      ],
+      "summary": "按 UTF-8 边界把 tail 裁到 maxRollingBytes。",
+      "tags": [
+        "buffering",
+        "utf8",
+        "tool"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/output-accumulator.ts:ensureTempFile",
+      "type": "function",
+      "name": "ensureTempFile",
+      "filePath": "packages/coding-agent/src/core/tools/output-accumulator.ts",
+      "lineRange": [
+        211,
+        221
+      ],
+      "summary": "首次需要时创建临时日志并把已缓存 rawChunks 刷盘。",
+      "tags": [
+        "file-io",
+        "streaming",
+        "tool"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "file:packages/coding-agent/src/core/tools/bash.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "file:packages/coding-agent/src/core/tools/edit.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "file:packages/coding-agent/src/core/tools/find.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "file:packages/coding-agent/src/core/tools/grep.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "file:packages/coding-agent/src/core/tools/ls.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "file:packages/coding-agent/src/core/tools/powershell.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "file:packages/coding-agent/src/core/tools/read.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "file:packages/coding-agent/src/core/tools/write.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/ls.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/ls.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/ls.ts",
+      "target": "file:packages/coding-agent/src/core/tools/path-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/ls.ts",
+      "target": "file:packages/coding-agent/src/core/tools/renderers/ls.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/ls.ts",
+      "target": "file:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/ls.ts",
+      "target": "file:packages/coding-agent/src/core/tools/truncate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/output-accumulator.ts",
+      "target": "file:packages/coding-agent/src/core/tools/truncate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "function:packages/coding-agent/src/core/tools/index.ts:createToolDefinition",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "function:packages/coding-agent/src/core/tools/index.ts:createTool",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "function:packages/coding-agent/src/core/tools/index.ts:createCodingToolDefinitions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "function:packages/coding-agent/src/core/tools/index.ts:createReadOnlyToolDefinitions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "function:packages/coding-agent/src/core/tools/index.ts:createAllToolDefinitions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "function:packages/coding-agent/src/core/tools/index.ts:createCodingTools",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "function:packages/coding-agent/src/core/tools/index.ts:createReadOnlyTools",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "function:packages/coding-agent/src/core/tools/index.ts:createAllTools",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/ls.ts",
+      "target": "function:packages/coding-agent/src/core/tools/ls.ts:createLsToolDefinition",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/ls.ts",
+      "target": "function:packages/coding-agent/src/core/tools/ls.ts:createLsTool",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/output-accumulator.ts",
+      "target": "class:packages/coding-agent/src/core/tools/output-accumulator.ts:OutputAccumulator",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/output-accumulator.ts",
+      "target": "function:packages/coding-agent/src/core/tools/output-accumulator.ts:append",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/output-accumulator.ts",
+      "target": "function:packages/coding-agent/src/core/tools/output-accumulator.ts:finish",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/output-accumulator.ts",
+      "target": "function:packages/coding-agent/src/core/tools/output-accumulator.ts:snapshot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/output-accumulator.ts",
+      "target": "function:packages/coding-agent/src/core/tools/output-accumulator.ts:closeTempFile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/output-accumulator.ts",
+      "target": "function:packages/coding-agent/src/core/tools/output-accumulator.ts:appendDecodedText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/output-accumulator.ts",
+      "target": "function:packages/coding-agent/src/core/tools/output-accumulator.ts:trimTail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/output-accumulator.ts",
+      "target": "function:packages/coding-agent/src/core/tools/output-accumulator.ts:ensureTempFile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "function:packages/coding-agent/src/core/tools/index.ts:createToolDefinition",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "function:packages/coding-agent/src/core/tools/index.ts:createTool",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "function:packages/coding-agent/src/core/tools/index.ts:createCodingToolDefinitions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "function:packages/coding-agent/src/core/tools/index.ts:createReadOnlyToolDefinitions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "function:packages/coding-agent/src/core/tools/index.ts:createAllToolDefinitions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "function:packages/coding-agent/src/core/tools/index.ts:createCodingTools",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "function:packages/coding-agent/src/core/tools/index.ts:createReadOnlyTools",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/index.ts",
+      "target": "function:packages/coding-agent/src/core/tools/index.ts:createAllTools",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/ls.ts",
+      "target": "function:packages/coding-agent/src/core/tools/ls.ts:createLsToolDefinition",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/ls.ts",
+      "target": "function:packages/coding-agent/src/core/tools/ls.ts:createLsTool",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/output-accumulator.ts",
+      "target": "class:packages/coding-agent/src/core/tools/output-accumulator.ts:OutputAccumulator",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createToolDefinition",
+      "target": "function:packages/coding-agent/src/core/tools/read.ts:createReadToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createToolDefinition",
+      "target": "function:packages/coding-agent/src/core/tools/bash.ts:createBashToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createToolDefinition",
+      "target": "function:packages/coding-agent/src/core/tools/powershell.ts:createPowerShellToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createToolDefinition",
+      "target": "function:packages/coding-agent/src/core/tools/edit.ts:createEditToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createToolDefinition",
+      "target": "function:packages/coding-agent/src/core/tools/write.ts:createWriteToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createToolDefinition",
+      "target": "function:packages/coding-agent/src/core/tools/grep.ts:createGrepToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createToolDefinition",
+      "target": "function:packages/coding-agent/src/core/tools/find.ts:createFindToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createToolDefinition",
+      "target": "function:packages/coding-agent/src/core/tools/ls.ts:createLsToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createTool",
+      "target": "function:packages/coding-agent/src/core/tools/read.ts:createReadTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createTool",
+      "target": "function:packages/coding-agent/src/core/tools/bash.ts:createBashTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createTool",
+      "target": "function:packages/coding-agent/src/core/tools/powershell.ts:createPowerShellTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createTool",
+      "target": "function:packages/coding-agent/src/core/tools/edit.ts:createEditTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createTool",
+      "target": "function:packages/coding-agent/src/core/tools/write.ts:createWriteTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createTool",
+      "target": "function:packages/coding-agent/src/core/tools/grep.ts:createGrepTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createTool",
+      "target": "function:packages/coding-agent/src/core/tools/find.ts:createFindTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createTool",
+      "target": "function:packages/coding-agent/src/core/tools/ls.ts:createLsTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createCodingToolDefinitions",
+      "target": "function:packages/coding-agent/src/core/tools/read.ts:createReadToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createCodingToolDefinitions",
+      "target": "function:packages/coding-agent/src/core/tools/bash.ts:createBashToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createCodingToolDefinitions",
+      "target": "function:packages/coding-agent/src/core/tools/edit.ts:createEditToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createCodingToolDefinitions",
+      "target": "function:packages/coding-agent/src/core/tools/write.ts:createWriteToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createReadOnlyToolDefinitions",
+      "target": "function:packages/coding-agent/src/core/tools/read.ts:createReadToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createReadOnlyToolDefinitions",
+      "target": "function:packages/coding-agent/src/core/tools/grep.ts:createGrepToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createReadOnlyToolDefinitions",
+      "target": "function:packages/coding-agent/src/core/tools/find.ts:createFindToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createReadOnlyToolDefinitions",
+      "target": "function:packages/coding-agent/src/core/tools/ls.ts:createLsToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createAllToolDefinitions",
+      "target": "function:packages/coding-agent/src/core/tools/read.ts:createReadToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createAllToolDefinitions",
+      "target": "function:packages/coding-agent/src/core/tools/bash.ts:createBashToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createAllToolDefinitions",
+      "target": "function:packages/coding-agent/src/core/tools/powershell.ts:createPowerShellToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createAllToolDefinitions",
+      "target": "function:packages/coding-agent/src/core/tools/edit.ts:createEditToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createAllToolDefinitions",
+      "target": "function:packages/coding-agent/src/core/tools/write.ts:createWriteToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createAllToolDefinitions",
+      "target": "function:packages/coding-agent/src/core/tools/grep.ts:createGrepToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createAllToolDefinitions",
+      "target": "function:packages/coding-agent/src/core/tools/find.ts:createFindToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createAllToolDefinitions",
+      "target": "function:packages/coding-agent/src/core/tools/ls.ts:createLsToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createCodingTools",
+      "target": "function:packages/coding-agent/src/core/tools/read.ts:createReadTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createCodingTools",
+      "target": "function:packages/coding-agent/src/core/tools/bash.ts:createBashTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createCodingTools",
+      "target": "function:packages/coding-agent/src/core/tools/edit.ts:createEditTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createCodingTools",
+      "target": "function:packages/coding-agent/src/core/tools/write.ts:createWriteTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createReadOnlyTools",
+      "target": "function:packages/coding-agent/src/core/tools/read.ts:createReadTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createReadOnlyTools",
+      "target": "function:packages/coding-agent/src/core/tools/grep.ts:createGrepTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createReadOnlyTools",
+      "target": "function:packages/coding-agent/src/core/tools/find.ts:createFindTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createReadOnlyTools",
+      "target": "function:packages/coding-agent/src/core/tools/ls.ts:createLsTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createAllTools",
+      "target": "function:packages/coding-agent/src/core/tools/read.ts:createReadTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createAllTools",
+      "target": "function:packages/coding-agent/src/core/tools/bash.ts:createBashTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createAllTools",
+      "target": "function:packages/coding-agent/src/core/tools/powershell.ts:createPowerShellTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createAllTools",
+      "target": "function:packages/coding-agent/src/core/tools/edit.ts:createEditTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createAllTools",
+      "target": "function:packages/coding-agent/src/core/tools/write.ts:createWriteTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createAllTools",
+      "target": "function:packages/coding-agent/src/core/tools/grep.ts:createGrepTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createAllTools",
+      "target": "function:packages/coding-agent/src/core/tools/find.ts:createFindTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/index.ts:createAllTools",
+      "target": "function:packages/coding-agent/src/core/tools/ls.ts:createLsTool",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/ls.ts:createLsToolDefinition",
+      "target": "function:packages/coding-agent/src/core/tools/path-utils.ts:resolveToCwd",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/ls.ts:createLsToolDefinition",
+      "target": "function:packages/coding-agent/src/core/tools/truncate.ts:truncateHead",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/ls.ts:createLsToolDefinition",
+      "target": "function:packages/coding-agent/src/core/tools/truncate.ts:formatSize",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/ls.ts:createLsTool",
+      "target": "function:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts:wrapToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/output-accumulator.ts:snapshot",
+      "target": "function:packages/coding-agent/src/core/tools/truncate.ts:truncateTail",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

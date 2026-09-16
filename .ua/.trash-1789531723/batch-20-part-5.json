@@ -1,0 +1,563 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/tui/src/components/input.ts",
+      "type": "file",
+      "name": "input.ts",
+      "filePath": "packages/tui/src/components/input.ts",
+      "summary": "单行输入：括号粘贴、emacs 风格删除/yank/undo、单词跳转，以及带光标标记的渲染。",
+      "tags": [
+        "component",
+        "input",
+        "editor"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:packages/tui/src/components/input.ts:Input",
+      "type": "class",
+      "name": "Input",
+      "filePath": "packages/tui/src/components/input.ts",
+      "lineRange": [
+        25,
+        494
+      ],
+      "summary": "单行可聚焦输入控件，处理键绑定、粘贴与 undo/yank。",
+      "tags": [
+        "component",
+        "input",
+        "focusable"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/tui/src/components/input.ts:handleInput",
+      "type": "function",
+      "name": "handleInput",
+      "filePath": "packages/tui/src/components/input.ts",
+      "lineRange": [
+        64,
+        228
+      ],
+      "summary": "单行按键分发：粘贴缓冲、提交/取消、删除、移动与 undo/yank。",
+      "tags": [
+        "input",
+        "event-handler",
+        "keybindings"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/components/input.ts:handleMouse",
+      "type": "function",
+      "name": "handleMouse",
+      "filePath": "packages/tui/src/components/input.ts",
+      "lineRange": [
+        229,
+        246
+      ],
+      "summary": "按可见列定位光标，支持点击改写插入点。",
+      "tags": [
+        "input",
+        "mouse",
+        "cursor"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/input.ts:insertCharacter",
+      "type": "function",
+      "name": "insertCharacter",
+      "filePath": "packages/tui/src/components/input.ts",
+      "lineRange": [
+        247,
+        257
+      ],
+      "summary": "在光标插入字符并推 undo。",
+      "tags": [
+        "input",
+        "editing",
+        "mutation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/input.ts:handleBackspace",
+      "type": "function",
+      "name": "handleBackspace",
+      "filePath": "packages/tui/src/components/input.ts",
+      "lineRange": [
+        258,
+        270
+      ],
+      "summary": "删除光标前一个 grapheme。",
+      "tags": [
+        "input",
+        "editing",
+        "delete"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/input.ts:handleForwardDelete",
+      "type": "function",
+      "name": "handleForwardDelete",
+      "filePath": "packages/tui/src/components/input.ts",
+      "lineRange": [
+        271,
+        282
+      ],
+      "summary": "删除光标后一个 grapheme。",
+      "tags": [
+        "input",
+        "editing",
+        "delete"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/input.ts:deleteToLineStart",
+      "type": "function",
+      "name": "deleteToLineStart",
+      "filePath": "packages/tui/src/components/input.ts",
+      "lineRange": [
+        283,
+        292
+      ],
+      "summary": "删除到行首并写入 kill-ring。",
+      "tags": [
+        "input",
+        "kill-ring",
+        "delete"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/input.ts:deleteWordBackwards",
+      "type": "function",
+      "name": "deleteWordBackwards",
+      "filePath": "packages/tui/src/components/input.ts",
+      "lineRange": [
+        302,
+        322
+      ],
+      "summary": "向后删一个词并写入 kill-ring。",
+      "tags": [
+        "input",
+        "word-navigation",
+        "delete"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/input.ts:deleteWordForward",
+      "type": "function",
+      "name": "deleteWordForward",
+      "filePath": "packages/tui/src/components/input.ts",
+      "lineRange": [
+        323,
+        342
+      ],
+      "summary": "向前删一个词并写入 kill-ring。",
+      "tags": [
+        "input",
+        "word-navigation",
+        "delete"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/input.ts:yank",
+      "type": "function",
+      "name": "yank",
+      "filePath": "packages/tui/src/components/input.ts",
+      "lineRange": [
+        343,
+        353
+      ],
+      "summary": "插入 kill-ring 当前条目。",
+      "tags": [
+        "input",
+        "kill-ring",
+        "yank"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/input.ts:yankPop",
+      "type": "function",
+      "name": "yankPop",
+      "filePath": "packages/tui/src/components/input.ts",
+      "lineRange": [
+        354,
+        371
+      ],
+      "summary": "用 kill-ring 上一条替换刚刚 yank 的文本。",
+      "tags": [
+        "input",
+        "kill-ring",
+        "yank"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/input.ts:handlePaste",
+      "type": "function",
+      "name": "handlePaste",
+      "filePath": "packages/tui/src/components/input.ts",
+      "lineRange": [
+        396,
+        407
+      ],
+      "summary": "把粘贴内容规范化为单行并插入。",
+      "tags": [
+        "input",
+        "paste",
+        "editing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/input.ts:render",
+      "type": "function",
+      "name": "render",
+      "filePath": "packages/tui/src/components/input.ts",
+      "lineRange": [
+        412,
+        494
+      ],
+      "summary": "绘制 prompt、占位符与带 CURSOR_MARKER 的可见窗口。",
+      "tags": [
+        "input",
+        "rendering",
+        "cursor"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/tui/src/components/loader.ts",
+      "type": "file",
+      "name": "loader.ts",
+      "filePath": "packages/tui/src/components/loader.ts",
+      "summary": "基于 Text 的加载指示器：定时切换 spinner 帧，并刷新消息与颜色。",
+      "tags": [
+        "component",
+        "loader",
+        "animation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/tui/src/components/loader.ts:Loader",
+      "type": "class",
+      "name": "Loader",
+      "filePath": "packages/tui/src/components/loader.ts",
+      "lineRange": [
+        17,
+        101
+      ],
+      "summary": "在 Text 上叠加 spinner 动画与消息更新。",
+      "tags": [
+        "component",
+        "loader",
+        "animation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/components/loader.ts:constructor",
+      "type": "function",
+      "name": "constructor",
+      "filePath": "packages/tui/src/components/loader.ts",
+      "lineRange": [
+        28,
+        42
+      ],
+      "summary": "用 Text 基类创建 loader，并配置 spinner 帧与颜色。",
+      "tags": [
+        "loader",
+        "initialization",
+        "animation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/loader.ts:restartAnimation",
+      "type": "function",
+      "name": "restartAnimation",
+      "filePath": "packages/tui/src/components/loader.ts",
+      "lineRange": [
+        77,
+        87
+      ],
+      "summary": "重置帧计时器，按 interval 循环更新指示器。",
+      "tags": [
+        "loader",
+        "animation",
+        "timer"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/tui/src/components/input.ts",
+      "target": "file:packages/tui/src/keybindings.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/input.ts",
+      "target": "file:packages/tui/src/keys.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/input.ts",
+      "target": "file:packages/tui/src/kill-ring.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/input.ts",
+      "target": "file:packages/tui/src/tui.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/input.ts",
+      "target": "file:packages/tui/src/undo-stack.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/input.ts",
+      "target": "file:packages/tui/src/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/input.ts",
+      "target": "file:packages/tui/src/word-navigation.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/input.ts",
+      "target": "class:packages/tui/src/components/input.ts:Input",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/input.ts",
+      "target": "class:packages/tui/src/components/input.ts:Input",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/components/input.ts",
+      "target": "function:packages/tui/src/components/input.ts:handleInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/input.ts",
+      "target": "function:packages/tui/src/components/input.ts:handleMouse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/input.ts",
+      "target": "function:packages/tui/src/components/input.ts:insertCharacter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/input.ts",
+      "target": "function:packages/tui/src/components/input.ts:handleBackspace",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/input.ts",
+      "target": "function:packages/tui/src/components/input.ts:handleForwardDelete",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/input.ts",
+      "target": "function:packages/tui/src/components/input.ts:deleteToLineStart",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/input.ts",
+      "target": "function:packages/tui/src/components/input.ts:deleteWordBackwards",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/input.ts",
+      "target": "function:packages/tui/src/components/input.ts:deleteWordForward",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/input.ts",
+      "target": "function:packages/tui/src/components/input.ts:yank",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/input.ts",
+      "target": "function:packages/tui/src/components/input.ts:yankPop",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/input.ts",
+      "target": "function:packages/tui/src/components/input.ts:handlePaste",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/input.ts",
+      "target": "function:packages/tui/src/components/input.ts:render",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/loader.ts",
+      "target": "file:packages/tui/src/components/text.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/loader.ts",
+      "target": "file:packages/tui/src/tui.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/loader.ts",
+      "target": "class:packages/tui/src/components/loader.ts:Loader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/loader.ts",
+      "target": "class:packages/tui/src/components/loader.ts:Loader",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/components/loader.ts",
+      "target": "function:packages/tui/src/components/loader.ts:constructor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/loader.ts",
+      "target": "function:packages/tui/src/components/loader.ts:restartAnimation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "function:packages/tui/src/components/input.ts:handleInput",
+      "target": "function:packages/tui/src/keybindings.ts:getKeybindings",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/input.ts:handleInput",
+      "target": "function:packages/tui/src/components/input.ts:handlePaste",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/input.ts:handleInput",
+      "target": "function:packages/tui/src/components/input.ts:handleBackspace",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/input.ts:handleInput",
+      "target": "function:packages/tui/src/components/input.ts:handleForwardDelete",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/input.ts:handleInput",
+      "target": "function:packages/tui/src/components/input.ts:insertCharacter",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/input.ts:handleInput",
+      "target": "function:packages/tui/src/components/input.ts:yank",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/input.ts:handleInput",
+      "target": "function:packages/tui/src/components/input.ts:yankPop",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/input.ts:deleteWordBackwards",
+      "target": "function:packages/tui/src/word-navigation.ts:findWordBackward",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/input.ts:deleteWordForward",
+      "target": "function:packages/tui/src/word-navigation.ts:findWordForward",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/components/loader.ts:Loader",
+      "target": "file:packages/tui/src/components/text.ts",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    }
+  ]
+}

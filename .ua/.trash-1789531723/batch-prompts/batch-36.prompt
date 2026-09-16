@@ -1,0 +1,35 @@
+Analyze these files and produce GraphNode and GraphEdge objects.
+Project root: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi`
+Project: `pi-monorepo`
+Batch: `36/45`
+Skill directory: `/Users/elex-mb0203/.cursor/plugins/local/Understand-Anything/understand-anything-plugin/skills/understand`
+Output: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-36.json` OR `batch-36-part-<k>.json`.
+UA_DIR: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua`
+Load `batchImportData` and `neighborMap` from `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-briefs/batch-36.json`.
+Pass every listed file through to `batchFiles` with path, language, sizeLines, fileCategory.
+
+> **Language directive**: Generate all textual content in **Chinese (zh)**. Keep technical terms in English when no standard translation exists.
+
+Files:
+1. packages/coding-agent/docs/compaction.md (444 lines, language: markdown, fileCategory: docs)
+2. packages/coding-agent/docs/containerization.md (156 lines, language: markdown, fileCategory: docs)
+3. packages/coding-agent/docs/custom-provider.md (777 lines, language: markdown, fileCategory: docs)
+4. packages/coding-agent/docs/development.md (90 lines, language: markdown, fileCategory: docs)
+5. packages/coding-agent/docs/docs.json (160 lines, language: json, fileCategory: config)
+6. packages/coding-agent/docs/environment-variables.md (99 lines, language: markdown, fileCategory: docs)
+7. packages/coding-agent/docs/extensions.md (3033 lines, language: markdown, fileCategory: docs)
+8. packages/coding-agent/docs/index.md (84 lines, language: markdown, fileCategory: docs)
+9. packages/coding-agent/docs/json.md (98 lines, language: markdown, fileCategory: docs)
+10. packages/coding-agent/docs/keybindings.md (239 lines, language: markdown, fileCategory: docs)
+11. packages/coding-agent/docs/llama-cpp.md (101 lines, language: markdown, fileCategory: docs)
+12. packages/coding-agent/docs/models.md (574 lines, language: markdown, fileCategory: docs)
+13. packages/coding-agent/docs/packages.md (228 lines, language: markdown, fileCategory: docs)
+14. packages/coding-agent/docs/prompt-templates.md (96 lines, language: markdown, fileCategory: docs)
+15. packages/coding-agent/docs/providers.md (317 lines, language: markdown, fileCategory: docs)
+16. packages/coding-agent/docs/quickstart.md (167 lines, language: markdown, fileCategory: docs)
+17. packages/coding-agent/docs/rpc.md (1618 lines, language: markdown, fileCategory: docs)
+18. packages/coding-agent/docs/sdk.md (1226 lines, language: markdown, fileCategory: docs)
+19. packages/coding-agent/docs/security.md (59 lines, language: markdown, fileCategory: docs)
+20. packages/coding-agent/docs/session-format.md (450 lines, language: markdown, fileCategory: docs)
+
+Respond with only a brief summary: parts written, total nodes/edges, files skipped.

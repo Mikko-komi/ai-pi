@@ -1,0 +1,43 @@
+Analyze these files and produce GraphNode and GraphEdge objects.
+Project root: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi`
+Project: `pi-monorepo`
+Batch: `15/45`
+Skill directory: `/Users/elex-mb0203/.cursor/plugins/local/Understand-Anything/understand-anything-plugin/skills/understand`
+Output: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-15.json` OR `batch-15-part-<k>.json`.
+UA_DIR: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua`
+Load `batchImportData` and `neighborMap` from `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-briefs/batch-15.json`.
+Pass every listed file through to `batchFiles` with path, language, sizeLines, fileCategory.
+
+> **Language directive**: Generate all textual content in **Chinese (zh)**. Keep technical terms in English when no standard translation exists.
+
+Files:
+1. packages/coding-agent/src/experimental/cli.ts (12 lines, language: typescript, fileCategory: code)
+2. packages/coding-agent/src/index.ts (425 lines, language: typescript, fileCategory: code)
+3. packages/coding-agent/src/main.ts (981 lines, language: typescript, fileCategory: code)
+4. packages/coding-agent/src/migrations.ts (315 lines, language: typescript, fileCategory: code)
+5. packages/coding-agent/src/modes/index.ts (16 lines, language: typescript, fileCategory: code)
+6. packages/coding-agent/src/modes/interactive/model-catalog-refresh.ts (51 lines, language: typescript, fileCategory: code)
+7. packages/coding-agent/src/modes/interactive/theme/theme-json.ts (146 lines, language: typescript, fileCategory: code)
+8. packages/coding-agent/src/modes/json-event.ts (61 lines, language: typescript, fileCategory: code)
+9. packages/coding-agent/src/modes/print-mode.ts (169 lines, language: typescript, fileCategory: code)
+10. packages/coding-agent/src/modes/rpc/jsonl.ts (58 lines, language: typescript, fileCategory: code)
+11. packages/coding-agent/src/modes/rpc/rpc-client.ts (609 lines, language: typescript, fileCategory: code)
+12. packages/coding-agent/src/modes/rpc/rpc-mode.ts (821 lines, language: typescript, fileCategory: code)
+13. packages/coding-agent/src/modes/rpc/rpc-types.ts (297 lines, language: typescript, fileCategory: code)
+14. packages/coding-agent/src/package-manager-cli.ts (1102 lines, language: typescript, fileCategory: code)
+15. packages/coding-agent/src/rpc-entry.ts (13 lines, language: typescript, fileCategory: code)
+16. packages/coding-agent/src/utils/abort.ts (48 lines, language: typescript, fileCategory: code)
+17. packages/coding-agent/src/utils/child-process.ts (137 lines, language: typescript, fileCategory: code)
+18. packages/coding-agent/src/utils/frontmatter.ts (40 lines, language: typescript, fileCategory: code)
+19. packages/coding-agent/src/utils/git.ts (226 lines, language: typescript, fileCategory: code)
+20. packages/coding-agent/src/utils/json.ts (6 lines, language: typescript, fileCategory: code)
+21. packages/coding-agent/src/utils/management-http.ts (78 lines, language: typescript, fileCategory: code)
+22. packages/coding-agent/src/utils/paths.ts (139 lines, language: typescript, fileCategory: code)
+23. packages/coding-agent/src/utils/pi-user-agent.ts (4 lines, language: typescript, fileCategory: code)
+24. packages/coding-agent/src/utils/shell.ts (247 lines, language: typescript, fileCategory: code)
+25. packages/coding-agent/src/utils/sleep.ts (18 lines, language: typescript, fileCategory: code)
+26. packages/coding-agent/src/utils/text.ts (9 lines, language: typescript, fileCategory: code)
+27. packages/coding-agent/src/utils/version-check.ts (109 lines, language: typescript, fileCategory: code)
+28. packages/coding-agent/src/utils/windows-self-update.ts (84 lines, language: typescript, fileCategory: code)
+
+Respond with only a brief summary: parts written, total nodes/edges, files skipped.

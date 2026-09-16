@@ -1,0 +1,516 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/core/tools/path-utils.ts",
+      "type": "file",
+      "name": "path-utils.ts",
+      "filePath": "packages/coding-agent/src/core/tools/path-utils.ts",
+      "summary": "工具层路径解析：相对 cwd 展开，并兼容 macOS 截图名、NFD 与花引号等真实路径变体。",
+      "tags": [
+        "path",
+        "utility",
+        "filesystem"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/path-utils.ts:pathExists",
+      "type": "function",
+      "name": "pathExists",
+      "filePath": "packages/coding-agent/src/core/tools/path-utils.ts",
+      "lineRange": [
+        31,
+        38
+      ],
+      "summary": "异步 access 判断路径是否存在。",
+      "tags": [
+        "filesystem",
+        "utility",
+        "tool"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/path-utils.ts:expandPath",
+      "type": "function",
+      "name": "expandPath",
+      "filePath": "packages/coding-agent/src/core/tools/path-utils.ts",
+      "lineRange": [
+        40,
+        42
+      ],
+      "summary": "用 normalizePath 展开 ~ 等用户路径。",
+      "tags": [
+        "path",
+        "normalization",
+        "tool"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/path-utils.ts:resolveToCwd",
+      "type": "function",
+      "name": "resolveToCwd",
+      "filePath": "packages/coding-agent/src/core/tools/path-utils.ts",
+      "lineRange": [
+        48,
+        50
+      ],
+      "summary": "把用户路径相对给定 cwd 解析为绝对路径。",
+      "tags": [
+        "path",
+        "cwd",
+        "tool"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/path-utils.ts:resolveReadPath",
+      "type": "function",
+      "name": "resolveReadPath",
+      "filePath": "packages/coding-agent/src/core/tools/path-utils.ts",
+      "lineRange": [
+        52,
+        84
+      ],
+      "summary": "同步解析可读路径：依次尝试原路径、macOS 截图、NFD 与花引号变体。",
+      "tags": [
+        "path",
+        "filesystem",
+        "compatibility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/path-utils.ts:resolveReadPathAsync",
+      "type": "function",
+      "name": "resolveReadPathAsync",
+      "filePath": "packages/coding-agent/src/core/tools/path-utils.ts",
+      "lineRange": [
+        86,
+        118
+      ],
+      "summary": "resolveReadPath 的异步版本，用 pathExists 探测变体。",
+      "tags": [
+        "path",
+        "filesystem",
+        "compatibility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/tools/powershell.ts",
+      "type": "file",
+      "name": "powershell.ts",
+      "filePath": "packages/coding-agent/src/core/tools/powershell.ts",
+      "summary": "在通用 shell 工具上套 PowerShell 配置与 prompt，复用 bash 的 spawn/输出管线。",
+      "tags": [
+        "tool",
+        "shell",
+        "powershell"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/powershell.ts:createLocalPowerShellOperations",
+      "type": "function",
+      "name": "createLocalPowerShellOperations",
+      "filePath": "packages/coding-agent/src/core/tools/powershell.ts",
+      "lineRange": [
+        32,
+        37
+      ],
+      "summary": "用 PowerShell shell config 创建本地 operations。",
+      "tags": [
+        "factory",
+        "powershell",
+        "tool"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/powershell.ts:createPowerShellToolDefinition",
+      "type": "function",
+      "name": "createPowerShellToolDefinition",
+      "filePath": "packages/coding-agent/src/core/tools/powershell.ts",
+      "lineRange": [
+        49,
+        57
+      ],
+      "summary": "用 PowerShell 配置调用 createShellToolDefinition。",
+      "tags": [
+        "factory",
+        "tool",
+        "coding-agent"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/powershell.ts:createPowerShellTool",
+      "type": "function",
+      "name": "createPowerShellTool",
+      "filePath": "packages/coding-agent/src/core/tools/powershell.ts",
+      "lineRange": [
+        59,
+        67
+      ],
+      "summary": "wrap PowerShell ToolDefinition 为 AgentTool。",
+      "tags": [
+        "factory",
+        "tool",
+        "coding-agent"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/tools/read.ts",
+      "type": "file",
+      "name": "read.ts",
+      "filePath": "packages/coding-agent/src/core/tools/read.ts",
+      "summary": "read 工具：异步解析路径，文本按 offset/limit/字节截断；图片走 processImage，非视觉模型附加说明。",
+      "tags": [
+        "tool",
+        "filesystem",
+        "image"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/read.ts:createReadToolDefinition",
+      "type": "function",
+      "name": "createReadToolDefinition",
+      "filePath": "packages/coding-agent/src/core/tools/read.ts",
+      "lineRange": [
+        64,
+        193
+      ],
+      "summary": "实现 read：图片处理或文本分页截断，并给出续读/超大行的 bash 回退提示。",
+      "tags": [
+        "tool",
+        "filesystem",
+        "factory"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/tools/read.ts:createReadTool",
+      "type": "function",
+      "name": "createReadTool",
+      "filePath": "packages/coding-agent/src/core/tools/read.ts",
+      "lineRange": [
+        195,
+        197
+      ],
+      "summary": "wrap read ToolDefinition 为 AgentTool。",
+      "tags": [
+        "factory",
+        "tool",
+        "coding-agent"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/core/tools/path-utils.ts",
+      "target": "file:packages/coding-agent/src/utils/paths.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/powershell.ts",
+      "target": "file:packages/coding-agent/src/core/tools/bash.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/powershell.ts",
+      "target": "file:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/powershell.ts",
+      "target": "file:packages/coding-agent/src/utils/shell.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/read.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/read.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/read.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/read.ts",
+      "target": "file:packages/coding-agent/src/core/tools/path-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/read.ts",
+      "target": "file:packages/coding-agent/src/core/tools/renderers/read.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/read.ts",
+      "target": "file:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/read.ts",
+      "target": "file:packages/coding-agent/src/core/tools/truncate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/read.ts",
+      "target": "file:packages/coding-agent/src/utils/image-process.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/read.ts",
+      "target": "file:packages/coding-agent/src/utils/mime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/path-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/path-utils.ts:pathExists",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/path-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/path-utils.ts:expandPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/path-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/path-utils.ts:resolveToCwd",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/path-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/path-utils.ts:resolveReadPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/path-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/path-utils.ts:resolveReadPathAsync",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/powershell.ts",
+      "target": "function:packages/coding-agent/src/core/tools/powershell.ts:createLocalPowerShellOperations",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/powershell.ts",
+      "target": "function:packages/coding-agent/src/core/tools/powershell.ts:createPowerShellToolDefinition",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/powershell.ts",
+      "target": "function:packages/coding-agent/src/core/tools/powershell.ts:createPowerShellTool",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/read.ts",
+      "target": "function:packages/coding-agent/src/core/tools/read.ts:createReadToolDefinition",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/read.ts",
+      "target": "function:packages/coding-agent/src/core/tools/read.ts:createReadTool",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/path-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/path-utils.ts:pathExists",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/path-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/path-utils.ts:expandPath",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/path-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/path-utils.ts:resolveToCwd",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/path-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/path-utils.ts:resolveReadPath",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/path-utils.ts",
+      "target": "function:packages/coding-agent/src/core/tools/path-utils.ts:resolveReadPathAsync",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/powershell.ts",
+      "target": "function:packages/coding-agent/src/core/tools/powershell.ts:createLocalPowerShellOperations",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/powershell.ts",
+      "target": "function:packages/coding-agent/src/core/tools/powershell.ts:createPowerShellToolDefinition",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/powershell.ts",
+      "target": "function:packages/coding-agent/src/core/tools/powershell.ts:createPowerShellTool",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/read.ts",
+      "target": "function:packages/coding-agent/src/core/tools/read.ts:createReadToolDefinition",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/tools/read.ts",
+      "target": "function:packages/coding-agent/src/core/tools/read.ts:createReadTool",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/path-utils.ts:expandPath",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:normalizePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/path-utils.ts:resolveToCwd",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:resolvePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/powershell.ts:createLocalPowerShellOperations",
+      "target": "function:packages/coding-agent/src/core/tools/bash.ts:createLocalShellOperations",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/powershell.ts:createPowerShellToolDefinition",
+      "target": "function:packages/coding-agent/src/core/tools/bash.ts:createShellToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/powershell.ts:createPowerShellTool",
+      "target": "function:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts:wrapToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/read.ts:createReadToolDefinition",
+      "target": "function:packages/coding-agent/src/core/tools/path-utils.ts:resolveReadPathAsync",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/read.ts:createReadToolDefinition",
+      "target": "function:packages/coding-agent/src/utils/image-process.ts:processImage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/read.ts:createReadToolDefinition",
+      "target": "function:packages/coding-agent/src/core/tools/truncate.ts:truncateHead",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/read.ts:createReadToolDefinition",
+      "target": "function:packages/coding-agent/src/core/tools/truncate.ts:formatSize",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/tools/read.ts:createReadTool",
+      "target": "function:packages/coding-agent/src/core/tools/tool-definition-wrapper.ts:wrapToolDefinition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

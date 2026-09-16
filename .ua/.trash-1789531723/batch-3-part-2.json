@@ -1,0 +1,2227 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/ai/src/auth/context.ts",
+      "type": "file",
+      "name": "context.ts",
+      "filePath": "packages/ai/src/auth/context.ts",
+      "summary": "提供默认 `AuthContext`：从 `process.env` 读环境变量，经 `node:fs` 检查文件（浏览器中恒为 false）。",
+      "tags": [
+        "认证",
+        "context",
+        "基础设施"
+      ],
+      "complexity": "simple",
+      "languageNotes": "用变量 specifier 动态 import `node:fs/promises` 与 `node:os`，避免 browser bundler 解析 Node builtin。"
+    },
+    {
+      "id": "function:packages/ai/src/auth/context.ts:defaultProviderAuthContext",
+      "type": "function",
+      "name": "defaultProviderAuthContext",
+      "filePath": "packages/ai/src/auth/context.ts",
+      "lineRange": [
+        23,
+        45
+      ],
+      "summary": "构造默认认证上下文：trim 后的 env 查询，以及支持 `~` 展开的 fileExists。",
+      "tags": [
+        "认证",
+        "factory",
+        "context"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/auth/credential-store.ts",
+      "type": "file",
+      "name": "credential-store.ts",
+      "filePath": "packages/ai/src/auth/credential-store.ts",
+      "summary": "默认内存 `CredentialStore`：按 `Provider.id` 存一条凭证，并用 per-provider Promise 链串行化写入。",
+      "tags": [
+        "认证",
+        "data-model",
+        "credential-store"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "modify/delete 走 enqueue，保证 refresh 与 login 不会并发双写同一 provider。"
+    },
+    {
+      "id": "class:packages/ai/src/auth/credential-store.ts:InMemoryCredentialStore",
+      "type": "class",
+      "name": "InMemoryCredentialStore",
+      "filePath": "packages/ai/src/auth/credential-store.ts",
+      "lineRange": [
+        9,
+        67
+      ],
+      "summary": "实现 `CredentialStore`：Map 存凭证，enqueue 用 Promise 链 + abort 竞态串行化 per-provider 任务。",
+      "tags": [
+        "认证",
+        "data-model",
+        "in-memory"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "写入失败仍保留 chain tail，避免后续任务被先前 rejection 卡死。"
+    },
+    {
+      "id": "file:packages/ai/src/auth/helpers.ts",
+      "type": "file",
+      "name": "helpers.ts",
+      "filePath": "packages/ai/src/auth/helpers.ts",
+      "summary": "Provider 认证工厂：标准 env API key 解析，以及把 OAuth 实现挡在动态 import 后的 `lazyOAuth`。",
+      "tags": [
+        "认证",
+        "factory",
+        "惰性加载"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "function",
+      "name": "envApiKeyAuth",
+      "filePath": "packages/ai/src/auth/helpers.ts",
+      "lineRange": [
+        9,
+        31
+      ],
+      "summary": "生成标准 `ApiKeyAuth`：stored key 优先，否则依次解析 env；并带 secret prompt 的 login。",
+      "tags": [
+        "认证",
+        "api-key",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/helpers.ts:lazyOAuth",
+      "type": "function",
+      "name": "lazyOAuth",
+      "filePath": "packages/ai/src/auth/helpers.ts",
+      "lineRange": [
+        40,
+        59
+      ],
+      "summary": "包装动态加载的 `OAuthAuth`，首次 login/refresh/toAuth 才执行 `input.load()`。",
+      "tags": [
+        "认证",
+        "oauth",
+        "惰性加载",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/auth/oauth/anthropic.ts",
+      "type": "file",
+      "name": "anthropic.ts",
+      "filePath": "packages/ai/src/auth/oauth/anthropic.ts",
+      "summary": "Anthropic Claude Pro/Max 的 authorization-code OAuth：本机 callback server、手动贴 code，以及 refresh。",
+      "tags": [
+        "oauth",
+        "认证",
+        "anthropic",
+        "cli-only"
+      ],
+      "complexity": "complex",
+      "languageNotes": "CLIENT_ID 以 atob 混淆；callback 与 manual_code prompt 竞态，谁先到谁赢。"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/anthropic.ts:getNodeApis",
+      "type": "function",
+      "name": "getNodeApis",
+      "filePath": "packages/ai/src/auth/oauth/anthropic.ts",
+      "lineRange": [
+        38,
+        50
+      ],
+      "summary": "缓存并动态 import `node:http.createServer`，避免顶层 Node 依赖。",
+      "tags": [
+        "oauth",
+        "node-only",
+        "惰性加载"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/anthropic.ts:parseAuthorizationInput",
+      "type": "function",
+      "name": "parseAuthorizationInput",
+      "filePath": "packages/ai/src/auth/oauth/anthropic.ts",
+      "lineRange": [
+        52,
+        80
+      ],
+      "summary": "从 redirect URL、query 或 `code#state` 文本解析 authorization code/state。",
+      "tags": [
+        "oauth",
+        "parsing",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/anthropic.ts:formatErrorDetails",
+      "type": "function",
+      "name": "formatErrorDetails",
+      "filePath": "packages/ai/src/auth/oauth/anthropic.ts",
+      "lineRange": [
+        82,
+        97
+      ],
+      "summary": "递归展开 token 错误对象，拼出可诊断的错误详情字符串。",
+      "tags": [
+        "error-handling",
+        "oauth",
+        "diagnostics"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/anthropic.ts:startCallbackServer",
+      "type": "function",
+      "name": "startCallbackServer",
+      "filePath": "packages/ai/src/auth/oauth/anthropic.ts",
+      "lineRange": [
+        99,
+        168
+      ],
+      "summary": "在 53692 端口起 loopback HTTP server，校验 state 并返回成功/失败 HTML。",
+      "tags": [
+        "oauth",
+        "http-server",
+        "callback"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/anthropic.ts:postJson",
+      "type": "function",
+      "name": "postJson",
+      "filePath": "packages/ai/src/auth/oauth/anthropic.ts",
+      "lineRange": [
+        170,
+        188
+      ],
+      "summary": "带 timeout 的 JSON POST，供 token 交换与 refresh 使用。",
+      "tags": [
+        "oauth",
+        "http-client",
+        "token"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/anthropic.ts:exchangeAuthorizationCode",
+      "type": "function",
+      "name": "exchangeAuthorizationCode",
+      "filePath": "packages/ai/src/auth/oauth/anthropic.ts",
+      "lineRange": [
+        190,
+        232
+      ],
+      "summary": "用 authorization code + PKCE verifier 换 access/refresh token。",
+      "tags": [
+        "oauth",
+        "token",
+        "pkce"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/anthropic.ts:loginAnthropic",
+      "type": "function",
+      "name": "loginAnthropic",
+      "filePath": "packages/ai/src/auth/oauth/anthropic.ts",
+      "lineRange": [
+        234,
+        312
+      ],
+      "summary": "完整 Anthropic 登录：PKCE、打开授权页、callback/手动 code 竞态，再换票。",
+      "tags": [
+        "oauth",
+        "login",
+        "anthropic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/anthropic.ts:refreshAnthropicToken",
+      "type": "function",
+      "name": "refreshAnthropicToken",
+      "filePath": "packages/ai/src/auth/oauth/anthropic.ts",
+      "lineRange": [
+        317,
+        353
+      ],
+      "summary": "用 refresh token 向 Claude token 端点续期，并提前 5 分钟过期。",
+      "tags": [
+        "oauth",
+        "refresh",
+        "token"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/auth/oauth/device-code.ts",
+      "type": "file",
+      "name": "device-code.ts",
+      "filePath": "packages/ai/src/auth/oauth/device-code.ts",
+      "summary": "RFC 8628 device-code 轮询内核：可取消 sleep、pending/slow_down/timeout，供多个 OAuth provider 复用。",
+      "tags": [
+        "oauth",
+        "device-code",
+        "utility"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "slow_down 优先采用服务端 interval，避免 WSL/VM 时钟漂移导致永远提前轮询。"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/device-code.ts:abortableSleep",
+      "type": "function",
+      "name": "abortableSleep",
+      "filePath": "packages/ai/src/auth/oauth/device-code.ts",
+      "lineRange": [
+        26,
+        44
+      ],
+      "summary": "可被 AbortSignal 取消的 sleep，取消时以指定错误信息 reject。",
+      "tags": [
+        "utility",
+        "abort",
+        "oauth"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/device-code.ts:pollOAuthDeviceCodeFlow",
+      "type": "function",
+      "name": "pollOAuthDeviceCodeFlow",
+      "filePath": "packages/ai/src/auth/oauth/device-code.ts",
+      "lineRange": [
+        46,
+        98
+      ],
+      "summary": "按 RFC 8628 轮询 device-code，处理 pending、slow_down、失败与超时。",
+      "tags": [
+        "oauth",
+        "device-code",
+        "polling"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/ai/src/auth/oauth/github-copilot.ts",
+      "type": "file",
+      "name": "github-copilot.ts",
+      "filePath": "packages/ai/src/auth/oauth/github-copilot.ts",
+      "summary": "GitHub Copilot OAuth：device-code 登录、企业域、token 刷新，并拉取/启用 Copilot 模型目录。",
+      "tags": [
+        "oauth",
+        "认证",
+        "github-copilot",
+        "device-code"
+      ],
+      "complexity": "complex",
+      "languageNotes": "登录后会对照内置 GITHUB_COPILOT_MODELS 尝试 enable 未配置模型；toAuth 按 token 推导 proxy baseUrl。"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/github-copilot.ts:normalizeDomain",
+      "type": "function",
+      "name": "normalizeDomain",
+      "filePath": "packages/ai/src/auth/oauth/github-copilot.ts",
+      "lineRange": [
+        41,
+        50
+      ],
+      "summary": "规范化 GitHub Enterprise 域名，去掉协议与多余路径。",
+      "tags": [
+        "oauth",
+        "parsing",
+        "github-copilot"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/github-copilot.ts:getUrls",
+      "type": "function",
+      "name": "getUrls",
+      "filePath": "packages/ai/src/auth/oauth/github-copilot.ts",
+      "lineRange": [
+        52,
+        62
+      ],
+      "summary": "按域名拼出 GitHub device-code / token 端点 URL。",
+      "tags": [
+        "oauth",
+        "github-copilot",
+        "config"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/github-copilot.ts:getGitHubCopilotBaseUrl",
+      "type": "function",
+      "name": "getGitHubCopilotBaseUrl",
+      "filePath": "packages/ai/src/auth/oauth/github-copilot.ts",
+      "lineRange": [
+        78,
+        87
+      ],
+      "summary": "从 Copilot token 或企业域推导请求用的 proxy baseUrl。",
+      "tags": [
+        "oauth",
+        "github-copilot",
+        "routing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/github-copilot.ts:parseGitHubCopilotModelCatalog",
+      "type": "function",
+      "name": "parseGitHubCopilotModelCatalog",
+      "filePath": "packages/ai/src/auth/oauth/github-copilot.ts",
+      "lineRange": [
+        93,
+        133
+      ],
+      "summary": "解析 Copilot 模型目录，按 picker/policy 过滤并可选回退到内置模型表。",
+      "tags": [
+        "oauth",
+        "parsing",
+        "catalog"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/github-copilot.ts:fetchWithRateLimitRetry",
+      "type": "function",
+      "name": "fetchWithRateLimitRetry",
+      "filePath": "packages/ai/src/auth/oauth/github-copilot.ts",
+      "lineRange": [
+        135,
+        166
+      ],
+      "summary": "带 Retry-After / rate-limit 等待的 fetch，避免 429 立刻失败。",
+      "tags": [
+        "http-client",
+        "retry",
+        "rate-limit"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/github-copilot.ts:fetchGitHubCopilotModels",
+      "type": "function",
+      "name": "fetchGitHubCopilotModels",
+      "filePath": "packages/ai/src/auth/oauth/github-copilot.ts",
+      "lineRange": [
+        168,
+        195
+      ],
+      "summary": "用 Copilot token 拉取模型目录并交给 catalog parser。",
+      "tags": [
+        "oauth",
+        "catalog",
+        "http-client"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/github-copilot.ts:startDeviceFlow",
+      "type": "function",
+      "name": "startDeviceFlow",
+      "filePath": "packages/ai/src/auth/oauth/github-copilot.ts",
+      "lineRange": [
+        206,
+        261
+      ],
+      "summary": "向 GitHub 申请 device code，并规范化 verification URI。",
+      "tags": [
+        "oauth",
+        "device-code",
+        "login"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/github-copilot.ts:pollForGitHubAccessToken",
+      "type": "function",
+      "name": "pollForGitHubAccessToken",
+      "filePath": "packages/ai/src/auth/oauth/github-copilot.ts",
+      "lineRange": [
+        263,
+        311
+      ],
+      "summary": "轮询 GitHub device-code 直到拿到 access/refresh token。",
+      "tags": [
+        "oauth",
+        "device-code",
+        "polling"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/github-copilot.ts:refreshGitHubCopilotAccessToken",
+      "type": "function",
+      "name": "refreshGitHubCopilotAccessToken",
+      "filePath": "packages/ai/src/auth/oauth/github-copilot.ts",
+      "lineRange": [
+        313,
+        348
+      ],
+      "summary": "用 refresh token 换新的 GitHub/Copilot access token。",
+      "tags": [
+        "oauth",
+        "refresh",
+        "token"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/github-copilot.ts:refreshGitHubCopilotToken",
+      "type": "function",
+      "name": "refreshGitHubCopilotToken",
+      "filePath": "packages/ai/src/auth/oauth/github-copilot.ts",
+      "lineRange": [
+        353,
+        367
+      ],
+      "summary": "刷新 token 后顺带拉取最新模型目录，供 login/refresh 复用。",
+      "tags": [
+        "oauth",
+        "refresh",
+        "catalog"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/github-copilot.ts:enableGitHubCopilotModel",
+      "type": "function",
+      "name": "enableGitHubCopilotModel",
+      "filePath": "packages/ai/src/auth/oauth/github-copilot.ts",
+      "lineRange": [
+        373,
+        408
+      ],
+      "summary": "对单个模型调用 Copilot policy API，尝试启用 picker。",
+      "tags": [
+        "oauth",
+        "catalog",
+        "http-client"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/github-copilot.ts:enableGitHubCopilotModels",
+      "type": "function",
+      "name": "enableGitHubCopilotModels",
+      "filePath": "packages/ai/src/auth/oauth/github-copilot.ts",
+      "lineRange": [
+        414,
+        432
+      ],
+      "summary": "批量启用一组 Copilot 模型 id，并收集成功项。",
+      "tags": [
+        "oauth",
+        "catalog",
+        "batch"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/github-copilot.ts:loginGitHubCopilot",
+      "type": "function",
+      "name": "loginGitHubCopilot",
+      "filePath": "packages/ai/src/auth/oauth/github-copilot.ts",
+      "lineRange": [
+        434,
+        485
+      ],
+      "summary": "可选企业域 → device flow → 换 Copilot token → 启用内置模型。",
+      "tags": [
+        "oauth",
+        "login",
+        "github-copilot"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/ai/src/auth/oauth/kimi-coding.ts",
+      "type": "file",
+      "name": "kimi-coding.ts",
+      "filePath": "packages/ai/src/auth/oauth/kimi-coding.ts",
+      "summary": "Kimi Code 订阅 OAuth：对 auth.kimi.com 走 RFC 8628 device grant，access token 作为 Bearer 调 coding API。",
+      "tags": [
+        "oauth",
+        "认证",
+        "kimi",
+        "device-code"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/kimi-coding.ts:trustedHttpUrl",
+      "type": "function",
+      "name": "trustedHttpUrl",
+      "filePath": "packages/ai/src/auth/oauth/kimi-coding.ts",
+      "lineRange": [
+        59,
+        68
+      ],
+      "summary": "只接受 http(s) URL，拒绝 javascript/data 等不可信 verification URI。",
+      "tags": [
+        "validation",
+        "security",
+        "oauth"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/kimi-coding.ts:startDeviceAuthorization",
+      "type": "function",
+      "name": "startDeviceAuthorization",
+      "filePath": "packages/ai/src/auth/oauth/kimi-coding.ts",
+      "lineRange": [
+        70,
+        118
+      ],
+      "summary": "向 Kimi OAuth host 申请 device authorization，并校验返回的 URI。",
+      "tags": [
+        "oauth",
+        "device-code",
+        "login"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/kimi-coding.ts:parseTokenResponse",
+      "type": "function",
+      "name": "parseTokenResponse",
+      "filePath": "packages/ai/src/auth/oauth/kimi-coding.ts",
+      "lineRange": [
+        120,
+        140
+      ],
+      "summary": "把 token JSON 规范成 access/refresh/expires。",
+      "tags": [
+        "oauth",
+        "parsing",
+        "token"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/kimi-coding.ts:pollForToken",
+      "type": "function",
+      "name": "pollForToken",
+      "filePath": "packages/ai/src/auth/oauth/kimi-coding.ts",
+      "lineRange": [
+        142,
+        208
+      ],
+      "summary": "轮询 Kimi token 端点直到授权完成或失败。",
+      "tags": [
+        "oauth",
+        "device-code",
+        "polling"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/kimi-coding.ts:refreshToken",
+      "type": "function",
+      "name": "refreshToken",
+      "filePath": "packages/ai/src/auth/oauth/kimi-coding.ts",
+      "lineRange": [
+        214,
+        265
+      ],
+      "summary": "带有限次重试的 refresh；对可重试失败先 sleep 再 POST。",
+      "tags": [
+        "oauth",
+        "refresh",
+        "retry"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/kimi-coding.ts:loginKimiCoding",
+      "type": "function",
+      "name": "loginKimiCoding",
+      "filePath": "packages/ai/src/auth/oauth/kimi-coding.ts",
+      "lineRange": [
+        267,
+        279
+      ],
+      "summary": "读取可覆盖的 OAuth host，启动 device 授权并轮询换票。",
+      "tags": [
+        "oauth",
+        "login",
+        "kimi"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/auth/oauth/load.ts",
+      "type": "file",
+      "name": "load.ts",
+      "filePath": "packages/ai/src/auth/oauth/load.ts",
+      "summary": "OAuth 流程加载器：默认用变量 specifier 动态 import 各 provider 实现，Bun 二进制可通过 register 注入静态模块。",
+      "tags": [
+        "oauth",
+        "惰性加载",
+        "factory",
+        "barrel"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "与 bedrock lazy wrapper 相同的 `.ts`/`.js` rewrite，避免 bundler 把 Node-only OAuth 拉进浏览器包。"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/load.ts:registerBundledOAuthFlowLoaders",
+      "type": "function",
+      "name": "registerBundledOAuthFlowLoaders",
+      "filePath": "packages/ai/src/auth/oauth/load.ts",
+      "lineRange": [
+        27,
+        29
+      ],
+      "summary": "注册静态打包的 OAuth loader，供独立 Bun 二进制绕过动态 import。",
+      "tags": [
+        "oauth",
+        "factory",
+        "bun"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/load.ts:loadAnthropicOAuth",
+      "type": "function",
+      "name": "loadAnthropicOAuth",
+      "filePath": "packages/ai/src/auth/oauth/load.ts",
+      "lineRange": [
+        31,
+        34
+      ],
+      "summary": "加载 Anthropic OAuthAuth，优先走 bundled loader。",
+      "tags": [
+        "oauth",
+        "惰性加载",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/load.ts:loadOpenAICodexOAuth",
+      "type": "function",
+      "name": "loadOpenAICodexOAuth",
+      "filePath": "packages/ai/src/auth/oauth/load.ts",
+      "lineRange": [
+        36,
+        39
+      ],
+      "summary": "加载 OpenAI Codex OAuthAuth。",
+      "tags": [
+        "oauth",
+        "惰性加载",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/load.ts:loadGitHubCopilotOAuth",
+      "type": "function",
+      "name": "loadGitHubCopilotOAuth",
+      "filePath": "packages/ai/src/auth/oauth/load.ts",
+      "lineRange": [
+        41,
+        44
+      ],
+      "summary": "加载 GitHub Copilot OAuthAuth。",
+      "tags": [
+        "oauth",
+        "惰性加载",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/load.ts:loadOpenRouterOAuth",
+      "type": "function",
+      "name": "loadOpenRouterOAuth",
+      "filePath": "packages/ai/src/auth/oauth/load.ts",
+      "lineRange": [
+        46,
+        49
+      ],
+      "summary": "加载 OpenRouter OAuthAuth。",
+      "tags": [
+        "oauth",
+        "惰性加载",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/load.ts:loadKimiCodingOAuth",
+      "type": "function",
+      "name": "loadKimiCodingOAuth",
+      "filePath": "packages/ai/src/auth/oauth/load.ts",
+      "lineRange": [
+        51,
+        54
+      ],
+      "summary": "加载 Kimi Coding OAuthAuth。",
+      "tags": [
+        "oauth",
+        "惰性加载",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/load.ts:loadXaiOAuth",
+      "type": "function",
+      "name": "loadXaiOAuth",
+      "filePath": "packages/ai/src/auth/oauth/load.ts",
+      "lineRange": [
+        56,
+        59
+      ],
+      "summary": "加载 xAI OAuthAuth。",
+      "tags": [
+        "oauth",
+        "惰性加载",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/load.ts:loadRadiusOAuth",
+      "type": "function",
+      "name": "loadRadiusOAuth",
+      "filePath": "packages/ai/src/auth/oauth/load.ts",
+      "lineRange": [
+        61,
+        68
+      ],
+      "summary": "按 gateway 选项创建或加载 Radius OAuthAuth。",
+      "tags": [
+        "oauth",
+        "惰性加载",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/auth/oauth/oauth-page.ts",
+      "type": "file",
+      "name": "oauth-page.ts",
+      "filePath": "packages/ai/src/auth/oauth/oauth-page.ts",
+      "summary": "OAuth loopback 回调页 HTML：成功/失败模板，含转义与内嵌 logo，供本机 callback server 返回。",
+      "tags": [
+        "oauth",
+        "html",
+        "ui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/oauth-page.ts:renderPage",
+      "type": "function",
+      "name": "renderPage",
+      "filePath": "packages/ai/src/auth/oauth/oauth-page.ts",
+      "lineRange": [
+        12,
+        92
+      ],
+      "summary": "渲染深色主题的 OAuth 结果页，对 title/heading/message/details 做 HTML escape。",
+      "tags": [
+        "html",
+        "oauth",
+        "rendering"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/oauth-page.ts:oauthSuccessHtml",
+      "type": "function",
+      "name": "oauthSuccessHtml",
+      "filePath": "packages/ai/src/auth/oauth/oauth-page.ts",
+      "lineRange": [
+        94,
+        100
+      ],
+      "summary": "生成登录成功回调页 HTML。",
+      "tags": [
+        "html",
+        "oauth",
+        "success"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/oauth-page.ts:oauthErrorHtml",
+      "type": "function",
+      "name": "oauthErrorHtml",
+      "filePath": "packages/ai/src/auth/oauth/oauth-page.ts",
+      "lineRange": [
+        102,
+        109
+      ],
+      "summary": "生成登录失败回调页 HTML，可附带 details。",
+      "tags": [
+        "html",
+        "oauth",
+        "error-handling"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/auth/oauth/openai-codex.ts",
+      "type": "file",
+      "name": "openai-codex.ts",
+      "filePath": "packages/ai/src/auth/oauth/openai-codex.ts",
+      "summary": "OpenAI Codex / ChatGPT OAuth：浏览器 PKCE + 本机 1455 回调，以及可选 device-code 登录与 refresh。",
+      "tags": [
+        "oauth",
+        "认证",
+        "openai-codex",
+        "cli-only"
+      ],
+      "complexity": "complex",
+      "languageNotes": "node:http/crypto 延迟绑定，禁止改成顶层 import，以免破坏 browser/Vite 构建。"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/openai-codex.ts:parseAuthorizationInput",
+      "type": "function",
+      "name": "parseAuthorizationInput",
+      "filePath": "packages/ai/src/auth/oauth/openai-codex.ts",
+      "lineRange": [
+        73,
+        101
+      ],
+      "summary": "从 redirect URL 或粘贴文本解析 Codex authorization code。",
+      "tags": [
+        "oauth",
+        "parsing",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/openai-codex.ts:decodeJwt",
+      "type": "function",
+      "name": "decodeJwt",
+      "filePath": "packages/ai/src/auth/oauth/openai-codex.ts",
+      "lineRange": [
+        103,
+        113
+      ],
+      "summary": "解码 access token JWT payload，供提取 account id。",
+      "tags": [
+        "oauth",
+        "jwt",
+        "parsing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/openai-codex.ts:fetchWithLoginCancellation",
+      "type": "function",
+      "name": "fetchWithLoginCancellation",
+      "filePath": "packages/ai/src/auth/oauth/openai-codex.ts",
+      "lineRange": [
+        115,
+        124
+      ],
+      "summary": "可随登录 AbortSignal 取消的 fetch 包装。",
+      "tags": [
+        "http-client",
+        "abort",
+        "oauth"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/openai-codex.ts:readTokenResponse",
+      "type": "function",
+      "name": "readTokenResponse",
+      "filePath": "packages/ai/src/auth/oauth/openai-codex.ts",
+      "lineRange": [
+        126,
+        147
+      ],
+      "summary": "读取并校验 token 响应，失败时带上 body 文本。",
+      "tags": [
+        "oauth",
+        "token",
+        "parsing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/openai-codex.ts:exchangeAuthorizationCode",
+      "type": "function",
+      "name": "exchangeAuthorizationCode",
+      "filePath": "packages/ai/src/auth/oauth/openai-codex.ts",
+      "lineRange": [
+        149,
+        169
+      ],
+      "summary": "用 code + PKCE verifier 向 auth.openai.com 换 token。",
+      "tags": [
+        "oauth",
+        "token",
+        "pkce"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/openai-codex.ts:refreshAccessToken",
+      "type": "function",
+      "name": "refreshAccessToken",
+      "filePath": "packages/ai/src/auth/oauth/openai-codex.ts",
+      "lineRange": [
+        171,
+        189
+      ],
+      "summary": "用 refresh token 续期 Codex access token。",
+      "tags": [
+        "oauth",
+        "refresh",
+        "token"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/openai-codex.ts:startOpenAICodexDeviceAuth",
+      "type": "function",
+      "name": "startOpenAICodexDeviceAuth",
+      "filePath": "packages/ai/src/auth/oauth/openai-codex.ts",
+      "lineRange": [
+        191,
+        233
+      ],
+      "summary": "启动 Codex device-auth，拿到 user code 与 deviceAuthId。",
+      "tags": [
+        "oauth",
+        "device-code",
+        "login"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/openai-codex.ts:pollOpenAICodexDeviceAuth",
+      "type": "function",
+      "name": "pollOpenAICodexDeviceAuth",
+      "filePath": "packages/ai/src/auth/oauth/openai-codex.ts",
+      "lineRange": [
+        235,
+        291
+      ],
+      "summary": "轮询 Codex device-auth token 端点直到完成。",
+      "tags": [
+        "oauth",
+        "device-code",
+        "polling"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/openai-codex.ts:createAuthorizationFlow",
+      "type": "function",
+      "name": "createAuthorizationFlow",
+      "filePath": "packages/ai/src/auth/oauth/openai-codex.ts",
+      "lineRange": [
+        293,
+        312
+      ],
+      "summary": "生成 PKCE + state，并拼出浏览器授权 URL。",
+      "tags": [
+        "oauth",
+        "pkce",
+        "login"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/openai-codex.ts:startLocalOAuthServer",
+      "type": "function",
+      "name": "startLocalOAuthServer",
+      "filePath": "packages/ai/src/auth/oauth/openai-codex.ts",
+      "lineRange": [
+        320,
+        394
+      ],
+      "summary": "在 1455 端口起 Codex 回调 server，校验 state 并展示结果页。",
+      "tags": [
+        "oauth",
+        "http-server",
+        "callback"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/openai-codex.ts:credentialsFromToken",
+      "type": "function",
+      "name": "credentialsFromToken",
+      "filePath": "packages/ai/src/auth/oauth/openai-codex.ts",
+      "lineRange": [
+        403,
+        416
+      ],
+      "summary": "从 token 响应提取 account id 并做成 `OAuthCredential`。",
+      "tags": [
+        "oauth",
+        "credential",
+        "parsing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/openai-codex.ts:loginOpenAICodexDeviceCode",
+      "type": "function",
+      "name": "loginOpenAICodexDeviceCode",
+      "filePath": "packages/ai/src/auth/oauth/openai-codex.ts",
+      "lineRange": [
+        427,
+        443
+      ],
+      "summary": "device-code 路径的 Codex 登录。",
+      "tags": [
+        "oauth",
+        "login",
+        "device-code"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/openai-codex.ts:loginOpenAICodex",
+      "type": "function",
+      "name": "loginOpenAICodex",
+      "filePath": "packages/ai/src/auth/oauth/openai-codex.ts",
+      "lineRange": [
+        445,
+        506
+      ],
+      "summary": "浏览器 PKCE 登录：本机回调与手动贴 code 竞态后换票。",
+      "tags": [
+        "oauth",
+        "login",
+        "pkce"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/ai/src/auth/oauth/openrouter.ts",
+      "type": "file",
+      "name": "openrouter.ts",
+      "filePath": "packages/ai/src/auth/oauth/openrouter.ts",
+      "summary": "OpenRouter PKCE OAuth：授权码换成永久用户 API key；ephemeral 端口回调与手动粘贴 redirect 竞态。",
+      "tags": [
+        "oauth",
+        "认证",
+        "openrouter",
+        "cli-only"
+      ],
+      "complexity": "complex",
+      "languageNotes": "交换结果是长期 API key 而非会过期的 access/refresh 对。"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/openrouter.ts:parseAuthorizationInput",
+      "type": "function",
+      "name": "parseAuthorizationInput",
+      "filePath": "packages/ai/src/auth/oauth/openrouter.ts",
+      "lineRange": [
+        52,
+        67
+      ],
+      "summary": "从 redirect URL 或 query 文本取出 OpenRouter authorization code。",
+      "tags": [
+        "oauth",
+        "parsing",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/openrouter.ts:errorDetail",
+      "type": "function",
+      "name": "errorDetail",
+      "filePath": "packages/ai/src/auth/oauth/openrouter.ts",
+      "lineRange": [
+        69,
+        78
+      ],
+      "summary": "从 token 错误 JSON 提取可读的 error / description。",
+      "tags": [
+        "error-handling",
+        "oauth",
+        "diagnostics"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/openrouter.ts:exchangeAuthorizationCode",
+      "type": "function",
+      "name": "exchangeAuthorizationCode",
+      "filePath": "packages/ai/src/auth/oauth/openrouter.ts",
+      "lineRange": [
+        80,
+        133
+      ],
+      "summary": "用 code + PKCE verifier 向 OpenRouter 换永久 API key。",
+      "tags": [
+        "oauth",
+        "token",
+        "pkce"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/openrouter.ts:startCallbackServer",
+      "type": "function",
+      "name": "startCallbackServer",
+      "filePath": "packages/ai/src/auth/oauth/openrouter.ts",
+      "lineRange": [
+        135,
+        240
+      ],
+      "summary": "在 ephemeral 端口起一次性回调 server，成功则直接完成 key exchange。",
+      "tags": [
+        "oauth",
+        "http-server",
+        "callback"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/auth/oauth/openrouter.ts:loginOpenRouter",
+      "type": "function",
+      "name": "loginOpenRouter",
+      "filePath": "packages/ai/src/auth/oauth/openrouter.ts",
+      "lineRange": [
+        242,
+        299
+      ],
+      "summary": "启动 PKCE 登录：打开授权页，回调与手动 code 竞态后换 key。",
+      "tags": [
+        "oauth",
+        "login",
+        "openrouter"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/ai/src/auth/context.ts",
+      "target": "function:packages/ai/src/auth/context.ts:defaultProviderAuthContext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/context.ts",
+      "target": "function:packages/ai/src/auth/context.ts:defaultProviderAuthContext",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/auth/credential-store.ts",
+      "target": "class:packages/ai/src/auth/credential-store.ts:InMemoryCredentialStore",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/credential-store.ts",
+      "target": "class:packages/ai/src/auth/credential-store.ts:InMemoryCredentialStore",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/ai/src/auth/credential-store.ts:InMemoryCredentialStore",
+      "target": "function:packages/ai/src/utils/abort.ts:operationSignal",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/ai/src/auth/credential-store.ts:InMemoryCredentialStore",
+      "target": "function:packages/ai/src/utils/abort.ts:raceWithAbortSignal",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/auth/helpers.ts",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/helpers.ts",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/auth/helpers.ts",
+      "target": "function:packages/ai/src/auth/helpers.ts:lazyOAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/helpers.ts",
+      "target": "function:packages/ai/src/auth/helpers.ts:lazyOAuth",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/anthropic.ts",
+      "target": "function:packages/ai/src/auth/oauth/anthropic.ts:getNodeApis",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/anthropic.ts",
+      "target": "function:packages/ai/src/auth/oauth/anthropic.ts:parseAuthorizationInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/anthropic.ts",
+      "target": "function:packages/ai/src/auth/oauth/anthropic.ts:formatErrorDetails",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/anthropic.ts",
+      "target": "function:packages/ai/src/auth/oauth/anthropic.ts:startCallbackServer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/anthropic.ts",
+      "target": "function:packages/ai/src/auth/oauth/anthropic.ts:postJson",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/anthropic.ts",
+      "target": "function:packages/ai/src/auth/oauth/anthropic.ts:exchangeAuthorizationCode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/anthropic.ts",
+      "target": "function:packages/ai/src/auth/oauth/anthropic.ts:loginAnthropic",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/anthropic.ts",
+      "target": "function:packages/ai/src/auth/oauth/anthropic.ts:refreshAnthropicToken",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/anthropic.ts:startCallbackServer",
+      "target": "function:packages/ai/src/auth/oauth/oauth-page.ts:oauthSuccessHtml",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/anthropic.ts:startCallbackServer",
+      "target": "function:packages/ai/src/auth/oauth/oauth-page.ts:oauthErrorHtml",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/anthropic.ts:loginAnthropic",
+      "target": "function:packages/ai/src/auth/oauth/anthropic.ts:startCallbackServer",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/anthropic.ts:loginAnthropic",
+      "target": "function:packages/ai/src/auth/oauth/anthropic.ts:exchangeAuthorizationCode",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/anthropic.ts:exchangeAuthorizationCode",
+      "target": "function:packages/ai/src/auth/oauth/anthropic.ts:postJson",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/anthropic.ts:refreshAnthropicToken",
+      "target": "function:packages/ai/src/auth/oauth/anthropic.ts:postJson",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/device-code.ts",
+      "target": "function:packages/ai/src/auth/oauth/device-code.ts:abortableSleep",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/device-code.ts",
+      "target": "function:packages/ai/src/auth/oauth/device-code.ts:abortableSleep",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/device-code.ts",
+      "target": "function:packages/ai/src/auth/oauth/device-code.ts:pollOAuthDeviceCodeFlow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/device-code.ts",
+      "target": "function:packages/ai/src/auth/oauth/device-code.ts:pollOAuthDeviceCodeFlow",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/device-code.ts:pollOAuthDeviceCodeFlow",
+      "target": "function:packages/ai/src/auth/oauth/device-code.ts:abortableSleep",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/github-copilot.ts",
+      "target": "function:packages/ai/src/auth/oauth/github-copilot.ts:normalizeDomain",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/github-copilot.ts",
+      "target": "function:packages/ai/src/auth/oauth/github-copilot.ts:getUrls",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/github-copilot.ts",
+      "target": "function:packages/ai/src/auth/oauth/github-copilot.ts:getGitHubCopilotBaseUrl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/github-copilot.ts",
+      "target": "function:packages/ai/src/auth/oauth/github-copilot.ts:parseGitHubCopilotModelCatalog",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/github-copilot.ts",
+      "target": "function:packages/ai/src/auth/oauth/github-copilot.ts:fetchWithRateLimitRetry",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/github-copilot.ts",
+      "target": "function:packages/ai/src/auth/oauth/github-copilot.ts:fetchGitHubCopilotModels",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/github-copilot.ts",
+      "target": "function:packages/ai/src/auth/oauth/github-copilot.ts:startDeviceFlow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/github-copilot.ts",
+      "target": "function:packages/ai/src/auth/oauth/github-copilot.ts:pollForGitHubAccessToken",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/github-copilot.ts",
+      "target": "function:packages/ai/src/auth/oauth/github-copilot.ts:refreshGitHubCopilotAccessToken",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/github-copilot.ts",
+      "target": "function:packages/ai/src/auth/oauth/github-copilot.ts:refreshGitHubCopilotToken",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/github-copilot.ts",
+      "target": "function:packages/ai/src/auth/oauth/github-copilot.ts:enableGitHubCopilotModel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/github-copilot.ts",
+      "target": "function:packages/ai/src/auth/oauth/github-copilot.ts:enableGitHubCopilotModels",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/github-copilot.ts",
+      "target": "function:packages/ai/src/auth/oauth/github-copilot.ts:loginGitHubCopilot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/github-copilot.ts:pollForGitHubAccessToken",
+      "target": "function:packages/ai/src/auth/oauth/device-code.ts:pollOAuthDeviceCodeFlow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/github-copilot.ts:fetchWithRateLimitRetry",
+      "target": "function:packages/ai/src/utils/sleep.ts:sleep",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/github-copilot.ts:loginGitHubCopilot",
+      "target": "function:packages/ai/src/auth/oauth/github-copilot.ts:startDeviceFlow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/github-copilot.ts:loginGitHubCopilot",
+      "target": "function:packages/ai/src/auth/oauth/github-copilot.ts:pollForGitHubAccessToken",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/github-copilot.ts:refreshGitHubCopilotToken",
+      "target": "function:packages/ai/src/auth/oauth/github-copilot.ts:refreshGitHubCopilotAccessToken",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/github-copilot.ts:refreshGitHubCopilotToken",
+      "target": "function:packages/ai/src/auth/oauth/github-copilot.ts:fetchGitHubCopilotModels",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/github-copilot.ts:enableGitHubCopilotModels",
+      "target": "function:packages/ai/src/auth/oauth/github-copilot.ts:enableGitHubCopilotModel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/kimi-coding.ts",
+      "target": "function:packages/ai/src/auth/oauth/kimi-coding.ts:trustedHttpUrl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/kimi-coding.ts",
+      "target": "function:packages/ai/src/auth/oauth/kimi-coding.ts:startDeviceAuthorization",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/kimi-coding.ts",
+      "target": "function:packages/ai/src/auth/oauth/kimi-coding.ts:parseTokenResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/kimi-coding.ts",
+      "target": "function:packages/ai/src/auth/oauth/kimi-coding.ts:pollForToken",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/kimi-coding.ts",
+      "target": "function:packages/ai/src/auth/oauth/kimi-coding.ts:refreshToken",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/kimi-coding.ts",
+      "target": "function:packages/ai/src/auth/oauth/kimi-coding.ts:loginKimiCoding",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/kimi-coding.ts:pollForToken",
+      "target": "function:packages/ai/src/auth/oauth/device-code.ts:pollOAuthDeviceCodeFlow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/kimi-coding.ts:refreshToken",
+      "target": "function:packages/ai/src/utils/sleep.ts:sleep",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/kimi-coding.ts:loginKimiCoding",
+      "target": "function:packages/ai/src/auth/oauth/kimi-coding.ts:startDeviceAuthorization",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/kimi-coding.ts:loginKimiCoding",
+      "target": "function:packages/ai/src/auth/oauth/kimi-coding.ts:pollForToken",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "function:packages/ai/src/auth/oauth/load.ts:registerBundledOAuthFlowLoaders",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "function:packages/ai/src/auth/oauth/load.ts:registerBundledOAuthFlowLoaders",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "function:packages/ai/src/auth/oauth/load.ts:loadAnthropicOAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "function:packages/ai/src/auth/oauth/load.ts:loadAnthropicOAuth",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "function:packages/ai/src/auth/oauth/load.ts:loadOpenAICodexOAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "function:packages/ai/src/auth/oauth/load.ts:loadOpenAICodexOAuth",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "function:packages/ai/src/auth/oauth/load.ts:loadGitHubCopilotOAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "function:packages/ai/src/auth/oauth/load.ts:loadGitHubCopilotOAuth",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "function:packages/ai/src/auth/oauth/load.ts:loadOpenRouterOAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "function:packages/ai/src/auth/oauth/load.ts:loadOpenRouterOAuth",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "function:packages/ai/src/auth/oauth/load.ts:loadKimiCodingOAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "function:packages/ai/src/auth/oauth/load.ts:loadKimiCodingOAuth",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "function:packages/ai/src/auth/oauth/load.ts:loadXaiOAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "function:packages/ai/src/auth/oauth/load.ts:loadXaiOAuth",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "function:packages/ai/src/auth/oauth/load.ts:loadRadiusOAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "function:packages/ai/src/auth/oauth/load.ts:loadRadiusOAuth",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "file:packages/ai/src/auth/oauth/anthropic.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "file:packages/ai/src/auth/oauth/openai-codex.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "file:packages/ai/src/auth/oauth/github-copilot.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "file:packages/ai/src/auth/oauth/openrouter.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "file:packages/ai/src/auth/oauth/kimi-coding.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "file:packages/ai/src/auth/oauth/xai.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "file:packages/ai/src/auth/oauth/radius.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/oauth-page.ts",
+      "target": "function:packages/ai/src/auth/oauth/oauth-page.ts:renderPage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/oauth-page.ts",
+      "target": "function:packages/ai/src/auth/oauth/oauth-page.ts:oauthSuccessHtml",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/oauth-page.ts",
+      "target": "function:packages/ai/src/auth/oauth/oauth-page.ts:oauthSuccessHtml",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/oauth-page.ts",
+      "target": "function:packages/ai/src/auth/oauth/oauth-page.ts:oauthErrorHtml",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/oauth-page.ts",
+      "target": "function:packages/ai/src/auth/oauth/oauth-page.ts:oauthErrorHtml",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/oauth-page.ts:oauthSuccessHtml",
+      "target": "function:packages/ai/src/auth/oauth/oauth-page.ts:renderPage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/oauth-page.ts:oauthErrorHtml",
+      "target": "function:packages/ai/src/auth/oauth/oauth-page.ts:renderPage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openai-codex.ts",
+      "target": "function:packages/ai/src/auth/oauth/openai-codex.ts:parseAuthorizationInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openai-codex.ts",
+      "target": "function:packages/ai/src/auth/oauth/openai-codex.ts:decodeJwt",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openai-codex.ts",
+      "target": "function:packages/ai/src/auth/oauth/openai-codex.ts:fetchWithLoginCancellation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openai-codex.ts",
+      "target": "function:packages/ai/src/auth/oauth/openai-codex.ts:readTokenResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openai-codex.ts",
+      "target": "function:packages/ai/src/auth/oauth/openai-codex.ts:exchangeAuthorizationCode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openai-codex.ts",
+      "target": "function:packages/ai/src/auth/oauth/openai-codex.ts:refreshAccessToken",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openai-codex.ts",
+      "target": "function:packages/ai/src/auth/oauth/openai-codex.ts:startOpenAICodexDeviceAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openai-codex.ts",
+      "target": "function:packages/ai/src/auth/oauth/openai-codex.ts:pollOpenAICodexDeviceAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openai-codex.ts",
+      "target": "function:packages/ai/src/auth/oauth/openai-codex.ts:createAuthorizationFlow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openai-codex.ts",
+      "target": "function:packages/ai/src/auth/oauth/openai-codex.ts:startLocalOAuthServer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openai-codex.ts",
+      "target": "function:packages/ai/src/auth/oauth/openai-codex.ts:credentialsFromToken",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openai-codex.ts",
+      "target": "function:packages/ai/src/auth/oauth/openai-codex.ts:loginOpenAICodexDeviceCode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openai-codex.ts",
+      "target": "function:packages/ai/src/auth/oauth/openai-codex.ts:loginOpenAICodex",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/openai-codex.ts:startLocalOAuthServer",
+      "target": "function:packages/ai/src/auth/oauth/oauth-page.ts:oauthSuccessHtml",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/openai-codex.ts:startLocalOAuthServer",
+      "target": "function:packages/ai/src/auth/oauth/oauth-page.ts:oauthErrorHtml",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/openai-codex.ts:pollOpenAICodexDeviceAuth",
+      "target": "function:packages/ai/src/auth/oauth/device-code.ts:pollOAuthDeviceCodeFlow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/openai-codex.ts:loginOpenAICodex",
+      "target": "function:packages/ai/src/auth/oauth/openai-codex.ts:createAuthorizationFlow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/openai-codex.ts:loginOpenAICodex",
+      "target": "function:packages/ai/src/auth/oauth/openai-codex.ts:startLocalOAuthServer",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/openai-codex.ts:loginOpenAICodexDeviceCode",
+      "target": "function:packages/ai/src/auth/oauth/openai-codex.ts:startOpenAICodexDeviceAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/openai-codex.ts:loginOpenAICodexDeviceCode",
+      "target": "function:packages/ai/src/auth/oauth/openai-codex.ts:pollOpenAICodexDeviceAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openrouter.ts",
+      "target": "function:packages/ai/src/auth/oauth/openrouter.ts:parseAuthorizationInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openrouter.ts",
+      "target": "function:packages/ai/src/auth/oauth/openrouter.ts:errorDetail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openrouter.ts",
+      "target": "function:packages/ai/src/auth/oauth/openrouter.ts:exchangeAuthorizationCode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openrouter.ts",
+      "target": "function:packages/ai/src/auth/oauth/openrouter.ts:startCallbackServer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openrouter.ts",
+      "target": "function:packages/ai/src/auth/oauth/openrouter.ts:loginOpenRouter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/openrouter.ts:loginOpenRouter",
+      "target": "function:packages/ai/src/auth/oauth/openrouter.ts:startCallbackServer",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/openrouter.ts:startCallbackServer",
+      "target": "function:packages/ai/src/auth/oauth/oauth-page.ts:oauthSuccessHtml",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/openrouter.ts:startCallbackServer",
+      "target": "function:packages/ai/src/auth/oauth/oauth-page.ts:oauthErrorHtml",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/auth/oauth/openrouter.ts:startCallbackServer",
+      "target": "function:packages/ai/src/auth/oauth/openrouter.ts:exchangeAuthorizationCode",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/auth/context.ts",
+      "target": "file:packages/ai/src/auth/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/credential-store.ts",
+      "target": "file:packages/ai/src/auth/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/credential-store.ts",
+      "target": "file:packages/ai/src/utils/abort.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/helpers.ts",
+      "target": "file:packages/ai/src/auth/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/anthropic.ts",
+      "target": "file:packages/ai/src/auth/oauth/oauth-page.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/anthropic.ts",
+      "target": "file:packages/ai/src/auth/oauth/pkce.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/anthropic.ts",
+      "target": "file:packages/ai/src/auth/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/anthropic.ts",
+      "target": "file:packages/ai/src/utils/provider-env.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/github-copilot.ts",
+      "target": "file:packages/ai/src/auth/oauth/device-code.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/github-copilot.ts",
+      "target": "file:packages/ai/src/auth/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/github-copilot.ts",
+      "target": "file:packages/ai/src/providers/github-copilot.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/github-copilot.ts",
+      "target": "file:packages/ai/src/utils/sleep.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/kimi-coding.ts",
+      "target": "file:packages/ai/src/auth/oauth/device-code.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/kimi-coding.ts",
+      "target": "file:packages/ai/src/auth/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/kimi-coding.ts",
+      "target": "file:packages/ai/src/utils/provider-env.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/kimi-coding.ts",
+      "target": "file:packages/ai/src/utils/sleep.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/load.ts",
+      "target": "file:packages/ai/src/auth/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openai-codex.ts",
+      "target": "file:packages/ai/src/auth/oauth/device-code.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openai-codex.ts",
+      "target": "file:packages/ai/src/auth/oauth/oauth-page.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openai-codex.ts",
+      "target": "file:packages/ai/src/auth/oauth/pkce.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openai-codex.ts",
+      "target": "file:packages/ai/src/auth/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openai-codex.ts",
+      "target": "file:packages/ai/src/utils/provider-env.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openrouter.ts",
+      "target": "file:packages/ai/src/auth/oauth/oauth-page.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openrouter.ts",
+      "target": "file:packages/ai/src/auth/oauth/pkce.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openrouter.ts",
+      "target": "file:packages/ai/src/auth/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/auth/oauth/openrouter.ts",
+      "target": "file:packages/ai/src/utils/provider-env.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+Analyze these files and produce GraphNode and GraphEdge objects.
+Project root: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi`
+Project: `pi-monorepo`
+Batch: `12/45`
+Skill directory: `/Users/elex-mb0203/.cursor/plugins/local/Understand-Anything/understand-anything-plugin/skills/understand`
+Output: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-12.json` OR `batch-12-part-<k>.json`.
+UA_DIR: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua`
+Load `batchImportData` and `neighborMap` from `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-briefs/batch-12.json`.
+Pass every listed file through to `batchFiles` with path, language, sizeLines, fileCategory.
+
+> **Language directive**: Generate all textual content in **Chinese (zh)**. Keep technical terms in English when no standard translation exists.
+
+Files:
+1. packages/coding-agent/src/core/extensions/loader.ts (809 lines, language: typescript, fileCategory: code)
+2. packages/coding-agent/src/core/http-dispatcher.ts (113 lines, language: typescript, fileCategory: code)
+3. packages/coding-agent/src/core/model-config.ts (303 lines, language: typescript, fileCategory: code)
+4. packages/coding-agent/src/core/model-registry.ts (173 lines, language: typescript, fileCategory: code)
+5. packages/coding-agent/src/core/model-resolver.ts (782 lines, language: typescript, fileCategory: code)
+6. packages/coding-agent/src/core/model-runtime.ts (795 lines, language: typescript, fileCategory: code)
+7. packages/coding-agent/src/core/models-store.ts (147 lines, language: typescript, fileCategory: code)
+8. packages/coding-agent/src/core/output-guard.ts (108 lines, language: typescript, fileCategory: code)
+9. packages/coding-agent/src/core/package-manager.ts (2699 lines, language: typescript, fileCategory: code)
+10. packages/coding-agent/src/core/pi-manifest.ts (35 lines, language: typescript, fileCategory: code)
+11. packages/coding-agent/src/core/project-trust.ts (96 lines, language: typescript, fileCategory: code)
+12. packages/coding-agent/src/core/prompt-templates.ts (285 lines, language: typescript, fileCategory: code)
+13. packages/coding-agent/src/core/provider-attribution.ts (97 lines, language: typescript, fileCategory: code)
+14. packages/coding-agent/src/core/provider-composer.ts (581 lines, language: typescript, fileCategory: code)
+15. packages/coding-agent/src/core/remote-catalog-provider.ts (137 lines, language: typescript, fileCategory: code)
+16. packages/coding-agent/src/core/resolve-config-value.ts (287 lines, language: typescript, fileCategory: code)
+17. packages/coding-agent/src/core/resource-loader.ts (1097 lines, language: typescript, fileCategory: code)
+18. packages/coding-agent/src/core/runtime-credentials.ts (52 lines, language: typescript, fileCategory: code)
+19. packages/coding-agent/src/core/sdk.ts (410 lines, language: typescript, fileCategory: code)
+20. packages/coding-agent/src/core/session-cwd.ts (59 lines, language: typescript, fileCategory: code)
+21. packages/coding-agent/src/core/settings-diagnostics.ts (25 lines, language: typescript, fileCategory: code)
+22. packages/coding-agent/src/core/settings-manager.ts (1417 lines, language: typescript, fileCategory: code)
+23. packages/coding-agent/src/core/skills.ts (509 lines, language: typescript, fileCategory: code)
+24. packages/coding-agent/src/core/slash-commands.ts (43 lines, language: typescript, fileCategory: code)
+25. packages/coding-agent/src/core/source-info.ts (40 lines, language: typescript, fileCategory: code)
+26. packages/coding-agent/src/core/system-prompt.ts (168 lines, language: typescript, fileCategory: code)
+27. packages/coding-agent/src/core/telemetry.ts (13 lines, language: typescript, fileCategory: code)
+28. packages/coding-agent/src/core/timings.ts (50 lines, language: typescript, fileCategory: code)
+29. packages/coding-agent/src/core/trust-manager.ts (245 lines, language: typescript, fileCategory: code)
+
+Respond with only a brief summary: parts written, total nodes/edges, files skipped.

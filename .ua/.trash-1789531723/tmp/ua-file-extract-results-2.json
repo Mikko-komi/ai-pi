@@ -1,0 +1,7137 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 32,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 32,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 32,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "packages/coding-agent/src/experimental/services/models-provider.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 143,
+      "nonEmptyLines": 139,
+      "functions": [
+        {
+          "name": "createModelsService",
+          "startLine": 14,
+          "endLine": 116,
+          "params": [
+            "lane",
+            "modelRuntime",
+            "settingsManager",
+            "createState"
+          ]
+        },
+        {
+          "name": "createModelsServiceFacet",
+          "startLine": 118,
+          "endLine": 136,
+          "params": [
+            "options"
+          ]
+        },
+        {
+          "name": "includesModel",
+          "startLine": 138,
+          "endLine": 143,
+          "params": [
+            "models",
+            "selected"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "createModelsService",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "createModelsServiceFacet",
+          "line": 118,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "createModelsService",
+          "callee": "createState",
+          "lineNumber": 21
+        },
+        {
+          "caller": "readConfiguration",
+          "callee": "Promise.all",
+          "lineNumber": 27
+        },
+        {
+          "caller": "readConfiguration",
+          "callee": "lane.getModel",
+          "lineNumber": 27
+        },
+        {
+          "caller": "readConfiguration",
+          "callee": "lane.getThinkingLevel",
+          "lineNumber": 27
+        },
+        {
+          "caller": "readThinkingLevels",
+          "callee": "lane.getModel",
+          "lineNumber": 34
+        },
+        {
+          "caller": "readThinkingLevels",
+          "callee": "getSupportedThinkingLevels",
+          "lineNumber": 35
+        },
+        {
+          "caller": "readCatalog",
+          "callee": "lane.getModel",
+          "lineNumber": 38
+        },
+        {
+          "caller": "readCatalog",
+          "callee": "modelRuntime?.getAvailableSnapshot",
+          "lineNumber": 39
+        },
+        {
+          "caller": "readCatalog",
+          "callee": "includesModel",
+          "lineNumber": 41
+        },
+        {
+          "caller": "readCatalog",
+          "callee": "catalog.map",
+          "lineNumber": 45
+        },
+        {
+          "caller": "cycleThinking",
+          "callee": "readThinkingLevels",
+          "lineNumber": 56
+        },
+        {
+          "caller": "cycleThinking",
+          "callee": "lane.getThinkingLevel",
+          "lineNumber": 57
+        },
+        {
+          "caller": "cycleThinking",
+          "callee": "levels.indexOf",
+          "lineNumber": 58
+        },
+        {
+          "caller": "cycleThinking",
+          "callee": "lane.setThinkingLevel",
+          "lineNumber": 60
+        },
+        {
+          "caller": "cycleThinking",
+          "callee": "readConfiguration",
+          "lineNumber": 61
+        },
+        {
+          "caller": "cycleThinking",
+          "callee": "state.publish",
+          "lineNumber": 62
+        },
+        {
+          "caller": "getThinkingLevels",
+          "callee": "readThinkingLevels",
+          "lineNumber": 65
+        },
+        {
+          "caller": "refresh",
+          "callee": "state.publish",
+          "lineNumber": 69
+        },
+        {
+          "caller": "refresh",
+          "callee": "modelRuntime?.refresh",
+          "lineNumber": 70
+        },
+        {
+          "caller": "refresh",
+          "callee": "Promise.all",
+          "lineNumber": 72
+        },
+        {
+          "caller": "refresh",
+          "callee": "readCatalog",
+          "lineNumber": 72
+        },
+        {
+          "caller": "refresh",
+          "callee": "readConfiguration",
+          "lineNumber": 72
+        },
+        {
+          "caller": "refresh",
+          "callee": "state.publish",
+          "lineNumber": 76
+        },
+        {
+          "caller": "refresh",
+          "callee": "Object.fromEntries",
+          "lineNumber": 80
+        },
+        {
+          "caller": "refresh",
+          "callee": "[...result.errors].map",
+          "lineNumber": 80
+        },
+        {
+          "caller": "refresh",
+          "callee": "Promise.all",
+          "lineNumber": 81
+        },
+        {
+          "caller": "refresh",
+          "callee": "readCatalog",
+          "lineNumber": 81
+        },
+        {
+          "caller": "refresh",
+          "callee": "readConfiguration",
+          "lineNumber": 81
+        },
+        {
+          "caller": "refresh",
+          "callee": "Object.keys",
+          "lineNumber": 84
+        },
+        {
+          "caller": "refresh",
+          "callee": "state.publish",
+          "lineNumber": 85
+        },
+        {
+          "caller": "select",
+          "callee": "modelRuntime?.getModel",
+          "lineNumber": 88
+        },
+        {
+          "caller": "select",
+          "callee": "lane.setModel",
+          "lineNumber": 90
+        },
+        {
+          "caller": "select",
+          "callee": "settingsManager?.setDefaultModelAndProvider",
+          "lineNumber": 91
+        },
+        {
+          "caller": "select",
+          "callee": "settingsManager?.flush",
+          "lineNumber": 92
+        },
+        {
+          "caller": "select",
+          "callee": "readConfiguration",
+          "lineNumber": 93
+        },
+        {
+          "caller": "select",
+          "callee": "state.publish",
+          "lineNumber": 94
+        },
+        {
+          "caller": "selectThinking",
+          "callee": "readThinkingLevels",
+          "lineNumber": 97
+        },
+        {
+          "caller": "selectThinking",
+          "callee": "levels.includes",
+          "lineNumber": 98
+        },
+        {
+          "caller": "selectThinking",
+          "callee": "levels.join",
+          "lineNumber": 99
+        },
+        {
+          "caller": "selectThinking",
+          "callee": "lane.setThinkingLevel",
+          "lineNumber": 101
+        },
+        {
+          "caller": "selectThinking",
+          "callee": "readConfiguration",
+          "lineNumber": 102
+        },
+        {
+          "caller": "selectThinking",
+          "callee": "state.publish",
+          "lineNumber": 103
+        },
+        {
+          "caller": "activate",
+          "callee": "Promise.all",
+          "lineNumber": 109
+        },
+        {
+          "caller": "activate",
+          "callee": "readCatalog",
+          "lineNumber": 109
+        },
+        {
+          "caller": "activate",
+          "callee": "readConfiguration",
+          "lineNumber": 109
+        },
+        {
+          "caller": "activate",
+          "callee": "state.publish",
+          "lineNumber": 113
+        },
+        {
+          "caller": "createModelsServiceFacet",
+          "callee": "defineFacet",
+          "lineNumber": 123
+        },
+        {
+          "caller": "setup",
+          "callee": "createModelsService",
+          "lineNumber": 126
+        },
+        {
+          "caller": "setup",
+          "callee": "env.provide",
+          "lineNumber": 132
+        },
+        {
+          "caller": "setup",
+          "callee": "env.onActivate",
+          "lineNumber": 133
+        },
+        {
+          "caller": "setup",
+          "callee": "runtime.activate",
+          "lineNumber": 133
+        },
+        {
+          "caller": "includesModel",
+          "callee": "models.some",
+          "lineNumber": 142
+        }
+      ],
+      "metrics": {
+        "importCount": 7,
+        "exportCount": 2,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 30,
+      "exports": [
+        {
+          "name": "Models",
+          "line": 35,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/plugins.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 19,
+      "nonEmptyLines": 15,
+      "exports": [
+        {
+          "name": "PresentationPlugins",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "SessionPlugins",
+          "line": 19,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/presentation-ui.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 17,
+      "exports": [
+        {
+          "name": "PresentationUI",
+          "line": 20,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/server.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 150,
+      "nonEmptyLines": 145,
+      "functions": [
+        {
+          "name": "createExperimentalServerServices",
+          "startLine": 25,
+          "endLine": 129,
+          "params": [
+            "options"
+          ]
+        },
+        {
+          "name": "createProviderAttachment",
+          "startLine": 131,
+          "endLine": 150,
+          "params": [
+            "provider",
+            "onRelease"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "createExperimentalServerServices",
+          "line": 25,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "createExperimentalServerServices",
+          "callee": "replicatedState",
+          "lineNumber": 37
+        },
+        {
+          "caller": "createExperimentalServerServices",
+          "callee": "options.list",
+          "lineNumber": 39
+        },
+        {
+          "caller": "createExperimentalServerServices",
+          "callee": "Promise.resolve",
+          "lineNumber": 42
+        },
+        {
+          "caller": "refreshNow",
+          "callee": "options.list",
+          "lineNumber": 45
+        },
+        {
+          "caller": "refreshNow",
+          "callee": "directory.publish",
+          "lineNumber": 49
+        },
+        {
+          "caller": "serialize",
+          "callee": "mutationTail.catch(() => {}).then",
+          "lineNumber": 52
+        },
+        {
+          "caller": "serialize",
+          "callee": "mutationTail.catch",
+          "lineNumber": 52
+        },
+        {
+          "caller": "serialize",
+          "callee": "result.then",
+          "lineNumber": 53
+        },
+        {
+          "caller": "attachClient",
+          "callee": "provider.provide",
+          "lineNumber": 69
+        },
+        {
+          "caller": "attachClient",
+          "callee": "provider.provide",
+          "lineNumber": 70
+        },
+        {
+          "caller": "attachClient",
+          "callee": "serialize",
+          "lineNumber": 72
+        },
+        {
+          "caller": "attachClient",
+          "callee": "options.prepareSessionPlugins",
+          "lineNumber": 73
+        },
+        {
+          "caller": "attachClient",
+          "callee": "serialize",
+          "lineNumber": 82
+        },
+        {
+          "caller": "attachClient",
+          "callee": "options.reloadPresentationPlugins",
+          "lineNumber": 86
+        },
+        {
+          "caller": "attachClient",
+          "callee": "provider.provide",
+          "lineNumber": 89
+        },
+        {
+          "caller": "attachClient",
+          "callee": "serialize",
+          "lineNumber": 91
+        },
+        {
+          "caller": "attachClient",
+          "callee": "options.create",
+          "lineNumber": 92
+        },
+        {
+          "caller": "attachClient",
+          "callee": "refreshNow",
+          "lineNumber": 93
+        },
+        {
+          "caller": "attachClient",
+          "callee": "serialize",
+          "lineNumber": 97
+        },
+        {
+          "caller": "attachClient",
+          "callee": "presentation.prepareSessionRemoval",
+          "lineNumber": 98
+        },
+        {
+          "caller": "attachClient",
+          "callee": "options.remove",
+          "lineNumber": 99
+        },
+        {
+          "caller": "attachClient",
+          "callee": "refreshNow",
+          "lineNumber": 100
+        },
+        {
+          "caller": "attachClient",
+          "callee": "serialize",
+          "lineNumber": 103
+        },
+        {
+          "caller": "attachClient",
+          "callee": "presentation.attachSession",
+          "lineNumber": 104
+        },
+        {
+          "caller": "attachClient",
+          "callee": "serialize",
+          "lineNumber": 107
+        },
+        {
+          "caller": "attachClient",
+          "callee": "presentation.detachSession",
+          "lineNumber": 108
+        },
+        {
+          "caller": "attachClient",
+          "callee": "createProviderAttachment",
+          "lineNumber": 112
+        },
+        {
+          "caller": "attachClient",
+          "callee": "attachments.delete",
+          "lineNumber": 112
+        },
+        {
+          "caller": "attachClient",
+          "callee": "attachments.add",
+          "lineNumber": 113
+        },
+        {
+          "caller": "createExperimentalServerServices",
+          "callee": "serialize",
+          "lineNumber": 117
+        },
+        {
+          "caller": "createExperimentalServerServices",
+          "callee": "refreshNow",
+          "lineNumber": 117
+        },
+        {
+          "caller": "dispose",
+          "callee": "Promise.allSettled",
+          "lineNumber": 119
+        },
+        {
+          "caller": "dispose",
+          "callee": "[...attachments].map",
+          "lineNumber": 120
+        },
+        {
+          "caller": "dispose",
+          "callee": "attachment.release",
+          "lineNumber": 120
+        },
+        {
+          "caller": "dispose",
+          "callee": "attachments.clear",
+          "lineNumber": 122
+        },
+        {
+          "caller": "dispose",
+          "callee": "releases.flatMap",
+          "lineNumber": 124
+        },
+        {
+          "caller": "createProviderAttachment",
+          "callee": "createRemoteServiceEndpoint",
+          "lineNumber": 135
+        },
+        {
+          "caller": "invokeService",
+          "callee": "Promise.reject",
+          "lineNumber": 139
+        },
+        {
+          "caller": "invokeService",
+          "callee": "endpoint.invoke",
+          "lineNumber": 140
+        },
+        {
+          "caller": "release",
+          "callee": "endpoint.dispose",
+          "lineNumber": 145
+        },
+        {
+          "caller": "release",
+          "callee": "provider.dispose",
+          "lineNumber": 146
+        },
+        {
+          "caller": "release",
+          "callee": "onRelease",
+          "lineNumber": 147
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/sessions.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 27,
+      "exports": [
+        {
+          "name": "SessionDirectory",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "SessionManagement",
+          "line": 35,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 225,
+      "nonEmptyLines": 209,
+      "functions": [
+        {
+          "name": "createSlashCommandsRuntimeFacet",
+          "startLine": 77,
+          "endLine": 84,
+          "params": [
+            "registry"
+          ]
+        },
+        {
+          "name": "createBuiltInSlashCommandsFacet",
+          "startLine": 86,
+          "endLine": 119,
+          "params": [
+            "options"
+          ]
+        },
+        {
+          "name": "modelCommand",
+          "startLine": 121,
+          "endLine": 169,
+          "params": [
+            "models",
+            "ui"
+          ]
+        },
+        {
+          "name": "thinkingCommand",
+          "startLine": 171,
+          "endLine": 202,
+          "params": [
+            "models",
+            "ui"
+          ]
+        },
+        {
+          "name": "compactCommand",
+          "startLine": 204,
+          "endLine": 214,
+          "params": [
+            "controller",
+            "ui"
+          ]
+        },
+        {
+          "name": "exactModel",
+          "startLine": 216,
+          "endLine": 225,
+          "params": [
+            "models",
+            "query"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "SlashCommandRegistry",
+          "startLine": 24,
+          "endLine": 75,
+          "methods": [
+            "register",
+            "replace",
+            "list",
+            "subscribe"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "SlashCommandRegistry",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "createSlashCommandsRuntimeFacet",
+          "line": 77,
+          "isDefault": false
+        },
+        {
+          "name": "createBuiltInSlashCommandsFacet",
+          "line": 86,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "register",
+          "callee": "this.#validate",
+          "lineNumber": 29
+        },
+        {
+          "caller": "register",
+          "callee": "this.#commands.has",
+          "lineNumber": 30
+        },
+        {
+          "caller": "register",
+          "callee": "this.#add",
+          "lineNumber": 31
+        },
+        {
+          "caller": "replace",
+          "callee": "this.#validate",
+          "lineNumber": 35
+        },
+        {
+          "caller": "replace",
+          "callee": "this.#add",
+          "lineNumber": 36
+        },
+        {
+          "caller": "list",
+          "callee": "Object.freeze",
+          "lineNumber": 40
+        },
+        {
+          "caller": "list",
+          "callee": "[...this.#commands.values()].map",
+          "lineNumber": 40
+        },
+        {
+          "caller": "list",
+          "callee": "this.#commands.values",
+          "lineNumber": 40
+        },
+        {
+          "caller": "subscribe",
+          "callee": "this.#listeners.add",
+          "lineNumber": 44
+        },
+        {
+          "caller": "subscribe",
+          "callee": "listener",
+          "lineNumber": 45
+        },
+        {
+          "caller": "subscribe",
+          "callee": "this.list",
+          "lineNumber": 45
+        },
+        {
+          "caller": "subscribe",
+          "callee": "this.#listeners.delete",
+          "lineNumber": 46
+        },
+        {
+          "caller": "createSlashCommandsRuntimeFacet",
+          "callee": "defineFacet",
+          "lineNumber": 78
+        },
+        {
+          "caller": "setup",
+          "callee": "env.provide",
+          "lineNumber": 81
+        },
+        {
+          "caller": "createBuiltInSlashCommandsFacet",
+          "callee": "defineFacet",
+          "lineNumber": 89
+        },
+        {
+          "caller": "setup",
+          "callee": "env.use",
+          "lineNumber": 92
+        },
+        {
+          "caller": "setup",
+          "callee": "env.use",
+          "lineNumber": 93
+        },
+        {
+          "caller": "setup",
+          "callee": "env.use",
+          "lineNumber": 94
+        },
+        {
+          "caller": "setup",
+          "callee": "env.use",
+          "lineNumber": 95
+        },
+        {
+          "caller": "setup",
+          "callee": "env.use",
+          "lineNumber": 96
+        },
+        {
+          "caller": "setup",
+          "callee": "env.use",
+          "lineNumber": 97
+        },
+        {
+          "caller": "setup",
+          "callee": "env.onActivate",
+          "lineNumber": 98
+        },
+        {
+          "caller": "setup",
+          "callee": "env.own",
+          "lineNumber": 99
+        },
+        {
+          "caller": "setup",
+          "callee": "commands.replace",
+          "lineNumber": 99
+        },
+        {
+          "caller": "setup",
+          "callee": "modelCommand",
+          "lineNumber": 99
+        },
+        {
+          "caller": "setup",
+          "callee": "env.own",
+          "lineNumber": 100
+        },
+        {
+          "caller": "setup",
+          "callee": "commands.replace",
+          "lineNumber": 100
+        },
+        {
+          "caller": "setup",
+          "callee": "thinkingCommand",
+          "lineNumber": 100
+        },
+        {
+          "caller": "setup",
+          "callee": "env.own",
+          "lineNumber": 101
+        },
+        {
+          "caller": "setup",
+          "callee": "commands.replace",
+          "lineNumber": 101
+        },
+        {
+          "caller": "setup",
+          "callee": "compactCommand",
+          "lineNumber": 101
+        },
+        {
+          "caller": "setup",
+          "callee": "env.own",
+          "lineNumber": 102
+        },
+        {
+          "caller": "setup",
+          "callee": "commands.replace",
+          "lineNumber": 103
+        },
+        {
+          "caller": "run",
+          "callee": "ui.showStatus",
+          "lineNumber": 107
+        },
+        {
+          "caller": "run",
+          "callee": "presentationPlugins.reload",
+          "lineNumber": 108
+        },
+        {
+          "caller": "run",
+          "callee": "sessionPlugins.reload",
+          "lineNumber": 109
+        },
+        {
+          "caller": "run",
+          "callee": "options.reloadPresentationPlugins",
+          "lineNumber": 110
+        },
+        {
+          "caller": "run",
+          "callee": "ui.showStatus",
+          "lineNumber": 111
+        },
+        {
+          "caller": "getArgumentCompletions",
+          "callee": "prefix.toLowerCase",
+          "lineNumber": 127
+        },
+        {
+          "caller": "getArgumentCompletions",
+          "callee": "(models.state.value?.catalog.availableModels ?? [])\n\t\t\t\t.filter((model) => `${model.provider}/${model.modelId} ${model.name}`.toLowerCase().includes(normalized))\n\t\t\t\t.map",
+          "lineNumber": 128
+        },
+        {
+          "caller": "getArgumentCompletions",
+          "callee": "(models.state.value?.catalog.availableModels ?? [])\n\t\t\t\t.filter",
+          "lineNumber": 128
+        },
+        {
+          "caller": "getArgumentCompletions",
+          "callee": "`${model.provider}/${model.modelId} ${model.name}`.toLowerCase().includes",
+          "lineNumber": 129
+        },
+        {
+          "caller": "getArgumentCompletions",
+          "callee": "`${model.provider}/${model.modelId} ${model.name}`.toLowerCase",
+          "lineNumber": 129
+        },
+        {
+          "caller": "run",
+          "callee": "exactModel",
+          "lineNumber": 139
+        },
+        {
+          "caller": "run",
+          "callee": "ui.select",
+          "lineNumber": 144
+        },
+        {
+          "caller": "run",
+          "callee": "state.catalog.availableModels.map",
+          "lineNumber": 146
+        },
+        {
+          "caller": "run",
+          "callee": "exactModel",
+          "lineNumber": 161
+        },
+        {
+          "caller": "run",
+          "callee": "models.select",
+          "lineNumber": 164
+        },
+        {
+          "caller": "run",
+          "callee": "ui.showStatus",
+          "lineNumber": 165
+        },
+        {
+          "caller": "run",
+          "callee": "models.getThinkingLevels",
+          "lineNumber": 177
+        },
+        {
+          "caller": "run",
+          "callee": "levels.find",
+          "lineNumber": 178
+        },
+        {
+          "caller": "run",
+          "callee": "args.toLowerCase",
+          "lineNumber": 178
+        },
+        {
+          "caller": "run",
+          "callee": "levels.join",
+          "lineNumber": 180
+        },
+        {
+          "caller": "run",
+          "callee": "ui.select",
+          "lineNumber": 183
+        },
+        {
+          "caller": "run",
+          "callee": "levels.map",
+          "lineNumber": 185
+        },
+        {
+          "caller": "run",
+          "callee": "levels.find",
+          "lineNumber": 194
+        },
+        {
+          "caller": "run",
+          "callee": "models.selectThinking",
+          "lineNumber": 197
+        },
+        {
+          "caller": "run",
+          "callee": "ui.showStatus",
+          "lineNumber": 198
+        },
+        {
+          "caller": "run",
+          "callee": "ui.showStatus",
+          "lineNumber": 210
+        },
+        {
+          "caller": "run",
+          "callee": "controller.compact",
+          "lineNumber": 211
+        },
+        {
+          "caller": "exactModel",
+          "callee": "query.toLowerCase",
+          "lineNumber": 218
+        },
+        {
+          "caller": "exactModel",
+          "callee": "models.filter",
+          "lineNumber": 219
+        },
+        {
+          "caller": "exactModel",
+          "callee": "`${model.provider}/${model.modelId}`.toLowerCase",
+          "lineNumber": 221
+        },
+        {
+          "caller": "exactModel",
+          "callee": "model.modelId.toLowerCase",
+          "lineNumber": 222
+        }
+      ],
+      "metrics": {
+        "importCount": 7,
+        "exportCount": 3,
+        "functionCount": 6,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/slash-commands.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 30,
+      "nonEmptyLines": 25,
+      "exports": [
+        {
+          "name": "SlashCommands",
+          "line": 30,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/transcript-provider.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 128,
+      "nonEmptyLines": 120,
+      "functions": [
+        {
+          "name": "createTranscriptService",
+          "startLine": 20,
+          "endLine": 91,
+          "params": [
+            "lane",
+            "createState"
+          ]
+        },
+        {
+          "name": "createTranscriptServiceFacet",
+          "startLine": 93,
+          "endLine": 103,
+          "params": [
+            "lane"
+          ]
+        },
+        {
+          "name": "toLaneWatchEvent",
+          "startLine": 105,
+          "endLine": 128,
+          "params": [
+            "event"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "createTranscriptService",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "createTranscriptServiceFacet",
+          "line": 93,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "createTranscriptService",
+          "callee": "createState",
+          "lineNumber": 24
+        },
+        {
+          "caller": "publishSnapshot",
+          "callee": "state.publish",
+          "lineNumber": 36
+        },
+        {
+          "caller": "scheduleRebase",
+          "callee": "(async () => {\n\t\t\tconst refreshed = await activeWatch.resnapshot(context);\n\t\t\tpublishSnapshot(refreshed, null, context);\n\t\t})",
+          "lineNumber": 43
+        },
+        {
+          "caller": "scheduleRebase",
+          "callee": "activeWatch.resnapshot",
+          "lineNumber": 44
+        },
+        {
+          "caller": "scheduleRebase",
+          "callee": "publishSnapshot",
+          "lineNumber": 45
+        },
+        {
+          "caller": "scheduleRebase",
+          "callee": "pending.then",
+          "lineNumber": 48
+        },
+        {
+          "caller": "scheduleRebase",
+          "callee": "String",
+          "lineNumber": 53
+        },
+        {
+          "caller": "onEvent",
+          "callee": "toLaneWatchEvent",
+          "lineNumber": 61
+        },
+        {
+          "caller": "onEvent",
+          "callee": "reduceLaneSnapshot",
+          "lineNumber": 65
+        },
+        {
+          "caller": "onEvent",
+          "callee": "scheduleRebase",
+          "lineNumber": 65
+        },
+        {
+          "caller": "onEvent",
+          "callee": "state.publish",
+          "lineNumber": 67
+        },
+        {
+          "caller": "activate",
+          "callee": "lane.watch",
+          "lineNumber": 74
+        },
+        {
+          "caller": "activate",
+          "callee": "publishSnapshot",
+          "lineNumber": 76
+        },
+        {
+          "caller": "activate",
+          "callee": "opened.start",
+          "lineNumber": 77
+        },
+        {
+          "caller": "dispose",
+          "callee": "watch?.unsubscribe",
+          "lineNumber": 86
+        },
+        {
+          "caller": "createTranscriptServiceFacet",
+          "callee": "defineFacet",
+          "lineNumber": 94
+        },
+        {
+          "caller": "setup",
+          "callee": "createTranscriptService",
+          "lineNumber": 97
+        },
+        {
+          "caller": "setup",
+          "callee": "env.provide",
+          "lineNumber": 98
+        },
+        {
+          "caller": "setup",
+          "callee": "env.onActivate",
+          "lineNumber": 99
+        },
+        {
+          "caller": "setup",
+          "callee": "runtime.activate",
+          "lineNumber": 99
+        },
+        {
+          "caller": "setup",
+          "callee": "env.own",
+          "lineNumber": 100
+        },
+        {
+          "caller": "setup",
+          "callee": "runtime.dispose",
+          "lineNumber": 100
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 2,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/transcript.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 12,
+      "exports": [
+        {
+          "name": "Transcript",
+          "line": 15,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/services/worker.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 152,
+      "nonEmptyLines": 144,
+      "functions": [
+        {
+          "name": "createSessionWorkerServices",
+          "startLine": 47,
+          "endLine": 148,
+          "params": [
+            "options"
+          ]
+        },
+        {
+          "name": "serviceScopeKey",
+          "startLine": 150,
+          "endLine": 152,
+          "params": [
+            "scope"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "createSessionWorkerServices",
+          "line": 47,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "createSessionWorkerServices",
+          "callee": "defineFacet",
+          "lineNumber": 54
+        },
+        {
+          "caller": "setup",
+          "callee": "env.provide",
+          "lineNumber": 57
+        },
+        {
+          "caller": "setup",
+          "callee": "createAgentController",
+          "lineNumber": 57
+        },
+        {
+          "caller": "reloadPlugins",
+          "callee": "Promise.reject",
+          "lineNumber": 60
+        },
+        {
+          "caller": "createSessionWorkerServices",
+          "callee": "defineFacet",
+          "lineNumber": 61
+        },
+        {
+          "caller": "setup",
+          "callee": "env.provide",
+          "lineNumber": 64
+        },
+        {
+          "caller": "setup",
+          "callee": "reloadPlugins",
+          "lineNumber": 64
+        },
+        {
+          "caller": "createSessionWorkerServices",
+          "callee": "createStaticFacetLoader([\n\t\tagentControllerRuntimeFacet,\n\t\tpluginRuntimeFacet,\n\t\tcreateModelsServiceFacet(options),\n\t\tcreateTranscriptServiceFacet(options.lane),\n\t]).load",
+          "lineNumber": 67
+        },
+        {
+          "caller": "createSessionWorkerServices",
+          "callee": "createStaticFacetLoader",
+          "lineNumber": 67
+        },
+        {
+          "caller": "createSessionWorkerServices",
+          "callee": "createModelsServiceFacet",
+          "lineNumber": 70
+        },
+        {
+          "caller": "createSessionWorkerServices",
+          "callee": "createTranscriptServiceFacet",
+          "lineNumber": 71
+        },
+        {
+          "caller": "createSessionWorkerServices",
+          "callee": "createStaticFacetLoader",
+          "lineNumber": 73
+        },
+        {
+          "caller": "createSessionWorkerServices",
+          "callee": "pluginLoader.load",
+          "lineNumber": 74
+        },
+        {
+          "caller": "createSessionWorkerServices",
+          "callee": "createFacetHost",
+          "lineNumber": 77
+        },
+        {
+          "caller": "createSessionWorkerServices",
+          "callee": "Promise.allSettled",
+          "lineNumber": 79
+        },
+        {
+          "caller": "createSessionWorkerServices",
+          "callee": "loadedPlugins.dispose",
+          "lineNumber": 79
+        },
+        {
+          "caller": "createSessionWorkerServices",
+          "callee": "builtins.dispose",
+          "lineNumber": 79
+        },
+        {
+          "caller": "createSessionWorkerServices",
+          "callee": "cleanup.flatMap",
+          "lineNumber": 80
+        },
+        {
+          "caller": "createSessionWorkerServices",
+          "callee": "Promise.resolve",
+          "lineNumber": 86
+        },
+        {
+          "caller": "createSessionWorkerServices",
+          "callee": "reloadTail.then",
+          "lineNumber": 88
+        },
+        {
+          "caller": "createSessionWorkerServices",
+          "callee": "pluginLoader.load",
+          "lineNumber": 89
+        },
+        {
+          "caller": "createSessionWorkerServices",
+          "callee": "facetHost.reload",
+          "lineNumber": 91
+        },
+        {
+          "caller": "createSessionWorkerServices",
+          "callee": "candidate.dispose",
+          "lineNumber": 94
+        },
+        {
+          "caller": "createSessionWorkerServices",
+          "callee": "retired.dispose",
+          "lineNumber": 102
+        },
+        {
+          "caller": "createSessionWorkerServices",
+          "callee": "operation.catch",
+          "lineNumber": 104
+        },
+        {
+          "caller": "removeSubscriptions",
+          "callee": "matches",
+          "lineNumber": 112
+        },
+        {
+          "caller": "removeSubscriptions",
+          "callee": "entry.endpoint.dispose",
+          "lineNumber": 113
+        },
+        {
+          "caller": "removeSubscriptions",
+          "callee": "endpoints.delete",
+          "lineNumber": 114
+        },
+        {
+          "caller": "invoke",
+          "callee": "serviceScopeKey",
+          "lineNumber": 120
+        },
+        {
+          "caller": "invoke",
+          "callee": "endpoints.get",
+          "lineNumber": 121
+        },
+        {
+          "caller": "invoke",
+          "callee": "createRemoteServiceEndpoint",
+          "lineNumber": 123
+        },
+        {
+          "caller": "invoke",
+          "callee": "endpoints.set",
+          "lineNumber": 124
+        },
+        {
+          "caller": "invoke",
+          "callee": "entry.endpoint.invoke",
+          "lineNumber": 126
+        },
+        {
+          "caller": "invoke",
+          "callee": "options.publish",
+          "lineNumber": 128
+        },
+        {
+          "caller": "dispose",
+          "callee": "removeSubscriptions",
+          "lineNumber": 134
+        },
+        {
+          "caller": "dispose",
+          "callee": "facetHost.dispose",
+          "lineNumber": 138
+        },
+        {
+          "caller": "dispose",
+          "callee": "errors.push",
+          "lineNumber": 140
+        },
+        {
+          "caller": "dispose",
+          "callee": "Promise.allSettled",
+          "lineNumber": 142
+        },
+        {
+          "caller": "dispose",
+          "callee": "loadedPlugins.dispose",
+          "lineNumber": 142
+        },
+        {
+          "caller": "dispose",
+          "callee": "builtins.dispose",
+          "lineNumber": 142
+        },
+        {
+          "caller": "dispose",
+          "callee": "errors.push",
+          "lineNumber": 143
+        },
+        {
+          "caller": "dispose",
+          "callee": "results.flatMap",
+          "lineNumber": 143
+        }
+      ],
+      "metrics": {
+        "importCount": 9,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/session-worker-manager.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 859,
+      "nonEmptyLines": 814,
+      "functions": [
+        {
+          "name": "sameStrings",
+          "startLine": 844,
+          "endLine": 846,
+          "params": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "name": "sameScope",
+          "startLine": 848,
+          "endLine": 850,
+          "params": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "name": "scopedServiceSubscriptionKey",
+          "startLine": 852,
+          "endLine": 854,
+          "params": [
+            "scope",
+            "subscriptionId"
+          ]
+        },
+        {
+          "name": "abortError",
+          "startLine": 856,
+          "endLine": 859,
+          "params": [
+            "signal"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "SessionPluginSelectionConflictError",
+          "startLine": 39,
+          "endLine": 44,
+          "methods": [
+            "constructor"
+          ],
+          "properties": []
+        },
+        {
+          "name": "SessionWorkerManager",
+          "startLine": 98,
+          "endLine": 842,
+          "methods": [
+            "constructor",
+            "trackedSessions",
+            "assertSessionPluginManifestPaths",
+            "discover",
+            "openSession",
+            "closeSession",
+            "shutdown",
+            "detach"
+          ],
+          "properties": [
+            "workerPids"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SessionPluginSelectionConflictError",
+          "line": 39,
+          "isDefault": false
+        },
+        {
+          "name": "SessionWorkerManager",
+          "line": 98,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 41
+        },
+        {
+          "caller": "constructor",
+          "callee": "coordinator.onEvent",
+          "lineNumber": 132
+        },
+        {
+          "caller": "constructor",
+          "callee": "this.#handleCoordinatorEvent",
+          "lineNumber": 132
+        },
+        {
+          "caller": "trackedSessions",
+          "callee": "[...this.#workersBySession.values()].map",
+          "lineNumber": 136
+        },
+        {
+          "caller": "trackedSessions",
+          "callee": "this.#workersBySession.values",
+          "lineNumber": 136
+        },
+        {
+          "caller": "assertSessionPluginManifestPaths",
+          "callee": "this.#workersBySession.get",
+          "lineNumber": 140
+        },
+        {
+          "caller": "assertSessionPluginManifestPaths",
+          "callee": "sameStrings",
+          "lineNumber": 141
+        },
+        {
+          "caller": "assertSessionPluginManifestPaths",
+          "callee": "this.#pending.get",
+          "lineNumber": 146
+        },
+        {
+          "caller": "assertSessionPluginManifestPaths",
+          "callee": "sameStrings",
+          "lineNumber": 147
+        },
+        {
+          "caller": "discover",
+          "callee": "[...peerIds].filter",
+          "lineNumber": 157
+        },
+        {
+          "caller": "discover",
+          "callee": "this.#workersByPeer.has",
+          "lineNumber": 157
+        },
+        {
+          "caller": "discover",
+          "callee": "this.#pendingPeer",
+          "lineNumber": 157
+        },
+        {
+          "caller": "discover",
+          "callee": "this.#coordinator.broadcast",
+          "lineNumber": 164
+        },
+        {
+          "caller": "discover",
+          "callee": "Promise.race",
+          "lineNumber": 166
+        },
+        {
+          "caller": "discover",
+          "callee": "setTimeout",
+          "lineNumber": 169
+        },
+        {
+          "caller": "discover",
+          "callee": "timer.unref",
+          "lineNumber": 170
+        },
+        {
+          "caller": "discover",
+          "callee": "clearTimeout",
+          "lineNumber": 173
+        },
+        {
+          "caller": "openSession",
+          "callee": "this.assertSessionPluginManifestPaths",
+          "lineNumber": 184
+        },
+        {
+          "caller": "openSession",
+          "callee": "this.#workersBySession.get",
+          "lineNumber": 185
+        },
+        {
+          "caller": "openSession",
+          "callee": "this.#routedHandle",
+          "lineNumber": 186
+        },
+        {
+          "caller": "openSession",
+          "callee": "this.#pending.get",
+          "lineNumber": 187
+        },
+        {
+          "caller": "openSession",
+          "callee": "this.#routedHandle",
+          "lineNumber": 188
+        },
+        {
+          "caller": "openSession",
+          "callee": "this.#routedHandle",
+          "lineNumber": 189
+        },
+        {
+          "caller": "openSession",
+          "callee": "this.#launch",
+          "lineNumber": 189
+        },
+        {
+          "caller": "closeSession",
+          "callee": "this.#workersBySession.get",
+          "lineNumber": 193
+        },
+        {
+          "caller": "closeSession",
+          "callee": "this.#pending.get",
+          "lineNumber": 193
+        },
+        {
+          "caller": "closeSession",
+          "callee": "this.#stopWorker",
+          "lineNumber": 194
+        },
+        {
+          "caller": "onAbort",
+          "callee": "this.#pendingOperations.has",
+          "lineNumber": 342
+        },
+        {
+          "caller": "onAbort",
+          "callee": "this.#coordinator.send(worker.peerId, { type: \"operation_cancel\", requestId, scope }).catch",
+          "lineNumber": 343
+        },
+        {
+          "caller": "onAbort",
+          "callee": "this.#coordinator.send",
+          "lineNumber": 343
+        },
+        {
+          "caller": "onAbort",
+          "callee": "this.#rejectOperation",
+          "lineNumber": 344
+        },
+        {
+          "caller": "onAbort",
+          "callee": "abortError",
+          "lineNumber": 344
+        },
+        {
+          "caller": "shutdown",
+          "callee": "this.#pending.values",
+          "lineNumber": 409
+        },
+        {
+          "caller": "shutdown",
+          "callee": "this.#coordinator.send(pending.peerId, { type: \"shutdown\" }).catch",
+          "lineNumber": 411
+        },
+        {
+          "caller": "shutdown",
+          "callee": "this.#coordinator.send",
+          "lineNumber": 411
+        },
+        {
+          "caller": "shutdown",
+          "callee": "Promise.all(\n\t\t\tpendingWorkers.map((pending) => {\n\t\t\t\tif (pending.child.exitCode !== null || pending.child.signalCode !== null) return Promise.resolve();\n\t\t\t\treturn new Promise<void>((resolve) => pending.child.once(\"exit\", () => resolve()));\n\t\t\t}),\n\t\t).then",
+          "lineNumber": 413
+        },
+        {
+          "caller": "shutdown",
+          "callee": "Promise.all",
+          "lineNumber": 413
+        },
+        {
+          "caller": "shutdown",
+          "callee": "pendingWorkers.map",
+          "lineNumber": 414
+        },
+        {
+          "caller": "shutdown",
+          "callee": "Promise.resolve",
+          "lineNumber": 415
+        },
+        {
+          "caller": "shutdown",
+          "callee": "pending.child.once",
+          "lineNumber": 416
+        },
+        {
+          "caller": "shutdown",
+          "callee": "resolve",
+          "lineNumber": 416
+        },
+        {
+          "caller": "shutdown",
+          "callee": "setTimeout",
+          "lineNumber": 421
+        },
+        {
+          "caller": "shutdown",
+          "callee": "resolve",
+          "lineNumber": 421
+        },
+        {
+          "caller": "shutdown",
+          "callee": "timer.unref",
+          "lineNumber": 422
+        },
+        {
+          "caller": "shutdown",
+          "callee": "(async () => {\n\t\t\tif ((await Promise.race([pendingFinished.then(() => false), pendingTimedOut])) === true) {\n\t\t\t\tfor (const pending of pendingWorkers) pending.child.kill(\"SIGKILL\");\n\t\t\t\tawait pendingFinished;\n\t\t\t}\n\t\t\tif (timer) clearTimeout(timer);\n\t\t})",
+          "lineNumber": 424
+        },
+        {
+          "caller": "shutdown",
+          "callee": "Promise.race",
+          "lineNumber": 425
+        },
+        {
+          "caller": "shutdown",
+          "callee": "pendingFinished.then",
+          "lineNumber": 425
+        },
+        {
+          "caller": "shutdown",
+          "callee": "pending.child.kill",
+          "lineNumber": 426
+        },
+        {
+          "caller": "shutdown",
+          "callee": "clearTimeout",
+          "lineNumber": 429
+        },
+        {
+          "caller": "shutdown",
+          "callee": "Promise.all",
+          "lineNumber": 431
+        },
+        {
+          "caller": "shutdown",
+          "callee": "[...this.#workersBySession.values()].map",
+          "lineNumber": 433
+        },
+        {
+          "caller": "shutdown",
+          "callee": "this.#workersBySession.values",
+          "lineNumber": 433
+        },
+        {
+          "caller": "shutdown",
+          "callee": "this.#stopWorker",
+          "lineNumber": 433
+        },
+        {
+          "caller": "shutdown",
+          "callee": "this.#detachState",
+          "lineNumber": 435
+        },
+        {
+          "caller": "detach",
+          "callee": "this.#pending.values",
+          "lineNumber": 442
+        },
+        {
+          "caller": "detach",
+          "callee": "clearTimeout",
+          "lineNumber": 443
+        },
+        {
+          "caller": "detach",
+          "callee": "pending.reject",
+          "lineNumber": 444
+        },
+        {
+          "caller": "detach",
+          "callee": "this.#pendingOperations.keys",
+          "lineNumber": 446
+        },
+        {
+          "caller": "detach",
+          "callee": "this.#rejectOperation",
+          "lineNumber": 447
+        },
+        {
+          "caller": "detach",
+          "callee": "this.#detachState",
+          "lineNumber": 449
+        },
+        {
+          "caller": "sameStrings",
+          "callee": "left.every",
+          "lineNumber": 845
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 2,
+        "functionCount": 4,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "packages/coding-agent/src/experimental/session-worker.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 884,
+      "nonEmptyLines": 839,
+      "functions": [
+        {
+          "name": "StrictObject",
+          "startLine": 51,
+          "endLine": 52,
+          "params": [
+            "properties"
+          ]
+        },
+        {
+          "name": "connectControl",
+          "startLine": 343,
+          "endLine": 373,
+          "params": []
+        },
+        {
+          "name": "readCommands",
+          "startLine": 375,
+          "endLine": 409,
+          "params": [
+            "control",
+            "handlers"
+          ]
+        },
+        {
+          "name": "createJsonLineMessages",
+          "startLine": 411,
+          "endLine": 448,
+          "params": [
+            "socket"
+          ]
+        },
+        {
+          "name": "writeJsonLine",
+          "startLine": 450,
+          "endLine": 457,
+          "params": [
+            "socket",
+            "message"
+          ]
+        },
+        {
+          "name": "toWorkerServiceUpdate",
+          "startLine": 459,
+          "endLine": 462,
+          "params": [
+            "update"
+          ]
+        },
+        {
+          "name": "demandKey",
+          "startLine": 464,
+          "endLine": 466,
+          "params": [
+            "serverConnectionId",
+            "attachmentId"
+          ]
+        },
+        {
+          "name": "sameScope",
+          "startLine": 468,
+          "endLine": 470,
+          "params": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "name": "lifecycleDelay",
+          "startLine": 472,
+          "endLine": 478,
+          "params": [
+            "name",
+            "fallback"
+          ]
+        },
+        {
+          "name": "closeResources",
+          "startLine": 480,
+          "endLine": 517,
+          "params": [
+            "resources"
+          ]
+        },
+        {
+          "name": "run",
+          "startLine": 525,
+          "endLine": 769,
+          "params": [
+            "options",
+            "createHarness"
+          ]
+        },
+        {
+          "name": "runSessionWorkerWithHarness",
+          "startLine": 771,
+          "endLine": 803,
+          "params": [
+            "args",
+            "createHarness"
+          ]
+        },
+        {
+          "name": "createCodingAgentHarness",
+          "startLine": 805,
+          "endLine": 872,
+          "params": [
+            "session",
+            "options",
+            "executionEnv"
+          ]
+        },
+        {
+          "name": "runSessionWorkerProcess",
+          "startLine": 874,
+          "endLine": 876,
+          "params": [
+            "args"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "WorkerLifecycle",
+          "startLine": 191,
+          "endLine": 315,
+          "methods": [
+            "constructor",
+            "serverConnected",
+            "serverDisconnected",
+            "beginRequest",
+            "holdRetirement",
+            "setDemand",
+            "operationStarted",
+            "operationStopped",
+            "close"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "SessionWorkerRuntime",
+          "line": 49,
+          "isDefault": false
+        },
+        {
+          "name": "SESSION_WORKER_CONTROL_ADDRESS_ENV",
+          "line": 68,
+          "isDefault": false
+        },
+        {
+          "name": "SESSION_WORKER_CONTROL_TOKEN_ENV",
+          "line": 69,
+          "isDefault": false
+        },
+        {
+          "name": "SESSION_WORKER_SESSION_KEY_ENV",
+          "line": 70,
+          "isDefault": false
+        },
+        {
+          "name": "SESSION_WORKER_PEER_ID_ENV",
+          "line": 71,
+          "isDefault": false
+        },
+        {
+          "name": "SessionWorkerMetadataSchema",
+          "line": 73,
+          "isDefault": false
+        },
+        {
+          "name": "SessionWorkerOptionsSchema",
+          "line": 83,
+          "isDefault": false
+        },
+        {
+          "name": "WorkerOperationScopeSchema",
+          "line": 92,
+          "isDefault": false
+        },
+        {
+          "name": "WorkerOperationRequestSchema",
+          "line": 98,
+          "isDefault": false
+        },
+        {
+          "name": "WorkerOperationResponseSchema",
+          "line": 106,
+          "isDefault": false
+        },
+        {
+          "name": "SessionWorkerCommandSchema",
+          "line": 123,
+          "isDefault": false
+        },
+        {
+          "name": "SessionWorkerEventSchema",
+          "line": 142,
+          "isDefault": false
+        },
+        {
+          "name": "WorkerLifecycle",
+          "line": 191,
+          "isDefault": false
+        },
+        {
+          "name": "SESSION_WORKER_INITIAL_DEMAND_GRACE_ENV",
+          "line": 319,
+          "isDefault": false
+        },
+        {
+          "name": "SESSION_WORKER_ORPHAN_DEMAND_GRACE_ENV",
+          "line": 320,
+          "isDefault": false
+        },
+        {
+          "name": "runSessionWorkerWithHarness",
+          "line": 771,
+          "isDefault": false
+        },
+        {
+          "name": "runSessionWorkerProcess",
+          "line": 874,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "StrictObject",
+          "callee": "Type.Object",
+          "lineNumber": 52
+        },
+        {
+          "caller": "constructor",
+          "callee": "setTimeout",
+          "lineNumber": 214
+        },
+        {
+          "caller": "constructor",
+          "callee": "this.#reconcile",
+          "lineNumber": 217
+        },
+        {
+          "caller": "constructor",
+          "callee": "this.#initialTimer.unref",
+          "lineNumber": 219
+        },
+        {
+          "caller": "serverConnected",
+          "callee": "this.#demands.values",
+          "lineNumber": 224
+        },
+        {
+          "caller": "serverConnected",
+          "callee": "clearTimeout",
+          "lineNumber": 226
+        },
+        {
+          "caller": "serverDisconnected",
+          "callee": "setTimeout",
+          "lineNumber": 235
+        },
+        {
+          "caller": "serverDisconnected",
+          "callee": "this.#demands.get",
+          "lineNumber": 236
+        },
+        {
+          "caller": "serverDisconnected",
+          "callee": "this.#demands.delete",
+          "lineNumber": 237
+        },
+        {
+          "caller": "serverDisconnected",
+          "callee": "this.#reconcile",
+          "lineNumber": 238
+        },
+        {
+          "caller": "serverDisconnected",
+          "callee": "demand.timer.unref",
+          "lineNumber": 240
+        },
+        {
+          "caller": "beginRequest",
+          "callee": "this.#demands.get",
+          "lineNumber": 249
+        },
+        {
+          "caller": "beginRequest",
+          "callee": "demandKey",
+          "lineNumber": 249
+        },
+        {
+          "caller": "beginRequest",
+          "callee": "this.holdRetirement",
+          "lineNumber": 253
+        },
+        {
+          "caller": "holdRetirement",
+          "callee": "this.#reconcile",
+          "lineNumber": 263
+        },
+        {
+          "caller": "setDemand",
+          "callee": "clearTimeout",
+          "lineNumber": 274
+        },
+        {
+          "caller": "setDemand",
+          "callee": "demandKey",
+          "lineNumber": 277
+        },
+        {
+          "caller": "setDemand",
+          "callee": "this.#demands.get",
+          "lineNumber": 278
+        },
+        {
+          "caller": "setDemand",
+          "callee": "clearTimeout",
+          "lineNumber": 279
+        },
+        {
+          "caller": "setDemand",
+          "callee": "this.#demands.set",
+          "lineNumber": 280
+        },
+        {
+          "caller": "setDemand",
+          "callee": "this.#demands.delete",
+          "lineNumber": 281
+        },
+        {
+          "caller": "setDemand",
+          "callee": "this.#reconcile",
+          "lineNumber": 282
+        },
+        {
+          "caller": "operationStarted",
+          "callee": "this.#activeOperations.add",
+          "lineNumber": 286
+        },
+        {
+          "caller": "operationStopped",
+          "callee": "this.#activeOperations.delete",
+          "lineNumber": 290
+        },
+        {
+          "caller": "operationStopped",
+          "callee": "this.#reconcile",
+          "lineNumber": 291
+        },
+        {
+          "caller": "close",
+          "callee": "clearTimeout",
+          "lineNumber": 295
+        },
+        {
+          "caller": "close",
+          "callee": "this.#demands.values",
+          "lineNumber": 296
+        },
+        {
+          "caller": "close",
+          "callee": "clearTimeout",
+          "lineNumber": 297
+        },
+        {
+          "caller": "close",
+          "callee": "this.#demands.clear",
+          "lineNumber": 299
+        },
+        {
+          "caller": "connectControl",
+          "callee": "createConnection",
+          "lineNumber": 350
+        },
+        {
+          "caller": "connectControl",
+          "callee": "socket.once",
+          "lineNumber": 352
+        },
+        {
+          "caller": "connectControl",
+          "callee": "socket.once",
+          "lineNumber": 353
+        },
+        {
+          "caller": "connectControl",
+          "callee": "createJsonLineMessages",
+          "lineNumber": 355
+        },
+        {
+          "caller": "connectControl",
+          "callee": "writeJsonLine",
+          "lineNumber": 356
+        },
+        {
+          "caller": "connectControl",
+          "callee": "messages[Symbol.asyncIterator]().next",
+          "lineNumber": 357
+        },
+        {
+          "caller": "connectControl",
+          "callee": "messages[Symbol.asyncIterator]",
+          "lineNumber": 357
+        },
+        {
+          "caller": "connectControl",
+          "callee": "Check",
+          "lineNumber": 360
+        },
+        {
+          "caller": "connectControl",
+          "callee": "writeJsonLine",
+          "lineNumber": 371
+        },
+        {
+          "caller": "readCommands",
+          "callee": "Check",
+          "lineNumber": 388
+        },
+        {
+          "caller": "readCommands",
+          "callee": "control.socket.destroy",
+          "lineNumber": 389
+        },
+        {
+          "caller": "readCommands",
+          "callee": "handlers.onServerConnected",
+          "lineNumber": 394
+        },
+        {
+          "caller": "readCommands",
+          "callee": "handlers.onServerDisconnected",
+          "lineNumber": 398
+        },
+        {
+          "caller": "readCommands",
+          "callee": "Check",
+          "lineNumber": 401
+        },
+        {
+          "caller": "readCommands",
+          "callee": "handlers.onShutdown",
+          "lineNumber": 403
+        },
+        {
+          "caller": "readCommands",
+          "callee": "handlers.onDiscovery",
+          "lineNumber": 404
+        },
+        {
+          "caller": "readCommands",
+          "callee": "handlers.onDemand",
+          "lineNumber": 405
+        },
+        {
+          "caller": "readCommands",
+          "callee": "handlers.onOperationCancel",
+          "lineNumber": 406
+        },
+        {
+          "caller": "readCommands",
+          "callee": "handlers.onOperation",
+          "lineNumber": 407
+        },
+        {
+          "caller": "createJsonLineMessages",
+          "callee": "socket.setEncoding",
+          "lineNumber": 415
+        },
+        {
+          "caller": "createJsonLineMessages",
+          "callee": "socket.on",
+          "lineNumber": 416
+        },
+        {
+          "caller": "createJsonLineMessages",
+          "callee": "Buffer.byteLength",
+          "lineNumber": 418
+        },
+        {
+          "caller": "createJsonLineMessages",
+          "callee": "socket.destroy",
+          "lineNumber": 419
+        },
+        {
+          "caller": "createJsonLineMessages",
+          "callee": "buffered.indexOf",
+          "lineNumber": 423
+        },
+        {
+          "caller": "createJsonLineMessages",
+          "callee": "buffered.slice",
+          "lineNumber": 425
+        },
+        {
+          "caller": "createJsonLineMessages",
+          "callee": "buffered.slice",
+          "lineNumber": 426
+        },
+        {
+          "caller": "createJsonLineMessages",
+          "callee": "JSON.parse",
+          "lineNumber": 428
+        },
+        {
+          "caller": "createJsonLineMessages",
+          "callee": "waiters.shift",
+          "lineNumber": 429
+        },
+        {
+          "caller": "createJsonLineMessages",
+          "callee": "waiter",
+          "lineNumber": 430
+        },
+        {
+          "caller": "createJsonLineMessages",
+          "callee": "queued.push",
+          "lineNumber": 431
+        },
+        {
+          "caller": "createJsonLineMessages",
+          "callee": "socket.destroy",
+          "lineNumber": 433
+        },
+        {
+          "caller": "createJsonLineMessages",
+          "callee": "queued.shift",
+          "lineNumber": 442
+        },
+        {
+          "caller": "createJsonLineMessages",
+          "callee": "waiters.push",
+          "lineNumber": 442
+        },
+        {
+          "caller": "writeJsonLine",
+          "callee": "socket.write",
+          "lineNumber": 452
+        },
+        {
+          "caller": "writeJsonLine",
+          "callee": "encodeControlLine",
+          "lineNumber": 452
+        },
+        {
+          "caller": "writeJsonLine",
+          "callee": "reject",
+          "lineNumber": 453
+        },
+        {
+          "caller": "writeJsonLine",
+          "callee": "resolve",
+          "lineNumber": 454
+        },
+        {
+          "caller": "toWorkerServiceUpdate",
+          "callee": "isJsonValue",
+          "lineNumber": 460
+        },
+        {
+          "caller": "toWorkerServiceUpdate",
+          "callee": "parseServiceProviderUpdate",
+          "lineNumber": 461
+        },
+        {
+          "caller": "lifecycleDelay",
+          "callee": "Number",
+          "lineNumber": 475
+        },
+        {
+          "caller": "lifecycleDelay",
+          "callee": "Number.isSafeInteger",
+          "lineNumber": 476
+        },
+        {
+          "caller": "closeResources",
+          "callee": "resources.services?.dispose",
+          "lineNumber": 490
+        },
+        {
+          "caller": "closeResources",
+          "callee": "errors.push",
+          "lineNumber": 492
+        },
+        {
+          "caller": "closeResources",
+          "callee": "resources.harness.close",
+          "lineNumber": 495
+        },
+        {
+          "caller": "closeResources",
+          "callee": "resources.session?.close",
+          "lineNumber": 496
+        },
+        {
+          "caller": "closeResources",
+          "callee": "errors.push",
+          "lineNumber": 498
+        },
+        {
+          "caller": "closeResources",
+          "callee": "resources.repo.close",
+          "lineNumber": 501
+        },
+        {
+          "caller": "closeResources",
+          "callee": "errors.push",
+          "lineNumber": 503
+        },
+        {
+          "caller": "closeResources",
+          "callee": "resources.executionEnv.cleanup",
+          "lineNumber": 506
+        },
+        {
+          "caller": "closeResources",
+          "callee": "errors.push",
+          "lineNumber": 508
+        },
+        {
+          "caller": "closeResources",
+          "callee": "resources.releaseOwnership",
+          "lineNumber": 511
+        },
+        {
+          "caller": "closeResources",
+          "callee": "errors.push",
+          "lineNumber": 513
+        },
+        {
+          "caller": "run",
+          "callee": "connectControl",
+          "lineNumber": 528
+        },
+        {
+          "caller": "run",
+          "callee": "Buffer.from(process.env[SESSION_WORKER_SESSION_KEY_ENV]!, \"base64url\").toString",
+          "lineNumber": 530
+        },
+        {
+          "caller": "run",
+          "callee": "Buffer.from",
+          "lineNumber": 530
+        },
+        {
+          "caller": "run",
+          "callee": "lockfile.lock",
+          "lineNumber": 533
+        },
+        {
+          "caller": "run",
+          "callee": "repo.open",
+          "lineNumber": 546
+        },
+        {
+          "caller": "run",
+          "callee": "createHarness",
+          "lineNumber": 547
+        },
+        {
+          "caller": "run",
+          "callee": "harness.lane",
+          "lineNumber": 549
+        },
+        {
+          "caller": "run",
+          "callee": "createSessionWorkerServices",
+          "lineNumber": 550
+        },
+        {
+          "caller": "run",
+          "callee": "control.send",
+          "lineNumber": 556
+        },
+        {
+          "caller": "run",
+          "callee": "toWorkerServiceUpdate",
+          "lineNumber": 562
+        },
+        {
+          "caller": "run",
+          "callee": "closeResources",
+          "lineNumber": 567
+        },
+        {
+          "caller": "close",
+          "callee": "lifecycle?.close",
+          "lineNumber": 583
+        },
+        {
+          "caller": "close",
+          "callee": "services.removeSubscriptions",
+          "lineNumber": 584
+        },
+        {
+          "caller": "close",
+          "callee": "activeRequests.values",
+          "lineNumber": 585
+        },
+        {
+          "caller": "close",
+          "callee": "request.cancel",
+          "lineNumber": 585
+        },
+        {
+          "caller": "close",
+          "callee": "activeRequests.clear",
+          "lineNumber": 586
+        },
+        {
+          "caller": "close",
+          "callee": "remove",
+          "lineNumber": 587
+        },
+        {
+          "caller": "close",
+          "callee": "closeResources",
+          "lineNumber": 589
+        },
+        {
+          "caller": "closeAndExit",
+          "callee": "close().then",
+          "lineNumber": 593
+        },
+        {
+          "caller": "closeAndExit",
+          "callee": "close",
+          "lineNumber": 593
+        },
+        {
+          "caller": "closeAndExit",
+          "callee": "process.exit",
+          "lineNumber": 594
+        },
+        {
+          "caller": "closeAndExit",
+          "callee": "console.error",
+          "lineNumber": 596
+        },
+        {
+          "caller": "closeAndExit",
+          "callee": "process.exit",
+          "lineNumber": 597
+        },
+        {
+          "caller": "run",
+          "callee": "lifecycleDelay",
+          "lineNumber": 604
+        },
+        {
+          "caller": "run",
+          "callee": "lifecycleDelay",
+          "lineNumber": 605
+        },
+        {
+          "caller": "run",
+          "callee": "harness.events.on",
+          "lineNumber": 609
+        },
+        {
+          "caller": "run",
+          "callee": "lifecycle?.operationStarted",
+          "lineNumber": 609
+        },
+        {
+          "caller": "run",
+          "callee": "harness.events.on",
+          "lineNumber": 610
+        },
+        {
+          "caller": "run",
+          "callee": "lifecycle?.operationStarted",
+          "lineNumber": 610
+        },
+        {
+          "caller": "run",
+          "callee": "harness.events.on",
+          "lineNumber": 611
+        },
+        {
+          "caller": "run",
+          "callee": "lifecycle?.operationStopped",
+          "lineNumber": 611
+        },
+        {
+          "caller": "run",
+          "callee": "harness.events.on",
+          "lineNumber": 612
+        },
+        {
+          "caller": "run",
+          "callee": "lifecycle?.operationStopped",
+          "lineNumber": 612
+        },
+        {
+          "caller": "run",
+          "callee": "harness.events.on",
+          "lineNumber": 613
+        },
+        {
+          "caller": "run",
+          "callee": "lifecycle?.operationStarted",
+          "lineNumber": 614
+        },
+        {
+          "caller": "run",
+          "callee": "harness.events.on",
+          "lineNumber": 616
+        },
+        {
+          "caller": "run",
+          "callee": "lifecycle?.operationStopped",
+          "lineNumber": 617
+        },
+        {
+          "caller": "run",
+          "callee": "harness.events.on",
+          "lineNumber": 619
+        },
+        {
+          "caller": "run",
+          "callee": "lifecycle?.operationStarted",
+          "lineNumber": 620
+        },
+        {
+          "caller": "run",
+          "callee": "harness.events.on",
+          "lineNumber": 622
+        },
+        {
+          "caller": "run",
+          "callee": "lifecycle?.operationStopped",
+          "lineNumber": 623
+        },
+        {
+          "caller": "run",
+          "callee": "harness.events.on",
+          "lineNumber": 625
+        },
+        {
+          "caller": "handleOperation",
+          "callee": "withCancel",
+          "lineNumber": 630
+        },
+        {
+          "caller": "handleOperation",
+          "callee": "lifecycle!.beginRequest",
+          "lineNumber": 632
+        },
+        {
+          "caller": "handleOperation",
+          "callee": "activeRequests.set",
+          "lineNumber": 633
+        },
+        {
+          "caller": "handleOperation",
+          "callee": "services.invoke",
+          "lineNumber": 634
+        },
+        {
+          "caller": "handleOperation",
+          "callee": "isJsonValue",
+          "lineNumber": 635
+        },
+        {
+          "caller": "handleOperation",
+          "callee": "control.send",
+          "lineNumber": 636
+        },
+        {
+          "caller": "handleOperation",
+          "callee": "Check",
+          "lineNumber": 653
+        },
+        {
+          "caller": "handleOperation",
+          "callee": "control.send",
+          "lineNumber": 655
+        },
+        {
+          "caller": "handleOperation",
+          "callee": "String",
+          "lineNumber": 664
+        },
+        {
+          "caller": "handleOperation",
+          "callee": "activeRequests.get",
+          "lineNumber": 668
+        },
+        {
+          "caller": "handleOperation",
+          "callee": "activeRequests.delete",
+          "lineNumber": 669
+        },
+        {
+          "caller": "handleOperation",
+          "callee": "releaseRequest",
+          "lineNumber": 671
+        },
+        {
+          "caller": "announce",
+          "callee": "control\n\t\t\t.send({\n\t\t\t\ttype: \"worker_ready\",\n\t\t\t\ttoken,\n\t\t\t\tsessionKey,\n\t\t\t\tsessionId,\n\t\t\t\tpid: process.pid,\n\t\t\t\tmetadata,\n\t\t\t\tpluginManifestPaths: [...pluginManifestPaths],\n\t\t\t})\n\t\t\t.catch",
+          "lineNumber": 678
+        },
+        {
+          "caller": "announce",
+          "callee": "control\n\t\t\t.send",
+          "lineNumber": 678
+        },
+        {
+          "caller": "announce",
+          "callee": "closeAndExit",
+          "lineNumber": 688
+        },
+        {
+          "caller": "run",
+          "callee": "readCommands(control, {\n\t\tonShutdown: closeAndExit,\n\t\tonDiscovery: announce,\n\t\tonDemand: async (command) => {\n\t\t\tconst releaseRetirement = lifecycle?.holdRetirement() ?? (() => {});\n\t\t\ttry {\n\t\t\t\ttry {\n\t\t\t\t\tif (!command.attached) {\n\t\t\t\t\t\tconst matches = (scope: WorkerOperationScope): boolean =>\n\t\t\t\t\t\t\tscope.serverConnectionId === command.serverConnectionId &&\n\t\t\t\t\t\t\tscope.attachmentId === command.attachmentId;\n\t\t\t\t\t\tservices.removeSubscriptions(matches);\n\t\t\t\t\t}\n\t\t\t\t\tlifecycle?.setDemand(command.serverConnectionId, command.attachmentId, command.attached);\n\t\t\t\t} catch (error) {\n\t\t\t\t\tawait control.send({\n\t\t\t\t\t\ttype: \"demand_rejected\",\n\t\t\t\t\t\ttoken,\n\t\t\t\t\t\tsessionKey,\n\t\t\t\t\t\trequestId: command.requestId,\n\t\t\t\t\t\tmessage: error instanceof Error ? error.message : String(error),\n\t\t\t\t\t});\n\t\t\t\t\treturn;\n\t\t\t\t}\n\t\t\t\tawait control.send({\n\t\t\t\t\ttype: \"demand_applied\",\n\t\t\t\t\ttoken,\n\t\t\t\t\tsessionKey,\n\t\t\t\t\trequestId: command.requestId,\n\t\t\t\t\tattachmentId: command.attachmentId,\n\t\t\t\t\tattached: command.attached,\n\t\t\t\t});\n\t\t\t} finally {\n\t\t\t\treleaseRetirement();\n\t\t\t}\n\t\t},\n\t\tonOperation: (request) => {\n\t\t\tvoid handleOperation(request).catch(() => closeAndExit());\n\t\t},\n\t\tonOperationCancel: (command) => {\n\t\t\tconst active = activeRequests.get(command.requestId);\n\t\t\tif (active !== undefined && sameScope(active.scope, command.scope)) {\n\t\t\t\tactive.cancel(new DOMException(\"Service operation cancelled\", \"AbortError\"));\n\t\t\t}\n\t\t},\n\t\tonServerConnected: (serverConnectionId) => lifecycle?.serverConnected(serverConnectionId),\n\t\tonServerDisconnected: (serverConnectionId) => {\n\t\t\tconst matches = (scope: WorkerOperationScope): boolean => scope.serverConnectionId === serverConnectionId;\n\t\t\tservices.removeSubscriptions(matches);\n\t\t\tfor (const request of activeRequests.values()) {\n\t\t\t\tif (matches(request.scope)) request.cancel(new Error(\"Server disconnected\"));\n\t\t\t}\n\t\t\tlifecycle?.serverDisconnected(serverConnectionId);\n\t\t},\n\t}).catch",
+          "lineNumber": 690
+        },
+        {
+          "caller": "run",
+          "callee": "readCommands",
+          "lineNumber": 690
+        },
+        {
+          "caller": "run",
+          "callee": "lifecycle?.holdRetirement",
+          "lineNumber": 694
+        },
+        {
+          "caller": "run",
+          "callee": "services.removeSubscriptions",
+          "lineNumber": 701
+        },
+        {
+          "caller": "run",
+          "callee": "lifecycle?.setDemand",
+          "lineNumber": 703
+        },
+        {
+          "caller": "run",
+          "callee": "control.send",
+          "lineNumber": 705
+        },
+        {
+          "caller": "run",
+          "callee": "String",
+          "lineNumber": 710
+        },
+        {
+          "caller": "run",
+          "callee": "control.send",
+          "lineNumber": 714
+        },
+        {
+          "caller": "run",
+          "callee": "releaseRetirement",
+          "lineNumber": 723
+        },
+        {
+          "caller": "run",
+          "callee": "handleOperation(request).catch",
+          "lineNumber": 727
+        },
+        {
+          "caller": "run",
+          "callee": "handleOperation",
+          "lineNumber": 727
+        },
+        {
+          "caller": "run",
+          "callee": "closeAndExit",
+          "lineNumber": 727
+        },
+        {
+          "caller": "run",
+          "callee": "activeRequests.get",
+          "lineNumber": 730
+        },
+        {
+          "caller": "run",
+          "callee": "sameScope",
+          "lineNumber": 731
+        },
+        {
+          "caller": "run",
+          "callee": "active.cancel",
+          "lineNumber": 732
+        },
+        {
+          "caller": "run",
+          "callee": "lifecycle?.serverConnected",
+          "lineNumber": 735
+        },
+        {
+          "caller": "run",
+          "callee": "services.removeSubscriptions",
+          "lineNumber": 738
+        },
+        {
+          "caller": "run",
+          "callee": "activeRequests.values",
+          "lineNumber": 739
+        },
+        {
+          "caller": "run",
+          "callee": "matches",
+          "lineNumber": 740
+        },
+        {
+          "caller": "run",
+          "callee": "request.cancel",
+          "lineNumber": 740
+        },
+        {
+          "caller": "run",
+          "callee": "lifecycle?.serverDisconnected",
+          "lineNumber": 742
+        },
+        {
+          "caller": "run",
+          "callee": "closeAndExit",
+          "lineNumber": 744
+        },
+        {
+          "caller": "run",
+          "callee": "control.socket.once",
+          "lineNumber": 745
+        },
+        {
+          "caller": "run",
+          "callee": "control.socket.once",
+          "lineNumber": 746
+        },
+        {
+          "caller": "run",
+          "callee": "closeAndExit",
+          "lineNumber": 746
+        },
+        {
+          "caller": "run",
+          "callee": "process.once",
+          "lineNumber": 747
+        },
+        {
+          "caller": "run",
+          "callee": "process.once",
+          "lineNumber": 748
+        },
+        {
+          "caller": "run",
+          "callee": "control.send",
+          "lineNumber": 752
+        },
+        {
+          "caller": "run",
+          "callee": "close",
+          "lineNumber": 763
+        },
+        {
+          "caller": "runSessionWorkerWithHarness",
+          "callee": "JSON.parse",
+          "lineNumber": 779
+        },
+        {
+          "caller": "runSessionWorkerWithHarness",
+          "callee": "Check",
+          "lineNumber": 784
+        },
+        {
+          "caller": "runSessionWorkerWithHarness",
+          "callee": "isAbsolute",
+          "lineNumber": 785
+        },
+        {
+          "caller": "runSessionWorkerWithHarness",
+          "callee": "isAbsolute",
+          "lineNumber": 786
+        },
+        {
+          "caller": "runSessionWorkerWithHarness",
+          "callee": "isAbsolute",
+          "lineNumber": 787
+        },
+        {
+          "caller": "runSessionWorkerWithHarness",
+          "callee": "run",
+          "lineNumber": 792
+        },
+        {
+          "caller": "runSessionWorkerWithHarness",
+          "callee": "String",
+          "lineNumber": 794
+        },
+        {
+          "caller": "runSessionWorkerWithHarness",
+          "callee": "Buffer.from(encodedSessionKey, \"base64url\").toString",
+          "lineNumber": 798
+        },
+        {
+          "caller": "runSessionWorkerWithHarness",
+          "callee": "Buffer.from",
+          "lineNumber": 798
+        },
+        {
+          "caller": "runSessionWorkerWithHarness",
+          "callee": "failureControl?.send({ type: \"worker_failed\", token, sessionKey, message }).catch",
+          "lineNumber": 799
+        },
+        {
+          "caller": "runSessionWorkerWithHarness",
+          "callee": "failureControl?.send",
+          "lineNumber": 799
+        },
+        {
+          "caller": "createCodingAgentHarness",
+          "callee": "ModelRuntime.create",
+          "lineNumber": 810
+        },
+        {
+          "caller": "createCodingAgentHarness",
+          "callee": "SettingsManager.create",
+          "lineNumber": 811
+        },
+        {
+          "caller": "createCodingAgentHarness",
+          "callee": "findInitialModel",
+          "lineNumber": 814
+        },
+        {
+          "caller": "createCodingAgentHarness",
+          "callee": "settingsManager.getDefaultProvider",
+          "lineNumber": 817
+        },
+        {
+          "caller": "createCodingAgentHarness",
+          "callee": "settingsManager.getDefaultModel",
+          "lineNumber": 818
+        },
+        {
+          "caller": "createCodingAgentHarness",
+          "callee": "settingsManager.getDefaultThinkingLevel",
+          "lineNumber": 819
+        },
+        {
+          "caller": "createCodingAgentHarness",
+          "callee": "resolveCliModel",
+          "lineNumber": 823
+        },
+        {
+          "caller": "createCodingAgentHarness",
+          "callee": "createReadTool",
+          "lineNumber": 831
+        },
+        {
+          "caller": "createCodingAgentHarness",
+          "callee": "createWriteTool",
+          "lineNumber": 831
+        },
+        {
+          "caller": "createCodingAgentHarness",
+          "callee": "createBashTool",
+          "lineNumber": 831
+        },
+        {
+          "caller": "createCodingAgentHarness",
+          "callee": "tools.map",
+          "lineNumber": 832
+        },
+        {
+          "caller": "createCodingAgentHarness",
+          "callee": "AgentHarness.create",
+          "lineNumber": 834
+        },
+        {
+          "caller": "createCodingAgentHarness",
+          "callee": "harness.lane",
+          "lineNumber": 849
+        },
+        {
+          "caller": "createCodingAgentHarness",
+          "callee": "lane.getActiveTools",
+          "lineNumber": 850
+        },
+        {
+          "caller": "createCodingAgentHarness",
+          "callee": "currentActiveToolNames.some",
+          "lineNumber": 853
+        },
+        {
+          "caller": "createCodingAgentHarness",
+          "callee": "lane.setActiveTools",
+          "lineNumber": 855
+        },
+        {
+          "caller": "createCodingAgentHarness",
+          "callee": "createSessionPluginFacetLoader",
+          "lineNumber": 862
+        },
+        {
+          "caller": "createCodingAgentHarness",
+          "callee": "harness.close",
+          "lineNumber": 866
+        },
+        {
+          "caller": "runSessionWorkerProcess",
+          "callee": "runSessionWorkerWithHarness",
+          "lineNumber": 875
+        }
+      ],
+      "metrics": {
+        "importCount": 10,
+        "exportCount": 17,
+        "functionCount": 14,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/protocol/src/cbor/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 9,
+      "nonEmptyLines": 9,
+      "exports": [
+        {
+          "name": "decodeCbor",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "encodeCbor",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "CborError",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "CborOptions",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "DEFAULT_MAX_CBOR_BYTE_LENGTH",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "DEFAULT_MAX_CBOR_CONTAINER_LENGTH",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "DEFAULT_MAX_CBOR_DEPTH",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 7,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/protocol/src/codec.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 141,
+      "nonEmptyLines": 121,
+      "functions": [
+        {
+          "name": "parseClientMessage",
+          "startLine": 20,
+          "endLine": 25,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "parseServerMessage",
+          "startLine": 27,
+          "endLine": 32,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "boundedErrorMessage",
+          "startLine": 34,
+          "endLine": 37,
+          "params": [
+            "error"
+          ]
+        },
+        {
+          "name": "encodeProtocolMessage",
+          "startLine": 39,
+          "endLine": 53,
+          "params": [
+            "value",
+            "parse",
+            "kind",
+            "options"
+          ]
+        },
+        {
+          "name": "encodeClientMessage",
+          "startLine": 56,
+          "endLine": 58,
+          "params": [
+            "message",
+            "options"
+          ]
+        },
+        {
+          "name": "encodeServerMessage",
+          "startLine": 61,
+          "endLine": 63,
+          "params": [
+            "message",
+            "options"
+          ]
+        },
+        {
+          "name": "isSupportedProtocolVersion",
+          "startLine": 139,
+          "endLine": 141,
+          "params": [
+            "version"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ProtocolValidationError",
+          "startLine": 13,
+          "endLine": 18,
+          "methods": [
+            "constructor"
+          ],
+          "properties": []
+        },
+        {
+          "name": "ValidatedMessageDecoder",
+          "startLine": 65,
+          "endLine": 103,
+          "methods": [
+            "constructor",
+            "push",
+            "end"
+          ],
+          "properties": [
+            "failed",
+            "frames",
+            "kind",
+            "maxFrameLength",
+            "parse"
+          ]
+        },
+        {
+          "name": "ClientMessageDecoder",
+          "startLine": 106,
+          "endLine": 120,
+          "methods": [
+            "constructor",
+            "push",
+            "end"
+          ],
+          "properties": [
+            "decoder"
+          ]
+        },
+        {
+          "name": "ServerMessageDecoder",
+          "startLine": 123,
+          "endLine": 137,
+          "methods": [
+            "constructor",
+            "push",
+            "end"
+          ],
+          "properties": [
+            "decoder"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProtocolValidationError",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "parseClientMessage",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "parseServerMessage",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "encodeClientMessage",
+          "line": 56,
+          "isDefault": false
+        },
+        {
+          "name": "encodeServerMessage",
+          "line": 61,
+          "isDefault": false
+        },
+        {
+          "name": "ClientMessageDecoder",
+          "line": 106,
+          "isDefault": false
+        },
+        {
+          "name": "ServerMessageDecoder",
+          "line": 123,
+          "isDefault": false
+        },
+        {
+          "name": "isSupportedProtocolVersion",
+          "line": 139,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 15
+        },
+        {
+          "caller": "parseClientMessage",
+          "callee": "Check",
+          "lineNumber": 21
+        },
+        {
+          "caller": "parseClientMessage",
+          "callee": "isJsonValue",
+          "lineNumber": 21
+        },
+        {
+          "caller": "parseServerMessage",
+          "callee": "Check",
+          "lineNumber": 28
+        },
+        {
+          "caller": "parseServerMessage",
+          "callee": "isJsonValue",
+          "lineNumber": 28
+        },
+        {
+          "caller": "boundedErrorMessage",
+          "callee": "error.message.slice",
+          "lineNumber": 36
+        },
+        {
+          "caller": "encodeProtocolMessage",
+          "callee": "parse",
+          "lineNumber": 45
+        },
+        {
+          "caller": "encodeProtocolMessage",
+          "callee": "encodeFrame",
+          "lineNumber": 48
+        },
+        {
+          "caller": "encodeProtocolMessage",
+          "callee": "encodeCbor",
+          "lineNumber": 48
+        },
+        {
+          "caller": "encodeProtocolMessage",
+          "callee": "boundedErrorMessage",
+          "lineNumber": 51
+        },
+        {
+          "caller": "encodeClientMessage",
+          "callee": "encodeProtocolMessage",
+          "lineNumber": 57
+        },
+        {
+          "caller": "encodeServerMessage",
+          "callee": "encodeProtocolMessage",
+          "lineNumber": 62
+        },
+        {
+          "caller": "push",
+          "callee": "this.frames.push",
+          "lineNumber": 83
+        },
+        {
+          "caller": "push",
+          "callee": "messages.push",
+          "lineNumber": 84
+        },
+        {
+          "caller": "push",
+          "callee": "this.parse",
+          "lineNumber": 84
+        },
+        {
+          "caller": "push",
+          "callee": "decodeCbor",
+          "lineNumber": 84
+        },
+        {
+          "caller": "push",
+          "callee": "boundedErrorMessage",
+          "lineNumber": 90
+        },
+        {
+          "caller": "end",
+          "callee": "this.frames.end",
+          "lineNumber": 97
+        },
+        {
+          "caller": "end",
+          "callee": "boundedErrorMessage",
+          "lineNumber": 100
+        },
+        {
+          "caller": "push",
+          "callee": "this.decoder.push",
+          "lineNumber": 114
+        },
+        {
+          "caller": "end",
+          "callee": "this.decoder.end",
+          "lineNumber": 118
+        },
+        {
+          "caller": "push",
+          "callee": "this.decoder.push",
+          "lineNumber": 131
+        },
+        {
+          "caller": "end",
+          "callee": "this.decoder.end",
+          "lineNumber": 135
+        },
+        {
+          "caller": "isSupportedProtocolVersion",
+          "callee": "Number.isInteger",
+          "lineNumber": 140
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 8,
+        "functionCount": 7,
+        "classCount": 4
+      }
+    },
+    {
+      "path": "packages/protocol/src/framing.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 151,
+      "nonEmptyLines": 137,
+      "functions": [
+        {
+          "name": "resolveMaxFrameLength",
+          "startLine": 19,
+          "endLine": 25,
+          "params": [
+            "options"
+          ]
+        },
+        {
+          "name": "encodeFrame",
+          "startLine": 28,
+          "endLine": 39,
+          "params": [
+            "payload"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "FrameError",
+          "startLine": 12,
+          "endLine": 17,
+          "methods": [
+            "constructor"
+          ],
+          "properties": []
+        },
+        {
+          "name": "FrameDecoder",
+          "startLine": 44,
+          "endLine": 151,
+          "methods": [
+            "constructor",
+            "push",
+            "end",
+            "fail"
+          ],
+          "properties": [
+            "header",
+            "headerLength",
+            "maxFrameLength",
+            "payloadBlocks",
+            "currentPayloadBlock",
+            "currentPayloadBlockLength",
+            "expectedPayloadLength",
+            "payloadLength",
+            "state"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "DEFAULT_MAX_FRAME_LENGTH",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "FrameError",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "encodeFrame",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "FrameDecoder",
+          "line": 44,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 14
+        },
+        {
+          "caller": "resolveMaxFrameLength",
+          "callee": "Number.isSafeInteger",
+          "lineNumber": 21
+        },
+        {
+          "caller": "encodeFrame",
+          "callee": "frame.set",
+          "lineNumber": 37
+        },
+        {
+          "caller": "constructor",
+          "callee": "resolveMaxFrameLength",
+          "lineNumber": 56
+        },
+        {
+          "caller": "push",
+          "callee": "Math.min",
+          "lineNumber": 68
+        },
+        {
+          "caller": "push",
+          "callee": "this.header.set",
+          "lineNumber": 69
+        },
+        {
+          "caller": "push",
+          "callee": "chunk.subarray",
+          "lineNumber": 69
+        },
+        {
+          "caller": "push",
+          "callee": "this.fail",
+          "lineNumber": 78
+        },
+        {
+          "caller": "push",
+          "callee": "frames.push",
+          "lineNumber": 81
+        },
+        {
+          "caller": "push",
+          "callee": "Math.min",
+          "lineNumber": 96
+        },
+        {
+          "caller": "push",
+          "callee": "this.payloadBlocks.push",
+          "lineNumber": 97
+        },
+        {
+          "caller": "push",
+          "callee": "Math.min",
+          "lineNumber": 101
+        },
+        {
+          "caller": "push",
+          "callee": "block.set",
+          "lineNumber": 105
+        },
+        {
+          "caller": "push",
+          "callee": "chunk.subarray",
+          "lineNumber": 105
+        },
+        {
+          "caller": "push",
+          "callee": "frames.push",
+          "lineNumber": 112
+        },
+        {
+          "caller": "push",
+          "callee": "payload.set",
+          "lineNumber": 117
+        },
+        {
+          "caller": "push",
+          "callee": "frames.push",
+          "lineNumber": 120
+        },
+        {
+          "caller": "end",
+          "callee": "this.fail",
+          "lineNumber": 136
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 2,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "packages/protocol/src/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 22,
+      "nonEmptyLines": 22,
+      "exports": [
+        {
+          "name": "AttachmentEnvelope",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "CancelEnvelope",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "ClientHello",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "ClientMessage",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "isServerId",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "PROTOCOL_VERSION",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "ProtocolError",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "ProtocolErrorCode",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "RequestEnvelope",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "ResponseEnvelope",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "RpcTarget",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "ServerHello",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "ServerHelloError",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "ServerId",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "ServerMessage",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "ServiceEventEnvelope",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "SessionTarget",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 17,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/protocol/src/protocol.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 110,
+      "nonEmptyLines": 101,
+      "functions": [
+        {
+          "name": "StrictObject",
+          "startLine": 9,
+          "endLine": 10,
+          "params": [
+            "properties"
+          ]
+        },
+        {
+          "name": "isServerId",
+          "startLine": 17,
+          "endLine": 19,
+          "params": [
+            "value"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "PROTOCOL_VERSION",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "isServerId",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "ClientMessageSchema",
+          "line": 62,
+          "isDefault": false
+        },
+        {
+          "name": "ServerMessageSchema",
+          "line": 98,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "StrictObject",
+          "callee": "Type.Object",
+          "lineNumber": 10
+        },
+        {
+          "caller": "isServerId",
+          "callee": "Check",
+          "lineNumber": 18
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 4,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/server/src/connection.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 30,
+      "functions": [
+        {
+          "name": "isTerminalConnection",
+          "startLine": 35,
+          "endLine": 37,
+          "params": [
+            "state"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "isTerminalConnection",
+          "line": 35,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/server/src/errors.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 57,
+      "nonEmptyLines": 48,
+      "classes": [
+        {
+          "name": "ServerError",
+          "startLine": 14,
+          "endLine": 22,
+          "methods": [
+            "constructor"
+          ],
+          "properties": [
+            "code"
+          ]
+        },
+        {
+          "name": "WrongServerError",
+          "startLine": 24,
+          "endLine": 29,
+          "methods": [
+            "constructor"
+          ],
+          "properties": []
+        },
+        {
+          "name": "SessionNotFoundError",
+          "startLine": 31,
+          "endLine": 36,
+          "methods": [
+            "constructor"
+          ],
+          "properties": []
+        },
+        {
+          "name": "SessionAmbiguousError",
+          "startLine": 38,
+          "endLine": 43,
+          "methods": [
+            "constructor"
+          ],
+          "properties": []
+        },
+        {
+          "name": "SessionNotAttachedError",
+          "startLine": 45,
+          "endLine": 50,
+          "methods": [
+            "constructor"
+          ],
+          "properties": []
+        },
+        {
+          "name": "ServerDrainingError",
+          "startLine": 52,
+          "endLine": 57,
+          "methods": [
+            "constructor"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "INTERNAL_SERVER_ERROR_MESSAGE",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "ServerError",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "WrongServerError",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "SessionNotFoundError",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "SessionAmbiguousError",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "SessionNotAttachedError",
+          "line": 45,
+          "isDefault": false
+        },
+        {
+          "name": "ServerDrainingError",
+          "line": 52,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 18
+        },
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 26
+        },
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 33
+        },
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 40
+        },
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 47
+        },
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 54
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 7,
+        "functionCount": 0,
+        "classCount": 6
+      }
+    },
+    {
+      "path": "packages/server/src/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 4,
+      "nonEmptyLines": 4,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/server/src/listener.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 7,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/server/src/server.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 576,
+      "nonEmptyLines": 544,
+      "functions": [
+        {
+          "name": "sameTarget",
+          "startLine": 547,
+          "endLine": 553,
+          "params": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "name": "resolveOptions",
+          "startLine": 555,
+          "endLine": 576,
+          "params": [
+            "options"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "Server",
+          "startLine": 46,
+          "endLine": 545,
+          "methods": [
+            "constructor",
+            "start",
+            "startInternal",
+            "accept",
+            "close",
+            "closeInternal",
+            "receive",
+            "dispatchMessage",
+            "finishHandshake",
+            "handleCancel",
+            "handleRequest",
+            "transportClosed",
+            "disconnect",
+            "sendServiceUpdate",
+            "sendMessage",
+            "failProtocol",
+            "closeServerState",
+            "closeConnection",
+            "toProtocolError",
+            "notifyConnectionCountChanged",
+            "reportError",
+            "settleClosed"
+          ],
+          "properties": [
+            "serverId",
+            "closed",
+            "host",
+            "listeners",
+            "maxFrameLength",
+            "handshakeTimeoutMs",
+            "onConnectionCountChanged",
+            "onError",
+            "connections",
+            "sessions",
+            "closing",
+            "closePromise",
+            "closedSettled",
+            "rejectClosed",
+            "resolveClosed",
+            "startPromise",
+            "started"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Server",
+          "line": 46,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "resolveOptions",
+          "lineNumber": 68
+        },
+        {
+          "caller": "constructor",
+          "callee": "this.sendMessage",
+          "lineNumber": 81
+        },
+        {
+          "caller": "constructor",
+          "callee": "this.reportError",
+          "lineNumber": 86
+        },
+        {
+          "caller": "constructor",
+          "callee": "this.closed.catch",
+          "lineNumber": 92
+        },
+        {
+          "caller": "start",
+          "callee": "Promise.reject",
+          "lineNumber": 96
+        },
+        {
+          "caller": "start",
+          "callee": "Promise.reject",
+          "lineNumber": 97
+        },
+        {
+          "caller": "start",
+          "callee": "Promise.reject",
+          "lineNumber": 98
+        },
+        {
+          "caller": "start",
+          "callee": "this.startInternal",
+          "lineNumber": 99
+        },
+        {
+          "caller": "startInternal",
+          "callee": "listener.start",
+          "lineNumber": 107
+        },
+        {
+          "caller": "startInternal",
+          "callee": "this.accept",
+          "lineNumber": 107
+        },
+        {
+          "caller": "startInternal",
+          "callee": "started.push",
+          "lineNumber": 108
+        },
+        {
+          "caller": "startInternal",
+          "callee": "Promise.allSettled",
+          "lineNumber": 115
+        },
+        {
+          "caller": "startInternal",
+          "callee": "started.map",
+          "lineNumber": 115
+        },
+        {
+          "caller": "startInternal",
+          "callee": "listener.close",
+          "lineNumber": 115
+        },
+        {
+          "caller": "startInternal",
+          "callee": "cleanupErrors.push",
+          "lineNumber": 117
+        },
+        {
+          "caller": "startInternal",
+          "callee": "this.closeServerState",
+          "lineNumber": 120
+        },
+        {
+          "caller": "startInternal",
+          "callee": "cleanupErrors.push",
+          "lineNumber": 122
+        },
+        {
+          "caller": "startInternal",
+          "callee": "this.settleClosed",
+          "lineNumber": 126
+        },
+        {
+          "caller": "startInternal",
+          "callee": "this.settleClosed",
+          "lineNumber": 129
+        },
+        {
+          "caller": "accept",
+          "callee": "this.closeConnection",
+          "lineNumber": 138
+        },
+        {
+          "caller": "accept",
+          "callee": "this.reportError",
+          "lineNumber": 142
+        },
+        {
+          "caller": "accept",
+          "callee": "setTimeout",
+          "lineNumber": 147
+        },
+        {
+          "caller": "accept",
+          "callee": "this.failProtocol",
+          "lineNumber": 148
+        },
+        {
+          "caller": "accept",
+          "callee": "handshakeTimeout.unref",
+          "lineNumber": 153
+        },
+        {
+          "caller": "accept",
+          "callee": "this.connections.add",
+          "lineNumber": 163
+        },
+        {
+          "caller": "accept",
+          "callee": "this.notifyConnectionCountChanged",
+          "lineNumber": 164
+        },
+        {
+          "caller": "accept",
+          "callee": "this.receive",
+          "lineNumber": 167
+        },
+        {
+          "caller": "accept",
+          "callee": "this.transportClosed",
+          "lineNumber": 168
+        },
+        {
+          "caller": "accept",
+          "callee": "this.reportError",
+          "lineNumber": 170
+        },
+        {
+          "caller": "accept",
+          "callee": "this.closeConnection(connection).then",
+          "lineNumber": 171
+        },
+        {
+          "caller": "accept",
+          "callee": "this.closeConnection",
+          "lineNumber": 171
+        },
+        {
+          "caller": "accept",
+          "callee": "this.disconnect",
+          "lineNumber": 171
+        },
+        {
+          "caller": "close",
+          "callee": "this.closeInternal",
+          "lineNumber": 179
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "starting.catch",
+          "lineNumber": 185
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "Promise.allSettled",
+          "lineNumber": 187
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "this.listeners.map",
+          "lineNumber": 187
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "listener.close",
+          "lineNumber": 187
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "errors.push",
+          "lineNumber": 189
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "this.closeServerState",
+          "lineNumber": 192
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "errors.push",
+          "lineNumber": 194
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "this.settleClosed",
+          "lineNumber": 202
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "this.settleClosed",
+          "lineNumber": 205
+        },
+        {
+          "caller": "receive",
+          "callee": "isTerminalConnection",
+          "lineNumber": 209
+        },
+        {
+          "caller": "receive",
+          "callee": "state.decoder.push",
+          "lineNumber": 212
+        },
+        {
+          "caller": "receive",
+          "callee": "this.failProtocol",
+          "lineNumber": 214
+        },
+        {
+          "caller": "receive",
+          "callee": "this.toProtocolError",
+          "lineNumber": 214
+        },
+        {
+          "caller": "receive",
+          "callee": "isTerminalConnection",
+          "lineNumber": 218
+        },
+        {
+          "caller": "receive",
+          "callee": "this.dispatchMessage",
+          "lineNumber": 219
+        },
+        {
+          "caller": "dispatchMessage",
+          "callee": "this.failProtocol",
+          "lineNumber": 226
+        },
+        {
+          "caller": "dispatchMessage",
+          "callee": "this.finishHandshake(state, message).catch",
+          "lineNumber": 233
+        },
+        {
+          "caller": "dispatchMessage",
+          "callee": "this.finishHandshake",
+          "lineNumber": 233
+        },
+        {
+          "caller": "dispatchMessage",
+          "callee": "this.failProtocol",
+          "lineNumber": 234
+        },
+        {
+          "caller": "dispatchMessage",
+          "callee": "this.toProtocolError",
+          "lineNumber": 234
+        },
+        {
+          "caller": "dispatchMessage",
+          "callee": "this.failProtocol",
+          "lineNumber": 240
+        },
+        {
+          "caller": "dispatchMessage",
+          "callee": "this.handleCancel",
+          "lineNumber": 248
+        },
+        {
+          "caller": "dispatchMessage",
+          "callee": "this.handleRequest",
+          "lineNumber": 249
+        },
+        {
+          "caller": "dispatchMessage",
+          "callee": "handshake.then",
+          "lineNumber": 255
+        },
+        {
+          "caller": "dispatchMessage",
+          "callee": "this.handleCancel",
+          "lineNumber": 257
+        },
+        {
+          "caller": "dispatchMessage",
+          "callee": "this.handleRequest",
+          "lineNumber": 258
+        },
+        {
+          "caller": "finishHandshake",
+          "callee": "isSupportedProtocolVersion",
+          "lineNumber": 263
+        },
+        {
+          "caller": "finishHandshake",
+          "callee": "this.failProtocol",
+          "lineNumber": 264
+        },
+        {
+          "caller": "finishHandshake",
+          "callee": "this.host.serverServices.attachClient",
+          "lineNumber": 272
+        },
+        {
+          "caller": "finishHandshake",
+          "callee": "this.sessions.attachClient",
+          "lineNumber": 275
+        },
+        {
+          "caller": "finishHandshake",
+          "callee": "this.sessions.detachClient",
+          "lineNumber": 277
+        },
+        {
+          "caller": "finishHandshake",
+          "callee": "this.sessions.removeSession",
+          "lineNumber": 278
+        },
+        {
+          "caller": "finishHandshake",
+          "callee": "services.release",
+          "lineNumber": 283
+        },
+        {
+          "caller": "finishHandshake",
+          "callee": "this.sendMessage",
+          "lineNumber": 287
+        },
+        {
+          "caller": "finishHandshake",
+          "callee": "clearTimeout",
+          "lineNumber": 294
+        },
+        {
+          "caller": "handleCancel",
+          "callee": "state.activeRequests.get",
+          "lineNumber": 300
+        },
+        {
+          "caller": "handleCancel",
+          "callee": "sameTarget",
+          "lineNumber": 301
+        },
+        {
+          "caller": "handleCancel",
+          "callee": "active.controller.abort",
+          "lineNumber": 302
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "state.activeRequests.has",
+          "lineNumber": 307
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "this.sendMessage",
+          "lineNumber": 308
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "parseServiceCall",
+          "lineNumber": 318
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "this.sendMessage",
+          "lineNumber": 320
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "state.activeRequests.set",
+          "lineNumber": 330
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "withAbortSignal",
+          "lineNumber": 331
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "decodeServiceControlCall",
+          "lineNumber": 332
+        },
+        {
+          "caller": "publish",
+          "callee": "pendingUpdates.push",
+          "lineNumber": 340
+        },
+        {
+          "caller": "publish",
+          "callee": "this.sendServiceUpdate",
+          "lineNumber": 343
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "state.serviceStateEncoders.has",
+          "lineNumber": 347
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "this.sessions.executeServiceCall",
+          "lineNumber": 352
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "state.serverServices.invokeService",
+          "lineNumber": 354
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "createServiceStateEncoder",
+          "lineNumber": 361
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "stateEncoder.encodeSnapshot",
+          "lineNumber": 362
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "parseServiceSubscriptionSnapshot",
+          "lineNumber": 362
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "state.serviceStateEncoders.set",
+          "lineNumber": 363
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "state.serviceStateEncoders.delete",
+          "lineNumber": 366
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "this.sendMessage",
+          "lineNumber": 368
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "pendingUpdates.shift",
+          "lineNumber": 377
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "this.sendServiceUpdate",
+          "lineNumber": 379
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "state.serviceStateEncoders.delete",
+          "lineNumber": 385
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "this.reportError",
+          "lineNumber": 388
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "this.closeConnection",
+          "lineNumber": 389
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "this.disconnect",
+          "lineNumber": 390
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "this.sendMessage",
+          "lineNumber": 392
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "this.toProtocolError",
+          "lineNumber": 398
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "state.activeRequests.get",
+          "lineNumber": 402
+        },
+        {
+          "caller": "handleRequest",
+          "callee": "state.activeRequests.delete",
+          "lineNumber": 402
+        },
+        {
+          "caller": "transportClosed",
+          "callee": "connection.decoder.end",
+          "lineNumber": 409
+        },
+        {
+          "caller": "transportClosed",
+          "callee": "this.reportError",
+          "lineNumber": 411
+        },
+        {
+          "caller": "transportClosed",
+          "callee": "this.disconnect",
+          "lineNumber": 414
+        },
+        {
+          "caller": "disconnect",
+          "callee": "clearTimeout",
+          "lineNumber": 421
+        },
+        {
+          "caller": "disconnect",
+          "callee": "connection.activeRequests.values",
+          "lineNumber": 422
+        },
+        {
+          "caller": "disconnect",
+          "callee": "controller.abort",
+          "lineNumber": 423
+        },
+        {
+          "caller": "disconnect",
+          "callee": "connection.activeRequests.clear",
+          "lineNumber": 425
+        },
+        {
+          "caller": "disconnect",
+          "callee": "connection.serviceStateEncoders.clear",
+          "lineNumber": 426
+        },
+        {
+          "caller": "disconnect",
+          "callee": "this.connections.delete",
+          "lineNumber": 427
+        },
+        {
+          "caller": "disconnect",
+          "callee": "this.notifyConnectionCountChanged",
+          "lineNumber": 427
+        },
+        {
+          "caller": "disconnect",
+          "callee": "Promise.allSettled([\n\t\t\tthis.sessions.disconnect(connection, TODO_CONTEXT),\n\t\t\tserverServices?.release(TODO_CONTEXT),\n\t\t]).then",
+          "lineNumber": 430
+        },
+        {
+          "caller": "disconnect",
+          "callee": "Promise.allSettled",
+          "lineNumber": 430
+        },
+        {
+          "caller": "disconnect",
+          "callee": "this.sessions.disconnect",
+          "lineNumber": 431
+        },
+        {
+          "caller": "disconnect",
+          "callee": "serverServices?.release",
+          "lineNumber": 432
+        },
+        {
+          "caller": "disconnect",
+          "callee": "this.reportError",
+          "lineNumber": 434
+        },
+        {
+          "caller": "sendServiceUpdate",
+          "callee": "connection.serviceStateEncoders.get",
+          "lineNumber": 443
+        },
+        {
+          "caller": "sendServiceUpdate",
+          "callee": "this.sendMessage",
+          "lineNumber": 445
+        },
+        {
+          "caller": "sendServiceUpdate",
+          "callee": "stateEncoder.encodeUpdate",
+          "lineNumber": 448
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "encodeServerMessage",
+          "lineNumber": 456
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "this.reportError",
+          "lineNumber": 458
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "this.closeConnection",
+          "lineNumber": 459
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "this.disconnect",
+          "lineNumber": 460
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "connection.connection.send",
+          "lineNumber": 464
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "this.reportError",
+          "lineNumber": 467
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "this.closeConnection",
+          "lineNumber": 468
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "this.disconnect",
+          "lineNumber": 469
+        },
+        {
+          "caller": "failProtocol",
+          "callee": "clearTimeout",
+          "lineNumber": 477
+        },
+        {
+          "caller": "failProtocol",
+          "callee": "encodeServerMessage",
+          "lineNumber": 481
+        },
+        {
+          "caller": "failProtocol",
+          "callee": "this.reportError",
+          "lineNumber": 483
+        },
+        {
+          "caller": "failProtocol",
+          "callee": "this.closeConnection",
+          "lineNumber": 485
+        },
+        {
+          "caller": "failProtocol",
+          "callee": "this.disconnect",
+          "lineNumber": 486
+        },
+        {
+          "caller": "closeServerState",
+          "callee": "clearTimeout",
+          "lineNumber": 493
+        },
+        {
+          "caller": "closeServerState",
+          "callee": "Promise.all",
+          "lineNumber": 495
+        },
+        {
+          "caller": "closeServerState",
+          "callee": "connections.map",
+          "lineNumber": 495
+        },
+        {
+          "caller": "closeServerState",
+          "callee": "this.closeConnection",
+          "lineNumber": 495
+        },
+        {
+          "caller": "closeServerState",
+          "callee": "this.disconnect",
+          "lineNumber": 496
+        },
+        {
+          "caller": "closeServerState",
+          "callee": "Promise.allSettled",
+          "lineNumber": 497
+        },
+        {
+          "caller": "closeServerState",
+          "callee": "this.sessions.close",
+          "lineNumber": 497
+        },
+        {
+          "caller": "closeServerState",
+          "callee": "this.connections.clear",
+          "lineNumber": 498
+        },
+        {
+          "caller": "closeServerState",
+          "callee": "cleanup.flatMap",
+          "lineNumber": 499
+        },
+        {
+          "caller": "closeConnection",
+          "callee": "connection.close",
+          "lineNumber": 506
+        },
+        {
+          "caller": "closeConnection",
+          "callee": "this.reportError",
+          "lineNumber": 508
+        },
+        {
+          "caller": "toProtocolError",
+          "callee": "this.reportError",
+          "lineNumber": 519
+        },
+        {
+          "caller": "notifyConnectionCountChanged",
+          "callee": "this.onConnectionCountChanged",
+          "lineNumber": 525
+        },
+        {
+          "caller": "notifyConnectionCountChanged",
+          "callee": "this.reportError",
+          "lineNumber": 527
+        },
+        {
+          "caller": "reportError",
+          "callee": "this.onError",
+          "lineNumber": 533
+        },
+        {
+          "caller": "reportError",
+          "callee": "String",
+          "lineNumber": 533
+        },
+        {
+          "caller": "settleClosed",
+          "callee": "this.resolveClosed",
+          "lineNumber": 542
+        },
+        {
+          "caller": "settleClosed",
+          "callee": "this.rejectClosed",
+          "lineNumber": 543
+        },
+        {
+          "caller": "resolveOptions",
+          "callee": "Array.isArray",
+          "lineNumber": 559
+        },
+        {
+          "caller": "resolveOptions",
+          "callee": "isServerId",
+          "lineNumber": 560
+        },
+        {
+          "caller": "resolveOptions",
+          "callee": "Number.isSafeInteger",
+          "lineNumber": 564
+        },
+        {
+          "caller": "resolveOptions",
+          "callee": "Number.isSafeInteger",
+          "lineNumber": 569
+        }
+      ],
+      "metrics": {
+        "importCount": 8,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/server/src/session-router.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 312,
+      "nonEmptyLines": 289,
+      "classes": [
+        {
+          "name": "SessionCleanupError",
+          "startLine": 8,
+          "endLine": 8,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "SessionRouter",
+          "startLine": 34,
+          "endLine": 312,
+          "methods": [
+            "constructor",
+            "executeServiceCall",
+            "attachClient",
+            "detachClient",
+            "removeSession",
+            "disconnect",
+            "close",
+            "closeInternal",
+            "runForClient",
+            "attachClientNow",
+            "startServiceCall",
+            "trackOperation",
+            "requireAttachment",
+            "releaseAttachment",
+            "clearAttachment",
+            "acquire",
+            "open",
+            "invalidate"
+          ],
+          "properties": [
+            "options",
+            "hostedSessions",
+            "openingSessions",
+            "attachmentsByClient",
+            "disconnectedClients",
+            "clientOperations",
+            "closePromise"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SessionRouter",
+          "line": 34,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "executeServiceCall",
+          "callee": "this.runForClient",
+          "lineNumber": 54
+        },
+        {
+          "caller": "executeServiceCall",
+          "callee": "this.startServiceCall",
+          "lineNumber": 55
+        },
+        {
+          "caller": "attachClient",
+          "callee": "this.options.isClosing",
+          "lineNumber": 61
+        },
+        {
+          "caller": "attachClient",
+          "callee": "Promise.reject",
+          "lineNumber": 61
+        },
+        {
+          "caller": "attachClient",
+          "callee": "this.runForClient",
+          "lineNumber": 62
+        },
+        {
+          "caller": "attachClient",
+          "callee": "this.attachClientNow",
+          "lineNumber": 62
+        },
+        {
+          "caller": "detachClient",
+          "callee": "this.runForClient",
+          "lineNumber": 66
+        },
+        {
+          "caller": "detachClient",
+          "callee": "this.attachmentsByClient.get",
+          "lineNumber": 67
+        },
+        {
+          "caller": "detachClient",
+          "callee": "this.releaseAttachment",
+          "lineNumber": 68
+        },
+        {
+          "caller": "removeSession",
+          "callee": "this.options.isClosing",
+          "lineNumber": 73
+        },
+        {
+          "caller": "removeSession",
+          "callee": "this.hostedSessions.get",
+          "lineNumber": 74
+        },
+        {
+          "caller": "removeSession",
+          "callee": "Promise.allSettled",
+          "lineNumber": 77
+        },
+        {
+          "caller": "removeSession",
+          "callee": "[...hosted.attachments].map",
+          "lineNumber": 78
+        },
+        {
+          "caller": "removeSession",
+          "callee": "this.releaseAttachment",
+          "lineNumber": 78
+        },
+        {
+          "caller": "removeSession",
+          "callee": "errors.push",
+          "lineNumber": 80
+        },
+        {
+          "caller": "removeSession",
+          "callee": "hosted.handle.close",
+          "lineNumber": 82
+        },
+        {
+          "caller": "removeSession",
+          "callee": "errors.push",
+          "lineNumber": 84
+        },
+        {
+          "caller": "removeSession",
+          "callee": "this.hostedSessions.get",
+          "lineNumber": 86
+        },
+        {
+          "caller": "removeSession",
+          "callee": "this.hostedSessions.delete",
+          "lineNumber": 86
+        },
+        {
+          "caller": "disconnect",
+          "callee": "this.disconnectedClients.add",
+          "lineNumber": 92
+        },
+        {
+          "caller": "disconnect",
+          "callee": "this.runForClient",
+          "lineNumber": 94
+        },
+        {
+          "caller": "disconnect",
+          "callee": "this.attachmentsByClient.get",
+          "lineNumber": 95
+        },
+        {
+          "caller": "disconnect",
+          "callee": "this.releaseAttachment",
+          "lineNumber": 96
+        },
+        {
+          "caller": "disconnect",
+          "callee": "this.disconnectedClients.delete",
+          "lineNumber": 99
+        },
+        {
+          "caller": "close",
+          "callee": "this.closeInternal",
+          "lineNumber": 104
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "this.clientOperations.values",
+          "lineNumber": 109
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "this.openingSessions.values",
+          "lineNumber": 110
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "Promise.all",
+          "lineNumber": 111
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "Promise.allSettled",
+          "lineNumber": 112
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "Promise.allSettled",
+          "lineNumber": 113
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "this.options.reportError",
+          "lineNumber": 118
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "closeErrors.push",
+          "lineNumber": 119
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "Promise.allSettled",
+          "lineNumber": 121
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "[...this.hostedSessions.values()].flatMap",
+          "lineNumber": 122
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "this.hostedSessions.values",
+          "lineNumber": 122
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "[...session.attachments].map",
+          "lineNumber": 123
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "this.releaseAttachment",
+          "lineNumber": 123
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "closeErrors.push",
+          "lineNumber": 127
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "this.hostedSessions.values",
+          "lineNumber": 129
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "Promise.allSettled",
+          "lineNumber": 130
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "hosted.map",
+          "lineNumber": 130
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "handle.close",
+          "lineNumber": 130
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "this.hostedSessions.get",
+          "lineNumber": 135
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "this.hostedSessions.delete",
+          "lineNumber": 135
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "this.options.reportError",
+          "lineNumber": 138
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "closeErrors.push",
+          "lineNumber": 139
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "this.attachmentsByClient.clear",
+          "lineNumber": 141
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "this.clientOperations.clear",
+          "lineNumber": 142
+        },
+        {
+          "caller": "runForClient",
+          "callee": "this.clientOperations.get",
+          "lineNumber": 147
+        },
+        {
+          "caller": "runForClient",
+          "callee": "Promise.resolve",
+          "lineNumber": 147
+        },
+        {
+          "caller": "runForClient",
+          "callee": "previous.catch(() => {}).then",
+          "lineNumber": 148
+        },
+        {
+          "caller": "runForClient",
+          "callee": "previous.catch",
+          "lineNumber": 148
+        },
+        {
+          "caller": "runForClient",
+          "callee": "result.then",
+          "lineNumber": 149
+        },
+        {
+          "caller": "runForClient",
+          "callee": "this.clientOperations.set",
+          "lineNumber": 153
+        },
+        {
+          "caller": "runForClient",
+          "callee": "tail.finally",
+          "lineNumber": 154
+        },
+        {
+          "caller": "runForClient",
+          "callee": "this.clientOperations.get",
+          "lineNumber": 155
+        },
+        {
+          "caller": "runForClient",
+          "callee": "this.clientOperations.delete",
+          "lineNumber": 155
+        },
+        {
+          "caller": "attachClientNow",
+          "callee": "this.options.isClosing",
+          "lineNumber": 161
+        },
+        {
+          "caller": "attachClientNow",
+          "callee": "this.disconnectedClients.has",
+          "lineNumber": 161
+        },
+        {
+          "caller": "attachClientNow",
+          "callee": "this.attachmentsByClient.get",
+          "lineNumber": 162
+        },
+        {
+          "caller": "attachClientNow",
+          "callee": "this.acquire",
+          "lineNumber": 164
+        },
+        {
+          "caller": "attachClientNow",
+          "callee": "this.options.isClosing",
+          "lineNumber": 165
+        },
+        {
+          "caller": "attachClientNow",
+          "callee": "this.disconnectedClients.has",
+          "lineNumber": 165
+        },
+        {
+          "caller": "attachClientNow",
+          "callee": "this.releaseAttachment",
+          "lineNumber": 166
+        },
+        {
+          "caller": "attachClientNow",
+          "callee": "randomUUID",
+          "lineNumber": 168
+        },
+        {
+          "caller": "attachClientNow",
+          "callee": "hosted.attachments.add",
+          "lineNumber": 173
+        },
+        {
+          "caller": "attachClientNow",
+          "callee": "Promise.resolve",
+          "lineNumber": 175
+        },
+        {
+          "caller": "attachClientNow",
+          "callee": "hosted.handle.attachClient",
+          "lineNumber": 175
+        },
+        {
+          "caller": "attachClientNow",
+          "callee": "hosted.attachments.delete",
+          "lineNumber": 179
+        },
+        {
+          "caller": "attachClientNow",
+          "callee": "this.hostedSessions.get",
+          "lineNumber": 183
+        },
+        {
+          "caller": "attachClientNow",
+          "callee": "hosted.attachments.has",
+          "lineNumber": 184
+        },
+        {
+          "caller": "attachClientNow",
+          "callee": "this.disconnectedClients.has",
+          "lineNumber": 185
+        },
+        {
+          "caller": "attachClientNow",
+          "callee": "this.options.isClosing",
+          "lineNumber": 186
+        },
+        {
+          "caller": "attachClientNow",
+          "callee": "this.releaseAttachment",
+          "lineNumber": 188
+        },
+        {
+          "caller": "attachClientNow",
+          "callee": "this.attachmentsByClient.set",
+          "lineNumber": 191
+        },
+        {
+          "caller": "attachClientNow",
+          "callee": "this.options.publishAttachment",
+          "lineNumber": 192
+        },
+        {
+          "caller": "startServiceCall",
+          "callee": "this.requireAttachment",
+          "lineNumber": 206
+        },
+        {
+          "caller": "startServiceCall",
+          "callee": "attachment.lease!.invokeService",
+          "lineNumber": 207
+        },
+        {
+          "caller": "startServiceCall",
+          "callee": "publish",
+          "lineNumber": 209
+        },
+        {
+          "caller": "startServiceCall",
+          "callee": "this.trackOperation",
+          "lineNumber": 212
+        },
+        {
+          "caller": "trackOperation",
+          "callee": "attachment.operations.add",
+          "lineNumber": 217
+        },
+        {
+          "caller": "remove",
+          "callee": "attachment.operations.delete",
+          "lineNumber": 219
+        },
+        {
+          "caller": "trackOperation",
+          "callee": "result.then",
+          "lineNumber": 221
+        },
+        {
+          "caller": "requireAttachment",
+          "callee": "this.options.isClosing",
+          "lineNumber": 225
+        },
+        {
+          "caller": "requireAttachment",
+          "callee": "this.disconnectedClients.has",
+          "lineNumber": 225
+        },
+        {
+          "caller": "requireAttachment",
+          "callee": "this.attachmentsByClient.get",
+          "lineNumber": 227
+        },
+        {
+          "caller": "releaseAttachment",
+          "callee": "(async () => {\n\t\t\tconst errors: unknown[] = [];\n\t\t\ttry {\n\t\t\t\tawait Promise.allSettled(attachment.operations);\n\t\t\t\ttry {\n\t\t\t\t\tconst lease = attachment.lease ?? (await attachment.acquiring);\n\t\t\t\t\tif (lease) await lease.release(context);\n\t\t\t\t} catch (error) {\n\t\t\t\t\terrors.push(error);\n\t\t\t\t}\n\t\t\t\tif (errors.length === 1) throw errors[0];\n\t\t\t\tif (errors.length > 1) throw new AggregateError(errors, \"Failed to release Session attachment\");\n\t\t\t} finally {\n\t\t\t\tawait this.clearAttachment(attachment, context, publish);\n\t\t\t}\n\t\t})",
+          "lineNumber": 235
+        },
+        {
+          "caller": "releaseAttachment",
+          "callee": "Promise.allSettled",
+          "lineNumber": 238
+        },
+        {
+          "caller": "releaseAttachment",
+          "callee": "lease.release",
+          "lineNumber": 241
+        },
+        {
+          "caller": "releaseAttachment",
+          "callee": "errors.push",
+          "lineNumber": 243
+        },
+        {
+          "caller": "releaseAttachment",
+          "callee": "this.clearAttachment",
+          "lineNumber": 248
+        },
+        {
+          "caller": "clearAttachment",
+          "callee": "attachment.session.attachments.delete",
+          "lineNumber": 255
+        },
+        {
+          "caller": "clearAttachment",
+          "callee": "this.attachmentsByClient.get",
+          "lineNumber": 256
+        },
+        {
+          "caller": "clearAttachment",
+          "callee": "this.attachmentsByClient.delete",
+          "lineNumber": 257
+        },
+        {
+          "caller": "clearAttachment",
+          "callee": "this.options.publishAttachment",
+          "lineNumber": 258
+        },
+        {
+          "caller": "acquire",
+          "callee": "this.hostedSessions.get",
+          "lineNumber": 263
+        },
+        {
+          "caller": "acquire",
+          "callee": "this.openingSessions.get",
+          "lineNumber": 265
+        },
+        {
+          "caller": "acquire",
+          "callee": "this.open",
+          "lineNumber": 267
+        },
+        {
+          "caller": "acquire",
+          "callee": "this.openingSessions.set",
+          "lineNumber": 268
+        },
+        {
+          "caller": "acquire",
+          "callee": "this.openingSessions.get",
+          "lineNumber": 272
+        },
+        {
+          "caller": "acquire",
+          "callee": "this.openingSessions.delete",
+          "lineNumber": 272
+        },
+        {
+          "caller": "open",
+          "callee": "this.options.host.resolveSession",
+          "lineNumber": 277
+        },
+        {
+          "caller": "open",
+          "callee": "this.options.host.openSession",
+          "lineNumber": 278
+        },
+        {
+          "caller": "open",
+          "callee": "this.options.isClosing",
+          "lineNumber": 279
+        },
+        {
+          "caller": "open",
+          "callee": "handle.close",
+          "lineNumber": 281
+        },
+        {
+          "caller": "open",
+          "callee": "this.options.reportError",
+          "lineNumber": 283
+        },
+        {
+          "caller": "open",
+          "callee": "this.hostedSessions.set",
+          "lineNumber": 292
+        },
+        {
+          "caller": "open",
+          "callee": "handle.terminated.then",
+          "lineNumber": 294
+        },
+        {
+          "caller": "open",
+          "callee": "this.invalidate",
+          "lineNumber": 295
+        },
+        {
+          "caller": "open",
+          "callee": "this.invalidate",
+          "lineNumber": 296
+        },
+        {
+          "caller": "open",
+          "callee": "String",
+          "lineNumber": 296
+        },
+        {
+          "caller": "invalidate",
+          "callee": "this.hostedSessions.get",
+          "lineNumber": 303
+        },
+        {
+          "caller": "invalidate",
+          "callee": "this.hostedSessions.delete",
+          "lineNumber": 304
+        },
+        {
+          "caller": "invalidate",
+          "callee": "this.releaseAttachment(attachment, BACKGROUND_CONTEXT).catch",
+          "lineNumber": 306
+        },
+        {
+          "caller": "invalidate",
+          "callee": "this.releaseAttachment",
+          "lineNumber": 306
+        },
+        {
+          "caller": "invalidate",
+          "callee": "this.options.reportError",
+          "lineNumber": 307
+        },
+        {
+          "caller": "invalidate",
+          "callee": "this.options.reportError",
+          "lineNumber": 310
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "packages/server/src/testing/client.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 183,
+      "nonEmptyLines": 162,
+      "functions": [
+        {
+          "name": "connectUnixTestClient",
+          "startLine": 152,
+          "endLine": 174,
+          "params": [
+            "path"
+          ]
+        },
+        {
+          "name": "writeSocket",
+          "startLine": 176,
+          "endLine": 183,
+          "params": [
+            "socket",
+            "chunk"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ProtocolTestClient",
+          "startLine": 27,
+          "endLine": 150,
+          "methods": [
+            "constructor",
+            "closed",
+            "hello",
+            "requestService",
+            "attach",
+            "requestSessionService",
+            "sendMessage",
+            "sendBytes",
+            "sendFragmentedMessage",
+            "next",
+            "nextFrom",
+            "waitForClose",
+            "close",
+            "receive",
+            "markClosed",
+            "fail"
+          ],
+          "properties": [
+            "messages",
+            "channel",
+            "decoder",
+            "waiters",
+            "closedDeferred",
+            "requestSequence",
+            "attachment",
+            "closedValue"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProtocolTestClient",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "connectUnixTestClient",
+          "line": 152,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "hello",
+          "callee": "this.next",
+          "lineNumber": 46
+        },
+        {
+          "caller": "hello",
+          "callee": "this.sendMessage",
+          "lineNumber": 47
+        },
+        {
+          "caller": "requestService",
+          "callee": "this.next",
+          "lineNumber": 56
+        },
+        {
+          "caller": "requestService",
+          "callee": "this.sendMessage",
+          "lineNumber": 59
+        },
+        {
+          "caller": "attach",
+          "callee": "this.requestService",
+          "lineNumber": 64
+        },
+        {
+          "caller": "requestSessionService",
+          "callee": "this.requestService",
+          "lineNumber": 81
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "this.channel.send",
+          "lineNumber": 85
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "encodeClientMessage",
+          "lineNumber": 85
+        },
+        {
+          "caller": "sendBytes",
+          "callee": "this.channel.send",
+          "lineNumber": 89
+        },
+        {
+          "caller": "sendFragmentedMessage",
+          "callee": "this.channel.sendFragmented",
+          "lineNumber": 93
+        },
+        {
+          "caller": "sendFragmentedMessage",
+          "callee": "encodeClientMessage",
+          "lineNumber": 93
+        },
+        {
+          "caller": "next",
+          "callee": "this.nextFrom",
+          "lineNumber": 97
+        },
+        {
+          "caller": "nextFrom",
+          "callee": "this.messages.slice(index).find",
+          "lineNumber": 101
+        },
+        {
+          "caller": "nextFrom",
+          "callee": "this.messages.slice",
+          "lineNumber": 101
+        },
+        {
+          "caller": "nextFrom",
+          "callee": "Promise.resolve",
+          "lineNumber": 102
+        },
+        {
+          "caller": "nextFrom",
+          "callee": "Promise.reject",
+          "lineNumber": 103
+        },
+        {
+          "caller": "nextFrom",
+          "callee": "this.waiters.add",
+          "lineNumber": 104
+        },
+        {
+          "caller": "waitForClose",
+          "callee": "Promise.resolve",
+          "lineNumber": 108
+        },
+        {
+          "caller": "close",
+          "callee": "this.channel.close",
+          "lineNumber": 112
+        },
+        {
+          "caller": "receive",
+          "callee": "this.decoder.push",
+          "lineNumber": 117
+        },
+        {
+          "caller": "receive",
+          "callee": "this.messages.push",
+          "lineNumber": 127
+        },
+        {
+          "caller": "receive",
+          "callee": "waiter.predicate",
+          "lineNumber": 129
+        },
+        {
+          "caller": "receive",
+          "callee": "this.waiters.delete",
+          "lineNumber": 130
+        },
+        {
+          "caller": "receive",
+          "callee": "waiter.resolve",
+          "lineNumber": 131
+        },
+        {
+          "caller": "receive",
+          "callee": "this.fail",
+          "lineNumber": 135
+        },
+        {
+          "caller": "receive",
+          "callee": "String",
+          "lineNumber": 135
+        },
+        {
+          "caller": "markClosed",
+          "callee": "this.closedDeferred.resolve",
+          "lineNumber": 142
+        },
+        {
+          "caller": "markClosed",
+          "callee": "this.fail",
+          "lineNumber": 143
+        },
+        {
+          "caller": "fail",
+          "callee": "waiter.reject",
+          "lineNumber": 147
+        },
+        {
+          "caller": "fail",
+          "callee": "this.waiters.clear",
+          "lineNumber": 148
+        },
+        {
+          "caller": "connectUnixTestClient",
+          "callee": "createConnection",
+          "lineNumber": 153
+        },
+        {
+          "caller": "connectUnixTestClient",
+          "callee": "once",
+          "lineNumber": 154
+        },
+        {
+          "caller": "connectUnixTestClient",
+          "callee": "writeSocket",
+          "lineNumber": 156
+        },
+        {
+          "caller": "sendFragmented",
+          "callee": "writeSocket",
+          "lineNumber": 158
+        },
+        {
+          "caller": "sendFragmented",
+          "callee": "chunk.subarray",
+          "lineNumber": 158
+        },
+        {
+          "caller": "sendFragmented",
+          "callee": "writeSocket",
+          "lineNumber": 159
+        },
+        {
+          "caller": "sendFragmented",
+          "callee": "chunk.subarray",
+          "lineNumber": 159
+        },
+        {
+          "caller": "close",
+          "callee": "once",
+          "lineNumber": 163
+        },
+        {
+          "caller": "close",
+          "callee": "socket.destroy",
+          "lineNumber": 164
+        },
+        {
+          "caller": "connectUnixTestClient",
+          "callee": "socket.on",
+          "lineNumber": 168
+        },
+        {
+          "caller": "connectUnixTestClient",
+          "callee": "client.receive",
+          "lineNumber": 169
+        },
+        {
+          "caller": "connectUnixTestClient",
+          "callee": "socket.on",
+          "lineNumber": 171
+        },
+        {
+          "caller": "connectUnixTestClient",
+          "callee": "client.fail",
+          "lineNumber": 171
+        },
+        {
+          "caller": "connectUnixTestClient",
+          "callee": "socket.once",
+          "lineNumber": 172
+        },
+        {
+          "caller": "connectUnixTestClient",
+          "callee": "client.markClosed",
+          "lineNumber": 172
+        },
+        {
+          "caller": "writeSocket",
+          "callee": "socket.write",
+          "lineNumber": 178
+        },
+        {
+          "caller": "writeSocket",
+          "callee": "reject",
+          "lineNumber": 179
+        },
+        {
+          "caller": "writeSocket",
+          "callee": "resolve",
+          "lineNumber": 180
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/server/src/testing/host.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 215,
+      "nonEmptyLines": 196,
+      "functions": [
+        {
+          "name": "createTestServerServices",
+          "startLine": 119,
+          "endLine": 149,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "Deferred",
+          "startLine": 7,
+          "endLine": 20,
+          "methods": [
+            "constructor",
+            "resolve"
+          ],
+          "properties": [
+            "promise",
+            "resolvePromise"
+          ]
+        },
+        {
+          "name": "TestHarness",
+          "startLine": 27,
+          "endLine": 117,
+          "methods": [
+            "constructor",
+            "attachClient",
+            "invokeService",
+            "close",
+            "terminate",
+            "gateNextClose",
+            "gateNextServiceCall"
+          ],
+          "properties": [
+            "session",
+            "closed",
+            "terminated",
+            "attachedClients",
+            "attachmentReleaseCount",
+            "closeCount",
+            "serviceCalls",
+            "failAttachmentRelease",
+            "failClose",
+            "nextServiceError",
+            "nextServiceResult",
+            "nextCloseGate",
+            "nextServiceGate"
+          ]
+        },
+        {
+          "name": "TestServerHost",
+          "startLine": 151,
+          "endLine": 215,
+          "methods": [
+            "resolveSession",
+            "openSession",
+            "seed",
+            "gateNextOpenSession",
+            "latestHarness"
+          ],
+          "properties": [
+            "serverServices",
+            "repo",
+            "harnesses",
+            "openSessionCount",
+            "nextOpenSessionError",
+            "nextHarnessCloseError",
+            "nextOpenSessionGate"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Deferred",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "TestHarness",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "createTestServerServices",
+          "line": 119,
+          "isDefault": false
+        },
+        {
+          "name": "TestServerHost",
+          "line": 151,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "resolve",
+          "callee": "this.resolvePromise",
+          "lineNumber": 18
+        },
+        {
+          "caller": "attachClient",
+          "callee": "this.invokeService",
+          "lineNumber": 54
+        },
+        {
+          "caller": "invokeService",
+          "callee": "this.serviceCalls.push",
+          "lineNumber": 66
+        },
+        {
+          "caller": "invokeService",
+          "callee": "gate.entered.resolve",
+          "lineNumber": 75
+        },
+        {
+          "caller": "close",
+          "callee": "gate.entered.resolve",
+          "lineNumber": 88
+        },
+        {
+          "caller": "close",
+          "callee": "this.session.close",
+          "lineNumber": 96
+        },
+        {
+          "caller": "close",
+          "callee": "this.closed.resolve",
+          "lineNumber": 97
+        },
+        {
+          "caller": "close",
+          "callee": "this.#termination.resolve",
+          "lineNumber": 98
+        },
+        {
+          "caller": "terminate",
+          "callee": "this.session.close",
+          "lineNumber": 102
+        },
+        {
+          "caller": "terminate",
+          "callee": "this.#termination.resolve",
+          "lineNumber": 103
+        },
+        {
+          "caller": "invokeService",
+          "callee": "presentation.attachSession",
+          "lineNumber": 131
+        },
+        {
+          "caller": "invokeService",
+          "callee": "presentation.detachSession",
+          "lineNumber": 140
+        },
+        {
+          "caller": "resolveSession",
+          "callee": "(await this.repo.list(undefined, context)).filter",
+          "lineNumber": 161
+        },
+        {
+          "caller": "resolveSession",
+          "callee": "this.repo.list",
+          "lineNumber": 161
+        },
+        {
+          "caller": "openSession",
+          "callee": "gate.entered.resolve",
+          "lineNumber": 172
+        },
+        {
+          "caller": "openSession",
+          "callee": "this.repo.open",
+          "lineNumber": 175
+        },
+        {
+          "caller": "openSession",
+          "callee": "this.harnesses.get",
+          "lineNumber": 187
+        },
+        {
+          "caller": "openSession",
+          "callee": "harnesses.push",
+          "lineNumber": 188
+        },
+        {
+          "caller": "openSession",
+          "callee": "this.harnesses.set",
+          "lineNumber": 189
+        },
+        {
+          "caller": "openSession",
+          "callee": "session.close",
+          "lineNumber": 192
+        },
+        {
+          "caller": "seed",
+          "callee": "this.repo.create",
+          "lineNumber": 198
+        },
+        {
+          "caller": "seed",
+          "callee": "session.close",
+          "lineNumber": 200
+        },
+        {
+          "caller": "latestHarness",
+          "callee": "this.harnesses.get",
+          "lineNumber": 211
+        },
+        {
+          "caller": "latestHarness",
+          "callee": "harnesses.at",
+          "lineNumber": 213
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 4,
+        "functionCount": 1,
+        "classCount": 3
+      }
+    },
+    {
+      "path": "packages/server/src/testing/server.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 28,
+      "nonEmptyLines": 25,
+      "functions": [
+        {
+          "name": "createTestServer",
+          "startLine": 16,
+          "endLine": 28,
+          "params": [
+            "options"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "createTestServer",
+          "line": 16,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/server/src/transports/unix/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 4,
+      "nonEmptyLines": 4,
+      "exports": [
+        {
+          "name": "getUnixSocketPath",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "createUnixListener",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "createUnixServer",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "UnixListenerOptions",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "UnixServerOptions",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/server/src/transports/unix/listener.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 421,
+      "nonEmptyLines": 391,
+      "functions": [
+        {
+          "name": "getOwnedBindPath",
+          "startLine": 294,
+          "endLine": 297,
+          "params": [
+            "path"
+          ]
+        },
+        {
+          "name": "removeStaleSocket",
+          "startLine": 299,
+          "endLine": 328,
+          "params": [
+            "path"
+          ]
+        },
+        {
+          "name": "removePath",
+          "startLine": 330,
+          "endLine": 336,
+          "params": [
+            "path"
+          ]
+        },
+        {
+          "name": "isSocketLive",
+          "startLine": 338,
+          "endLine": 363,
+          "params": [
+            "path"
+          ]
+        },
+        {
+          "name": "setSocketMode",
+          "startLine": 365,
+          "endLine": 372,
+          "params": [
+            "path",
+            "mode"
+          ]
+        },
+        {
+          "name": "closeNetServer",
+          "startLine": 374,
+          "endLine": 382,
+          "params": [
+            "server",
+            "reportError"
+          ]
+        },
+        {
+          "name": "isErrorCode",
+          "startLine": 384,
+          "endLine": 386,
+          "params": [
+            "error",
+            "code"
+          ]
+        },
+        {
+          "name": "createUnixListener",
+          "startLine": 388,
+          "endLine": 390,
+          "params": [
+            "options"
+          ]
+        },
+        {
+          "name": "resolveUnixListenerOptions",
+          "startLine": 392,
+          "endLine": 421,
+          "params": [
+            "options"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "UnixListener",
+          "startLine": 29,
+          "endLine": 188,
+          "methods": [
+            "constructor",
+            "start",
+            "close",
+            "acceptSocket",
+            "closeInternal",
+            "closeServerAndCleanup",
+            "cleanupOwnedSocket",
+            "reportError"
+          ],
+          "properties": [
+            "options",
+            "path",
+            "mode",
+            "connections",
+            "server",
+            "socketIdentity",
+            "ownedBindPath",
+            "closing",
+            "closePromise",
+            "accept"
+          ]
+        },
+        {
+          "name": "UnixByteConnection",
+          "startLine": 191,
+          "endLine": 292,
+          "methods": [
+            "constructor",
+            "closed",
+            "send",
+            "close",
+            "markClosed",
+            "write"
+          ],
+          "properties": [
+            "socket",
+            "gracefulCloseTimeoutMs",
+            "maxPendingBytes",
+            "pendingBytes",
+            "closedValue",
+            "closing",
+            "writeTail",
+            "closePromise",
+            "resolveClose"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "UnixByteConnection",
+          "line": 191,
+          "isDefault": false
+        },
+        {
+          "name": "createUnixListener",
+          "line": 388,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "resolveUnixListenerOptions",
+          "lineNumber": 42
+        },
+        {
+          "caller": "start",
+          "callee": "getOwnedBindPath",
+          "lineNumber": 52
+        },
+        {
+          "caller": "start",
+          "callee": "mkdir",
+          "lineNumber": 53
+        },
+        {
+          "caller": "start",
+          "callee": "dirname",
+          "lineNumber": 53
+        },
+        {
+          "caller": "start",
+          "callee": "removeStaleSocket",
+          "lineNumber": 54
+        },
+        {
+          "caller": "start",
+          "callee": "removeStaleSocket",
+          "lineNumber": 55
+        },
+        {
+          "caller": "start",
+          "callee": "createServer",
+          "lineNumber": 57
+        },
+        {
+          "caller": "start",
+          "callee": "this.acceptSocket",
+          "lineNumber": 57
+        },
+        {
+          "caller": "start",
+          "callee": "server.on",
+          "lineNumber": 58
+        },
+        {
+          "caller": "start",
+          "callee": "this.reportError",
+          "lineNumber": 58
+        },
+        {
+          "caller": "onError",
+          "callee": "server.off",
+          "lineNumber": 63
+        },
+        {
+          "caller": "onError",
+          "callee": "reject",
+          "lineNumber": 64
+        },
+        {
+          "caller": "onListening",
+          "callee": "server.off",
+          "lineNumber": 67
+        },
+        {
+          "caller": "onListening",
+          "callee": "resolve",
+          "lineNumber": 68
+        },
+        {
+          "caller": "start",
+          "callee": "server.once",
+          "lineNumber": 70
+        },
+        {
+          "caller": "start",
+          "callee": "server.once",
+          "lineNumber": 71
+        },
+        {
+          "caller": "start",
+          "callee": "server.listen",
+          "lineNumber": 72
+        },
+        {
+          "caller": "start",
+          "callee": "lstat",
+          "lineNumber": 74
+        },
+        {
+          "caller": "start",
+          "callee": "stats.isSocket",
+          "lineNumber": 75
+        },
+        {
+          "caller": "start",
+          "callee": "link",
+          "lineNumber": 77
+        },
+        {
+          "caller": "start",
+          "callee": "setSocketMode",
+          "lineNumber": 78
+        },
+        {
+          "caller": "start",
+          "callee": "removePath",
+          "lineNumber": 79
+        },
+        {
+          "caller": "start",
+          "callee": "this.closeServerAndCleanup",
+          "lineNumber": 82
+        },
+        {
+          "caller": "close",
+          "callee": "this.closeInternal",
+          "lineNumber": 91
+        },
+        {
+          "caller": "acceptSocket",
+          "callee": "socket.destroy",
+          "lineNumber": 97
+        },
+        {
+          "caller": "acceptSocket",
+          "callee": "this.connections.add",
+          "lineNumber": 105
+        },
+        {
+          "caller": "acceptSocket",
+          "callee": "socket.destroy",
+          "lineNumber": 108
+        },
+        {
+          "caller": "acceptSocket",
+          "callee": "accept",
+          "lineNumber": 111
+        },
+        {
+          "caller": "acceptSocket",
+          "callee": "socket.on",
+          "lineNumber": 112
+        },
+        {
+          "caller": "acceptSocket",
+          "callee": "handler.onData",
+          "lineNumber": 113
+        },
+        {
+          "caller": "acceptSocket",
+          "callee": "socket.on",
+          "lineNumber": 115
+        },
+        {
+          "caller": "acceptSocket",
+          "callee": "handler.onError",
+          "lineNumber": 116
+        },
+        {
+          "caller": "acceptSocket",
+          "callee": "socket.destroy",
+          "lineNumber": 117
+        },
+        {
+          "caller": "acceptSocket",
+          "callee": "socket.once",
+          "lineNumber": 119
+        },
+        {
+          "caller": "acceptSocket",
+          "callee": "connection.markClosed",
+          "lineNumber": 120
+        },
+        {
+          "caller": "acceptSocket",
+          "callee": "this.connections.delete",
+          "lineNumber": 121
+        },
+        {
+          "caller": "acceptSocket",
+          "callee": "handler.onClose",
+          "lineNumber": 122
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "this.closeServerAndCleanup",
+          "lineNumber": 127
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "this.cleanupOwnedSocket",
+          "lineNumber": 127
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "Promise.all",
+          "lineNumber": 128
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "[...this.connections].map",
+          "lineNumber": 128
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "connection.close",
+          "lineNumber": 128
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "removePath",
+          "lineNumber": 130
+        },
+        {
+          "caller": "closeInternal",
+          "callee": "this.connections.clear",
+          "lineNumber": 132
+        },
+        {
+          "caller": "closeServerAndCleanup",
+          "callee": "closeNetServer",
+          "lineNumber": 138
+        },
+        {
+          "caller": "closeServerAndCleanup",
+          "callee": "this.reportError",
+          "lineNumber": 138
+        },
+        {
+          "caller": "closeServerAndCleanup",
+          "callee": "removePath",
+          "lineNumber": 141
+        },
+        {
+          "caller": "closeServerAndCleanup",
+          "callee": "this.cleanupOwnedSocket",
+          "lineNumber": 143
+        },
+        {
+          "caller": "cleanupOwnedSocket",
+          "callee": "lstat",
+          "lineNumber": 153
+        },
+        {
+          "caller": "cleanupOwnedSocket",
+          "callee": "isErrorCode",
+          "lineNumber": 155
+        },
+        {
+          "caller": "cleanupOwnedSocket",
+          "callee": "current.isSocket",
+          "lineNumber": 158
+        },
+        {
+          "caller": "cleanupOwnedSocket",
+          "callee": "join",
+          "lineNumber": 160
+        },
+        {
+          "caller": "cleanupOwnedSocket",
+          "callee": "dirname",
+          "lineNumber": 160
+        },
+        {
+          "caller": "cleanupOwnedSocket",
+          "callee": "randomUUID().slice",
+          "lineNumber": 160
+        },
+        {
+          "caller": "cleanupOwnedSocket",
+          "callee": "randomUUID",
+          "lineNumber": 160
+        },
+        {
+          "caller": "cleanupOwnedSocket",
+          "callee": "rename",
+          "lineNumber": 162
+        },
+        {
+          "caller": "cleanupOwnedSocket",
+          "callee": "isErrorCode",
+          "lineNumber": 164
+        },
+        {
+          "caller": "cleanupOwnedSocket",
+          "callee": "lstat",
+          "lineNumber": 167
+        },
+        {
+          "caller": "cleanupOwnedSocket",
+          "callee": "moved.isSocket",
+          "lineNumber": 168
+        },
+        {
+          "caller": "cleanupOwnedSocket",
+          "callee": "removePath",
+          "lineNumber": 169
+        },
+        {
+          "caller": "cleanupOwnedSocket",
+          "callee": "lstat",
+          "lineNumber": 173
+        },
+        {
+          "caller": "cleanupOwnedSocket",
+          "callee": "isErrorCode",
+          "lineNumber": 175
+        },
+        {
+          "caller": "cleanupOwnedSocket",
+          "callee": "rename",
+          "lineNumber": 175
+        },
+        {
+          "caller": "reportError",
+          "callee": "this.options.onError",
+          "lineNumber": 183
+        },
+        {
+          "caller": "reportError",
+          "callee": "String",
+          "lineNumber": 183
+        },
+        {
+          "caller": "send",
+          "callee": "Promise.reject",
+          "lineNumber": 214
+        },
+        {
+          "caller": "send",
+          "callee": "Promise.reject",
+          "lineNumber": 216
+        },
+        {
+          "caller": "send",
+          "callee": "Promise.reject",
+          "lineNumber": 218
+        },
+        {
+          "caller": "send",
+          "callee": "chunk.slice",
+          "lineNumber": 221
+        },
+        {
+          "caller": "send",
+          "callee": "this.writeTail.then",
+          "lineNumber": 222
+        },
+        {
+          "caller": "send",
+          "callee": "this.write",
+          "lineNumber": 222
+        },
+        {
+          "caller": "send",
+          "callee": "write.finally",
+          "lineNumber": 223
+        },
+        {
+          "caller": "send",
+          "callee": "tracked.catch",
+          "lineNumber": 226
+        },
+        {
+          "caller": "close",
+          "callee": "this.markClosed",
+          "lineNumber": 232
+        },
+        {
+          "caller": "close",
+          "callee": "Promise.resolve",
+          "lineNumber": 233
+        },
+        {
+          "caller": "close",
+          "callee": "finalChunk?.slice",
+          "lineNumber": 237
+        },
+        {
+          "caller": "close",
+          "callee": "setTimeout",
+          "lineNumber": 240
+        },
+        {
+          "caller": "close",
+          "callee": "this.socket.destroy",
+          "lineNumber": 241
+        },
+        {
+          "caller": "close",
+          "callee": "this.markClosed",
+          "lineNumber": 242
+        },
+        {
+          "caller": "close",
+          "callee": "timer.unref",
+          "lineNumber": 244
+        },
+        {
+          "caller": "close",
+          "callee": "this.socket.once",
+          "lineNumber": 245
+        },
+        {
+          "caller": "close",
+          "callee": "clearTimeout",
+          "lineNumber": 245
+        },
+        {
+          "caller": "close",
+          "callee": "this.writeTail.then",
+          "lineNumber": 246
+        },
+        {
+          "caller": "close",
+          "callee": "this.markClosed",
+          "lineNumber": 248
+        },
+        {
+          "caller": "close",
+          "callee": "this.socket.end",
+          "lineNumber": 252
+        },
+        {
+          "caller": "close",
+          "callee": "this.socket.end",
+          "lineNumber": 253
+        },
+        {
+          "caller": "close",
+          "callee": "this.socket.destroy",
+          "lineNumber": 255
+        },
+        {
+          "caller": "markClosed",
+          "callee": "this.resolveClose",
+          "lineNumber": 266
+        },
+        {
+          "caller": "write",
+          "callee": "Promise.reject",
+          "lineNumber": 272
+        },
+        {
+          "caller": "onClose",
+          "callee": "finish",
+          "lineNumber": 276
+        },
+        {
+          "caller": "finish",
+          "callee": "this.socket.off",
+          "lineNumber": 280
+        },
+        {
+          "caller": "finish",
+          "callee": "reject",
+          "lineNumber": 281
+        },
+        {
+          "caller": "finish",
+          "callee": "resolve",
+          "lineNumber": 282
+        },
+        {
+          "caller": "write",
+          "callee": "this.socket.once",
+          "lineNumber": 284
+        },
+        {
+          "caller": "write",
+          "callee": "this.socket.write",
+          "lineNumber": 286
+        },
+        {
+          "caller": "write",
+          "callee": "finish",
+          "lineNumber": 288
+        },
+        {
+          "caller": "write",
+          "callee": "String",
+          "lineNumber": 288
+        },
+        {
+          "caller": "getOwnedBindPath",
+          "callee": "createHash(\"sha256\").update(path).digest(\"hex\").slice",
+          "lineNumber": 295
+        },
+        {
+          "caller": "getOwnedBindPath",
+          "callee": "createHash(\"sha256\").update(path).digest",
+          "lineNumber": 295
+        },
+        {
+          "caller": "getOwnedBindPath",
+          "callee": "createHash(\"sha256\").update",
+          "lineNumber": 295
+        },
+        {
+          "caller": "getOwnedBindPath",
+          "callee": "createHash",
+          "lineNumber": 295
+        },
+        {
+          "caller": "getOwnedBindPath",
+          "callee": "join",
+          "lineNumber": 296
+        },
+        {
+          "caller": "getOwnedBindPath",
+          "callee": "dirname",
+          "lineNumber": 296
+        },
+        {
+          "caller": "removeStaleSocket",
+          "callee": "lstat",
+          "lineNumber": 302
+        },
+        {
+          "caller": "removeStaleSocket",
+          "callee": "isErrorCode",
+          "lineNumber": 304
+        },
+        {
+          "caller": "removeStaleSocket",
+          "callee": "original.isSocket",
+          "lineNumber": 307
+        },
+        {
+          "caller": "removeStaleSocket",
+          "callee": "isSocketLive",
+          "lineNumber": 308
+        },
+        {
+          "caller": "removeStaleSocket",
+          "callee": "join",
+          "lineNumber": 310
+        },
+        {
+          "caller": "removeStaleSocket",
+          "callee": "dirname",
+          "lineNumber": 310
+        },
+        {
+          "caller": "removeStaleSocket",
+          "callee": "randomUUID().slice",
+          "lineNumber": 310
+        },
+        {
+          "caller": "removeStaleSocket",
+          "callee": "randomUUID",
+          "lineNumber": 310
+        },
+        {
+          "caller": "removeStaleSocket",
+          "callee": "rename",
+          "lineNumber": 312
+        },
+        {
+          "caller": "removeStaleSocket",
+          "callee": "isErrorCode",
+          "lineNumber": 314
+        },
+        {
+          "caller": "removeStaleSocket",
+          "callee": "lstat",
+          "lineNumber": 317
+        },
+        {
+          "caller": "removeStaleSocket",
+          "callee": "current.isSocket",
+          "lineNumber": 318
+        },
+        {
+          "caller": "removeStaleSocket",
+          "callee": "lstat",
+          "lineNumber": 320
+        },
+        {
+          "caller": "removeStaleSocket",
+          "callee": "isErrorCode",
+          "lineNumber": 322
+        },
+        {
+          "caller": "removeStaleSocket",
+          "callee": "rename",
+          "lineNumber": 322
+        },
+        {
+          "caller": "removeStaleSocket",
+          "callee": "removePath",
+          "lineNumber": 327
+        },
+        {
+          "caller": "removePath",
+          "callee": "unlink",
+          "lineNumber": 332
+        },
+        {
+          "caller": "removePath",
+          "callee": "isErrorCode",
+          "lineNumber": 334
+        },
+        {
+          "caller": "isSocketLive",
+          "callee": "createConnection",
+          "lineNumber": 340
+        },
+        {
+          "caller": "finish",
+          "callee": "clearTimeout",
+          "lineNumber": 346
+        },
+        {
+          "caller": "finish",
+          "callee": "socket.removeAllListeners",
+          "lineNumber": 347
+        },
+        {
+          "caller": "finish",
+          "callee": "socket.destroy",
+          "lineNumber": 348
+        },
+        {
+          "caller": "finish",
+          "callee": "reject",
+          "lineNumber": 349
+        },
+        {
+          "caller": "finish",
+          "callee": "resolve",
+          "lineNumber": 350
+        },
+        {
+          "caller": "isSocketLive",
+          "callee": "socket.once",
+          "lineNumber": 352
+        },
+        {
+          "caller": "isSocketLive",
+          "callee": "finish",
+          "lineNumber": 352
+        },
+        {
+          "caller": "isSocketLive",
+          "callee": "socket.once",
+          "lineNumber": 353
+        },
+        {
+          "caller": "isSocketLive",
+          "callee": "[\"ECONNREFUSED\", \"ENOENT\", \"EPIPE\", \"ECONNRESET\"].includes",
+          "lineNumber": 354
+        },
+        {
+          "caller": "isSocketLive",
+          "callee": "finish",
+          "lineNumber": 355
+        },
+        {
+          "caller": "isSocketLive",
+          "callee": "finish",
+          "lineNumber": 358
+        },
+        {
+          "caller": "isSocketLive",
+          "callee": "setTimeout",
+          "lineNumber": 360
+        },
+        {
+          "caller": "isSocketLive",
+          "callee": "finish",
+          "lineNumber": 360
+        },
+        {
+          "caller": "isSocketLive",
+          "callee": "timer.unref",
+          "lineNumber": 361
+        },
+        {
+          "caller": "setSocketMode",
+          "callee": "chmod",
+          "lineNumber": 368
+        },
+        {
+          "caller": "setSocketMode",
+          "callee": "isErrorCode",
+          "lineNumber": 370
+        },
+        {
+          "caller": "setSocketMode",
+          "callee": "isErrorCode",
+          "lineNumber": 370
+        },
+        {
+          "caller": "closeNetServer",
+          "callee": "Promise.resolve",
+          "lineNumber": 375
+        },
+        {
+          "caller": "closeNetServer",
+          "callee": "server.close",
+          "lineNumber": 377
+        },
+        {
+          "caller": "closeNetServer",
+          "callee": "reportError",
+          "lineNumber": 378
+        },
+        {
+          "caller": "closeNetServer",
+          "callee": "resolve",
+          "lineNumber": 379
+        },
+        {
+          "caller": "resolveUnixListenerOptions",
+          "callee": "Number.isInteger",
+          "lineNumber": 395
+        },
+        {
+          "caller": "resolveUnixListenerOptions",
+          "callee": "Number.isSafeInteger",
+          "lineNumber": 399
+        },
+        {
+          "caller": "resolveUnixListenerOptions",
+          "callee": "Number.isSafeInteger",
+          "lineNumber": 403
+        },
+        {
+          "caller": "resolveUnixListenerOptions",
+          "callee": "Number.isSafeInteger",
+          "lineNumber": 408
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 2,
+        "functionCount": 9,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "packages/server/src/transports/unix/preset.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 28,
+      "nonEmptyLines": 27,
+      "functions": [
+        {
+          "name": "createUnixServer",
+          "startLine": 8,
+          "endLine": 28,
+          "params": [
+            "host",
+            "options"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "createUnixServer",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "createUnixServer",
+          "callee": "createUnixListener",
+          "lineNumber": 12
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/server/src/transports/unix/types.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 13,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/server/src/types.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 64,
+      "nonEmptyLines": 56,
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+1. packages/tui/README.md (903 lines, language: markdown, fileCategory: docs)
+2. packages/tui/package.json (62 lines, language: json, fileCategory: config)
+3. packages/tui/tsconfig.build.json (8 lines, language: json, fileCategory: config)

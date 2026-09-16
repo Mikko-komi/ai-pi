@@ -1,0 +1,17 @@
+{
+  "projectRoot": "/Users/elex-mb0203/MyWork/agent-projects/ai-pi",
+  "batchFiles": [
+    {"path": "packages/telemetry/src/index.ts", "language": "typescript", "sizeLines": 357, "fileCategory": "code"},
+    {"path": "packages/telemetry/src/memory.ts", "language": "typescript", "sizeLines": 219, "fileCategory": "code"},
+    {"path": "packages/telemetry/src/noop.ts", "language": "typescript", "sizeLines": 20, "fileCategory": "code"},
+    {"path": "packages/telemetry/src/testing/conformance.ts", "language": "typescript", "sizeLines": 315, "fileCategory": "code"},
+    {"path": "packages/telemetry/src/testing/types.ts", "language": "typescript", "sizeLines": 18, "fileCategory": "code"}
+  ],
+  "batchImportData": {
+    "packages/telemetry/src/index.ts": [],
+    "packages/telemetry/src/memory.ts": ["packages/telemetry/src/index.ts", "packages/telemetry/src/noop.ts"],
+    "packages/telemetry/src/noop.ts": ["packages/telemetry/src/index.ts"],
+    "packages/telemetry/src/testing/conformance.ts": ["packages/telemetry/src/index.ts", "packages/telemetry/src/memory.ts", "packages/telemetry/src/testing/types.ts"],
+    "packages/telemetry/src/testing/types.ts": ["packages/telemetry/src/index.ts", "packages/telemetry/src/memory.ts"]
+  }
+}

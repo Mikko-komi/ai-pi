@@ -1,0 +1,1512 @@
+{
+  "nodes": [
+    {
+      "filePath": "packages/chord/src/api.ts",
+      "id": "file:packages/chord/src/api.ts",
+      "type": "file",
+      "name": "api.ts",
+      "summary": "Chord 面向应用的公开工厂入口：创建 facet host、组合 loader，以及定义 service、远程绑定与复制状态。",
+      "tags": [
+        "入口点",
+        "工厂",
+        "facet",
+        "service"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/api.ts",
+      "id": "function:packages/chord/src/api.ts:createFacetHost",
+      "type": "function",
+      "name": "createFacetHost",
+      "lineRange": [
+        19,
+        27
+      ],
+      "summary": "用 FacetKernel 激活一整代 facet，并返回冻结的 host 句柄（services/reload/dispose）。",
+      "tags": [
+        "工厂",
+        "生命周期",
+        "facet"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/api.ts",
+      "id": "function:packages/chord/src/api.ts:createStaticFacetLoader",
+      "type": "function",
+      "name": "createStaticFacetLoader",
+      "lineRange": [
+        29,
+        36
+      ],
+      "summary": "把已有 facet 列表包装成不做清理的静态 FacetLoader。",
+      "tags": [
+        "工厂",
+        "加载器",
+        "facet"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/api.ts",
+      "id": "function:packages/chord/src/api.ts:combineFacetLoaders",
+      "type": "function",
+      "name": "combineFacetLoaders",
+      "lineRange": [
+        38,
+        64
+      ],
+      "summary": "顺序组合多个 FacetLoader；加载失败时按逆序 dispose，成功后共享统一清理。",
+      "tags": [
+        "加载器",
+        "组合",
+        "生命周期"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/api.ts",
+      "id": "function:packages/chord/src/api.ts:defineFacet",
+      "type": "function",
+      "name": "defineFacet",
+      "lineRange": [
+        66,
+        68
+      ],
+      "summary": "原样返回 Facet，供调用方做显式类型标注。",
+      "tags": [
+        "工厂",
+        "类型定义",
+        "facet"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/api.ts",
+      "id": "function:packages/chord/src/api.ts:defineService",
+      "type": "function",
+      "name": "defineService",
+      "lineRange": [
+        77,
+        82
+      ],
+      "summary": "校验非空且非 $chord. 保留前缀后，冻结生成 Service 身份（local 默认 false）。",
+      "tags": [
+        "工厂",
+        "校验",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/api.ts",
+      "id": "function:packages/chord/src/api.ts:createRemoteServiceBinding",
+      "type": "function",
+      "name": "createRemoteServiceBinding",
+      "lineRange": [
+        84,
+        86
+      ],
+      "summary": "构造 RemoteServiceBindingImpl，作为消费端远程服务绑定入口。",
+      "tags": [
+        "工厂",
+        "远程服务",
+        "绑定"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/api.ts",
+      "id": "function:packages/chord/src/api.ts:replicatedState",
+      "type": "function",
+      "name": "replicatedState",
+      "lineRange": [
+        88,
+        90
+      ],
+      "summary": "用初始对象创建 MutableReplicatedStateImpl，供服务实现暴露可复制状态。",
+      "tags": [
+        "工厂",
+        "状态同步",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "file:packages/chord/src/delta/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "summary": "Chord 的 JSON 增量层：对纯 JSON 做 flush 时差量跟踪，并提供 apply、不可变 apply 以及 wire 编解码。",
+      "tags": [
+        "增量",
+        "序列化",
+        "状态同步",
+        "校验"
+      ],
+      "complexity": "complex",
+      "languageNotes": "用元组动词 r/s/d/a/t/p 表示替换、赋值、删除、追加、截断与数组拼接；WireOp 另含路径字典与省略路径。"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:isReplace",
+      "type": "function",
+      "name": "isReplace",
+      "lineRange": [
+        64,
+        64
+      ],
+      "summary": "判断一条 Op/WireOp 是否为根替换动词 r。",
+      "tags": [
+        "工具函数",
+        "增量",
+        "分类"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:isBase",
+      "type": "function",
+      "name": "isBase",
+      "lineRange": [
+        70,
+        70
+      ],
+      "summary": "判断一批操作是否以根替换开头，用作完整快照/恢复点判定。",
+      "tags": [
+        "工具函数",
+        "增量",
+        "分类"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:overlap",
+      "type": "function",
+      "name": "overlap",
+      "lineRange": [
+        81,
+        104
+      ],
+      "summary": "用 indexOf 探测求 a 后缀与 b 前缀的最长重叠，失败则返回 0 以免错误截断。",
+      "tags": [
+        "工具函数",
+        "字符串",
+        "增量"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:cloneJson",
+      "type": "function",
+      "name": "cloneJson",
+      "lineRange": [
+        130,
+        146
+      ],
+      "summary": "深拷贝严格 JSON，保留 null 原型对象并只复制自有可枚举数据属性。",
+      "tags": [
+        "工具函数",
+        "克隆",
+        "json"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:jsonEqual",
+      "type": "function",
+      "name": "jsonEqual",
+      "lineRange": [
+        168,
+        187
+      ],
+      "summary": "结构化比较两个 JsonValue，按数组下标或对象自有键递归相等。",
+      "tags": [
+        "工具函数",
+        "比较",
+        "json"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:diffString",
+      "type": "function",
+      "name": "diffString",
+      "lineRange": [
+        205,
+        227
+      ],
+      "summary": "把字符串变化编成追加 a、截断 t 或整值 s，优先识别后缀追加与重叠。",
+      "tags": [
+        "增量",
+        "字符串",
+        "diff"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:diffValue",
+      "type": "function",
+      "name": "diffValue",
+      "lineRange": [
+        229,
+        252
+      ],
+      "summary": "按缺失/类型分发到字符串、数组、对象 diff 或整值替换。",
+      "tags": [
+        "增量",
+        "diff",
+        "分发"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:diffObject",
+      "type": "function",
+      "name": "diffObject",
+      "lineRange": [
+        254,
+        271
+      ],
+      "summary": "对普通对象逐键 diff；遇到保留段名则整对象替换以免原型污染。",
+      "tags": [
+        "增量",
+        "对象",
+        "安全"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:diffArray",
+      "type": "function",
+      "name": "diffArray",
+      "lineRange": [
+        273,
+        313
+      ],
+      "summary": "用公共前后缀压缩数组变化为 p 拼接，否则保留下标编辑并只改尾部长短。",
+      "tags": [
+        "增量",
+        "数组",
+        "diff"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:walkDirty",
+      "type": "function",
+      "name": "walkDirty",
+      "lineRange": [
+        315,
+        363
+      ],
+      "summary": "沿脏节点树只 diff 变更子树，处理整值脏、数组 append/diff/replace。",
+      "tags": [
+        "增量",
+        "脏标记",
+        "diff"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:syncInto",
+      "type": "function",
+      "name": "syncInto",
+      "lineRange": [
+        387,
+        400
+      ],
+      "summary": "把脏子树同步进 baseline：append 只推入新元素，其余走 syncChild。",
+      "tags": [
+        "增量",
+        "基线",
+        "同步"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:syncChild",
+      "type": "function",
+      "name": "syncChild",
+      "lineRange": [
+        402,
+        420
+      ],
+      "summary": "按脏节点把单个子段写回 baseline，必要时克隆或递归 syncInto。",
+      "tags": [
+        "增量",
+        "基线",
+        "同步"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:cloneOp",
+      "type": "function",
+      "name": "cloneOp",
+      "lineRange": [
+        422,
+        433
+      ],
+      "summary": "克隆一条 Op 的 JSON 载荷，避免后续突变共享批次。",
+      "tags": [
+        "工具函数",
+        "克隆",
+        "增量"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:track",
+      "type": "function",
+      "name": "track",
+      "lineRange": [
+        435,
+        749
+      ],
+      "summary": "对根对象建立 Proxy 跟踪器，记录脏树并在 flush 时产出最小 Op 批次，支持 rebase/discard。",
+      "tags": [
+        "工厂",
+        "增量",
+        "代理",
+        "状态同步"
+      ],
+      "complexity": "complex",
+      "languageNotes": "插入值会被收养；调用方不得在 Proxy 外突变同一对象。"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "class:packages/chord/src/delta/index.ts:UnsafePathError",
+      "type": "class",
+      "name": "UnsafePathError",
+      "lineRange": [
+        766,
+        775
+      ],
+      "summary": "路径段为 __proto__/constructor/prototype 或非法下标时抛出的安全错误。",
+      "tags": [
+        "错误处理",
+        "安全",
+        "路径"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:assertValidOp",
+      "type": "function",
+      "name": "assertValidOp",
+      "lineRange": [
+        785,
+        819
+      ],
+      "summary": "校验已解码 Op 的动词、元数与路径形状，未知动词直接失败。",
+      "tags": [
+        "校验",
+        "增量",
+        "安全"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:assertValidWireOp",
+      "type": "function",
+      "name": "assertValidWireOp",
+      "lineRange": [
+        828,
+        889
+      ],
+      "summary": "按 wire 文法校验 WireOp，允许路径 id、短形式与 # 字典定义。",
+      "tags": [
+        "校验",
+        "增量",
+        "编解码"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:assertSafePath",
+      "type": "function",
+      "name": "assertSafePath",
+      "lineRange": [
+        891,
+        899
+      ],
+      "summary": "拒绝保留段名与非负整数以外的数组下标，防止原型污染与超大稀疏数组。",
+      "tags": [
+        "校验",
+        "安全",
+        "路径"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "class:packages/chord/src/delta/index.ts:PathError",
+      "type": "class",
+      "name": "PathError",
+      "lineRange": [
+        922,
+        929
+      ],
+      "summary": "apply/decode 无法解析路径或路径 id 时抛出的错误。",
+      "tags": [
+        "错误处理",
+        "路径",
+        "增量"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:apply",
+      "type": "function",
+      "name": "apply",
+      "lineRange": [
+        938,
+        940
+      ],
+      "summary": "把已解码 Op 应用到可变 JSON，根替换时返回新根。",
+      "tags": [
+        "增量",
+        "应用",
+        "入口点"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:applyOps",
+      "type": "function",
+      "name": "applyOps",
+      "lineRange": [
+        942,
+        1011
+      ],
+      "summary": "就地执行 r/s/d/a/t/p：用 defineProperty 写入并校验安全路径与数组下标。",
+      "tags": [
+        "增量",
+        "应用",
+        "可变"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:applyImmutable",
+      "type": "function",
+      "name": "applyImmutable",
+      "lineRange": [
+        1014,
+        1026
+      ],
+      "summary": "沿路径拷贝容器后应用单条 op，保持上一版本结构共享且不被突变。",
+      "tags": [
+        "增量",
+        "不可变",
+        "应用"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:copyContainers",
+      "type": "function",
+      "name": "copyContainers",
+      "lineRange": [
+        1028,
+        1064
+      ],
+      "summary": "浅拷贝路径上的数组/对象容器，供不可变 apply 隔离旧快照。",
+      "tags": [
+        "增量",
+        "克隆",
+        "不可变"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:resolveValue",
+      "type": "function",
+      "name": "resolveValue",
+      "lineRange": [
+        1066,
+        1077
+      ],
+      "summary": "只沿自有属性解析路径，禁止继承 getter 与原型链逃逸。",
+      "tags": [
+        "工具函数",
+        "路径",
+        "安全"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:encoder",
+      "type": "function",
+      "name": "encoder",
+      "lineRange": [
+        1105,
+        1192
+      ],
+      "summary": "创建有状态 Encoder：第二次出现的路径才 intern，同批相邻相同路径可省略。",
+      "tags": [
+        "编解码",
+        "压缩",
+        "工厂"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/delta/index.ts",
+      "id": "function:packages/chord/src/delta/index.ts:decoder",
+      "type": "function",
+      "name": "decoder",
+      "lineRange": [
+        1198,
+        1267
+      ],
+      "summary": "创建有状态 Decoder：展开路径 id 与短形式，遇 r 清空字典作为恢复点。",
+      "tags": [
+        "编解码",
+        "解压",
+        "工厂"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/facets/host.ts",
+      "id": "file:packages/chord/src/facets/host.ts",
+      "type": "file",
+      "name": "host.ts",
+      "summary": "Facet 运行时内核：同步 setup、校验依赖、装配本地/远程 provider，并按拓扑顺序激活与热替换。",
+      "tags": [
+        "内核",
+        "生命周期",
+        "facet",
+        "依赖注入"
+      ],
+      "complexity": "complex",
+      "languageNotes": "用分代状态机（setup/assembling/connecting/activating/reloading）保证 handle 在 reload 时不断开。"
+    },
+    {
+      "filePath": "packages/chord/src/facets/host.ts",
+      "id": "class:packages/chord/src/facets/host.ts:FacetLifecycle",
+      "type": "class",
+      "name": "FacetLifecycle",
+      "lineRange": [
+        59,
+        143
+      ],
+      "summary": "单个 facet 的 setup/active/dispose 状态机，登记 effect、观察与激活回调。",
+      "tags": [
+        "生命周期",
+        "状态机",
+        "facet"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/facets/host.ts",
+      "id": "class:packages/chord/src/facets/host.ts:LocalKeyedServiceRegistry",
+      "type": "class",
+      "name": "LocalKeyedServiceRegistry",
+      "lineRange": [
+        154,
+        217
+      ],
+      "summary": "为本地 keyed service 分配 generation 并委托 InstanceDirectory 观察实例。",
+      "tags": [
+        "注册表",
+        "keyed-service",
+        "本地"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/facets/host.ts",
+      "id": "class:packages/chord/src/facets/host.ts:HostServiceSlots",
+      "type": "class",
+      "name": "HostServiceSlots",
+      "lineRange": [
+        219,
+        277
+      ],
+      "summary": "宿主侧 singleton/keyed 槽位：用 ServiceSlot 包装实现并在观察时按实例绑定。",
+      "tags": [
+        "绑定",
+        "service",
+        "句柄"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/facets/host.ts",
+      "id": "class:packages/chord/src/facets/host.ts:StagedServiceSpawner",
+      "type": "class",
+      "name": "StagedServiceSpawner",
+      "lineRange": [
+        287,
+        321
+      ],
+      "summary": "setup 期暂存 keyed 实例，connect 后再交给本地 registry 或远程 provider。",
+      "tags": [
+        "工厂",
+        "keyed-service",
+        "分阶段"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/facets/host.ts",
+      "id": "class:packages/chord/src/facets/host.ts:FacetKernel",
+      "type": "class",
+      "name": "FacetKernel",
+      "lineRange": [
+        340,
+        794
+      ],
+      "summary": "私有宿主内核：装配 provider、绑定内外服务、按拓扑激活/reload/dispose 整代 facet。",
+      "tags": [
+        "内核",
+        "生命周期",
+        "编排"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "filePath": "packages/chord/src/facets/host.ts",
+      "id": "function:packages/chord/src/facets/host.ts:disposeFacetRecords",
+      "type": "function",
+      "name": "disposeFacetRecords",
+      "lineRange": [
+        796,
+        806
+      ],
+      "summary": "逆序 dispose 一组 FacetRuntime，收集但不中断后续清理错误。",
+      "tags": [
+        "生命周期",
+        "清理",
+        "facet"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/facets/host.ts",
+      "id": "function:packages/chord/src/facets/host.ts:validateFacets",
+      "type": "function",
+      "name": "validateFacets",
+      "lineRange": [
+        808,
+        856
+      ],
+      "summary": "检查服务提供唯一性与模式匹配，构建依赖图后返回拓扑激活顺序。",
+      "tags": [
+        "校验",
+        "依赖",
+        "拓扑"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/facets/host.ts",
+      "id": "function:packages/chord/src/facets/host.ts:topologicalOrder",
+      "type": "function",
+      "name": "topologicalOrder",
+      "lineRange": [
+        858,
+        880
+      ],
+      "summary": "Kahn 算法排序 facet；若有剩余入度则报依赖环。",
+      "tags": [
+        "拓扑",
+        "依赖",
+        "算法"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "filePath": "packages/chord/src/facets/loader.ts",
+      "id": "file:packages/chord/src/facets/loader.ts",
+      "type": "file",
+      "name": "loader.ts",
+      "summary": "加载结果清理辅助：并行 settle 所有 LoadedFacets.dispose 并收集拒绝原因。",
+      "tags": [
+        "加载器",
+        "清理",
+        "工具函数"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/facets/loader.ts",
+      "id": "function:packages/chord/src/facets/loader.ts:disposeLoadedFacets",
+      "type": "function",
+      "name": "disposeLoadedFacets",
+      "lineRange": [
+        3,
+        6
+      ],
+      "summary": "对已加载条目 allSettled dispose，只返回 rejected 的 reason。",
+      "tags": [
+        "清理",
+        "加载器",
+        "生命周期"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/json.ts",
+      "id": "file:packages/chord/src/json.ts",
+      "type": "file",
+      "name": "json.ts",
+      "summary": "运行时判定未知值是否为有限、无环、仅普通对象的严格 JSON。",
+      "tags": [
+        "校验",
+        "json",
+        "类型守卫"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/json.ts",
+      "id": "function:packages/chord/src/json.ts:isJsonValue",
+      "type": "function",
+      "name": "isJsonValue",
+      "lineRange": [
+        4,
+        6
+      ],
+      "summary": "对外类型守卫：用祖先集合启动深度受限的严格 JSON 检查。",
+      "tags": [
+        "类型守卫",
+        "json",
+        "校验"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "filePath": "packages/chord/src/json.ts",
+      "id": "function:packages/chord/src/json.ts:check",
+      "type": "function",
+      "name": "check",
+      "lineRange": [
+        8,
+        50
+      ],
+      "summary": "递归检查数组稠密性、普通对象原型、可枚举数据属性，并拒绝环与过深嵌套。",
+      "tags": [
+        "校验",
+        "json",
+        "递归"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/chord/src/api.ts",
+      "target": "file:packages/chord/src/facets/host.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/api.ts",
+      "target": "file:packages/chord/src/facets/loader.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/api.ts",
+      "target": "file:packages/chord/src/services/consumer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/api.ts",
+      "target": "file:packages/chord/src/services/state.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/api.ts",
+      "target": "file:packages/chord/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "file:packages/chord/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/facets/host.ts",
+      "target": "file:packages/chord/src/context/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/facets/host.ts",
+      "target": "file:packages/chord/src/services/consumer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/facets/host.ts",
+      "target": "file:packages/chord/src/services/handle.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/facets/host.ts",
+      "target": "file:packages/chord/src/services/instances.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/facets/host.ts",
+      "target": "file:packages/chord/src/services/loopback.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/facets/host.ts",
+      "target": "file:packages/chord/src/services/provider.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/facets/host.ts",
+      "target": "file:packages/chord/src/services/state.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/facets/host.ts",
+      "target": "file:packages/chord/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/facets/loader.ts",
+      "target": "file:packages/chord/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/json.ts",
+      "target": "file:packages/chord/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/chord/src/api.ts",
+      "target": "function:packages/chord/src/api.ts:createFacetHost",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/api.ts",
+      "target": "function:packages/chord/src/api.ts:createStaticFacetLoader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/api.ts",
+      "target": "function:packages/chord/src/api.ts:combineFacetLoaders",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/api.ts",
+      "target": "function:packages/chord/src/api.ts:defineFacet",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/api.ts",
+      "target": "function:packages/chord/src/api.ts:defineService",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/api.ts",
+      "target": "function:packages/chord/src/api.ts:createRemoteServiceBinding",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/api.ts",
+      "target": "function:packages/chord/src/api.ts:replicatedState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:isReplace",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:isBase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:overlap",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:cloneJson",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:jsonEqual",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:diffString",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:diffValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:diffObject",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:diffArray",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:walkDirty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:syncInto",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:syncChild",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:cloneOp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:track",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "class:packages/chord/src/delta/index.ts:UnsafePathError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:assertValidOp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:assertValidWireOp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:assertSafePath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "class:packages/chord/src/delta/index.ts:PathError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:apply",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:applyOps",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:applyImmutable",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:copyContainers",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:resolveValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:encoder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:decoder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/facets/host.ts",
+      "target": "class:packages/chord/src/facets/host.ts:FacetLifecycle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/facets/host.ts",
+      "target": "class:packages/chord/src/facets/host.ts:LocalKeyedServiceRegistry",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/facets/host.ts",
+      "target": "class:packages/chord/src/facets/host.ts:HostServiceSlots",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/facets/host.ts",
+      "target": "class:packages/chord/src/facets/host.ts:StagedServiceSpawner",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/facets/host.ts",
+      "target": "class:packages/chord/src/facets/host.ts:FacetKernel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/facets/host.ts",
+      "target": "function:packages/chord/src/facets/host.ts:disposeFacetRecords",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/facets/host.ts",
+      "target": "function:packages/chord/src/facets/host.ts:validateFacets",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/facets/host.ts",
+      "target": "function:packages/chord/src/facets/host.ts:topologicalOrder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/facets/loader.ts",
+      "target": "function:packages/chord/src/facets/loader.ts:disposeLoadedFacets",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/json.ts",
+      "target": "function:packages/chord/src/json.ts:isJsonValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/json.ts",
+      "target": "function:packages/chord/src/json.ts:check",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/chord/src/api.ts",
+      "target": "function:packages/chord/src/api.ts:createFacetHost",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/api.ts",
+      "target": "function:packages/chord/src/api.ts:createStaticFacetLoader",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/api.ts",
+      "target": "function:packages/chord/src/api.ts:combineFacetLoaders",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/api.ts",
+      "target": "function:packages/chord/src/api.ts:defineFacet",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/api.ts",
+      "target": "function:packages/chord/src/api.ts:defineService",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/api.ts",
+      "target": "function:packages/chord/src/api.ts:createRemoteServiceBinding",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/api.ts",
+      "target": "function:packages/chord/src/api.ts:replicatedState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:isReplace",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:isBase",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:overlap",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:track",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "class:packages/chord/src/delta/index.ts:UnsafePathError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:assertValidOp",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:assertValidWireOp",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:assertSafePath",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "class:packages/chord/src/delta/index.ts:PathError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:apply",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:applyImmutable",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:encoder",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/delta/index.ts",
+      "target": "function:packages/chord/src/delta/index.ts:decoder",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/facets/host.ts",
+      "target": "class:packages/chord/src/facets/host.ts:FacetKernel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/facets/loader.ts",
+      "target": "function:packages/chord/src/facets/loader.ts:disposeLoadedFacets",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/chord/src/json.ts",
+      "target": "function:packages/chord/src/json.ts:isJsonValue",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/chord/src/api.ts:combineFacetLoaders",
+      "target": "function:packages/chord/src/facets/loader.ts:disposeLoadedFacets",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/chord/src/api.ts:createFacetHost",
+      "target": "class:packages/chord/src/facets/host.ts:FacetKernel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/chord/src/json.ts:isJsonValue",
+      "target": "function:packages/chord/src/json.ts:check",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/chord/src/facets/host.ts:validateFacets",
+      "target": "function:packages/chord/src/facets/host.ts:topologicalOrder",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/chord/src/facets/host.ts:FacetKernel",
+      "target": "function:packages/chord/src/facets/host.ts:validateFacets",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/chord/src/facets/host.ts:FacetKernel",
+      "target": "function:packages/chord/src/facets/host.ts:disposeFacetRecords",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/chord/src/facets/host.ts:LocalKeyedServiceRegistry",
+      "target": "class:packages/chord/src/services/instances.ts:InstanceDirectory",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/chord/src/facets/host.ts:HostServiceSlots",
+      "target": "class:packages/chord/src/services/handle.ts:ServiceSlot",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/chord/src/facets/host.ts:FacetKernel",
+      "target": "function:packages/chord/src/services/loopback.ts:createLoopbackServiceTransport",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/chord/src/facets/host.ts:FacetKernel",
+      "target": "function:packages/chord/src/services/provider.ts:validateRemoteServiceImplementation",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/chord/src/delta/index.ts:apply",
+      "target": "function:packages/chord/src/delta/index.ts:applyOps",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/chord/src/delta/index.ts:applyImmutable",
+      "target": "function:packages/chord/src/delta/index.ts:applyOps",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/chord/src/delta/index.ts:applyImmutable",
+      "target": "function:packages/chord/src/delta/index.ts:copyContainers",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/chord/src/delta/index.ts:applyOps",
+      "target": "function:packages/chord/src/delta/index.ts:assertValidOp",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/chord/src/delta/index.ts:decoder",
+      "target": "function:packages/chord/src/delta/index.ts:assertValidWireOp",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

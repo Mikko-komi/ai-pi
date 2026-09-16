@@ -1,0 +1,1148 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/core/project-trust.ts",
+      "type": "file",
+      "name": "project-trust.ts",
+      "filePath": "packages/coding-agent/src/core/project-trust.ts",
+      "summary": "综合设置、扩展事件与用户提示，解析并持久化项目信任决策。",
+      "tags": [
+        "security",
+        "trust",
+        "service"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/project-trust.ts:selectProjectTrustOption",
+      "type": "function",
+      "name": "selectProjectTrustOption",
+      "filePath": "packages/coding-agent/src/core/project-trust.ts",
+      "lineRange": [
+        28,
+        38
+      ],
+      "summary": "展示当前目录的信任选项并返回用户选择。",
+      "tags": [
+        "trust",
+        "ui-prompt",
+        "security"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/project-trust.ts:resolveProjectTrusted",
+      "type": "function",
+      "name": "resolveProjectTrusted",
+      "filePath": "packages/coding-agent/src/core/project-trust.ts",
+      "lineRange": [
+        46,
+        96
+      ],
+      "summary": "综合设置、扩展事件与提示，解析项目是否受信任。",
+      "tags": [
+        "trust",
+        "security",
+        "resolver"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/prompt-templates.ts",
+      "type": "file",
+      "name": "prompt-templates.ts",
+      "filePath": "packages/coding-agent/src/core/prompt-templates.ts",
+      "summary": "从多来源加载 prompt 模板，解析参数并在文本中展开模板引用。",
+      "tags": [
+        "service",
+        "prompt",
+        "template"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/prompt-templates.ts:parseCommandArgs",
+      "type": "function",
+      "name": "parseCommandArgs",
+      "filePath": "packages/coding-agent/src/core/prompt-templates.ts",
+      "lineRange": [
+        24,
+        55
+      ],
+      "summary": "解析模板调用参数字符串为键值或位置参数。",
+      "tags": [
+        "parser",
+        "template",
+        "args"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/prompt-templates.ts:substituteArgs",
+      "type": "function",
+      "name": "substituteArgs",
+      "filePath": "packages/coding-agent/src/core/prompt-templates.ts",
+      "lineRange": [
+        70,
+        102
+      ],
+      "summary": "将解析后的参数替换进模板正文。",
+      "tags": [
+        "template",
+        "substitution",
+        "prompt"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/prompt-templates.ts:loadTemplateFromFile",
+      "type": "function",
+      "name": "loadTemplateFromFile",
+      "filePath": "packages/coding-agent/src/core/prompt-templates.ts",
+      "lineRange": [
+        104,
+        133
+      ],
+      "summary": "从单文件解析 frontmatter 并加载为 PromptTemplate。",
+      "tags": [
+        "loader",
+        "template",
+        "frontmatter"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/prompt-templates.ts:loadTemplatesFromDir",
+      "type": "function",
+      "name": "loadTemplatesFromDir",
+      "filePath": "packages/coding-agent/src/core/prompt-templates.ts",
+      "lineRange": [
+        138,
+        175
+      ],
+      "summary": "扫描目录加载全部 prompt 模板文件。",
+      "tags": [
+        "loader",
+        "template",
+        "discovery"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/prompt-templates.ts:loadPromptTemplates",
+      "type": "function",
+      "name": "loadPromptTemplates",
+      "filePath": "packages/coding-agent/src/core/prompt-templates.ts",
+      "lineRange": [
+        194,
+        263
+      ],
+      "summary": "合并多来源路径，加载并去重 prompt 模板。",
+      "tags": [
+        "loader",
+        "template",
+        "prompt"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/prompt-templates.ts:expandPromptTemplate",
+      "type": "function",
+      "name": "expandPromptTemplate",
+      "filePath": "packages/coding-agent/src/core/prompt-templates.ts",
+      "lineRange": [
+        269,
+        285
+      ],
+      "summary": "在文本中查找并展开已加载的模板引用。",
+      "tags": [
+        "template",
+        "expansion",
+        "prompt"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/provider-attribution.ts",
+      "type": "file",
+      "name": "provider-attribution.ts",
+      "filePath": "packages/coding-agent/src/core/provider-attribution.ts",
+      "summary": "为 OpenRouter、NIM、Cloudflare 等请求合并归因头与会话级 headers。",
+      "tags": [
+        "http",
+        "telemetry",
+        "headers"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/provider-attribution.ts:getDefaultAttributionHeaders",
+      "type": "function",
+      "name": "getDefaultAttributionHeaders",
+      "filePath": "packages/coding-agent/src/core/provider-attribution.ts",
+      "lineRange": [
+        36,
+        65
+      ],
+      "summary": "按 provider 主机生成默认归因 headers。",
+      "tags": [
+        "headers",
+        "attribution",
+        "telemetry"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/provider-attribution.ts:getSessionHeaders",
+      "type": "function",
+      "name": "getSessionHeaders",
+      "filePath": "packages/coding-agent/src/core/provider-attribution.ts",
+      "lineRange": [
+        67,
+        77
+      ],
+      "summary": "生成绑定 sessionId 的会话级 attribution headers。",
+      "tags": [
+        "headers",
+        "session",
+        "attribution"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/provider-attribution.ts:mergeProviderAttributionHeaders",
+      "type": "function",
+      "name": "mergeProviderAttributionHeaders",
+      "filePath": "packages/coding-agent/src/core/provider-attribution.ts",
+      "lineRange": [
+        79,
+        97
+      ],
+      "summary": "合并默认、会话与调用方提供的 attribution headers。",
+      "tags": [
+        "headers",
+        "merge",
+        "attribution"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "type": "file",
+      "name": "provider-composer.ts",
+      "filePath": "packages/coding-agent/src/core/provider-composer.ts",
+      "summary": "将内置 provider、models.json 与扩展配置合成为可请求的 ModelProvider。",
+      "tags": [
+        "factory",
+        "service",
+        "provider-composition"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/provider-composer.ts:mergeCompat",
+      "type": "function",
+      "name": "mergeCompat",
+      "filePath": "packages/coding-agent/src/core/provider-composer.ts",
+      "lineRange": [
+        81,
+        101
+      ],
+      "summary": "合并兼容层 provider 选项，后者覆盖前者。",
+      "tags": [
+        "merge",
+        "compat",
+        "provider"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/provider-composer.ts:applyModelOverride",
+      "type": "function",
+      "name": "applyModelOverride",
+      "filePath": "packages/coding-agent/src/core/provider-composer.ts",
+      "lineRange": [
+        103,
+        128
+      ],
+      "summary": "将 override 字段应用到单个 Model 定义。",
+      "tags": [
+        "override",
+        "models",
+        "composition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/provider-composer.ts:modelFromJson",
+      "type": "function",
+      "name": "modelFromJson",
+      "filePath": "packages/coding-agent/src/core/provider-composer.ts",
+      "lineRange": [
+        130,
+        166
+      ],
+      "summary": "从 JSON 模型定义构造运行时 Model。",
+      "tags": [
+        "factory",
+        "models",
+        "json"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/provider-composer.ts:applyModelsJson",
+      "type": "function",
+      "name": "applyModelsJson",
+      "filePath": "packages/coding-agent/src/core/provider-composer.ts",
+      "lineRange": [
+        177,
+        215
+      ],
+      "summary": "把 models.json 覆盖应用到基础模型列表。",
+      "tags": [
+        "composition",
+        "models",
+        "config"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/provider-composer.ts:applyExtension",
+      "type": "function",
+      "name": "applyExtension",
+      "filePath": "packages/coding-agent/src/core/provider-composer.ts",
+      "lineRange": [
+        217,
+        244
+      ],
+      "summary": "把扩展提供的模型配置应用到现有列表。",
+      "tags": [
+        "composition",
+        "extension",
+        "models"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/provider-composer.ts:adaptOAuth",
+      "type": "function",
+      "name": "adaptOAuth",
+      "filePath": "packages/coding-agent/src/core/provider-composer.ts",
+      "lineRange": [
+        246,
+        265
+      ],
+      "summary": "把配置中的 OAuth 信息适配为运行时 auth。",
+      "tags": [
+        "oauth",
+        "auth",
+        "adapter"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/provider-composer.ts:withConfiguredAuth",
+      "type": "function",
+      "name": "withConfiguredAuth",
+      "filePath": "packages/coding-agent/src/core/provider-composer.ts",
+      "lineRange": [
+        267,
+        279
+      ],
+      "summary": "为已有 auth 附加配置层 headers 与鉴权头。",
+      "tags": [
+        "auth",
+        "headers",
+        "composition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/provider-composer.ts:configContextEnv",
+      "type": "function",
+      "name": "configContextEnv",
+      "filePath": "packages/coding-agent/src/core/provider-composer.ts",
+      "lineRange": [
+        296,
+        308
+      ],
+      "summary": "解析配置上下文里声明的环境变量映射。",
+      "tags": [
+        "config",
+        "environment",
+        "resolver"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/provider-composer.ts:composeApiKeyAuth",
+      "type": "function",
+      "name": "composeApiKeyAuth",
+      "filePath": "packages/coding-agent/src/core/provider-composer.ts",
+      "lineRange": [
+        310,
+        374
+      ],
+      "summary": "合成 API key 鉴权，支持 env 模板与 command 配置值。",
+      "tags": [
+        "auth",
+        "api-key",
+        "composition"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/provider-composer.ts:composeOAuthAuth",
+      "type": "function",
+      "name": "composeOAuthAuth",
+      "filePath": "packages/coding-agent/src/core/provider-composer.ts",
+      "lineRange": [
+        376,
+        399
+      ],
+      "summary": "合成 OAuth 鉴权并解析相关 headers。",
+      "tags": [
+        "auth",
+        "oauth",
+        "composition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/provider-composer.ts:rawModelHeaders",
+      "type": "function",
+      "name": "rawModelHeaders",
+      "filePath": "packages/coding-agent/src/core/provider-composer.ts",
+      "lineRange": [
+        401,
+        414
+      ],
+      "summary": "收集模型级尚未解析的原始 headers。",
+      "tags": [
+        "headers",
+        "models",
+        "composition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/provider-composer.ts:validateExtensionProvider",
+      "type": "function",
+      "name": "validateExtensionProvider",
+      "filePath": "packages/coding-agent/src/core/provider-composer.ts",
+      "lineRange": [
+        416,
+        426
+      ],
+      "summary": "校验扩展 provider 是否具备可注册的模型与鉴权。",
+      "tags": [
+        "validation",
+        "extension",
+        "provider"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/provider-composer.ts:composeModelProvider",
+      "type": "function",
+      "name": "composeModelProvider",
+      "filePath": "packages/coding-agent/src/core/provider-composer.ts",
+      "lineRange": [
+        429,
+        532
+      ],
+      "summary": "合成完整 ModelProvider，包含模型列表、鉴权与 stream 适配。",
+      "tags": [
+        "factory",
+        "provider",
+        "composition"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/provider-composer.ts:resolveConfiguredModelHeaders",
+      "type": "function",
+      "name": "resolveConfiguredModelHeaders",
+      "filePath": "packages/coding-agent/src/core/provider-composer.ts",
+      "lineRange": [
+        534,
+        545
+      ],
+      "summary": "解析已配置模型的 headers，缺失则抛错。",
+      "tags": [
+        "headers",
+        "resolver",
+        "models"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/provider-composer.ts:resolveCompatibilityRequestConfig",
+      "type": "function",
+      "name": "resolveCompatibilityRequestConfig",
+      "filePath": "packages/coding-agent/src/core/provider-composer.ts",
+      "lineRange": [
+        552,
+        565
+      ],
+      "summary": "解析兼容层请求配置中的 headers 与选项。",
+      "tags": [
+        "compat",
+        "resolver",
+        "http"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/provider-composer.ts:configuredRequestAuthStatus",
+      "type": "function",
+      "name": "configuredRequestAuthStatus",
+      "filePath": "packages/coding-agent/src/core/provider-composer.ts",
+      "lineRange": [
+        567,
+        581
+      ],
+      "summary": "判断配置侧鉴权是否已就绪（含 command/env）。",
+      "tags": [
+        "auth",
+        "status",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/remote-catalog-provider.ts",
+      "type": "file",
+      "name": "remote-catalog-provider.ts",
+      "filePath": "packages/coding-agent/src/core/remote-catalog-provider.ts",
+      "summary": "周期性拉取远程模型目录，并与本地内置目录合并后包装 provider。",
+      "tags": [
+        "service",
+        "catalog",
+        "http"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/remote-catalog-provider.ts:parseCatalog",
+      "type": "function",
+      "name": "parseCatalog",
+      "filePath": "packages/coding-agent/src/core/remote-catalog-provider.ts",
+      "lineRange": [
+        20,
+        32
+      ],
+      "summary": "解析远程目录 JSON 为模型列表。",
+      "tags": [
+        "parser",
+        "catalog",
+        "models"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/remote-catalog-provider.ts:remoteModels",
+      "type": "function",
+      "name": "remoteModels",
+      "filePath": "packages/coding-agent/src/core/remote-catalog-provider.ts",
+      "lineRange": [
+        34,
+        43
+      ],
+      "summary": "按本地生成时间戳合并远程与基线模型。",
+      "tags": [
+        "catalog",
+        "merge",
+        "models"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/remote-catalog-provider.ts:withRemoteCatalog",
+      "type": "function",
+      "name": "withRemoteCatalog",
+      "filePath": "packages/coding-agent/src/core/remote-catalog-provider.ts",
+      "lineRange": [
+        46,
+        137
+      ],
+      "summary": "包装内置 provider，定时拉取并合并远程模型目录。",
+      "tags": [
+        "catalog",
+        "http",
+        "provider"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/core/project-trust.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/project-trust.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/runner.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/project-trust.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/project-trust.ts",
+      "target": "file:packages/coding-agent/src/core/settings-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/project-trust.ts",
+      "target": "file:packages/coding-agent/src/core/trust-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/prompt-templates.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/prompt-templates.ts",
+      "target": "file:packages/coding-agent/src/core/source-info.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/prompt-templates.ts",
+      "target": "file:packages/coding-agent/src/utils/frontmatter.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/prompt-templates.ts",
+      "target": "file:packages/coding-agent/src/utils/paths.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-attribution.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-attribution.ts",
+      "target": "file:packages/coding-agent/src/core/settings-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-attribution.ts",
+      "target": "file:packages/coding-agent/src/core/telemetry.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "file:packages/ai/src/compat.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "file:packages/coding-agent/src/core/model-config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "file:packages/coding-agent/src/core/resolve-config-value.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/remote-catalog-provider.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/remote-catalog-provider.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/remote-catalog-provider.ts",
+      "target": "file:packages/coding-agent/src/utils/management-http.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/remote-catalog-provider.ts",
+      "target": "file:packages/coding-agent/src/utils/pi-user-agent.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/project-trust.ts",
+      "target": "function:packages/coding-agent/src/core/project-trust.ts:selectProjectTrustOption",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/project-trust.ts",
+      "target": "function:packages/coding-agent/src/core/project-trust.ts:resolveProjectTrusted",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/project-trust.ts",
+      "target": "function:packages/coding-agent/src/core/project-trust.ts:resolveProjectTrusted",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/prompt-templates.ts",
+      "target": "function:packages/coding-agent/src/core/prompt-templates.ts:parseCommandArgs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/prompt-templates.ts",
+      "target": "function:packages/coding-agent/src/core/prompt-templates.ts:parseCommandArgs",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/prompt-templates.ts",
+      "target": "function:packages/coding-agent/src/core/prompt-templates.ts:substituteArgs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/prompt-templates.ts",
+      "target": "function:packages/coding-agent/src/core/prompt-templates.ts:substituteArgs",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/prompt-templates.ts",
+      "target": "function:packages/coding-agent/src/core/prompt-templates.ts:loadTemplateFromFile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/prompt-templates.ts",
+      "target": "function:packages/coding-agent/src/core/prompt-templates.ts:loadTemplatesFromDir",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/prompt-templates.ts",
+      "target": "function:packages/coding-agent/src/core/prompt-templates.ts:loadPromptTemplates",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/prompt-templates.ts",
+      "target": "function:packages/coding-agent/src/core/prompt-templates.ts:loadPromptTemplates",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/prompt-templates.ts",
+      "target": "function:packages/coding-agent/src/core/prompt-templates.ts:expandPromptTemplate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/prompt-templates.ts",
+      "target": "function:packages/coding-agent/src/core/prompt-templates.ts:expandPromptTemplate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-attribution.ts",
+      "target": "function:packages/coding-agent/src/core/provider-attribution.ts:getDefaultAttributionHeaders",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-attribution.ts",
+      "target": "function:packages/coding-agent/src/core/provider-attribution.ts:getSessionHeaders",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-attribution.ts",
+      "target": "function:packages/coding-agent/src/core/provider-attribution.ts:mergeProviderAttributionHeaders",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-attribution.ts",
+      "target": "function:packages/coding-agent/src/core/provider-attribution.ts:mergeProviderAttributionHeaders",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:mergeCompat",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:applyModelOverride",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:modelFromJson",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:applyModelsJson",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:applyExtension",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:adaptOAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:withConfiguredAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:configContextEnv",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:composeApiKeyAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:composeOAuthAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:rawModelHeaders",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:validateExtensionProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:validateExtensionProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:composeModelProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:composeModelProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:resolveConfiguredModelHeaders",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:resolveConfiguredModelHeaders",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:resolveCompatibilityRequestConfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:resolveCompatibilityRequestConfig",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:configuredRequestAuthStatus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:configuredRequestAuthStatus",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/remote-catalog-provider.ts",
+      "target": "function:packages/coding-agent/src/core/remote-catalog-provider.ts:parseCatalog",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/remote-catalog-provider.ts",
+      "target": "function:packages/coding-agent/src/core/remote-catalog-provider.ts:remoteModels",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/remote-catalog-provider.ts",
+      "target": "function:packages/coding-agent/src/core/remote-catalog-provider.ts:withRemoteCatalog",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/remote-catalog-provider.ts",
+      "target": "function:packages/coding-agent/src/core/remote-catalog-provider.ts:withRemoteCatalog",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/project-trust.ts:selectProjectTrustOption",
+      "target": "function:packages/coding-agent/src/core/trust-manager.ts:getProjectTrustOptions",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/project-trust.ts:resolveProjectTrusted",
+      "target": "function:packages/coding-agent/src/core/trust-manager.ts:hasTrustRequiringProjectResources",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/project-trust.ts:resolveProjectTrusted",
+      "target": "function:packages/coding-agent/src/core/extensions/runner.ts:emitProjectTrustEvent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/prompt-templates.ts:loadTemplateFromFile",
+      "target": "function:packages/coding-agent/src/utils/frontmatter.ts:parseFrontmatter",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/prompt-templates.ts:loadPromptTemplates",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:resolvePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/provider-attribution.ts:getDefaultAttributionHeaders",
+      "target": "function:packages/coding-agent/src/core/telemetry.ts:isInstallTelemetryEnabled",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/provider-composer.ts:composeApiKeyAuth",
+      "target": "function:packages/coding-agent/src/core/resolve-config-value.ts:isCommandConfigValue",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/provider-composer.ts:composeApiKeyAuth",
+      "target": "function:packages/coding-agent/src/core/resolve-config-value.ts:getConfigValueEnvVarNames",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/provider-composer.ts:composeApiKeyAuth",
+      "target": "function:packages/coding-agent/src/core/resolve-config-value.ts:resolveConfigValueOrThrow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/provider-composer.ts:composeApiKeyAuth",
+      "target": "function:packages/coding-agent/src/core/resolve-config-value.ts:resolveHeadersOrThrow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/provider-composer.ts:composeOAuthAuth",
+      "target": "function:packages/coding-agent/src/core/resolve-config-value.ts:resolveHeadersOrThrow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/provider-composer.ts:composeModelProvider",
+      "target": "function:packages/ai/src/compat.ts:getModels",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/provider-composer.ts:resolveConfiguredModelHeaders",
+      "target": "function:packages/coding-agent/src/core/resolve-config-value.ts:resolveHeadersOrThrow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/provider-composer.ts:resolveCompatibilityRequestConfig",
+      "target": "function:packages/coding-agent/src/core/resolve-config-value.ts:resolveHeadersOrThrow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/provider-composer.ts:configuredRequestAuthStatus",
+      "target": "function:packages/coding-agent/src/core/resolve-config-value.ts:isCommandConfigValue",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/provider-composer.ts:configuredRequestAuthStatus",
+      "target": "function:packages/coding-agent/src/core/resolve-config-value.ts:getConfigValueEnvVarNames",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/provider-composer.ts:configuredRequestAuthStatus",
+      "target": "function:packages/coding-agent/src/core/resolve-config-value.ts:isConfigValueConfigured",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/remote-catalog-provider.ts:withRemoteCatalog",
+      "target": "function:packages/coding-agent/src/utils/management-http.ts:fetchWithRetry",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/remote-catalog-provider.ts:withRemoteCatalog",
+      "target": "function:packages/coding-agent/src/utils/pi-user-agent.ts:getPiUserAgent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

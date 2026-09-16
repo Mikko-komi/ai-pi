@@ -1,0 +1,179 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/ai/src/images-api-registry.ts",
+      "type": "file",
+      "name": "images-api-registry.ts",
+      "filePath": "packages/ai/src/images-api-registry.ts",
+      "summary": "图像 API 提供方注册表：按 api 名登记 generateImages，并在调用时校验 model.api 是否匹配。",
+      "tags": [
+        "registry",
+        "images",
+        "factory",
+        "api-handler"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/images-api-registry.ts:wrapGenerateImages",
+      "type": "function",
+      "name": "wrapGenerateImages",
+      "filePath": "packages/ai/src/images-api-registry.ts",
+      "lineRange": [
+        26,
+        36
+      ],
+      "summary": "包装 generateImages，调用时校验 model.api 与登记的 api 一致。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/images-api-registry.ts:registerImagesApiProvider",
+      "type": "function",
+      "name": "registerImagesApiProvider",
+      "filePath": "packages/ai/src/images-api-registry.ts",
+      "lineRange": [
+        38,
+        49
+      ],
+      "summary": "按 api 名登记图像提供方，可选 sourceId。",
+      "tags": [
+        "exports",
+        "utility",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/images-api-registry.ts:getImagesApiProvider",
+      "type": "function",
+      "name": "getImagesApiProvider",
+      "filePath": "packages/ai/src/images-api-registry.ts",
+      "lineRange": [
+        51,
+        53
+      ],
+      "summary": "按 ImagesApi 取出已登记提供方。",
+      "tags": [
+        "exports",
+        "utility",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/images.ts",
+      "type": "file",
+      "name": "images.ts",
+      "filePath": "packages/ai/src/images.ts",
+      "summary": "图像生成公共入口：副作用注册内置提供方后，按 model.api 分发给对应 ImagesApiProvider。",
+      "tags": [
+        "entry-point",
+        "images",
+        "api-handler",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/images.ts:generateImages",
+      "type": "function",
+      "name": "generateImages",
+      "filePath": "packages/ai/src/images.ts",
+      "lineRange": [
+        14,
+        21
+      ],
+      "summary": "公共图像生成入口：解析注册表中的提供方并委托 generateImages。",
+      "tags": [
+        "exports",
+        "api-handler",
+        "streaming"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/ai/src/images-api-registry.ts",
+      "target": "function:packages/ai/src/images-api-registry.ts:wrapGenerateImages",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/images-api-registry.ts",
+      "target": "function:packages/ai/src/images-api-registry.ts:registerImagesApiProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/images-api-registry.ts",
+      "target": "function:packages/ai/src/images-api-registry.ts:registerImagesApiProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/images-api-registry.ts",
+      "target": "function:packages/ai/src/images-api-registry.ts:getImagesApiProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/images-api-registry.ts",
+      "target": "function:packages/ai/src/images-api-registry.ts:getImagesApiProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/images-api-registry.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/images.ts",
+      "target": "function:packages/ai/src/images.ts:generateImages",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/images.ts",
+      "target": "function:packages/ai/src/images.ts:generateImages",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/images.ts",
+      "target": "file:packages/ai/src/images-api-registry.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/images.ts",
+      "target": "file:packages/ai/src/providers/images/register-builtins.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/images.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

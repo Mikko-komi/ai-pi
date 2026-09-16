@@ -1,0 +1,529 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "type": "file",
+      "name": "session-selector.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "summary": "交互式 session 选择器：按当前/全部范围加载会话，支持搜索排序、重命名、删除确认与路径展示。",
+      "tags": [
+        "component",
+        "selector",
+        "session",
+        "tui"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/session-selector.ts:formatSessionDate",
+      "type": "function",
+      "name": "formatSessionDate",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "summary": "把会话时间格式化为相对描述（分钟/小时/天前）或本地日期。",
+      "tags": [
+        "utility",
+        "formatting",
+        "date"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        35,
+        49
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/session-selector.ts:buildSessionTree",
+      "type": "function",
+      "name": "buildSessionTree",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "summary": "按 parent 关系将会话列表建成树，供列表缩进与分组显示。",
+      "tags": [
+        "tree",
+        "session",
+        "data-model"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        209,
+        254
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/session-selector.ts:flattenSessionTree",
+      "type": "function",
+      "name": "flattenSessionTree",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "summary": "前序展开会话树为扁平行，保留缩进供 SessionList 渲染。",
+      "tags": [
+        "tree",
+        "session",
+        "utility"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        259,
+        278
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/session-selector.ts:deleteSessionFile",
+      "type": "function",
+      "name": "deleteSessionFile",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "summary": "删除会话文件并处理失败，供选择器确认删除后调用。",
+      "tags": [
+        "session",
+        "filesystem",
+        "mutation"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        645,
+        680
+      ]
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/session-selector.ts:SessionSelectorHeader",
+      "type": "class",
+      "name": "SessionSelectorHeader",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "summary": "选择器页头：展示范围、排序、过滤状态、加载进度与快捷键提示。",
+      "tags": [
+        "component",
+        "header",
+        "tui"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        56,
+        187
+      ]
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/session-selector.ts:SessionList",
+      "type": "class",
+      "name": "SessionList",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "summary": "可聚焦会话列表：过滤排序、键盘导航、删除确认与当前会话高亮。",
+      "tags": [
+        "component",
+        "list",
+        "keyboard",
+        "tui"
+      ],
+      "complexity": "complex",
+      "lineRange": [
+        283,
+        638
+      ]
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/session-selector.ts:SessionSelectorComponent",
+      "type": "class",
+      "name": "SessionSelectorComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "summary": "会话选择器容器：懒加载当前/全部会话，协调重命名输入与 SessionList。",
+      "tags": [
+        "component",
+        "selector",
+        "session",
+        "tui"
+      ],
+      "complexity": "complex",
+      "lineRange": [
+        685,
+        1031
+      ]
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "type": "file",
+      "name": "settings-selector.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "summary": "交互式设置面板：用 SettingsList 编辑 compact、主题、thinking、HTTP 超时与项目信任等选项。",
+      "tags": [
+        "component",
+        "settings",
+        "selector",
+        "tui"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/settings-selector.ts:singleModeThemeItems",
+      "type": "function",
+      "name": "singleModeThemeItems",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "summary": "生成单主题模式下的可选主题项，并附带切换到 automatic 的入口。",
+      "tags": [
+        "theme",
+        "settings",
+        "utility"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        203,
+        212
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/settings-selector.ts:defaultAutomaticThemes",
+      "type": "function",
+      "name": "defaultAutomaticThemes",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "summary": "从当前 theme setting 解析 automatic 的 light/dark 回退主题。",
+      "tags": [
+        "theme",
+        "settings",
+        "utility"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        220,
+        230
+      ]
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/settings-selector.ts:WarningSettingsSubmenu",
+      "type": "class",
+      "name": "WarningSettingsSubmenu",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "summary": "警告类设置子菜单：在 SettingsList 上编辑各类 warning 开关。",
+      "tags": [
+        "component",
+        "settings",
+        "submenu"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        132,
+        172
+      ]
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/settings-selector.ts:ThemeSubmenu",
+      "type": "class",
+      "name": "ThemeSubmenu",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "summary": "主题子菜单：单主题或 automatic light/dark 选择，支持预览与取消还原。",
+      "tags": [
+        "component",
+        "theme",
+        "submenu",
+        "settings"
+      ],
+      "complexity": "complex",
+      "lineRange": [
+        232,
+        438
+      ]
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/settings-selector.ts:SettingsSelectorComponent",
+      "type": "class",
+      "name": "SettingsSelectorComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "summary": "设置选择器根组件：组装 SettingsList 与各子菜单回调。",
+      "tags": [
+        "component",
+        "settings",
+        "selector",
+        "tui"
+      ],
+      "complexity": "complex",
+      "lineRange": [
+        443,
+        945
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/session-selector.ts:formatSessionDate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/session-selector.ts:buildSessionTree",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/session-selector.ts:flattenSessionTree",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/session-selector.ts:deleteSessionFile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/session-selector.ts:SessionSelectorHeader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/session-selector.ts:SessionList",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/session-selector.ts:SessionSelectorComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/session-selector.ts:SessionSelectorComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "target": "file:packages/coding-agent/src/core/keybindings.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "target": "file:packages/coding-agent/src/core/session-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "target": "file:packages/coding-agent/src/utils/paths.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/session-selector.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/settings-selector.ts:singleModeThemeItems",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/settings-selector.ts:defaultAutomaticThemes",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/settings-selector.ts:WarningSettingsSubmenu",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/settings-selector.ts:ThemeSubmenu",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/settings-selector.ts:SettingsSelectorComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/settings-selector.ts:SettingsSelectorComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "target": "file:packages/coding-agent/src/core/http-dispatcher.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "target": "file:packages/coding-agent/src/core/settings-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/settings-submenu.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/settings-selector.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/session-selector.ts:SessionSelectorHeader",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyHint",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/session-selector.ts:SessionList",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts:filterAndSortSessions",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/session-selector.ts:SessionList",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts:parseSearchQuery",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/session-selector.ts:SessionList",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/session-selector-search.ts:hasSessionName",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/session-selector.ts:SessionSelectorComponent",
+      "target": "class:packages/coding-agent/src/core/session-manager.ts:SessionManager",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/session-selector.ts:SessionSelectorComponent",
+      "target": "class:packages/coding-agent/src/core/keybindings.ts:KeybindingsManager",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/session-selector.ts:SessionSelectorComponent",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts:DynamicBorder",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/settings-selector.ts:SettingsSelectorComponent",
+      "target": "function:packages/coding-agent/src/core/http-dispatcher.ts:formatHttpIdleTimeoutMs",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/settings-selector.ts:SettingsSelectorComponent",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyDisplayText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/settings-selector.ts:SettingsSelectorComponent",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts:DynamicBorder",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "issues": [],
+  "warnings": [
+    "Node 'pipeline:.github/workflows/issue-analysis.yml' has no edges (orphan)",
+    "Node 'pipeline:.github/workflows/npm-audit.yml' has no edges (orphan)",
+    "Node 'document:packages/coding-agent/docs/termux.md' has no edges (orphan)",
+    "Node 'file:.gitattributes' has no edges (orphan)",
+    "Node 'file:.github/APPROVED_CONTRIBUTORS' has no edges (orphan)",
+    "Node 'file:.husky/pre-commit' has no edges (orphan)",
+    "Node 'file:.npmrc' has no edges (orphan)",
+    "Node 'file:packages/agent/src/harness/runtime/index.ts' has no edges (orphan)",
+    "Node 'file:packages/agent/src/harness/session/jsonl/index.ts' has no edges (orphan)",
+    "Node 'file:packages/agent/src/harness/tools/index.ts' has no edges (orphan)",
+    "Node 'file:packages/agent/src/search/index.ts' has no edges (orphan)",
+    "Node 'file:packages/agent/vitest.benchmark.config.ts' has no edges (orphan)",
+    "Node 'file:packages/agent/vitest.config.ts' has no edges (orphan)",
+    "Node 'file:packages/agent/vitest.harness.config.ts' has no edges (orphan)",
+    "Node 'file:packages/ai/bedrock-provider.d.ts' has no edges (orphan)",
+    "Node 'file:packages/ai/bedrock-provider.js' has no edges (orphan)",
+    "Node 'file:packages/ai/src/api/cloudflare.ts' has no edges (orphan)",
+    "Node 'file:packages/ai/src/providers/data-json.d.ts' has no edges (orphan)",
+    "Node 'file:packages/ai/vitest.config.ts' has no edges (orphan)",
+    "Node 'file:packages/client/vitest.config.ts' has no edges (orphan)",
+    "Node 'file:packages/coding-agent/src/client/index.ts' has no edges (orphan)",
+    "Node 'file:packages/coding-agent/src/core/radius.ts' has no edges (orphan)",
+    "Node 'file:packages/coding-agent/src/utils/highlight-js.d.ts' has no edges (orphan)",
+    "Node 'file:packages/protocol/vitest.config.ts' has no edges (orphan)",
+    "Node 'file:packages/server/vitest.config.ts' has no edges (orphan)",
+    "Node 'file:packages/session-backends/sqlite-node/src/sqlite/index.ts' has no edges (orphan)",
+    "Node 'file:packages/session-backends/sqlite-node/vitest.benchmark.config.ts' has no edges (orphan)",
+    "Node 'file:packages/session-backends/sqlite-node/vitest.config.ts' has no edges (orphan)",
+    "Node 'file:packages/telemetry/src/testing/index.ts' has no edges (orphan)"
+  ],
+  "stats": {
+    "totalNodes": 3224,
+    "totalEdges": 8368,
+    "totalLayers": 8,
+    "tourSteps": 13,
+    "nodeTypes": {
+      "file": 676,
+      "function": 2170,
+      "class": 270,
+      "pipeline": 10,
+      "table": 7,
+      "config": 34,
+      "document": 57
+    },
+    "edgeTypes": {
+      "imports": 2431,
+      "contains": 2444,
+      "exports": 1351,
+      "inherits": 41,
+      "calls": 1836,
+      "depends_on": 56,
+      "triggers": 1,
+      "related": 121,
+      "migrates": 7,
+      "documents": 40,
+      "configures": 38,
+      "defines_schema": 2
+    }
+  }
+}

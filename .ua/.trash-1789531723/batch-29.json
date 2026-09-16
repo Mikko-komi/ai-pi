@@ -1,0 +1,312 @@
+{
+  "nodes": [
+    {
+      "id": "document:AGENTS.md",
+      "type": "document",
+      "name": "AGENTS.md",
+      "filePath": "AGENTS.md",
+      "summary": "仓库级 agent 开发规则，覆盖对话风格、代码质量、允许命令、依赖与 lockfile 安全、多会话 Git 约束、Issue/PR 流程、changelog 与发布指引。",
+      "tags": ["documentation", "development", "agent-rules", "contributing"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:CONTRIBUTING.md",
+      "type": "document",
+      "name": "CONTRIBUTING.md",
+      "filePath": "CONTRIBUTING.md",
+      "summary": "贡献门槛说明：核心保持精简、提交者必须理解自己的代码；新贡献者 issue/PR 默认自动关闭，需 maintainer 以 lgtm/lgtmi 放行，并规定 issue 质量标准与 PR 前检查。",
+      "tags": ["documentation", "contributing", "development", "governance"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "README.md",
+      "summary": "Pi agent harness 总览：列出 monorepo 各包、权限与容器化边界、开发命令、从 release 源码构建独立二进制，以及供应链加固实践。",
+      "tags": ["documentation", "entry-point", "overview", "monorepo"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:SECURITY.md",
+      "type": "document",
+      "name": "SECURITY.md",
+      "filePath": "SECURITY.md",
+      "summary": "安全策略：Pi 运行在启动用户的本地信任边界内；说明私下报告渠道、范围内外事项，并排除 prompt injection、本地写权限与用户安装扩展类报告。",
+      "tags": ["documentation", "security", "vulnerability-reporting", "trust-boundary"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:biome.json",
+      "type": "config",
+      "name": "biome.json",
+      "filePath": "biome.json",
+      "summary": "根级 Biome lint/format 配置：对 packages 源码与测试启用 recommended 规则、tab 缩进与 120 列宽，并排除生成模型文件与 node_modules。",
+      "tags": ["configuration", "lint", "format", "build-system"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:mini-test.sh",
+      "type": "file",
+      "name": "mini-test.sh",
+      "filePath": "mini-test.sh",
+      "summary": "用 tsx 或已构建 dist 启动 experimental mini CLI，并提供 --fresh/--stop 以重启或停止分离的 session server。",
+      "tags": ["script", "test", "entry-point", "cli"],
+      "complexity": "simple",
+      "languageNotes": "Bash 脚本通过 pkill 与 Unix socket 清理分离的 mini session server。"
+    },
+    {
+      "id": "config:package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "package.json",
+      "summary": "pi-monorepo 根清单：定义 workspaces、按包顺序的 build/check/test/publish 脚本、精确钉死的 devDependencies，以及 Node >=22.19 引擎约束。",
+      "tags": ["configuration", "monorepo", "build-system", "workspaces"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:pi-test.bat",
+      "type": "file",
+      "name": "pi-test.bat",
+      "filePath": "pi-test.bat",
+      "summary": "Windows cmd 入口：检测 powershell.exe 后将全部参数转发给同目录的 pi-test.ps1。",
+      "tags": ["script", "windows", "entry-point", "cli"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:pi-test.ps1",
+      "type": "file",
+      "name": "pi-test.ps1",
+      "filePath": "pi-test.ps1",
+      "summary": "Windows 下用 tsx 运行 coding-agent CLI；可选 --no-env 清除常见 LLM 与云厂商 API 密钥，避免误触发付费 e2e。",
+      "tags": ["script", "windows", "cli", "test"],
+      "complexity": "moderate",
+      "languageNotes": "PowerShell 顶层脚本，无 function 块；通过 Remove-Item Env: 清密钥后调用 tsx.cmd。"
+    },
+    {
+      "id": "file:pi-test.sh",
+      "type": "file",
+      "name": "pi-test.sh",
+      "filePath": "pi-test.sh",
+      "summary": "Unix 下用 tsx 与根 tsconfig 启动 experimental coding-agent CLI；可选 --no-env 清除同类 API 密钥后转发剩余参数。",
+      "tags": ["script", "cli", "entry-point", "test"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:test.sh",
+      "type": "file",
+      "name": "test.sh",
+      "filePath": "test.sh",
+      "summary": "在隔离临时 HOME/配置/缓存下用 env -i 运行 npm test，避免凭证与用户配置泄漏；退出时仅删除带所有权标记的测试目录。",
+      "tags": ["script", "test", "isolation", "entry-point"],
+      "complexity": "moderate",
+      "languageNotes": "通过 env -i 白名单环境变量，并用 .pi-test-owned 标记防止 cleanup 误删。"
+    },
+    {
+      "id": "function:test.sh:cleanup",
+      "type": "function",
+      "name": "cleanup",
+      "filePath": "test.sh",
+      "lineRange": [16, 36],
+      "summary": "EXIT trap 处理函数：仅删除路径匹配且带 .pi-test-owned 标记的临时测试根目录，否则拒绝删除并保留非零退出码。",
+      "tags": ["cleanup", "safety", "test", "isolation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:tsconfig.base.json",
+      "type": "config",
+      "name": "tsconfig.base.json",
+      "filePath": "tsconfig.base.json",
+      "summary": "共享 TypeScript 编译选项：ES2022、strict、erasableSyntaxOnly、Node16 模块解析，以及 declaration 与 source map。",
+      "tags": ["configuration", "typescript", "build-system"],
+      "complexity": "simple",
+      "languageNotes": "erasableSyntaxOnly 与 Node strip-only 模式对齐，禁止需 emit 的 TypeScript 语法。"
+    },
+    {
+      "id": "config:tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "tsconfig.json",
+      "summary": "根 TypeScript 配置：extends base，noEmit + NodeNext，并为 chord/ai/agent/coding-agent 等 workspace 包设置 path alias。",
+      "tags": ["configuration", "typescript", "path-alias", "build-system"],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:README.md",
+      "target": "document:CONTRIBUTING.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "document:AGENTS.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "config:package.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "file:test.sh",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "file:pi-test.sh",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "document:SECURITY.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:AGENTS.md",
+      "target": "document:CONTRIBUTING.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:AGENTS.md",
+      "target": "file:test.sh",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:AGENTS.md",
+      "target": "config:package.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CONTRIBUTING.md",
+      "target": "document:AGENTS.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CONTRIBUTING.md",
+      "target": "file:test.sh",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CONTRIBUTING.md",
+      "target": "config:package.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:SECURITY.md",
+      "target": "document:AGENTS.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:tsconfig.json",
+      "target": "config:tsconfig.base.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:tsconfig.base.json",
+      "target": "config:tsconfig.json",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:package.json",
+      "target": "config:biome.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:package.json",
+      "target": "config:tsconfig.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:biome.json",
+      "target": "config:package.json",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:test.sh",
+      "target": "config:package.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:test.sh",
+      "target": "function:test.sh:cleanup",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:pi-test.sh",
+      "target": "config:tsconfig.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:mini-test.sh",
+      "target": "config:tsconfig.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:pi-test.bat",
+      "target": "file:pi-test.ps1",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:pi-test.sh",
+      "target": "file:pi-test.ps1",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:mini-test.sh",
+      "target": "file:pi-test.sh",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

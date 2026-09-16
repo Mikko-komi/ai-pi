@@ -1,0 +1,73 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/coding-agent/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/coding-agent/README.md",
+      "summary": "@earendil-works/pi-coding-agent 的用户文档：覆盖安装与认证、交互模式、会话管理、扩展/Skills/Packages、SDK 与 RPC，以及完整 CLI 与环境变量参考。",
+      "tags": ["documentation", "entry-point", "cli", "sdk", "入门指南"],
+      "complexity": "complex",
+      "languageNotes": "42 个 Markdown 小节，含交互命令、CLI 选项表与多模式（interactive / print / RPC / SDK）说明。"
+    },
+    {
+      "id": "config:packages/coding-agent/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "packages/coding-agent/package.json",
+      "summary": "定义 @earendil-works/pi-coding-agent 的 npm 元数据、pi/bin 入口、SDK exports，以及 unbundled/binary 构建、资产拷贝与 shrinkwrap 脚本。",
+      "tags": ["configuration", "npm", "build-system", "package-manifest"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:packages/coding-agent/tsconfig.build.json",
+      "type": "config",
+      "name": "tsconfig.build.json",
+      "filePath": "packages/coding-agent/tsconfig.build.json",
+      "summary": "coding-agent 正式构建的 TypeScript 配置：继承仓库 base、输出到 dist，并为 chord/agent/ai/tui 映射到已构建的 .d.ts；排除 client 与 experimental。",
+      "tags": ["configuration", "typescript", "build-system"],
+      "complexity": "simple",
+      "languageNotes": "paths 指向 sibling package 的 dist 类型声明，而不是源码。"
+    },
+    {
+      "id": "config:packages/coding-agent/tsconfig.examples.json",
+      "type": "config",
+      "name": "tsconfig.examples.json",
+      "filePath": "packages/coding-agent/tsconfig.examples.json",
+      "summary": "仅用于类型检查 examples/**/*.ts 的 TypeScript 配置：noEmit，并把 pi-coding-agent、pi-tui、pi-ai 映射到源码以便示例直接引用。",
+      "tags": ["configuration", "typescript", "examples"],
+      "complexity": "simple",
+      "languageNotes": "noEmit + 源码 paths，避免示例依赖已构建产物。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:packages/coding-agent/README.md",
+      "target": "config:packages/coding-agent/package.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/README.md",
+      "target": "config:packages/coding-agent/tsconfig.examples.json",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:packages/coding-agent/package.json",
+      "target": "config:packages/coding-agent/tsconfig.build.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:packages/coding-agent/tsconfig.build.json",
+      "target": "config:packages/coding-agent/tsconfig.examples.json",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

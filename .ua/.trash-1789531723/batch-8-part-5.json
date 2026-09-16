@@ -1,0 +1,398 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/tool-execution.ts",
+      "type": "file",
+      "name": "tool-execution.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/tool-execution.ts",
+      "summary": "工具执行 UI：用 tool renderer 画 call/result，支持展开、图片 Kitty 转换与回退文本。",
+      "tags": [
+        "component",
+        "tool",
+        "renderer",
+        "tui"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/tool-execution.ts:ToolExecutionComponent",
+      "type": "class",
+      "name": "ToolExecutionComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/tool-execution.ts",
+      "summary": "单个工具调用的渲染容器，流式更新 args/result，并可把图片转 PNG 给 Kitty。",
+      "tags": [
+        "component",
+        "tool",
+        "renderer",
+        "images"
+      ],
+      "complexity": "complex",
+      "lineRange": [
+        47,
+        421
+      ]
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "type": "file",
+      "name": "tree-selector.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "summary": "Session 树选择器：折叠展开、搜索、横向视口、复制节点与就地改标签。",
+      "tags": [
+        "component",
+        "tree",
+        "session",
+        "selector"
+      ],
+      "complexity": "complex",
+      "languageNotes": "TreeList 自行实现 Component，用 gutter/connector 与横向 viewport 处理超宽树行。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/tree-selector.ts:renderHorizontalViewport",
+      "type": "function",
+      "name": "renderHorizontalViewport",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "summary": "按选中锚点裁剪超宽树行，保证当前节点在可视列内。",
+      "tags": [
+        "utility",
+        "viewport",
+        "tree",
+        "tui"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        62,
+        92
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/tree-selector.ts:formatHelpKeys",
+      "type": "function",
+      "name": "formatHelpKeys",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "summary": "把树选择器相关 keybinding 格式化为帮助行文案。",
+      "tags": [
+        "utility",
+        "keybinding",
+        "help"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        1238,
+        1253
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/tree-selector.ts:compactRawKeys",
+      "type": "function",
+      "name": "compactRawKeys",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "summary": "压缩重复的原始按键名，避免帮助行过长。",
+      "tags": [
+        "utility",
+        "keybinding",
+        "formatting"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        1255,
+        1268
+      ]
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/tree-selector.ts:TreeList",
+      "type": "class",
+      "name": "TreeList",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "summary": "会话树列表核心：扁平化、过滤、折叠、键盘导航与节点文本/工具调用展示。",
+      "tags": [
+        "component",
+        "tree",
+        "list",
+        "keyboard"
+      ],
+      "complexity": "complex",
+      "lineRange": [
+        106,
+        1154
+      ]
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/tree-selector.ts:SearchLine",
+      "type": "class",
+      "name": "SearchLine",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "summary": "树搜索输入行，把按键转发给 TreeList 的过滤逻辑。",
+      "tags": [
+        "component",
+        "search",
+        "tree",
+        "tui"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        1157,
+        1175
+      ]
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/tree-selector.ts:TreeHelp",
+      "type": "class",
+      "name": "TreeHelp",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "summary": "树选择器底部帮助行，展示导航/折叠/复制快捷键。",
+      "tags": [
+        "component",
+        "help",
+        "tree",
+        "tui"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        1178,
+        1215
+      ]
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/tree-selector.ts:LabelInput",
+      "type": "class",
+      "name": "LabelInput",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "summary": "就地标签编辑输入框，提交或取消后交回焦点。",
+      "tags": [
+        "component",
+        "input",
+        "tree",
+        "tui"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        1271,
+        1323
+      ]
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/tree-selector.ts:TreeSelectorComponent",
+      "type": "class",
+      "name": "TreeSelectorComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "summary": "树选择器容器：组合 TreeList、帮助与标签输入，并转发焦点。",
+      "tags": [
+        "component",
+        "selector",
+        "tree",
+        "session"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        1328,
+        1427
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tool-execution.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/tool-execution.ts:ToolExecutionComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tool-execution.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/tool-execution.ts:ToolExecutionComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tool-execution.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tool-execution.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tool-execution.ts",
+      "target": "file:packages/coding-agent/src/core/tools/render-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tool-execution.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tool-execution.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tool-execution.ts",
+      "target": "file:packages/coding-agent/src/utils/image-convert.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tool-execution.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/tree-selector.ts:renderHorizontalViewport",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/tree-selector.ts:formatHelpKeys",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/tree-selector.ts:compactRawKeys",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/tree-selector.ts:TreeList",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/tree-selector.ts:SearchLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/tree-selector.ts:TreeHelp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/tree-selector.ts:LabelInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/tree-selector.ts:TreeSelectorComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/tree-selector.ts:TreeSelectorComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "target": "file:packages/coding-agent/src/core/session-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/tree-selector.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/tool-execution.ts:ToolExecutionComponent",
+      "target": "function:packages/coding-agent/src/utils/image-convert.ts:convertToPng",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/tool-execution.ts:ToolExecutionComponent",
+      "target": "function:packages/coding-agent/src/core/tools/render-utils.ts:getTextOutput",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/tool-execution.ts:ToolExecutionComponent",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyHint",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/tree-selector.ts:TreeList",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyHint",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/tree-selector.ts:TreeSelectorComponent",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts:DynamicBorder",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/modes/interactive/components/tree-selector.ts:formatHelpKeys",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:formatKeyText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

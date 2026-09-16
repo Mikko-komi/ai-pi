@@ -1,0 +1,498 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 4,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 4,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 4
+    }
+  },
+  "results": [
+    {
+      "path": "packages/chord/PLANNING.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 860,
+      "nonEmptyLines": 624,
+      "sections": [
+        {
+          "heading": "Chord implementation plan",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Goal",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "2. Dependency boundary",
+          "level": 2,
+          "line": 16
+        },
+        {
+          "heading": "3. Architectural model",
+          "level": 2,
+          "line": 39
+        },
+        {
+          "heading": "3.1 Working vocabulary",
+          "level": 3,
+          "line": 41
+        },
+        {
+          "heading": "3.2 Layering",
+          "level": 3,
+          "line": 57
+        },
+        {
+          "heading": "4. Invocation context and strict JSON",
+          "level": 2,
+          "line": 77
+        },
+        {
+          "heading": "5. Plugins and lifecycle",
+          "level": 2,
+          "line": 101
+        },
+        {
+          "heading": "5.1 Plugin shape",
+          "level": 3,
+          "line": 103
+        },
+        {
+          "heading": "5.2 Assembly",
+          "level": 3,
+          "line": 134
+        },
+        {
+          "heading": "5.3 Resource ownership",
+          "level": 3,
+          "line": 150
+        },
+        {
+          "heading": "5.4 Loaded module generations",
+          "level": 3,
+          "line": 164
+        },
+        {
+          "heading": "6. Loading, unloading, and reload",
+          "level": 2,
+          "line": 189
+        },
+        {
+          "heading": "6.1 Host updates",
+          "level": 3,
+          "line": 191
+        },
+        {
+          "heading": "Shape-preserving replacement",
+          "level": 4,
+          "line": 195
+        },
+        {
+          "heading": "Structural replacement",
+          "level": 4,
+          "line": 229
+        },
+        {
+          "heading": "6.2 Calls during unload",
+          "level": 3,
+          "line": 253
+        },
+        {
+          "heading": "6.3 Update failure reporting",
+          "level": 3,
+          "line": 257
+        },
+        {
+          "heading": "7. Services",
+          "level": 2,
+          "line": 270
+        },
+        {
+          "heading": "7.1 Tokens and modes",
+          "level": 3,
+          "line": 272
+        },
+        {
+          "heading": "7.2 Local services",
+          "level": 3,
+          "line": 290
+        },
+        {
+          "heading": "7.3 Remote service contracts",
+          "level": 3,
+          "line": 303
+        },
+        {
+          "heading": "7.4 Stable singleton facades",
+          "level": 3,
+          "line": 325
+        },
+        {
+          "heading": "7.5 Keyed services",
+          "level": 3,
+          "line": 339
+        },
+        {
+          "heading": "8. Replicated state",
+          "level": 2,
+          "line": 360
+        },
+        {
+          "heading": "9. Symmetric RPC plumbing",
+          "level": 2,
+          "line": 400
+        },
+        {
+          "heading": "9.1 No client/server mode",
+          "level": 3,
+          "line": 402
+        },
+        {
+          "heading": "9.2 RPC layer",
+          "level": 3,
+          "line": 418
+        },
+        {
+          "heading": "9.3 Service protocol over RPC",
+          "level": 3,
+          "line": 441
+        },
+        {
+          "heading": "9.4 Wire errors and validation",
+          "level": 3,
+          "line": 458
+        },
+        {
+          "heading": "9.5 Protocol evolution",
+          "level": 3,
+          "line": 474
+        },
+        {
+          "heading": "10. Bundling",
+          "level": 2,
+          "line": 480
+        },
+        {
+          "heading": "10.1 Purpose",
+          "level": 3,
+          "line": 482
+        },
+        {
+          "heading": "10.2 Initial input and output",
+          "level": 3,
+          "line": 488
+        },
+        {
+          "heading": "10.3 Bundle rules",
+          "level": 3,
+          "line": 512
+        },
+        {
+          "heading": "10.4 Bundle loading",
+          "level": 3,
+          "line": 524
+        },
+        {
+          "heading": "11. Pi migration boundary",
+          "level": 2,
+          "line": 538
+        },
+        {
+          "heading": "12. Proposed source layout",
+          "level": 2,
+          "line": 576
+        },
+        {
+          "heading": "13. Work packages",
+          "level": 2,
+          "line": 620
+        },
+        {
+          "heading": "WP0 — Contract decisions and test harness",
+          "level": 3,
+          "line": 622
+        },
+        {
+          "heading": "WP1 — Foundations and replicated state",
+          "level": 3,
+          "line": 636
+        },
+        {
+          "heading": "WP2 — Symmetric RPC peer",
+          "level": 3,
+          "line": 650
+        },
+        {
+          "heading": "WP3 — Service provider and facades",
+          "level": 3,
+          "line": 664
+        },
+        {
+          "heading": "WP4 — Remote state and service subscriptions",
+          "level": 3,
+          "line": 679
+        },
+        {
+          "heading": "WP5 — Plugin host and graph",
+          "level": 3,
+          "line": 693
+        },
+        {
+          "heading": "WP6 — Generation loading, unload, and reload",
+          "level": 3,
+          "line": 708
+        },
+        {
+          "heading": "WP7 — Node CommonJS bundler and bundle loader",
+          "level": 3,
+          "line": 723
+        },
+        {
+          "heading": "WP8 — Pi adoption",
+          "level": 3,
+          "line": 739
+        },
+        {
+          "heading": "14. Required conformance matrix",
+          "level": 2,
+          "line": 753
+        },
+        {
+          "heading": "Plugin graph and lifecycle",
+          "level": 3,
+          "line": 757
+        },
+        {
+          "heading": "Services",
+          "level": 3,
+          "line": 769
+        },
+        {
+          "heading": "Replication",
+          "level": 3,
+          "line": 781
+        },
+        {
+          "heading": "RPC",
+          "level": 3,
+          "line": 792
+        },
+        {
+          "heading": "Loading and bundling",
+          "level": 3,
+          "line": 803
+        },
+        {
+          "heading": "15. Non-goals for the initial implementation",
+          "level": 2,
+          "line": 816
+        },
+        {
+          "heading": "16. Decisions required before implementation",
+          "level": 2,
+          "line": 831
+        },
+        {
+          "heading": "17. Definition of done",
+          "level": 2,
+          "line": 847
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 57
+      }
+    },
+    {
+      "path": "packages/chord/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 205,
+      "nonEmptyLines": 169,
+      "sections": [
+        {
+          "heading": "@earendil-works/chord",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "What Chord is for",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Remote service adapters",
+          "level": 2,
+          "line": 69
+        },
+        {
+          "heading": "Tracking JSON deltas",
+          "level": 2,
+          "line": 89
+        },
+        {
+          "heading": "Bundling and loading facets",
+          "level": 2,
+          "line": 124
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "packages/chord/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 72,
+      "nonEmptyLines": 72,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "description",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "type",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "main",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "types",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "exports",
+          "level": 1,
+          "line": 8
+        },
+        {
+          "heading": "sideEffects",
+          "level": 1,
+          "line": 36
+        },
+        {
+          "heading": "files",
+          "level": 1,
+          "line": 37
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 42
+        },
+        {
+          "heading": "keywords",
+          "level": 1,
+          "line": 48
+        },
+        {
+          "heading": "author",
+          "level": 1,
+          "line": 55
+        },
+        {
+          "heading": "license",
+          "level": 1,
+          "line": 56
+        },
+        {
+          "heading": "repository",
+          "level": 1,
+          "line": 57
+        },
+        {
+          "heading": "engines",
+          "level": 1,
+          "line": 62
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 65
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 68
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 17
+      }
+    },
+    {
+      "path": "packages/chord/tsconfig.build.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 9,
+      "nonEmptyLines": 9,
+      "sections": [
+        {
+          "heading": "extends",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "exclude",
+          "level": 1,
+          "line": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    }
+  ]
+}

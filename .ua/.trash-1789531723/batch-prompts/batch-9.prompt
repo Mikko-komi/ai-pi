@@ -1,0 +1,44 @@
+Analyze these files and produce GraphNode and GraphEdge objects.
+Project root: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi`
+Project: `pi-monorepo`
+Batch: `9/45`
+Skill directory: `/Users/elex-mb0203/.cursor/plugins/local/Understand-Anything/understand-anything-plugin/skills/understand`
+Output: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-9.json` OR `batch-9-part-<k>.json`.
+UA_DIR: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua`
+Load `batchImportData` and `neighborMap` from `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-briefs/batch-9.json`.
+Pass every listed file through to `batchFiles` with path, language, sizeLines, fileCategory.
+
+> **Language directive**: Generate all textual content in **Chinese (zh)**. Keep technical terms in English when no standard translation exists.
+
+Files:
+1. packages/agent/src/agent-loop.ts (803 lines, language: typescript, fileCategory: code)
+2. packages/agent/src/agent.ts (592 lines, language: typescript, fileCategory: code)
+3. packages/agent/src/harness/agent-harness.ts (622 lines, language: typescript, fileCategory: code)
+4. packages/agent/src/harness/compaction/branch-summarization.ts (300 lines, language: typescript, fileCategory: code)
+5. packages/agent/src/harness/compaction/compaction.ts (865 lines, language: typescript, fileCategory: code)
+6. packages/agent/src/harness/compaction/utils.ts (132 lines, language: typescript, fileCategory: code)
+7. packages/agent/src/harness/config.ts (42 lines, language: typescript, fileCategory: code)
+8. packages/agent/src/harness/context.ts (37 lines, language: typescript, fileCategory: code)
+9. packages/agent/src/harness/env/nodejs.ts (924 lines, language: typescript, fileCategory: code)
+10. packages/agent/src/harness/events.ts (286 lines, language: typescript, fileCategory: code)
+11. packages/agent/src/harness/execution/assistant.ts (175 lines, language: typescript, fileCategory: code)
+12. packages/agent/src/harness/execution/effect-gate.ts (64 lines, language: typescript, fileCategory: code)
+13. packages/agent/src/harness/execution/tools.ts (210 lines, language: typescript, fileCategory: code)
+14. packages/agent/src/harness/hooks.ts (533 lines, language: typescript, fileCategory: code)
+15. packages/agent/src/harness/messages.ts (168 lines, language: typescript, fileCategory: code)
+16. packages/agent/src/harness/prompt-templates.ts (270 lines, language: typescript, fileCategory: code)
+17. packages/agent/src/harness/result.ts (117 lines, language: typescript, fileCategory: code)
+18. packages/agent/src/harness/runtime/drive.ts (106 lines, language: typescript, fileCategory: code)
+19. packages/agent/src/harness/runtime/drive/boundary.ts (262 lines, language: typescript, fileCategory: code)
+20. packages/agent/src/harness/runtime/drive/checkpoint.ts (190 lines, language: typescript, fileCategory: code)
+21. packages/agent/src/harness/runtime/drive/deferred.ts (287 lines, language: typescript, fileCategory: code)
+22. packages/agent/src/harness/runtime/drive/generation.ts (302 lines, language: typescript, fileCategory: code)
+23. packages/agent/src/harness/runtime/drive/reconcile.ts (173 lines, language: typescript, fileCategory: code)
+24. packages/agent/src/harness/runtime/drive/recovery.ts (126 lines, language: typescript, fileCategory: code)
+25. packages/agent/src/harness/runtime/drive/response.ts (485 lines, language: typescript, fileCategory: code)
+26. packages/agent/src/harness/runtime/drive/retry.ts (36 lines, language: typescript, fileCategory: code)
+27. packages/agent/src/harness/runtime/drive/structural.ts (1222 lines, language: typescript, fileCategory: code)
+28. packages/agent/src/harness/runtime/drive/terminal.ts (82 lines, language: typescript, fileCategory: code)
+29. packages/agent/src/harness/runtime/drive/tool-placement.ts (326 lines, language: typescript, fileCategory: code)
+
+Respond with only a brief summary: parts written, total nodes/edges, files skipped.

@@ -1,0 +1,1017 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/ai/src/api/google-vertex.ts",
+      "type": "file",
+      "name": "google-vertex.ts",
+      "filePath": "packages/ai/src/api/google-vertex.ts",
+      "summary": "Google Vertex AI 适配器：解析项目/区域与 ADC 或 API key，复用 google-shared 做消息转换与流式解析。",
+      "tags": [
+        "api-handler",
+        "provider",
+        "vertex",
+        "streaming"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/ai/src/api/google-vertex.ts:stream",
+      "type": "function",
+      "name": "stream",
+      "filePath": "packages/ai/src/api/google-vertex.ts",
+      "lineRange": [
+        71,
+        312
+      ],
+      "summary": "调用 Vertex AI 流式 generateContent，复用 google-shared 解析 thought 与 stop。",
+      "tags": [
+        "exports",
+        "api-handler",
+        "streaming"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/ai/src/api/google-vertex.ts:streamSimple",
+      "type": "function",
+      "name": "streamSimple",
+      "filePath": "packages/ai/src/api/google-vertex.ts",
+      "lineRange": [
+        314,
+        351
+      ],
+      "summary": "夹紧 thinking 后把 SimpleStreamOptions 交给 Vertex stream。",
+      "tags": [
+        "exports",
+        "api-handler",
+        "streaming"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/google-vertex.ts:createClient",
+      "type": "function",
+      "name": "createClient",
+      "filePath": "packages/ai/src/api/google-vertex.ts",
+      "lineRange": [
+        353,
+        369
+      ],
+      "summary": "优先 ADC，失败则回退 API key，创建 Vertex GoogleGenAI 客户端。",
+      "tags": [
+        "factory",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/google-vertex.ts:createClientWithApiKey",
+      "type": "function",
+      "name": "createClientWithApiKey",
+      "filePath": "packages/ai/src/api/google-vertex.ts",
+      "lineRange": [
+        371,
+        382
+      ],
+      "summary": "用显式 API key 与 HTTP 选项构造 Vertex 客户端。",
+      "tags": [
+        "factory",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/google-vertex.ts:buildHttpOptions",
+      "type": "function",
+      "name": "buildHttpOptions",
+      "filePath": "packages/ai/src/api/google-vertex.ts",
+      "lineRange": [
+        384,
+        401
+      ],
+      "summary": "合并自定义头、User-Agent 与 Vertex 基址，生成 SDK httpOptions。",
+      "tags": [
+        "factory",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/google-vertex.ts:resolveProject",
+      "type": "function",
+      "name": "resolveProject",
+      "filePath": "packages/ai/src/api/google-vertex.ts",
+      "lineRange": [
+        437,
+        448
+      ],
+      "summary": "从选项或 GOOGLE_CLOUD_PROJECT 等环境变量解析 GCP 项目。",
+      "tags": [
+        "mapping",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/google-vertex.ts:buildParams",
+      "type": "function",
+      "name": "buildParams",
+      "filePath": "packages/ai/src/api/google-vertex.ts",
+      "lineRange": [
+        458,
+        515
+      ],
+      "summary": "组装 Vertex generateContent 参数，含 Gemini 3 thinking 与工具模式。",
+      "tags": [
+        "factory",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/google-vertex.ts:getDisabledThinkingConfig",
+      "type": "function",
+      "name": "getDisabledThinkingConfig",
+      "filePath": "packages/ai/src/api/google-vertex.ts",
+      "lineRange": [
+        526,
+        540
+      ],
+      "summary": "为需关闭 thinking 的 Vertex 型号返回 disabled 配置。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/google-vertex.ts:getGemini3ThinkingLevel",
+      "type": "function",
+      "name": "getGemini3ThinkingLevel",
+      "filePath": "packages/ai/src/api/google-vertex.ts",
+      "lineRange": [
+        542,
+        566
+      ],
+      "summary": "把 effort 映射为 Gemini 3 的 thinkingLevel。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/google-vertex.ts:getGoogleBudget",
+      "type": "function",
+      "name": "getGoogleBudget",
+      "filePath": "packages/ai/src/api/google-vertex.ts",
+      "lineRange": [
+        568,
+        598
+      ],
+      "summary": "按 Vertex 型号计算 thinkingBudget。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/ai/src/api/mistral-conversations.ts",
+      "type": "file",
+      "name": "mistral-conversations.ts",
+      "filePath": "packages/ai/src/api/mistral-conversations.ts",
+      "summary": "Mistral Chat/Conversations 流式适配：规范化工具调用 ID、组装 wire payload，并解析缓存 token 与 stop reason。",
+      "tags": [
+        "api-handler",
+        "provider",
+        "mistral",
+        "streaming"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/ai/src/api/mistral-conversations.ts:stream",
+      "type": "function",
+      "name": "stream",
+      "filePath": "packages/ai/src/api/mistral-conversations.ts",
+      "lineRange": [
+        122,
+        176
+      ],
+      "summary": "对 Mistral 发起流式 chat/conversations 请求并消费事件。",
+      "tags": [
+        "exports",
+        "api-handler",
+        "streaming"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/mistral-conversations.ts:streamSimple",
+      "type": "function",
+      "name": "streamSimple",
+      "filePath": "packages/ai/src/api/mistral-conversations.ts",
+      "lineRange": [
+        181,
+        205
+      ],
+      "summary": "把 SimpleStreamOptions 转为 Mistral 选项后调用 stream。",
+      "tags": [
+        "exports",
+        "api-handler",
+        "streaming"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/mistral-conversations.ts:createOutput",
+      "type": "function",
+      "name": "createOutput",
+      "filePath": "packages/ai/src/api/mistral-conversations.ts",
+      "lineRange": [
+        207,
+        225
+      ],
+      "summary": "初始化 assistant 输出占位（usage、内容块、stop）。",
+      "tags": [
+        "factory",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/mistral-conversations.ts:createMistralToolCallIdNormalizer",
+      "type": "function",
+      "name": "createMistralToolCallIdNormalizer",
+      "filePath": "packages/ai/src/api/mistral-conversations.ts",
+      "lineRange": [
+        227,
+        247
+      ],
+      "summary": "创建工具调用 ID 规范化器，把超长/非法 id 收成 Mistral 可回传的短 id。",
+      "tags": [
+        "factory",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/mistral-conversations.ts:formatMistralError",
+      "type": "function",
+      "name": "formatMistralError",
+      "filePath": "packages/ai/src/api/mistral-conversations.ts",
+      "lineRange": [
+        259,
+        271
+      ],
+      "summary": "把 HTTP/JSON 错误体格式化为可读的 Mistral 错误。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/mistral-conversations.ts:requestMistralStream",
+      "type": "function",
+      "name": "requestMistralStream",
+      "filePath": "packages/ai/src/api/mistral-conversations.ts",
+      "lineRange": [
+        287,
+        317
+      ],
+      "summary": "发送带重试的 Mistral 流式 HTTP 请求并返回 Response。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/mistral-conversations.ts:buildMistralHeaders",
+      "type": "function",
+      "name": "buildMistralHeaders",
+      "filePath": "packages/ai/src/api/mistral-conversations.ts",
+      "lineRange": [
+        331,
+        348
+      ],
+      "summary": "组装 Authorization、User-Agent 与调用方覆盖头。",
+      "tags": [
+        "factory",
+        "headers",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/mistral-conversations.ts:toMistralWirePayload",
+      "type": "function",
+      "name": "toMistralWirePayload",
+      "filePath": "packages/ai/src/api/mistral-conversations.ts",
+      "lineRange": [
+        362,
+        396
+      ],
+      "summary": "把内部请求映射为 Mistral wire JSON（消息、工具、缓存）。",
+      "tags": [
+        "serialization",
+        "转换",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/mistral-conversations.ts:toMistralWireContentChunk",
+      "type": "function",
+      "name": "toMistralWireContentChunk",
+      "filePath": "packages/ai/src/api/mistral-conversations.ts",
+      "lineRange": [
+        408,
+        421
+      ],
+      "summary": "将单个内容块转为 Mistral wire chunk（文本/图/thinking）。",
+      "tags": [
+        "serialization",
+        "转换",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/mistral-conversations.ts:parseMistralEvent",
+      "type": "function",
+      "name": "parseMistralEvent",
+      "filePath": "packages/ai/src/api/mistral-conversations.ts",
+      "lineRange": [
+        486,
+        501
+      ],
+      "summary": "解析 SSE 边界后的单个 Mistral 事件对象。",
+      "tags": [
+        "parsing",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/mistral-conversations.ts:buildChatPayload",
+      "type": "function",
+      "name": "buildChatPayload",
+      "filePath": "packages/ai/src/api/mistral-conversations.ts",
+      "lineRange": [
+        503,
+        531
+      ],
+      "summary": "组装 chat completions 形态的 payload（模型、消息、工具选择）。",
+      "tags": [
+        "factory",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/mistral-conversations.ts:getMistralCachedPromptTokens",
+      "type": "function",
+      "name": "getMistralCachedPromptTokens",
+      "filePath": "packages/ai/src/api/mistral-conversations.ts",
+      "lineRange": [
+        537,
+        556
+      ],
+      "summary": "从 usage 或响应头提取 prompt cache 命中 token。",
+      "tags": [
+        "utility",
+        "cache",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/mistral-conversations.ts:consumeChatStream",
+      "type": "function",
+      "name": "consumeChatStream",
+      "filePath": "packages/ai/src/api/mistral-conversations.ts",
+      "lineRange": [
+        558,
+        751
+      ],
+      "summary": "消费 Mistral chat SSE，增量拼文本/工具参数并映射 stop。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/ai/src/api/mistral-conversations.ts:toFunctionTools",
+      "type": "function",
+      "name": "toFunctionTools",
+      "filePath": "packages/ai/src/api/mistral-conversations.ts",
+      "lineRange": [
+        753,
+        766
+      ],
+      "summary": "把内部 Tool 转为 Mistral function tools。",
+      "tags": [
+        "serialization",
+        "转换",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/mistral-conversations.ts:stripSymbolKeys",
+      "type": "function",
+      "name": "stripSymbolKeys",
+      "filePath": "packages/ai/src/api/mistral-conversations.ts",
+      "lineRange": [
+        768,
+        782
+      ],
+      "summary": "去掉对象上的 symbol 键，避免进入 JSON 序列化。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/mistral-conversations.ts:toChatMessages",
+      "type": "function",
+      "name": "toChatMessages",
+      "filePath": "packages/ai/src/api/mistral-conversations.ts",
+      "lineRange": [
+        784,
+        870
+      ],
+      "summary": "把内部对话转为 Mistral chat messages，合并连续 tool results。",
+      "tags": [
+        "serialization",
+        "转换",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/ai/src/api/mistral-conversations.ts:buildToolResultText",
+      "type": "function",
+      "name": "buildToolResultText",
+      "filePath": "packages/ai/src/api/mistral-conversations.ts",
+      "lineRange": [
+        872,
+        891
+      ],
+      "summary": "把工具结果内容压成 Mistral 可接受的文本。",
+      "tags": [
+        "factory",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/mistral-conversations.ts:mapToolChoice",
+      "type": "function",
+      "name": "mapToolChoice",
+      "filePath": "packages/ai/src/api/mistral-conversations.ts",
+      "lineRange": [
+        913,
+        924
+      ],
+      "summary": "把内部 toolChoice 映射为 Mistral tool_choice。",
+      "tags": [
+        "mapping",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/mistral-conversations.ts:mapChatStopReason",
+      "type": "function",
+      "name": "mapChatStopReason",
+      "filePath": "packages/ai/src/api/mistral-conversations.ts",
+      "lineRange": [
+        926,
+        941
+      ],
+      "summary": "把 Mistral finish_reason 映射为内部 stop 语义。",
+      "tags": [
+        "mapping",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "function:packages/ai/src/api/google-vertex.ts:stream",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "function:packages/ai/src/api/google-vertex.ts:stream",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "function:packages/ai/src/api/google-vertex.ts:streamSimple",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "function:packages/ai/src/api/google-vertex.ts:streamSimple",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "function:packages/ai/src/api/google-vertex.ts:createClient",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "function:packages/ai/src/api/google-vertex.ts:createClientWithApiKey",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "function:packages/ai/src/api/google-vertex.ts:buildHttpOptions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "function:packages/ai/src/api/google-vertex.ts:resolveProject",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "function:packages/ai/src/api/google-vertex.ts:buildParams",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "function:packages/ai/src/api/google-vertex.ts:getDisabledThinkingConfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "function:packages/ai/src/api/google-vertex.ts:getGemini3ThinkingLevel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "function:packages/ai/src/api/google-vertex.ts:getGoogleBudget",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "file:packages/ai/src/api/google-shared.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "file:packages/ai/src/api/simple-options.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "file:packages/ai/src/utils/error-body.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "file:packages/ai/src/utils/event-stream.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "file:packages/ai/src/utils/headers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "file:packages/ai/src/utils/pi-user-agent.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "file:packages/ai/src/utils/provider-env.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/google-vertex.ts",
+      "target": "file:packages/ai/src/utils/sanitize-unicode.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.ts:stream",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.ts:stream",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.ts:streamSimple",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.ts:streamSimple",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.ts:createOutput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.ts:createMistralToolCallIdNormalizer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.ts:formatMistralError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.ts:requestMistralStream",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.ts:buildMistralHeaders",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.ts:toMistralWirePayload",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.ts:toMistralWireContentChunk",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.ts:parseMistralEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.ts:buildChatPayload",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.ts:getMistralCachedPromptTokens",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.ts:consumeChatStream",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.ts:toFunctionTools",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.ts:stripSymbolKeys",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.ts:toChatMessages",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.ts:buildToolResultText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.ts:mapToolChoice",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "function:packages/ai/src/api/mistral-conversations.ts:mapChatStopReason",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "file:packages/ai/src/api/constrained-sampling.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "file:packages/ai/src/api/simple-options.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "file:packages/ai/src/api/transform-messages.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "file:packages/ai/src/utils/event-stream.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "file:packages/ai/src/utils/hash.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "file:packages/ai/src/utils/headers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "file:packages/ai/src/utils/json-parse.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "file:packages/ai/src/utils/pi-user-agent.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/mistral-conversations.ts",
+      "target": "file:packages/ai/src/utils/sanitize-unicode.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:packages/ai/src/api/google-vertex.ts:stream",
+      "target": "function:packages/ai/src/models.ts:calculateCost",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/google-vertex.ts:stream",
+      "target": "function:packages/ai/src/utils/error-body.ts:formatProviderError",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/google-vertex.ts:stream",
+      "target": "function:packages/ai/src/utils/error-body.ts:normalizeProviderError",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/google-vertex.ts:streamSimple",
+      "target": "function:packages/ai/src/models.ts:clampThinkingLevel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/google-vertex.ts:buildHttpOptions",
+      "target": "function:packages/ai/src/utils/headers.ts:providerHeadersToRecord",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/google-vertex.ts:buildHttpOptions",
+      "target": "function:packages/ai/src/utils/pi-user-agent.ts:getPiUserAgent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/google-vertex.ts:resolveProject",
+      "target": "function:packages/ai/src/utils/provider-env.ts:getProviderEnvValue",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/google-vertex.ts:buildParams",
+      "target": "function:packages/ai/src/utils/sanitize-unicode.ts:sanitizeSurrogates",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/mistral-conversations.ts:streamSimple",
+      "target": "function:packages/ai/src/models.ts:clampThinkingLevel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/mistral-conversations.ts:requestMistralStream",
+      "target": "function:packages/ai/src/utils/headers.ts:headersToRecord",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/mistral-conversations.ts:buildMistralHeaders",
+      "target": "function:packages/ai/src/utils/pi-user-agent.ts:getPiUserAgent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/mistral-conversations.ts:buildChatPayload",
+      "target": "function:packages/ai/src/utils/sanitize-unicode.ts:sanitizeSurrogates",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/mistral-conversations.ts:consumeChatStream",
+      "target": "function:packages/ai/src/models.ts:calculateCost",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/mistral-conversations.ts:consumeChatStream",
+      "target": "function:packages/ai/src/utils/sanitize-unicode.ts:sanitizeSurrogates",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/mistral-conversations.ts:consumeChatStream",
+      "target": "function:packages/ai/src/utils/json-parse.ts:parseStreamingJson",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/mistral-conversations.ts:toChatMessages",
+      "target": "function:packages/ai/src/utils/sanitize-unicode.ts:sanitizeSurrogates",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

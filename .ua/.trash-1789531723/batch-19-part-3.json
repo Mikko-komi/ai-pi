@@ -1,0 +1,1061 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/session-backends/sqlite-node/src/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/session-backends/sqlite-node/src/index.ts",
+      "summary": "node:sqlite 适配层：包装 DatabaseSync/Statement，提供可注入的 SqliteDatabaseFactory，并再导出 session backend。",
+      "tags": [
+        "entry-point",
+        "adapter",
+        "factory"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "用 node:sqlite 的 DatabaseSync 实现同步事务，并拒绝事务回调返回 Promise。"
+    },
+    {
+      "id": "file:packages/session-backends/sqlite-node/src/sqlite/migrations.ts",
+      "type": "file",
+      "name": "migrations.ts",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/migrations.ts",
+      "summary": "读取 schema.sql 并对数据库执行初始 schema 迁移。",
+      "tags": [
+        "database",
+        "migration",
+        "schema-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "type": "file",
+      "name": "repo.ts",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "summary": "SQLite SessionRepo 实现：按文件或共享库管理 session 生命周期，支持 create/open/list/delete/fork 与快照复制。",
+      "tags": [
+        "data-model",
+        "service",
+        "session"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/session-backends/sqlite-node/src/sqlite/session.ts",
+      "type": "file",
+      "name": "session.ts",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session.ts",
+      "summary": "SqliteOpenSession 包装底层 Session，用 admit 集合串行化并发操作，并在关闭时排空 in-flight 请求。",
+      "tags": [
+        "session",
+        "lifecycle",
+        "adapter"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "type": "file",
+      "name": "branch-entries.ts",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "summary": "维护 branch_meta/branch_entries 索引：追加、分叉、compaction 边界拷贝，以及按段扫描分支条目。",
+      "tags": [
+        "data-model",
+        "session",
+        "query"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:packages/session-backends/sqlite-node/src/index.ts:NodeSqliteStatement",
+      "type": "class",
+      "name": "NodeSqliteStatement",
+      "filePath": "packages/session-backends/sqlite-node/src/index.ts",
+      "lineRange": [
+        17,
+        61
+      ],
+      "summary": "把 node:sqlite 预处理语句适配为 SqliteStatement，兼容命名参数与位置参数。",
+      "tags": [
+        "adapter",
+        "database",
+        "sqlite"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/session-backends/sqlite-node/src/index.ts:NodeSqliteDatabase",
+      "type": "class",
+      "name": "NodeSqliteDatabase",
+      "filePath": "packages/session-backends/sqlite-node/src/index.ts",
+      "lineRange": [
+        63,
+        100
+      ],
+      "summary": "包装 DatabaseSync：exec/prepare/close，并用 BEGIN IMMEDIATE 实现同步事务。",
+      "tags": [
+        "adapter",
+        "database",
+        "sqlite"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/index.ts:wrapNodeSqliteDatabase",
+      "type": "function",
+      "name": "wrapNodeSqliteDatabase",
+      "filePath": "packages/session-backends/sqlite-node/src/index.ts",
+      "lineRange": [
+        102,
+        104
+      ],
+      "summary": "把已有 DatabaseSync 实例包装为 SqliteDatabase。",
+      "tags": [
+        "factory",
+        "adapter",
+        "database"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/index.ts:createNodeSqliteFactory",
+      "type": "function",
+      "name": "createNodeSqliteFactory",
+      "filePath": "packages/session-backends/sqlite-node/src/index.ts",
+      "lineRange": [
+        106,
+        120
+      ],
+      "summary": "创建可 open/openExisting/openReadOnly 的 SqliteDatabaseFactory。",
+      "tags": [
+        "factory",
+        "entry-point",
+        "database"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/migrations.ts:applyInitialSchema",
+      "type": "function",
+      "name": "applyInitialSchema",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/migrations.ts",
+      "lineRange": [
+        5,
+        8
+      ],
+      "summary": "读取同目录 schema.sql 并对数据库执行初始 DDL。",
+      "tags": [
+        "migration",
+        "database",
+        "schema-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/repo.ts:buildForkSnapshot",
+      "type": "function",
+      "name": "buildForkSnapshot",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "lineRange": [
+        86,
+        102
+      ],
+      "summary": "基于源快照调用 createForkSnapshot，排序条目并计算 messageCount 与 nextSeq。",
+      "tags": [
+        "session",
+        "fork",
+        "data-model"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/repo.ts:readForkSourceEntries",
+      "type": "function",
+      "name": "readForkSourceEntries",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "lineRange": [
+        105,
+        120
+      ],
+      "summary": "按 fork 选项从源库读取完整条目或扫描到指定分支 tip。",
+      "tags": [
+        "session",
+        "fork",
+        "query"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/repo.ts:createSqliteForkSnapshot",
+      "type": "function",
+      "name": "createSqliteForkSnapshot",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "lineRange": [
+        122,
+        147
+      ],
+      "summary": "在只读事务中读取源 session 元数据、标量值与条目，组装 fork 快照。",
+      "tags": [
+        "session",
+        "fork",
+        "database"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/session-backends/sqlite-node/src/sqlite/repo.ts:SqliteSessionRepo",
+      "type": "class",
+      "name": "SqliteSessionRepo",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "lineRange": [
+        157,
+        453
+      ],
+      "summary": "SQLite SessionRepo：管理每 session 文件或共享库，提供创建、打开、列举、删除、fork 与关闭。",
+      "tags": [
+        "service",
+        "session",
+        "data-model"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:packages/session-backends/sqlite-node/src/sqlite/session.ts:SqliteOpenSession",
+      "type": "class",
+      "name": "SqliteOpenSession",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session.ts",
+      "lineRange": [
+        24,
+        213
+      ],
+      "summary": "打开中的 SQLite session 外观：委托底层 Session，并用 admit 跟踪并发，关闭时拒绝新操作。",
+      "tags": [
+        "session",
+        "lifecycle",
+        "adapter"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:readBranchMembership",
+      "type": "function",
+      "name": "readBranchMembership",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "lineRange": [
+        51,
+        63
+      ],
+      "summary": "查询条目当前所属的有效 branch_id 与 entry_seq。",
+      "tags": [
+        "query",
+        "session",
+        "database"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:readBranchSegmentsNewestFirst",
+      "type": "function",
+      "name": "readBranchSegmentsNewestFirst",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "lineRange": [
+        98,
+        111
+      ],
+      "summary": "从 tip 沿 base 链收集分支段，按从新到旧返回。",
+      "tags": [
+        "query",
+        "session",
+        "data-model"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:readNewestCompactionBoundary",
+      "type": "function",
+      "name": "readNewestCompactionBoundary",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "lineRange": [
+        113,
+        130
+      ],
+      "summary": "在分支段中查找最新 compaction 条目，作为分叉拷贝下界。",
+      "tags": [
+        "query",
+        "session",
+        "compaction"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:copyBranchEntriesAfterSeqThroughParent",
+      "type": "function",
+      "name": "copyBranchEntriesAfterSeqThroughParent",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "lineRange": [
+        132,
+        150
+      ],
+      "summary": "把源分支段中 afterSeq 之后的条目复制到目标分支。",
+      "tags": [
+        "session",
+        "database",
+        "fork"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:createDivergentBranchForEntry",
+      "type": "function",
+      "name": "createDivergentBranchForEntry",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "lineRange": [
+        152,
+        164
+      ],
+      "summary": "为非线性追加创建新分支：写入 branch_meta 并拷贝 compaction 之后的祖先条目。",
+      "tags": [
+        "session",
+        "fork",
+        "data-model"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:appendEntryToBranchIndex",
+      "type": "function",
+      "name": "appendEntryToBranchIndex",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "lineRange": [
+        166,
+        178
+      ],
+      "summary": "把新条目挂到分支索引：根分支、沿 tip 追加，或创建分叉分支。",
+      "tags": [
+        "session",
+        "data-model",
+        "index"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:readStopSeq",
+      "type": "function",
+      "name": "readStopSeq",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "lineRange": [
+        187,
+        205
+      ],
+      "summary": "按查询谓词计算分支段内的停止序号，供扫描提前结束。",
+      "tags": [
+        "query",
+        "session",
+        "database"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:branchScanPredicates",
+      "type": "function",
+      "name": "branchScanPredicates",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "lineRange": [
+        207,
+        229
+      ],
+      "summary": "拼出分支扫描的 SQL 谓词：段范围、类型过滤与 stopSeq。",
+      "tags": [
+        "query",
+        "database",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:scanEntrySegmentRows",
+      "type": "function",
+      "name": "scanEntrySegmentRows",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "lineRange": [
+        235,
+        251
+      ],
+      "summary": "扫描单个分支段并返回带 payload 的完整条目行。",
+      "tags": [
+        "query",
+        "session",
+        "database"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:decodeEntryStructureRow",
+      "type": "function",
+      "name": "decodeEntryStructureRow",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "lineRange": [
+        253,
+        262
+      ],
+      "summary": "把无 payload 的结构行解码为 EntryStructure。",
+      "tags": [
+        "serialization",
+        "data-model",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:scanStructureSegmentRows",
+      "type": "function",
+      "name": "scanStructureSegmentRows",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "lineRange": [
+        264,
+        281
+      ],
+      "summary": "扫描单个分支段并返回不含 payload 的条目结构行。",
+      "tags": [
+        "query",
+        "session",
+        "database"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:scanBranchSegments",
+      "type": "function",
+      "name": "scanBranchSegments",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "lineRange": [
+        283,
+        312
+      ],
+      "summary": "沿分支段链调用 readSegment，处理 stopSeq 与 limit，拼出跨段扫描结果。",
+      "tags": [
+        "query",
+        "session",
+        "database"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:scanBranchEntries",
+      "type": "function",
+      "name": "scanBranchEntries",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "lineRange": [
+        314,
+        316
+      ],
+      "summary": "按 StorageBranchScan 扫描分支上的完整 Entry。",
+      "tags": [
+        "query",
+        "session",
+        "entry-point"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:scanBranchEntryStructures",
+      "type": "function",
+      "name": "scanBranchEntryStructures",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "lineRange": [
+        318,
+        324
+      ],
+      "summary": "按 StorageBranchScan 扫描分支上的 EntryStructure。",
+      "tags": [
+        "query",
+        "session",
+        "entry-point"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/index.ts",
+      "target": "class:packages/session-backends/sqlite-node/src/index.ts:NodeSqliteStatement",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/index.ts",
+      "target": "class:packages/session-backends/sqlite-node/src/index.ts:NodeSqliteDatabase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/index.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/index.ts:wrapNodeSqliteDatabase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/index.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/index.ts:createNodeSqliteFactory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/migrations.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/migrations.ts:applyInitialSchema",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/repo.ts:buildForkSnapshot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/repo.ts:readForkSourceEntries",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/repo.ts:createSqliteForkSnapshot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "target": "class:packages/session-backends/sqlite-node/src/sqlite/repo.ts:SqliteSessionRepo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session.ts",
+      "target": "class:packages/session-backends/sqlite-node/src/sqlite/session.ts:SqliteOpenSession",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:readBranchMembership",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:readBranchSegmentsNewestFirst",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:readNewestCompactionBoundary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:copyBranchEntriesAfterSeqThroughParent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:createDivergentBranchForEntry",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:appendEntryToBranchIndex",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:readStopSeq",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:branchScanPredicates",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:scanEntrySegmentRows",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:decodeEntryStructureRow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:scanStructureSegmentRows",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:scanBranchSegments",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:scanBranchEntries",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:scanBranchEntryStructures",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/index.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/index.ts:wrapNodeSqliteDatabase",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/index.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/index.ts:createNodeSqliteFactory",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/migrations.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/migrations.ts:applyInitialSchema",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "target": "class:packages/session-backends/sqlite-node/src/sqlite/repo.ts:SqliteSessionRepo",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session.ts",
+      "target": "class:packages/session-backends/sqlite-node/src/sqlite/session.ts:SqliteOpenSession",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:appendEntryToBranchIndex",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:scanBranchEntries",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:scanBranchEntryStructures",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/index.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/sql.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/index.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/migrations.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/migrations.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/session.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/session/values.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/sql.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/storage.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/sql.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts",
+      "target": "file:packages/session-backends/sqlite-node/src/sqlite/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/repo.ts",
+      "target": "file:packages/session-backends/sqlite-node/benchmark/session/session-repo.bench.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/index.ts",
+      "target": "file:packages/session-backends/sqlite-node/benchmark/session/session-repo.bench.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:packages/session-backends/sqlite-node/src/sqlite/migrations.ts",
+      "target": "file:packages/session-backends/sqlite-node/benchmark/session/storage.bench.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "class:packages/session-backends/sqlite-node/src/index.ts:NodeSqliteDatabase",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/repo.ts:readForkSourceEntries",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:scanBranchEntries",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/repo.ts:createSqliteForkSnapshot",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:metadataFromSessionRow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/repo.ts:createSqliteForkSnapshot",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:readSessionRow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/repo.ts:createSqliteForkSnapshot",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/values.ts:readAllScalarValueRows",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/session-backends/sqlite-node/src/sqlite/repo.ts:SqliteSessionRepo",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/values.ts:setScalarValueRow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/session-backends/sqlite-node/src/sqlite/repo.ts:SqliteSessionRepo",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/session-backends/sqlite-node/src/sqlite/repo.ts:SqliteSessionRepo",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/migrations.ts:applyInitialSchema",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/session-backends/sqlite-node/src/sqlite/repo.ts:SqliteSessionRepo",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:hasSessionRow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/session-backends/sqlite-node/src/sqlite/repo.ts:SqliteSessionRepo",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:insertSessionRow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/session-backends/sqlite-node/src/sqlite/repo.ts:SqliteSessionRepo",
+      "target": "function:packages/ai/src/index.ts:uuidv7",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/session-backends/sqlite-node/src/sqlite/repo.ts:SqliteSessionRepo",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:metadataFromSessionRow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/session-backends/sqlite-node/src/sqlite/repo.ts:SqliteSessionRepo",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:readSessionRow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/session-backends/sqlite-node/src/sqlite/repo.ts:SqliteSessionRepo",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:readAllSessionRows",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/session-backends/sqlite-node/src/sqlite/repo.ts:SqliteSessionRepo",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/session-row.ts:deleteSessionRows",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/session-backends/sqlite-node/src/sqlite/repo.ts:SqliteSessionRepo",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:appendEntryToBranchIndex",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:readBranchMembership",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:readNewestCompactionBoundary",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:copyBranchEntriesAfterSeqThroughParent",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:createDivergentBranchForEntry",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:readStopSeq",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:branchScanPredicates",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:scanEntrySegmentRows",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:scanStructureSegmentRows",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:sql",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:readStopSeq",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:joinSqlFragments",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:scanEntrySegmentRows",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:joinSqlFragments",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:scanStructureSegmentRows",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/sql.ts:joinSqlFragments",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/session-backends/sqlite-node/src/sqlite/session/branch-entries.ts:scanBranchEntries",
+      "target": "function:packages/session-backends/sqlite-node/src/sqlite/session/entries.ts:decodeEntryRow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

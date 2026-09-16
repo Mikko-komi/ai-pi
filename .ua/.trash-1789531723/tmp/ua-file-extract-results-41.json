@@ -1,0 +1,162 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 3,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 3
+    }
+  },
+  "results": [
+    {
+      "path": "packages/session-backends/sqlite-node/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 33,
+      "nonEmptyLines": 25,
+      "sections": [
+        {
+          "heading": "@earendil-works/pi-session-backend-sqlite-node",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 45,
+      "nonEmptyLines": 45,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "description",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "type",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "main",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "types",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "exports",
+          "level": 1,
+          "line": 8
+        },
+        {
+          "heading": "files",
+          "level": 1,
+          "line": 14
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 19
+        },
+        {
+          "heading": "author",
+          "level": 1,
+          "line": 27
+        },
+        {
+          "heading": "license",
+          "level": 1,
+          "line": 28
+        },
+        {
+          "heading": "repository",
+          "level": 1,
+          "line": 29
+        },
+        {
+          "heading": "engines",
+          "level": 1,
+          "line": 34
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 37
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 41
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 15
+      }
+    },
+    {
+      "path": "packages/session-backends/sqlite-node/tsconfig.build.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 11,
+      "nonEmptyLines": 11,
+      "sections": [
+        {
+          "heading": "extends",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    }
+  ]
+}

@@ -1,0 +1,535 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/ai/src/api/openrouter-images.ts",
+      "type": "file",
+      "name": "openrouter-images.ts",
+      "filePath": "packages/ai/src/api/openrouter-images.ts",
+      "summary": "OpenRouter 图像生成适配器：构造 chat/completions 图像请求、解析 usage，并走统一重试与错误体。",
+      "tags": [
+        "api-handler",
+        "images",
+        "openrouter",
+        "provider"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/openrouter-images.ts:generateImages",
+      "type": "function",
+      "name": "generateImages",
+      "filePath": "packages/ai/src/api/openrouter-images.ts",
+      "lineRange": [
+        40,
+        115
+      ],
+      "summary": "向 OpenRouter 发送图像生成请求，解析图片与 usage，并统一重试/错误体。",
+      "tags": [
+        "exports",
+        "api-handler",
+        "streaming"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/openrouter-images.ts:createClient",
+      "type": "function",
+      "name": "createClient",
+      "filePath": "packages/ai/src/api/openrouter-images.ts",
+      "lineRange": [
+        117,
+        130
+      ],
+      "summary": "创建带供应商头的 OpenRouter 图像请求客户端。",
+      "tags": [
+        "factory",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/openrouter-images.ts:buildParams",
+      "type": "function",
+      "name": "buildParams",
+      "filePath": "packages/ai/src/api/openrouter-images.ts",
+      "lineRange": [
+        136,
+        163
+      ],
+      "summary": "把图像 context 转为 OpenRouter 请求体并清洗 unicode。",
+      "tags": [
+        "factory",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/openrouter-images.ts:parseUsage",
+      "type": "function",
+      "name": "parseUsage",
+      "filePath": "packages/ai/src/api/openrouter-images.ts",
+      "lineRange": [
+        165,
+        196
+      ],
+      "summary": "从响应 usage 提取图像计费 token/费用。",
+      "tags": [
+        "parsing",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/ai/src/api/pi-messages.ts",
+      "type": "file",
+      "name": "pi-messages.ts",
+      "filePath": "packages/ai/src/api/pi-messages.ts",
+      "summary": "Pi 自有 Messages 协议客户端：把供应商事件流转成内部格式，并附带响应错误诊断与 rewrite 信息。",
+      "tags": [
+        "api-handler",
+        "streaming",
+        "diagnostics",
+        "pi"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/ai/src/api/pi-messages.ts:formatPiMessagesResponseError",
+      "type": "function",
+      "name": "formatPiMessagesResponseError",
+      "filePath": "packages/ai/src/api/pi-messages.ts",
+      "lineRange": [
+        123,
+        133
+      ],
+      "summary": "把 HTTP 状态与错误体格式化为 Pi Messages 错误文本。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/pi-messages.ts:createPiMessagesResponseError",
+      "type": "function",
+      "name": "createPiMessagesResponseError",
+      "filePath": "packages/ai/src/api/pi-messages.ts",
+      "lineRange": [
+        135,
+        154
+      ],
+      "summary": "构造带 url/状态/诊断详情的 PiMessagesResponseError。",
+      "tags": [
+        "factory",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/pi-messages.ts:createEmptyUsage",
+      "type": "function",
+      "name": "createEmptyUsage",
+      "filePath": "packages/ai/src/api/pi-messages.ts",
+      "lineRange": [
+        156,
+        165
+      ],
+      "summary": "返回全零 usage 占位，供错误或空响应使用。",
+      "tags": [
+        "factory",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/pi-messages.ts:appendRewriteDiagnostic",
+      "type": "function",
+      "name": "appendRewriteDiagnostic",
+      "filePath": "packages/ai/src/api/pi-messages.ts",
+      "lineRange": [
+        167,
+        176
+      ],
+      "summary": "把 rewrite 诊断追加到 assistant 消息。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/pi-messages.ts:createEventConverter",
+      "type": "function",
+      "name": "createEventConverter",
+      "filePath": "packages/ai/src/api/pi-messages.ts",
+      "lineRange": [
+        178,
+        272
+      ],
+      "summary": "创建 Pi 事件到内部 AssistantMessageEvent 的转换器，含 JSON 修复解析。",
+      "tags": [
+        "factory",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/ai/src/api/pi-messages.ts:createErrorEvent",
+      "type": "function",
+      "name": "createErrorEvent",
+      "filePath": "packages/ai/src/api/pi-messages.ts",
+      "lineRange": [
+        321,
+        343
+      ],
+      "summary": "把异常转为带诊断的错误事件（区分 abort）。",
+      "tags": [
+        "factory",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/pi-messages.ts:stream",
+      "type": "function",
+      "name": "stream",
+      "filePath": "packages/ai/src/api/pi-messages.ts",
+      "lineRange": [
+        353,
+        427
+      ],
+      "summary": "请求 Pi Messages 端点，解析事件流并回传诊断。",
+      "tags": [
+        "exports",
+        "api-handler",
+        "streaming"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/pi-messages.ts:streamSimple",
+      "type": "function",
+      "name": "streamSimple",
+      "filePath": "packages/ai/src/api/pi-messages.ts",
+      "lineRange": [
+        429,
+        441
+      ],
+      "summary": "把 SimpleStreamOptions 交给 Pi Messages stream。",
+      "tags": [
+        "exports",
+        "api-handler",
+        "streaming"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/ai/src/api/pi-messages.ts:PiMessagesResponseError",
+      "type": "class",
+      "name": "PiMessagesResponseError",
+      "filePath": "packages/ai/src/api/pi-messages.ts",
+      "lineRange": [
+        96,
+        106
+      ],
+      "summary": "携带错误码与 diagnosticDetails 的 Pi Messages HTTP 响应错误。",
+      "tags": [
+        "error-type",
+        "diagnostics",
+        "exports"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/ai/src/api/openrouter-images.ts",
+      "target": "function:packages/ai/src/api/openrouter-images.ts:generateImages",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/openrouter-images.ts",
+      "target": "function:packages/ai/src/api/openrouter-images.ts:generateImages",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/openrouter-images.ts",
+      "target": "function:packages/ai/src/api/openrouter-images.ts:createClient",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/openrouter-images.ts",
+      "target": "function:packages/ai/src/api/openrouter-images.ts:buildParams",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/openrouter-images.ts",
+      "target": "function:packages/ai/src/api/openrouter-images.ts:parseUsage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/openrouter-images.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/openrouter-images.ts",
+      "target": "file:packages/ai/src/utils/error-body.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/openrouter-images.ts",
+      "target": "file:packages/ai/src/utils/headers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/openrouter-images.ts",
+      "target": "file:packages/ai/src/utils/provider-retry.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/openrouter-images.ts",
+      "target": "file:packages/ai/src/utils/sanitize-unicode.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.ts",
+      "target": "function:packages/ai/src/api/pi-messages.ts:formatPiMessagesResponseError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.ts",
+      "target": "function:packages/ai/src/api/pi-messages.ts:createPiMessagesResponseError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.ts",
+      "target": "function:packages/ai/src/api/pi-messages.ts:createEmptyUsage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.ts",
+      "target": "function:packages/ai/src/api/pi-messages.ts:appendRewriteDiagnostic",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.ts",
+      "target": "function:packages/ai/src/api/pi-messages.ts:createEventConverter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.ts",
+      "target": "function:packages/ai/src/api/pi-messages.ts:createErrorEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.ts",
+      "target": "function:packages/ai/src/api/pi-messages.ts:stream",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.ts",
+      "target": "function:packages/ai/src/api/pi-messages.ts:stream",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.ts",
+      "target": "function:packages/ai/src/api/pi-messages.ts:streamSimple",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.ts",
+      "target": "function:packages/ai/src/api/pi-messages.ts:streamSimple",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.ts",
+      "target": "class:packages/ai/src/api/pi-messages.ts:PiMessagesResponseError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.ts",
+      "target": "class:packages/ai/src/api/pi-messages.ts:PiMessagesResponseError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.ts",
+      "target": "file:packages/ai/src/utils/diagnostics.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.ts",
+      "target": "file:packages/ai/src/utils/event-stream.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.ts",
+      "target": "file:packages/ai/src/utils/headers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.ts",
+      "target": "file:packages/ai/src/utils/json-parse.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/pi-messages.ts",
+      "target": "file:packages/ai/src/utils/provider-env.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:packages/ai/src/api/openrouter-images.ts:generateImages",
+      "target": "function:packages/ai/src/utils/provider-retry.ts:retryProviderRequest",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/openrouter-images.ts:generateImages",
+      "target": "function:packages/ai/src/utils/headers.ts:headersToRecord",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/openrouter-images.ts:generateImages",
+      "target": "function:packages/ai/src/utils/error-body.ts:formatProviderError",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/openrouter-images.ts:generateImages",
+      "target": "function:packages/ai/src/utils/error-body.ts:normalizeProviderError",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/openrouter-images.ts:createClient",
+      "target": "function:packages/ai/src/utils/headers.ts:providerHeadersToRecord",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/openrouter-images.ts:buildParams",
+      "target": "function:packages/ai/src/utils/sanitize-unicode.ts:sanitizeSurrogates",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/pi-messages.ts:appendRewriteDiagnostic",
+      "target": "function:packages/ai/src/utils/diagnostics.ts:appendAssistantMessageDiagnostic",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/pi-messages.ts:createEventConverter",
+      "target": "function:packages/ai/src/utils/json-parse.ts:parseStreamingJson",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/pi-messages.ts:createErrorEvent",
+      "target": "function:packages/ai/src/utils/diagnostics.ts:appendAssistantMessageDiagnostic",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/pi-messages.ts:createErrorEvent",
+      "target": "function:packages/ai/src/utils/diagnostics.ts:createAssistantMessageDiagnostic",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/pi-messages.ts:stream",
+      "target": "function:packages/ai/src/utils/headers.ts:providerHeadersToRecord",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/api/pi-messages.ts:stream",
+      "target": "function:packages/ai/src/utils/headers.ts:headersToRecord",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/tui/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/tui/README.md",
+      "summary": "@earendil-works/pi-tui 的完整使用文档，覆盖差分渲染、TUI/主屏与备用屏 API、内置组件、Autocomplete、按键检测、自定义组件以及开发调试。",
+      "tags": ["documentation", "entry-point", "tui", "api-reference", "getting-started"],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:packages/tui/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "packages/tui/package.json",
+      "summary": "@earendil-works/pi-tui 的 npm 包清单，定义 ESM 入口、tsgo 构建脚本、darwin/linux/win32 native 预编译产物发布，以及 marked 与 get-east-asian-width 依赖。",
+      "tags": ["configuration", "npm-package", "build-system", "native-addon"],
+      "complexity": "moderate",
+      "languageNotes": "Node >= 22.19.0 的 ESM 包；build 使用 tsgo -p tsconfig.build.json，并分别调用各平台 native 构建脚本。"
+    },
+    {
+      "id": "config:packages/tui/tsconfig.build.json",
+      "type": "config",
+      "name": "tsconfig.build.json",
+      "filePath": "packages/tui/tsconfig.build.json",
+      "summary": "pi-tui 的 TypeScript 构建配置，继承仓库根 tsconfig.base.json，将 src 编译到 dist。",
+      "tags": ["configuration", "typescript", "build-system"],
+      "complexity": "simple",
+      "languageNotes": "extends ../../tsconfig.base.json，rootDir 为 src，outDir 为 dist。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:packages/tui/README.md",
+      "target": "config:packages/tui/package.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:packages/tui/package.json",
+      "target": "config:packages/tui/tsconfig.build.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

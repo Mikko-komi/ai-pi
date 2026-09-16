@@ -1,0 +1,237 @@
+Found 148 batch files (45 logical batches, 22 multi-part):
+  batch-1-part-1.json: 13 nodes, 21 edges
+  batch-1-part-2.json: 12 nodes, 42 edges
+  batch-1-part-3.json: 5 nodes, 5 edges
+  batch-1-part-4.json: 18 nodes, 41 edges
+  batch-1-part-5.json: 9 nodes, 81 edges
+  batch-1-part-6.json: 24 nodes, 65 edges
+  batch-1-part-7.json: 24 nodes, 61 edges
+  batch-1-part-8.json: 32 nodes, 116 edges
+  batch-1-part-9.json: 7 nodes, 19 edges
+  batch-2-part-1.json: 26 nodes, 82 edges
+  batch-2-part-2.json: 43 nodes, 103 edges
+  batch-2-part-3.json: 27 nodes, 76 edges
+  batch-3-part-1.json: 25 nodes, 60 edges
+  batch-3-part-2.json: 73 nodes, 144 edges
+  batch-3-part-3.json: 49 nodes, 123 edges
+  batch-4-part-1.json: 36 nodes, 192 edges
+  batch-4-part-2.json: 22 nodes, 78 edges
+  batch-4-part-3.json: 13 nodes, 54 edges
+  batch-5-part-1.json: 24 nodes, 83 edges
+  batch-5-part-2.json: 24 nodes, 104 edges
+  batch-6-part-1.json: 22 nodes, 85 edges
+  batch-6-part-2.json: 28 nodes, 91 edges
+  batch-6-part-3.json: 42 nodes, 100 edges
+  batch-6-part-4.json: 25 nodes, 89 edges
+  batch-6-part-5.json: 20 nodes, 75 edges
+  batch-6-part-6.json: 20 nodes, 69 edges
+  batch-6-part-7.json: 3 nodes, 15 edges
+  batch-7-part-1.json: 35 nodes, 114 edges
+  batch-7-part-2.json: 26 nodes, 87 edges
+  batch-7-part-3.json: 32 nodes, 109 edges
+  batch-8-part-1.json: 14 nodes, 41 edges
+  batch-8-part-2.json: 5 nodes, 11 edges
+  batch-8-part-3.json: 9 nodes, 31 edges
+  batch-8-part-4.json: 4 nodes, 15 edges
+  batch-8-part-5.json: 11 nodes, 29 edges
+  batch-8-part-6.json: 6 nodes, 19 edges
+  batch-8-part-7.json: 4 nodes, 10 edges
+  batch-8-part-8.json: 8 nodes, 109 edges
+  batch-8-part-9.json: 8 nodes, 25 edges
+  batch-8-part-10.json: 48 nodes, 116 edges
+  batch-8-part-11.json: 6 nodes, 14 edges
+  batch-8-part-12.json: 10 nodes, 17 edges
+  batch-8-part-13.json: 13 nodes, 29 edges
+  batch-8-part-14.json: 6 nodes, 8 edges
+  batch-8-part-15.json: 10 nodes, 19 edges
+  batch-8-part-16.json: 1 nodes, 0 edges
+  batch-9-part-1.json: 55 nodes, 135 edges
+  batch-9-part-2.json: 30 nodes, 53 edges
+  batch-9-part-3.json: 47 nodes, 118 edges
+  batch-9-part-4.json: 36 nodes, 144 edges
+  batch-9-part-5.json: 42 nodes, 132 edges
+  batch-10-part-1.json: 50 nodes, 174 edges
+  batch-10-part-2.json: 41 nodes, 99 edges
+  batch-10-part-3.json: 39 nodes, 108 edges
+  batch-10-part-4.json: 34 nodes, 86 edges
+  batch-11-part-1.json: 5 nodes, 6 edges
+  batch-11-part-2.json: 8 nodes, 19 edges
+  batch-11-part-3.json: 17 nodes, 49 edges
+  batch-11-part-4.json: 44 nodes, 91 edges
+  batch-11-part-5.json: 17 nodes, 101 edges
+  batch-11-part-6.json: 10 nodes, 36 edges
+  batch-11-part-7.json: 13 nodes, 27 edges
+  batch-11-part-8.json: 1 nodes, 2 edges
+  batch-12-part-1.json: 38 nodes, 99 edges
+  batch-12-part-2.json: 38 nodes, 105 edges
+  batch-12-part-3.json: 35 nodes, 81 edges
+  batch-12-part-4.json: 32 nodes, 112 edges
+  batch-12-part-5.json: 24 nodes, 58 edges
+  batch-12-part-6.json: 18 nodes, 37 edges
+  batch-13-part-1.json: 46 nodes, 95 edges
+  batch-13-part-2.json: 33 nodes, 80 edges
+  batch-13-part-3.json: 25 nodes, 75 edges
+  batch-13-part-4.json: 22 nodes, 33 edges
+  batch-14-part-1.json: 27 nodes, 93 edges
+  batch-14-part-2.json: 23 nodes, 66 edges
+  batch-15-part-1.json: 38 nodes, 152 edges
+  batch-15-part-2.json: 45 nodes, 111 edges
+  batch-15-part-3.json: 41 nodes, 86 edges
+  batch-16-part-1.json: 4 nodes, 11 edges
+  batch-16-part-2.json: 35 nodes, 94 edges
+  batch-16-part-3.json: 28 nodes, 79 edges
+  batch-16-part-4.json: 10 nodes, 39 edges
+  batch-16-part-5.json: 21 nodes, 99 edges
+  batch-16-part-6.json: 13 nodes, 43 edges
+  batch-16-part-7.json: 14 nodes, 31 edges
+  batch-16-part-8.json: 15 nodes, 26 edges
+  batch-16-part-9.json: 2 nodes, 6 edges
+  batch-17-part-1.json: 28 nodes, 71 edges
+  batch-17-part-2.json: 30 nodes, 57 edges
+  batch-17-part-3.json: 15 nodes, 25 edges
+  batch-17-part-4.json: 22 nodes, 66 edges
+  batch-17-part-5.json: 31 nodes, 70 edges
+  batch-17-part-6.json: 54 nodes, 112 edges
+  batch-17-part-7.json: 9 nodes, 23 edges
+  batch-17-part-8.json: 10 nodes, 33 edges
+  batch-17-part-9.json: 15 nodes, 40 edges
+  batch-17-part-10.json: 11 nodes, 20 edges
+  batch-17-part-11.json: 9 nodes, 18 edges
+  batch-17-part-12.json: 6 nodes, 11 edges
+  batch-17-part-13.json: 1 nodes, 17 edges
+  batch-18-part-1.json: 65 nodes, 114 edges
+  batch-18-part-2.json: 53 nodes, 70 edges
+  batch-19-part-1.json: 15 nodes, 23 edges
+  batch-19-part-2.json: 14 nodes, 26 edges
+  batch-19-part-3.json: 29 nodes, 83 edges
+  batch-19-part-4.json: 32 nodes, 83 edges
+  batch-19-part-5.json: 18 nodes, 69 edges
+  batch-20-part-1.json: 28 nodes, 62 edges
+  batch-20-part-2.json: 9 nodes, 18 edges
+  batch-20-part-3.json: 58 nodes, 111 edges
+  batch-20-part-4.json: 7 nodes, 21 edges
+  batch-20-part-5.json: 18 nodes, 37 edges
+  batch-20-part-6.json: 18 nodes, 38 edges
+  batch-20-part-7.json: 19 nodes, 31 edges
+  batch-20-part-8.json: 11 nodes, 26 edges
+  batch-20-part-9.json: 11 nodes, 22 edges
+  batch-20-part-10.json: 6 nodes, 14 edges
+  batch-20-part-11.json: 1 nodes, 2 edges
+  batch-21-part-1.json: 49 nodes, 98 edges
+  batch-21-part-2.json: 32 nodes, 62 edges
+  batch-21-part-3.json: 16 nodes, 32 edges
+  batch-21-part-4.json: 28 nodes, 67 edges
+  batch-22-part-1.json: 47 nodes, 86 edges
+  batch-22-part-2.json: 60 nodes, 107 edges
+  batch-22-part-3.json: 49 nodes, 141 edges
+  batch-23.json: 30 nodes, 90 edges
+  batch-24.json: 15 nodes, 31 edges
+  batch-25.json: 16 nodes, 31 edges
+  batch-26.json: 10 nodes, 9 edges
+  batch-27.json: 8 nodes, 16 edges
+  batch-28.json: 4 nodes, 6 edges
+  batch-29.json: 14 nodes, 25 edges
+  batch-30.json: 3 nodes, 3 edges
+  batch-31.json: 9 nodes, 14 edges
+  batch-32.json: 3 nodes, 15 edges
+  batch-33.json: 4 nodes, 23 edges
+  batch-34.json: 3 nodes, 2 edges
+  batch-35.json: 4 nodes, 4 edges
+  batch-36.json: 20 nodes, 77 edges
+  batch-37.json: 11 nodes, 14 edges
+  batch-38.json: 3 nodes, 5 edges
+  batch-39.json: 3 nodes, 2 edges
+  batch-40.json: 3 nodes, 8 edges
+  batch-41.json: 3 nodes, 6 edges
+  batch-42.json: 3 nodes, 2 edges
+  batch-43.json: 3 nodes, 2 edges
+  batch-44.json: 58 nodes, 38 edges
+  batch-45.json: 22 nodes, 11 edges
+
+Input: 3224 nodes, 8408 edges
+
+Fixed (13 corrections):
+    13 × tested_by edges dropped (orphan endpoint or test↔test / prod↔prod pair)
+
+Could not fix (74 issues — needs agent review):
+  - Edge class:packages/client/src/client.ts:Client → function:packages/protocol/src/index.ts:isServerId (calls): dropped, missing target 'function:packages/protocol/src/index.ts:isServerId'
+  - Edge function:packages/client/src/unix.ts:discoverUnixServers → function:packages/protocol/src/index.ts:isServerId (calls): dropped, missing target 'function:packages/protocol/src/index.ts:isServerId'
+  - Edge function:packages/coding-agent/src/cli/experimental/command-options.ts:parseTransportAddress → function:packages/protocol/src/index.ts:isServerId (calls): dropped, missing target 'function:packages/protocol/src/index.ts:isServerId'
+  - Edge function:packages/coding-agent/src/experimental/client-runtime.ts:activateBuiltinClientServices → class:packages/coding-agent/src/experimental/services/sessions.ts:SessionDirectory (calls): dropped, missing target 'class:packages/coding-agent/src/experimental/services/sessions.ts:SessionDirectory'
+  - Edge function:packages/coding-agent/src/experimental/client-runtime.ts:activateBuiltinClientServices → class:packages/coding-agent/src/experimental/services/sessions.ts:SessionManagement (calls): dropped, missing target 'class:packages/coding-agent/src/experimental/services/sessions.ts:SessionManagement'
+  - Edge class:packages/coding-agent/src/experimental/client-tui.ts:ExperimentalClientTui → function:packages/tui/src/index.ts:setKeybindings (calls): dropped, missing target 'function:packages/tui/src/index.ts:setKeybindings'
+  - Edge class:packages/coding-agent/src/experimental/client-tui.ts:ExperimentalClientTui → class:packages/tui/src/index.ts:Component (implements): dropped, missing target 'class:packages/tui/src/index.ts:Component'
+  - Edge file:packages/coding-agent/src/cli/experimental/commands/server.ts → function:packages/protocol/src/index.ts:isServerId (depends_on): dropped, missing target 'function:packages/protocol/src/index.ts:isServerId'
+  - Edge function:packages/coding-agent/src/experimental/server.ts:acquireServerProfile → function:packages/protocol/src/index.ts:isServerId (calls): dropped, missing target 'function:packages/protocol/src/index.ts:isServerId'
+  - Edge function:packages/coding-agent/src/experimental/server.ts:activateServer → function:packages/server/src/transports/unix/index.ts:getUnixSocketPath (calls): dropped, missing target 'function:packages/server/src/transports/unix/index.ts:getUnixSocketPath'
+  - Edge function:packages/coding-agent/src/experimental/services/models-provider.ts:createModelsServiceFacet → function:packages/chord/src/index.ts:defineFacet (calls): dropped, missing target 'function:packages/chord/src/index.ts:defineFacet'
+  - Edge function:packages/coding-agent/src/experimental/services/server.ts:createExperimentalServerServices → function:packages/chord/src/index.ts:createRemoteServiceEndpoint (calls): dropped, missing target 'function:packages/chord/src/index.ts:createRemoteServiceEndpoint'
+  - Edge function:packages/coding-agent/src/experimental/services/server.ts:createExperimentalServerServices → function:packages/chord/src/index.ts:replicatedState (calls): dropped, missing target 'function:packages/chord/src/index.ts:replicatedState'
+  - Edge function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:createSlashCommandsRuntimeFacet → function:packages/chord/src/index.ts:defineFacet (calls): dropped, missing target 'function:packages/chord/src/index.ts:defineFacet'
+  - Edge function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:createBuiltInSlashCommandsFacet → function:packages/chord/src/index.ts:defineFacet (calls): dropped, missing target 'function:packages/chord/src/index.ts:defineFacet'
+  - Edge function:packages/coding-agent/src/experimental/services/transcript-provider.ts:createTranscriptService → function:packages/agent/src/index.ts:reduceLaneSnapshot (calls): dropped, missing target 'function:packages/agent/src/index.ts:reduceLaneSnapshot'
+  - Edge function:packages/coding-agent/src/experimental/services/transcript-provider.ts:createTranscriptServiceFacet → function:packages/chord/src/index.ts:defineFacet (calls): dropped, missing target 'function:packages/chord/src/index.ts:defineFacet'
+  - Edge function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices → function:packages/chord/src/index.ts:createFacetHost (calls): dropped, missing target 'function:packages/chord/src/index.ts:createFacetHost'
+  - Edge function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices → function:packages/chord/src/index.ts:createStaticFacetLoader (calls): dropped, missing target 'function:packages/chord/src/index.ts:createStaticFacetLoader'
+  - Edge function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices → function:packages/chord/src/index.ts:createRemoteServiceEndpoint (calls): dropped, missing target 'function:packages/chord/src/index.ts:createRemoteServiceEndpoint'
+  - Edge function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices → function:packages/chord/src/index.ts:defineFacet (calls): dropped, missing target 'function:packages/chord/src/index.ts:defineFacet'
+  - Edge class:packages/server/src/server.ts:Server → function:packages/chord/src/index.ts:parseServiceCall (calls): dropped, missing target 'function:packages/chord/src/index.ts:parseServiceCall'
+  - Edge class:packages/coding-agent/src/extensions/llama/ui.ts:HuggingFaceSearch → class:packages/tui/src/index.ts:Container (inherits): dropped, missing target 'class:packages/tui/src/index.ts:Container'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/assistant-message.ts:AssistantMessageComponent → class:packages/tui/src/index.ts:Container (inherits): dropped, missing target 'class:packages/tui/src/index.ts:Container'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/bash-execution.ts:BashExecutionComponent → class:packages/tui/src/index.ts:Container (inherits): dropped, missing target 'class:packages/tui/src/index.ts:Container'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/bordered-loader.ts:BorderedLoader → class:packages/tui/src/index.ts:Container (inherits): dropped, missing target 'class:packages/tui/src/index.ts:Container'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts:BranchSummaryMessageComponent → class:packages/tui/src/index.ts:Box (inherits): dropped, missing target 'class:packages/tui/src/index.ts:Box'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts:CompactionSummaryMessageComponent → class:packages/tui/src/index.ts:Box (inherits): dropped, missing target 'class:packages/tui/src/index.ts:Box'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/config-selector.ts:ConfigSelectorComponent → class:packages/tui/src/index.ts:Container (inherits): dropped, missing target 'class:packages/tui/src/index.ts:Container'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/armin.ts:ArminComponent → class:packages/tui/src/index.ts:Component (implements): dropped, missing target 'class:packages/tui/src/index.ts:Component'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/config-selector.ts:ConfigSelectorHeader → class:packages/tui/src/index.ts:Component (implements): dropped, missing target 'class:packages/tui/src/index.ts:Component'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/config-selector.ts:ResourceList → class:packages/tui/src/index.ts:Component (implements): dropped, missing target 'class:packages/tui/src/index.ts:Component'
+  - Edge class:packages/coding-agent/src/extensions/llama/ui.ts:HuggingFaceSearch → class:packages/tui/src/index.ts:Focusable (implements): dropped, missing target 'class:packages/tui/src/index.ts:Focusable'
+  - Edge class:packages/coding-agent/src/extensions/llama/ui.ts:LlamaView → class:packages/tui/src/index.ts:Focusable (implements): dropped, missing target 'class:packages/tui/src/index.ts:Focusable'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/config-selector.ts:ResourceList → class:packages/tui/src/index.ts:Focusable (implements): dropped, missing target 'class:packages/tui/src/index.ts:Focusable'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/config-selector.ts:ConfigSelectorComponent → class:packages/tui/src/index.ts:Focusable (implements): dropped, missing target 'class:packages/tui/src/index.ts:Focusable'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/custom-editor.ts:CustomEditor → class:packages/tui/src/index.ts:Editor (inherits): dropped, missing target 'class:packages/tui/src/index.ts:Editor'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/custom-entry.ts:CustomEntryComponent → class:packages/tui/src/index.ts:Container (inherits): dropped, missing target 'class:packages/tui/src/index.ts:Container'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/custom-message.ts:CustomMessageComponent → class:packages/tui/src/index.ts:Container (inherits): dropped, missing target 'class:packages/tui/src/index.ts:Container'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts:EarendilAnnouncementComponent → class:packages/tui/src/index.ts:Container (inherits): dropped, missing target 'class:packages/tui/src/index.ts:Container'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/extension-editor.ts:ExtensionEditorComponent → class:packages/tui/src/index.ts:Container (inherits): dropped, missing target 'class:packages/tui/src/index.ts:Container'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/extension-input.ts:ExtensionInputComponent → class:packages/tui/src/index.ts:Container (inherits): dropped, missing target 'class:packages/tui/src/index.ts:Container'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/extension-selector.ts:ExtensionSelectorComponent → class:packages/tui/src/index.ts:Container (inherits): dropped, missing target 'class:packages/tui/src/index.ts:Container'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/first-time-setup.ts:FirstTimeSetupComponent → class:packages/tui/src/index.ts:Container (inherits): dropped, missing target 'class:packages/tui/src/index.ts:Container'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts:DynamicBorder → class:packages/tui/src/index.ts:Component (implements): dropped, missing target 'class:packages/tui/src/index.ts:Component'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/daxnuts.ts:DaxnutsComponent → class:packages/tui/src/index.ts:Component (implements): dropped, missing target 'class:packages/tui/src/index.ts:Component'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/extension-editor.ts:ExtensionEditorComponent → class:packages/tui/src/index.ts:Focusable (implements): dropped, missing target 'class:packages/tui/src/index.ts:Focusable'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/extension-input.ts:ExtensionInputComponent → class:packages/tui/src/index.ts:Focusable (implements): dropped, missing target 'class:packages/tui/src/index.ts:Focusable'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/login-dialog.ts:LoginDialogComponent → class:packages/tui/src/index.ts:Container (inherits): dropped, missing target 'class:packages/tui/src/index.ts:Container'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/model-selector.ts:ModelSelectorComponent → class:packages/tui/src/index.ts:Container (inherits): dropped, missing target 'class:packages/tui/src/index.ts:Container'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:OAuthSelectorComponent → class:packages/tui/src/index.ts:Container (inherits): dropped, missing target 'class:packages/tui/src/index.ts:Container'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:ScopedModelsSelectorComponent → class:packages/tui/src/index.ts:Container (inherits): dropped, missing target 'class:packages/tui/src/index.ts:Container'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/footer.ts:FooterComponent → class:packages/tui/src/index.ts:Component (implements): dropped, missing target 'class:packages/tui/src/index.ts:Component'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/login-dialog.ts:LoginDialogComponent → class:packages/tui/src/index.ts:Focusable (implements): dropped, missing target 'class:packages/tui/src/index.ts:Focusable'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/model-selector.ts:ModelSelectorComponent → class:packages/tui/src/index.ts:Focusable (implements): dropped, missing target 'class:packages/tui/src/index.ts:Focusable'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:OAuthSelectorComponent → class:packages/tui/src/index.ts:Focusable (implements): dropped, missing target 'class:packages/tui/src/index.ts:Focusable'
+  - Edge class:packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:ScopedModelsSelectorComponent → class:packages/tui/src/index.ts:Focusable (implements): dropped, missing target 'class:packages/tui/src/index.ts:Focusable'
+  - Edge class:packages/coding-agent/src/modes/interactive/interactive-mode.ts:InteractiveMode → function:packages/ai/src/compat.ts:getModel (calls): dropped, missing target 'function:packages/ai/src/compat.ts:getModel'
+  - Edge class:packages/agent/src/harness/runtime/lane.ts:Lane → function:packages/agent/src/harness/context.ts:awaitWithContext (calls): dropped, missing target 'function:packages/agent/src/harness/context.ts:awaitWithContext'
+  - Edge function:packages/coding-agent/src/cli/list-models.ts:listModels → function:packages/tui/src/index.ts:fuzzyFilter (calls): dropped, missing target 'function:packages/tui/src/index.ts:fuzzyFilter'
+  - Edge function:packages/coding-agent/src/core/extensions/loader.ts:loadExtensionsInternal → function:packages/coding-agent/src/index.ts:createExtensionRuntime (calls): dropped, missing target 'function:packages/coding-agent/src/index.ts:createExtensionRuntime'
+  - Edge function:packages/coding-agent/src/core/provider-composer.ts:composeModelProvider → function:packages/ai/src/compat.ts:getModels (calls): dropped, missing target 'function:packages/ai/src/compat.ts:getModels'
+  - Edge function:packages/coding-agent/src/core/compaction/branch-summarization.ts:generateBranchSummary → function:packages/ai/src/index.ts:contentText (calls): dropped, missing target 'function:packages/ai/src/index.ts:contentText'
+  - Edge function:packages/coding-agent/src/core/compaction/compaction.ts:completeSummarization → function:packages/ai/src/index.ts:uuidv7 (calls): dropped, missing target 'function:packages/ai/src/index.ts:uuidv7'
+  - Edge function:packages/coding-agent/src/core/compaction/compaction.ts:generateSummaryWithUsage → function:packages/ai/src/index.ts:contentText (calls): dropped, missing target 'function:packages/ai/src/index.ts:contentText'
+  - Edge function:packages/coding-agent/src/core/compaction/utils.ts:serializeConversation → function:packages/ai/src/index.ts:contentText (calls): dropped, missing target 'function:packages/ai/src/index.ts:contentText'
+  - Edge class:packages/session-backends/sqlite-node/src/sqlite/repo.ts:SqliteSessionRepo → function:packages/ai/src/index.ts:uuidv7 (calls): dropped, missing target 'function:packages/ai/src/index.ts:uuidv7'
+  - Edge function:packages/coding-agent/src/experimental/mini/worker/run.ts:runSessionWorker → class:packages/agent/src/node.ts:NodeExecutionEnv (calls): dropped, missing target 'class:packages/agent/src/node.ts:NodeExecutionEnv'
+  - Edge document:packages/ai/README.md → file:packages/ai/scripts/generate-models.ts (documents): dropped, missing target 'file:packages/ai/scripts/generate-models.ts'
+  - Edge document:packages/ai/README.md → file:packages/ai/scripts/generate-image-models.ts (documents): dropped, missing target 'file:packages/ai/scripts/generate-image-models.ts'
+  - Edge document:packages/ai/README.md → document:packages/ai/CHANGELOG.md (documents): dropped, missing target 'document:packages/ai/CHANGELOG.md'
+  - Edge config:packages/ai/package.json → file:packages/ai/scripts/generate-models.ts (configures): dropped, missing target 'file:packages/ai/scripts/generate-models.ts'
+  - Edge config:packages/ai/package.json → file:packages/ai/scripts/generate-image-models.ts (configures): dropped, missing target 'file:packages/ai/scripts/generate-image-models.ts'
+  - Edge config:packages/ai/package.json → file:packages/ai/scripts/check-model-data.ts (configures): dropped, missing target 'file:packages/ai/scripts/check-model-data.ts'
+
+Output: 3224 nodes, 8319 edges
+
+Imports edge recovery:
+  Recovered 0 `imports` edges from importMap (777 entries scanned)
+
+Written to /Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/assembled-graph.json (3565 KB)

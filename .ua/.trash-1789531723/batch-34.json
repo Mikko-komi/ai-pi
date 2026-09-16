@@ -1,0 +1,48 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/client/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/client/README.md",
+      "summary": "说明 @earendil-works/pi-client 的传输无关用法：通过 ByteTransportFactory 连接、校验 serverId、用 request/subscribeService 访问 Chord 服务，并介绍 Unix socket 工厂与只读服务发现。",
+      "tags": ["文档", "入门", "客户端", "protocol", "unix-socket"],
+      "complexity": "simple",
+      "languageNotes": "强调 Client 不自动重连或重放请求；断开后需显式 reconnect 并只重复安全操作。"
+    },
+    {
+      "id": "config:packages/client/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "packages/client/package.json",
+      "summary": "定义 @earendil-works/pi-client 包元数据与发布入口（. 与 ./unix），声明对 chord、pi-protocol 的依赖，并用 tsgo -p tsconfig.build.json 构建。",
+      "tags": ["配置", "npm", "构建系统", "exports", "package"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:packages/client/tsconfig.build.json",
+      "type": "config",
+      "name": "tsconfig.build.json",
+      "filePath": "packages/client/tsconfig.build.json",
+      "summary": "继承仓库根 tsconfig.base.json，将 packages/client/src 编译到 dist，并把 @earendil-works/pi-protocol 映射到 protocol 包的类型声明。",
+      "tags": ["配置", "typescript", "构建系统", "编译"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:packages/client/README.md",
+      "target": "config:packages/client/package.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:packages/client/package.json",
+      "target": "config:packages/client/tsconfig.build.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

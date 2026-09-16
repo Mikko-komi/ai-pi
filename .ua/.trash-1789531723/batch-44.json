@@ -1,0 +1,828 @@
+{
+  "nodes": [
+    {
+      "id": "file:.gitattributes",
+      "type": "file",
+      "name": ".gitattributes",
+      "filePath": ".gitattributes",
+      "summary": "统一仓库换行策略：文本默认 LF，Windows 脚本保留 CRLF，并将图片、字体与压缩包标为 binary。",
+      "tags": ["git", "line-endings", "configuration"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.github/APPROVED_CONTRIBUTORS",
+      "type": "file",
+      "name": "APPROVED_CONTRIBUTORS",
+      "filePath": ".github/APPROVED_CONTRIBUTORS",
+      "summary": "GitHub 已批准贡献者名单，按 issue/pr 能力绕过贡献自动关闭工作流。",
+      "tags": ["github", "contributors", "governance"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.husky/pre-commit",
+      "type": "file",
+      "name": "pre-commit",
+      "filePath": ".husky/pre-commit",
+      "summary": "Husky pre-commit 钩子：先检查 lockfile，再跑 npm check；若暂存了 ai/web-ui 或根 package 文件则追加 browser smoke。",
+      "tags": ["git-hook", "lint", "ci-cd"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.npmrc",
+      "type": "file",
+      "name": ".npmrc",
+      "filePath": ".npmrc",
+      "summary": "npm 客户端配置：强制精确版本写入，并要求包发布至少满 2 天才可安装。",
+      "tags": ["npm", "configuration", "security"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/agent/src/harness/runtime/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/agent/src/harness/runtime/index.ts",
+      "summary": "harness runtime 的 barrel，再导出 createAgentHarness。",
+      "tags": ["barrel", "entry-point", "harness"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/agent/src/harness/session/jsonl/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/agent/src/harness/session/jsonl/index.ts",
+      "summary": "JSONL session 子模块入口，再导出 repo、storage 与 types。",
+      "tags": ["barrel", "session", "jsonl"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/agent/src/harness/tools/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/agent/src/harness/tools/index.ts",
+      "summary": "harness 工具 barrel，再导出 bash/edit/read/write 的工厂函数与输入类型。",
+      "tags": ["barrel", "tools", "harness"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/agent/src/search/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/agent/src/search/index.ts",
+      "summary": "定义 SessionSearchService 以及会话/条目搜索查询与命中结果的 TypeScript 接口。",
+      "tags": ["type-definition", "search", "session"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/agent/vitest.benchmark.config.ts",
+      "type": "file",
+      "name": "vitest.benchmark.config.ts",
+      "filePath": "packages/agent/vitest.benchmark.config.ts",
+      "summary": "agent 包 session benchmark 的 Vitest 配置，并将 telemetry/ai 解析到源码。",
+      "tags": ["test", "benchmark", "vitest"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/agent/vitest.config.ts",
+      "type": "file",
+      "name": "vitest.config.ts",
+      "filePath": "packages/agent/vitest.config.ts",
+      "summary": "agent 包默认 Vitest 配置：Node 环境、30s 超时，以及 telemetry/ai/agent 的 source alias。",
+      "tags": ["test", "vitest", "configuration"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/agent/vitest.harness.config.ts",
+      "type": "file",
+      "name": "vitest.harness.config.ts",
+      "filePath": "packages/agent/vitest.harness.config.ts",
+      "summary": "仅跑 test/harness 的 Vitest 配置，并对 harness/agent-loop 收集 v8 coverage。",
+      "tags": ["test", "vitest", "coverage", "harness"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/bedrock-provider.d.ts",
+      "type": "file",
+      "name": "bedrock-provider.d.ts",
+      "filePath": "packages/ai/bedrock-provider.d.ts",
+      "summary": "包根类型入口，再导出构建产物中的 Bedrock provider 声明。",
+      "tags": ["barrel", "type-definition", "bedrock"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/bedrock-provider.js",
+      "type": "file",
+      "name": "bedrock-provider.js",
+      "filePath": "packages/ai/bedrock-provider.js",
+      "summary": "包根运行时入口，再导出构建产物中的 Bedrock provider。",
+      "tags": ["barrel", "entry-point", "bedrock"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/api/cloudflare.ts",
+      "type": "file",
+      "name": "cloudflare.ts",
+      "filePath": "packages/ai/src/api/cloudflare.ts",
+      "summary": "导出 Cloudflare Workers AI 与 AI Gateway（compat/OpenAI/Anthropic）的 base URL 常量。",
+      "tags": ["api", "cloudflare", "constants"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/providers/data-json.d.ts",
+      "type": "file",
+      "name": "data-json.d.ts",
+      "filePath": "packages/ai/src/providers/data-json.d.ts",
+      "summary": "为 `*.json` 模块声明 unknown 默认导出，供 provider 数据文件导入。",
+      "tags": ["type-definition", "json", "ambient"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/utils/typebox-helpers.ts",
+      "type": "file",
+      "name": "typebox-helpers.ts",
+      "filePath": "packages/ai/src/utils/typebox-helpers.ts",
+      "summary": "提供 StringEnum helper，生成 Google 等不支持 anyOf/const 的 TypeBox 字符串枚举 schema。",
+      "tags": ["utility", "typebox", "validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/utils/typebox-helpers.ts:StringEnum",
+      "type": "function",
+      "name": "StringEnum",
+      "filePath": "packages/ai/src/utils/typebox-helpers.ts",
+      "lineRange": [14, 24],
+      "summary": "用 Type.Unsafe 构造带 enum 的字符串 schema，可选 description 与 default。",
+      "tags": ["utility", "typebox", "schema"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/vitest.config.ts",
+      "type": "file",
+      "name": "vitest.config.ts",
+      "filePath": "packages/ai/vitest.config.ts",
+      "summary": "ai 包 Vitest 配置：Node 环境、30s 超时，并将 pi-telemetry 别名到源码。",
+      "tags": ["test", "vitest", "configuration"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:packages/chord/src/delta/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/chord/src/delta/README.md",
+      "summary": "Chord Delta 文档：讲解 Op/WireOp、track/apply、路径编解码、状态所有权与 tracker 生命周期限制。",
+      "tags": ["documentation", "delta", "replication"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/client/vitest.config.ts",
+      "type": "file",
+      "name": "vitest.config.ts",
+      "filePath": "packages/client/vitest.config.ts",
+      "summary": "client 包 Vitest 配置：Node 环境，并将 pi-protocol 别名到源码。",
+      "tags": ["test", "vitest", "configuration"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:packages/coding-agent/install-lock/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "packages/coding-agent/install-lock/package.json",
+      "summary": "安装器/更新器使用的私有 lockfile 根，钉住 pi-coding-agent 与 protobufjs，并要求 Node >= 22.19。",
+      "tags": ["configuration", "lockfile", "installer"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/client/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/coding-agent/src/client/index.ts",
+      "summary": "coding-agent client 入口，再导出 @earendil-works/pi-client 的全部公共 API。",
+      "tags": ["barrel", "entry-point", "client"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/export-html/template.css",
+      "type": "file",
+      "name": "template.css",
+      "filePath": "packages/coding-agent/src/core/export-html/template.css",
+      "summary": "HTML session 导出页样式：主题变量、可调整侧栏、消息/工具输出、markdown 与移动端布局。",
+      "tags": ["stylesheet", "export-html", "theme"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/export-html/template.html",
+      "type": "file",
+      "name": "template.html",
+      "filePath": "packages/coding-agent/src/core/export-html/template.html",
+      "summary": "session 导出页 HTML 骨架，占位注入 CSS、session JSON、marked、highlight.js 与主脚本。",
+      "tags": ["html-template", "export-html", "ui"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/export-html/template.js",
+      "type": "file",
+      "name": "template.js",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "summary": "导出页独立 IIFE：从嵌入 JSON 构建会话树、渲染消息与工具调用、支持搜索/深链/分享与侧栏拖拽。",
+      "tags": ["export-html", "ui", "session-viewer"],
+      "complexity": "complex",
+      "languageNotes": "无模块系统的浏览器 IIFE，依赖模板注入的 marked 与 highlight.js。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:buildTree",
+      "type": "function",
+      "name": "buildTree",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [73, 111],
+      "summary": "把扁平 session entries 组装成带 parentId 的树，并按时间戳排序子节点。",
+      "tags": ["tree", "session", "data-model"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:buildActivePathIds",
+      "type": "function",
+      "name": "buildActivePathIds",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [116, 128],
+      "summary": "沿 parentId 上溯，收集从根到目标条目的路径 ID 集合。",
+      "tags": ["tree", "navigation", "session"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:getPath",
+      "type": "function",
+      "name": "getPath",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [133, 145],
+      "summary": "返回从根到目标条目的完整 entry 数组，供主栏按分支渲染。",
+      "tags": ["tree", "navigation", "session"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:findNewestLeaf",
+      "type": "function",
+      "name": "findNewestLeaf",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [155, 176],
+      "summary": "从任意节点沿最新子节点下探，定位该分支最新叶子以便点击展开整支。",
+      "tags": ["tree", "navigation", "session"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:flattenTree",
+      "type": "function",
+      "name": "flattenTree",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [183, 253],
+      "summary": "把会话树压成带缩进、连接符与 gutter 的扁平列表，优先排列含活动叶子的分支。",
+      "tags": ["tree", "layout", "session"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:buildTreePrefix",
+      "type": "function",
+      "name": "buildTreePrefix",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [258, 293],
+      "summary": "根据 indent/gutter 生成侧栏树节点的 ASCII 前缀（├─/└─）。",
+      "tags": ["tree", "rendering", "ui"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:extractContent",
+      "type": "function",
+      "name": "extractContent",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [305, 314],
+      "summary": "从字符串或 content block 数组中抽出纯文本，供搜索与树标签使用。",
+      "tags": ["utility", "content", "text"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:parseSkillBlock",
+      "type": "function",
+      "name": "parseSkillBlock",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [321, 330],
+      "summary": "解析消息文本中的 `<skill name location>` 块，分离 skill 内容与后续用户消息。",
+      "tags": ["skill", "parsing", "message"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:getSearchableText",
+      "type": "function",
+      "name": "getSearchableText",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [332, 363],
+      "summary": "按 entry 类型拼接可搜索文本（角色、正文、命令、模型切换等）并转小写。",
+      "tags": ["search", "session", "indexing"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:filterNodes",
+      "type": "function",
+      "name": "filterNodes",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [368, 430],
+      "summary": "按 filterMode 与搜索词过滤扁平树节点，并在过滤后重算可见结构。",
+      "tags": ["search", "filter", "tree"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:recalculateVisualStructure",
+      "type": "function",
+      "name": "recalculateVisualStructure",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [432, 552],
+      "summary": "在过滤后的可见节点上重建父子关系、缩进与连接符，使残缺树仍可绘制。",
+      "tags": ["tree", "layout", "filter"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:findVisibleAncestor",
+      "type": "function",
+      "name": "findVisibleAncestor",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [444, 453],
+      "summary": "沿 parentId 上溯，找到过滤后仍可见的最近祖先。",
+      "tags": ["tree", "filter", "navigation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:shortenPath",
+      "type": "function",
+      "name": "shortenPath",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [558, 569],
+      "summary": "把 /Users 或 /home 绝对路径缩短为 ~ 形式，便于树与工具调用展示。",
+      "tags": ["utility", "path", "display"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:formatToolCall",
+      "type": "function",
+      "name": "formatToolCall",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [571, 605],
+      "summary": "按工具名把参数格式化成简短标签，如 [read: path] 或截断后的 bash 命令。",
+      "tags": ["tools", "formatting", "display"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:sanitizeMarkdownUrl",
+      "type": "function",
+      "name": "sanitizeMarkdownUrl",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [616, 626],
+      "summary": "清洗 markdown 链接/图片 URL，仅允许 http(s)/mailto/tel/ftp scheme。",
+      "tags": ["security", "markdown", "sanitization"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:getTreeNodeDisplayHtml",
+      "type": "function",
+      "name": "getTreeNodeDisplayHtml",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [639, 702],
+      "summary": "按 entry 类型生成侧栏树节点 HTML，含 skill、工具调用、模型切换等摘要。",
+      "tags": ["tree", "rendering", "html"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:renderTree",
+      "type": "function",
+      "name": "renderTree",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [712, 788],
+      "summary": "首次完整绘制侧栏树 DOM，之后只更新活动路径标记，并滚动到当前节点。",
+      "tags": ["tree", "rendering", "dom"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:getLanguageFromPath",
+      "type": "function",
+      "name": "getLanguageFromPath",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [823, 835],
+      "summary": "按文件扩展名映射 highlight.js 语言 id，用于工具输出高亮。",
+      "tags": ["highlighting", "utility", "language"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:findToolResult",
+      "type": "function",
+      "name": "findToolResult",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [837, 846],
+      "summary": "在 entries 中查找匹配 toolCallId 的 toolResult 消息。",
+      "tags": ["tools", "session", "lookup"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:formatExpandableOutput",
+      "type": "function",
+      "name": "formatExpandableOutput",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [848, 902],
+      "summary": "把长工具输出折成可展开预览，可选 highlight.js 高亮完整与预览片段。",
+      "tags": ["tools", "rendering", "highlighting"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:renderToolCall",
+      "type": "function",
+      "name": "renderToolCall",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [904, 1090],
+      "summary": "按工具类型渲染调用参数、diff/文件内容、结果文本与图片，并标记成功/失败状态。",
+      "tags": ["tools", "rendering", "html"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:buildShareUrl",
+      "type": "function",
+      "name": "buildShareUrl",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [1096, 1118],
+      "summary": "构造带 leafId/targetId 的可分享 URL，兼容 gist 查询与 iframe 注入的 base URL。",
+      "tags": ["sharing", "url", "deep-link"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:copyToClipboard",
+      "type": "function",
+      "name": "copyToClipboard",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [1124, 1160],
+      "summary": "用 Clipboard API 复制文本，失败时回退 execCommand，并短暂显示按钮反馈。",
+      "tags": ["clipboard", "ui", "sharing"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:renderEntry",
+      "type": "function",
+      "name": "renderEntry",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [1174, 1317],
+      "summary": "把单条 session entry 渲染成消息/工具/compaction/分支摘要等 HTML。",
+      "tags": ["rendering", "message", "html"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:computeStats",
+      "type": "function",
+      "name": "computeStats",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [1323, 1362],
+      "summary": "统计会话中的消息数、工具调用、token 与费用，并收集用过的模型。",
+      "tags": ["stats", "tokens", "session"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:renderHeader",
+      "type": "function",
+      "name": "renderHeader",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [1366, 1455],
+      "summary": "渲染页头：时间、模型、消息统计、token/费用、可折叠 system prompt 与工具列表。",
+      "tags": ["header", "rendering", "stats"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:renderEntryToNode",
+      "type": "function",
+      "name": "renderEntryToNode",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [1474, 1493],
+      "summary": "将 renderEntry HTML 解析为 DOM，并用 clone 缓存避免重复渲染。",
+      "tags": ["rendering", "dom", "cache"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:navigateTo",
+      "type": "function",
+      "name": "navigateTo",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [1495, 1551],
+      "summary": "切换当前叶子路径：重绘树与页头、填充消息列，并按模式滚动/高亮目标。",
+      "tags": ["navigation", "session", "ui"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:getSidebarBounds",
+      "type": "function",
+      "name": "getSidebarBounds",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [1673, 1682],
+      "summary": "从 CSS 变量与视口宽度计算侧栏可拖拽的最小/最大宽度。",
+      "tags": ["sidebar", "layout", "ui"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:loadSidebarWidth",
+      "type": "function",
+      "name": "loadSidebarWidth",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [1693, 1702],
+      "summary": "从 localStorage 读取上次保存的侧栏宽度，失败则返回 null。",
+      "tags": ["sidebar", "localStorage", "ui"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:setupSidebarResize",
+      "type": "function",
+      "name": "setupSidebarResize",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [1712, 1769],
+      "summary": "绑定侧栏拖拽、双击复位与窗口 resize，并在桌面布局持久化宽度。",
+      "tags": ["sidebar", "event-handler", "ui"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/export-html/template.js:toggleToolOutputs",
+      "type": "function",
+      "name": "toggleToolOutputs",
+      "filePath": "packages/coding-agent/src/core/export-html/template.js",
+      "lineRange": [1802, 1813],
+      "summary": "切换所有可展开工具输出、compaction 与 skill invocation 的 expanded 状态。",
+      "tags": ["ui", "event-handler", "tools"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/coding-agent/src/core/index.ts",
+      "summary": "coding-agent 核心 barrel：再导出 AgentSession、runtime/services、extensions、bash 与 event bus。",
+      "tags": ["barrel", "entry-point", "core"],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/ai/src/utils/typebox-helpers.ts",
+      "target": "function:packages/ai/src/utils/typebox-helpers.ts:StringEnum",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/typebox-helpers.ts",
+      "target": "function:packages/ai/src/utils/typebox-helpers.ts:StringEnum",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:buildTree",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:buildActivePathIds",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:getPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:findNewestLeaf",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:flattenTree",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:buildTreePrefix",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:extractContent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:parseSkillBlock",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:getSearchableText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:filterNodes",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:recalculateVisualStructure",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:findVisibleAncestor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:shortenPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:formatToolCall",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:sanitizeMarkdownUrl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:getTreeNodeDisplayHtml",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:renderTree",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:getLanguageFromPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:findToolResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:formatExpandableOutput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:renderToolCall",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:buildShareUrl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:copyToClipboard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:renderEntry",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:computeStats",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:renderHeader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:renderEntryToNode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:navigateTo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:getSidebarBounds",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:loadSidebarWidth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:setupSidebarResize",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.js",
+      "target": "function:packages/coding-agent/src/core/export-html/template.js:toggleToolOutputs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.html",
+      "target": "file:packages/coding-agent/src/core/export-html/template.js",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.html",
+      "target": "file:packages/coding-agent/src/core/export-html/template.css",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/export-html/template.css",
+      "target": "file:packages/coding-agent/src/core/export-html/template.js",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:packages/coding-agent/install-lock/package.json",
+      "target": "file:packages/coding-agent/src/core/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

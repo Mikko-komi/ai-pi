@@ -1,0 +1,26 @@
+Analyze these files and produce GraphNode and GraphEdge objects.
+Project root: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi`
+Project: `pi-monorepo`
+Batch: `37/45`
+Skill directory: `/Users/elex-mb0203/.cursor/plugins/local/Understand-Anything/understand-anything-plugin/skills/understand`
+Output: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-37.json` OR `batch-37-part-<k>.json`.
+UA_DIR: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua`
+Load `batchImportData` and `neighborMap` from `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-briefs/batch-37.json`.
+Pass every listed file through to `batchFiles` with path, language, sizeLines, fileCategory.
+
+> **Language directive**: Generate all textual content in **Chinese (zh)**. Keep technical terms in English when no standard translation exists.
+
+Files:
+1. packages/coding-agent/docs/sessions.md (145 lines, language: markdown, fileCategory: docs)
+2. packages/coding-agent/docs/settings.md (405 lines, language: markdown, fileCategory: docs)
+3. packages/coding-agent/docs/shell-aliases.md (13 lines, language: markdown, fileCategory: docs)
+4. packages/coding-agent/docs/skills.md (232 lines, language: markdown, fileCategory: docs)
+5. packages/coding-agent/docs/terminal-setup.md (192 lines, language: markdown, fileCategory: docs)
+6. packages/coding-agent/docs/termux.md (126 lines, language: markdown, fileCategory: docs)
+7. packages/coding-agent/docs/themes.md (322 lines, language: markdown, fileCategory: docs)
+8. packages/coding-agent/docs/tmux.md (63 lines, language: markdown, fileCategory: docs)
+9. packages/coding-agent/docs/tui.md (961 lines, language: markdown, fileCategory: docs)
+10. packages/coding-agent/docs/usage.md (311 lines, language: markdown, fileCategory: docs)
+11. packages/coding-agent/docs/windows.md (39 lines, language: markdown, fileCategory: docs)
+
+Respond with only a brief summary: parts written, total nodes/edges, files skipped.

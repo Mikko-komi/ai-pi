@@ -1,0 +1,430 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/ai/src/api/constrained-sampling.ts",
+      "type": "file",
+      "name": "constrained-sampling.ts",
+      "filePath": "packages/ai/src/api/constrained-sampling.ts",
+      "summary": "把工具 JSON Schema 收成供应商可接受的 strict 子集，并生成 grammar 约束采样所需的 input 属性与增量缓冲。",
+      "tags": [
+        "validation",
+        "serialization",
+        "tools",
+        "schema"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/constrained-sampling.ts:isStructuredSchema",
+      "type": "function",
+      "name": "isStructuredSchema",
+      "filePath": "packages/ai/src/api/constrained-sampling.ts",
+      "lineRange": [
+        35,
+        44
+      ],
+      "summary": "判断 schema 是否为 object/array 或带 properties/items 的结构化节点。",
+      "tags": [
+        "utility",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/constrained-sampling.ts:makeJsonSchemaNodeStrict",
+      "type": "function",
+      "name": "makeJsonSchemaNodeStrict",
+      "filePath": "packages/ai/src/api/constrained-sampling.ts",
+      "lineRange": [
+        53,
+        114
+      ],
+      "summary": "就地收紧 JSON Schema 节点：禁用不支持关键字，补 required 与 additionalProperties:false。",
+      "tags": [
+        "factory",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/constrained-sampling.ts:makeStrictJsonSchema",
+      "type": "function",
+      "name": "makeStrictJsonSchema",
+      "filePath": "packages/ai/src/api/constrained-sampling.ts",
+      "lineRange": [
+        117,
+        127
+      ],
+      "summary": "克隆工具 parameters 并转为供应商 constrained sampling 所需的 strict object schema。",
+      "tags": [
+        "exports",
+        "factory",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/constrained-sampling.ts:getJsonSchemaToolParameters",
+      "type": "function",
+      "name": "getJsonSchemaToolParameters",
+      "filePath": "packages/ai/src/api/constrained-sampling.ts",
+      "lineRange": [
+        129,
+        131
+      ],
+      "summary": "按 strict 标志返回原始或收紧后的工具 parameters。",
+      "tags": [
+        "exports",
+        "utility",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/constrained-sampling.ts:getGrammarToolInput",
+      "type": "function",
+      "name": "getGrammarToolInput",
+      "filePath": "packages/ai/src/api/constrained-sampling.ts",
+      "lineRange": [
+        145,
+        155
+      ],
+      "summary": "从工具 arguments 取出 grammar 绑定的 input 属性字符串。",
+      "tags": [
+        "exports",
+        "utility",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/constrained-sampling.ts:appendGrammarToolInputJsonDelta",
+      "type": "function",
+      "name": "appendGrammarToolInputJsonDelta",
+      "filePath": "packages/ai/src/api/constrained-sampling.ts",
+      "lineRange": [
+        157,
+        187
+      ],
+      "summary": "把 grammar 工具的增量 input 包成 JSON 字段 delta，维护开关缓冲。",
+      "tags": [
+        "exports",
+        "utility",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/constrained-sampling.ts:inferGrammarInputProperty",
+      "type": "function",
+      "name": "inferGrammarInputProperty",
+      "filePath": "packages/ai/src/api/constrained-sampling.ts",
+      "lineRange": [
+        189,
+        206
+      ],
+      "summary": "从工具 schema 推断应作为 grammar 输入的属性名。",
+      "tags": [
+        "mapping",
+        "typescript",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/constrained-sampling.ts:resolveJsonSchemaStrictSampling",
+      "type": "function",
+      "name": "resolveJsonSchemaStrictSampling",
+      "filePath": "packages/ai/src/api/constrained-sampling.ts",
+      "lineRange": [
+        208,
+        228
+      ],
+      "summary": "在供应商支持时为工具启用 strict JSON Schema 采样。",
+      "tags": [
+        "exports",
+        "mapping",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/constrained-sampling.ts:resolveGrammarConstrainedSampling",
+      "type": "function",
+      "name": "resolveGrammarConstrainedSampling",
+      "filePath": "packages/ai/src/api/constrained-sampling.ts",
+      "lineRange": [
+        230,
+        263
+      ],
+      "summary": "在支持 OpenAI grammar tools 时解析 lark/regex 约束定义。",
+      "tags": [
+        "exports",
+        "mapping",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/ai/src/api/constrained-sampling.ts:createGrammarToolInputProperties",
+      "type": "function",
+      "name": "createGrammarToolInputProperties",
+      "filePath": "packages/ai/src/api/constrained-sampling.ts",
+      "lineRange": [
+        265,
+        277
+      ],
+      "summary": "为工具列表生成 grammar input 属性映射，供请求体与流解析共用。",
+      "tags": [
+        "exports",
+        "factory",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/api/github-copilot-headers.ts",
+      "type": "file",
+      "name": "github-copilot-headers.ts",
+      "filePath": "packages/ai/src/api/github-copilot-headers.ts",
+      "summary": "根据消息角色与是否含图，生成 GitHub Copilot 所需的 X-Initiator 与 Copilot-Vision-Request 头。",
+      "tags": [
+        "utility",
+        "headers",
+        "copilot",
+        "github"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/github-copilot-headers.ts:inferCopilotInitiator",
+      "type": "function",
+      "name": "inferCopilotInitiator",
+      "filePath": "packages/ai/src/api/github-copilot-headers.ts",
+      "lineRange": [
+        5,
+        8
+      ],
+      "summary": "根据最后一条消息角色判断 X-Initiator 是 user 还是 agent。",
+      "tags": [
+        "exports",
+        "mapping",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/github-copilot-headers.ts:hasCopilotVisionInput",
+      "type": "function",
+      "name": "hasCopilotVisionInput",
+      "filePath": "packages/ai/src/api/github-copilot-headers.ts",
+      "lineRange": [
+        11,
+        21
+      ],
+      "summary": "扫描 user/toolResult 内容是否包含 image 块。",
+      "tags": [
+        "exports",
+        "utility",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/api/github-copilot-headers.ts:buildCopilotDynamicHeaders",
+      "type": "function",
+      "name": "buildCopilotDynamicHeaders",
+      "filePath": "packages/ai/src/api/github-copilot-headers.ts",
+      "lineRange": [
+        23,
+        37
+      ],
+      "summary": "组装 X-Initiator、Openai-Intent 以及可选 Copilot-Vision-Request。",
+      "tags": [
+        "exports",
+        "factory",
+        "headers"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/ai/src/api/constrained-sampling.ts",
+      "target": "function:packages/ai/src/api/constrained-sampling.ts:isStructuredSchema",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/constrained-sampling.ts",
+      "target": "function:packages/ai/src/api/constrained-sampling.ts:makeJsonSchemaNodeStrict",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/constrained-sampling.ts",
+      "target": "function:packages/ai/src/api/constrained-sampling.ts:makeStrictJsonSchema",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/constrained-sampling.ts",
+      "target": "function:packages/ai/src/api/constrained-sampling.ts:makeStrictJsonSchema",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/constrained-sampling.ts",
+      "target": "function:packages/ai/src/api/constrained-sampling.ts:getJsonSchemaToolParameters",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/constrained-sampling.ts",
+      "target": "function:packages/ai/src/api/constrained-sampling.ts:getJsonSchemaToolParameters",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/constrained-sampling.ts",
+      "target": "function:packages/ai/src/api/constrained-sampling.ts:getGrammarToolInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/constrained-sampling.ts",
+      "target": "function:packages/ai/src/api/constrained-sampling.ts:getGrammarToolInput",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/constrained-sampling.ts",
+      "target": "function:packages/ai/src/api/constrained-sampling.ts:appendGrammarToolInputJsonDelta",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/constrained-sampling.ts",
+      "target": "function:packages/ai/src/api/constrained-sampling.ts:appendGrammarToolInputJsonDelta",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/constrained-sampling.ts",
+      "target": "function:packages/ai/src/api/constrained-sampling.ts:inferGrammarInputProperty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/constrained-sampling.ts",
+      "target": "function:packages/ai/src/api/constrained-sampling.ts:resolveJsonSchemaStrictSampling",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/constrained-sampling.ts",
+      "target": "function:packages/ai/src/api/constrained-sampling.ts:resolveJsonSchemaStrictSampling",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/constrained-sampling.ts",
+      "target": "function:packages/ai/src/api/constrained-sampling.ts:resolveGrammarConstrainedSampling",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/constrained-sampling.ts",
+      "target": "function:packages/ai/src/api/constrained-sampling.ts:resolveGrammarConstrainedSampling",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/constrained-sampling.ts",
+      "target": "function:packages/ai/src/api/constrained-sampling.ts:createGrammarToolInputProperties",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/constrained-sampling.ts",
+      "target": "function:packages/ai/src/api/constrained-sampling.ts:createGrammarToolInputProperties",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/constrained-sampling.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/api/github-copilot-headers.ts",
+      "target": "function:packages/ai/src/api/github-copilot-headers.ts:inferCopilotInitiator",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/github-copilot-headers.ts",
+      "target": "function:packages/ai/src/api/github-copilot-headers.ts:inferCopilotInitiator",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/github-copilot-headers.ts",
+      "target": "function:packages/ai/src/api/github-copilot-headers.ts:hasCopilotVisionInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/github-copilot-headers.ts",
+      "target": "function:packages/ai/src/api/github-copilot-headers.ts:hasCopilotVisionInput",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/github-copilot-headers.ts",
+      "target": "function:packages/ai/src/api/github-copilot-headers.ts:buildCopilotDynamicHeaders",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/ai/src/api/github-copilot-headers.ts",
+      "target": "function:packages/ai/src/api/github-copilot-headers.ts:buildCopilotDynamicHeaders",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/api/github-copilot-headers.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

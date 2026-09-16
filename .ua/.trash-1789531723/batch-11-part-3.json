@@ -1,0 +1,622 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/cli/auth-check.ts",
+      "type": "file",
+      "name": "auth-check.ts",
+      "filePath": "packages/coding-agent/src/cli/auth-check.ts",
+      "summary": "检查指定 provider/model 的认证就绪状态，并提供打印凭证用的 ModelRuntime 工厂。",
+      "tags": [
+        "cli",
+        "auth",
+        "validation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "type": "file",
+      "name": "auth-command.ts",
+      "filePath": "packages/coding-agent/src/cli/auth-command.ts",
+      "summary": "解析并校验 pi auth 子命令（check / print-api-key / print-bearer-token），并提取 API key 或 Bearer token。",
+      "tags": [
+        "cli",
+        "auth",
+        "validation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/cli/credential-print.ts",
+      "type": "file",
+      "name": "credential-print.ts",
+      "filePath": "packages/coding-agent/src/cli/credential-print.ts",
+      "summary": "为 print-api-key / print-bearer-token 解析唯一可用凭证，必要时经 ModelRuntime.getAuth 刷新 OAuth。",
+      "tags": [
+        "cli",
+        "auth",
+        "credentials"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/cli/initial-message.ts",
+      "type": "file",
+      "name": "initial-message.ts",
+      "filePath": "packages/coding-agent/src/cli/initial-message.ts",
+      "summary": "把 stdin、@file 文本/图片与首条 CLI 消息拼成非交互模式的初始 prompt。",
+      "tags": [
+        "cli",
+        "utility",
+        "prompt"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/auth-check.ts:checkProviderAuth",
+      "type": "function",
+      "name": "checkProviderAuth",
+      "filePath": "packages/coding-agent/src/cli/auth-check.ts",
+      "lineRange": [
+        22,
+        53
+      ],
+      "summary": "按 --provider/--model 校验认证，返回 ready/not_ready/invalid。",
+      "tags": [
+        "auth",
+        "validation",
+        "cli"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/auth-check.ts:getProviderCredential",
+      "type": "function",
+      "name": "getProviderCredential",
+      "filePath": "packages/coding-agent/src/cli/auth-check.ts",
+      "lineRange": [
+        55,
+        64
+      ],
+      "summary": "读取已存 OAuth access 或经 ModelRuntime 解析出的凭证字符串。",
+      "tags": [
+        "auth",
+        "credentials",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/auth-check.ts:createAuthCheckModelRuntime",
+      "type": "function",
+      "name": "createAuthCheckModelRuntime",
+      "filePath": "packages/coding-agent/src/cli/auth-check.ts",
+      "lineRange": [
+        66,
+        73
+      ],
+      "summary": "创建不联网、不刷新的内存 ModelRuntime，专供 auth check。",
+      "tags": [
+        "factory",
+        "auth",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/cli/auth-command.ts:AuthCommandError",
+      "type": "class",
+      "name": "AuthCommandError",
+      "filePath": "packages/coding-agent/src/cli/auth-command.ts",
+      "lineRange": [
+        16,
+        16
+      ],
+      "summary": "auth 子命令参数或状态错误。",
+      "tags": [
+        "error",
+        "auth",
+        "cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/auth-command.ts:getAuthCommandName",
+      "type": "function",
+      "name": "getAuthCommandName",
+      "filePath": "packages/coding-agent/src/cli/auth-command.ts",
+      "lineRange": [
+        24,
+        26
+      ],
+      "summary": "把 AuthCommandKind 映射为用户可见命令名。",
+      "tags": [
+        "utility",
+        "cli",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/auth-command.ts:getAuthCommandUsage",
+      "type": "function",
+      "name": "getAuthCommandUsage",
+      "filePath": "packages/coding-agent/src/cli/auth-command.ts",
+      "lineRange": [
+        28,
+        30
+      ],
+      "summary": "返回对应 auth 子命令的 usage 字符串。",
+      "tags": [
+        "utility",
+        "cli",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/auth-command.ts:isAuthCommandHelp",
+      "type": "function",
+      "name": "isAuthCommandHelp",
+      "filePath": "packages/coding-agent/src/cli/auth-command.ts",
+      "lineRange": [
+        32,
+        37
+      ],
+      "summary": "判断 argv 是否为 auth help / --help。",
+      "tags": [
+        "cli",
+        "validation",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/auth-command.ts:printAuthCommandHelp",
+      "type": "function",
+      "name": "printAuthCommandHelp",
+      "filePath": "packages/coding-agent/src/cli/auth-command.ts",
+      "lineRange": [
+        39,
+        46
+      ],
+      "summary": "向 stdout 打印 auth 子命令用法。",
+      "tags": [
+        "cli",
+        "documentation",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/auth-command.ts:parseAuthCommand",
+      "type": "function",
+      "name": "parseAuthCommand",
+      "filePath": "packages/coding-agent/src/cli/auth-command.ts",
+      "lineRange": [
+        48,
+        96
+      ],
+      "summary": "解析 auth check/print-api-key/print-bearer-token 及其 flag。",
+      "tags": [
+        "cli",
+        "parser",
+        "auth"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/auth-command.ts:validateAuthCommandArgs",
+      "type": "function",
+      "name": "validateAuthCommandArgs",
+      "filePath": "packages/coding-agent/src/cli/auth-command.ts",
+      "lineRange": [
+        98,
+        118
+      ],
+      "summary": "要求 --provider 或 --model，并拒绝未知 flag 与多余位置参数。",
+      "tags": [
+        "validation",
+        "auth",
+        "cli"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/auth-command.ts:getAuthCredential",
+      "type": "function",
+      "name": "getAuthCredential",
+      "filePath": "packages/coding-agent/src/cli/auth-command.ts",
+      "lineRange": [
+        120,
+        126
+      ],
+      "summary": "从 AuthResult 提取 apiKey 或 Authorization Bearer token。",
+      "tags": [
+        "auth",
+        "credentials",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/credential-print.ts:resolveCredentialForPrint",
+      "type": "function",
+      "name": "resolveCredentialForPrint",
+      "filePath": "packages/coding-agent/src/cli/credential-print.ts",
+      "lineRange": [
+        17,
+        87
+      ],
+      "summary": "解析并校验唯一可打印凭证；OAuth 走 getAuth 以刷新即将过期的 token。",
+      "tags": [
+        "auth",
+        "credentials",
+        "cli"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/cli/initial-message.ts:buildInitialMessage",
+      "type": "function",
+      "name": "buildInitialMessage",
+      "filePath": "packages/coding-agent/src/cli/initial-message.ts",
+      "lineRange": [
+        20,
+        43
+      ],
+      "summary": "合并 stdin、文件文本与首条消息，并透传初始图片。",
+      "tags": [
+        "utility",
+        "prompt",
+        "cli"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-check.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-check.ts",
+      "target": "file:packages/coding-agent/src/cli/args.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-check.ts",
+      "target": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-check.ts",
+      "target": "file:packages/coding-agent/src/core/model-resolver.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-check.ts",
+      "target": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-check.ts",
+      "target": "file:packages/coding-agent/src/core/models-store.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "target": "file:packages/coding-agent/src/cli/args.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/credential-print.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/credential-print.ts",
+      "target": "file:packages/coding-agent/src/cli/args.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/credential-print.ts",
+      "target": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/credential-print.ts",
+      "target": "file:packages/coding-agent/src/core/model-resolver.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/credential-print.ts",
+      "target": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/initial-message.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/initial-message.ts",
+      "target": "file:packages/coding-agent/src/cli/args.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-check.ts",
+      "target": "function:packages/coding-agent/src/cli/auth-check.ts:checkProviderAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-check.ts",
+      "target": "function:packages/coding-agent/src/cli/auth-check.ts:checkProviderAuth",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-check.ts",
+      "target": "function:packages/coding-agent/src/cli/auth-check.ts:getProviderCredential",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-check.ts",
+      "target": "function:packages/coding-agent/src/cli/auth-check.ts:getProviderCredential",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-check.ts",
+      "target": "function:packages/coding-agent/src/cli/auth-check.ts:createAuthCheckModelRuntime",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-check.ts",
+      "target": "function:packages/coding-agent/src/cli/auth-check.ts:createAuthCheckModelRuntime",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "target": "class:packages/coding-agent/src/cli/auth-command.ts:AuthCommandError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "target": "class:packages/coding-agent/src/cli/auth-command.ts:AuthCommandError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "target": "function:packages/coding-agent/src/cli/auth-command.ts:getAuthCommandName",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "target": "function:packages/coding-agent/src/cli/auth-command.ts:getAuthCommandName",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "target": "function:packages/coding-agent/src/cli/auth-command.ts:getAuthCommandUsage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "target": "function:packages/coding-agent/src/cli/auth-command.ts:getAuthCommandUsage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "target": "function:packages/coding-agent/src/cli/auth-command.ts:isAuthCommandHelp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "target": "function:packages/coding-agent/src/cli/auth-command.ts:isAuthCommandHelp",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "target": "function:packages/coding-agent/src/cli/auth-command.ts:printAuthCommandHelp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "target": "function:packages/coding-agent/src/cli/auth-command.ts:printAuthCommandHelp",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "target": "function:packages/coding-agent/src/cli/auth-command.ts:parseAuthCommand",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "target": "function:packages/coding-agent/src/cli/auth-command.ts:parseAuthCommand",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "target": "function:packages/coding-agent/src/cli/auth-command.ts:validateAuthCommandArgs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "target": "function:packages/coding-agent/src/cli/auth-command.ts:validateAuthCommandArgs",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "target": "function:packages/coding-agent/src/cli/auth-command.ts:getAuthCredential",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "target": "function:packages/coding-agent/src/cli/auth-command.ts:getAuthCredential",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/credential-print.ts",
+      "target": "function:packages/coding-agent/src/cli/credential-print.ts:resolveCredentialForPrint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/credential-print.ts",
+      "target": "function:packages/coding-agent/src/cli/credential-print.ts:resolveCredentialForPrint",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/initial-message.ts",
+      "target": "function:packages/coding-agent/src/cli/initial-message.ts:buildInitialMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/cli/initial-message.ts",
+      "target": "function:packages/coding-agent/src/cli/initial-message.ts:buildInitialMessage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/auth-check.ts:checkProviderAuth",
+      "target": "function:packages/coding-agent/src/cli/auth-command.ts:validateAuthCommandArgs",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/auth-check.ts:checkProviderAuth",
+      "target": "function:packages/coding-agent/src/core/model-resolver.ts:resolveCliModel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/auth-check.ts:getProviderCredential",
+      "target": "function:packages/coding-agent/src/cli/auth-command.ts:getAuthCredential",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/auth-check.ts:createAuthCheckModelRuntime",
+      "target": "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/credential-print.ts:resolveCredentialForPrint",
+      "target": "function:packages/coding-agent/src/cli/auth-command.ts:validateAuthCommandArgs",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/credential-print.ts:resolveCredentialForPrint",
+      "target": "function:packages/coding-agent/src/cli/auth-command.ts:getAuthCredential",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/cli/credential-print.ts:resolveCredentialForPrint",
+      "target": "function:packages/coding-agent/src/core/model-resolver.ts:resolveCliModel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

@@ -1,0 +1,357 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 3,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 3
+    }
+  },
+  "results": [
+    {
+      "path": "packages/tui/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 903,
+      "nonEmptyLines": 702,
+      "sections": [
+        {
+          "heading": "@earendil-works/pi-tui",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Features",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Quick Start",
+          "level": 2,
+          "line": 18
+        },
+        {
+          "heading": "Core API",
+          "level": 2,
+          "line": 55
+        },
+        {
+          "heading": "TUI interface and renderers",
+          "level": 3,
+          "line": 57
+        },
+        {
+          "heading": "Alternate-screen viewport layouts",
+          "level": 3,
+          "line": 81
+        },
+        {
+          "heading": "Overlays",
+          "level": 3,
+          "line": 128
+        },
+        {
+          "heading": "Component Interface",
+          "level": 3,
+          "line": 207
+        },
+        {
+          "heading": "Mouse Input",
+          "level": 3,
+          "line": 229
+        },
+        {
+          "heading": "Focusable Interface (IME Support)",
+          "level": 3,
+          "line": 268
+        },
+        {
+          "heading": "Built-in Components",
+          "level": 2,
+          "line": 320
+        },
+        {
+          "heading": "Container",
+          "level": 3,
+          "line": 322
+        },
+        {
+          "heading": "Box",
+          "level": 3,
+          "line": 332
+        },
+        {
+          "heading": "Text",
+          "level": 3,
+          "line": 346
+        },
+        {
+          "heading": "TruncatedText",
+          "level": 3,
+          "line": 361
+        },
+        {
+          "heading": "Input",
+          "level": 3,
+          "line": 373
+        },
+        {
+          "heading": "Editor",
+          "level": 3,
+          "line": 396
+        },
+        {
+          "heading": "Markdown",
+          "level": 3,
+          "line": 442
+        },
+        {
+          "heading": "Loader",
+          "level": 3,
+          "line": 491
+        },
+        {
+          "heading": "CancellableLoader",
+          "level": 3,
+          "line": 507
+        },
+        {
+          "heading": "SelectList",
+          "level": 3,
+          "line": 527
+        },
+        {
+          "heading": "SettingsList",
+          "level": 3,
+          "line": 568
+        },
+        {
+          "heading": "Spacer",
+          "level": 3,
+          "line": 610
+        },
+        {
+          "heading": "Image",
+          "level": 3,
+          "line": 618
+        },
+        {
+          "heading": "Alternate-screen image compatibility",
+          "level": 4,
+          "line": 644
+        },
+        {
+          "heading": "Autocomplete",
+          "level": 2,
+          "line": 648
+        },
+        {
+          "heading": "CombinedAutocompleteProvider",
+          "level": 3,
+          "line": 650
+        },
+        {
+          "heading": "Key Detection",
+          "level": 2,
+          "line": 675
+        },
+        {
+          "heading": "Rendering modes",
+          "level": 2,
+          "line": 701
+        },
+        {
+          "heading": "Terminal Interface",
+          "level": 2,
+          "line": 713
+        },
+        {
+          "heading": "Utilities",
+          "level": 2,
+          "line": 737
+        },
+        {
+          "heading": "Creating Custom Components",
+          "level": 2,
+          "line": 756
+        },
+        {
+          "heading": "Handling Input",
+          "level": 3,
+          "line": 760
+        },
+        {
+          "heading": "Handling Line Width",
+          "level": 3,
+          "line": 796
+        },
+        {
+          "heading": "ANSI Code Considerations",
+          "level": 3,
+          "line": 827
+        },
+        {
+          "heading": "Caching",
+          "level": 3,
+          "line": 842
+        },
+        {
+          "heading": "Example",
+          "level": 2,
+          "line": 871
+        },
+        {
+          "heading": "Development",
+          "level": 2,
+          "line": 884
+        },
+        {
+          "heading": "Debug logging",
+          "level": 3,
+          "line": 897
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 39
+      }
+    },
+    {
+      "path": "packages/tui/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 62,
+      "nonEmptyLines": 62,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "description",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "type",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "main",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "files",
+          "level": 1,
+          "line": 16
+        },
+        {
+          "heading": "keywords",
+          "level": 1,
+          "line": 34
+        },
+        {
+          "heading": "author",
+          "level": 1,
+          "line": 43
+        },
+        {
+          "heading": "license",
+          "level": 1,
+          "line": 44
+        },
+        {
+          "heading": "repository",
+          "level": 1,
+          "line": 45
+        },
+        {
+          "heading": "engines",
+          "level": 1,
+          "line": 50
+        },
+        {
+          "heading": "types",
+          "level": 1,
+          "line": 53
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 54
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 58
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 15
+      }
+    },
+    {
+      "path": "packages/tui/tsconfig.build.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 9,
+      "nonEmptyLines": 9,
+      "sections": [
+        {
+          "heading": "extends",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "exclude",
+          "level": 1,
+          "line": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    }
+  ]
+}

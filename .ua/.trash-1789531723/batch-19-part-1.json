@@ -1,0 +1,404 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/utils/image-resize-worker.ts",
+      "type": "file",
+      "name": "image-resize-worker.ts",
+      "filePath": "packages/coding-agent/src/utils/image-resize-worker.ts",
+      "summary": "Worker 线程入口：接收可转移的图像字节，调用进程内 resize 并回传结果或错误，避免阻塞 TUI 主循环。",
+      "tags": [
+        "worker",
+        "image-processing",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/utils/image-resize.ts",
+      "type": "file",
+      "name": "image-resize.ts",
+      "filePath": "packages/coding-agent/src/utils/image-resize.ts",
+      "summary": "对外图像缩放入口：优先在 worker 线程用 Photon 缩放，失败则回退到进程内处理，并生成尺寸换算说明。",
+      "tags": [
+        "image-processing",
+        "utility",
+        "worker"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "通过 worker_threads 与 Transferable 字节避免阻塞事件循环；Bun 编译产物用字符串路径加载 worker。"
+    },
+    {
+      "id": "file:packages/coding-agent/src/utils/mime.ts",
+      "type": "file",
+      "name": "mime.ts",
+      "filePath": "packages/coding-agent/src/utils/mime.ts",
+      "summary": "通过魔数检测受支持的图像 MIME 类型，覆盖 JPEG/PNG/GIF/WebP/BMP，并识别动画 PNG。",
+      "tags": [
+        "utility",
+        "validation",
+        "image-processing"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/utils/photon.ts",
+      "type": "file",
+      "name": "photon.ts",
+      "filePath": "packages/coding-agent/src/utils/photon.ts",
+      "summary": "包装 photon-node 的懒加载，并修补 fs.readFileSync，以便在 Bun 编译二进制中找到 WASM。",
+      "tags": [
+        "image-processing",
+        "wasm",
+        "utility"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "通过猴子补丁 fs.readFileSync 把丢失的 photon_rs_bg.wasm 重定向到可执行文件旁的回退路径。"
+    },
+    {
+      "id": "file:packages/coding-agent/src/utils/tool-result-images.ts",
+      "type": "file",
+      "name": "tool-result-images.ts",
+      "filePath": "packages/coding-agent/src/utils/tool-result-images.ts",
+      "summary": "规范化工具结果中的图像块，对 oversized 图像走 processImage，避免后续 provider 请求整段被拒。",
+      "tags": [
+        "utility",
+        "image-processing",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/image-resize.ts:resizeImageInWorker",
+      "type": "function",
+      "name": "resizeImageInWorker",
+      "filePath": "packages/coding-agent/src/utils/image-resize.ts",
+      "lineRange": [
+        25,
+        76
+      ],
+      "summary": "在独立 worker 中执行图像缩放：发送可转移字节、校验响应，并在超时或错误时终止 worker。",
+      "tags": [
+        "image-processing",
+        "worker",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/image-resize.ts:resizeImage",
+      "type": "function",
+      "name": "resizeImage",
+      "filePath": "packages/coding-agent/src/utils/image-resize.ts",
+      "lineRange": [
+        85,
+        110
+      ],
+      "summary": "对外缩放入口：优先启动 worker，Bun 下尝试嵌入路径，失败则回退到进程内 Photon 处理。",
+      "tags": [
+        "image-processing",
+        "entry-point",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/image-resize.ts:formatDimensionNote",
+      "type": "function",
+      "name": "formatDimensionNote",
+      "filePath": "packages/coding-agent/src/utils/image-resize.ts",
+      "lineRange": [
+        116,
+        123
+      ],
+      "summary": "为已缩放图像生成坐标换算说明，帮助模型把显示坐标映射回原图。",
+      "tags": [
+        "utility",
+        "formatting",
+        "image-processing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/mime.ts:detectSupportedImageMimeType",
+      "type": "function",
+      "name": "detectSupportedImageMimeType",
+      "filePath": "packages/coding-agent/src/utils/mime.ts",
+      "lineRange": [
+        6,
+        23
+      ],
+      "summary": "根据缓冲区魔数识别 JPEG/PNG/GIF/WebP/BMP，动画 PNG 返回 undefined。",
+      "tags": [
+        "utility",
+        "validation",
+        "image-processing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/mime.ts:detectSupportedImageMimeTypeFromFile",
+      "type": "function",
+      "name": "detectSupportedImageMimeTypeFromFile",
+      "filePath": "packages/coding-agent/src/utils/mime.ts",
+      "lineRange": [
+        25,
+        34
+      ],
+      "summary": "读取文件头部字节并委托 detectSupportedImageMimeType 判断 MIME。",
+      "tags": [
+        "utility",
+        "validation",
+        "image-processing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/mime.ts:isAnimatedPng",
+      "type": "function",
+      "name": "isAnimatedPng",
+      "filePath": "packages/coding-agent/src/utils/mime.ts",
+      "lineRange": [
+        42,
+        55
+      ],
+      "summary": "扫描 PNG chunk 是否包含 acTL，以判断是否为动画 PNG。",
+      "tags": [
+        "utility",
+        "validation",
+        "image-processing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/mime.ts:isBmp",
+      "type": "function",
+      "name": "isBmp",
+      "filePath": "packages/coding-agent/src/utils/mime.ts",
+      "lineRange": [
+        57,
+        81
+      ],
+      "summary": "校验 BMP 头、DIB 尺寸与位深，确认是否为可解码的位图。",
+      "tags": [
+        "utility",
+        "validation",
+        "image-processing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/photon.ts:patchPhotonWasmRead",
+      "type": "function",
+      "name": "patchPhotonWasmRead",
+      "filePath": "packages/coding-agent/src/utils/photon.ts",
+      "lineRange": [
+        54,
+        110
+      ],
+      "summary": "临时劫持 fs.readFileSync，把丢失的 photon WASM 读取重定向到多个回退路径。",
+      "tags": [
+        "wasm",
+        "utility",
+        "adapter"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/photon.ts:loadPhoton",
+      "type": "function",
+      "name": "loadPhoton",
+      "filePath": "packages/coding-agent/src/utils/photon.ts",
+      "lineRange": [
+        116,
+        139
+      ],
+      "summary": "懒加载 photon-node 模块，加载期间应用 WASM 路径补丁并缓存成功或失败结果。",
+      "tags": [
+        "image-processing",
+        "factory",
+        "wasm"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/tool-result-images.ts:normalizeToolResultImages",
+      "type": "function",
+      "name": "normalizeToolResultImages",
+      "filePath": "packages/coding-agent/src/utils/tool-result-images.ts",
+      "lineRange": [
+        22,
+        62
+      ],
+      "summary": "遍历工具结果内容，将 oversized 图像交给 processImage，未变化时返回原数组。",
+      "tags": [
+        "utility",
+        "image-processing",
+        "validation"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/utils/image-resize.ts",
+      "target": "function:packages/coding-agent/src/utils/image-resize.ts:resizeImageInWorker",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/image-resize.ts",
+      "target": "function:packages/coding-agent/src/utils/image-resize.ts:resizeImage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/image-resize.ts",
+      "target": "function:packages/coding-agent/src/utils/image-resize.ts:formatDimensionNote",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/mime.ts",
+      "target": "function:packages/coding-agent/src/utils/mime.ts:detectSupportedImageMimeType",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/mime.ts",
+      "target": "function:packages/coding-agent/src/utils/mime.ts:detectSupportedImageMimeTypeFromFile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/mime.ts",
+      "target": "function:packages/coding-agent/src/utils/mime.ts:isAnimatedPng",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/mime.ts",
+      "target": "function:packages/coding-agent/src/utils/mime.ts:isBmp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/photon.ts",
+      "target": "function:packages/coding-agent/src/utils/photon.ts:patchPhotonWasmRead",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/photon.ts",
+      "target": "function:packages/coding-agent/src/utils/photon.ts:loadPhoton",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/tool-result-images.ts",
+      "target": "function:packages/coding-agent/src/utils/tool-result-images.ts:normalizeToolResultImages",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/image-resize.ts",
+      "target": "function:packages/coding-agent/src/utils/image-resize.ts:resizeImage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/image-resize.ts",
+      "target": "function:packages/coding-agent/src/utils/image-resize.ts:formatDimensionNote",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/mime.ts",
+      "target": "function:packages/coding-agent/src/utils/mime.ts:detectSupportedImageMimeType",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/mime.ts",
+      "target": "function:packages/coding-agent/src/utils/mime.ts:detectSupportedImageMimeTypeFromFile",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/photon.ts",
+      "target": "function:packages/coding-agent/src/utils/photon.ts:loadPhoton",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/tool-result-images.ts",
+      "target": "function:packages/coding-agent/src/utils/tool-result-images.ts:normalizeToolResultImages",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/image-resize-worker.ts",
+      "target": "file:packages/coding-agent/src/utils/image-resize-core.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/image-resize.ts",
+      "target": "file:packages/coding-agent/src/utils/image-resize-core.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/tool-result-images.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/tool-result-images.ts",
+      "target": "file:packages/coding-agent/src/utils/image-process.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/image-resize.ts",
+      "target": "file:packages/coding-agent/src/utils/image-resize-worker.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/image-resize.ts:resizeImage",
+      "target": "function:packages/coding-agent/src/utils/image-resize-core.ts:resizeImageInProcess",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/utils/tool-result-images.ts:normalizeToolResultImages",
+      "target": "function:packages/coding-agent/src/utils/image-process.ts:processImage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

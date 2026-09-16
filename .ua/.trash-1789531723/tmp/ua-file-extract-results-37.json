@@ -1,0 +1,1015 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 11,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 11,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 11
+    }
+  },
+  "results": [
+    {
+      "path": "packages/coding-agent/docs/sessions.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 145,
+      "nonEmptyLines": 101,
+      "sections": [
+        {
+          "heading": "Sessions",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Session Storage",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Session Commands",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Resuming and Deleting Sessions",
+          "level": 2,
+          "line": 37
+        },
+        {
+          "heading": "Naming Sessions",
+          "level": 2,
+          "line": 52
+        },
+        {
+          "heading": "Branching with `/tree`",
+          "level": 2,
+          "line": 69
+        },
+        {
+          "heading": "Tree Controls",
+          "level": 3,
+          "line": 87
+        },
+        {
+          "heading": "Selection Behavior",
+          "level": 3,
+          "line": 102
+        },
+        {
+          "heading": "`/tree`, `/fork`, and `/clone`",
+          "level": 2,
+          "line": 118
+        },
+        {
+          "heading": "Branch Summaries",
+          "level": 2,
+          "line": 129
+        },
+        {
+          "heading": "Session Format",
+          "level": 2,
+          "line": 141
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/settings.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 405,
+      "nonEmptyLines": 315,
+      "sections": [
+        {
+          "heading": "Settings",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Project Trust",
+          "level": 2,
+          "line": 12
+        },
+        {
+          "heading": "All Settings",
+          "level": 2,
+          "line": 24
+        },
+        {
+          "heading": "Model & Thinking",
+          "level": 3,
+          "line": 26
+        },
+        {
+          "heading": "thinkingBudgets",
+          "level": 4,
+          "line": 38
+        },
+        {
+          "heading": "UI & Display",
+          "level": 3,
+          "line": 51
+        },
+        {
+          "heading": "Telemetry and update checks",
+          "level": 3,
+          "line": 82
+        },
+        {
+          "heading": "Network",
+          "level": 3,
+          "line": 88
+        },
+        {
+          "heading": "Warnings",
+          "level": 3,
+          "line": 100
+        },
+        {
+          "heading": "Compaction",
+          "level": 3,
+          "line": 114
+        },
+        {
+          "heading": "Per-model compaction overrides",
+          "level": 4,
+          "line": 133
+        },
+        {
+          "heading": "Branch Summary",
+          "level": 3,
+          "line": 164
+        },
+        {
+          "heading": "Retry",
+          "level": 3,
+          "line": 171
+        },
+        {
+          "heading": "Message Delivery",
+          "level": 3,
+          "line": 205
+        },
+        {
+          "heading": "Terminal & Images",
+          "level": 3,
+          "line": 215
+        },
+        {
+          "heading": "Shell",
+          "level": 3,
+          "line": 228
+        },
+        {
+          "heading": "Tools",
+          "level": 3,
+          "line": 258
+        },
+        {
+          "heading": "Sessions",
+          "level": 3,
+          "line": 282
+        },
+        {
+          "heading": "Model Cycling",
+          "level": 3,
+          "line": 294
+        },
+        {
+          "heading": "Markdown",
+          "level": 3,
+          "line": 306
+        },
+        {
+          "heading": "Resources",
+          "level": 3,
+          "line": 313
+        },
+        {
+          "heading": "packages",
+          "level": 4,
+          "line": 330
+        },
+        {
+          "heading": "Example",
+          "level": 2,
+          "line": 356
+        },
+        {
+          "heading": "Project Overrides",
+          "level": 2,
+          "line": 384
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 24
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/shell-aliases.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 13,
+      "nonEmptyLines": 9,
+      "sections": [
+        {
+          "heading": "Shell Aliases",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/skills.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 232,
+      "nonEmptyLines": 167,
+      "sections": [
+        {
+          "heading": "Skills",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "Table of Contents",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Locations",
+          "level": 2,
+          "line": 20
+        },
+        {
+          "heading": "Using Skills from Other Harnesses",
+          "level": 3,
+          "line": 44
+        },
+        {
+          "heading": "How Skills Work",
+          "level": 2,
+          "line": 65
+        },
+        {
+          "heading": "Skill Commands",
+          "level": 2,
+          "line": 74
+        },
+        {
+          "heading": "Skill Structure",
+          "level": 2,
+          "line": 93
+        },
+        {
+          "heading": "SKILL.md Format",
+          "level": 3,
+          "line": 108
+        },
+        {
+          "heading": "Frontmatter",
+          "level": 2,
+          "line": 138
+        },
+        {
+          "heading": "Name Rules",
+          "level": 3,
+          "line": 152
+        },
+        {
+          "heading": "Description Best Practices",
+          "level": 3,
+          "line": 163
+        },
+        {
+          "heading": "Validation",
+          "level": 2,
+          "line": 177
+        },
+        {
+          "heading": "Example",
+          "level": 2,
+          "line": 191
+        },
+        {
+          "heading": "Skill Repositories",
+          "level": 2,
+          "line": 229
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 14
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/terminal-setup.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 192,
+      "nonEmptyLines": 130,
+      "sections": [
+        {
+          "heading": "Terminal Setup",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Capability Overrides",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Kitty",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "iTerm2",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Regular TUI mode",
+          "level": 3,
+          "line": 23
+        },
+        {
+          "heading": "Fullscreen TUI mode",
+          "level": 3,
+          "line": 27
+        },
+        {
+          "heading": "Apple Terminal",
+          "level": 2,
+          "line": 38
+        },
+        {
+          "heading": "Ghostty",
+          "level": 2,
+          "line": 44
+        },
+        {
+          "heading": "Fullscreen TUI mode",
+          "level": 3,
+          "line": 64
+        },
+        {
+          "heading": "WezTerm",
+          "level": 2,
+          "line": 68
+        },
+        {
+          "heading": "Alacritty",
+          "level": 2,
+          "line": 98
+        },
+        {
+          "heading": "VS Code (Integrated Terminal)",
+          "level": 2,
+          "line": 111
+        },
+        {
+          "heading": "Zed (Integrated Terminal)",
+          "level": 2,
+          "line": 133
+        },
+        {
+          "heading": "Windows Terminal",
+          "level": 2,
+          "line": 148
+        },
+        {
+          "heading": "xfce4-terminal, terminator",
+          "level": 2,
+          "line": 175
+        },
+        {
+          "heading": "IntelliJ IDEA (Integrated Terminal)",
+          "level": 2,
+          "line": 186
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 16
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/termux.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 126,
+      "nonEmptyLines": 92,
+      "sections": [
+        {
+          "heading": "Termux (Android) Setup",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Prerequisites",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Installation",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "Clipboard Support",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "Example AGENTS.md for Termux",
+          "level": 2,
+          "line": 35
+        },
+        {
+          "heading": "Limitations",
+          "level": 2,
+          "line": 96
+        },
+        {
+          "heading": "Troubleshooting",
+          "level": 2,
+          "line": 101
+        },
+        {
+          "heading": "Clipboard not working",
+          "level": 3,
+          "line": 103
+        },
+        {
+          "heading": "Permission denied for shared storage",
+          "level": 3,
+          "line": 114
+        },
+        {
+          "heading": "Node.js installation issues",
+          "level": 3,
+          "line": 121
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/themes.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 322,
+      "nonEmptyLines": 256,
+      "sections": [
+        {
+          "heading": "Themes",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "Table of Contents",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Locations",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "Selecting a Theme",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "Initial Theme",
+          "level": 3,
+          "line": 42
+        },
+        {
+          "heading": "Creating a Custom Theme",
+          "level": 2,
+          "line": 59
+        },
+        {
+          "heading": "Theme Format",
+          "level": 2,
+          "line": 143
+        },
+        {
+          "heading": "Color Tokens",
+          "level": 2,
+          "line": 168
+        },
+        {
+          "heading": "Core UI (13 colors)",
+          "level": 3,
+          "line": 172
+        },
+        {
+          "heading": "Backgrounds & Content (11 required, 2 optional)",
+          "level": 3,
+          "line": 190
+        },
+        {
+          "heading": "Markdown (10 colors)",
+          "level": 3,
+          "line": 208
+        },
+        {
+          "heading": "Tool Diffs (3 colors)",
+          "level": 3,
+          "line": 223
+        },
+        {
+          "heading": "Syntax Highlighting (9 colors)",
+          "level": 3,
+          "line": 231
+        },
+        {
+          "heading": "Thinking Level Borders (6 required, 1 optional)",
+          "level": 3,
+          "line": 245
+        },
+        {
+          "heading": "Bash Mode (1 color)",
+          "level": 3,
+          "line": 259
+        },
+        {
+          "heading": "HTML Export (optional)",
+          "level": 3,
+          "line": 265
+        },
+        {
+          "heading": "Color Values",
+          "level": 2,
+          "line": 279
+        },
+        {
+          "heading": "256-Color Palette",
+          "level": 3,
+          "line": 290
+        },
+        {
+          "heading": "Terminal Compatibility",
+          "level": 3,
+          "line": 296
+        },
+        {
+          "heading": "Tips",
+          "level": 2,
+          "line": 306
+        },
+        {
+          "heading": "Examples",
+          "level": 2,
+          "line": 318
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 21
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/tmux.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 63,
+      "nonEmptyLines": 41,
+      "sections": [
+        {
+          "heading": "tmux Setup",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Recommended Configuration",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Why `csi-u` Is Recommended",
+          "level": 2,
+          "line": 23
+        },
+        {
+          "heading": "What This Fixes",
+          "level": 2,
+          "line": 45
+        },
+        {
+          "heading": "Requirements",
+          "level": 2,
+          "line": 58
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/tui.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 961,
+      "nonEmptyLines": 739,
+      "sections": [
+        {
+          "heading": "TUI Components",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "Component Interface",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Focusable Interface (IME Support)",
+          "level": 2,
+          "line": 33
+        },
+        {
+          "heading": "Container Components with Embedded Inputs",
+          "level": 3,
+          "line": 59
+        },
+        {
+          "heading": "Using Components",
+          "level": 2,
+          "line": 89
+        },
+        {
+          "heading": "Overlays",
+          "level": 2,
+          "line": 124
+        },
+        {
+          "heading": "Overlay Focus",
+          "level": 3,
+          "line": 175
+        },
+        {
+          "heading": "Overlay Lifecycle",
+          "level": 3,
+          "line": 181
+        },
+        {
+          "heading": "Built-in Components",
+          "level": 2,
+          "line": 204
+        },
+        {
+          "heading": "Text",
+          "level": 3,
+          "line": 212
+        },
+        {
+          "heading": "Box",
+          "level": 3,
+          "line": 226
+        },
+        {
+          "heading": "Container",
+          "level": 3,
+          "line": 240
+        },
+        {
+          "heading": "Spacer",
+          "level": 3,
+          "line": 251
+        },
+        {
+          "heading": "Markdown",
+          "level": 3,
+          "line": 259
+        },
+        {
+          "heading": "Image",
+          "level": 3,
+          "line": 273
+        },
+        {
+          "heading": "Keyboard Input",
+          "level": 2,
+          "line": 286
+        },
+        {
+          "heading": "Mouse Input",
+          "level": 2,
+          "line": 312
+        },
+        {
+          "heading": "Line Width",
+          "level": 2,
+          "line": 328
+        },
+        {
+          "heading": "Creating Custom Components",
+          "level": 2,
+          "line": 346
+        },
+        {
+          "heading": "Theming",
+          "level": 2,
+          "line": 432
+        },
+        {
+          "heading": "Debug logging",
+          "level": 2,
+          "line": 488
+        },
+        {
+          "heading": "Performance",
+          "level": 2,
+          "line": 496
+        },
+        {
+          "heading": "Invalidation and Theme Changes",
+          "level": 2,
+          "line": 524
+        },
+        {
+          "heading": "The Problem",
+          "level": 3,
+          "line": 528
+        },
+        {
+          "heading": "The Solution",
+          "level": 3,
+          "line": 549
+        },
+        {
+          "heading": "Pattern: Rebuild on Invalidate",
+          "level": 3,
+          "line": 578
+        },
+        {
+          "heading": "When This Matters",
+          "level": 3,
+          "line": 612
+        },
+        {
+          "heading": "Common Patterns",
+          "level": 2,
+          "line": 626
+        },
+        {
+          "heading": "Pattern 1: Selection Dialog (SelectList)",
+          "level": 3,
+          "line": 630
+        },
+        {
+          "heading": "Pattern 2: Async Operation with Cancel (BorderedLoader)",
+          "level": 3,
+          "line": 690
+        },
+        {
+          "heading": "Pattern 3: Settings/Toggles (SettingsList)",
+          "level": 3,
+          "line": 722
+        },
+        {
+          "heading": "Pattern 4: Persistent Status Indicator",
+          "level": 3,
+          "line": 766
+        },
+        {
+          "heading": "Pattern 4b: Working Indicator Customization",
+          "level": 3,
+          "line": 780
+        },
+        {
+          "heading": "Pattern 5: Widgets Above/Below Editor",
+          "level": 3,
+          "line": 810
+        },
+        {
+          "heading": "Pattern 6: Custom Footer",
+          "level": 3,
+          "line": 840
+        },
+        {
+          "heading": "Pattern 7: Custom Editor (vim mode, etc.)",
+          "level": 3,
+          "line": 862
+        },
+        {
+          "heading": "Key Rules",
+          "level": 2,
+          "line": 939
+        },
+        {
+          "heading": "Examples",
+          "level": 2,
+          "line": 951
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 38
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/usage.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 311,
+      "nonEmptyLines": 223,
+      "sections": [
+        {
+          "heading": "Using Pi",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Interactive Mode",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Editor Features",
+          "level": 3,
+          "line": 18
+        },
+        {
+          "heading": "Slash Commands",
+          "level": 2,
+          "line": 33
+        },
+        {
+          "heading": "Message Queue",
+          "level": 2,
+          "line": 63
+        },
+        {
+          "heading": "Sessions",
+          "level": 2,
+          "line": 76
+        },
+        {
+          "heading": "Context Files",
+          "level": 2,
+          "line": 99
+        },
+        {
+          "heading": "System Prompt Files",
+          "level": 3,
+          "line": 111
+        },
+        {
+          "heading": "Project Trust",
+          "level": 3,
+          "line": 120
+        },
+        {
+          "heading": "Exporting and Sharing Sessions",
+          "level": 2,
+          "line": 135
+        },
+        {
+          "heading": "CLI Reference",
+          "level": 2,
+          "line": 143
+        },
+        {
+          "heading": "Package Commands",
+          "level": 3,
+          "line": 149
+        },
+        {
+          "heading": "Modes",
+          "level": 3,
+          "line": 169
+        },
+        {
+          "heading": "Model Options",
+          "level": 3,
+          "line": 185
+        },
+        {
+          "heading": "Session Options",
+          "level": 3,
+          "line": 196
+        },
+        {
+          "heading": "Tool Options",
+          "level": 3,
+          "line": 208
+        },
+        {
+          "heading": "Resource Options",
+          "level": 3,
+          "line": 219
+        },
+        {
+          "heading": "Other Options",
+          "level": 3,
+          "line": 239
+        },
+        {
+          "heading": "File Arguments",
+          "level": 3,
+          "line": 258
+        },
+        {
+          "heading": "Examples",
+          "level": 3,
+          "line": 268
+        },
+        {
+          "heading": "Design Principles",
+          "level": 2,
+          "line": 305
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 21
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/windows.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 39,
+      "nonEmptyLines": 27,
+      "sections": [
+        {
+          "heading": "Windows Setup",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "PowerShell Tool",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Custom Bash Path",
+          "level": 2,
+          "line": 33
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    }
+  ]
+}

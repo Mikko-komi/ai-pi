@@ -1,0 +1,1808 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 9,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 9,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 9
+    }
+  },
+  "results": [
+    {
+      "path": "packages/agent/docs/assistant-durability.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 355,
+      "nonEmptyLines": 253,
+      "sections": [
+        {
+          "heading": "Assistant partial durability — implementation handoff",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Goals",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Non-goals",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Storage",
+          "level": 2,
+          "line": 31
+        },
+        {
+          "heading": "Frame contract",
+          "level": 2,
+          "line": 60
+        },
+        {
+          "heading": "Fresh stream scheduling",
+          "level": 2,
+          "line": 83
+        },
+        {
+          "heading": "Normal settlement",
+          "level": 2,
+          "line": 116
+        },
+        {
+          "heading": "Unknown-outcome generation recovery",
+          "level": 2,
+          "line": 141
+        },
+        {
+          "heading": "Cancellation",
+          "level": 2,
+          "line": 171
+        },
+        {
+          "heading": "Deferred polling",
+          "level": 2,
+          "line": 185
+        },
+        {
+          "heading": "Structural generation scope",
+          "level": 2,
+          "line": 197
+        },
+        {
+          "heading": "Snapshots and reconnect",
+          "level": 2,
+          "line": 203
+        },
+        {
+          "heading": "Events",
+          "level": 2,
+          "line": 219
+        },
+        {
+          "heading": "Close, fault, and external finalization",
+          "level": 2,
+          "line": 240
+        },
+        {
+          "heading": "Terminal cleanup, forks, and migrations",
+          "level": 2,
+          "line": 256
+        },
+        {
+          "heading": "Races",
+          "level": 2,
+          "line": 266
+        },
+        {
+          "heading": "Invariants",
+          "level": 2,
+          "line": 280
+        },
+        {
+          "heading": "Required tests",
+          "level": 2,
+          "line": 295
+        },
+        {
+          "heading": "Frame integration",
+          "level": 3,
+          "line": 297
+        },
+        {
+          "heading": "Settlement and recovery",
+          "level": 3,
+          "line": 310
+        },
+        {
+          "heading": "Deferred, snapshots, and lifecycle",
+          "level": 3,
+          "line": 322
+        },
+        {
+          "heading": "Storage lifecycle",
+          "level": 3,
+          "line": 333
+        },
+        {
+          "heading": "Implementation map",
+          "level": 2,
+          "line": 342
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 23
+      }
+    },
+    {
+      "path": "packages/agent/docs/harness.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 1468,
+      "nonEmptyLines": 1057,
+      "sections": [
+        {
+          "heading": "AgentHarness — implementation specification",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Part 0 — Orientation",
+          "level": 1,
+          "line": 17
+        },
+        {
+          "heading": "0.1 What this is",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "0.2 System model",
+          "level": 2,
+          "line": 23
+        },
+        {
+          "heading": "0.3 The three stores",
+          "level": 2,
+          "line": 35
+        },
+        {
+          "heading": "0.4 Worked example — a Slack thread",
+          "level": 2,
+          "line": 56
+        },
+        {
+          "heading": "0.5 Worked example — a crash mid-tool",
+          "level": 2,
+          "line": 91
+        },
+        {
+          "heading": "0.6 Non-goals",
+          "level": 2,
+          "line": 116
+        },
+        {
+          "heading": "0.7 Notation and source types",
+          "level": 2,
+          "line": 126
+        },
+        {
+          "heading": "0.8 Validation boundary",
+          "level": 2,
+          "line": 137
+        },
+        {
+          "heading": "0.9 Implementation status",
+          "level": 2,
+          "line": 141
+        },
+        {
+          "heading": "Part 1 — Storage",
+          "level": 1,
+          "line": 162
+        },
+        {
+          "heading": "1.1 The model",
+          "level": 2,
+          "line": 166
+        },
+        {
+          "heading": "1.2 Identity",
+          "level": 2,
+          "line": 202
+        },
+        {
+          "heading": "1.3 Bound values and lists",
+          "level": 2,
+          "line": 212
+        },
+        {
+          "heading": "1.4 Transactions",
+          "level": 2,
+          "line": 283
+        },
+        {
+          "heading": "1.5 Queries",
+          "level": 2,
+          "line": 307
+        },
+        {
+          "heading": "1.6 Usage ledger",
+          "level": 2,
+          "line": 339
+        },
+        {
+          "heading": "1.7 Backends",
+          "level": 2,
+          "line": 348
+        },
+        {
+          "heading": "Memory",
+          "level": 3,
+          "line": 352
+        },
+        {
+          "heading": "JSONL",
+          "level": 3,
+          "line": 356
+        },
+        {
+          "heading": "SQLite",
+          "level": 3,
+          "line": 369
+        },
+        {
+          "heading": "1.8 Why write-once plus values and lists",
+          "level": 2,
+          "line": 423
+        },
+        {
+          "heading": "Part 2 — The conversation tree",
+          "level": 1,
+          "line": 428
+        },
+        {
+          "heading": "2.1 Entries",
+          "level": 2,
+          "line": 430
+        },
+        {
+          "heading": "2.2 Placement",
+          "level": 2,
+          "line": 456
+        },
+        {
+          "heading": "2.3 Branches and AgentLanes",
+          "level": 2,
+          "line": 479
+        },
+        {
+          "heading": "2.4 Session metadata and application values",
+          "level": 2,
+          "line": 487
+        },
+        {
+          "heading": "2.5 Branch queries and context",
+          "level": 2,
+          "line": 491
+        },
+        {
+          "heading": "2.6 The branch index",
+          "level": 2,
+          "line": 520
+        },
+        {
+          "heading": "2.7 Forks",
+          "level": 2,
+          "line": 530
+        },
+        {
+          "heading": "2.8 Session and repository boundary",
+          "level": 2,
+          "line": 553
+        },
+        {
+          "heading": "Search",
+          "level": 3,
+          "line": 568
+        },
+        {
+          "heading": "2.9 The precise rewrite",
+          "level": 2,
+          "line": 578
+        },
+        {
+          "heading": "Part 3 — The operation state machine",
+          "level": 1,
+          "line": 584
+        },
+        {
+          "heading": "3.1 Operations",
+          "level": 2,
+          "line": 586
+        },
+        {
+          "heading": "3.2 Operation state — the durable restart point",
+          "level": 2,
+          "line": 604
+        },
+        {
+          "heading": "3.3 Lane state and the restore projection",
+          "level": 2,
+          "line": 650
+        },
+        {
+          "heading": "3.4 The atomic transition rule",
+          "level": 2,
+          "line": 664
+        },
+        {
+          "heading": "3.5 The graph",
+          "level": 2,
+          "line": 670
+        },
+        {
+          "heading": "3.6 Acceptance",
+          "level": 2,
+          "line": 716
+        },
+        {
+          "heading": "3.7 Assistant generation",
+          "level": 2,
+          "line": 738
+        },
+        {
+          "heading": "Streamed frame persistence",
+          "level": 3,
+          "line": 757
+        },
+        {
+          "heading": "Classification order",
+          "level": 3,
+          "line": 763
+        },
+        {
+          "heading": "3.8 Tools",
+          "level": 2,
+          "line": 776
+        },
+        {
+          "heading": "3.9 Summary generation — compaction and navigation summaries",
+          "level": 2,
+          "line": 802
+        },
+        {
+          "heading": "3.10 Navigation",
+          "level": 2,
+          "line": 820
+        },
+        {
+          "heading": "3.11 Inbox, queues, deferred writes",
+          "level": 2,
+          "line": 824
+        },
+        {
+          "heading": "3.12 The checkpoint and boundary procedure",
+          "level": 2,
+          "line": 841
+        },
+        {
+          "heading": "3.13 Terminal transactions and result records",
+          "level": 2,
+          "line": 854
+        },
+        {
+          "heading": "Part 4 — Execution, recovery, abort, close",
+          "level": 1,
+          "line": 873
+        },
+        {
+          "heading": "4.1 The live operation task",
+          "level": 2,
+          "line": 875
+        },
+        {
+          "heading": "4.2 Effect gate",
+          "level": 2,
+          "line": 898
+        },
+        {
+          "heading": "4.3 The Session mutation line",
+          "level": 2,
+          "line": 951
+        },
+        {
+          "heading": "4.4 Attachment and open-operation inventory",
+          "level": 2,
+          "line": 959
+        },
+        {
+          "heading": "4.5 Driving and crash recovery",
+          "level": 2,
+          "line": 967
+        },
+        {
+          "heading": "4.6 Abort and cancellation reconciliation",
+          "level": 2,
+          "line": 995
+        },
+        {
+          "heading": "4.7 Close — a controlled crash",
+          "level": 2,
+          "line": 1005
+        },
+        {
+          "heading": "4.8 Faults",
+          "level": 2,
+          "line": 1009
+        },
+        {
+          "heading": "Part 5 — Public surface",
+          "level": 1,
+          "line": 1015
+        },
+        {
+          "heading": "5.1 The lane surface",
+          "level": 2,
+          "line": 1017
+        },
+        {
+          "heading": "Results",
+          "level": 3,
+          "line": 1033
+        },
+        {
+          "heading": "5.2 The harness",
+          "level": 2,
+          "line": 1069
+        },
+        {
+          "heading": "Options",
+          "level": 3,
+          "line": 1084
+        },
+        {
+          "heading": "5.3 Session and Branch",
+          "level": 2,
+          "line": 1096
+        },
+        {
+          "heading": "5.4 Snapshots and subscription",
+          "level": 2,
+          "line": 1100
+        },
+        {
+          "heading": "5.5 Events",
+          "level": 2,
+          "line": 1144
+        },
+        {
+          "heading": "5.6 Hooks",
+          "level": 2,
+          "line": 1166
+        },
+        {
+          "heading": "5.7 Harness execution blocks",
+          "level": 2,
+          "line": 1208
+        },
+        {
+          "heading": "Assistant streaming",
+          "level": 3,
+          "line": 1212
+        },
+        {
+          "heading": "Tool phases",
+          "level": 3,
+          "line": 1220
+        },
+        {
+          "heading": "5.8 Telemetry",
+          "level": 2,
+          "line": 1232
+        },
+        {
+          "heading": "Part 6 — Future: partitioned retention (Postgres)",
+          "level": 1,
+          "line": 1251
+        },
+        {
+          "heading": "Part 7 — Schema evolution",
+          "level": 1,
+          "line": 1255
+        },
+        {
+          "heading": "Part 8 — Work packages",
+          "level": 1,
+          "line": 1282
+        },
+        {
+          "heading": "Part 9 — Invariants and tests",
+          "level": 1,
+          "line": 1307
+        },
+        {
+          "heading": "9.1 Invariants",
+          "level": 2,
+          "line": 1309
+        },
+        {
+          "heading": "9.2 Race catalog",
+          "level": 2,
+          "line": 1358
+        },
+        {
+          "heading": "9.3 Test tiers",
+          "level": 2,
+          "line": 1393
+        },
+        {
+          "heading": "Appendix A — Glossary",
+          "level": 1,
+          "line": 1419
+        },
+        {
+          "heading": "Appendix B — Coding-agent v3-format compatibility",
+          "level": 1,
+          "line": 1449
+        },
+        {
+          "heading": "Appendix C — Open questions",
+          "level": 1,
+          "line": 1465
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 82
+      }
+    },
+    {
+      "path": "packages/agent/docs/plugins.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 1158,
+      "nonEmptyLines": 858,
+      "sections": [
+        {
+          "heading": "Coding-Agent Application Hosts and Facets",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Bird's-eye view",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Why this shape",
+          "level": 2,
+          "line": 35
+        },
+        {
+          "heading": "One feature, several independently loaded facets",
+          "level": 2,
+          "line": 44
+        },
+        {
+          "heading": "Loading and connecting hosts",
+          "level": 2,
+          "line": 87
+        },
+        {
+          "heading": "Services connect host facets",
+          "level": 2,
+          "line": 112
+        },
+        {
+          "heading": "Dependency declaration and assembly",
+          "level": 3,
+          "line": 132
+        },
+        {
+          "heading": "Shared contract",
+          "level": 3,
+          "line": 160
+        },
+        {
+          "heading": "Session facet",
+          "level": 3,
+          "line": 188
+        },
+        {
+          "heading": "TUI facet",
+          "level": 3,
+          "line": 239
+        },
+        {
+          "heading": "Service semantics",
+          "level": 3,
+          "line": 272
+        },
+        {
+          "heading": "What each facet kind grants",
+          "level": 2,
+          "line": 287
+        },
+        {
+          "heading": "Local services and narrow remote facades",
+          "level": 2,
+          "line": 378
+        },
+        {
+          "heading": "Replicated state: `ReplicatedState`",
+          "level": 2,
+          "line": 394
+        },
+        {
+          "heading": "Contribution registries: many contributors, one result",
+          "level": 2,
+          "line": 428
+        },
+        {
+          "heading": "Context, cancellation, and telemetry for facet authors",
+          "level": 2,
+          "line": 455
+        },
+        {
+          "heading": "Service-owned jobs",
+          "level": 2,
+          "line": 488
+        },
+        {
+          "heading": "The server: directory, management, and routing",
+          "level": 2,
+          "line": 504
+        },
+        {
+          "heading": "Server host services",
+          "level": 3,
+          "line": 510
+        },
+        {
+          "heading": "Shared contract",
+          "level": 3,
+          "line": 542
+        },
+        {
+          "heading": "Server facet",
+          "level": 3,
+          "line": 568
+        },
+        {
+          "heading": "TUI facet: the picker",
+          "level": 3,
+          "line": 625
+        },
+        {
+          "heading": "Attaching and switching",
+          "level": 3,
+          "line": 658
+        },
+        {
+          "heading": "Routed session call",
+          "level": 3,
+          "line": 669
+        },
+        {
+          "heading": "Routing is host infrastructure",
+          "level": 3,
+          "line": 680
+        },
+        {
+          "heading": "Session-owned deferred interactions: the question extension",
+          "level": 2,
+          "line": 686
+        },
+        {
+          "heading": "Shared contracts",
+          "level": 3,
+          "line": 692
+        },
+        {
+          "heading": "Session facet: add one dialog service",
+          "level": 3,
+          "line": 739
+        },
+        {
+          "heading": "TUI and web facets: observe every dialog instance",
+          "level": 3,
+          "line": 807
+        },
+        {
+          "heading": "Durability and worker replacement",
+          "level": 3,
+          "line": 862
+        },
+        {
+          "heading": "Lifecycle and disposal",
+          "level": 2,
+          "line": 870
+        },
+        {
+          "heading": "Reloading facets",
+          "level": 2,
+          "line": 876
+        },
+        {
+          "heading": "Shape-preserving provider replacement",
+          "level": 3,
+          "line": 880
+        },
+        {
+          "heading": "Shape changes and process replacement",
+          "level": 3,
+          "line": 901
+        },
+        {
+          "heading": "Connection loss, errors, and security",
+          "level": 2,
+          "line": 927
+        },
+        {
+          "heading": "Host composition",
+          "level": 2,
+          "line": 945
+        },
+        {
+          "heading": "Open decisions",
+          "level": 2,
+          "line": 949
+        },
+        {
+          "heading": "Required tests",
+          "level": 2,
+          "line": 963
+        },
+        {
+          "heading": "Collaborative diff review: a durable shared sidebar",
+          "level": 2,
+          "line": 974
+        },
+        {
+          "heading": "Shared remote contract",
+          "level": 3,
+          "line": 995
+        },
+        {
+          "heading": "Narrow local durability capabilities",
+          "level": 3,
+          "line": 1039
+        },
+        {
+          "heading": "Why record mutations need a critical region",
+          "level": 3,
+          "line": 1045
+        },
+        {
+          "heading": "Session facet",
+          "level": 3,
+          "line": 1094
+        },
+        {
+          "heading": "TUI and web facets",
+          "level": 3,
+          "line": 1121
+        },
+        {
+          "heading": "Deferred: delta-based replicated state",
+          "level": 2,
+          "line": 1142
+        },
+        {
+          "heading": "Possible future primitive",
+          "level": 3,
+          "line": 1150
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 46
+      }
+    },
+    {
+      "path": "packages/agent/docs/rpc.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 215,
+      "nonEmptyLines": 143,
+      "sections": [
+        {
+          "heading": "Facet Service RPC",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Role",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "Non-goals",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Service contracts and typed facades",
+          "level": 2,
+          "line": 26
+        },
+        {
+          "heading": "Dependency ledger",
+          "level": 2,
+          "line": 40
+        },
+        {
+          "heading": "Bindings and identity",
+          "level": 2,
+          "line": 55
+        },
+        {
+          "heading": "Server control plane",
+          "level": 3,
+          "line": 59
+        },
+        {
+          "heading": "Calls, context, and routing",
+          "level": 2,
+          "line": 82
+        },
+        {
+          "heading": "Replicated state and keyed instances",
+          "level": 2,
+          "line": 88
+        },
+        {
+          "heading": "Private returned references",
+          "level": 2,
+          "line": 96
+        },
+        {
+          "heading": "Context, cancellation, and telemetry",
+          "level": 2,
+          "line": 102
+        },
+        {
+          "heading": "Security and lifecycle",
+          "level": 2,
+          "line": 117
+        },
+        {
+          "heading": "Tests",
+          "level": 2,
+          "line": 125
+        },
+        {
+          "heading": "Open protocol mechanics",
+          "level": 2,
+          "line": 137
+        },
+        {
+          "heading": "Example: directory and selected session",
+          "level": 2,
+          "line": 143
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 15
+      }
+    },
+    {
+      "path": "packages/agent/docs/runtime-simplification.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 391,
+      "nonEmptyLines": 274,
+      "sections": [
+        {
+          "heading": "Existing AgentHarness runtime simplification",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Scope",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Implementation status",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "WP05 structural status",
+          "level": 3,
+          "line": 33
+        },
+        {
+          "heading": "Core model",
+          "level": 2,
+          "line": 52
+        },
+        {
+          "heading": "Durable state",
+          "level": 2,
+          "line": 66
+        },
+        {
+          "heading": "State and content boundary",
+          "level": 2,
+          "line": 86
+        },
+        {
+          "heading": "Concurrency model",
+          "level": 2,
+          "line": 110
+        },
+        {
+          "heading": "Operation advancement",
+          "level": 3,
+          "line": 112
+        },
+        {
+          "heading": "Cancellation boundaries",
+          "level": 3,
+          "line": 135
+        },
+        {
+          "heading": "Close",
+          "level": 3,
+          "line": 145
+        },
+        {
+          "heading": "Small concrete mutation API",
+          "level": 2,
+          "line": 159
+        },
+        {
+          "heading": "`continueOperation`",
+          "level": 3,
+          "line": 163
+        },
+        {
+          "heading": "`settleOperation`",
+          "level": 3,
+          "line": 174
+        },
+        {
+          "heading": "Durable procedure shape",
+          "level": 2,
+          "line": 186
+        },
+        {
+          "heading": "Drive lifecycle",
+          "level": 2,
+          "line": 199
+        },
+        {
+          "heading": "Checks that remain",
+          "level": 2,
+          "line": 223
+        },
+        {
+          "heading": "Completed staged implementation plan",
+          "level": 2,
+          "line": 241
+        },
+        {
+          "heading": "Stage 1 — Canonical flat durable types",
+          "level": 3,
+          "line": 243
+        },
+        {
+          "heading": "Stage 2 — Add canonical transition operations",
+          "level": 3,
+          "line": 262
+        },
+        {
+          "heading": "Stage 3 — Convert starting, checkpoint, and assistant",
+          "level": 3,
+          "line": 280
+        },
+        {
+          "heading": "Stage 4 — Convert deferred and tools",
+          "level": 3,
+          "line": 299
+        },
+        {
+          "heading": "Stage 5 — Remove ownership-loss machinery",
+          "level": 3,
+          "line": 317
+        },
+        {
+          "heading": "Stage 6 — Close and fault",
+          "level": 3,
+          "line": 337
+        },
+        {
+          "heading": "Stage 7 — Finish WP05 on the simpler substrate",
+          "level": 3,
+          "line": 356
+        },
+        {
+          "heading": "Validation",
+          "level": 2,
+          "line": 374
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 26
+      }
+    },
+    {
+      "path": "packages/agent/docs/telemetry-schema.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 383,
+      "nonEmptyLines": 258,
+      "sections": [
+        {
+          "heading": "Pi Agent Telemetry Schemas",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "AI request schema",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "`pi.ai.request`",
+          "level": 3,
+          "line": 9
+        },
+        {
+          "heading": "Start attributes",
+          "level": 4,
+          "line": 17
+        },
+        {
+          "heading": "End attributes",
+          "level": 4,
+          "line": 28
+        },
+        {
+          "heading": "Events",
+          "level": 4,
+          "line": 49
+        },
+        {
+          "heading": "Harness schema",
+          "level": 2,
+          "line": 53
+        },
+        {
+          "heading": "`pi.harness.run`",
+          "level": 3,
+          "line": 57
+        },
+        {
+          "heading": "Start attributes",
+          "level": 4,
+          "line": 65
+        },
+        {
+          "heading": "End attributes",
+          "level": 4,
+          "line": 75
+        },
+        {
+          "heading": "Events",
+          "level": 4,
+          "line": 85
+        },
+        {
+          "heading": "`pi.harness.compaction`",
+          "level": 3,
+          "line": 89
+        },
+        {
+          "heading": "Start attributes",
+          "level": 4,
+          "line": 97
+        },
+        {
+          "heading": "End attributes",
+          "level": 4,
+          "line": 107
+        },
+        {
+          "heading": "Events",
+          "level": 4,
+          "line": 117
+        },
+        {
+          "heading": "`pi.harness.navigation`",
+          "level": 3,
+          "line": 121
+        },
+        {
+          "heading": "Start attributes",
+          "level": 4,
+          "line": 129
+        },
+        {
+          "heading": "End attributes",
+          "level": 4,
+          "line": 139
+        },
+        {
+          "heading": "Events",
+          "level": 4,
+          "line": 149
+        },
+        {
+          "heading": "`pi.harness.checkpoint`",
+          "level": 3,
+          "line": 153
+        },
+        {
+          "heading": "Start attributes",
+          "level": 4,
+          "line": 161
+        },
+        {
+          "heading": "End attributes",
+          "level": 4,
+          "line": 169
+        },
+        {
+          "heading": "Events",
+          "level": 4,
+          "line": 177
+        },
+        {
+          "heading": "`pi.harness.turn`",
+          "level": 3,
+          "line": 181
+        },
+        {
+          "heading": "Start attributes",
+          "level": 4,
+          "line": 189
+        },
+        {
+          "heading": "End attributes",
+          "level": 4,
+          "line": 197
+        },
+        {
+          "heading": "Events",
+          "level": 4,
+          "line": 205
+        },
+        {
+          "heading": "`pi.harness.step`",
+          "level": 3,
+          "line": 209
+        },
+        {
+          "heading": "Start attributes",
+          "level": 4,
+          "line": 217
+        },
+        {
+          "heading": "End attributes",
+          "level": 4,
+          "line": 227
+        },
+        {
+          "heading": "Events",
+          "level": 4,
+          "line": 235
+        },
+        {
+          "heading": "`pi.harness.tool`",
+          "level": 3,
+          "line": 239
+        },
+        {
+          "heading": "Start attributes",
+          "level": 4,
+          "line": 247
+        },
+        {
+          "heading": "End attributes",
+          "level": 4,
+          "line": 259
+        },
+        {
+          "heading": "Events",
+          "level": 4,
+          "line": 267
+        },
+        {
+          "heading": "`pi.harness.hook`",
+          "level": 3,
+          "line": 271
+        },
+        {
+          "heading": "Start attributes",
+          "level": 4,
+          "line": 279
+        },
+        {
+          "heading": "End attributes",
+          "level": 4,
+          "line": 288
+        },
+        {
+          "heading": "Events",
+          "level": 4,
+          "line": 296
+        },
+        {
+          "heading": "`pi.harness.sleep`",
+          "level": 3,
+          "line": 300
+        },
+        {
+          "heading": "Start attributes",
+          "level": 4,
+          "line": 308
+        },
+        {
+          "heading": "End attributes",
+          "level": 4,
+          "line": 315
+        },
+        {
+          "heading": "Events",
+          "level": 4,
+          "line": 323
+        },
+        {
+          "heading": "`pi.harness.event_handler`",
+          "level": 3,
+          "line": 327
+        },
+        {
+          "heading": "Start attributes",
+          "level": 4,
+          "line": 335
+        },
+        {
+          "heading": "End attributes",
+          "level": 4,
+          "line": 342
+        },
+        {
+          "heading": "Events",
+          "level": 4,
+          "line": 350
+        },
+        {
+          "heading": "`pi.session.write`",
+          "level": 3,
+          "line": 354
+        },
+        {
+          "heading": "Start attributes",
+          "level": 4,
+          "line": 362
+        },
+        {
+          "heading": "End attributes",
+          "level": 4,
+          "line": 372
+        },
+        {
+          "heading": "Events",
+          "level": 4,
+          "line": 381
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 51
+      }
+    },
+    {
+      "path": "packages/agent/docs/telemetry.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 251,
+      "nonEmptyLines": 174,
+      "sections": [
+        {
+          "heading": "Invocation Context and Telemetry Design Notes",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Goal",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Context model",
+          "level": 2,
+          "line": 16
+        },
+        {
+          "heading": "Receiver ownership",
+          "level": 2,
+          "line": 56
+        },
+        {
+          "heading": "Existing typed telemetry remains authoritative",
+          "level": 2,
+          "line": 73
+        },
+        {
+          "heading": "Concurrent parentage",
+          "level": 2,
+          "line": 101
+        },
+        {
+          "heading": "Callbacks, hooks, and events",
+          "level": 2,
+          "line": 119
+        },
+        {
+          "heading": "Drive execution and joiners",
+          "level": 2,
+          "line": 135
+        },
+        {
+          "heading": "Invocation cancellation versus durable cancellation",
+          "level": 2,
+          "line": 156
+        },
+        {
+          "heading": "RPC trace propagation",
+          "level": 2,
+          "line": 185
+        },
+        {
+          "heading": "Interface migration scaffolding",
+          "level": 2,
+          "line": 215
+        },
+        {
+          "heading": "Required tests for the later handoff",
+          "level": 2,
+          "line": 223
+        },
+        {
+          "heading": "Resolved migration decisions",
+          "level": 2,
+          "line": 240
+        },
+        {
+          "heading": "Open decisions before the telemetry handoff",
+          "level": 2,
+          "line": 246
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 14
+      }
+    },
+    {
+      "path": "packages/agent/docs/tool-durability.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 704,
+      "nonEmptyLines": 506,
+      "sections": [
+        {
+          "heading": "Tool durability — implementation handoff",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Problem",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "Goals",
+          "level": 2,
+          "line": 33
+        },
+        {
+          "heading": "Non-goals",
+          "level": 2,
+          "line": 43
+        },
+        {
+          "heading": "Durable identities",
+          "level": 2,
+          "line": 52
+        },
+        {
+          "heading": "Storage",
+          "level": 2,
+          "line": 70
+        },
+        {
+          "heading": "Existing bound values",
+          "level": 3,
+          "line": 72
+        },
+        {
+          "heading": "Invocation memos",
+          "level": 3,
+          "line": 82
+        },
+        {
+          "heading": "Partial tool output",
+          "level": 3,
+          "line": 101
+        },
+        {
+          "heading": "Tool update API",
+          "level": 2,
+          "line": 121
+        },
+        {
+          "heading": "Bash policy",
+          "level": 3,
+          "line": 153
+        },
+        {
+          "heading": "Tool-call state",
+          "level": 2,
+          "line": 164
+        },
+        {
+          "heading": "State transitions",
+          "level": 2,
+          "line": 205
+        },
+        {
+          "heading": "Fresh execution",
+          "level": 2,
+          "line": 223
+        },
+        {
+          "heading": "Clearance and intent",
+          "level": 3,
+          "line": 225
+        },
+        {
+          "heading": "Partial output",
+          "level": 3,
+          "line": 242
+        },
+        {
+          "heading": "Finalization to `outcome_ready`",
+          "level": 3,
+          "line": 256
+        },
+        {
+          "heading": "Source-ordered materialization",
+          "level": 2,
+          "line": 298
+        },
+        {
+          "heading": "Parallel execution",
+          "level": 2,
+          "line": 336
+        },
+        {
+          "heading": "Unsafe recovery with partial output",
+          "level": 2,
+          "line": 366
+        },
+        {
+          "heading": "Safe recovery",
+          "level": 2,
+          "line": 393
+        },
+        {
+          "heading": "Invocation memos",
+          "level": 2,
+          "line": 409
+        },
+        {
+          "heading": "Flue-style `step.do`",
+          "level": 2,
+          "line": 447
+        },
+        {
+          "heading": "Application persistent state",
+          "level": 2,
+          "line": 489
+        },
+        {
+          "heading": "Cancellation",
+          "level": 2,
+          "line": 516
+        },
+        {
+          "heading": "Close and external finalization",
+          "level": 2,
+          "line": 529
+        },
+        {
+          "heading": "Restore and consumption-time reads",
+          "level": 2,
+          "line": 540
+        },
+        {
+          "heading": "`planned`",
+          "level": 3,
+          "line": 546
+        },
+        {
+          "heading": "`effect_pending`",
+          "level": 3,
+          "line": 550
+        },
+        {
+          "heading": "`outcome_ready`",
+          "level": 3,
+          "line": 554
+        },
+        {
+          "heading": "`completed`",
+          "level": 3,
+          "line": 558
+        },
+        {
+          "heading": "Snapshots and reconnect",
+          "level": 2,
+          "line": 564
+        },
+        {
+          "heading": "Events and hooks",
+          "level": 2,
+          "line": 575
+        },
+        {
+          "heading": "Races",
+          "level": 2,
+          "line": 588
+        },
+        {
+          "heading": "Invariants",
+          "level": 2,
+          "line": 602
+        },
+        {
+          "heading": "Required tests",
+          "level": 2,
+          "line": 619
+        },
+        {
+          "heading": "State and restore",
+          "level": 3,
+          "line": 621
+        },
+        {
+          "heading": "Parallel ordering",
+          "level": 3,
+          "line": 631
+        },
+        {
+          "heading": "Replay and interruption",
+          "level": 3,
+          "line": 640
+        },
+        {
+          "heading": "Invocation memos and `step.do`",
+          "level": 3,
+          "line": 649
+        },
+        {
+          "heading": "Partial output",
+          "level": 3,
+          "line": 661
+        },
+        {
+          "heading": "Atomicity and instrumentation",
+          "level": 3,
+          "line": 673
+        },
+        {
+          "heading": "Implementation map",
+          "level": 2,
+          "line": 683
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 43
+      }
+    },
+    {
+      "path": "packages/agent/docs/values.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 735,
+      "nonEmptyLines": 564,
+      "sections": [
+        {
+          "heading": "Typed values and lists",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Goals",
+          "level": 2,
+          "line": 40
+        },
+        {
+          "heading": "Non-goals",
+          "level": 2,
+          "line": 53
+        },
+        {
+          "heading": "Bound address model",
+          "level": 2,
+          "line": 68
+        },
+        {
+          "heading": "Exact addresses, not families",
+          "level": 3,
+          "line": 121
+        },
+        {
+          "heading": "No global value map",
+          "level": 3,
+          "line": 157
+        },
+        {
+          "heading": "Built-in addresses",
+          "level": 2,
+          "line": 176
+        },
+        {
+          "heading": "Shared read API",
+          "level": 2,
+          "line": 252
+        },
+        {
+          "heading": "Typed transaction writes",
+          "level": 2,
+          "line": 320
+        },
+        {
+          "heading": "Scalar semantics",
+          "level": 2,
+          "line": 379
+        },
+        {
+          "heading": "List semantics",
+          "level": 2,
+          "line": 391
+        },
+        {
+          "heading": "List reads",
+          "level": 3,
+          "line": 418
+        },
+        {
+          "heading": "Assistant partial frames",
+          "level": 2,
+          "line": 442
+        },
+        {
+          "heading": "Restore policy",
+          "level": 2,
+          "line": 480
+        },
+        {
+          "heading": "Memory backend",
+          "level": 2,
+          "line": 501
+        },
+        {
+          "heading": "SQLite backend",
+          "level": 2,
+          "line": 523
+        },
+        {
+          "heading": "JSONL backend",
+          "level": 2,
+          "line": 565
+        },
+        {
+          "heading": "Snapshot compaction",
+          "level": 3,
+          "line": 585
+        },
+        {
+          "heading": "Forks and rewrites",
+          "level": 2,
+          "line": 591
+        },
+        {
+          "heading": "Schema evolution",
+          "level": 2,
+          "line": 603
+        },
+        {
+          "heading": "Instrumentation and telemetry",
+          "level": 2,
+          "line": 616
+        },
+        {
+          "heading": "Invariants",
+          "level": 2,
+          "line": 624
+        },
+        {
+          "heading": "Required tests",
+          "level": 2,
+          "line": 645
+        },
+        {
+          "heading": "Address typing and identity",
+          "level": 3,
+          "line": 647
+        },
+        {
+          "heading": "Scalar regression",
+          "level": 3,
+          "line": 667
+        },
+        {
+          "heading": "List conformance",
+          "level": 3,
+          "line": 675
+        },
+        {
+          "heading": "Application surface",
+          "level": 3,
+          "line": 698
+        },
+        {
+          "heading": "Assistant-frame integration — deferred beyond WP01",
+          "level": 3,
+          "line": 707
+        },
+        {
+          "heading": "Implementation map",
+          "level": 2,
+          "line": 723
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 29
+      }
+    }
+  ]
+}

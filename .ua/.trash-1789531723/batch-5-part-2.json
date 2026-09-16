@@ -1,0 +1,1105 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/ai/src/providers/moonshotai.ts",
+      "type": "file",
+      "name": "moonshotai.ts",
+      "filePath": "packages/ai/src/providers/moonshotai.ts",
+      "summary": "定义 Moonshot AI 国际区 provider：指向 api.moonshot.ai 的 OpenAI 兼容 Completions 端点，使用 MOONSHOT_API_KEY 鉴权。",
+      "tags": [
+        "provider",
+        "factory",
+        "认证",
+        "openai-compatible"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/moonshotai.ts:moonshotaiProvider",
+      "type": "function",
+      "name": "moonshotaiProvider",
+      "filePath": "packages/ai/src/providers/moonshotai.ts",
+      "summary": "工厂函数：创建 Moonshot AI 国际区 provider，绑定 MOONSHOT_API_KEY 与 OpenAI Completions 兼容 API。",
+      "tags": [
+        "factory",
+        "provider",
+        "openai-compatible"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        6,
+        15
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/nvidia.models.ts",
+      "type": "file",
+      "name": "nvidia.models.ts",
+      "filePath": "packages/ai/src/providers/nvidia.models.ts",
+      "summary": "导出 NVIDIA_MODELS：展平 NVIDIA NIM / Integrate API 的生成模型目录。",
+      "tags": [
+        "模型目录",
+        "generated",
+        "type-definition",
+        "nvidia"
+      ],
+      "complexity": "simple",
+      "languageNotes": "由 scripts/generate-models.ts 自动生成，通过 JSON import attributes 载入对应 data/*.json 再经 flattenModelCatalog 展平。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/nvidia.ts",
+      "type": "file",
+      "name": "nvidia.ts",
+      "filePath": "packages/ai/src/providers/nvidia.ts",
+      "summary": "定义 NVIDIA 内置 provider：对接 integrate.api.nvidia.com 的 OpenAI 兼容 Completions 端点，使用 NVIDIA_API_KEY 鉴权。",
+      "tags": [
+        "provider",
+        "factory",
+        "认证",
+        "openai-compatible"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/nvidia.ts:nvidiaProvider",
+      "type": "function",
+      "name": "nvidiaProvider",
+      "filePath": "packages/ai/src/providers/nvidia.ts",
+      "summary": "工厂函数：创建 NVIDIA provider，绑定 NVIDIA_API_KEY、NVIDIA_MODELS 与 OpenAI Completions 兼容 API。",
+      "tags": [
+        "factory",
+        "provider",
+        "openai-compatible"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        6,
+        15
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/openai-codex.models.ts",
+      "type": "file",
+      "name": "openai-codex.models.ts",
+      "filePath": "packages/ai/src/providers/openai-codex.models.ts",
+      "summary": "导出 OPENAI_CODEX_MODELS：展平 OpenAI Codex / ChatGPT 后端可用的生成模型目录。",
+      "tags": [
+        "模型目录",
+        "generated",
+        "type-definition",
+        "openai"
+      ],
+      "complexity": "simple",
+      "languageNotes": "由 scripts/generate-models.ts 自动生成，通过 JSON import attributes 载入对应 data/*.json 再经 flattenModelCatalog 展平。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/openai-codex.ts",
+      "type": "file",
+      "name": "openai-codex.ts",
+      "filePath": "packages/ai/src/providers/openai-codex.ts",
+      "summary": "定义 OpenAI Codex provider：对接 chatgpt.com/backend-api，仅通过 ChatGPT Plus/Pro 订阅 OAuth 登录，使用 openai-codex-responses 协议。",
+      "tags": [
+        "provider",
+        "factory",
+        "oauth",
+        "认证"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/openai-codex.ts:openaiCodexProvider",
+      "type": "function",
+      "name": "openaiCodexProvider",
+      "filePath": "packages/ai/src/providers/openai-codex.ts",
+      "summary": "工厂函数：创建仅 OAuth 的 OpenAI Codex provider，通过 loadOpenAICodexOAuth 登录 ChatGPT 订阅并调用 Codex Responses API。",
+      "tags": [
+        "factory",
+        "provider",
+        "oauth"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        7,
+        22
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/openai.models.ts",
+      "type": "file",
+      "name": "openai.models.ts",
+      "filePath": "packages/ai/src/providers/openai.models.ts",
+      "summary": "导出 OPENAI_MODELS：展平 OpenAI 官方生成模型目录。",
+      "tags": [
+        "模型目录",
+        "generated",
+        "type-definition",
+        "openai"
+      ],
+      "complexity": "simple",
+      "languageNotes": "由 scripts/generate-models.ts 自动生成，通过 JSON import attributes 载入对应 data/*.json 再经 flattenModelCatalog 展平。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/openai.ts",
+      "type": "file",
+      "name": "openai.ts",
+      "filePath": "packages/ai/src/providers/openai.ts",
+      "summary": "定义 OpenAI 官方 provider：指向 api.openai.com/v1，使用 OPENAI_API_KEY，并通过 openAIResponsesApi 走 Responses 协议。",
+      "tags": [
+        "provider",
+        "factory",
+        "认证",
+        "openai"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/openai.ts:openaiProvider",
+      "type": "function",
+      "name": "openaiProvider",
+      "filePath": "packages/ai/src/providers/openai.ts",
+      "summary": "工厂函数：创建 OpenAI 官方 provider，绑定 OPENAI_API_KEY、OPENAI_MODELS 与 openAIResponsesApi。",
+      "tags": [
+        "factory",
+        "provider",
+        "openai"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        6,
+        15
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/opencode-go.models.ts",
+      "type": "file",
+      "name": "opencode-go.models.ts",
+      "filePath": "packages/ai/src/providers/opencode-go.models.ts",
+      "summary": "导出 OPENCODE_GO_MODELS：展平 OpenCode Go 生成模型目录。",
+      "tags": [
+        "模型目录",
+        "generated",
+        "type-definition",
+        "opencode"
+      ],
+      "complexity": "simple",
+      "languageNotes": "由 scripts/generate-models.ts 自动生成，通过 JSON import attributes 载入对应 data/*.json 再经 flattenModelCatalog 展平。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/opencode-go.ts",
+      "type": "file",
+      "name": "opencode-go.ts",
+      "filePath": "packages/ai/src/providers/opencode-go.ts",
+      "summary": "定义 OpenCode Go provider：用 OPENCODE_API_KEY 鉴权，并按模型协议分发到 Anthropic Messages、OpenAI Completions 与 Responses，统一注入会话头。",
+      "tags": [
+        "provider",
+        "factory",
+        "认证",
+        "multi-api"
+      ],
+      "complexity": "simple",
+      "languageNotes": "createProvider 的泛型联合类型同时声明三种 API 协议。"
+    },
+    {
+      "id": "function:packages/ai/src/providers/opencode-go.ts:opencodeGoProvider",
+      "type": "function",
+      "name": "opencodeGoProvider",
+      "filePath": "packages/ai/src/providers/opencode-go.ts",
+      "summary": "工厂函数：创建 OpenCode Go provider，将三种 API 流均用 withOpenCodeSessionHeader 包装后再交给 createProvider。",
+      "tags": [
+        "factory",
+        "provider",
+        "multi-api"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        9,
+        21
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/opencode-headers.ts",
+      "type": "file",
+      "name": "opencode-headers.ts",
+      "filePath": "packages/ai/src/providers/opencode-headers.ts",
+      "summary": "为 OpenCode 流式请求包装 sessionId：在尚未设置时写入 x-opencode-session 请求头，供 Zen/Go provider 做会话路由。",
+      "tags": [
+        "middleware",
+        "header",
+        "session",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/opencode-headers.ts:withOpenCodeSessionHeader",
+      "type": "function",
+      "name": "withOpenCodeSessionHeader",
+      "filePath": "packages/ai/src/providers/opencode-headers.ts",
+      "summary": "包装 ProviderStreams：在 stream / streamSimple 发出前，把 sessionId 写入 x-opencode-session 请求头（已存在则跳过）。",
+      "tags": [
+        "middleware",
+        "header",
+        "session"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        19,
+        25
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/opencode.models.ts",
+      "type": "file",
+      "name": "opencode.models.ts",
+      "filePath": "packages/ai/src/providers/opencode.models.ts",
+      "summary": "导出 OPENCODE_MODELS：展平 OpenCode Zen 生成模型目录。",
+      "tags": [
+        "模型目录",
+        "generated",
+        "type-definition",
+        "opencode"
+      ],
+      "complexity": "simple",
+      "languageNotes": "由 scripts/generate-models.ts 自动生成，通过 JSON import attributes 载入对应 data/*.json 再经 flattenModelCatalog 展平。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/opencode.ts",
+      "type": "file",
+      "name": "opencode.ts",
+      "filePath": "packages/ai/src/providers/opencode.ts",
+      "summary": "定义 OpenCode Zen provider：用 OPENCODE_API_KEY 鉴权，并同时挂载 Anthropic、Google Generative AI、OpenAI Completions 与 Responses 四套 API，均包裹会话头。",
+      "tags": [
+        "provider",
+        "factory",
+        "认证",
+        "multi-api"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Provider 泛型为四种 API id 的联合类型，按协议键分发。"
+    },
+    {
+      "id": "function:packages/ai/src/providers/opencode.ts:opencodeProvider",
+      "type": "function",
+      "name": "opencodeProvider",
+      "filePath": "packages/ai/src/providers/opencode.ts",
+      "summary": "工厂函数：创建 OpenCode Zen provider，将 Anthropic、Google、OpenAI Completions/Responses 四套 API 均包裹会话头后注册。",
+      "tags": [
+        "factory",
+        "provider",
+        "multi-api"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        10,
+        25
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/openrouter-images.ts",
+      "type": "file",
+      "name": "openrouter-images.ts",
+      "filePath": "packages/ai/src/providers/openrouter-images.ts",
+      "summary": "定义 OpenRouter 图像 provider：复用 OPENROUTER_API_KEY 与 OpenRouter OAuth，通过 createImagesProvider 挂载 openrouterImagesApi 与 IMAGE_MODELS.openrouter。",
+      "tags": [
+        "provider",
+        "factory",
+        "图像生成",
+        "oauth"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/openrouter-images.ts:openrouterImagesProvider",
+      "type": "function",
+      "name": "openrouterImagesProvider",
+      "filePath": "packages/ai/src/providers/openrouter-images.ts",
+      "summary": "工厂函数：创建 OpenRouter 图像 provider，复用 API key / OAuth，并绑定 IMAGE_MODELS.openrouter 与 openrouterImagesApi。",
+      "tags": [
+        "factory",
+        "provider",
+        "图像生成"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        7,
+        22
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/openrouter.models.ts",
+      "type": "file",
+      "name": "openrouter.models.ts",
+      "filePath": "packages/ai/src/providers/openrouter.models.ts",
+      "summary": "导出 OPENROUTER_MODELS：展平 OpenRouter 聚合的生成模型目录。",
+      "tags": [
+        "模型目录",
+        "generated",
+        "type-definition",
+        "openrouter"
+      ],
+      "complexity": "simple",
+      "languageNotes": "由 scripts/generate-models.ts 自动生成，通过 JSON import attributes 载入对应 data/*.json 再经 flattenModelCatalog 展平。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/openrouter.ts",
+      "type": "file",
+      "name": "openrouter.ts",
+      "filePath": "packages/ai/src/providers/openrouter.ts",
+      "summary": "定义 OpenRouter 文本 provider：对接 openrouter.ai/api/v1，同时支持 API key 与 OAuth，并按协议分发 Anthropic Messages 与 OpenAI Completions。",
+      "tags": [
+        "provider",
+        "factory",
+        "oauth",
+        "multi-api"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/openrouter.ts:openrouterProvider",
+      "type": "function",
+      "name": "openrouterProvider",
+      "filePath": "packages/ai/src/providers/openrouter.ts",
+      "summary": "工厂函数：创建 OpenRouter 文本 provider，同时配置 API key 与 loadOpenRouterOAuth，并分发 Anthropic / OpenAI Completions 两套 API。",
+      "tags": [
+        "factory",
+        "provider",
+        "oauth"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        8,
+        27
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/ai/src/providers/moonshotai.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/moonshotai.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/moonshotai.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/moonshotai.ts",
+      "target": "file:packages/ai/src/providers/moonshotai.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/moonshotai.ts",
+      "target": "function:packages/ai/src/providers/moonshotai.ts:moonshotaiProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/moonshotai.ts",
+      "target": "function:packages/ai/src/providers/moonshotai.ts:moonshotaiProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/moonshotai.ts:moonshotaiProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/moonshotai.ts:moonshotaiProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/moonshotai.ts:moonshotaiProvider",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/nvidia.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/nvidia.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/nvidia.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/nvidia.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/nvidia.ts",
+      "target": "file:packages/ai/src/providers/nvidia.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/nvidia.ts",
+      "target": "function:packages/ai/src/providers/nvidia.ts:nvidiaProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/nvidia.ts",
+      "target": "function:packages/ai/src/providers/nvidia.ts:nvidiaProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/nvidia.ts:nvidiaProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/nvidia.ts:nvidiaProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/nvidia.ts:nvidiaProvider",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/openai-codex.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openai-codex.ts",
+      "target": "file:packages/ai/src/api/openai-codex-responses.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openai-codex.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openai-codex.ts",
+      "target": "file:packages/ai/src/auth/oauth/load.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openai-codex.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openai-codex.ts",
+      "target": "file:packages/ai/src/providers/openai-codex.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openai-codex.ts",
+      "target": "function:packages/ai/src/providers/openai-codex.ts:openaiCodexProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/openai-codex.ts",
+      "target": "function:packages/ai/src/providers/openai-codex.ts:openaiCodexProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/openai-codex.ts:openaiCodexProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/openai-codex.ts:openaiCodexProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:lazyOAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/openai-codex.ts:openaiCodexProvider",
+      "target": "function:packages/ai/src/auth/oauth/load.ts:loadOpenAICodexOAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/openai-codex.ts:openaiCodexProvider",
+      "target": "function:packages/ai/src/api/openai-codex-responses.lazy.ts:openAICodexResponsesApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/openai.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openai.ts",
+      "target": "file:packages/ai/src/api/openai-responses.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openai.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openai.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openai.ts",
+      "target": "file:packages/ai/src/providers/openai.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openai.ts",
+      "target": "function:packages/ai/src/providers/openai.ts:openaiProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/openai.ts",
+      "target": "function:packages/ai/src/providers/openai.ts:openaiProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/openai.ts:openaiProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/openai.ts:openaiProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/openai.ts:openaiProvider",
+      "target": "function:packages/ai/src/api/openai-responses.lazy.ts:openAIResponsesApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode-go.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode-go.ts",
+      "target": "file:packages/ai/src/api/anthropic-messages.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode-go.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode-go.ts",
+      "target": "file:packages/ai/src/api/openai-responses.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode-go.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode-go.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode-go.ts",
+      "target": "file:packages/ai/src/providers/opencode-go.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode-go.ts",
+      "target": "file:packages/ai/src/providers/opencode-headers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode-go.ts",
+      "target": "function:packages/ai/src/providers/opencode-go.ts:opencodeGoProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode-go.ts",
+      "target": "function:packages/ai/src/providers/opencode-go.ts:opencodeGoProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/opencode-go.ts:opencodeGoProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/opencode-go.ts:opencodeGoProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/opencode-go.ts:opencodeGoProvider",
+      "target": "function:packages/ai/src/providers/opencode-headers.ts:withOpenCodeSessionHeader",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/opencode-go.ts:opencodeGoProvider",
+      "target": "function:packages/ai/src/api/anthropic-messages.lazy.ts:anthropicMessagesApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/opencode-go.ts:opencodeGoProvider",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/opencode-go.ts:opencodeGoProvider",
+      "target": "function:packages/ai/src/api/openai-responses.lazy.ts:openAIResponsesApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode-headers.ts",
+      "target": "file:packages/ai/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode-headers.ts",
+      "target": "function:packages/ai/src/providers/opencode-headers.ts:withOpenCodeSessionHeader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode-headers.ts",
+      "target": "function:packages/ai/src/providers/opencode-headers.ts:withOpenCodeSessionHeader",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode.ts",
+      "target": "file:packages/ai/src/api/anthropic-messages.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode.ts",
+      "target": "file:packages/ai/src/api/google-generative-ai.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode.ts",
+      "target": "file:packages/ai/src/api/openai-responses.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode.ts",
+      "target": "file:packages/ai/src/providers/opencode-headers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode.ts",
+      "target": "file:packages/ai/src/providers/opencode.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode.ts",
+      "target": "function:packages/ai/src/providers/opencode.ts:opencodeProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/opencode.ts",
+      "target": "function:packages/ai/src/providers/opencode.ts:opencodeProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/opencode.ts:opencodeProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/opencode.ts:opencodeProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/opencode.ts:opencodeProvider",
+      "target": "function:packages/ai/src/providers/opencode-headers.ts:withOpenCodeSessionHeader",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/opencode.ts:opencodeProvider",
+      "target": "function:packages/ai/src/api/anthropic-messages.lazy.ts:anthropicMessagesApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/opencode.ts:opencodeProvider",
+      "target": "function:packages/ai/src/api/google-generative-ai.lazy.ts:googleGenerativeAIApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/opencode.ts:opencodeProvider",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/opencode.ts:opencodeProvider",
+      "target": "function:packages/ai/src/api/openai-responses.lazy.ts:openAIResponsesApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/openrouter-images.ts",
+      "target": "file:packages/ai/src/api/openrouter-images.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openrouter-images.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openrouter-images.ts",
+      "target": "file:packages/ai/src/auth/oauth/load.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openrouter-images.ts",
+      "target": "file:packages/ai/src/images-models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openrouter-images.ts",
+      "target": "function:packages/ai/src/providers/openrouter-images.ts:openrouterImagesProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/openrouter-images.ts",
+      "target": "function:packages/ai/src/providers/openrouter-images.ts:openrouterImagesProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/openrouter-images.ts:openrouterImagesProvider",
+      "target": "function:packages/ai/src/images-models.ts:createImagesProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/openrouter-images.ts:openrouterImagesProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/openrouter-images.ts:openrouterImagesProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:lazyOAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/openrouter-images.ts:openrouterImagesProvider",
+      "target": "function:packages/ai/src/auth/oauth/load.ts:loadOpenRouterOAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/openrouter-images.ts:openrouterImagesProvider",
+      "target": "function:packages/ai/src/api/openrouter-images.lazy.ts:openrouterImagesApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/openrouter.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openrouter.ts",
+      "target": "file:packages/ai/src/api/anthropic-messages.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openrouter.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openrouter.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openrouter.ts",
+      "target": "file:packages/ai/src/auth/oauth/load.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openrouter.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openrouter.ts",
+      "target": "file:packages/ai/src/providers/openrouter.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/openrouter.ts",
+      "target": "function:packages/ai/src/providers/openrouter.ts:openrouterProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/openrouter.ts",
+      "target": "function:packages/ai/src/providers/openrouter.ts:openrouterProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/openrouter.ts:openrouterProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/openrouter.ts:openrouterProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/openrouter.ts:openrouterProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:lazyOAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/openrouter.ts:openrouterProvider",
+      "target": "function:packages/ai/src/auth/oauth/load.ts:loadOpenRouterOAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/openrouter.ts:openrouterProvider",
+      "target": "function:packages/ai/src/api/anthropic-messages.lazy.ts:anthropicMessagesApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/openrouter.ts:openrouterProvider",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

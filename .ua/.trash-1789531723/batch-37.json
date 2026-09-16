@@ -1,0 +1,204 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/coding-agent/docs/sessions.md",
+      "type": "document",
+      "name": "sessions.md",
+      "filePath": "packages/coding-agent/docs/sessions.md",
+      "summary": "说明 Pi 会话的自动保存位置、JSONL 树结构，以及续跑、删除、命名和 /tree、/fork、/clone 分支操作。",
+      "tags": ["documentation", "sessions", "cli", "interactive"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/settings.md",
+      "type": "document",
+      "name": "settings.md",
+      "filePath": "packages/coding-agent/docs/settings.md",
+      "summary": "完整列出全局与项目 settings.json 选项，覆盖模型与 thinking、UI、压缩、重试、工具、会话以及项目信任。",
+      "tags": ["documentation", "configuration", "settings", "project-trust"],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/shell-aliases.md",
+      "type": "document",
+      "name": "shell-aliases.md",
+      "filePath": "packages/coding-agent/docs/shell-aliases.md",
+      "summary": "说明非交互 bash -c 默认不展开 alias，以及如何用 shellCommandPrefix 从 zsh/bashrc 加载别名。",
+      "tags": ["documentation", "shell", "configuration", "aliases"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/skills.md",
+      "type": "document",
+      "name": "skills.md",
+      "filePath": "packages/coding-agent/docs/skills.md",
+      "summary": "说明 Agent Skills 的发现路径、按需加载、SKILL.md 结构、frontmatter 规则、校验与 /skill 命令。",
+      "tags": ["documentation", "skills", "agent-skills", "configuration"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/terminal-setup.md",
+      "type": "document",
+      "name": "terminal-setup.md",
+      "filePath": "packages/coding-agent/docs/terminal-setup.md",
+      "summary": "按终端说明 Kitty keyboard protocol 与 OSC 8、内联图像、truecolor 的检测覆盖，覆盖 Kitty、iTerm2、Ghostty、WezTerm 等。",
+      "tags": ["documentation", "terminal", "keyboard-protocol", "setup"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/termux.md",
+      "type": "document",
+      "name": "termux.md",
+      "filePath": "packages/coding-agent/docs/termux.md",
+      "summary": "说明在 Android Termux 上安装 Pi 的依赖、剪贴板集成、示例 AGENTS.md，以及存储权限与 Node 排障。",
+      "tags": ["documentation", "android", "termux", "setup"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/themes.md",
+      "type": "document",
+      "name": "themes.md",
+      "filePath": "packages/coding-agent/docs/themes.md",
+      "summary": "说明 TUI 主题 JSON 的加载位置、选择方式、必选/可选 color tokens，以及 256 色与 truecolor 取值。",
+      "tags": ["documentation", "themes", "tui", "color-tokens"],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/tmux.md",
+      "type": "document",
+      "name": "tmux.md",
+      "filePath": "packages/coding-agent/docs/tmux.md",
+      "summary": "推荐 tmux 3.5+ 启用 extended-keys 与 csi-u，使 Shift/Ctrl+Enter 不再与普通 Enter 混淆。",
+      "tags": ["documentation", "tmux", "terminal", "keyboard-protocol"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/tui.md",
+      "type": "document",
+      "name": "tui.md",
+      "filePath": "packages/coding-agent/docs/tui.md",
+      "summary": "面向扩展作者说明 @earendil-works/pi-tui 的 Component/Focusable 接口、内置组件、overlay、主题失效与常见交互模式。",
+      "tags": ["documentation", "tui", "extensions", "components"],
+      "complexity": "complex",
+      "languageNotes": "用 TypeScript 接口与扩展示例说明终端 UI 组件契约，而不是实现代码本身。"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/usage.md",
+      "type": "document",
+      "name": "usage.md",
+      "filePath": "packages/coding-agent/docs/usage.md",
+      "summary": "日常使用指南：交互界面分区、编辑器能力、斜杠命令、消息队列、会话与上下文文件，以及完整 CLI 参考。",
+      "tags": ["documentation", "usage", "cli", "interactive"],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:packages/coding-agent/docs/windows.md",
+      "type": "document",
+      "name": "windows.md",
+      "filePath": "packages/coding-agent/docs/windows.md",
+      "summary": "说明 Windows 默认使用 Git Bash、可选 powershell 工具，以及 settings.json 中的 shellPath 自定义。",
+      "tags": ["documentation", "windows", "powershell", "setup"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:packages/coding-agent/docs/sessions.md",
+      "target": "document:packages/coding-agent/docs/settings.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/settings.md",
+      "target": "document:packages/coding-agent/docs/sessions.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/shell-aliases.md",
+      "target": "document:packages/coding-agent/docs/settings.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/skills.md",
+      "target": "document:packages/coding-agent/docs/settings.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/terminal-setup.md",
+      "target": "document:packages/coding-agent/docs/windows.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/terminal-setup.md",
+      "target": "document:packages/coding-agent/docs/tmux.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/themes.md",
+      "target": "document:packages/coding-agent/docs/settings.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/themes.md",
+      "target": "document:packages/coding-agent/docs/tui.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/tmux.md",
+      "target": "document:packages/coding-agent/docs/terminal-setup.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/tui.md",
+      "target": "document:packages/coding-agent/docs/themes.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/usage.md",
+      "target": "document:packages/coding-agent/docs/sessions.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/usage.md",
+      "target": "document:packages/coding-agent/docs/settings.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/usage.md",
+      "target": "document:packages/coding-agent/docs/terminal-setup.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/docs/windows.md",
+      "target": "document:packages/coding-agent/docs/settings.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

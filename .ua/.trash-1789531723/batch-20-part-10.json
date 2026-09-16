@@ -1,0 +1,198 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/tui/src/components/truncated-text.ts",
+      "type": "file",
+      "name": "truncated-text.ts",
+      "filePath": "packages/tui/src/components/truncated-text.ts",
+      "summary": "单行截断文本：按可见列宽 truncate，并保留 padding 与首行内容。",
+      "tags": [
+        "component",
+        "text",
+        "truncation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/tui/src/components/truncated-text.ts:TruncatedText",
+      "type": "class",
+      "name": "TruncatedText",
+      "filePath": "packages/tui/src/components/truncated-text.ts",
+      "lineRange": [
+        7,
+        65
+      ],
+      "summary": "按宽度截断的单行文本 Component。",
+      "tags": [
+        "component",
+        "text",
+        "truncation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/truncated-text.ts:render",
+      "type": "function",
+      "name": "render",
+      "filePath": "packages/tui/src/components/truncated-text.ts",
+      "lineRange": [
+        22,
+        65
+      ],
+      "summary": "只取首行并按宽度截断，周围填充 padding。",
+      "tags": [
+        "text",
+        "truncation",
+        "rendering"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/tui/src/components/v-stack.ts",
+      "type": "file",
+      "name": "v-stack.ts",
+      "filePath": "packages/tui/src/components/v-stack.ts",
+      "summary": "垂直 Stack：按分配高度切片子组件输出，并在子项之间插入 gap 空行。",
+      "tags": [
+        "component",
+        "layout",
+        "stack"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/tui/src/components/v-stack.ts:VStack",
+      "type": "class",
+      "name": "VStack",
+      "filePath": "packages/tui/src/components/v-stack.ts",
+      "lineRange": [
+        3,
+        31
+      ],
+      "summary": "垂直方向 Stack，按分配行数堆叠子组件。",
+      "tags": [
+        "component",
+        "layout",
+        "stack"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/v-stack.ts:render",
+      "type": "function",
+      "name": "render",
+      "filePath": "packages/tui/src/components/v-stack.ts",
+      "lineRange": [
+        10,
+        31
+      ],
+      "summary": "按分配高度切片各子组件行，并插入 gap。",
+      "tags": [
+        "layout",
+        "rendering",
+        "stack"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/tui/src/components/truncated-text.ts",
+      "target": "file:packages/tui/src/tui.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/truncated-text.ts",
+      "target": "file:packages/tui/src/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/truncated-text.ts",
+      "target": "class:packages/tui/src/components/truncated-text.ts:TruncatedText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/truncated-text.ts",
+      "target": "class:packages/tui/src/components/truncated-text.ts:TruncatedText",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/components/truncated-text.ts",
+      "target": "function:packages/tui/src/components/truncated-text.ts:render",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/v-stack.ts",
+      "target": "file:packages/tui/src/components/stack.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/v-stack.ts",
+      "target": "class:packages/tui/src/components/v-stack.ts:VStack",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/v-stack.ts",
+      "target": "class:packages/tui/src/components/v-stack.ts:VStack",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/components/v-stack.ts",
+      "target": "function:packages/tui/src/components/v-stack.ts:render",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "function:packages/tui/src/components/truncated-text.ts:render",
+      "target": "function:packages/tui/src/utils.ts:truncateToWidth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/truncated-text.ts:render",
+      "target": "function:packages/tui/src/utils.ts:visibleWidth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/v-stack.ts:render",
+      "target": "file:packages/tui/src/components/stack.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/v-stack.ts:render",
+      "target": "file:packages/tui/src/components/stack.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/components/v-stack.ts:VStack",
+      "target": "file:packages/tui/src/components/stack.ts",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    }
+  ]
+}

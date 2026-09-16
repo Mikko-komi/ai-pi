@@ -1,0 +1,156 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/utils/fs-watch.ts",
+      "type": "file",
+      "name": "fs-watch.ts",
+      "filePath": "packages/coding-agent/src/utils/fs-watch.ts",
+      "summary": "带 error handler 的 fs.watch 封装，以及安全关闭 watcher。",
+      "tags": [
+        "filesystem",
+        "watch",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/fs-watch.ts:closeWatcher",
+      "type": "function",
+      "name": "closeWatcher",
+      "filePath": "packages/coding-agent/src/utils/fs-watch.ts",
+      "summary": "关闭 FSWatcher 并忽略已关闭错误。",
+      "tags": [
+        "filesystem",
+        "watch",
+        "cleanup"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        5,
+        15
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/fs-watch.ts:watchWithErrorHandler",
+      "type": "function",
+      "name": "watchWithErrorHandler",
+      "filePath": "packages/coding-agent/src/utils/fs-watch.ts",
+      "summary": "创建 fs.watch 并在 error 时回调，避免未处理异常。",
+      "tags": [
+        "filesystem",
+        "watch",
+        "error-handling"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        17,
+        30
+      ]
+    },
+    {
+      "id": "file:packages/coding-agent/src/utils/html.ts",
+      "type": "file",
+      "name": "html.ts",
+      "filePath": "packages/coding-agent/src/utils/html.ts",
+      "summary": "解码 HTML 命名/十进制/十六进制实体，供高亮 HTML 转 ANSI。",
+      "tags": [
+        "html",
+        "decoding",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/html.ts:decodeHtmlEntity",
+      "type": "function",
+      "name": "decodeHtmlEntity",
+      "filePath": "packages/coding-agent/src/utils/html.ts",
+      "summary": "解码单个 HTML 实体为字符。",
+      "tags": [
+        "html",
+        "decoding",
+        "utility"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        13,
+        36
+      ]
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/html.ts:decodeHtmlEntityAt",
+      "type": "function",
+      "name": "decodeHtmlEntityAt",
+      "filePath": "packages/coding-agent/src/utils/html.ts",
+      "summary": "从 html[index] 起解析一个实体并返回新位置。",
+      "tags": [
+        "html",
+        "decoding",
+        "parsing"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        38,
+        51
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/utils/fs-watch.ts",
+      "target": "function:packages/coding-agent/src/utils/fs-watch.ts:closeWatcher",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/fs-watch.ts",
+      "target": "function:packages/coding-agent/src/utils/fs-watch.ts:closeWatcher",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/fs-watch.ts",
+      "target": "function:packages/coding-agent/src/utils/fs-watch.ts:watchWithErrorHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/fs-watch.ts",
+      "target": "function:packages/coding-agent/src/utils/fs-watch.ts:watchWithErrorHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/html.ts",
+      "target": "function:packages/coding-agent/src/utils/html.ts:decodeHtmlEntity",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/html.ts",
+      "target": "function:packages/coding-agent/src/utils/html.ts:decodeHtmlEntity",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/html.ts",
+      "target": "function:packages/coding-agent/src/utils/html.ts:decodeHtmlEntityAt",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/html.ts",
+      "target": "function:packages/coding-agent/src/utils/html.ts:decodeHtmlEntityAt",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

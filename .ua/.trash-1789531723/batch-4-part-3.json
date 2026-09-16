@@ -1,0 +1,574 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/ai/src/providers/deepseek.models.ts",
+      "type": "file",
+      "name": "deepseek.models.ts",
+      "summary": "由 generate-models.ts 生成的 DeepSeek 静态目录：从 data JSON 经 flattenModelCatalog 得到 DEEPSEEK_MODELS。",
+      "tags": [
+        "自动生成",
+        "模型目录",
+        "data-model"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/deepseek.models.ts",
+      "languageNotes": "文件头禁止手改；应运行 npm run generate-models。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/fireworks.models.ts",
+      "type": "file",
+      "name": "fireworks.models.ts",
+      "summary": "由 generate-models.ts 生成的 Fireworks 静态目录：从 data JSON 经 flattenModelCatalog 得到 FIREWORKS_MODELS。",
+      "tags": [
+        "自动生成",
+        "模型目录",
+        "data-model"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/fireworks.models.ts",
+      "languageNotes": "文件头禁止手改；应运行 npm run generate-models。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/github-copilot.models.ts",
+      "type": "file",
+      "name": "github-copilot.models.ts",
+      "summary": "由 generate-models.ts 生成的 GitHub Copilot 静态目录：从 data JSON 经 flattenModelCatalog 得到 GITHUB_COPILOT_MODELS。",
+      "tags": [
+        "自动生成",
+        "模型目录",
+        "data-model"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/github-copilot.models.ts",
+      "languageNotes": "文件头禁止手改；应运行 npm run generate-models。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/google-vertex.models.ts",
+      "type": "file",
+      "name": "google-vertex.models.ts",
+      "summary": "由 generate-models.ts 生成的 Google Vertex AI 静态目录：从 data JSON 经 flattenModelCatalog 得到 GOOGLE_VERTEX_MODELS。",
+      "tags": [
+        "自动生成",
+        "模型目录",
+        "data-model"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/google-vertex.models.ts",
+      "languageNotes": "文件头禁止手改；应运行 npm run generate-models。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/google.models.ts",
+      "type": "file",
+      "name": "google.models.ts",
+      "summary": "由 generate-models.ts 生成的 Google Gemini 静态目录：从 data JSON 经 flattenModelCatalog 得到 GOOGLE_MODELS。",
+      "tags": [
+        "自动生成",
+        "模型目录",
+        "data-model"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/google.models.ts",
+      "languageNotes": "文件头禁止手改；应运行 npm run generate-models。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/deepseek.ts",
+      "type": "file",
+      "name": "deepseek.ts",
+      "summary": "DeepSeek provider：环境变量 API key + OpenAI completions 兼容流。",
+      "tags": [
+        "provider",
+        "认证",
+        "factory"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/deepseek.ts"
+    },
+    {
+      "id": "function:packages/ai/src/providers/deepseek.ts:deepseekProvider",
+      "type": "function",
+      "name": "deepseekProvider",
+      "summary": "用 createProvider 组装 deepseek：envApiKeyAuth 与 openAICompletionsApi。",
+      "tags": [
+        "factory",
+        "provider",
+        "认证"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/deepseek.ts",
+      "lineRange": [
+        6,
+        15
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/fireworks.ts",
+      "type": "file",
+      "name": "fireworks.ts",
+      "summary": "Fireworks provider：环境变量 API key，按模型分发 anthropic-messages 或 openai-completions。",
+      "tags": [
+        "provider",
+        "认证",
+        "factory"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/fireworks.ts"
+    },
+    {
+      "id": "function:packages/ai/src/providers/fireworks.ts:fireworksProvider",
+      "type": "function",
+      "name": "fireworksProvider",
+      "summary": "用 createProvider 组装 fireworks：双 API map（Anthropic Messages + OpenAI completions）。",
+      "tags": [
+        "factory",
+        "provider",
+        "认证"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/fireworks.ts",
+      "lineRange": [
+        7,
+        19
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/github-copilot.ts",
+      "type": "file",
+      "name": "github-copilot.ts",
+      "summary": "GitHub Copilot provider：token/OAuth，三 API 分发，并按 OAuth availableModelIds 过滤模型。",
+      "tags": [
+        "provider",
+        "oauth",
+        "认证"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/github-copilot.ts"
+    },
+    {
+      "id": "function:packages/ai/src/providers/github-copilot.ts:githubCopilotProvider",
+      "type": "function",
+      "name": "githubCopilotProvider",
+      "summary": "用 createProvider 组装 github-copilot：env/OAuth 认证、filterModels 与 Anthropic/OpenAI completions/Responses 三 API。",
+      "tags": [
+        "factory",
+        "provider",
+        "oauth"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/ai/src/providers/github-copilot.ts",
+      "lineRange": [
+        9,
+        34
+      ]
+    },
+    {
+      "id": "file:packages/ai/src/providers/google-vertex.ts",
+      "type": "file",
+      "name": "google-vertex.ts",
+      "summary": "Google Vertex AI provider：支持 API key、ADC 或服务账号文件，并要求 project/location；走 google-vertex API。",
+      "tags": [
+        "provider",
+        "认证",
+        "gcp"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/ai/src/providers/google-vertex.ts"
+    },
+    {
+      "id": "function:packages/ai/src/providers/google-vertex.ts:googleVertexProvider",
+      "type": "function",
+      "name": "googleVertexProvider",
+      "summary": "用 createProvider 组装 google-vertex：自定义 GCP 认证与 googleVertexApi。",
+      "tags": [
+        "factory",
+        "provider",
+        "gcp"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/ai/src/providers/google-vertex.ts",
+      "lineRange": [
+        92,
+        100
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/ai/src/providers/deepseek.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/deepseek.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/deepseek.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/deepseek.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/deepseek.ts",
+      "target": "file:packages/ai/src/providers/deepseek.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/fireworks.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/fireworks.ts",
+      "target": "file:packages/ai/src/api/anthropic-messages.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/fireworks.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/fireworks.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/fireworks.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/fireworks.ts",
+      "target": "file:packages/ai/src/providers/fireworks.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/github-copilot.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/github-copilot.ts",
+      "target": "file:packages/ai/src/api/anthropic-messages.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/github-copilot.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/github-copilot.ts",
+      "target": "file:packages/ai/src/api/openai-responses.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/github-copilot.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/github-copilot.ts",
+      "target": "file:packages/ai/src/auth/oauth/load.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/github-copilot.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/github-copilot.ts",
+      "target": "file:packages/ai/src/providers/github-copilot.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/google-vertex.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/google-vertex.ts",
+      "target": "file:packages/ai/src/api/google-vertex.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/google-vertex.ts",
+      "target": "file:packages/ai/src/auth/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/google-vertex.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/google-vertex.ts",
+      "target": "file:packages/ai/src/providers/google-vertex.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/google.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/deepseek.ts",
+      "target": "function:packages/ai/src/providers/deepseek.ts:deepseekProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/deepseek.ts",
+      "target": "function:packages/ai/src/providers/deepseek.ts:deepseekProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/fireworks.ts",
+      "target": "function:packages/ai/src/providers/fireworks.ts:fireworksProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/fireworks.ts",
+      "target": "function:packages/ai/src/providers/fireworks.ts:fireworksProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/github-copilot.ts",
+      "target": "function:packages/ai/src/providers/github-copilot.ts:githubCopilotProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/github-copilot.ts",
+      "target": "function:packages/ai/src/providers/github-copilot.ts:githubCopilotProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/google-vertex.ts",
+      "target": "function:packages/ai/src/providers/google-vertex.ts:googleVertexProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/google-vertex.ts",
+      "target": "function:packages/ai/src/providers/google-vertex.ts:googleVertexProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/deepseek.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/fireworks.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/github-copilot.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/google-vertex.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/google.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/deepseek.ts:deepseekProvider",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/deepseek.ts:deepseekProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/deepseek.ts:deepseekProvider",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/fireworks.ts:fireworksProvider",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/fireworks.ts:fireworksProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/fireworks.ts:fireworksProvider",
+      "target": "function:packages/ai/src/api/anthropic-messages.lazy.ts:anthropicMessagesApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/fireworks.ts:fireworksProvider",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/github-copilot.ts:githubCopilotProvider",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/github-copilot.ts:githubCopilotProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/github-copilot.ts:githubCopilotProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:lazyOAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/github-copilot.ts:githubCopilotProvider",
+      "target": "function:packages/ai/src/auth/oauth/load.ts:loadGitHubCopilotOAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/github-copilot.ts:githubCopilotProvider",
+      "target": "function:packages/ai/src/api/anthropic-messages.lazy.ts:anthropicMessagesApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/github-copilot.ts:githubCopilotProvider",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/github-copilot.ts:githubCopilotProvider",
+      "target": "function:packages/ai/src/api/openai-responses.lazy.ts:openAIResponsesApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/google-vertex.ts:googleVertexProvider",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/google-vertex.ts:googleVertexProvider",
+      "target": "function:packages/ai/src/api/google-vertex.lazy.ts:googleVertexApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

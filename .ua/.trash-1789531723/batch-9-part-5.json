@@ -1,0 +1,1628 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "type": "file",
+      "name": "response.ts",
+      "summary": "打开 assistant 流进度、发布配置失败，并按 overflow/retry/abort 规范化后提交响应。",
+      "tags": [
+        "drive",
+        "response",
+        "error-handling",
+        "streaming"
+      ],
+      "complexity": "complex",
+      "filePath": "packages/agent/src/harness/runtime/drive/response.ts"
+    },
+    {
+      "id": "file:packages/agent/src/harness/runtime/drive/retry.ts",
+      "type": "file",
+      "name": "retry.ts",
+      "summary": "按 RetryPolicy 计算下次重试时间，并在 AbortSignal 下等待到点。",
+      "tags": [
+        "retry",
+        "utility",
+        "cancellation"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/retry.ts"
+    },
+    {
+      "id": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "type": "file",
+      "name": "structural.ts",
+      "summary": "结构性任务驱动：compaction/分支摘要的决策、嵌套 LLM 请求、重试等待与导航提交。",
+      "tags": [
+        "drive",
+        "compaction",
+        "summarization",
+        "navigation"
+      ],
+      "complexity": "complex",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts"
+    },
+    {
+      "id": "file:packages/agent/src/harness/runtime/drive/terminal.ts",
+      "type": "file",
+      "name": "terminal.ts",
+      "summary": "扫描并删除 operation 临时键，同时构造 operation 结果记录。",
+      "tags": [
+        "drive",
+        "cleanup",
+        "session"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/runtime/drive/terminal.ts"
+    },
+    {
+      "id": "file:packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "type": "file",
+      "name": "tool-placement.ts",
+      "summary": "读取 tool batch 来源与待提交结果，物化后写入 session 并推进 lane 状态。",
+      "tags": [
+        "drive",
+        "tool-execution",
+        "session-commit"
+      ],
+      "complexity": "complex",
+      "filePath": "packages/agent/src/harness/runtime/drive/tool-placement.ts"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/response.ts:openAssistantResponse",
+      "type": "function",
+      "name": "openAssistantResponse",
+      "summary": "打开帧进度编码器，返回 start/update/end/afterResponse/close observer。",
+      "tags": [
+        "streaming",
+        "assistant",
+        "progress"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/runtime/drive/response.ts",
+      "lineRange": [
+        46,
+        97
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/response.ts:publishConfigurationFailure",
+      "type": "function",
+      "name": "publishConfigurationFailure",
+      "summary": "把配置错误写成 operation 失败结果并清理临时键。",
+      "tags": [
+        "error-handling",
+        "session-commit",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/response.ts",
+      "lineRange": [
+        106,
+        138
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/response.ts:deferredHandleIsValid",
+      "type": "function",
+      "name": "deferredHandleIsValid",
+      "summary": "检查 assistant 消息是否携带可用的 DeferredHandle。",
+      "tags": [
+        "deferred",
+        "validation",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/response.ts",
+      "lineRange": [
+        168,
+        179
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/response.ts:publishResponse",
+      "type": "function",
+      "name": "publishResponse",
+      "summary": "按 overflow/abort/retry/成功路径规范化 assistant 响应并提交写入。",
+      "tags": [
+        "response",
+        "retry",
+        "compaction",
+        "session-commit"
+      ],
+      "complexity": "complex",
+      "filePath": "packages/agent/src/harness/runtime/drive/response.ts",
+      "lineRange": [
+        182,
+        485
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/retry.ts:retryNotBefore",
+      "type": "function",
+      "name": "retryNotBefore",
+      "summary": "按 policy 与 attempt 计算下次重试的绝对时间戳。",
+      "tags": [
+        "retry",
+        "utility",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/retry.ts",
+      "lineRange": [
+        3,
+        10
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/retry.ts:waitUntil",
+      "type": "function",
+      "name": "waitUntil",
+      "summary": "等待到 notBefore，或在 AbortSignal 触发时拒绝。",
+      "tags": [
+        "retry",
+        "cancellation",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/retry.ts",
+      "lineRange": [
+        12,
+        36
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:durableCompactionPreparation",
+      "type": "function",
+      "name": "durableCompactionPreparation",
+      "summary": "把 CompactionPreparation 转成可持久化的 JSON 形态。",
+      "tags": [
+        "serialization",
+        "compaction",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        75,
+        89
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:durableBranchPreparation",
+      "type": "function",
+      "name": "durableBranchPreparation",
+      "summary": "把 BranchPreparation 转成可持久化的 JSON 形态。",
+      "tags": [
+        "serialization",
+        "branch",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        91,
+        100
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:compactionPreparation",
+      "type": "function",
+      "name": "compactionPreparation",
+      "summary": "从持久化形态还原 CompactionPreparation。",
+      "tags": [
+        "serialization",
+        "compaction",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        110,
+        123
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:readStructuralPreparation",
+      "type": "function",
+      "name": "readStructuralPreparation",
+      "summary": "从 operationPreparation 键读取并还原 compaction/branch 准备数据。",
+      "tags": [
+        "session",
+        "compaction",
+        "preparation"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        152,
+        186
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:summaryContext",
+      "type": "function",
+      "name": "summaryContext",
+      "summary": "组装摘要任务的模型、设置与归一化 retry policy。",
+      "tags": [
+        "summarization",
+        "config",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        188,
+        199
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:publishStructuralOutcome",
+      "type": "function",
+      "name": "publishStructuralOutcome",
+      "summary": "按成功/失败/导航结果写入摘要条目、清理或进入下一边界。",
+      "tags": [
+        "session-commit",
+        "compaction",
+        "navigation"
+      ],
+      "complexity": "complex",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        222,
+        577
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:publishStructuralReady",
+      "type": "function",
+      "name": "publishStructuralReady",
+      "summary": "把 deciding 状态推进到 summary.ready 并写入准备数据。",
+      "tags": [
+        "drive",
+        "session-commit",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        579,
+        605
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:runStructuralDecision",
+      "type": "function",
+      "name": "runStructuralDecision",
+      "summary": "决定执行 compaction/分支摘要或直接结束，并发布 ready/outcome。",
+      "tags": [
+        "drive",
+        "compaction",
+        "decision"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        608,
+        672
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:effectPendingFromReady",
+      "type": "function",
+      "name": "effectPendingFromReady",
+      "summary": "从 ready 状态构造 summary.effect_pending。",
+      "tags": [
+        "drive",
+        "state-machine",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        674,
+        683
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:retryWaitFromEffect",
+      "type": "function",
+      "name": "retryWaitFromEffect",
+      "summary": "从 effect 计算 retry wait 状态（含 notBefore）。",
+      "tags": [
+        "retry",
+        "drive",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        685,
+        695
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:publishAttemptIntent",
+      "type": "function",
+      "name": "publishAttemptIntent",
+      "summary": "为结构性 LLM 尝试写入 effect_pending intent。",
+      "tags": [
+        "session-commit",
+        "summarization",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        707,
+        725
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:publishNestedRequestIntent",
+      "type": "function",
+      "name": "publishNestedRequestIntent",
+      "summary": "为嵌套摘要请求写入 usage 占位与 intent。",
+      "tags": [
+        "session-commit",
+        "llm",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        727,
+        747
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:publishNestedRequestOutcome",
+      "type": "function",
+      "name": "publishNestedRequestOutcome",
+      "summary": "把嵌套请求的 usage/结果写回 session。",
+      "tags": [
+        "session-commit",
+        "usage",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        749,
+        772
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:requestStreamOptions",
+      "type": "function",
+      "name": "requestStreamOptions",
+      "summary": "为结构性 LLM 调用组装带 telemetry 的 stream options。",
+      "tags": [
+        "llm",
+        "telemetry",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        774,
+        794
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:performStructuralAttempt",
+      "type": "function",
+      "name": "performStructuralAttempt",
+      "summary": "经 gate 调用 compactWithRequest 或 generateBranchSummaryWithRequest。",
+      "tags": [
+        "summarization",
+        "compaction",
+        "llm",
+        "gate"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        796,
+        923
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:readAttemptPreparation",
+      "type": "function",
+      "name": "readAttemptPreparation",
+      "summary": "读取 ready 状态对应的持久化 preparation。",
+      "tags": [
+        "preparation",
+        "session",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        925,
+        951
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:publishAttemptResult",
+      "type": "function",
+      "name": "publishAttemptResult",
+      "summary": "把结构性尝试结果转为 outcome 或 retry wait。",
+      "tags": [
+        "summarization",
+        "retry",
+        "session-commit"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        953,
+        1007
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:runStructuralGeneration",
+      "type": "function",
+      "name": "runStructuralGeneration",
+      "summary": "发布 attempt intent 并执行结构性 LLM 生成。",
+      "tags": [
+        "drive",
+        "summarization",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        1010,
+        1029
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:runStructuralRetryWait",
+      "type": "function",
+      "name": "runStructuralRetryWait",
+      "summary": "等待结构性重试窗口，再回到 summary.ready。",
+      "tags": [
+        "retry",
+        "drive",
+        "gate"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        1032,
+        1074
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:recoverStructuralGeneration",
+      "type": "function",
+      "name": "recoverStructuralGeneration",
+      "summary": "从 effect_pending 恢复未完成的结构性生成。",
+      "tags": [
+        "recovery",
+        "summarization",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        1077,
+        1115
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:prepareCompactionThreshold",
+      "type": "function",
+      "name": "prepareCompactionThreshold",
+      "summary": "在 checkpoint 用 prepareCompaction+shouldCompact 判断是否触发压缩。",
+      "tags": [
+        "compaction",
+        "checkpoint",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        1118,
+        1152
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:prepareOverflowCompaction",
+      "type": "function",
+      "name": "prepareOverflowCompaction",
+      "summary": "上下文溢出时准备强制压缩。",
+      "tags": [
+        "compaction",
+        "overflow",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        1155,
+        1170
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/structural.ts:commitNavigation",
+      "type": "function",
+      "name": "commitNavigation",
+      "summary": "提交导航写入、清理 operation，并结束 run。",
+      "tags": [
+        "navigation",
+        "session-commit",
+        "drive"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/structural.ts",
+      "lineRange": [
+        1173,
+        1222
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/terminal.ts:operationCleanupWrites",
+      "type": "function",
+      "name": "operationCleanupWrites",
+      "summary": "扫描 operation 前缀键，生成删除 pending/args/memo/preparation 的写入。",
+      "tags": [
+        "cleanup",
+        "session",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/terminal.ts",
+      "lineRange": [
+        26,
+        60
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/terminal.ts:operationResultRecord",
+      "type": "function",
+      "name": "operationResultRecord",
+      "summary": "构造带 status/tip/error 的 OperationResultRecord。",
+      "tags": [
+        "factory",
+        "session",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/terminal.ts",
+      "lineRange": [
+        63,
+        82
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:readToolBatchSource",
+      "type": "function",
+      "name": "readToolBatchSource",
+      "summary": "读取 assistant 条目上的 tool call 映射，作为 batch 源。",
+      "tags": [
+        "tool-execution",
+        "session",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "lineRange": [
+        34,
+        56
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:toolCallFor",
+      "type": "function",
+      "name": "toolCallFor",
+      "summary": "按 id 从 batch 源取出对应 tool call。",
+      "tags": [
+        "tool-execution",
+        "utility",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "lineRange": [
+        72,
+        78
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:withToolBatch",
+      "type": "function",
+      "name": "withToolBatch",
+      "summary": "把 tool batch 信息并入 operation scope。",
+      "tags": [
+        "tool-execution",
+        "session",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "lineRange": [
+        80,
+        82
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:readPlacement",
+      "type": "function",
+      "name": "readPlacement",
+      "summary": "读取已完成/待提交的 tool result 与 pending 条目。",
+      "tags": [
+        "tool-execution",
+        "session",
+        "function"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "lineRange": [
+        84,
+        142
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:commitPlacement",
+      "type": "function",
+      "name": "commitPlacement",
+      "summary": "把就绪的 tool result 写入 session，更新 lane 并可能结束 operation。",
+      "tags": [
+        "tool-execution",
+        "session-commit",
+        "function"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "lineRange": [
+        144,
+        278
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:materializeReady",
+      "type": "function",
+      "name": "materializeReady",
+      "summary": "读取 placement 后提交，供 tools drive 在 ready 时落盘。",
+      "tags": [
+        "tool-execution",
+        "session-commit",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "lineRange": [
+        280,
+        326
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "target": "file:packages/agent/src/harness/agent-harness.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "target": "file:packages/agent/src/harness/execution/assistant.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/retry.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/terminal.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "target": "file:packages/agent/src/harness/runtime/lane.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "target": "file:packages/agent/src/harness/runtime/progress.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "target": "file:packages/agent/src/harness/runtime/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "target": "file:packages/agent/src/harness/session/commit.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "target": "file:packages/agent/src/harness/session/session.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "target": "file:packages/agent/src/harness/session/values.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/retry.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "file:packages/agent/src/harness/agent-harness.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "file:packages/agent/src/harness/compaction/branch-summarization.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "file:packages/agent/src/harness/compaction/compaction.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "file:packages/agent/src/harness/execution/effect-gate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "file:packages/agent/src/harness/hooks.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/retry.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/terminal.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "file:packages/agent/src/harness/runtime/lane.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "file:packages/agent/src/harness/runtime/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "file:packages/agent/src/harness/session/commit.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "file:packages/agent/src/harness/session/session.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "file:packages/agent/src/harness/session/values.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/terminal.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/terminal.ts",
+      "target": "file:packages/agent/src/harness/session/session.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/terminal.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/terminal.ts",
+      "target": "file:packages/agent/src/harness/session/values.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "target": "file:packages/agent/src/harness/agent-harness.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "target": "file:packages/agent/src/harness/runtime/lane.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "target": "file:packages/agent/src/harness/runtime/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "target": "file:packages/agent/src/harness/session/commit.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "target": "file:packages/agent/src/harness/session/session.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "target": "file:packages/agent/src/harness/session/values.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "target": "file:packages/agent/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/response.ts:openAssistantResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/response.ts:openAssistantResponse",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/response.ts:publishConfigurationFailure",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/response.ts:publishConfigurationFailure",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/response.ts:deferredHandleIsValid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/response.ts:publishResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/response.ts:publishResponse",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/retry.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/retry.ts:retryNotBefore",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/retry.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/retry.ts:retryNotBefore",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/retry.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/retry.ts:waitUntil",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/retry.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/retry.ts:waitUntil",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:durableCompactionPreparation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:durableCompactionPreparation",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:durableBranchPreparation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:durableBranchPreparation",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:compactionPreparation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:readStructuralPreparation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:summaryContext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:publishStructuralOutcome",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:publishStructuralReady",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:runStructuralDecision",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:runStructuralDecision",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:effectPendingFromReady",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:retryWaitFromEffect",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:publishAttemptIntent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:publishNestedRequestIntent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:publishNestedRequestOutcome",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:requestStreamOptions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:performStructuralAttempt",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:readAttemptPreparation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:publishAttemptResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:runStructuralGeneration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:runStructuralGeneration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:runStructuralRetryWait",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:runStructuralRetryWait",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:recoverStructuralGeneration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:recoverStructuralGeneration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:prepareCompactionThreshold",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:prepareCompactionThreshold",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:prepareOverflowCompaction",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:prepareOverflowCompaction",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:commitNavigation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:commitNavigation",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/terminal.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/terminal.ts:operationCleanupWrites",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/terminal.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/terminal.ts:operationCleanupWrites",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/terminal.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/terminal.ts:operationResultRecord",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/terminal.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/terminal.ts:operationResultRecord",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:readToolBatchSource",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:readToolBatchSource",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:toolCallFor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:toolCallFor",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:withToolBatch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:withToolBatch",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:readPlacement",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:commitPlacement",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:materializeReady",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/tool-placement.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:materializeReady",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/response.ts:openAssistantResponse",
+      "target": "function:packages/agent/src/harness/runtime/progress.ts:openFrameProgress",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/response.ts:publishConfigurationFailure",
+      "target": "function:packages/agent/src/harness/runtime/drive/terminal.ts:operationResultRecord",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/response.ts:publishConfigurationFailure",
+      "target": "function:packages/agent/src/harness/runtime/drive/terminal.ts:operationCleanupWrites",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/response.ts:publishResponse",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:prepareOverflowCompaction",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/response.ts:publishResponse",
+      "target": "function:packages/agent/src/harness/runtime/drive/retry.ts:retryNotBefore",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/response.ts:publishResponse",
+      "target": "function:packages/agent/src/harness/runtime/drive/terminal.ts:operationResultRecord",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/structural.ts:summaryContext",
+      "target": "function:packages/agent/src/harness/runtime/drive/boundary.ts:normalizedRetryPolicy",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/structural.ts:publishStructuralOutcome",
+      "target": "function:packages/agent/src/harness/runtime/drive/boundary.ts:planBoundaryInbox",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/structural.ts:publishStructuralOutcome",
+      "target": "function:packages/agent/src/harness/runtime/drive/terminal.ts:operationCleanupWrites",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/structural.ts:publishStructuralOutcome",
+      "target": "function:packages/agent/src/harness/runtime/drive/terminal.ts:operationResultRecord",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/structural.ts:publishStructuralOutcome",
+      "target": "function:packages/agent/src/harness/runtime/drive/boundary.ts:finishRunBoundary",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/structural.ts:publishStructuralOutcome",
+      "target": "function:packages/agent/src/harness/session/commit.ts:insertUsage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/structural.ts:publishStructuralOutcome",
+      "target": "function:packages/agent/src/harness/session/commit.ts:insertEntry",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/structural.ts:publishStructuralOutcome",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:committedEntryEvents",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/structural.ts:requestStreamOptions",
+      "target": "function:packages/agent/src/harness/context.ts:getTelemetryContext",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/structural.ts:performStructuralAttempt",
+      "target": "function:packages/agent/src/harness/hooks.ts:applyStreamOptionsPatch",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/structural.ts:performStructuralAttempt",
+      "target": "function:packages/agent/src/harness/compaction/compaction.ts:compactWithRequest",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/structural.ts:performStructuralAttempt",
+      "target": "function:packages/agent/src/harness/compaction/branch-summarization.ts:generateBranchSummaryWithRequest",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/structural.ts:performStructuralAttempt",
+      "target": "function:packages/chord/src/context/index.ts:withAbortSignal",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/structural.ts:retryWaitFromEffect",
+      "target": "function:packages/agent/src/harness/runtime/drive/retry.ts:retryNotBefore",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/structural.ts:runStructuralRetryWait",
+      "target": "function:packages/agent/src/harness/runtime/drive/retry.ts:waitUntil",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/structural.ts:prepareCompactionThreshold",
+      "target": "function:packages/agent/src/harness/compaction/compaction.ts:prepareCompaction",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/structural.ts:prepareCompactionThreshold",
+      "target": "function:packages/agent/src/harness/compaction/compaction.ts:shouldCompact",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/structural.ts:prepareOverflowCompaction",
+      "target": "function:packages/agent/src/harness/compaction/compaction.ts:prepareCompaction",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/structural.ts:commitNavigation",
+      "target": "function:packages/agent/src/harness/runtime/drive/terminal.ts:operationCleanupWrites",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/structural.ts:commitNavigation",
+      "target": "function:packages/agent/src/harness/runtime/drive/terminal.ts:operationResultRecord",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:commitPlacement",
+      "target": "function:packages/agent/src/harness/session/commit.ts:insertEntry",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:commitPlacement",
+      "target": "function:packages/agent/src/harness/session/commit.ts:insertUsage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/tool-placement.ts:withToolBatch",
+      "target": "function:packages/agent/src/harness/session/types.ts:operationScopeOf",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

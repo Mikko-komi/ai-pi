@@ -1,0 +1,1762 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/tui/src/components/cancellable-loader.ts",
+      "type": "file",
+      "name": "cancellable-loader.ts",
+      "filePath": "packages/tui/src/components/cancellable-loader.ts",
+      "summary": "可取消 Loader：Escape 触发 AbortController，把 signal 交给异步任务。",
+      "tags": [
+        "component",
+        "loader",
+        "cancellation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/tui/src/components/cancellable-loader.ts:CancellableLoader",
+      "type": "class",
+      "name": "CancellableLoader",
+      "filePath": "packages/tui/src/components/cancellable-loader.ts",
+      "lineRange": [
+        13,
+        40
+      ],
+      "summary": "扩展 Loader，用 Escape 中止 AbortSignal 并可选调用 onAbort。",
+      "tags": [
+        "component",
+        "loader",
+        "cancellation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/tui/src/components/editor.ts",
+      "type": "file",
+      "name": "editor.ts",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "summary": "多行 TUI 编辑器：视觉换行、历史、yank/undo、粘贴标记，以及斜杠/文件自动补全下拉。",
+      "tags": [
+        "component",
+        "editor",
+        "autocomplete"
+      ],
+      "complexity": "complex",
+      "languageNotes": "粘贴大文本收成 [paste #n] 标记，用自定义 segmenter 保证光标与回绕按 grapheme 计算。"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:segmentWithMarkers",
+      "type": "function",
+      "name": "segmentWithMarkers",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        46,
+        98
+      ],
+      "summary": "在 grapheme 分段时合并合法的 [paste #n] 标记，避免标记被拆开。",
+      "tags": [
+        "editor",
+        "paste",
+        "segmentation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:wordWrapLine",
+      "type": "function",
+      "name": "wordWrapLine",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        121,
+        213
+      ],
+      "summary": "按可见列宽对一行做 CJK/单词感知折行，保留预分段与粘贴标记。",
+      "tags": [
+        "editor",
+        "word-wrap",
+        "layout"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:createScrollBorder",
+      "type": "function",
+      "name": "createScrollBorder",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        266,
+        282
+      ],
+      "summary": "生成顶部/底部滚动提示边框，显示隐藏行数。",
+      "tags": [
+        "editor",
+        "rendering",
+        "scroll"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/tui/src/components/editor.ts:Editor",
+      "type": "class",
+      "name": "Editor",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        284,
+        2461
+      ],
+      "summary": "完整多行编辑器状态机：视觉行导航、kill-ring、undo、历史浏览与自动补全请求。",
+      "tags": [
+        "component",
+        "editor",
+        "state-machine"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:constructor",
+      "type": "function",
+      "name": "constructor",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        361,
+        371
+      ],
+      "summary": "初始化编辑器状态、kill-ring、undo 栈与自动补全字段。",
+      "tags": [
+        "editor",
+        "initialization",
+        "state"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:setAutocompleteProvider",
+      "type": "function",
+      "name": "setAutocompleteProvider",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        405,
+        414
+      ],
+      "summary": "注入 AutocompleteProvider 并清掉进行中的补全请求。",
+      "tags": [
+        "editor",
+        "autocomplete",
+        "provider"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:addToHistory",
+      "type": "function",
+      "name": "addToHistory",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        415,
+        426
+      ],
+      "summary": "把非空文本压入历史上行，供上下键浏览。",
+      "tags": [
+        "editor",
+        "history",
+        "state"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:navigateHistory",
+      "type": "function",
+      "name": "navigateHistory",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        443,
+        474
+      ],
+      "summary": "在历史上行间移动，进入时保存草稿，越界则退出浏览。",
+      "tags": [
+        "editor",
+        "history",
+        "navigation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:setTextInternal",
+      "type": "function",
+      "name": "setTextInternal",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        481,
+        493
+      ],
+      "summary": "替换内部文本与光标并失效布局，不走外部 onChange。",
+      "tags": [
+        "editor",
+        "state",
+        "mutation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:render",
+      "type": "function",
+      "name": "render",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        508,
+        619
+      ],
+      "summary": "按滚动偏移绘制可见视觉行、光标标记、补全列表与上下边框。",
+      "tags": [
+        "editor",
+        "rendering",
+        "autocomplete"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:handleMouse",
+      "type": "function",
+      "name": "handleMouse",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        620,
+        682
+      ],
+      "summary": "把点击映射到视觉行/列，或转发给自动补全列表。",
+      "tags": [
+        "editor",
+        "mouse",
+        "event-handler"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:handleInput",
+      "type": "function",
+      "name": "handleInput",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        683,
+        984
+      ],
+      "summary": "主按键分发：粘贴、提交、删除、移动、yank/undo、跳转与补全触发。",
+      "tags": [
+        "editor",
+        "event-handler",
+        "keybindings"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:layoutText",
+      "type": "function",
+      "name": "layoutText",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        985,
+        1072
+      ],
+      "summary": "把逻辑行折成视觉行映射，计算光标所在视觉位置与滚动。",
+      "tags": [
+        "editor",
+        "layout",
+        "word-wrap"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:expandPasteMarkers",
+      "type": "function",
+      "name": "expandPasteMarkers",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1077,
+        1089
+      ],
+      "summary": "把 [paste #n] 标记还原为完整粘贴正文。",
+      "tags": [
+        "editor",
+        "paste",
+        "expansion"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:setText",
+      "type": "function",
+      "name": "setText",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1102,
+        1120
+      ],
+      "summary": "对外设置文本：规范化、重置光标/历史浏览并通知 onChange。",
+      "tags": [
+        "editor",
+        "api",
+        "state"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:insertTextAtCursor",
+      "type": "function",
+      "name": "insertTextAtCursor",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1121,
+        1134
+      ],
+      "summary": "在光标插入文本并推 undo，供外部扩展调用。",
+      "tags": [
+        "editor",
+        "editing",
+        "api"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:insertTextAtCursorInternal",
+      "type": "function",
+      "name": "insertTextAtCursorInternal",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1144,
+        1187
+      ],
+      "summary": "底层插入：拆行、更新光标并处理自动补全失效。",
+      "tags": [
+        "editor",
+        "editing",
+        "mutation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:insertCharacter",
+      "type": "function",
+      "name": "insertCharacter",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1188,
+        1247
+      ],
+      "summary": "插入可打印字符或触发补全，处理覆盖与成对符号。",
+      "tags": [
+        "editor",
+        "editing",
+        "autocomplete"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:handlePaste",
+      "type": "function",
+      "name": "handlePaste",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1248,
+        1315
+      ],
+      "summary": "括号粘贴：大文本收成标记，小文本直接插入。",
+      "tags": [
+        "editor",
+        "paste",
+        "markers"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:addNewLine",
+      "type": "function",
+      "name": "addNewLine",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1316,
+        1340
+      ],
+      "summary": "在光标处断行，保持缩进并更新视觉布局。",
+      "tags": [
+        "editor",
+        "editing",
+        "newline"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:shouldSubmitOnBackslashEnter",
+      "type": "function",
+      "name": "shouldSubmitOnBackslashEnter",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1341,
+        1351
+      ],
+      "summary": "判断反斜杠+Enter 是否应提交而非插入换行。",
+      "tags": [
+        "editor",
+        "submit",
+        "keybindings"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:submitValue",
+      "type": "function",
+      "name": "submitValue",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1352,
+        1367
+      ],
+      "summary": "提交当前文本（展开粘贴标记）并调用 onSubmit。",
+      "tags": [
+        "editor",
+        "submit",
+        "callback"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:handleBackspace",
+      "type": "function",
+      "name": "handleBackspace",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1368,
+        1456
+      ],
+      "summary": "按 grapheme/标记删除光标前内容，处理行合并与补全。",
+      "tags": [
+        "editor",
+        "editing",
+        "delete"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:setCursorCol",
+      "type": "function",
+      "name": "setCursorCol",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1457,
+        1466
+      ],
+      "summary": "设置逻辑列并清除垂直移动的 preferred 列缓存。",
+      "tags": [
+        "editor",
+        "cursor",
+        "state"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:moveToVisualLine",
+      "type": "function",
+      "name": "moveToVisualLine",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1467,
+        1568
+      ],
+      "summary": "在视觉行间上下移动，保持目标列并处理滚动。",
+      "tags": [
+        "editor",
+        "navigation",
+        "visual-line"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:computeVerticalMoveColumn",
+      "type": "function",
+      "name": "computeVerticalMoveColumn",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1569,
+        1601
+      ],
+      "summary": "计算垂直移动时应落到的视觉列，兼容宽字符与 snap。",
+      "tags": [
+        "editor",
+        "cursor",
+        "visual-line"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:deleteToStartOfLine",
+      "type": "function",
+      "name": "deleteToStartOfLine",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1613,
+        1647
+      ],
+      "summary": "删除到行首并写入 kill-ring。",
+      "tags": [
+        "editor",
+        "kill-ring",
+        "delete"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:deleteToEndOfLine",
+      "type": "function",
+      "name": "deleteToEndOfLine",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1648,
+        1679
+      ],
+      "summary": "删除到行尾并写入 kill-ring。",
+      "tags": [
+        "editor",
+        "kill-ring",
+        "delete"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:deleteWordBackwards",
+      "type": "function",
+      "name": "deleteWordBackwards",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1680,
+        1724
+      ],
+      "summary": "按词法边界向后删词，可进入 kill-ring。",
+      "tags": [
+        "editor",
+        "word-navigation",
+        "delete"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:deleteWordForward",
+      "type": "function",
+      "name": "deleteWordForward",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1725,
+        1766
+      ],
+      "summary": "按词法边界向前删词，可进入 kill-ring。",
+      "tags": [
+        "editor",
+        "word-navigation",
+        "delete"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:handleForwardDelete",
+      "type": "function",
+      "name": "handleForwardDelete",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1767,
+        1823
+      ],
+      "summary": "Delete 键：删除光标后 grapheme 或合并下一行。",
+      "tags": [
+        "editor",
+        "editing",
+        "delete"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:buildVisualLineMap",
+      "type": "function",
+      "name": "buildVisualLineMap",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1824,
+        1853
+      ],
+      "summary": "由折行结果构建逻辑行到视觉行的映射表。",
+      "tags": [
+        "editor",
+        "layout",
+        "visual-line"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:findVisualLineAt",
+      "type": "function",
+      "name": "findVisualLineAt",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1854,
+        1875
+      ],
+      "summary": "定位某逻辑坐标所在的视觉行条目。",
+      "tags": [
+        "editor",
+        "layout",
+        "lookup"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:moveCursor",
+      "type": "function",
+      "name": "moveCursor",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1882,
+        1948
+      ],
+      "summary": "按偏移移动光标，处理行边界与 preferred 列。",
+      "tags": [
+        "editor",
+        "cursor",
+        "navigation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:pageScroll",
+      "type": "function",
+      "name": "pageScroll",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1949,
+        1960
+      ],
+      "summary": "按可见页高度翻页并移动光标。",
+      "tags": [
+        "editor",
+        "scroll",
+        "navigation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:moveWordBackwards",
+      "type": "function",
+      "name": "moveWordBackwards",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1961,
+        1985
+      ],
+      "summary": "光标跳到上一词边界。",
+      "tags": [
+        "editor",
+        "word-navigation",
+        "cursor"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:yank",
+      "type": "function",
+      "name": "yank",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        1986,
+        2000
+      ],
+      "summary": "从 kill-ring 取出最近删除文本并插入。",
+      "tags": [
+        "editor",
+        "kill-ring",
+        "yank"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:yankPop",
+      "type": "function",
+      "name": "yankPop",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        2001,
+        2022
+      ],
+      "summary": "替换上一次 yank 为 kill-ring 中更早的条目。",
+      "tags": [
+        "editor",
+        "kill-ring",
+        "yank"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:insertYankedText",
+      "type": "function",
+      "name": "insertYankedText",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        2023,
+        2065
+      ],
+      "summary": "插入 yank 文本并记录区间，供 yank-pop 替换。",
+      "tags": [
+        "editor",
+        "kill-ring",
+        "editing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:deleteYankedText",
+      "type": "function",
+      "name": "deleteYankedText",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        2066,
+        2103
+      ],
+      "summary": "删除上一次 yank 插入的区间。",
+      "tags": [
+        "editor",
+        "kill-ring",
+        "editing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:undo",
+      "type": "function",
+      "name": "undo",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        2108,
+        2125
+      ],
+      "summary": "弹出 undo 快照，恢复文本与光标。",
+      "tags": [
+        "editor",
+        "undo",
+        "state"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:jumpToChar",
+      "type": "function",
+      "name": "jumpToChar",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        2126,
+        2155
+      ],
+      "summary": "进入/执行跳转到行内下一指定字符。",
+      "tags": [
+        "editor",
+        "navigation",
+        "jump"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:moveWordForwards",
+      "type": "function",
+      "name": "moveWordForwards",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        2156,
+        2177
+      ],
+      "summary": "光标跳到下一词边界。",
+      "tags": [
+        "editor",
+        "word-navigation",
+        "cursor"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:isInSlashCommandContext",
+      "type": "function",
+      "name": "isInSlashCommandContext",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        2190,
+        2205
+      ],
+      "summary": "判断当前行是否仍处于 /command 补全上下文。",
+      "tags": [
+        "editor",
+        "autocomplete",
+        "slash-command"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:getBestAutocompleteMatchIndex",
+      "type": "function",
+      "name": "getBestAutocompleteMatchIndex",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        2206,
+        2223
+      ],
+      "summary": "按前缀为补全列表挑选默认高亮项。",
+      "tags": [
+        "editor",
+        "autocomplete",
+        "ranking"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:createAutocompleteList",
+      "type": "function",
+      "name": "createAutocompleteList",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        2224,
+        2249
+      ],
+      "summary": "用建议项构建 SelectList 下拉并绑定选择回调。",
+      "tags": [
+        "editor",
+        "autocomplete",
+        "select"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:handleTabCompletion",
+      "type": "function",
+      "name": "handleTabCompletion",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        2254,
+        2266
+      ],
+      "summary": "Tab 时应用最佳补全或强制文件补全。",
+      "tags": [
+        "editor",
+        "autocomplete",
+        "keybindings"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:requestAutocomplete",
+      "type": "function",
+      "name": "requestAutocomplete",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        2275,
+        2305
+      ],
+      "summary": "按触发字符/防抖决定是否启动补全请求。",
+      "tags": [
+        "editor",
+        "autocomplete",
+        "debounce"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:startAutocompleteRequest",
+      "type": "function",
+      "name": "startAutocompleteRequest",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        2306,
+        2328
+      ],
+      "summary": "取消旧请求并启动新的 provider 查询。",
+      "tags": [
+        "editor",
+        "autocomplete",
+        "async"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:setAutocompleteTriggerCharacters",
+      "type": "function",
+      "name": "setAutocompleteTriggerCharacters",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        2329,
+        2341
+      ],
+      "summary": "更新触发补全的字符集与对应正则。",
+      "tags": [
+        "editor",
+        "autocomplete",
+        "config"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:getAutocompleteDebounceMs",
+      "type": "function",
+      "name": "getAutocompleteDebounceMs",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        2342,
+        2351
+      ],
+      "summary": "按当前前缀是否匹配防抖模式返回延迟毫秒。",
+      "tags": [
+        "editor",
+        "autocomplete",
+        "debounce"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:runAutocompleteRequest",
+      "type": "function",
+      "name": "runAutocompleteRequest",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        2352,
+        2403
+      ],
+      "summary": "调用 provider.getSuggestions，仅在请求仍有效时应用结果。",
+      "tags": [
+        "editor",
+        "autocomplete",
+        "async"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:isAutocompleteRequestCurrent",
+      "type": "function",
+      "name": "isAutocompleteRequestCurrent",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        2404,
+        2419
+      ],
+      "summary": "用 token/id 判断异步补全结果是否过期。",
+      "tags": [
+        "editor",
+        "autocomplete",
+        "concurrency"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:applyAutocompleteSuggestions",
+      "type": "function",
+      "name": "applyAutocompleteSuggestions",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        2420,
+        2431
+      ],
+      "summary": "把建议填进下拉列表并更新选中项。",
+      "tags": [
+        "editor",
+        "autocomplete",
+        "ui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/components/editor.ts:cancelAutocompleteRequest",
+      "type": "function",
+      "name": "cancelAutocompleteRequest",
+      "filePath": "packages/tui/src/components/editor.ts",
+      "lineRange": [
+        2432,
+        2441
+      ],
+      "summary": "中止进行中的补全 AbortSignal 与防抖定时器。",
+      "tags": [
+        "editor",
+        "autocomplete",
+        "cancellation"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/tui/src/components/cancellable-loader.ts",
+      "target": "file:packages/tui/src/components/loader.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/cancellable-loader.ts",
+      "target": "file:packages/tui/src/keybindings.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/cancellable-loader.ts",
+      "target": "class:packages/tui/src/components/cancellable-loader.ts:CancellableLoader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/cancellable-loader.ts",
+      "target": "class:packages/tui/src/components/cancellable-loader.ts:CancellableLoader",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "file:packages/tui/src/autocomplete.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "file:packages/tui/src/components/select-list.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "file:packages/tui/src/keybindings.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "file:packages/tui/src/keys.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "file:packages/tui/src/kill-ring.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "file:packages/tui/src/tui.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "file:packages/tui/src/undo-stack.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "file:packages/tui/src/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "file:packages/tui/src/word-navigation.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:segmentWithMarkers",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:wordWrapLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:wordWrapLine",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:createScrollBorder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "class:packages/tui/src/components/editor.ts:Editor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "class:packages/tui/src/components/editor.ts:Editor",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:constructor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:setAutocompleteProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:addToHistory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:navigateHistory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:setTextInternal",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:render",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:handleMouse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:handleInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:layoutText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:expandPasteMarkers",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:setText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:insertTextAtCursor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:insertTextAtCursorInternal",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:insertCharacter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:handlePaste",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:addNewLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:shouldSubmitOnBackslashEnter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:submitValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:handleBackspace",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:setCursorCol",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:moveToVisualLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:computeVerticalMoveColumn",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:deleteToStartOfLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:deleteToEndOfLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:deleteWordBackwards",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:deleteWordForward",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:handleForwardDelete",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:buildVisualLineMap",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:findVisualLineAt",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:moveCursor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:pageScroll",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:moveWordBackwards",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:yank",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:yankPop",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:insertYankedText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:deleteYankedText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:undo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:jumpToChar",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:moveWordForwards",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:isInSlashCommandContext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:getBestAutocompleteMatchIndex",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:createAutocompleteList",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:handleTabCompletion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:requestAutocomplete",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:startAutocompleteRequest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:setAutocompleteTriggerCharacters",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:getAutocompleteDebounceMs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:runAutocompleteRequest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:isAutocompleteRequestCurrent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:applyAutocompleteSuggestions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/components/editor.ts",
+      "target": "function:packages/tui/src/components/editor.ts:cancelAutocompleteRequest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:constructor",
+      "target": "class:packages/tui/src/kill-ring.ts:KillRing",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:constructor",
+      "target": "class:packages/tui/src/undo-stack.ts:UndoStack",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:handleInput",
+      "target": "function:packages/tui/src/keybindings.ts:getKeybindings",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:handleInput",
+      "target": "function:packages/tui/src/keys.ts:matchesKey",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:handleInput",
+      "target": "function:packages/tui/src/keys.ts:decodePrintableKey",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:handleInput",
+      "target": "function:packages/tui/src/components/editor.ts:handleBackspace",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:handleInput",
+      "target": "function:packages/tui/src/components/editor.ts:handleForwardDelete",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:handleInput",
+      "target": "function:packages/tui/src/components/editor.ts:handlePaste",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:handleInput",
+      "target": "function:packages/tui/src/components/editor.ts:insertCharacter",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:handleInput",
+      "target": "function:packages/tui/src/components/editor.ts:addNewLine",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:handleInput",
+      "target": "function:packages/tui/src/components/editor.ts:submitValue",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:handleInput",
+      "target": "function:packages/tui/src/components/editor.ts:navigateHistory",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:handleInput",
+      "target": "function:packages/tui/src/components/editor.ts:moveCursor",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:handleInput",
+      "target": "function:packages/tui/src/components/editor.ts:moveToVisualLine",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:handleInput",
+      "target": "function:packages/tui/src/components/editor.ts:yank",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:handleInput",
+      "target": "function:packages/tui/src/components/editor.ts:yankPop",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:handleInput",
+      "target": "function:packages/tui/src/components/editor.ts:undo",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:handleInput",
+      "target": "function:packages/tui/src/components/editor.ts:jumpToChar",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:handleInput",
+      "target": "function:packages/tui/src/components/editor.ts:requestAutocomplete",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:handleInput",
+      "target": "function:packages/tui/src/components/editor.ts:handleTabCompletion",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:wordWrapLine",
+      "target": "function:packages/tui/src/utils.ts:visibleWidth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:render",
+      "target": "function:packages/tui/src/utils.ts:visibleWidth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:render",
+      "target": "function:packages/tui/src/components/editor.ts:createScrollBorder",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:layoutText",
+      "target": "function:packages/tui/src/components/editor.ts:wordWrapLine",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:layoutText",
+      "target": "function:packages/tui/src/utils.ts:visibleWidth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:moveWordBackwards",
+      "target": "function:packages/tui/src/word-navigation.ts:findWordBackward",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:moveWordForwards",
+      "target": "function:packages/tui/src/word-navigation.ts:findWordForward",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:deleteWordBackwards",
+      "target": "function:packages/tui/src/word-navigation.ts:findWordBackward",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:deleteWordForward",
+      "target": "function:packages/tui/src/word-navigation.ts:findWordForward",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:createAutocompleteList",
+      "target": "file:packages/tui/src/components/select-list.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:runAutocompleteRequest",
+      "target": "file:packages/tui/src/autocomplete.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:yank",
+      "target": "function:packages/tui/src/components/editor.ts:insertYankedText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:yankPop",
+      "target": "function:packages/tui/src/components/editor.ts:deleteYankedText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:yankPop",
+      "target": "function:packages/tui/src/components/editor.ts:insertYankedText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:handleTabCompletion",
+      "target": "function:packages/tui/src/components/editor.ts:getBestAutocompleteMatchIndex",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:requestAutocomplete",
+      "target": "function:packages/tui/src/components/editor.ts:startAutocompleteRequest",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:startAutocompleteRequest",
+      "target": "function:packages/tui/src/components/editor.ts:runAutocompleteRequest",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:runAutocompleteRequest",
+      "target": "function:packages/tui/src/components/editor.ts:applyAutocompleteSuggestions",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:runAutocompleteRequest",
+      "target": "function:packages/tui/src/components/editor.ts:isAutocompleteRequestCurrent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/components/editor.ts:shouldSubmitOnBackslashEnter",
+      "target": "function:packages/tui/src/keys.ts:matchesKey",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/components/cancellable-loader.ts:CancellableLoader",
+      "target": "file:packages/tui/src/components/loader.ts",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    }
+  ]
+}

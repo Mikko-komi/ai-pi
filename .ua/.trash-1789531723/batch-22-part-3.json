@@ -1,0 +1,1811 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/tui/src/tui-alt-screen.ts",
+      "type": "file",
+      "name": "tui-alt-screen.ts",
+      "filePath": "packages/tui/src/tui-alt-screen.ts",
+      "summary": "全屏备用屏幕 TUI：布局滚动、鼠标选区、搜索高亮、滚动条与 Kitty 图像生命周期。",
+      "tags": [
+        "备用屏幕",
+        "viewport",
+        "鼠标",
+        "选区"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/tui/src/tui-main-screen.ts",
+      "type": "file",
+      "name": "tui-main-screen.ts",
+      "filePath": "packages/tui/src/tui-main-screen.ts",
+      "summary": "主屏幕差分渲染实现，跟踪已绘制行与 Kitty 图像 ID，并定位硬件光标。",
+      "tags": [
+        "主屏幕",
+        "差分渲染",
+        "kitty",
+        "光标"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/tui/src/tui.ts",
+      "type": "file",
+      "name": "tui.ts",
+      "filePath": "packages/tui/src/tui.ts",
+      "summary": "TUI 核心：组件/鼠标协议、Container、叠加层焦点与 TuiBase 的输入、查询和合成渲染循环。",
+      "tags": [
+        "entry-point",
+        "组件模型",
+        "渲染循环",
+        "鼠标"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/tui/src/undo-stack.ts",
+      "type": "file",
+      "name": "undo-stack.ts",
+      "filePath": "packages/tui/src/undo-stack.ts",
+      "summary": "通用撤销栈，push 时 structuredClone 快照，pop 直接返回已分离副本。",
+      "tags": [
+        "撤销",
+        "data-model",
+        "utility",
+        "编辑器"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/tui/src/utils.ts",
+      "type": "file",
+      "name": "utils.ts",
+      "filePath": "packages/tui/src/utils.ts",
+      "summary": "终端文本度量与裁剪工具：grapheme 宽度、ANSI/OSC 8 追踪、换行与按列切片。",
+      "tags": [
+        "utility",
+        "ansi",
+        "文本宽度",
+        "grapheme"
+      ],
+      "complexity": "complex",
+      "languageNotes": "结合 Intl.Segmenter 与 East Asian Width 计算可见列宽，并保持 ANSI 状态机。"
+    },
+    {
+      "id": "file:packages/tui/src/word-navigation.ts",
+      "type": "file",
+      "name": "word-navigation.ts",
+      "filePath": "packages/tui/src/word-navigation.ts",
+      "summary": "基于 Intl.Segmenter 的按词前进/后退光标计算，可注入自定义分段与原子片段。",
+      "tags": [
+        "词导航",
+        "编辑器",
+        "utility",
+        "光标"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/tui-main-screen.ts:parseKittyImageHeader",
+      "type": "function",
+      "name": "parseKittyImageHeader",
+      "filePath": "packages/tui/src/tui-main-screen.ts",
+      "lineRange": [
+        81,
+        99
+      ],
+      "summary": "解析主屏幕行里的 Kitty 图像头字段。",
+      "tags": [
+        "kitty",
+        "解析",
+        "图像"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/tui.ts:dispatchMouseEvent",
+      "type": "function",
+      "name": "dispatchMouseEvent",
+      "filePath": "packages/tui/src/tui.ts",
+      "lineRange": [
+        81,
+        98
+      ],
+      "summary": "向组件分发鼠标事件并记录命中目标与坐标变换。",
+      "tags": [
+        "鼠标",
+        "分发",
+        "组件"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/tui.ts:retargetMouseEvent",
+      "type": "function",
+      "name": "retargetMouseEvent",
+      "filePath": "packages/tui/src/tui.ts",
+      "lineRange": [
+        101,
+        109
+      ],
+      "summary": "把已有鼠标事件改写到新目标组件的局部坐标。",
+      "tags": [
+        "鼠标",
+        "坐标变换",
+        "分发"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/tui.ts:isFocusable",
+      "type": "function",
+      "name": "isFocusable",
+      "filePath": "packages/tui/src/tui.ts",
+      "lineRange": [
+        158,
+        160
+      ],
+      "summary": "判断组件是否声明了可聚焦能力。",
+      "tags": [
+        "焦点",
+        "组件",
+        "introspection"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/tui.ts:parseSizeValue",
+      "type": "function",
+      "name": "parseSizeValue",
+      "filePath": "packages/tui/src/tui.ts",
+      "lineRange": [
+        200,
+        209
+      ],
+      "summary": "把数字或百分比尺寸解析为相对参考值的像素/单元格。",
+      "tags": [
+        "尺寸",
+        "布局",
+        "解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/tui.ts:compositeTuiLine",
+      "type": "function",
+      "name": "compositeTuiLine",
+      "filePath": "packages/tui/src/tui.ts",
+      "lineRange": [
+        387,
+        416
+      ],
+      "summary": "把 overlay 行按列宽合成到基线上，正确处理图像行与 ANSI。",
+      "tags": [
+        "合成",
+        "overlay",
+        "渲染"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/tui.ts:isViewportTUI",
+      "type": "function",
+      "name": "isViewportTUI",
+      "filePath": "packages/tui/src/tui.ts",
+      "lineRange": [
+        461,
+        463
+      ],
+      "summary": "判断实例是否为带 VIEWPORT_TUI 标记的备用屏幕 TUI。",
+      "tags": [
+        "viewport",
+        "introspection",
+        "类型守卫"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:getGraphemeSegmenter",
+      "type": "function",
+      "name": "getGraphemeSegmenter",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        10,
+        12
+      ],
+      "summary": "返回共享的 Intl.Segmenter grapheme 实例。",
+      "tags": [
+        "grapheme",
+        "segmenter",
+        "singleton"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:getWordSegmenter",
+      "type": "function",
+      "name": "getWordSegmenter",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        17,
+        19
+      ],
+      "summary": "返回共享的 Intl.Segmenter word 实例。",
+      "tags": [
+        "分词",
+        "segmenter",
+        "singleton"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:couldBeEmoji",
+      "type": "function",
+      "name": "couldBeEmoji",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        27,
+        37
+      ],
+      "summary": "用 Unicode 区块启发式判断片段是否可能是 emoji。",
+      "tags": [
+        "emoji",
+        "启发式",
+        "宽度"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:truncateFragmentToWidth",
+      "type": "function",
+      "name": "truncateFragmentToWidth",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        67,
+        145
+      ],
+      "summary": "按可见列宽截断文本片段，处理宽字符与 ANSI。",
+      "tags": [
+        "截断",
+        "宽度",
+        "ansi"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:finalizeTruncatedResult",
+      "type": "function",
+      "name": "finalizeTruncatedResult",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        147,
+        167
+      ],
+      "summary": "为截断结果补上省略号与可选右填充。",
+      "tags": [
+        "截断",
+        "格式化",
+        "宽度"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:graphemeWidth",
+      "type": "function",
+      "name": "graphemeWidth",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        174,
+        235
+      ],
+      "summary": "计算单个 grapheme 的终端单元格宽度，含 CJK 与 emoji。",
+      "tags": [
+        "宽度",
+        "grapheme",
+        "cjk"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:visibleWidth",
+      "type": "function",
+      "name": "visibleWidth",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        240,
+        295
+      ],
+      "summary": "计算含 ANSI 的字符串可见列宽。",
+      "tags": [
+        "宽度",
+        "ansi",
+        "度量"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:stripTerminalSequences",
+      "type": "function",
+      "name": "stripTerminalSequences",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        298,
+        312
+      ],
+      "summary": "剥除 ANSI/OSC 等终端序列，留下纯文本。",
+      "tags": [
+        "ansi",
+        "剥离",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:getGraphemeCellRange",
+      "type": "function",
+      "name": "getGraphemeCellRange",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        320,
+        341
+      ],
+      "summary": "返回覆盖指定列的 grapheme 列区间。",
+      "tags": [
+        "grapheme",
+        "列",
+        "选区"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:getOsc8LinkAtColumn",
+      "type": "function",
+      "name": "getOsc8LinkAtColumn",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        344,
+        366
+      ],
+      "summary": "查找指定列上的 OSC 8 超链接 URL。",
+      "tags": [
+        "osc8",
+        "hyperlink",
+        "命中"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:normalizeTerminalOutput",
+      "type": "function",
+      "name": "normalizeTerminalOutput",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        379,
+        401
+      ],
+      "summary": "规范化终端输出中的控制字符与序列边界。",
+      "tags": [
+        "normalization",
+        "终端输出",
+        "ansi"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:extractAnsiCode",
+      "type": "function",
+      "name": "extractAnsiCode",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        406,
+        444
+      ],
+      "summary": "从位置处提取一段完整 ANSI/OSC 转义码。",
+      "tags": [
+        "ansi",
+        "解析",
+        "转义"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:parseOsc8Hyperlink",
+      "type": "function",
+      "name": "parseOsc8Hyperlink",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        454,
+        472
+      ],
+      "summary": "解析 OSC 8 超链接参数与 URL。",
+      "tags": [
+        "osc8",
+        "hyperlink",
+        "解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:getActiveOsc8Close",
+      "type": "function",
+      "name": "getActiveOsc8Close",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        482,
+        502
+      ],
+      "summary": "根据前缀推断关闭当前 OSC 8 链接所需的序列。",
+      "tags": [
+        "osc8",
+        "状态",
+        "ansi"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:updateTrackerFromText",
+      "type": "function",
+      "name": "updateTrackerFromText",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        733,
+        744
+      ],
+      "summary": "用文本驱动 AnsiCodeTracker 前进并更新活动码。",
+      "tags": [
+        "ansi",
+        "状态机",
+        "tracker"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:getActiveBackgroundAnsi",
+      "type": "function",
+      "name": "getActiveBackgroundAnsi",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        747,
+        751
+      ],
+      "summary": "提取文本末尾仍然生效的背景色 ANSI。",
+      "tags": [
+        "背景色",
+        "ansi",
+        "状态"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:splitIntoTokensWithAnsi",
+      "type": "function",
+      "name": "splitIntoTokensWithAnsi",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        756,
+        830
+      ],
+      "summary": "把带 ANSI 的文本拆成保留样式的 token 序列。",
+      "tags": [
+        "分词",
+        "ansi",
+        "换行"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:wrapTextWithAnsi",
+      "type": "function",
+      "name": "wrapTextWithAnsi",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        843,
+        866
+      ],
+      "summary": "按宽度对带 ANSI 的文本自动换行。",
+      "tags": [
+        "换行",
+        "ansi",
+        "排版"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:wrapSingleLine",
+      "type": "function",
+      "name": "wrapSingleLine",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        868,
+        947
+      ],
+      "summary": "对单行做按词/按宽折行，并延续 ANSI 状态。",
+      "tags": [
+        "换行",
+        "ansi",
+        "排版"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:isWhitespaceChar",
+      "type": "function",
+      "name": "isWhitespaceChar",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        954,
+        956
+      ],
+      "summary": "判断字符是否为空白。",
+      "tags": [
+        "空白",
+        "字符分类",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:isPunctuationChar",
+      "type": "function",
+      "name": "isPunctuationChar",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        961,
+        963
+      ],
+      "summary": "判断字符是否为标点。",
+      "tags": [
+        "标点",
+        "字符分类",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:breakLongWord",
+      "type": "function",
+      "name": "breakLongWord",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        965,
+        1032
+      ],
+      "summary": "把超宽单词按单元格宽度切开并保留 ANSI。",
+      "tags": [
+        "换行",
+        "长词",
+        "ansi"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:applyBackgroundToLine",
+      "type": "function",
+      "name": "applyBackgroundToLine",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        1042,
+        1051
+      ],
+      "summary": "把背景色函数应用到整行可见宽度。",
+      "tags": [
+        "背景色",
+        "绘制",
+        "ansi"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:truncateToWidth",
+      "type": "function",
+      "name": "truncateToWidth",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        1064,
+        1200
+      ],
+      "summary": "按可见列宽截断整行，处理图像行、链接与填充。",
+      "tags": [
+        "截断",
+        "宽度",
+        "核心"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:sliceByColumn",
+      "type": "function",
+      "name": "sliceByColumn",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        1206,
+        1208
+      ],
+      "summary": "按起始列与长度切片一行，委托 sliceWithWidth。",
+      "tags": [
+        "切片",
+        "列",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:sliceWithWidth",
+      "type": "function",
+      "name": "sliceWithWidth",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        1211,
+        1256
+      ],
+      "summary": "按列范围切片并重放必要的 ANSI 前缀/重置。",
+      "tags": [
+        "切片",
+        "ansi",
+        "列"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/utils.ts:extractSegments",
+      "type": "function",
+      "name": "extractSegments",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        1266,
+        1337
+      ],
+      "summary": "从一行抽出前中后三段，供 overlay 合成使用。",
+      "tags": [
+        "切片",
+        "合成",
+        "ansi"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/tui/src/word-navigation.ts:findWordBackward",
+      "type": "function",
+      "name": "findWordBackward",
+      "filePath": "packages/tui/src/word-navigation.ts",
+      "lineRange": [
+        22,
+        70
+      ],
+      "summary": "从光标向左跳过空白后停在上一词或标点边界。",
+      "tags": [
+        "词导航",
+        "光标",
+        "后退"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/tui/src/word-navigation.ts:findWordForward",
+      "type": "function",
+      "name": "findWordForward",
+      "filePath": "packages/tui/src/word-navigation.ts",
+      "lineRange": [
+        78,
+        117
+      ],
+      "summary": "从光标向右跳到下一词或标点边界。",
+      "tags": [
+        "词导航",
+        "光标",
+        "前进"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "type": "class",
+      "name": "TuiAltScreen",
+      "filePath": "packages/tui/src/tui-alt-screen.ts",
+      "lineRange": [
+        195,
+        1721
+      ],
+      "summary": "全屏 ViewportTUI：滚动视口、选区复制、搜索、滚动条拖拽与差分绘制。",
+      "tags": [
+        "备用屏幕",
+        "viewport",
+        "鼠标",
+        "渲染"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:packages/tui/src/tui-main-screen.ts:BoundedTerminalWriter",
+      "type": "class",
+      "name": "BoundedTerminalWriter",
+      "filePath": "packages/tui/src/tui-main-screen.ts",
+      "lineRange": [
+        18,
+        74
+      ],
+      "summary": "限制单次写入字符数的终端 writer，避免主屏幕突发输出过大。",
+      "tags": [
+        "写入缓冲",
+        "限流",
+        "终端"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/tui/src/tui-main-screen.ts:TuiMainScreen",
+      "type": "class",
+      "name": "TuiMainScreen",
+      "filePath": "packages/tui/src/tui-main-screen.ts",
+      "lineRange": [
+        124,
+        655
+      ],
+      "summary": "主屏幕 TUI：差分重绘已输出行，并清理变更范围内的 Kitty 图像。",
+      "tags": [
+        "主屏幕",
+        "差分渲染",
+        "kitty"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:packages/tui/src/tui.ts:Container",
+      "type": "class",
+      "name": "Container",
+      "filePath": "packages/tui/src/tui.ts",
+      "lineRange": [
+        319,
+        379
+      ],
+      "summary": "可嵌套子组件容器，负责增删、失效与鼠标向下分发。",
+      "tags": [
+        "容器",
+        "组件",
+        "鼠标"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/tui/src/tui.ts:TuiBase",
+      "type": "class",
+      "name": "TuiBase",
+      "filePath": "packages/tui/src/tui.ts",
+      "lineRange": [
+        465,
+        1456
+      ],
+      "summary": "TUI 基类：终端生命周期、渲染调度、叠加层焦点与颜色/单元格查询。",
+      "tags": [
+        "基类",
+        "渲染循环",
+        "焦点",
+        "overlay"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:packages/tui/src/undo-stack.ts:UndoStack",
+      "type": "class",
+      "name": "UndoStack",
+      "filePath": "packages/tui/src/undo-stack.ts",
+      "lineRange": [
+        7,
+        28
+      ],
+      "summary": "泛型撤销栈，push 深拷贝快照，pop 返回已分离状态。",
+      "tags": [
+        "撤销",
+        "快照",
+        "泛型"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/tui/src/utils.ts:AnsiCodeTracker",
+      "type": "class",
+      "name": "AnsiCodeTracker",
+      "filePath": "packages/tui/src/utils.ts",
+      "lineRange": [
+        507,
+        731
+      ],
+      "summary": "扫描文本维护当前 ANSI 样式、颜色与 OSC 8 超链接状态。",
+      "tags": [
+        "ansi",
+        "状态机",
+        "样式"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/tui/src/tui-alt-screen.ts",
+      "target": "file:packages/tui/src/alt-screen-search.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/tui-alt-screen.ts",
+      "target": "file:packages/tui/src/components/alt-screen-flash.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/tui-alt-screen.ts",
+      "target": "file:packages/tui/src/components/scroll-view.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/tui-alt-screen.ts",
+      "target": "file:packages/tui/src/keybindings.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/tui-alt-screen.ts",
+      "target": "file:packages/tui/src/keys.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/tui-alt-screen.ts",
+      "target": "file:packages/tui/src/layout-node.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/tui-alt-screen.ts",
+      "target": "file:packages/tui/src/layout.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/tui-alt-screen.ts",
+      "target": "file:packages/tui/src/terminal-image.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/tui-alt-screen.ts",
+      "target": "file:packages/tui/src/terminal.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/tui-alt-screen.ts",
+      "target": "file:packages/tui/src/tui.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/tui-alt-screen.ts",
+      "target": "file:packages/tui/src/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/tui-main-screen.ts",
+      "target": "file:packages/tui/src/terminal-image.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/tui-main-screen.ts",
+      "target": "file:packages/tui/src/tui.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/tui-main-screen.ts",
+      "target": "file:packages/tui/src/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/tui.ts",
+      "target": "file:packages/tui/src/keys.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/tui.ts",
+      "target": "file:packages/tui/src/terminal-colors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/tui.ts",
+      "target": "file:packages/tui/src/terminal-image.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/tui.ts",
+      "target": "file:packages/tui/src/terminal.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/tui.ts",
+      "target": "file:packages/tui/src/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/word-navigation.ts",
+      "target": "file:packages/tui/src/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/tui/src/tui-main-screen.ts",
+      "target": "function:packages/tui/src/tui-main-screen.ts:parseKittyImageHeader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/tui.ts",
+      "target": "function:packages/tui/src/tui.ts:dispatchMouseEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/tui.ts",
+      "target": "function:packages/tui/src/tui.ts:dispatchMouseEvent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/tui.ts",
+      "target": "function:packages/tui/src/tui.ts:retargetMouseEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/tui.ts",
+      "target": "function:packages/tui/src/tui.ts:retargetMouseEvent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/tui.ts",
+      "target": "function:packages/tui/src/tui.ts:isFocusable",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/tui.ts",
+      "target": "function:packages/tui/src/tui.ts:isFocusable",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/tui.ts",
+      "target": "function:packages/tui/src/tui.ts:parseSizeValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/tui.ts",
+      "target": "function:packages/tui/src/tui.ts:compositeTuiLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/tui.ts",
+      "target": "function:packages/tui/src/tui.ts:compositeTuiLine",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/tui.ts",
+      "target": "function:packages/tui/src/tui.ts:isViewportTUI",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/tui.ts",
+      "target": "function:packages/tui/src/tui.ts:isViewportTUI",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:getGraphemeSegmenter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:getGraphemeSegmenter",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:getWordSegmenter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:getWordSegmenter",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:couldBeEmoji",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:truncateFragmentToWidth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:finalizeTruncatedResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:graphemeWidth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:visibleWidth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:visibleWidth",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:stripTerminalSequences",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:stripTerminalSequences",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:getGraphemeCellRange",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:getGraphemeCellRange",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:getOsc8LinkAtColumn",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:getOsc8LinkAtColumn",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:normalizeTerminalOutput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:normalizeTerminalOutput",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:extractAnsiCode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:extractAnsiCode",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:parseOsc8Hyperlink",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:getActiveOsc8Close",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:updateTrackerFromText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:getActiveBackgroundAnsi",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:getActiveBackgroundAnsi",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:splitIntoTokensWithAnsi",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:wrapTextWithAnsi",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:wrapTextWithAnsi",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:wrapSingleLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:isWhitespaceChar",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:isWhitespaceChar",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:isPunctuationChar",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:isPunctuationChar",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:breakLongWord",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:applyBackgroundToLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:applyBackgroundToLine",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:truncateToWidth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:truncateToWidth",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:sliceByColumn",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:sliceByColumn",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:sliceWithWidth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:sliceWithWidth",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:extractSegments",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "function:packages/tui/src/utils.ts:extractSegments",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/word-navigation.ts",
+      "target": "function:packages/tui/src/word-navigation.ts:findWordBackward",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/word-navigation.ts",
+      "target": "function:packages/tui/src/word-navigation.ts:findWordBackward",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/word-navigation.ts",
+      "target": "function:packages/tui/src/word-navigation.ts:findWordForward",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/word-navigation.ts",
+      "target": "function:packages/tui/src/word-navigation.ts:findWordForward",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/tui-alt-screen.ts",
+      "target": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/tui-alt-screen.ts",
+      "target": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/tui-main-screen.ts",
+      "target": "class:packages/tui/src/tui-main-screen.ts:BoundedTerminalWriter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/tui-main-screen.ts",
+      "target": "class:packages/tui/src/tui-main-screen.ts:TuiMainScreen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/tui-main-screen.ts",
+      "target": "class:packages/tui/src/tui-main-screen.ts:TuiMainScreen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/tui.ts",
+      "target": "class:packages/tui/src/tui.ts:Container",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/tui.ts",
+      "target": "class:packages/tui/src/tui.ts:Container",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/tui.ts",
+      "target": "class:packages/tui/src/tui.ts:TuiBase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/tui.ts",
+      "target": "class:packages/tui/src/tui.ts:TuiBase",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/undo-stack.ts",
+      "target": "class:packages/tui/src/undo-stack.ts:UndoStack",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/tui/src/undo-stack.ts",
+      "target": "class:packages/tui/src/undo-stack.ts:UndoStack",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/tui/src/utils.ts",
+      "target": "class:packages/tui/src/utils.ts:AnsiCodeTracker",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/terminal-image.ts:getCapabilities",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/terminal-image.ts:setCapabilities",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/terminal-image.ts:isImageLine",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/utils.ts:visibleWidth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/utils.ts:sliceByColumn",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/terminal-image.ts:deleteAllKittyImages",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/terminal-image.ts:getKittyImagePlacement",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/terminal-image.ts:deleteKittyImage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/layout.ts:getScrollViewBox",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/alt-screen-search.ts:getAltScreenSearchMatchKey",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/keybindings.ts:getKeybindings",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/keys.ts:isKeyRelease",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/layout.ts:getLayoutBoxesAt",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/layout-node.ts:getLayoutNode",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/tui.ts:dispatchMouseEvent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/tui.ts:retargetMouseEvent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/layout.ts:getScrollViewsAt",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/layout.ts:getScrollbarGeometry",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/utils.ts:stripTerminalSequences",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/utils.ts:getOsc8LinkAtColumn",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/utils.ts:getGraphemeCellRange",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/utils.ts:extractAnsiCode",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/utils.ts:truncateToWidth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/tui.ts:compositeTuiLine",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/layout.ts:renderLayoutFrame",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "function:packages/tui/src/terminal-image.ts:deleteAllKittyPlacements",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-main-screen.ts:TuiMainScreen",
+      "target": "function:packages/tui/src/terminal-image.ts:isImageLine",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-main-screen.ts:TuiMainScreen",
+      "target": "function:packages/tui/src/terminal-image.ts:deleteKittyImage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-main-screen.ts:TuiMainScreen",
+      "target": "function:packages/tui/src/utils.ts:visibleWidth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/tui.ts:compositeTuiLine",
+      "target": "function:packages/tui/src/terminal-image.ts:isImageLine",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/tui.ts:compositeTuiLine",
+      "target": "function:packages/tui/src/utils.ts:extractSegments",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/tui.ts:compositeTuiLine",
+      "target": "function:packages/tui/src/utils.ts:sliceWithWidth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/tui.ts:compositeTuiLine",
+      "target": "function:packages/tui/src/utils.ts:visibleWidth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/tui.ts:compositeTuiLine",
+      "target": "function:packages/tui/src/utils.ts:sliceByColumn",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui.ts:TuiBase",
+      "target": "function:packages/tui/src/terminal-image.ts:getCapabilities",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui.ts:TuiBase",
+      "target": "function:packages/tui/src/keys.ts:matchesKey",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui.ts:TuiBase",
+      "target": "function:packages/tui/src/keys.ts:isKeyRelease",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui.ts:TuiBase",
+      "target": "function:packages/tui/src/terminal-colors.ts:isOsc11BackgroundColorResponse",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui.ts:TuiBase",
+      "target": "function:packages/tui/src/terminal-colors.ts:parseOsc11BackgroundColor",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui.ts:TuiBase",
+      "target": "function:packages/tui/src/terminal-colors.ts:parseTerminalColorSchemeReport",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui.ts:TuiBase",
+      "target": "function:packages/tui/src/terminal-image.ts:setCellDimensions",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui.ts:TuiBase",
+      "target": "function:packages/tui/src/utils.ts:visibleWidth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui.ts:TuiBase",
+      "target": "function:packages/tui/src/utils.ts:sliceByColumn",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui.ts:TuiBase",
+      "target": "function:packages/tui/src/terminal-image.ts:isImageLine",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui.ts:TuiBase",
+      "target": "function:packages/tui/src/utils.ts:normalizeTerminalOutput",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/word-navigation.ts:findWordBackward",
+      "target": "function:packages/tui/src/utils.ts:isWhitespaceChar",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/tui/src/word-navigation.ts:findWordForward",
+      "target": "function:packages/tui/src/utils.ts:isWhitespaceChar",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/tui/src/tui-alt-screen.ts:TuiAltScreen",
+      "target": "class:packages/tui/src/tui.ts:TuiBase",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:packages/tui/src/tui-main-screen.ts:TuiMainScreen",
+      "target": "class:packages/tui/src/tui.ts:TuiBase",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    }
+  ]
+}

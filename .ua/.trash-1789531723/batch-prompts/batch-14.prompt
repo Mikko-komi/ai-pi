@@ -1,0 +1,43 @@
+Analyze these files and produce GraphNode and GraphEdge objects.
+Project root: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi`
+Project: `pi-monorepo`
+Batch: `14/45`
+Skill directory: `/Users/elex-mb0203/.cursor/plugins/local/Understand-Anything/understand-anything-plugin/skills/understand`
+Output: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-14.json` OR `batch-14-part-<k>.json`.
+UA_DIR: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua`
+Load `batchImportData` and `neighborMap` from `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-briefs/batch-14.json`.
+Pass every listed file through to `batchFiles` with path, language, sizeLines, fileCategory.
+
+> **Language directive**: Generate all textual content in **Chinese (zh)**. Keep technical terms in English when no standard translation exists.
+
+Files:
+1. packages/ai/src/providers/qwen-token-plan-cn.models.ts (8 lines, language: typescript, fileCategory: code)
+2. packages/ai/src/providers/qwen-token-plan-cn.ts (15 lines, language: typescript, fileCategory: code)
+3. packages/ai/src/providers/qwen-token-plan-individual.models.ts (8 lines, language: typescript, fileCategory: code)
+4. packages/ai/src/providers/qwen-token-plan-individual.ts (15 lines, language: typescript, fileCategory: code)
+5. packages/ai/src/providers/qwen-token-plan.models.ts (8 lines, language: typescript, fileCategory: code)
+6. packages/ai/src/providers/qwen-token-plan.ts (15 lines, language: typescript, fileCategory: code)
+7. packages/ai/src/providers/radius-config.ts (96 lines, language: typescript, fileCategory: code)
+8. packages/ai/src/providers/radius.ts (82 lines, language: typescript, fileCategory: code)
+9. packages/ai/src/providers/together.models.ts (8 lines, language: typescript, fileCategory: code)
+10. packages/ai/src/providers/together.ts (15 lines, language: typescript, fileCategory: code)
+11. packages/ai/src/providers/vercel-ai-gateway.models.ts (8 lines, language: typescript, fileCategory: code)
+12. packages/ai/src/providers/vercel-ai-gateway.ts (15 lines, language: typescript, fileCategory: code)
+13. packages/ai/src/providers/xai.models.ts (8 lines, language: typescript, fileCategory: code)
+14. packages/ai/src/providers/xai.ts (24 lines, language: typescript, fileCategory: code)
+15. packages/ai/src/providers/xiaomi-token-plan-ams.models.ts (8 lines, language: typescript, fileCategory: code)
+16. packages/ai/src/providers/xiaomi-token-plan-ams.ts (15 lines, language: typescript, fileCategory: code)
+17. packages/ai/src/providers/xiaomi-token-plan-cn.models.ts (8 lines, language: typescript, fileCategory: code)
+18. packages/ai/src/providers/xiaomi-token-plan-cn.ts (15 lines, language: typescript, fileCategory: code)
+19. packages/ai/src/providers/xiaomi-token-plan-sgp.models.ts (8 lines, language: typescript, fileCategory: code)
+20. packages/ai/src/providers/xiaomi-token-plan-sgp.ts (15 lines, language: typescript, fileCategory: code)
+21. packages/ai/src/providers/xiaomi.models.ts (8 lines, language: typescript, fileCategory: code)
+22. packages/ai/src/providers/xiaomi.ts (15 lines, language: typescript, fileCategory: code)
+23. packages/ai/src/providers/zai-coding-cn.models.ts (8 lines, language: typescript, fileCategory: code)
+24. packages/ai/src/providers/zai-coding-cn.ts (15 lines, language: typescript, fileCategory: code)
+25. packages/ai/src/providers/zai.models.ts (8 lines, language: typescript, fileCategory: code)
+26. packages/ai/src/providers/zai.ts (15 lines, language: typescript, fileCategory: code)
+27. packages/ai/src/utils/abort.ts (50 lines, language: typescript, fileCategory: code)
+28. packages/ai/src/utils/sleep.ts (14 lines, language: typescript, fileCategory: code)
+
+Respond with only a brief summary: parts written, total nodes/edges, files skipped.

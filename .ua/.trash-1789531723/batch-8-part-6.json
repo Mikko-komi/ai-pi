@@ -1,0 +1,238 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/trust-selector.ts",
+      "type": "file",
+      "name": "trust-selector.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/trust-selector.ts",
+      "summary": "项目信任选择器：列出 trust 选项，标记已保存决策并确认新选择。",
+      "tags": [
+        "component",
+        "trust",
+        "selector",
+        "security"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/modes/interactive/components/trust-selector.ts:formatDecision",
+      "type": "function",
+      "name": "formatDecision",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/trust-selector.ts",
+      "summary": "把已保存的信任路径与 decision 格式化为页头说明。",
+      "tags": [
+        "utility",
+        "trust",
+        "formatting"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        21,
+        30
+      ]
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/trust-selector.ts:TrustSelectorComponent",
+      "type": "class",
+      "name": "TrustSelectorComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/trust-selector.ts",
+      "summary": "信任选项列表，键盘选择后回调 onSelect，Esc 取消。",
+      "tags": [
+        "component",
+        "trust",
+        "selector",
+        "tui"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        32,
+        134
+      ]
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/user-message-selector.ts",
+      "type": "file",
+      "name": "user-message-selector.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/user-message-selector.ts",
+      "summary": "从历史用户消息中挑选一条，供编辑或重新提交。",
+      "tags": [
+        "component",
+        "selector",
+        "message",
+        "tui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/user-message-selector.ts:UserMessageList",
+      "type": "class",
+      "name": "UserMessageList",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/user-message-selector.ts",
+      "summary": "用户消息列表：单行预览、键盘导航并回调选中消息。",
+      "tags": [
+        "component",
+        "list",
+        "message",
+        "tui"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        14,
+        105
+      ]
+    },
+    {
+      "id": "class:packages/coding-agent/src/modes/interactive/components/user-message-selector.ts:UserMessageSelectorComponent",
+      "type": "class",
+      "name": "UserMessageSelectorComponent",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/user-message-selector.ts",
+      "summary": "用户消息选择器容器，无消息时短暂提示后自动取消。",
+      "tags": [
+        "component",
+        "selector",
+        "message",
+        "tui"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        110,
+        155
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/trust-selector.ts",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/trust-selector.ts:formatDecision",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/trust-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/trust-selector.ts:TrustSelectorComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/trust-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/trust-selector.ts:TrustSelectorComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/trust-selector.ts",
+      "target": "file:packages/coding-agent/src/core/trust-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/trust-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/trust-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/trust-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/trust-selector.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/user-message-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/user-message-selector.ts:UserMessageList",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/user-message-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/user-message-selector.ts:UserMessageSelectorComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/user-message-selector.ts",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/user-message-selector.ts:UserMessageSelectorComponent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/user-message-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/user-message-selector.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/modes/interactive/components/user-message-selector.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/trust-selector.ts:TrustSelectorComponent",
+      "target": "function:packages/coding-agent/src/core/trust-manager.ts:getProjectTrustOptions",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/trust-selector.ts:TrustSelectorComponent",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:keyHint",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/trust-selector.ts:TrustSelectorComponent",
+      "target": "function:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts:rawKeyHint",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/trust-selector.ts:TrustSelectorComponent",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts:DynamicBorder",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/modes/interactive/components/user-message-selector.ts:UserMessageSelectorComponent",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts:DynamicBorder",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

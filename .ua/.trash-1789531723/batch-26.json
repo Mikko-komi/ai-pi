@@ -1,0 +1,163 @@
+{
+  "nodes": [
+    {
+      "id": "pipeline:.github/workflows/approve-contributor.yml",
+      "type": "pipeline",
+      "name": "approve-contributor.yml",
+      "filePath": ".github/workflows/approve-contributor.yml",
+      "summary": "监听 issue 评论中的 lgtm/lgtmi，由具备写权限的维护者把用户写入 .github/APPROVED_CONTRIBUTORS，并在 issue 上回复批准结果。",
+      "tags": ["ci-cd", "github-actions", "contributor-gate", "approval", "security"],
+      "complexity": "moderate",
+      "languageNotes": "内联 github-script，用正则匹配评论开头或结尾的 lgtm/lgtmi，并区分 issue 与 pr 能力。"
+    },
+    {
+      "id": "pipeline:.github/workflows/build-binaries.yml",
+      "type": "pipeline",
+      "name": "build-binaries.yml",
+      "filePath": ".github/workflows/build-binaries.yml",
+      "summary": "在 v* tag 或手动触发时构建多平台二进制并做 smoke test，先创建草稿 GitHub Release，再发布 npm 包与 pi.dev 公告，最后公开 Release；失败则删除草稿。",
+      "tags": ["ci-cd", "github-actions", "release", "deployment", "binaries"],
+      "complexity": "complex",
+      "languageNotes": "多 job 流水线：先暂存草稿 Release，npm 与公告成功后再公开，失败路径清理草稿以免留下半发布状态。"
+    },
+    {
+      "id": "pipeline:.github/workflows/ci.yml",
+      "type": "pipeline",
+      "name": "ci.yml",
+      "filePath": ".github/workflows/ci.yml",
+      "summary": "在 main 的 push 与 pull_request 上安装系统依赖和 npm 包，依次执行 build、check 与 test。",
+      "tags": ["ci-cd", "github-actions", "build-system", "test", "quality"],
+      "complexity": "simple"
+    },
+    {
+      "id": "pipeline:.github/workflows/issue-analysis.yml",
+      "type": "pipeline",
+      "name": "issue-analysis.yml",
+      "filePath": ".github/workflows/issue-analysis.yml",
+      "summary": "在打上 pi-analyze 或评论 @issuron analyze 后，校验 earendil-works/staff 身份，再运行 pi /is 分析 issue，把 session 上传 gist 并回写评论。",
+      "tags": ["ci-cd", "github-actions", "issue-analysis", "automation", "security"],
+      "complexity": "complex",
+      "languageNotes": "授权与分析分 job；分析跑在高熵工作目录，并在 pi-analyze environment 回写刷新后的 PI_AUTH_JSON。"
+    },
+    {
+      "id": "pipeline:.github/workflows/issue-gate.yml",
+      "type": "pipeline",
+      "name": "issue-gate.yml",
+      "filePath": ".github/workflows/issue-gate.yml",
+      "summary": "新 issue 打开时检查作者是否为协作者或已批准贡献者；否则评论说明、打 untriaged 并自动关闭。",
+      "tags": ["ci-cd", "github-actions", "contributor-gate", "issues", "security"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "pipeline:.github/workflows/issue-triage-labels.yml",
+      "type": "pipeline",
+      "name": "issue-triage-labels.yml",
+      "filePath": ".github/workflows/issue-triage-labels.yml",
+      "summary": "处理 issue 重开与标签变化：清理 untriaged/no-action；在 last-read 区间内给未分诊 issue 打 no-action 并关闭。",
+      "tags": ["ci-cd", "github-actions", "issue-triage", "labels", "automation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "pipeline:.github/workflows/npm-audit.yml",
+      "type": "pipeline",
+      "name": "npm-audit.yml",
+      "filePath": ".github/workflows/npm-audit.yml",
+      "summary": "每日定时或手动对生产依赖运行 npm audit，并校验 registry 签名。",
+      "tags": ["ci-cd", "github-actions", "security", "npm-audit", "dependencies"],
+      "complexity": "simple"
+    },
+    {
+      "id": "pipeline:.github/workflows/pr-gate.yml",
+      "type": "pipeline",
+      "name": "pr-gate.yml",
+      "filePath": ".github/workflows/pr-gate.yml",
+      "summary": "PR 打开时检查作者是否具备 pr 批准能力；未批准则评论说明并自动关闭。",
+      "tags": ["ci-cd", "github-actions", "contributor-gate", "pull-request", "security"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "pipeline:.github/workflows/publish-model-catalog.yml",
+      "type": "pipeline",
+      "name": "publish-model-catalog.yml",
+      "filePath": ".github/workflows/publish-model-catalog.yml",
+      "summary": "在 CI 成功、相关路径变更、工作日窗口或手动触发时生成并校验 model catalog，窗口内上传到 Cloudflare R2。",
+      "tags": ["ci-cd", "github-actions", "deployment", "model-catalog", "publishing"],
+      "complexity": "moderate",
+      "languageNotes": "通过 workflow_run 串联 CI；R2 上传受 Europe/Vienna 工作日时间窗口约束。"
+    },
+    {
+      "id": "pipeline:.github/workflows/remove-inprogress-on-close.yml",
+      "type": "pipeline",
+      "name": "remove-inprogress-on-close.yml",
+      "filePath": ".github/workflows/remove-inprogress-on-close.yml",
+      "summary": "issue 关闭时若带有 inprogress 标签则移除该标签。",
+      "tags": ["ci-cd", "github-actions", "issue-triage", "labels", "automation"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "pipeline:.github/workflows/ci.yml",
+      "target": "pipeline:.github/workflows/publish-model-catalog.yml",
+      "type": "triggers",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "pipeline:.github/workflows/publish-model-catalog.yml",
+      "target": "pipeline:.github/workflows/ci.yml",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "pipeline:.github/workflows/approve-contributor.yml",
+      "target": "pipeline:.github/workflows/issue-gate.yml",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "pipeline:.github/workflows/approve-contributor.yml",
+      "target": "pipeline:.github/workflows/pr-gate.yml",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "pipeline:.github/workflows/issue-gate.yml",
+      "target": "pipeline:.github/workflows/pr-gate.yml",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "pipeline:.github/workflows/issue-gate.yml",
+      "target": "pipeline:.github/workflows/issue-triage-labels.yml",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "pipeline:.github/workflows/issue-triage-labels.yml",
+      "target": "pipeline:.github/workflows/remove-inprogress-on-close.yml",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "pipeline:.github/workflows/ci.yml",
+      "target": "pipeline:.github/workflows/build-binaries.yml",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "pipeline:.github/workflows/build-binaries.yml",
+      "target": "pipeline:.github/workflows/publish-model-catalog.yml",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

@@ -1,0 +1,817 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/experimental/client-tui-chat.ts",
+      "type": "file",
+      "name": "client-tui-chat.ts",
+      "filePath": "packages/coding-agent/src/experimental/client-tui-chat.ts",
+      "summary": "实验性、snapshot 驱动的聊天视图：把 LaneSnapshot 映射到 transcript、运行中工具与 working 状态组件。",
+      "tags": [
+        "experimental",
+        "tui",
+        "component",
+        "chat"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/experimental/client-tui-chat.ts:ExperimentalChatView",
+      "type": "class",
+      "name": "ExperimentalChatView",
+      "filePath": "packages/coding-agent/src/experimental/client-tui-chat.ts",
+      "lineRange": [
+        21,
+        184
+      ],
+      "summary": "把 LaneSnapshot 同步到 transcript、pending queue、running tools 与 working indicator。",
+      "tags": [
+        "experimental",
+        "tui",
+        "chat",
+        "component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "type": "file",
+      "name": "view.ts",
+      "filePath": "packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "summary": "mini TUI 的 alt-screen 视图：不持有 live runtime，只渲染复制的 SessionView snapshot，并把用户操作发成命令。",
+      "tags": [
+        "experimental",
+        "tui",
+        "entry-point",
+        "chat"
+      ],
+      "complexity": "complex",
+      "languageNotes": "视图与 worker 通过 protocol 命令通信，登录/选模型走 overlay 组件。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/mini/tui/view.ts:runLogin",
+      "type": "function",
+      "name": "runLogin",
+      "filePath": "packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "lineRange": [
+        393,
+        438
+      ],
+      "summary": "用 LoginDialog/OAuthSelector overlay 走完账户登录，并把结果写回 UI 状态。",
+      "tags": [
+        "experimental",
+        "oauth",
+        "tui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/mini/tui/view.ts:runView",
+      "type": "function",
+      "name": "runView",
+      "filePath": "packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "lineRange": [
+        441,
+        555
+      ],
+      "summary": "mini TUI 主循环：连接 session、渲染 MiniTui、处理提交/中断/选模型/登录命令。",
+      "tags": [
+        "experimental",
+        "tui",
+        "entry-point"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/experimental/mini/tui/view.ts:ListSelector",
+      "type": "class",
+      "name": "ListSelector",
+      "filePath": "packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "lineRange": [
+        73,
+        128
+      ],
+      "summary": "带模糊搜索的 Focusable 列表，用于不持有 ModelRuntime 的选择场景。",
+      "tags": [
+        "experimental",
+        "tui",
+        "selector",
+        "component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/experimental/mini/tui/view.ts:MiniTui",
+      "type": "class",
+      "name": "MiniTui",
+      "filePath": "packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "lineRange": [
+        140,
+        376
+      ],
+      "summary": "Alt-screen 聊天表面：CustomEditor + ScrollView transcript，apply() 只消费复制的 snapshot。",
+      "tags": [
+        "experimental",
+        "tui",
+        "chat",
+        "component"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/coding-agent/src/extensions/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/coding-agent/src/extensions/index.ts",
+      "summary": "内置 InlineExtension 注册表，目前只挂 hidden 的 llama.cpp factory。",
+      "tags": [
+        "barrel",
+        "extension",
+        "entry-point"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/extensions/llama/client.ts",
+      "type": "file",
+      "name": "client.ts",
+      "filePath": "packages/coding-agent/src/extensions/llama/client.ts",
+      "summary": "llama.cpp 服务器 HTTP 客户端：list/load/unload/download，解析 SSE 进度，并用 AbortSignal 链接取消。",
+      "tags": [
+        "extension",
+        "http-client",
+        "llama",
+        "service"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/coding-agent/src/extensions/llama/client.ts:linkSignal",
+      "type": "function",
+      "name": "linkSignal",
+      "filePath": "packages/coding-agent/src/extensions/llama/client.ts",
+      "lineRange": [
+        61,
+        70
+      ],
+      "summary": "把 source AbortSignal 链接到 target AbortController，返回解除监听函数。",
+      "tags": [
+        "abort",
+        "utility",
+        "http-client"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/extensions/llama/client.ts:sleep",
+      "type": "function",
+      "name": "sleep",
+      "filePath": "packages/coding-agent/src/extensions/llama/client.ts",
+      "lineRange": [
+        72,
+        88
+      ],
+      "summary": "可取消的 sleep；signal abort 时 reject。",
+      "tags": [
+        "async",
+        "abort",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/extensions/llama/client.ts:parseLoadProgress",
+      "type": "function",
+      "name": "parseLoadProgress",
+      "filePath": "packages/coding-agent/src/extensions/llama/client.ts",
+      "lineRange": [
+        90,
+        110
+      ],
+      "summary": "从 llama.cpp 加载事件解析阶段比例与状态文案。",
+      "tags": [
+        "llama",
+        "progress",
+        "parser"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/extensions/llama/client.ts:parseDownloadProgress",
+      "type": "function",
+      "name": "parseDownloadProgress",
+      "filePath": "packages/coding-agent/src/extensions/llama/client.ts",
+      "lineRange": [
+        112,
+        131
+      ],
+      "summary": "从下载事件汇总各分片进度，并用 formatBytes 生成详情。",
+      "tags": [
+        "llama",
+        "progress",
+        "parser"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/extensions/llama/client.ts:formatBytes",
+      "type": "function",
+      "name": "formatBytes",
+      "filePath": "packages/coding-agent/src/extensions/llama/client.ts",
+      "lineRange": [
+        133,
+        143
+      ],
+      "summary": "把字节数格式化为 KiB/MiB/GiB 等人类可读单位。",
+      "tags": [
+        "utility",
+        "formatting",
+        "display"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/extensions/llama/client.ts:normalizeLlamaServerUrl",
+      "type": "function",
+      "name": "normalizeLlamaServerUrl",
+      "filePath": "packages/coding-agent/src/extensions/llama/client.ts",
+      "lineRange": [
+        145,
+        154
+      ],
+      "summary": "规范化 llama.cpp base URL：去尾斜杠并去掉 /v1 推理后缀。",
+      "tags": [
+        "llama",
+        "url",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/extensions/llama/client.ts:llamaInferenceUrl",
+      "type": "function",
+      "name": "llamaInferenceUrl",
+      "filePath": "packages/coding-agent/src/extensions/llama/client.ts",
+      "lineRange": [
+        156,
+        158
+      ],
+      "summary": "在规范化 server URL 后追加推理端点路径。",
+      "tags": [
+        "llama",
+        "url",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/extensions/llama/client.ts:LlamaClient",
+      "type": "class",
+      "name": "LlamaClient",
+      "filePath": "packages/coding-agent/src/extensions/llama/client.ts",
+      "lineRange": [
+        160,
+        343
+      ],
+      "summary": "llama.cpp HTTP API：list/props/load/unload/download，watch SSE，并提供 *AndWait 进度封装。",
+      "tags": [
+        "llama",
+        "http-client",
+        "service"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/extensions/llama/huggingface.ts",
+      "type": "file",
+      "name": "huggingface.ts",
+      "filePath": "packages/coding-agent/src/extensions/llama/huggingface.ts",
+      "summary": "Hugging Face 模型搜索与量化详情客户端，并从 HF_TOKEN / 标准缓存路径发现 token。",
+      "tags": [
+        "extension",
+        "http-client",
+        "huggingface",
+        "认证"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/extensions/llama/huggingface.ts:findHuggingFaceToken",
+      "type": "function",
+      "name": "findHuggingFaceToken",
+      "filePath": "packages/coding-agent/src/extensions/llama/huggingface.ts",
+      "lineRange": [
+        46,
+        61
+      ],
+      "summary": "按 HF_TOKEN、HF_TOKEN_PATH、HF_HOME、XDG_CACHE_HOME 与 ~/.cache/huggingface/token 查找 token。",
+      "tags": [
+        "huggingface",
+        "认证",
+        "token"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/extensions/llama/huggingface.ts:HuggingFaceClient",
+      "type": "class",
+      "name": "HuggingFaceClient",
+      "filePath": "packages/coding-agent/src/extensions/llama/huggingface.ts",
+      "lineRange": [
+        63,
+        158
+      ],
+      "summary": "调用 Hugging Face Hub：search 模型、details 量化文件，处理 gated 与 rate-limit。",
+      "tags": [
+        "huggingface",
+        "http-client",
+        "service"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui-chat.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui-chat.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui-chat.ts",
+      "target": "file:packages/coding-agent/src/core/tools/renderers/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui-chat.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/assistant-message.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui-chat.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/status-indicator.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui-chat.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/tool-execution.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui-chat.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/user-message.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui-chat.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui-chat.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "file:packages/agent/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "file:packages/coding-agent/src/core/keybindings.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "file:packages/coding-agent/src/core/tools/renderers/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/shared/protocol.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "file:packages/coding-agent/src/experimental/mini/tui/session.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/assistant-message.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/custom-editor.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/dynamic-border.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/extension-selector.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/login-dialog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/status-indicator.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/tool-execution.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/user-message.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "file:packages/coding-agent/src/modes/interactive/theme/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "file:packages/tui/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/index.ts",
+      "target": "file:packages/coding-agent/src/core/extensions/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/index.ts",
+      "target": "file:packages/coding-agent/src/extensions/llama/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui-chat.ts",
+      "target": "class:packages/coding-agent/src/experimental/client-tui-chat.ts:ExperimentalChatView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/client-tui-chat.ts",
+      "target": "class:packages/coding-agent/src/experimental/client-tui-chat.ts:ExperimentalChatView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/tui/view.ts:runLogin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/tui/view.ts:runView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "function:packages/coding-agent/src/experimental/mini/tui/view.ts:runView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "class:packages/coding-agent/src/experimental/mini/tui/view.ts:ListSelector",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/mini/tui/view.ts",
+      "target": "class:packages/coding-agent/src/experimental/mini/tui/view.ts:MiniTui",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/client.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/client.ts:linkSignal",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/client.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/client.ts:sleep",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/client.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/client.ts:parseLoadProgress",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/client.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/client.ts:parseDownloadProgress",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/client.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/client.ts:formatBytes",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/client.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/client.ts:formatBytes",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/client.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/client.ts:normalizeLlamaServerUrl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/client.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/client.ts:normalizeLlamaServerUrl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/client.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/client.ts:llamaInferenceUrl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/client.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/client.ts:llamaInferenceUrl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/client.ts",
+      "target": "class:packages/coding-agent/src/extensions/llama/client.ts:LlamaClient",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/client.ts",
+      "target": "class:packages/coding-agent/src/extensions/llama/client.ts:LlamaClient",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/huggingface.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/huggingface.ts:findHuggingFaceToken",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/huggingface.ts",
+      "target": "function:packages/coding-agent/src/extensions/llama/huggingface.ts:findHuggingFaceToken",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/huggingface.ts",
+      "target": "class:packages/coding-agent/src/extensions/llama/huggingface.ts:HuggingFaceClient",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:packages/coding-agent/src/extensions/llama/huggingface.ts",
+      "target": "class:packages/coding-agent/src/extensions/llama/huggingface.ts:HuggingFaceClient",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/client-tui-chat.ts:ExperimentalChatView",
+      "target": "file:packages/coding-agent/src/core/tools/renderers/index.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/tui/view.ts:runView",
+      "target": "class:packages/coding-agent/src/experimental/mini/tui/view.ts:MiniTui",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/tui/view.ts:runView",
+      "target": "function:packages/coding-agent/src/experimental/mini/tui/view.ts:runLogin",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/mini/tui/view.ts:MiniTui",
+      "target": "file:packages/coding-agent/src/core/keybindings.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/mini/tui/view.ts:MiniTui",
+      "target": "file:packages/coding-agent/src/core/tools/renderers/index.ts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/extensions/llama/client.ts:llamaInferenceUrl",
+      "target": "function:packages/coding-agent/src/extensions/llama/client.ts:normalizeLlamaServerUrl",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/extensions/llama/client.ts:parseDownloadProgress",
+      "target": "function:packages/coding-agent/src/extensions/llama/client.ts:formatBytes",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/extensions/llama/client.ts:LlamaClient",
+      "target": "function:packages/coding-agent/src/extensions/llama/client.ts:normalizeLlamaServerUrl",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/client-tui-chat.ts:ExperimentalChatView",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/assistant-message.ts:AssistantMessageComponent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/client-tui-chat.ts:ExperimentalChatView",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/tool-execution.ts:ToolExecutionComponent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/client-tui-chat.ts:ExperimentalChatView",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/user-message.ts:UserMessageComponent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/mini/tui/view.ts:MiniTui",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/custom-editor.ts:CustomEditor",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/mini/tui/view.ts:MiniTui",
+      "target": "function:packages/coding-agent/src/config.ts:getAgentDir",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/tui/view.ts:runLogin",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/login-dialog.ts:LoginDialogComponent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/tui/view.ts:runLogin",
+      "target": "class:packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:OAuthSelectorComponent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/mini/tui/view.ts:runView",
+      "target": "function:packages/coding-agent/src/experimental/mini/tui/session.ts:connect",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

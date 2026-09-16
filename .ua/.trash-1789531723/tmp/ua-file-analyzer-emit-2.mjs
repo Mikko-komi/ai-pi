@@ -1,0 +1,1262 @@
+import fs from "node:fs";
+
+const UA_DIR = "/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua";
+const brief = JSON.parse(fs.readFileSync(`${UA_DIR}/intermediate/batch-briefs/batch-2.json`, "utf8"));
+const batchImportData = brief.batchImportData;
+const neighborMap = brief.neighborMap;
+
+const n = (obj) => obj;
+
+const nodes = [
+	n({
+		id: "file:packages/coding-agent/src/experimental/services/models-provider.ts",
+		type: "file",
+		name: "models-provider.ts",
+		filePath: "packages/coding-agent/src/experimental/services/models-provider.ts",
+		summary: "实现 pi.models Chord service：从 AgentLane 与 ModelRuntime 同步模型目录、当前配置与 thinking level，并提供选择/刷新/循环推理档位的 facet。",
+		tags: ["service", "factory", "chord-facet", "模型目录", "replicated-state"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/services/models-provider.ts:createModelsService",
+		type: "function",
+		name: "createModelsService",
+		filePath: "packages/coding-agent/src/experimental/services/models-provider.ts",
+		lineRange: [14, 116],
+		summary: "构造 Models service runtime：发布 catalog/configuration/refresh 复制状态，并实现 cycleThinking、select、refresh 等操作。",
+		tags: ["factory", "service", "replicated-state", "模型选择"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/services/models-provider.ts:createModelsServiceFacet",
+		type: "function",
+		name: "createModelsServiceFacet",
+		filePath: "packages/coding-agent/src/experimental/services/models-provider.ts",
+		lineRange: [118, 136],
+		summary: "将 Models service 包装为 @pi/models facet，在激活时用 BACKGROUND_CONTEXT 填充初始目录与配置。",
+		tags: ["factory", "chord-facet", "service"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/coding-agent/src/experimental/services/models.ts",
+		type: "file",
+		name: "models.ts",
+		filePath: "packages/coding-agent/src/experimental/services/models.ts",
+		summary: "定义 pi.models Chord service 契约：模型引用、目录摘要、复制状态以及选择/刷新/thinking 操作。",
+		tags: ["type-definition", "service", "契约", "models"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/coding-agent/src/experimental/services/plugins.ts",
+		type: "file",
+		name: "plugins.ts",
+		filePath: "packages/coding-agent/src/experimental/services/plugins.ts",
+		summary: "定义演示侧 PresentationPlugins 与会话侧 SessionPlugins 两个 Chord service，分别负责准备/重载插件包。",
+		tags: ["type-definition", "service", "插件", "契约"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/coding-agent/src/experimental/services/presentation-ui.ts",
+		type: "file",
+		name: "presentation-ui.ts",
+		filePath: "packages/coding-agent/src/experimental/services/presentation-ui.ts",
+		summary: "定义进程本地 PresentationUI service，向 presentation facet 暴露 select 与 showStatus 窄 UI 能力。",
+		tags: ["type-definition", "service", "local-ui", "契约"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/coding-agent/src/experimental/services/server.ts",
+		type: "file",
+		name: "server.ts",
+		filePath: "packages/coding-agent/src/experimental/services/server.ts",
+		summary: "为实验服务器组装 RoutedServerServiceHost：串行化会话目录刷新，并向客户端提供 SessionDirectory、SessionManagement 与 PresentationPlugins。",
+		tags: ["service", "factory", "会话管理", "server-host"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/services/server.ts:createExperimentalServerServices",
+		type: "function",
+		name: "createExperimentalServerServices",
+		filePath: "packages/coding-agent/src/experimental/services/server.ts",
+		lineRange: [25, 129],
+		summary: "创建实验服务器服务主机，用 mutation 队列串行化创建/删除/挂接会话与插件准备，并复制会话目录状态。",
+		tags: ["factory", "service", "会话管理", "remote-service"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/services/server.ts:createProviderAttachment",
+		type: "function",
+		name: "createProviderAttachment",
+		filePath: "packages/coding-agent/src/experimental/services/server.ts",
+		lineRange: [131, 150],
+		summary: "把 RemoteServiceProvider 包成 RoutedServerServiceAttachment，支持 invoke 与一次性 release。",
+		tags: ["adapter", "remote-service", "attachment"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/coding-agent/src/experimental/services/sessions.ts",
+		type: "file",
+		name: "sessions.ts",
+		filePath: "packages/coding-agent/src/experimental/services/sessions.ts",
+		summary: "定义会话地址/摘要类型，以及 SessionDirectory 与 SessionManagement 两个 Chord service 契约。",
+		tags: ["type-definition", "service", "会话管理", "契约"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+		type: "file",
+		name: "slash-commands-provider.ts",
+		filePath: "packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+		summary: "实现 SlashCommandRegistry 与内置 /model、/thinking、/compact、/reload 命令 facet，对接 Models、AgentController 与 PresentationUI。",
+		tags: ["service", "slash-command", "chord-facet", "registry"],
+		complexity: "complex",
+	}),
+	n({
+		id: "class:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:SlashCommandRegistry",
+		type: "class",
+		name: "SlashCommandRegistry",
+		filePath: "packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+		lineRange: [24, 75],
+		summary: "进程内斜杠命令注册表：校验名称、支持同名 replace 世代、以及 list/subscribe 通知。",
+		tags: ["registry", "slash-command", "local-service"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:createSlashCommandsRuntimeFacet",
+		type: "function",
+		name: "createSlashCommandsRuntimeFacet",
+		filePath: "packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+		lineRange: [77, 84],
+		summary: "提供 @pi/slash-commands-runtime facet，把 SlashCommandRegistry 注入 SlashCommands service。",
+		tags: ["factory", "chord-facet", "slash-command"],
+		complexity: "simple",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:createBuiltInSlashCommandsFacet",
+		type: "function",
+		name: "createBuiltInSlashCommandsFacet",
+		filePath: "packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+		lineRange: [86, 119],
+		summary: "在激活时注册内置 /model、/thinking、/compact、/reload，并在 facet 退役时收回替换世代。",
+		tags: ["factory", "chord-facet", "slash-command", "builtin"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:modelCommand",
+		type: "function",
+		name: "modelCommand",
+		filePath: "packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+		lineRange: [121, 169],
+		summary: "构造 /model 命令：按 provider/modelId 补全或弹出 PresentationUI 选择器，再调用 Models.select。",
+		tags: ["slash-command", "模型选择", "ui"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:thinkingCommand",
+		type: "function",
+		name: "thinkingCommand",
+		filePath: "packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+		lineRange: [171, 202],
+		summary: "构造 /thinking 命令：校验或选择 thinking level，并写回 Models.selectThinking。",
+		tags: ["slash-command", "thinking-level", "ui"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:compactCommand",
+		type: "function",
+		name: "compactCommand",
+		filePath: "packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+		lineRange: [204, 214],
+		summary: "构造 /compact 命令，把可选自定义指令转发给 AgentController.compact。",
+		tags: ["slash-command", "compaction", "agent-controller"],
+		complexity: "simple",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:exactModel",
+		type: "function",
+		name: "exactModel",
+		filePath: "packages/coding-agent/src/experimental/services/slash-commands-provider.ts",
+		lineRange: [216, 225],
+		summary: "按 provider/modelId 或仅 modelId 精确匹配目录中的唯一模型，歧义时返回 undefined。",
+		tags: ["utility", "模型匹配", "lookup"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/coding-agent/src/experimental/services/slash-commands.ts",
+		type: "file",
+		name: "slash-commands.ts",
+		filePath: "packages/coding-agent/src/experimental/services/slash-commands.ts",
+		summary: "定义进程本地 SlashCommands service：命令贡献形状、补全、run 结果，以及 register/replace/list/subscribe。",
+		tags: ["type-definition", "service", "slash-command", "契约"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/coding-agent/src/experimental/services/transcript-provider.ts",
+		type: "file",
+		name: "transcript-provider.ts",
+		filePath: "packages/coding-agent/src/experimental/services/transcript-provider.ts",
+		summary: "把 AgentLane watch 事件折叠进 Transcript 复制状态，必要时 rebase 快照，并过滤不向前端转发的 harness 事件。",
+		tags: ["service", "transcript", "chord-facet", "replicated-state"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/services/transcript-provider.ts:createTranscriptService",
+		type: "function",
+		name: "createTranscriptService",
+		filePath: "packages/coding-agent/src/experimental/services/transcript-provider.ts",
+		lineRange: [20, 91],
+		summary: "订阅 lane.watch，用 reduceLaneSnapshot 增量更新或 rebase，并向 Transcript.state 发布 snapshot/event。",
+		tags: ["factory", "transcript", "replicated-state", "event-handler"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/services/transcript-provider.ts:createTranscriptServiceFacet",
+		type: "function",
+		name: "createTranscriptServiceFacet",
+		filePath: "packages/coding-agent/src/experimental/services/transcript-provider.ts",
+		lineRange: [93, 103],
+		summary: "将 Transcript service 注册为 @pi/transcript facet，激活时 watch、退役时 dispose。",
+		tags: ["factory", "chord-facet", "transcript"],
+		complexity: "simple",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/services/transcript-provider.ts:toLaneWatchEvent",
+		type: "function",
+		name: "toLaneWatchEvent",
+		filePath: "packages/coding-agent/src/experimental/services/transcript-provider.ts",
+		lineRange: [105, 128],
+		summary: "把 HarnessEvent 筛成可复制的 LaneWatchEvent，丢弃 turn/handler 噪声并剥掉 message_update 的 provider 事件。",
+		tags: ["utility", "event-filter", "transcript"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/coding-agent/src/experimental/services/transcript.ts",
+		type: "file",
+		name: "transcript.ts",
+		filePath: "packages/coding-agent/src/experimental/services/transcript.ts",
+		summary: "定义 pi.transcript Chord service：复制主 lane 的 LaneTranscriptSnapshot 与最近一次 watch 事件。",
+		tags: ["type-definition", "service", "transcript", "契约"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/coding-agent/src/experimental/services/worker.ts",
+		type: "file",
+		name: "worker.ts",
+		filePath: "packages/coding-agent/src/experimental/services/worker.ts",
+		summary: "为 Session worker 组装 FacetHost：内置 AgentController/Models/Transcript/SessionPlugins，并按连接 attachment 作用域调用远程 service。",
+		tags: ["factory", "session-worker", "chord-facet", "service"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices",
+		type: "function",
+		name: "createSessionWorkerServices",
+		filePath: "packages/coding-agent/src/experimental/services/worker.ts",
+		lineRange: [47, 148],
+		summary: "加载内置与插件 facet、支持串行 reload，并按 serverConnectionId+attachmentId 复用 RemoteServiceEndpoint。",
+		tags: ["factory", "session-worker", "facet-host", "remote-service"],
+		complexity: "moderate",
+		languageNotes: "插件 reload 走 reloadTail 串行队列，失败时 dispose 候选世代以免泄漏 facet。",
+	}),
+	n({
+		id: "file:packages/coding-agent/src/experimental/session-worker-manager.ts",
+		type: "file",
+		name: "session-worker-manager.ts",
+		filePath: "packages/coding-agent/src/experimental/session-worker-manager.ts",
+		summary: "在可替换的实验 server 进程内管理 Session worker 子进程：发现、启动、demand 挂接、RPC 转发、订阅投递与关闭/替换。",
+		tags: ["session-worker", "process-manager", "rpc", "生命周期"],
+		complexity: "complex",
+		languageNotes: "worker 操作没有墙钟超时，只在断开、替换或 shutdown 时结算；startup/demand/shutdown 另有独立超时。",
+	}),
+	n({
+		id: "class:packages/coding-agent/src/experimental/session-worker-manager.ts:SessionPluginSelectionConflictError",
+		type: "class",
+		name: "SessionPluginSelectionConflictError",
+		filePath: "packages/coding-agent/src/experimental/session-worker-manager.ts",
+		lineRange: [39, 44],
+		summary: "当活动或启动中的 Session 已绑定另一组 plugin manifest 路径时抛出的冲突错误。",
+		tags: ["error", "插件", "validation"],
+		complexity: "simple",
+	}),
+	n({
+		id: "class:packages/coding-agent/src/experimental/session-worker-manager.ts:SessionWorkerManager",
+		type: "class",
+		name: "SessionWorkerManager",
+		filePath: "packages/coding-agent/src/experimental/session-worker-manager.ts",
+		lineRange: [98, 842],
+		summary: "通过 coordinator 控制面 spawn/discover worker，把 attach/invoke/subscribe 映射为 session_demand 与 operation 消息，并在替换时 detach 而不杀进程。",
+		tags: ["process-manager", "session-worker", "rpc", "coordinator"],
+		complexity: "complex",
+	}),
+	n({
+		id: "file:packages/coding-agent/src/experimental/session-worker.ts",
+		type: "file",
+		name: "session-worker.ts",
+		filePath: "packages/coding-agent/src/experimental/session-worker.ts",
+		summary: "Session worker 子进程入口：注册到 coordinator、锁住 JSONL session、创建 coding-agent harness，并按 demand/operation 协议提供服务。",
+		tags: ["entry-point", "session-worker", "process", "lifecycle"],
+		complexity: "complex",
+		languageNotes: "若以内部进程角色 session-worker 直接启动，会消费 process role 并调用 runSessionWorkerProcess。",
+	}),
+	n({
+		id: "class:packages/coding-agent/src/experimental/session-worker.ts:WorkerLifecycle",
+		type: "class",
+		name: "WorkerLifecycle",
+		filePath: "packages/coding-agent/src/experimental/session-worker.ts",
+		lineRange: [191, 315],
+		summary: "在 worker 内调和 server 世代 demand、进行中的 harness 操作与 retirement hold，空闲且无 demand 时触发退役。",
+		tags: ["lifecycle", "session-worker", "demand", "retirement"],
+		complexity: "moderate",
+		languageNotes: "初始 demand 宽限期与孤儿 demand 宽限期可通过内部环境变量覆盖，便于测试。",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/session-worker.ts:connectControl",
+		type: "function",
+		name: "connectControl",
+		filePath: "packages/coding-agent/src/experimental/session-worker.ts",
+		lineRange: [343, 373],
+		summary: "按环境变量连接 coordinator Unix 控制套接字，发送 register_peer 并等待 peer_registered。",
+		tags: ["control-plane", "unix-socket", "session-worker"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/session-worker.ts:readCommands",
+		type: "function",
+		name: "readCommands",
+		filePath: "packages/coding-agent/src/experimental/session-worker.ts",
+		lineRange: [375, 409],
+		summary: "从 coordinator JSONL 流解析 shutdown/discover/demand/operation 与 server 连接事件并分发给 handler。",
+		tags: ["control-plane", "dispatcher", "session-worker"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/session-worker.ts:createJsonLineMessages",
+		type: "function",
+		name: "createJsonLineMessages",
+		filePath: "packages/coding-agent/src/experimental/session-worker.ts",
+		lineRange: [411, 448],
+		summary: "把控制套接字字节流拆成受 MAX_CONTROL_LINE_BYTES 限制的 JSON 行异步迭代器。",
+		tags: ["utility", "jsonl", "framing"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/session-worker.ts:closeResources",
+		type: "function",
+		name: "closeResources",
+		filePath: "packages/coding-agent/src/experimental/session-worker.ts",
+		lineRange: [480, 517],
+		summary: "按固定顺序关闭 harness、services、session、repo、executionEnv 与 lockfile，并聚合清理错误。",
+		tags: ["cleanup", "lifecycle", "session-worker"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/session-worker.ts:run",
+		type: "function",
+		name: "run",
+		filePath: "packages/coding-agent/src/experimental/session-worker.ts",
+		lineRange: [525, 769],
+		summary: "锁定 session 文件、创建 harness/services、宣告 worker_ready，并循环处理 demand、RPC 与生命周期退役。",
+		tags: ["entry-point", "session-worker", "rpc", "lifecycle"],
+		complexity: "complex",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/session-worker.ts:runSessionWorkerWithHarness",
+		type: "function",
+		name: "runSessionWorkerWithHarness",
+		filePath: "packages/coding-agent/src/experimental/session-worker.ts",
+		lineRange: [771, 803],
+		summary: "解析并校验 worker JSON 选项后调用 run；失败时尽量向 coordinator 发送 worker_failed。",
+		tags: ["entry-point", "validation", "session-worker"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/session-worker.ts:createCodingAgentHarness",
+		type: "function",
+		name: "createCodingAgentHarness",
+		filePath: "packages/coding-agent/src/experimental/session-worker.ts",
+		lineRange: [805, 872],
+		summary: "解析模型、创建带 read/write/bash 工具的 AgentHarness，并加载会话插件 facet loader。",
+		tags: ["factory", "harness", "模型解析", "tools"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "function:packages/coding-agent/src/experimental/session-worker.ts:runSessionWorkerProcess",
+		type: "function",
+		name: "runSessionWorkerProcess",
+		filePath: "packages/coding-agent/src/experimental/session-worker.ts",
+		lineRange: [874, 876],
+		summary: "生产入口：用 createCodingAgentHarness 作为 harness 工厂启动 session worker。",
+		tags: ["entry-point", "session-worker", "factory"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/protocol/src/cbor/index.ts",
+		type: "file",
+		name: "index.ts",
+		filePath: "packages/protocol/src/cbor/index.ts",
+		summary: "CBOR 编解码公共入口，重导出 encode/decode 与深度/长度限制常量。",
+		tags: ["barrel", "cbor", "serialization", "entry-point"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/protocol/src/codec.ts",
+		type: "file",
+		name: "codec.ts",
+		filePath: "packages/protocol/src/codec.ts",
+		summary: "将 TypeBox 校验后的 Client/Server 消息经 CBOR 编码并加上长度前缀帧，同时提供增量解码器。",
+		tags: ["serialization", "protocol", "validation", "cbor"],
+		complexity: "moderate",
+		languageNotes: "编码前先 parse 再 CBOR+frame；解码失败会锁死 decoder，避免半损坏流继续产出消息。",
+	}),
+	n({
+		id: "class:packages/protocol/src/codec.ts:ProtocolValidationError",
+		type: "class",
+		name: "ProtocolValidationError",
+		filePath: "packages/protocol/src/codec.ts",
+		lineRange: [13, 18],
+		summary: "协议消息 schema 或帧校验失败时抛出的错误类型。",
+		tags: ["error", "validation", "protocol"],
+		complexity: "simple",
+	}),
+	n({
+		id: "function:packages/protocol/src/codec.ts:parseClientMessage",
+		type: "function",
+		name: "parseClientMessage",
+		filePath: "packages/protocol/src/codec.ts",
+		lineRange: [20, 25],
+		summary: "用 ClientMessageSchema 与 isJsonValue 校验未知值为客户端协议消息。",
+		tags: ["validation", "parser", "protocol"],
+		complexity: "simple",
+	}),
+	n({
+		id: "function:packages/protocol/src/codec.ts:parseServerMessage",
+		type: "function",
+		name: "parseServerMessage",
+		filePath: "packages/protocol/src/codec.ts",
+		lineRange: [27, 32],
+		summary: "用 ServerMessageSchema 与 isJsonValue 校验未知值为服务端协议消息。",
+		tags: ["validation", "parser", "protocol"],
+		complexity: "simple",
+	}),
+	n({
+		id: "function:packages/protocol/src/codec.ts:encodeProtocolMessage",
+		type: "function",
+		name: "encodeProtocolMessage",
+		filePath: "packages/protocol/src/codec.ts",
+		lineRange: [39, 53],
+		summary: "先校验再 CBOR 编码并加上 length-prefix 帧，把底层错误收敛为 ProtocolValidationError。",
+		tags: ["serialization", "encoder", "protocol"],
+		complexity: "simple",
+	}),
+	n({
+		id: "function:packages/protocol/src/codec.ts:encodeClientMessage",
+		type: "function",
+		name: "encodeClientMessage",
+		filePath: "packages/protocol/src/codec.ts",
+		lineRange: [56, 58],
+		summary: "校验并编码一条完整的 length-prefixed 客户端消息。",
+		tags: ["serialization", "encoder", "protocol"],
+		complexity: "simple",
+	}),
+	n({
+		id: "function:packages/protocol/src/codec.ts:encodeServerMessage",
+		type: "function",
+		name: "encodeServerMessage",
+		filePath: "packages/protocol/src/codec.ts",
+		lineRange: [61, 63],
+		summary: "校验并编码一条完整的 length-prefixed 服务端消息。",
+		tags: ["serialization", "encoder", "protocol"],
+		complexity: "simple",
+	}),
+	n({
+		id: "class:packages/protocol/src/codec.ts:ValidatedMessageDecoder",
+		type: "class",
+		name: "ValidatedMessageDecoder",
+		filePath: "packages/protocol/src/codec.ts",
+		lineRange: [65, 103],
+		summary: "组合 FrameDecoder 与 CBOR/schema parse 的通用增量解码器，失败后拒绝后续 push。",
+		tags: ["decoder", "validation", "framing"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "class:packages/protocol/src/codec.ts:ClientMessageDecoder",
+		type: "class",
+		name: "ClientMessageDecoder",
+		filePath: "packages/protocol/src/codec.ts",
+		lineRange: [106, 120],
+		summary: "面向客户端消息的增量解码器包装。",
+		tags: ["decoder", "protocol", "client"],
+		complexity: "simple",
+	}),
+	n({
+		id: "class:packages/protocol/src/codec.ts:ServerMessageDecoder",
+		type: "class",
+		name: "ServerMessageDecoder",
+		filePath: "packages/protocol/src/codec.ts",
+		lineRange: [123, 137],
+		summary: "面向服务端消息的增量解码器包装。",
+		tags: ["decoder", "protocol", "server"],
+		complexity: "simple",
+	}),
+	n({
+		id: "function:packages/protocol/src/codec.ts:isSupportedProtocolVersion",
+		type: "function",
+		name: "isSupportedProtocolVersion",
+		filePath: "packages/protocol/src/codec.ts",
+		lineRange: [139, 141],
+		summary: "判断整数版本是否恰好等于当前 PROTOCOL_VERSION。",
+		tags: ["validation", "protocol", "version"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/protocol/src/framing.ts",
+		type: "file",
+		name: "framing.ts",
+		filePath: "packages/protocol/src/framing.ts",
+		summary: "实现 4 字节大端长度前缀帧的编码与流式拆帧，默认单帧上限 16MiB。",
+		tags: ["framing", "protocol", "streaming", "utility"],
+		complexity: "moderate",
+		languageNotes: "负载按 64KiB block 收集，单 block 时可零拷贝返回，避免大帧一次分配失败导致半状态。",
+	}),
+	n({
+		id: "class:packages/protocol/src/framing.ts:FrameError",
+		type: "class",
+		name: "FrameError",
+		filePath: "packages/protocol/src/framing.ts",
+		lineRange: [12, 17],
+		summary: "帧超限、截断或在 ended/failed 状态下继续推流时抛出的错误。",
+		tags: ["error", "framing", "protocol"],
+		complexity: "simple",
+	}),
+	n({
+		id: "function:packages/protocol/src/framing.ts:encodeFrame",
+		type: "function",
+		name: "encodeFrame",
+		filePath: "packages/protocol/src/framing.ts",
+		lineRange: [28, 39],
+		summary: "为 Uint8Array 负载写入 4 字节无符号大端长度前缀。",
+		tags: ["encoder", "framing", "utility"],
+		complexity: "simple",
+	}),
+	n({
+		id: "class:packages/protocol/src/framing.ts:FrameDecoder",
+		type: "class",
+		name: "FrameDecoder",
+		filePath: "packages/protocol/src/framing.ts",
+		lineRange: [44, 151],
+		summary: "增量拆分任意字节块为完整 length-prefixed payload，并在流结束时检测截断帧。",
+		tags: ["decoder", "framing", "streaming"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "file:packages/protocol/src/index.ts",
+		type: "file",
+		name: "index.ts",
+		filePath: "packages/protocol/src/index.ts",
+		summary: "@earendil-works/pi-protocol 包入口，重导出 CBOR、编解码、分帧以及握手/RPC 消息类型。",
+		tags: ["barrel", "entry-point", "protocol"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/protocol/src/protocol.ts",
+		type: "file",
+		name: "protocol.ts",
+		filePath: "packages/protocol/src/protocol.ts",
+		summary: "用 TypeBox 定义协议版本 8 的 Client/Server 消息：hello、request/cancel、response、service_update 与 attachment。",
+		tags: ["schema-definition", "protocol", "type-definition", "rpc"],
+		complexity: "moderate",
+		languageNotes: "对象 schema 使用 additionalProperties:false 的 StrictObject，ServerId 约束为 UUID v4 形态。",
+	}),
+	n({
+		id: "function:packages/protocol/src/protocol.ts:isServerId",
+		type: "function",
+		name: "isServerId",
+		filePath: "packages/protocol/src/protocol.ts",
+		lineRange: [17, 19],
+		summary: "用 TypeBox ServerIdSchema 判断值是否为合法逻辑 server UUID。",
+		tags: ["validation", "type-guard", "protocol"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/server/src/connection.ts",
+		type: "file",
+		name: "connection.ts",
+		filePath: "packages/server/src/connection.ts",
+		summary: "定义已鉴权字节连接、acceptor/handler 以及 Server 连接状态机字段，并提供终态判断。",
+		tags: ["type-definition", "connection", "transport", "state-machine"],
+		complexity: "simple",
+	}),
+	n({
+		id: "function:packages/server/src/connection.ts:isTerminalConnection",
+		type: "function",
+		name: "isTerminalConnection",
+		filePath: "packages/server/src/connection.ts",
+		lineRange: [35, 37],
+		summary: "判断连接是否已断开或处于 closing/closed，供收包与分发短路。",
+		tags: ["utility", "connection", "state-machine"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/server/src/errors.ts",
+		type: "file",
+		name: "errors.ts",
+		filePath: "packages/server/src/errors.ts",
+		summary: "定义可安全穿越协议边界的 ServerError 族：wrong_server、session 路由失败与 draining。",
+		tags: ["error", "protocol", "routing", "type-definition"],
+		complexity: "simple",
+	}),
+	n({
+		id: "class:packages/server/src/errors.ts:ServerError",
+		type: "class",
+		name: "ServerError",
+		filePath: "packages/server/src/errors.ts",
+		lineRange: [14, 22],
+		summary: "带稳定 error code 的主机/生命周期错误基类，供协议响应映射。",
+		tags: ["error", "protocol", "base-class"],
+		complexity: "simple",
+	}),
+	n({
+		id: "class:packages/server/src/errors.ts:WrongServerError",
+		type: "class",
+		name: "WrongServerError",
+		filePath: "packages/server/src/errors.ts",
+		lineRange: [24, 29],
+		summary: "请求 target.serverId 指向另一逻辑 server 时抛出。",
+		tags: ["error", "routing", "protocol"],
+		complexity: "simple",
+	}),
+	n({
+		id: "class:packages/server/src/errors.ts:SessionNotFoundError",
+		type: "class",
+		name: "SessionNotFoundError",
+		filePath: "packages/server/src/errors.ts",
+		lineRange: [31, 36],
+		summary: "无法解析到对应 durable Session 时抛出。",
+		tags: ["error", "session", "routing"],
+		complexity: "simple",
+	}),
+	n({
+		id: "class:packages/server/src/errors.ts:SessionAmbiguousError",
+		type: "class",
+		name: "SessionAmbiguousError",
+		filePath: "packages/server/src/errors.ts",
+		lineRange: [38, 43],
+		summary: "Session ID 匹配到多条记录时抛出。",
+		tags: ["error", "session", "routing"],
+		complexity: "simple",
+	}),
+	n({
+		id: "class:packages/server/src/errors.ts:SessionNotAttachedError",
+		type: "class",
+		name: "SessionNotAttachedError",
+		filePath: "packages/server/src/errors.ts",
+		lineRange: [45, 50],
+		summary: "客户端没有匹配的 Session attachment 却发起 session 调用时抛出。",
+		tags: ["error", "session", "attachment"],
+		complexity: "simple",
+	}),
+	n({
+		id: "class:packages/server/src/errors.ts:ServerDrainingError",
+		type: "class",
+		name: "ServerDrainingError",
+		filePath: "packages/server/src/errors.ts",
+		lineRange: [52, 57],
+		summary: "服务器正在关闭或拒绝新路由时抛出。",
+		tags: ["error", "lifecycle", "draining"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/server/src/index.ts",
+		type: "file",
+		name: "index.ts",
+		filePath: "packages/server/src/index.ts",
+		summary: "@earendil-works/pi-server 包入口，重导出错误、listener、Server 与主机/路由类型。",
+		tags: ["barrel", "entry-point", "server"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/server/src/listener.ts",
+		type: "file",
+		name: "listener.ts",
+		filePath: "packages/server/src/listener.ts",
+		summary: "定义 ServerListener：在完成传输鉴权后把 ByteConnection 交给 Server.accept。",
+		tags: ["type-definition", "transport", "listener"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/server/src/server.ts",
+		type: "file",
+		name: "server.ts",
+		filePath: "packages/server/src/server.ts",
+		summary: "协议 Server：启动 listeners、完成 hello 握手、把 request 路由到 server services 或 SessionRouter，并编码 service_update。",
+		tags: ["server", "rpc", "handshake", "routing"],
+		complexity: "complex",
+		languageNotes: "握手超时后 failProtocol；订阅响应会用 ServiceStateEncoder 编码 snapshot，再刷出缓冲的 update。",
+	}),
+	n({
+		id: "class:packages/server/src/server.ts:Server",
+		type: "class",
+		name: "Server",
+		filePath: "packages/server/src/server.ts",
+		lineRange: [46, 545],
+		summary: "管理连接集合与 SessionRouter，处理 hello/request/cancel，并把 Chord service 调用映射为协议 response。",
+		tags: ["server", "rpc", "connection", "lifecycle"],
+		complexity: "complex",
+	}),
+	n({
+		id: "function:packages/server/src/server.ts:resolveOptions",
+		type: "function",
+		name: "resolveOptions",
+		filePath: "packages/server/src/server.ts",
+		lineRange: [555, 576],
+		summary: "校验 maxFrameLength 与 handshakeTimeoutMs，并套用默认帧长与 5s 握手超时。",
+		tags: ["validation", "config", "utility"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/server/src/session-router.ts",
+		type: "file",
+		name: "session-router.ts",
+		filePath: "packages/server/src/session-router.ts",
+		summary: "按客户端串行化 attach/detach/remove，打开 RoutedSessionHandle，并把带 attachment 的 RPC 转发到 Session endpoint。",
+		tags: ["routing", "session", "attachment", "lifecycle"],
+		complexity: "complex",
+	}),
+	n({
+		id: "class:packages/server/src/session-router.ts:SessionRouter",
+		type: "class",
+		name: "SessionRouter",
+		filePath: "packages/server/src/session-router.ts",
+		lineRange: [34, 312],
+		summary: "维护 hosted session 与每客户端唯一 attachment，校验 RpcTarget，并在 disconnect/close 时释放租约。",
+		tags: ["routing", "session", "attachment", "concurrency"],
+		complexity: "complex",
+		languageNotes: "每个 client 的路由操作走 runForClient 串行队列，避免 attach/detach 与 RPC 交错破坏 attachment 不变量。",
+	}),
+	n({
+		id: "file:packages/server/src/testing/client.ts",
+		type: "file",
+		name: "client.ts",
+		filePath: "packages/server/src/testing/client.ts",
+		summary: "协议一致性测试客户端：编码 hello/request，解码 server 帧，并跟踪 attachment 信封。",
+		tags: ["test", "protocol", "client", "unix-socket"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "class:packages/server/src/testing/client.ts:ProtocolTestClient",
+		type: "class",
+		name: "ProtocolTestClient",
+		filePath: "packages/server/src/testing/client.ts",
+		lineRange: [27, 150],
+		summary: "基于 WireChannel 的可等待消息客户端，支持分片发送与按谓词 next()。",
+		tags: ["test", "protocol", "client", "async"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "function:packages/server/src/testing/client.ts:connectUnixTestClient",
+		type: "function",
+		name: "connectUnixTestClient",
+		filePath: "packages/server/src/testing/client.ts",
+		lineRange: [152, 174],
+		summary: "连接 Unix domain socket 并包装为 ProtocolTestClient，支持故意分片写。",
+		tags: ["test", "unix-socket", "factory"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/server/src/testing/host.ts",
+		type: "file",
+		name: "host.ts",
+		filePath: "packages/server/src/testing/host.ts",
+		summary: "内存 Session 测试主机：可注入打开/关闭/服务调用失败，并门控并发以验证 Server 路由。",
+		tags: ["test", "test-double", "server-host", "session"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "class:packages/server/src/testing/host.ts:Deferred",
+		type: "class",
+		name: "Deferred",
+		filePath: "packages/server/src/testing/host.ts",
+		lineRange: [7, 20],
+		summary: "可外部 resolve 的 Promise 容器，供测试门控与关闭等待。",
+		tags: ["test", "utility", "async"],
+		complexity: "simple",
+	}),
+	n({
+		id: "class:packages/server/src/testing/host.ts:TestHarness",
+		type: "class",
+		name: "TestHarness",
+		filePath: "packages/server/src/testing/host.ts",
+		lineRange: [27, 117],
+		summary: "伪造的 RoutedSessionHandle：记录 attach/invoke/close，并可注入错误与门控。",
+		tags: ["test-double", "session", "harness"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "function:packages/server/src/testing/host.ts:createTestServerServices",
+		type: "function",
+		name: "createTestServerServices",
+		filePath: "packages/server/src/testing/host.ts",
+		lineRange: [119, 149],
+		summary: "最小 serverServices：只实现 pi.session-management 的 attach/detach。",
+		tags: ["test-double", "service", "session-management"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "class:packages/server/src/testing/host.ts:TestServerHost",
+		type: "class",
+		name: "TestServerHost",
+		filePath: "packages/server/src/testing/host.ts",
+		lineRange: [151, 215],
+		summary: "用 MemorySessionRepo 实现 ServerHost，支持 seed、门控 openSession 与错误注入。",
+		tags: ["test-double", "server-host", "session"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "file:packages/server/src/testing/server.ts",
+		type: "file",
+		name: "server.ts",
+		filePath: "packages/server/src/testing/server.ts",
+		summary: "用确定性 serverId 与可选 TestServerHost 创建未 start 的 Server，供传输一致性测试。",
+		tags: ["test", "factory", "server"],
+		complexity: "simple",
+	}),
+	n({
+		id: "function:packages/server/src/testing/server.ts:createTestServer",
+		type: "function",
+		name: "createTestServer",
+		filePath: "packages/server/src/testing/server.ts",
+		lineRange: [16, 28],
+		summary: "组装未启动的测试 Server，默认固定 UUID serverId 与 TestServerHost。",
+		tags: ["test", "factory", "server"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/server/src/transports/unix/index.ts",
+		type: "file",
+		name: "index.ts",
+		filePath: "packages/server/src/transports/unix/index.ts",
+		summary: "Unix 传输公共入口，重导出套接字路径、listener、preset 与选项类型。",
+		tags: ["barrel", "unix-socket", "transport", "entry-point"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/server/src/transports/unix/listener.ts",
+		type: "file",
+		name: "listener.ts",
+		filePath: "packages/server/src/transports/unix/listener.ts",
+		summary: "Unix domain socket ServerListener：私有路径 bind 后 hardlink 到公开路径，并实现背压与优雅关闭。",
+		tags: ["transport", "unix-socket", "listener", "infrastructure"],
+		complexity: "complex",
+		languageNotes: "先 bind 到 owned 临时 socket 再 link 到公开路径，关闭时按 inode 身份清理，避免误删被替换的 socket。",
+	}),
+	n({
+		id: "class:packages/server/src/transports/unix/listener.ts:UnixListener",
+		type: "class",
+		name: "UnixListener",
+		filePath: "packages/server/src/transports/unix/listener.ts",
+		lineRange: [29, 188],
+		summary: "实现 ServerListener：清理 stale socket、监听、把 net.Socket 交给 acceptor，并按身份安全卸载路径。",
+		tags: ["listener", "unix-socket", "lifecycle"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "class:packages/server/src/transports/unix/listener.ts:UnixByteConnection",
+		type: "class",
+		name: "UnixByteConnection",
+		filePath: "packages/server/src/transports/unix/listener.ts",
+		lineRange: [191, 292],
+		summary: "ByteConnection 的 Unix 实现：串行写、pending 字节上限断开慢对端，以及带超时的 graceful close。",
+		tags: ["connection", "unix-socket", "backpressure"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "function:packages/server/src/transports/unix/listener.ts:removeStaleSocket",
+		type: "function",
+		name: "removeStaleSocket",
+		filePath: "packages/server/src/transports/unix/listener.ts",
+		lineRange: [299, 328],
+		summary: "若路径是死 socket（探测连接失败）则删除，活 socket 则报 EADDRINUSE。",
+		tags: ["cleanup", "unix-socket", "lifecycle"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "function:packages/server/src/transports/unix/listener.ts:isSocketLive",
+		type: "function",
+		name: "isSocketLive",
+		filePath: "packages/server/src/transports/unix/listener.ts",
+		lineRange: [338, 363],
+		summary: "短超时 connect 探测 Unix socket 是否仍有进程在听。",
+		tags: ["probe", "unix-socket", "utility"],
+		complexity: "simple",
+	}),
+	n({
+		id: "function:packages/server/src/transports/unix/listener.ts:createUnixListener",
+		type: "function",
+		name: "createUnixListener",
+		filePath: "packages/server/src/transports/unix/listener.ts",
+		lineRange: [388, 390],
+		summary: "构造 UnixListener 的公开工厂。",
+		tags: ["factory", "unix-socket", "listener"],
+		complexity: "simple",
+	}),
+	n({
+		id: "function:packages/server/src/transports/unix/listener.ts:resolveUnixListenerOptions",
+		type: "function",
+		name: "resolveUnixListenerOptions",
+		filePath: "packages/server/src/transports/unix/listener.ts",
+		lineRange: [392, 421],
+		summary: "解析 mode、gracefulCloseTimeout 与 maxPendingBytes（至少能缓冲一帧）。",
+		tags: ["validation", "config", "unix-socket"],
+		complexity: "moderate",
+	}),
+	n({
+		id: "file:packages/server/src/transports/unix/preset.ts",
+		type: "file",
+		name: "preset.ts",
+		filePath: "packages/server/src/transports/unix/preset.ts",
+		summary: "用单个 UnixListener 组装 Server 的便捷 preset。",
+		tags: ["factory", "unix-socket", "server", "preset"],
+		complexity: "simple",
+	}),
+	n({
+		id: "function:packages/server/src/transports/unix/preset.ts:createUnixServer",
+		type: "function",
+		name: "createUnixServer",
+		filePath: "packages/server/src/transports/unix/preset.ts",
+		lineRange: [8, 28],
+		summary: "创建带一个 Unix-domain listener 的 Server 实例。",
+		tags: ["factory", "server", "unix-socket"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/server/src/transports/unix/types.ts",
+		type: "file",
+		name: "types.ts",
+		filePath: "packages/server/src/transports/unix/types.ts",
+		summary: "UnixListener 与 UnixServer 选项：路径、权限、背压上限与优雅关闭超时。",
+		tags: ["type-definition", "unix-socket", "config"],
+		complexity: "simple",
+	}),
+	n({
+		id: "file:packages/server/src/types.ts",
+		type: "file",
+		name: "types.ts",
+		filePath: "packages/server/src/types.ts",
+		summary: "定义 ServerOptions、RoutedSession/Server attachment 以及应用侧 ServerHost 能力接口。",
+		tags: ["type-definition", "server-host", "routing", "session"],
+		complexity: "moderate",
+	}),
+];
+
+const edge = (source, target, type, weight) => ({
+	source,
+	target,
+	type,
+	direction: "forward",
+	weight,
+});
+
+const extraEdges = [];
+
+const contains = [
+	["file:packages/coding-agent/src/experimental/services/models-provider.ts", "function:packages/coding-agent/src/experimental/services/models-provider.ts:createModelsService"],
+	["file:packages/coding-agent/src/experimental/services/models-provider.ts", "function:packages/coding-agent/src/experimental/services/models-provider.ts:createModelsServiceFacet"],
+	["file:packages/coding-agent/src/experimental/services/server.ts", "function:packages/coding-agent/src/experimental/services/server.ts:createExperimentalServerServices"],
+	["file:packages/coding-agent/src/experimental/services/server.ts", "function:packages/coding-agent/src/experimental/services/server.ts:createProviderAttachment"],
+	["file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts", "class:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:SlashCommandRegistry"],
+	["file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts", "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:createSlashCommandsRuntimeFacet"],
+	["file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts", "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:createBuiltInSlashCommandsFacet"],
+	["file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts", "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:modelCommand"],
+	["file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts", "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:thinkingCommand"],
+	["file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts", "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:compactCommand"],
+	["file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts", "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:exactModel"],
+	["file:packages/coding-agent/src/experimental/services/transcript-provider.ts", "function:packages/coding-agent/src/experimental/services/transcript-provider.ts:createTranscriptService"],
+	["file:packages/coding-agent/src/experimental/services/transcript-provider.ts", "function:packages/coding-agent/src/experimental/services/transcript-provider.ts:createTranscriptServiceFacet"],
+	["file:packages/coding-agent/src/experimental/services/transcript-provider.ts", "function:packages/coding-agent/src/experimental/services/transcript-provider.ts:toLaneWatchEvent"],
+	["file:packages/coding-agent/src/experimental/services/worker.ts", "function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices"],
+	["file:packages/coding-agent/src/experimental/session-worker-manager.ts", "class:packages/coding-agent/src/experimental/session-worker-manager.ts:SessionPluginSelectionConflictError"],
+	["file:packages/coding-agent/src/experimental/session-worker-manager.ts", "class:packages/coding-agent/src/experimental/session-worker-manager.ts:SessionWorkerManager"],
+	["file:packages/coding-agent/src/experimental/session-worker.ts", "class:packages/coding-agent/src/experimental/session-worker.ts:WorkerLifecycle"],
+	["file:packages/coding-agent/src/experimental/session-worker.ts", "function:packages/coding-agent/src/experimental/session-worker.ts:connectControl"],
+	["file:packages/coding-agent/src/experimental/session-worker.ts", "function:packages/coding-agent/src/experimental/session-worker.ts:readCommands"],
+	["file:packages/coding-agent/src/experimental/session-worker.ts", "function:packages/coding-agent/src/experimental/session-worker.ts:createJsonLineMessages"],
+	["file:packages/coding-agent/src/experimental/session-worker.ts", "function:packages/coding-agent/src/experimental/session-worker.ts:closeResources"],
+	["file:packages/coding-agent/src/experimental/session-worker.ts", "function:packages/coding-agent/src/experimental/session-worker.ts:run"],
+	["file:packages/coding-agent/src/experimental/session-worker.ts", "function:packages/coding-agent/src/experimental/session-worker.ts:runSessionWorkerWithHarness"],
+	["file:packages/coding-agent/src/experimental/session-worker.ts", "function:packages/coding-agent/src/experimental/session-worker.ts:createCodingAgentHarness"],
+	["file:packages/coding-agent/src/experimental/session-worker.ts", "function:packages/coding-agent/src/experimental/session-worker.ts:runSessionWorkerProcess"],
+	["file:packages/protocol/src/codec.ts", "class:packages/protocol/src/codec.ts:ProtocolValidationError"],
+	["file:packages/protocol/src/codec.ts", "function:packages/protocol/src/codec.ts:parseClientMessage"],
+	["file:packages/protocol/src/codec.ts", "function:packages/protocol/src/codec.ts:parseServerMessage"],
+	["file:packages/protocol/src/codec.ts", "function:packages/protocol/src/codec.ts:encodeProtocolMessage"],
+	["file:packages/protocol/src/codec.ts", "function:packages/protocol/src/codec.ts:encodeClientMessage"],
+	["file:packages/protocol/src/codec.ts", "function:packages/protocol/src/codec.ts:encodeServerMessage"],
+	["file:packages/protocol/src/codec.ts", "class:packages/protocol/src/codec.ts:ValidatedMessageDecoder"],
+	["file:packages/protocol/src/codec.ts", "class:packages/protocol/src/codec.ts:ClientMessageDecoder"],
+	["file:packages/protocol/src/codec.ts", "class:packages/protocol/src/codec.ts:ServerMessageDecoder"],
+	["file:packages/protocol/src/codec.ts", "function:packages/protocol/src/codec.ts:isSupportedProtocolVersion"],
+	["file:packages/protocol/src/framing.ts", "class:packages/protocol/src/framing.ts:FrameError"],
+	["file:packages/protocol/src/framing.ts", "function:packages/protocol/src/framing.ts:encodeFrame"],
+	["file:packages/protocol/src/framing.ts", "class:packages/protocol/src/framing.ts:FrameDecoder"],
+	["file:packages/protocol/src/protocol.ts", "function:packages/protocol/src/protocol.ts:isServerId"],
+	["file:packages/server/src/connection.ts", "function:packages/server/src/connection.ts:isTerminalConnection"],
+	["file:packages/server/src/errors.ts", "class:packages/server/src/errors.ts:ServerError"],
+	["file:packages/server/src/errors.ts", "class:packages/server/src/errors.ts:WrongServerError"],
+	["file:packages/server/src/errors.ts", "class:packages/server/src/errors.ts:SessionNotFoundError"],
+	["file:packages/server/src/errors.ts", "class:packages/server/src/errors.ts:SessionAmbiguousError"],
+	["file:packages/server/src/errors.ts", "class:packages/server/src/errors.ts:SessionNotAttachedError"],
+	["file:packages/server/src/errors.ts", "class:packages/server/src/errors.ts:ServerDrainingError"],
+	["file:packages/server/src/server.ts", "class:packages/server/src/server.ts:Server"],
+	["file:packages/server/src/server.ts", "function:packages/server/src/server.ts:resolveOptions"],
+	["file:packages/server/src/session-router.ts", "class:packages/server/src/session-router.ts:SessionRouter"],
+	["file:packages/server/src/testing/client.ts", "class:packages/server/src/testing/client.ts:ProtocolTestClient"],
+	["file:packages/server/src/testing/client.ts", "function:packages/server/src/testing/client.ts:connectUnixTestClient"],
+	["file:packages/server/src/testing/host.ts", "class:packages/server/src/testing/host.ts:Deferred"],
+	["file:packages/server/src/testing/host.ts", "class:packages/server/src/testing/host.ts:TestHarness"],
+	["file:packages/server/src/testing/host.ts", "function:packages/server/src/testing/host.ts:createTestServerServices"],
+	["file:packages/server/src/testing/host.ts", "class:packages/server/src/testing/host.ts:TestServerHost"],
+	["file:packages/server/src/testing/server.ts", "function:packages/server/src/testing/server.ts:createTestServer"],
+	["file:packages/server/src/transports/unix/listener.ts", "class:packages/server/src/transports/unix/listener.ts:UnixListener"],
+	["file:packages/server/src/transports/unix/listener.ts", "class:packages/server/src/transports/unix/listener.ts:UnixByteConnection"],
+	["file:packages/server/src/transports/unix/listener.ts", "function:packages/server/src/transports/unix/listener.ts:removeStaleSocket"],
+	["file:packages/server/src/transports/unix/listener.ts", "function:packages/server/src/transports/unix/listener.ts:isSocketLive"],
+	["file:packages/server/src/transports/unix/listener.ts", "function:packages/server/src/transports/unix/listener.ts:createUnixListener"],
+	["file:packages/server/src/transports/unix/listener.ts", "function:packages/server/src/transports/unix/listener.ts:resolveUnixListenerOptions"],
+	["file:packages/server/src/transports/unix/preset.ts", "function:packages/server/src/transports/unix/preset.ts:createUnixServer"],
+];
+for (const [source, target] of contains) extraEdges.push(edge(source, target, "contains", 1.0));
+
+const exportsList = [
+	["file:packages/coding-agent/src/experimental/services/models-provider.ts", "function:packages/coding-agent/src/experimental/services/models-provider.ts:createModelsService"],
+	["file:packages/coding-agent/src/experimental/services/models-provider.ts", "function:packages/coding-agent/src/experimental/services/models-provider.ts:createModelsServiceFacet"],
+	["file:packages/coding-agent/src/experimental/services/server.ts", "function:packages/coding-agent/src/experimental/services/server.ts:createExperimentalServerServices"],
+	["file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts", "class:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:SlashCommandRegistry"],
+	["file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts", "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:createSlashCommandsRuntimeFacet"],
+	["file:packages/coding-agent/src/experimental/services/slash-commands-provider.ts", "function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:createBuiltInSlashCommandsFacet"],
+	["file:packages/coding-agent/src/experimental/services/transcript-provider.ts", "function:packages/coding-agent/src/experimental/services/transcript-provider.ts:createTranscriptService"],
+	["file:packages/coding-agent/src/experimental/services/transcript-provider.ts", "function:packages/coding-agent/src/experimental/services/transcript-provider.ts:createTranscriptServiceFacet"],
+	["file:packages/coding-agent/src/experimental/services/worker.ts", "function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices"],
+	["file:packages/coding-agent/src/experimental/session-worker-manager.ts", "class:packages/coding-agent/src/experimental/session-worker-manager.ts:SessionPluginSelectionConflictError"],
+	["file:packages/coding-agent/src/experimental/session-worker-manager.ts", "class:packages/coding-agent/src/experimental/session-worker-manager.ts:SessionWorkerManager"],
+	["file:packages/coding-agent/src/experimental/session-worker.ts", "class:packages/coding-agent/src/experimental/session-worker.ts:WorkerLifecycle"],
+	["file:packages/coding-agent/src/experimental/session-worker.ts", "function:packages/coding-agent/src/experimental/session-worker.ts:runSessionWorkerWithHarness"],
+	["file:packages/coding-agent/src/experimental/session-worker.ts", "function:packages/coding-agent/src/experimental/session-worker.ts:runSessionWorkerProcess"],
+	["file:packages/protocol/src/codec.ts", "class:packages/protocol/src/codec.ts:ProtocolValidationError"],
+	["file:packages/protocol/src/codec.ts", "function:packages/protocol/src/codec.ts:parseClientMessage"],
+	["file:packages/protocol/src/codec.ts", "function:packages/protocol/src/codec.ts:parseServerMessage"],
+	["file:packages/protocol/src/codec.ts", "function:packages/protocol/src/codec.ts:encodeClientMessage"],
+	["file:packages/protocol/src/codec.ts", "function:packages/protocol/src/codec.ts:encodeServerMessage"],
+	["file:packages/protocol/src/codec.ts", "class:packages/protocol/src/codec.ts:ClientMessageDecoder"],
+	["file:packages/protocol/src/codec.ts", "class:packages/protocol/src/codec.ts:ServerMessageDecoder"],
+	["file:packages/protocol/src/codec.ts", "function:packages/protocol/src/codec.ts:isSupportedProtocolVersion"],
+	["file:packages/protocol/src/framing.ts", "class:packages/protocol/src/framing.ts:FrameError"],
+	["file:packages/protocol/src/framing.ts", "function:packages/protocol/src/framing.ts:encodeFrame"],
+	["file:packages/protocol/src/framing.ts", "class:packages/protocol/src/framing.ts:FrameDecoder"],
+	["file:packages/protocol/src/protocol.ts", "function:packages/protocol/src/protocol.ts:isServerId"],
+	["file:packages/server/src/connection.ts", "function:packages/server/src/connection.ts:isTerminalConnection"],
+	["file:packages/server/src/errors.ts", "class:packages/server/src/errors.ts:ServerError"],
+	["file:packages/server/src/errors.ts", "class:packages/server/src/errors.ts:WrongServerError"],
+	["file:packages/server/src/errors.ts", "class:packages/server/src/errors.ts:SessionNotFoundError"],
+	["file:packages/server/src/errors.ts", "class:packages/server/src/errors.ts:SessionAmbiguousError"],
+	["file:packages/server/src/errors.ts", "class:packages/server/src/errors.ts:SessionNotAttachedError"],
+	["file:packages/server/src/errors.ts", "class:packages/server/src/errors.ts:ServerDrainingError"],
+	["file:packages/server/src/server.ts", "class:packages/server/src/server.ts:Server"],
+	["file:packages/server/src/session-router.ts", "class:packages/server/src/session-router.ts:SessionRouter"],
+	["file:packages/server/src/testing/client.ts", "class:packages/server/src/testing/client.ts:ProtocolTestClient"],
+	["file:packages/server/src/testing/client.ts", "function:packages/server/src/testing/client.ts:connectUnixTestClient"],
+	["file:packages/server/src/testing/host.ts", "class:packages/server/src/testing/host.ts:Deferred"],
+	["file:packages/server/src/testing/host.ts", "class:packages/server/src/testing/host.ts:TestHarness"],
+	["file:packages/server/src/testing/host.ts", "function:packages/server/src/testing/host.ts:createTestServerServices"],
+	["file:packages/server/src/testing/host.ts", "class:packages/server/src/testing/host.ts:TestServerHost"],
+	["file:packages/server/src/testing/server.ts", "function:packages/server/src/testing/server.ts:createTestServer"],
+	["file:packages/server/src/transports/unix/listener.ts", "class:packages/server/src/transports/unix/listener.ts:UnixByteConnection"],
+	["file:packages/server/src/transports/unix/listener.ts", "function:packages/server/src/transports/unix/listener.ts:createUnixListener"],
+	["file:packages/server/src/transports/unix/preset.ts", "function:packages/server/src/transports/unix/preset.ts:createUnixServer"],
+];
+for (const [source, target] of exportsList) extraEdges.push(edge(source, target, "exports", 0.8));
+
+const calls = [
+	["function:packages/coding-agent/src/experimental/services/models-provider.ts:createModelsService", "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime"],
+	["function:packages/coding-agent/src/experimental/services/models-provider.ts:createModelsService", "class:packages/coding-agent/src/core/settings-manager.ts:SettingsManager"],
+	["function:packages/coding-agent/src/experimental/services/models-provider.ts:createModelsServiceFacet", "function:packages/chord/src/index.ts:defineFacet"],
+	["function:packages/coding-agent/src/experimental/services/server.ts:createExperimentalServerServices", "function:packages/chord/src/index.ts:createRemoteServiceEndpoint"],
+	["function:packages/coding-agent/src/experimental/services/server.ts:createExperimentalServerServices", "function:packages/chord/src/index.ts:replicatedState"],
+	["function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:createSlashCommandsRuntimeFacet", "function:packages/chord/src/index.ts:defineFacet"],
+	["function:packages/coding-agent/src/experimental/services/slash-commands-provider.ts:createBuiltInSlashCommandsFacet", "function:packages/chord/src/index.ts:defineFacet"],
+	["function:packages/coding-agent/src/experimental/services/transcript-provider.ts:createTranscriptService", "function:packages/agent/src/index.ts:reduceLaneSnapshot"],
+	["function:packages/coding-agent/src/experimental/services/transcript-provider.ts:createTranscriptServiceFacet", "function:packages/chord/src/index.ts:defineFacet"],
+	["function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices", "function:packages/coding-agent/src/experimental/services/agent-controller-provider.ts:createAgentController"],
+	["function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices", "function:packages/coding-agent/src/experimental/services/models-provider.ts:createModelsServiceFacet"],
+	["function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices", "function:packages/coding-agent/src/experimental/services/transcript-provider.ts:createTranscriptServiceFacet"],
+	["function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices", "function:packages/chord/src/index.ts:createFacetHost"],
+	["function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices", "function:packages/chord/src/index.ts:createStaticFacetLoader"],
+	["function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices", "function:packages/chord/src/index.ts:createRemoteServiceEndpoint"],
+	["function:packages/coding-agent/src/experimental/services/worker.ts:createSessionWorkerServices", "function:packages/chord/src/index.ts:defineFacet"],
+	["class:packages/coding-agent/src/experimental/session-worker-manager.ts:SessionWorkerManager", "function:packages/coding-agent/src/experimental/process.ts:spawnInternalProcess"],
+	["function:packages/coding-agent/src/experimental/session-worker.ts:createCodingAgentHarness", "function:packages/coding-agent/src/core/model-resolver.ts:findInitialModel"],
+	["function:packages/coding-agent/src/experimental/session-worker.ts:createCodingAgentHarness", "function:packages/coding-agent/src/core/model-resolver.ts:resolveCliModel"],
+	["function:packages/coding-agent/src/experimental/session-worker.ts:createCodingAgentHarness", "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime"],
+	["function:packages/coding-agent/src/experimental/session-worker.ts:createCodingAgentHarness", "class:packages/coding-agent/src/core/settings-manager.ts:SettingsManager"],
+	["function:packages/coding-agent/src/experimental/session-worker.ts:createCodingAgentHarness", "function:packages/coding-agent/src/experimental/plugins/bundled.ts:createSessionPluginFacetLoader"],
+	["function:packages/protocol/src/codec.ts:encodeProtocolMessage", "function:packages/protocol/src/framing.ts:encodeFrame"],
+	["class:packages/protocol/src/codec.ts:ValidatedMessageDecoder", "class:packages/protocol/src/framing.ts:FrameDecoder"],
+	["class:packages/server/src/server.ts:Server", "class:packages/server/src/session-router.ts:SessionRouter"],
+	["class:packages/server/src/server.ts:Server", "function:packages/chord/src/index.ts:parseServiceCall"],
+	["function:packages/server/src/testing/server.ts:createTestServer", "class:packages/server/src/server.ts:Server"],
+	["function:packages/server/src/testing/server.ts:createTestServer", "class:packages/server/src/testing/host.ts:TestServerHost"],
+	["function:packages/server/src/transports/unix/preset.ts:createUnixServer", "function:packages/server/src/transports/unix/listener.ts:createUnixListener"],
+	["function:packages/server/src/transports/unix/preset.ts:createUnixServer", "class:packages/server/src/server.ts:Server"],
+];
+for (const [source, target] of calls) extraEdges.push(edge(source, target, "calls", 0.8));
+
+const inherits = [
+	["class:packages/server/src/errors.ts:WrongServerError", "class:packages/server/src/errors.ts:ServerError"],
+	["class:packages/server/src/errors.ts:SessionNotFoundError", "class:packages/server/src/errors.ts:ServerError"],
+	["class:packages/server/src/errors.ts:SessionAmbiguousError", "class:packages/server/src/errors.ts:ServerError"],
+	["class:packages/server/src/errors.ts:SessionNotAttachedError", "class:packages/server/src/errors.ts:ServerError"],
+	["class:packages/server/src/errors.ts:ServerDrainingError", "class:packages/server/src/errors.ts:ServerError"],
+];
+for (const [source, target] of inherits) extraEdges.push(edge(source, target, "inherits", 0.9));
+
+const dependsOn = [
+	["file:packages/protocol/src/index.ts", "file:packages/protocol/src/cbor/index.ts"],
+	["file:packages/protocol/src/index.ts", "file:packages/protocol/src/codec.ts"],
+	["file:packages/protocol/src/index.ts", "file:packages/protocol/src/framing.ts"],
+	["file:packages/protocol/src/index.ts", "file:packages/protocol/src/protocol.ts"],
+	["file:packages/server/src/index.ts", "file:packages/server/src/errors.ts"],
+	["file:packages/server/src/index.ts", "file:packages/server/src/listener.ts"],
+	["file:packages/server/src/index.ts", "file:packages/server/src/server.ts"],
+	["file:packages/server/src/index.ts", "file:packages/server/src/types.ts"],
+	["file:packages/server/src/transports/unix/index.ts", "file:packages/server/src/transports/unix/listener.ts"],
+	["file:packages/server/src/transports/unix/index.ts", "file:packages/server/src/transports/unix/preset.ts"],
+	["file:packages/server/src/transports/unix/index.ts", "file:packages/server/src/transports/unix/types.ts"],
+];
+for (const [source, target] of dependsOn) extraEdges.push(edge(source, target, "depends_on", 0.6));
+
+extraEdges.push(edge("file:packages/server/src/server.ts", "file:packages/server/src/testing/server.ts", "tested_by", 0.5));
+extraEdges.push(edge("file:packages/server/src/testing/client.ts", "file:packages/protocol/src/index.ts", "tested_by", 0.5));
+
+const importEdges = [];
+for (const [filePath, imports] of Object.entries(batchImportData)) {
+	for (const target of imports) {
+		importEdges.push(edge(`file:${filePath}`, `file:${target}`, "imports", 0.7));
+	}
+}
+
+const expectedImportCount = Object.values(batchImportData).reduce((n, a) => n + a.length, 0);
+if (importEdges.length !== expectedImportCount) {
+	throw new Error(`import edges ${importEdges.length} !== expected ${expectedImportCount}`);
+}
+
+const edges = [...importEdges, ...extraEdges];
+
+const ids = new Set(nodes.map((node) => node.id));
+if (ids.size !== nodes.length) {
+	const seen = new Map();
+	for (const node of nodes) {
+		seen.set(node.id, (seen.get(node.id) ?? 0) + 1);
+	}
+	throw new Error(`duplicate node ids: ${[...seen.entries()].filter(([, c]) => c > 1).map(([id]) => id).join(", ")}`);
+}
+
+for (const e of extraEdges) {
+	if (e.source === e.target) throw new Error(`self edge ${e.source}`);
+}
+
+const fileNodes = nodes.filter((node) => node.filePath && ["file", "config", "document", "service", "pipeline", "schema", "resource"].includes(node.type));
+const batchFiles = brief.files.map((f) => f.path).sort();
+const fileNodePaths = new Set(fileNodes.map((node) => node.filePath));
+for (const path of batchFiles) {
+	if (!fileNodePaths.has(path)) throw new Error(`missing file node for ${path}`);
+}
+
+const neighborSymbols = new Set();
+const neighborFiles = new Set();
+for (const [src, neighbors] of Object.entries(neighborMap)) {
+	neighborFiles.add(src);
+	for (const nb of neighbors) {
+		neighborFiles.add(nb.path);
+		for (const sym of nb.symbols ?? []) neighborSymbols.add(`${nb.path}:${sym}`);
+	}
+}
+const importFiles = new Set();
+for (const [src, imports] of Object.entries(batchImportData)) {
+	importFiles.add(src);
+	for (const p of imports) importFiles.add(p);
+}
+
+function targetAllowed(target, partNodeIds) {
+	if (partNodeIds.has(target)) return true;
+	if (target.startsWith("file:")) {
+		const path = target.slice("file:".length);
+		return neighborFiles.has(path) || importFiles.has(path);
+	}
+	const match = /^(?:function|class):(.+):([^:]+)$/.exec(target);
+	if (match) {
+		const [, path, symbol] = match;
+		if (neighborSymbols.has(`${path}:${symbol}`)) return true;
+		return false;
+	}
+	return false;
+}
+
+const nodeCount = nodes.length;
+const edgeCount = edges.length;
+const parts = nodeCount <= 60 && edgeCount <= 120 ? 1 : Math.ceil(Math.max(nodeCount / 60, edgeCount / 120));
+
+const filesSorted = [...batchFiles];
+const chunkSize = Math.ceil(filesSorted.length / parts);
+const fileParts = [];
+for (let i = 0; i < parts; i++) {
+	fileParts.push(filesSorted.slice(i * chunkSize, (i + 1) * chunkSize));
+}
+
+fs.mkdirSync(`${UA_DIR}/intermediate`, { recursive: true });
+
+const written = [];
+if (parts === 1) {
+	const fragment = { nodes, edges };
+	const out = `${UA_DIR}/intermediate/batch-2.json`;
+	fs.writeFileSync(out, JSON.stringify(fragment, null, 2));
+	written.push({ file: out, nodes: nodes.length, edges: edges.length });
+} else {
+	for (let i = 0; i < parts; i++) {
+		const partFiles = new Set(fileParts[i]);
+		const partNodes = nodes.filter((node) => partFiles.has(node.filePath));
+		const partIds = new Set(partNodes.map((node) => node.id));
+		const partEdges = edges.filter((e) => partIds.has(e.source));
+		const failed = [];
+		for (const e of partEdges) {
+			if (!partIds.has(e.source)) failed.push({ e, why: "source missing" });
+			else if (!targetAllowed(e.target, partIds)) failed.push({ e, why: `target not allowed: ${e.target}` });
+		}
+		if (failed.length > 0) {
+			const detail = failed
+				.slice(0, 20)
+				.map((item) => `${item.e.type} ${item.e.source} -> ${item.e.target} (${item.why})`)
+				.join("\n");
+			throw new Error(`part ${i + 1} validation failed (${failed.length} edges):\n${detail}`);
+		}
+		const fragment = { nodes: partNodes, edges: partEdges };
+		const out = `${UA_DIR}/intermediate/batch-2-part-${i + 1}.json`;
+		fs.writeFileSync(out, JSON.stringify(fragment, null, 2));
+		written.push({ file: out, nodes: partNodes.length, edges: partEdges.length, files: [...partFiles] });
+	}
+}
+
+const leftover = filesSorted.filter((path) => !fileParts.some((part) => part.includes(path)));
+if (leftover.length) throw new Error(`files not assigned: ${leftover.join(", ")}`);
+
+console.log(
+	JSON.stringify(
+		{
+			nodeCount,
+			edgeCount,
+			importEdges: importEdges.length,
+			parts,
+			written,
+		},
+		null,
+		2,
+	),
+);

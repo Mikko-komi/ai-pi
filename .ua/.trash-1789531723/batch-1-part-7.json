@@ -1,0 +1,830 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/experimental/plugins/bundled.ts",
+      "type": "file",
+      "name": "bundled.ts",
+      "filePath": "packages/coding-agent/src/experimental/plugins/bundled.ts",
+      "summary": "从 facet bundle manifest/artifact 构造 session 与 presentation FacetLoader，并解析插件 API external。",
+      "tags": [
+        "plugin",
+        "loader",
+        "facet",
+        "experimental"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/plugins/bundled.ts:createSessionPluginFacetLoader",
+      "type": "function",
+      "name": "createSessionPluginFacetLoader",
+      "filePath": "packages/coding-agent/src/experimental/plugins/bundled.ts",
+      "lineRange": [
+        12,
+        15
+      ],
+      "summary": "把多个 manifest 编成 combineFacetLoaders；空列表返回 undefined。",
+      "tags": [
+        "plugin",
+        "factory",
+        "loader"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/plugins/bundled.ts:createOptionalSessionFacetLoader",
+      "type": "function",
+      "name": "createOptionalSessionFacetLoader",
+      "filePath": "packages/coding-agent/src/experimental/plugins/bundled.ts",
+      "lineRange": [
+        17,
+        30
+      ],
+      "summary": "仅当 manifest 含 session entry 时加载 bundle，否则返回空 facets。",
+      "tags": [
+        "plugin",
+        "loader",
+        "session"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/plugins/bundled.ts:createPresentationFacetData",
+      "type": "function",
+      "name": "createPresentationFacetData",
+      "filePath": "packages/coding-agent/src/experimental/plugins/bundled.ts",
+      "lineRange": [
+        32,
+        36
+      ],
+      "summary": "把 artifact 列表编码为可经服务复制的 presentationFacetBundles JSON。",
+      "tags": [
+        "plugin",
+        "serialization",
+        "presentation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/plugins/bundled.ts:createPresentationFacetLoaders",
+      "type": "function",
+      "name": "createPresentationFacetLoaders",
+      "filePath": "packages/coding-agent/src/experimental/plugins/bundled.ts",
+      "lineRange": [
+        39,
+        49
+      ],
+      "summary": "从服务下发的 presentation 数据重建 artifact loader 列表。",
+      "tags": [
+        "plugin",
+        "factory",
+        "loader"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/plugins/package.ts",
+      "type": "file",
+      "name": "package.ts",
+      "filePath": "packages/coding-agent/src/experimental/plugins/package.ts",
+      "summary": "持久化并构建 server/session 的插件包配置：读写 profile JSON，调用 bundleFacetPackage 产出 artifact。",
+      "tags": [
+        "plugin",
+        "package",
+        "persistence",
+        "bundler"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/plugins/package.ts:restoreServerPluginPackageProfile",
+      "type": "function",
+      "name": "restoreServerPluginPackageProfile",
+      "filePath": "packages/coding-agent/src/experimental/plugins/package.ts",
+      "lineRange": [
+        21,
+        34
+      ],
+      "summary": "按配置写入或读回 plugin-packages-<serverId>.json，空配置则删除文件。",
+      "tags": [
+        "plugin",
+        "persistence",
+        "server"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/plugins/package.ts:readSessionPluginPackageProfile",
+      "type": "function",
+      "name": "readSessionPluginPackageProfile",
+      "filePath": "packages/coding-agent/src/experimental/plugins/package.ts",
+      "lineRange": [
+        37,
+        43
+      ],
+      "summary": "读取单个 durable session 上显式选择的插件包路径。",
+      "tags": [
+        "plugin",
+        "persistence",
+        "session"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/plugins/package.ts:removeSessionPluginPackageProfile",
+      "type": "function",
+      "name": "removeSessionPluginPackageProfile",
+      "filePath": "packages/coding-agent/src/experimental/plugins/package.ts",
+      "lineRange": [
+        46,
+        52
+      ],
+      "summary": "删除已销毁 session 对应的插件 profile。",
+      "tags": [
+        "plugin",
+        "persistence",
+        "cleanup"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/plugins/package.ts:writeSessionPluginPackageProfile",
+      "type": "function",
+      "name": "writeSessionPluginPackageProfile",
+      "filePath": "packages/coding-agent/src/experimental/plugins/package.ts",
+      "lineRange": [
+        55,
+        66
+      ],
+      "summary": "把规范化后的包路径写入 session 级 profile。",
+      "tags": [
+        "plugin",
+        "persistence",
+        "session"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/plugins/package.ts:createServerPluginPackage",
+      "type": "function",
+      "name": "createServerPluginPackage",
+      "filePath": "packages/coding-agent/src/experimental/plugins/package.ts",
+      "lineRange": [
+        69,
+        97
+      ],
+      "summary": "为单个包路径返回可重复 build() 的 ConfiguredServerPluginPackage，内部串行 bundle。",
+      "tags": [
+        "plugin",
+        "factory",
+        "bundler"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/plugins/package.ts:readPluginPackageProfile",
+      "type": "function",
+      "name": "readPluginPackageProfile",
+      "filePath": "packages/coding-agent/src/experimental/plugins/package.ts",
+      "lineRange": [
+        99,
+        131
+      ],
+      "summary": "解析 profile JSON，校验版本与 packagePaths，非法结构返回 undefined 或抛错。",
+      "tags": [
+        "plugin",
+        "validation",
+        "persistence"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/plugins/package.ts:writePluginPackageProfile",
+      "type": "function",
+      "name": "writePluginPackageProfile",
+      "filePath": "packages/coding-agent/src/experimental/plugins/package.ts",
+      "lineRange": [
+        133,
+        147
+      ],
+      "summary": "把版本化 profile（含可选 sessionPath）写成 JSON 文件。",
+      "tags": [
+        "plugin",
+        "persistence",
+        "filesystem"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/plugins/package.ts:normalizePluginPackagePaths",
+      "type": "function",
+      "name": "normalizePluginPackagePaths",
+      "filePath": "packages/coding-agent/src/experimental/plugins/package.ts",
+      "lineRange": [
+        149,
+        158
+      ],
+      "summary": "resolve 去重后冻结包路径列表，拒绝空字符串。",
+      "tags": [
+        "plugin",
+        "validation",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/process.ts",
+      "type": "file",
+      "name": "process.ts",
+      "filePath": "packages/coding-agent/src/experimental/process.ts",
+      "summary": "内部进程工具：用 __PI_INTERNAL_SPAWN 标记角色，在 Node/Bun 下统一 spawn/终止 coordinator、server、session-worker。",
+      "tags": [
+        "process-spawn",
+        "进程管理",
+        "experimental",
+        "utility"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "编译后的 Bun 可执行文件不能再指定外部 entryUrl。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/process.ts:isDirectInternalProcessEntry",
+      "type": "function",
+      "name": "isDirectInternalProcessEntry",
+      "filePath": "packages/coding-agent/src/experimental/process.ts",
+      "lineRange": [
+        11,
+        18
+      ],
+      "summary": "判断当前 argv[1] 是否直接执行了给定 moduleUrl（排除 Bun binary / bundled Node）。",
+      "tags": [
+        "process",
+        "detection",
+        "entry-point"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/process.ts:getInternalProcessRole",
+      "type": "function",
+      "name": "getInternalProcessRole",
+      "filePath": "packages/coding-agent/src/experimental/process.ts",
+      "lineRange": [
+        21,
+        26
+      ],
+      "summary": "读取并校验 INTERNAL_PROCESS_ENV，非法角色抛错。",
+      "tags": [
+        "process",
+        "validation",
+        "env"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/process.ts:consumeInternalProcessRole",
+      "type": "function",
+      "name": "consumeInternalProcessRole",
+      "filePath": "packages/coding-agent/src/experimental/process.ts",
+      "lineRange": [
+        29,
+        33
+      ],
+      "summary": "读取角色后从 env 删除，避免子孙进程继承。",
+      "tags": [
+        "process",
+        "lifecycle",
+        "env"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/process.ts:spawnInternalProcess",
+      "type": "function",
+      "name": "spawnInternalProcess",
+      "filePath": "packages/coding-agent/src/experimental/process.ts",
+      "lineRange": [
+        41,
+        70
+      ],
+      "summary": "detached spawn 同源可执行文件，注入角色 env；源码模式额外挂 source-resolver。",
+      "tags": [
+        "process-spawn",
+        "factory",
+        "node"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/process.ts:terminateInternalProcess",
+      "type": "function",
+      "name": "terminateInternalProcess",
+      "filePath": "packages/coding-agent/src/experimental/process.ts",
+      "lineRange": [
+        73,
+        81
+      ],
+      "summary": "对仍存活的 child 发 SIGKILL 并等待 exit/error。",
+      "tags": [
+        "process",
+        "lifecycle",
+        "termination"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/process.ts:defaultEntryUrl",
+      "type": "function",
+      "name": "defaultEntryUrl",
+      "filePath": "packages/coding-agent/src/experimental/process.ts",
+      "lineRange": [
+        83,
+        97
+      ],
+      "summary": "按角色解析入口 URL：bundled Node 走 dist/bundle，否则指向同目录 ts/js。",
+      "tags": [
+        "process",
+        "resolution",
+        "entry-point"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/process.ts:encodeControlLine",
+      "type": "function",
+      "name": "encodeControlLine",
+      "filePath": "packages/coding-agent/src/experimental/process.ts",
+      "lineRange": [
+        101,
+        105
+      ],
+      "summary": "把消息 JSON.stringify 成单行并校验不超过 MAX_CONTROL_LINE_BYTES。",
+      "tags": [
+        "protocol",
+        "serialization",
+        "control-plane"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/radius-auth.ts",
+      "type": "file",
+      "name": "radius-auth.ts",
+      "filePath": "packages/coding-agent/src/experimental/radius-auth.ts",
+      "summary": "每次中继连接重新解析 Radius 凭据：显式 token/file，或从 ModelRuntime 读取已登录的 radius auth。",
+      "tags": [
+        "auth",
+        "认证",
+        "radius",
+        "experimental"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/experimental/radius-auth.ts:RadiusRelayAuthResolver",
+      "type": "class",
+      "name": "RadiusRelayAuthResolver",
+      "filePath": "packages/coding-agent/src/experimental/radius-auth.ts",
+      "lineRange": [
+        16,
+        66
+      ],
+      "summary": "解析 gateway URL 与 token；离线模式拒绝；required 时缺少凭据会提示 /login radius。",
+      "tags": [
+        "auth",
+        "resolver",
+        "radius"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/bundled.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/bundled.ts",
+      "target": "file:packages/chord/src/node.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/package.ts",
+      "target": "file:packages/chord/src/bundler.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/package.ts",
+      "target": "file:packages/chord/src/node.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/package.ts",
+      "target": "file:packages/protocol/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/process.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-auth.ts",
+      "target": "file:packages/ai/src/providers/radius-config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-auth.ts",
+      "target": "file:packages/coding-agent/src/cli/auth-command.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-auth.ts",
+      "target": "file:packages/coding-agent/src/cli/experimental/command-options.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-auth.ts",
+      "target": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-auth.ts",
+      "target": "file:packages/coding-agent/src/utils/paths.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/bundled.ts",
+      "target": "function:packages/coding-agent/src/experimental/plugins/bundled.ts:createSessionPluginFacetLoader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/bundled.ts",
+      "target": "function:packages/coding-agent/src/experimental/plugins/bundled.ts:createOptionalSessionFacetLoader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/bundled.ts",
+      "target": "function:packages/coding-agent/src/experimental/plugins/bundled.ts:createPresentationFacetData",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/bundled.ts",
+      "target": "function:packages/coding-agent/src/experimental/plugins/bundled.ts:createPresentationFacetLoaders",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/bundled.ts",
+      "target": "function:packages/coding-agent/src/experimental/plugins/bundled.ts:createSessionPluginFacetLoader",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/bundled.ts",
+      "target": "function:packages/coding-agent/src/experimental/plugins/bundled.ts:createPresentationFacetData",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/bundled.ts",
+      "target": "function:packages/coding-agent/src/experimental/plugins/bundled.ts:createPresentationFacetLoaders",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/plugins/bundled.ts:createSessionPluginFacetLoader",
+      "target": "function:packages/coding-agent/src/experimental/plugins/bundled.ts:createOptionalSessionFacetLoader",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/package.ts",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:restoreServerPluginPackageProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/package.ts",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:readSessionPluginPackageProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/package.ts",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:removeSessionPluginPackageProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/package.ts",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:writeSessionPluginPackageProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/package.ts",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:createServerPluginPackage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/package.ts",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:readPluginPackageProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/package.ts",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:writePluginPackageProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/package.ts",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:normalizePluginPackagePaths",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/package.ts",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:restoreServerPluginPackageProfile",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/package.ts",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:readSessionPluginPackageProfile",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/package.ts",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:removeSessionPluginPackageProfile",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/package.ts",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:writeSessionPluginPackageProfile",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/package.ts",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:createServerPluginPackage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/plugins/package.ts",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:normalizePluginPackagePaths",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/plugins/package.ts:restoreServerPluginPackageProfile",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:readPluginPackageProfile",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/plugins/package.ts:restoreServerPluginPackageProfile",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:writePluginPackageProfile",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/plugins/package.ts:restoreServerPluginPackageProfile",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:normalizePluginPackagePaths",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/plugins/package.ts:readSessionPluginPackageProfile",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:readPluginPackageProfile",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/plugins/package.ts:writeSessionPluginPackageProfile",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:writePluginPackageProfile",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/plugins/package.ts:writeSessionPluginPackageProfile",
+      "target": "function:packages/coding-agent/src/experimental/plugins/package.ts:normalizePluginPackagePaths",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/process.ts",
+      "target": "function:packages/coding-agent/src/experimental/process.ts:isDirectInternalProcessEntry",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/process.ts",
+      "target": "function:packages/coding-agent/src/experimental/process.ts:getInternalProcessRole",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/process.ts",
+      "target": "function:packages/coding-agent/src/experimental/process.ts:consumeInternalProcessRole",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/process.ts",
+      "target": "function:packages/coding-agent/src/experimental/process.ts:spawnInternalProcess",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/process.ts",
+      "target": "function:packages/coding-agent/src/experimental/process.ts:terminateInternalProcess",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/process.ts",
+      "target": "function:packages/coding-agent/src/experimental/process.ts:defaultEntryUrl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/process.ts",
+      "target": "function:packages/coding-agent/src/experimental/process.ts:encodeControlLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/process.ts",
+      "target": "function:packages/coding-agent/src/experimental/process.ts:isDirectInternalProcessEntry",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/process.ts",
+      "target": "function:packages/coding-agent/src/experimental/process.ts:getInternalProcessRole",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/process.ts",
+      "target": "function:packages/coding-agent/src/experimental/process.ts:consumeInternalProcessRole",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/process.ts",
+      "target": "function:packages/coding-agent/src/experimental/process.ts:spawnInternalProcess",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/process.ts",
+      "target": "function:packages/coding-agent/src/experimental/process.ts:terminateInternalProcess",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/process.ts",
+      "target": "function:packages/coding-agent/src/experimental/process.ts:encodeControlLine",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/process.ts:consumeInternalProcessRole",
+      "target": "function:packages/coding-agent/src/experimental/process.ts:getInternalProcessRole",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/process.ts:spawnInternalProcess",
+      "target": "function:packages/coding-agent/src/experimental/process.ts:defaultEntryUrl",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/experimental/process.ts:defaultEntryUrl",
+      "target": "function:packages/coding-agent/src/config.ts:getPackageDir",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-auth.ts",
+      "target": "class:packages/coding-agent/src/experimental/radius-auth.ts:RadiusRelayAuthResolver",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/radius-auth.ts",
+      "target": "class:packages/coding-agent/src/experimental/radius-auth.ts:RadiusRelayAuthResolver",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/radius-auth.ts:RadiusRelayAuthResolver",
+      "target": "function:packages/ai/src/providers/radius-config.ts:normalizeRadiusGatewayUrl",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/radius-auth.ts:RadiusRelayAuthResolver",
+      "target": "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/radius-auth.ts:RadiusRelayAuthResolver",
+      "target": "function:packages/coding-agent/src/cli/auth-command.ts:getAuthCredential",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/experimental/radius-auth.ts:RadiusRelayAuthResolver",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:resolvePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

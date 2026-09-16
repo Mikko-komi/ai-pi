@@ -1,0 +1,1390 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 28,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 28,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 28,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "packages/ai/src/providers/qwen-token-plan-cn.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "QWEN_TOKEN_PLAN_CN_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/qwen-token-plan-cn.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "qwenTokenPlanCnProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "qwenTokenPlanCnProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "qwenTokenPlanCnProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "qwenTokenPlanCnProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "qwenTokenPlanCnProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "qwenTokenPlanCnProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/qwen-token-plan-individual.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "QWEN_TOKEN_PLAN_INDIVIDUAL_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/qwen-token-plan-individual.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "qwenTokenPlanIndividualProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "qwenTokenPlanIndividualProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "qwenTokenPlanIndividualProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "qwenTokenPlanIndividualProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "qwenTokenPlanIndividualProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "qwenTokenPlanIndividualProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/qwen-token-plan.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "QWEN_TOKEN_PLAN_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/qwen-token-plan.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "qwenTokenPlanProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "qwenTokenPlanProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "qwenTokenPlanProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "qwenTokenPlanProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "qwenTokenPlanProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "qwenTokenPlanProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/radius-config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 96,
+      "nonEmptyLines": 84,
+      "functions": [
+        {
+          "name": "isRadiusGatewayModel",
+          "startLine": 26,
+          "endLine": 40,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "sanitizeRadiusGatewayConfig",
+          "startLine": 42,
+          "endLine": 50,
+          "params": [
+            "config"
+          ]
+        },
+        {
+          "name": "normalizeRadiusGatewayUrl",
+          "startLine": 52,
+          "endLine": 55,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "getRadiusCredentialConfig",
+          "startLine": 57,
+          "endLine": 59,
+          "params": [
+            "credential"
+          ]
+        },
+        {
+          "name": "getRadiusModelsFromConfig",
+          "startLine": 61,
+          "endLine": 68,
+          "params": [
+            "providerId",
+            "config"
+          ]
+        },
+        {
+          "name": "getRadiusModels",
+          "startLine": 70,
+          "endLine": 73,
+          "params": [
+            "providerId",
+            "credential"
+          ]
+        },
+        {
+          "name": "truncateHttpBody",
+          "startLine": 75,
+          "endLine": 78,
+          "params": [
+            "body"
+          ]
+        },
+        {
+          "name": "loadRadiusGatewayConfig",
+          "startLine": 80,
+          "endLine": 96,
+          "params": [
+            "gateway",
+            "apiKey",
+            "signal"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "DEFAULT_RADIUS_GATEWAY",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "normalizeRadiusGatewayUrl",
+          "line": 52,
+          "isDefault": false
+        },
+        {
+          "name": "getRadiusCredentialConfig",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "getRadiusModelsFromConfig",
+          "line": 61,
+          "isDefault": false
+        },
+        {
+          "name": "getRadiusModels",
+          "line": 70,
+          "isDefault": false
+        },
+        {
+          "name": "loadRadiusGatewayConfig",
+          "line": 80,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "isRadiusGatewayModel",
+          "callee": "Array.isArray",
+          "lineNumber": 27
+        },
+        {
+          "caller": "isRadiusGatewayModel",
+          "callee": "Array.isArray",
+          "lineNumber": 33
+        },
+        {
+          "caller": "isRadiusGatewayModel",
+          "callee": "Array.isArray",
+          "lineNumber": 36
+        },
+        {
+          "caller": "sanitizeRadiusGatewayConfig",
+          "callee": "Array.isArray",
+          "lineNumber": 43
+        },
+        {
+          "caller": "sanitizeRadiusGatewayConfig",
+          "callee": "Array.isArray",
+          "lineNumber": 45
+        },
+        {
+          "caller": "sanitizeRadiusGatewayConfig",
+          "callee": "models.filter(isRadiusGatewayModel).map",
+          "lineNumber": 48
+        },
+        {
+          "caller": "sanitizeRadiusGatewayConfig",
+          "callee": "models.filter",
+          "lineNumber": 48
+        },
+        {
+          "caller": "normalizeRadiusGatewayUrl",
+          "callee": "/^https?:\\/\\//iu.test",
+          "lineNumber": 53
+        },
+        {
+          "caller": "normalizeRadiusGatewayUrl",
+          "callee": "withScheme.replace",
+          "lineNumber": 54
+        },
+        {
+          "caller": "getRadiusCredentialConfig",
+          "callee": "sanitizeRadiusGatewayConfig",
+          "lineNumber": 58
+        },
+        {
+          "caller": "getRadiusModelsFromConfig",
+          "callee": "config.models.map",
+          "lineNumber": 62
+        },
+        {
+          "caller": "getRadiusModels",
+          "callee": "getRadiusCredentialConfig",
+          "lineNumber": 71
+        },
+        {
+          "caller": "getRadiusModels",
+          "callee": "getRadiusModelsFromConfig",
+          "lineNumber": 72
+        },
+        {
+          "caller": "truncateHttpBody",
+          "callee": "body.trim",
+          "lineNumber": 76
+        },
+        {
+          "caller": "truncateHttpBody",
+          "callee": "trimmed.slice",
+          "lineNumber": 77
+        },
+        {
+          "caller": "loadRadiusGatewayConfig",
+          "callee": "fetch",
+          "lineNumber": 87
+        },
+        {
+          "caller": "loadRadiusGatewayConfig",
+          "callee": "truncateHttpBody",
+          "lineNumber": 90
+        },
+        {
+          "caller": "loadRadiusGatewayConfig",
+          "callee": "response.text",
+          "lineNumber": 90
+        },
+        {
+          "caller": "loadRadiusGatewayConfig",
+          "callee": "sanitizeRadiusGatewayConfig",
+          "lineNumber": 93
+        },
+        {
+          "caller": "loadRadiusGatewayConfig",
+          "callee": "response.json",
+          "lineNumber": 93
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 6,
+        "functionCount": 8,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/radius.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 82,
+      "nonEmptyLines": 77,
+      "functions": [
+        {
+          "name": "radiusProvider",
+          "startLine": 20,
+          "endLine": 82,
+          "params": [
+            "options"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "radiusProvider",
+          "line": 20,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "radiusProvider",
+          "callee": "normalizeRadiusGatewayUrl",
+          "lineNumber": 23
+        },
+        {
+          "caller": "radiusProvider",
+          "callee": "getRadiusModels",
+          "lineNumber": 24
+        },
+        {
+          "caller": "radiusProvider",
+          "callee": "piMessagesApi",
+          "lineNumber": 25
+        },
+        {
+          "caller": "radiusProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 31
+        },
+        {
+          "caller": "radiusProvider",
+          "callee": "lazyOAuth",
+          "lineNumber": 32
+        },
+        {
+          "caller": "radiusProvider",
+          "callee": "loadRadiusOAuth",
+          "lineNumber": 32
+        },
+        {
+          "caller": "radiusProvider",
+          "callee": "stored.models.filter",
+          "lineNumber": 38
+        },
+        {
+          "caller": "radiusProvider",
+          "callee": "context.publish",
+          "lineNumber": 40
+        },
+        {
+          "caller": "radiusProvider",
+          "callee": "getRadiusModels",
+          "lineNumber": 52
+        },
+        {
+          "caller": "radiusProvider",
+          "callee": "context.publish",
+          "lineNumber": 55
+        },
+        {
+          "caller": "radiusProvider",
+          "callee": "Date.now",
+          "lineNumber": 56
+        },
+        {
+          "caller": "radiusProvider",
+          "callee": "loadRadiusGatewayConfig",
+          "lineNumber": 69
+        },
+        {
+          "caller": "radiusProvider",
+          "callee": "getRadiusModelsFromConfig",
+          "lineNumber": 71
+        },
+        {
+          "caller": "radiusProvider",
+          "callee": "context.publish",
+          "lineNumber": 72
+        },
+        {
+          "caller": "radiusProvider",
+          "callee": "Date.now",
+          "lineNumber": 73
+        },
+        {
+          "caller": "radiusProvider",
+          "callee": "streams.stream",
+          "lineNumber": 79
+        },
+        {
+          "caller": "radiusProvider",
+          "callee": "streams.streamSimple",
+          "lineNumber": 80
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/together.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "TOGETHER_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/together.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "togetherProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "togetherProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "togetherProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "togetherProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "togetherProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "togetherProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/vercel-ai-gateway.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "VERCEL_AI_GATEWAY_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/vercel-ai-gateway.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "vercelAIGatewayProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "vercelAIGatewayProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "vercelAIGatewayProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "vercelAIGatewayProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "vercelAIGatewayProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "vercelAIGatewayProvider",
+          "callee": "anthropicMessagesApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/xai.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "XAI_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/xai.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 24,
+      "nonEmptyLines": 23,
+      "functions": [
+        {
+          "name": "xaiProvider",
+          "startLine": 7,
+          "endLine": 24,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "xaiProvider",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "xaiProvider",
+          "callee": "createProvider",
+          "lineNumber": 8
+        },
+        {
+          "caller": "xaiProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 13
+        },
+        {
+          "caller": "xaiProvider",
+          "callee": "lazyOAuth",
+          "lineNumber": 14
+        },
+        {
+          "caller": "xaiProvider",
+          "callee": "Object.values",
+          "lineNumber": 21
+        },
+        {
+          "caller": "xaiProvider",
+          "callee": "openAIResponsesApi",
+          "lineNumber": 22
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi-token-plan-ams.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "XIAOMI_TOKEN_PLAN_AMS_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi-token-plan-ams.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "xiaomiTokenPlanAmsProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "xiaomiTokenPlanAmsProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "xiaomiTokenPlanAmsProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "xiaomiTokenPlanAmsProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "xiaomiTokenPlanAmsProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "xiaomiTokenPlanAmsProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi-token-plan-cn.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "XIAOMI_TOKEN_PLAN_CN_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi-token-plan-cn.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "xiaomiTokenPlanCnProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "xiaomiTokenPlanCnProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "xiaomiTokenPlanCnProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "xiaomiTokenPlanCnProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "xiaomiTokenPlanCnProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "xiaomiTokenPlanCnProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi-token-plan-sgp.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "XIAOMI_TOKEN_PLAN_SGP_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi-token-plan-sgp.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "xiaomiTokenPlanSgpProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "xiaomiTokenPlanSgpProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "xiaomiTokenPlanSgpProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "xiaomiTokenPlanSgpProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "xiaomiTokenPlanSgpProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "xiaomiTokenPlanSgpProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "XIAOMI_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/xiaomi.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "xiaomiProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "xiaomiProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "xiaomiProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "xiaomiProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "xiaomiProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "xiaomiProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/zai-coding-cn.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "ZAI_CODING_CN_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/zai-coding-cn.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "zaiCodingCnProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "zaiCodingCnProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "zaiCodingCnProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "zaiCodingCnProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "zaiCodingCnProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "zaiCodingCnProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/zai.models.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "ZAI_MODELS",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/providers/zai.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "zaiProvider",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "zaiProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "zaiProvider",
+          "callee": "createProvider",
+          "lineNumber": 7
+        },
+        {
+          "caller": "zaiProvider",
+          "callee": "envApiKeyAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "zaiProvider",
+          "callee": "Object.values",
+          "lineNumber": 12
+        },
+        {
+          "caller": "zaiProvider",
+          "callee": "openAICompletionsApi",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/utils/abort.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 50,
+      "nonEmptyLines": 46,
+      "functions": [
+        {
+          "name": "abortReason",
+          "startLine": 1,
+          "endLine": 6,
+          "params": [
+            "signal"
+          ]
+        },
+        {
+          "name": "operationSignal",
+          "startLine": 9,
+          "endLine": 11,
+          "params": [
+            "signal"
+          ]
+        },
+        {
+          "name": "raceWithAbortSignal",
+          "startLine": 17,
+          "endLine": 50,
+          "params": [
+            "operation",
+            "signal"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "operationSignal",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "raceWithAbortSignal",
+          "line": 17,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "raceWithAbortSignal",
+          "callee": "operation.catch",
+          "lineNumber": 19
+        },
+        {
+          "caller": "raceWithAbortSignal",
+          "callee": "Promise.reject",
+          "lineNumber": 20
+        },
+        {
+          "caller": "raceWithAbortSignal",
+          "callee": "abortReason",
+          "lineNumber": 20
+        },
+        {
+          "caller": "cleanup",
+          "callee": "signal.removeEventListener",
+          "lineNumber": 25
+        },
+        {
+          "caller": "onAbort",
+          "callee": "cleanup",
+          "lineNumber": 29
+        },
+        {
+          "caller": "onAbort",
+          "callee": "reject",
+          "lineNumber": 30
+        },
+        {
+          "caller": "onAbort",
+          "callee": "abortReason",
+          "lineNumber": 30
+        },
+        {
+          "caller": "raceWithAbortSignal",
+          "callee": "signal.addEventListener",
+          "lineNumber": 33
+        },
+        {
+          "caller": "raceWithAbortSignal",
+          "callee": "operation.then",
+          "lineNumber": 34
+        },
+        {
+          "caller": "raceWithAbortSignal",
+          "callee": "cleanup",
+          "lineNumber": 38
+        },
+        {
+          "caller": "raceWithAbortSignal",
+          "callee": "resolve",
+          "lineNumber": 39
+        },
+        {
+          "caller": "raceWithAbortSignal",
+          "callee": "cleanup",
+          "lineNumber": 44
+        },
+        {
+          "caller": "raceWithAbortSignal",
+          "callee": "reject",
+          "lineNumber": 45
+        },
+        {
+          "caller": "raceWithAbortSignal",
+          "callee": "onAbort",
+          "lineNumber": 48
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ai/src/utils/sleep.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "sleep",
+          "startLine": 1,
+          "endLine": 14,
+          "params": [
+            "ms",
+            "signal"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "sleep",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "sleep",
+          "callee": "signal.throwIfAborted",
+          "lineNumber": 3
+        },
+        {
+          "caller": "onAbort",
+          "callee": "clearTimeout",
+          "lineNumber": 5
+        },
+        {
+          "caller": "onAbort",
+          "callee": "reject",
+          "lineNumber": 6
+        },
+        {
+          "caller": "sleep",
+          "callee": "setTimeout",
+          "lineNumber": 8
+        },
+        {
+          "caller": "sleep",
+          "callee": "signal.removeEventListener",
+          "lineNumber": 9
+        },
+        {
+          "caller": "sleep",
+          "callee": "resolve",
+          "lineNumber": 10
+        },
+        {
+          "caller": "sleep",
+          "callee": "signal.addEventListener",
+          "lineNumber": 12
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

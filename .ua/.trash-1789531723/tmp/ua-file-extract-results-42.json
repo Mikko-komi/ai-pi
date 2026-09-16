@@ -1,0 +1,262 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 3,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 3
+    }
+  },
+  "results": [
+    {
+      "path": "packages/telemetry/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 464,
+      "nonEmptyLines": 363,
+      "sections": [
+        {
+          "heading": "@earendil-works/pi-telemetry",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Table of Contents",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "Installation",
+          "level": 2,
+          "line": 33
+        },
+        {
+          "heading": "Telemetry Concepts",
+          "level": 2,
+          "line": 39
+        },
+        {
+          "heading": "Core Context API",
+          "level": 2,
+          "line": 64
+        },
+        {
+          "heading": "Adapter Contract",
+          "level": 2,
+          "line": 118
+        },
+        {
+          "heading": "No-op Context",
+          "level": 2,
+          "line": 134
+        },
+        {
+          "heading": "In-Memory Reference Adapter",
+          "level": 2,
+          "line": 154
+        },
+        {
+          "heading": "Adapter Conformance",
+          "level": 2,
+          "line": 178
+        },
+        {
+          "heading": "Typed Schemas",
+          "level": 2,
+          "line": 211
+        },
+        {
+          "heading": "Start and Completion Attributes",
+          "level": 3,
+          "line": 292
+        },
+        {
+          "heading": "Schema Metadata",
+          "level": 2,
+          "line": 340
+        },
+        {
+          "heading": "Pi Package Integration",
+          "level": 2,
+          "line": 365
+        },
+        {
+          "heading": "Security and Portability",
+          "level": 2,
+          "line": 385
+        },
+        {
+          "heading": "API Reference",
+          "level": 2,
+          "line": 393
+        },
+        {
+          "heading": "Core types and values",
+          "level": 3,
+          "line": 395
+        },
+        {
+          "heading": "Schema definitions and inference",
+          "level": 3,
+          "line": 409
+        },
+        {
+          "heading": "Testing subpath",
+          "level": 3,
+          "line": 438
+        },
+        {
+          "heading": "Development",
+          "level": 2,
+          "line": 447
+        },
+        {
+          "heading": "License",
+          "level": 2,
+          "line": 462
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 20
+      }
+    },
+    {
+      "path": "packages/telemetry/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 47,
+      "nonEmptyLines": 47,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "description",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "type",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "main",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "types",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "exports",
+          "level": 1,
+          "line": 8
+        },
+        {
+          "heading": "files",
+          "level": 1,
+          "line": 18
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 22
+        },
+        {
+          "heading": "keywords",
+          "level": 1,
+          "line": 28
+        },
+        {
+          "heading": "author",
+          "level": 1,
+          "line": 33
+        },
+        {
+          "heading": "license",
+          "level": 1,
+          "line": 34
+        },
+        {
+          "heading": "repository",
+          "level": 1,
+          "line": 35
+        },
+        {
+          "heading": "engines",
+          "level": 1,
+          "line": 40
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 43
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 15
+      }
+    },
+    {
+      "path": "packages/telemetry/tsconfig.build.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 9,
+      "nonEmptyLines": 9,
+      "sections": [
+        {
+          "heading": "extends",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "exclude",
+          "level": 1,
+          "line": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    }
+  ]
+}

@@ -1,0 +1,816 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/ai/src/providers/xiaomi-token-plan-ams.models.ts",
+      "type": "file",
+      "name": "xiaomi-token-plan-ams.models.ts",
+      "filePath": "packages/ai/src/providers/xiaomi-token-plan-ams.models.ts",
+      "summary": "从生成目录扁平化小米 Token Plan 阿姆斯特丹区模型清单。",
+      "tags": [
+        "模型目录",
+        "自动生成",
+        "type-definition",
+        "xiaomi"
+      ],
+      "complexity": "simple",
+      "languageNotes": "由 generate-models.ts 生成，禁止手改。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/xiaomi-token-plan-ams.ts",
+      "type": "file",
+      "name": "xiaomi-token-plan-ams.ts",
+      "filePath": "packages/ai/src/providers/xiaomi-token-plan-ams.ts",
+      "summary": "注册小米 Token Plan AMS provider，指向阿姆斯特丹区兼容 Completions 端点。",
+      "tags": [
+        "provider",
+        "工厂",
+        "认证"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/providers/xiaomi-token-plan-cn.models.ts",
+      "type": "file",
+      "name": "xiaomi-token-plan-cn.models.ts",
+      "filePath": "packages/ai/src/providers/xiaomi-token-plan-cn.models.ts",
+      "summary": "从生成目录扁平化小米 Token Plan 中国区模型清单。",
+      "tags": [
+        "模型目录",
+        "自动生成",
+        "type-definition",
+        "xiaomi"
+      ],
+      "complexity": "simple",
+      "languageNotes": "由 generate-models.ts 生成，禁止手改。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/xiaomi-token-plan-cn.ts",
+      "type": "file",
+      "name": "xiaomi-token-plan-cn.ts",
+      "filePath": "packages/ai/src/providers/xiaomi-token-plan-cn.ts",
+      "summary": "注册小米 Token Plan CN provider，指向中国区兼容 Completions 端点。",
+      "tags": [
+        "provider",
+        "工厂",
+        "认证"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/providers/xiaomi-token-plan-sgp.models.ts",
+      "type": "file",
+      "name": "xiaomi-token-plan-sgp.models.ts",
+      "filePath": "packages/ai/src/providers/xiaomi-token-plan-sgp.models.ts",
+      "summary": "从生成目录扁平化小米 Token Plan 新加坡区模型清单。",
+      "tags": [
+        "模型目录",
+        "自动生成",
+        "type-definition",
+        "xiaomi"
+      ],
+      "complexity": "simple",
+      "languageNotes": "由 generate-models.ts 生成，禁止手改。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/xiaomi-token-plan-sgp.ts",
+      "type": "file",
+      "name": "xiaomi-token-plan-sgp.ts",
+      "filePath": "packages/ai/src/providers/xiaomi-token-plan-sgp.ts",
+      "summary": "注册小米 Token Plan SGP provider，指向新加坡区兼容 Completions 端点。",
+      "tags": [
+        "provider",
+        "工厂",
+        "认证"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/providers/xiaomi.models.ts",
+      "type": "file",
+      "name": "xiaomi.models.ts",
+      "filePath": "packages/ai/src/providers/xiaomi.models.ts",
+      "summary": "从生成目录扁平化默认小米模型清单。",
+      "tags": [
+        "模型目录",
+        "自动生成",
+        "type-definition",
+        "xiaomi"
+      ],
+      "complexity": "simple",
+      "languageNotes": "由 generate-models.ts 生成，禁止手改。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/xiaomi.ts",
+      "type": "file",
+      "name": "xiaomi.ts",
+      "filePath": "packages/ai/src/providers/xiaomi.ts",
+      "summary": "注册默认小米 provider，使用 api.xiaomimimo.com 的 OpenAI Completions 兼容 API。",
+      "tags": [
+        "provider",
+        "工厂",
+        "认证"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/providers/zai-coding-cn.models.ts",
+      "type": "file",
+      "name": "zai-coding-cn.models.ts",
+      "filePath": "packages/ai/src/providers/zai-coding-cn.models.ts",
+      "summary": "从生成目录扁平化 Z.AI Coding 中国区模型清单。",
+      "tags": [
+        "模型目录",
+        "自动生成",
+        "type-definition",
+        "zai"
+      ],
+      "complexity": "simple",
+      "languageNotes": "由 generate-models.ts 生成，禁止手改。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/zai-coding-cn.ts",
+      "type": "file",
+      "name": "zai-coding-cn.ts",
+      "filePath": "packages/ai/src/providers/zai-coding-cn.ts",
+      "summary": "注册 Z.AI Coding CN provider，指向智谱开放平台 coding paas 端点。",
+      "tags": [
+        "provider",
+        "工厂",
+        "认证"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/providers/zai.models.ts",
+      "type": "file",
+      "name": "zai.models.ts",
+      "filePath": "packages/ai/src/providers/zai.models.ts",
+      "summary": "从生成目录扁平化默认 Z.AI 模型清单。",
+      "tags": [
+        "模型目录",
+        "自动生成",
+        "type-definition",
+        "zai"
+      ],
+      "complexity": "simple",
+      "languageNotes": "由 generate-models.ts 生成，禁止手改。"
+    },
+    {
+      "id": "file:packages/ai/src/providers/zai.ts",
+      "type": "file",
+      "name": "zai.ts",
+      "filePath": "packages/ai/src/providers/zai.ts",
+      "summary": "注册默认 Z.AI provider，指向 api.z.ai coding paas 端点。",
+      "tags": [
+        "provider",
+        "工厂",
+        "认证"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/ai/src/utils/abort.ts",
+      "type": "file",
+      "name": "abort.ts",
+      "filePath": "packages/ai/src/utils/abort.ts",
+      "summary": "为可选 AbortSignal 提供默认 signal，并在中止时与 in-flight Promise 竞态且吞掉遗弃 rejection。",
+      "tags": [
+        "工具函数",
+        "取消",
+        "promise"
+      ],
+      "complexity": "simple",
+      "languageNotes": "中止后继续观察原 Promise，避免未处理的 rejection。"
+    },
+    {
+      "id": "file:packages/ai/src/utils/sleep.ts",
+      "type": "file",
+      "name": "sleep.ts",
+      "filePath": "packages/ai/src/utils/sleep.ts",
+      "summary": "可被 AbortSignal 打断的延时 Promise，供 OAuth 轮询等等待场景使用。",
+      "tags": [
+        "工具函数",
+        "取消",
+        "延时"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/ai/src/providers/xiaomi-token-plan-ams.ts:xiaomiTokenPlanAmsProvider",
+      "type": "function",
+      "name": "xiaomiTokenPlanAmsProvider",
+      "filePath": "packages/ai/src/providers/xiaomi-token-plan-ams.ts",
+      "summary": "用 createProvider 组装小米 Token Plan AMS provider。",
+      "tags": [
+        "工厂",
+        "provider",
+        "认证"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        6,
+        15
+      ]
+    },
+    {
+      "id": "function:packages/ai/src/providers/xiaomi-token-plan-cn.ts:xiaomiTokenPlanCnProvider",
+      "type": "function",
+      "name": "xiaomiTokenPlanCnProvider",
+      "filePath": "packages/ai/src/providers/xiaomi-token-plan-cn.ts",
+      "summary": "用 createProvider 组装小米 Token Plan CN provider。",
+      "tags": [
+        "工厂",
+        "provider",
+        "认证"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        6,
+        15
+      ]
+    },
+    {
+      "id": "function:packages/ai/src/providers/xiaomi-token-plan-sgp.ts:xiaomiTokenPlanSgpProvider",
+      "type": "function",
+      "name": "xiaomiTokenPlanSgpProvider",
+      "filePath": "packages/ai/src/providers/xiaomi-token-plan-sgp.ts",
+      "summary": "用 createProvider 组装小米 Token Plan SGP provider。",
+      "tags": [
+        "工厂",
+        "provider",
+        "认证"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        6,
+        15
+      ]
+    },
+    {
+      "id": "function:packages/ai/src/providers/xiaomi.ts:xiaomiProvider",
+      "type": "function",
+      "name": "xiaomiProvider",
+      "filePath": "packages/ai/src/providers/xiaomi.ts",
+      "summary": "用 createProvider 组装默认小米 Completions provider。",
+      "tags": [
+        "工厂",
+        "provider",
+        "认证"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        6,
+        15
+      ]
+    },
+    {
+      "id": "function:packages/ai/src/providers/zai-coding-cn.ts:zaiCodingCnProvider",
+      "type": "function",
+      "name": "zaiCodingCnProvider",
+      "filePath": "packages/ai/src/providers/zai-coding-cn.ts",
+      "summary": "用 createProvider 组装 Z.AI Coding CN provider。",
+      "tags": [
+        "工厂",
+        "provider",
+        "认证"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        6,
+        15
+      ]
+    },
+    {
+      "id": "function:packages/ai/src/providers/zai.ts:zaiProvider",
+      "type": "function",
+      "name": "zaiProvider",
+      "filePath": "packages/ai/src/providers/zai.ts",
+      "summary": "用 createProvider 组装默认 Z.AI Completions provider。",
+      "tags": [
+        "工厂",
+        "provider",
+        "认证"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        6,
+        15
+      ]
+    },
+    {
+      "id": "function:packages/ai/src/utils/abort.ts:operationSignal",
+      "type": "function",
+      "name": "operationSignal",
+      "filePath": "packages/ai/src/utils/abort.ts",
+      "summary": "若调用方未传入 AbortSignal，则新建 AbortController 并返回其 signal。",
+      "tags": [
+        "工具函数",
+        "取消",
+        "signal"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        9,
+        11
+      ]
+    },
+    {
+      "id": "function:packages/ai/src/utils/abort.ts:raceWithAbortSignal",
+      "type": "function",
+      "name": "raceWithAbortSignal",
+      "filePath": "packages/ai/src/utils/abort.ts",
+      "summary": "将 Promise 与 AbortSignal 竞态：中止时 reject，同时继续观察原 Promise 以免未处理 rejection。",
+      "tags": [
+        "工具函数",
+        "取消",
+        "promise"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        17,
+        50
+      ]
+    },
+    {
+      "id": "function:packages/ai/src/utils/sleep.ts:sleep",
+      "type": "function",
+      "name": "sleep",
+      "filePath": "packages/ai/src/utils/sleep.ts",
+      "summary": "等待指定毫秒，若 AbortSignal 触发则清定时器并以 signal.reason reject。",
+      "tags": [
+        "工具函数",
+        "取消",
+        "延时"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        1,
+        14
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/ai/src/providers/xiaomi-token-plan-ams.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi-token-plan-ams.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi-token-plan-ams.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi-token-plan-ams.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi-token-plan-ams.ts",
+      "target": "file:packages/ai/src/providers/xiaomi-token-plan-ams.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi-token-plan-cn.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi-token-plan-cn.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi-token-plan-cn.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi-token-plan-cn.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi-token-plan-cn.ts",
+      "target": "file:packages/ai/src/providers/xiaomi-token-plan-cn.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi-token-plan-sgp.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi-token-plan-sgp.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi-token-plan-sgp.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi-token-plan-sgp.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi-token-plan-sgp.ts",
+      "target": "file:packages/ai/src/providers/xiaomi-token-plan-sgp.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi.ts",
+      "target": "file:packages/ai/src/providers/xiaomi.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/zai-coding-cn.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/zai-coding-cn.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/zai-coding-cn.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/zai-coding-cn.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/zai-coding-cn.ts",
+      "target": "file:packages/ai/src/providers/zai-coding-cn.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/zai.models.ts",
+      "target": "file:packages/ai/src/model-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/zai.ts",
+      "target": "file:packages/ai/src/api/openai-completions.lazy.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/zai.ts",
+      "target": "file:packages/ai/src/auth/helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/zai.ts",
+      "target": "file:packages/ai/src/models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/zai.ts",
+      "target": "file:packages/ai/src/providers/zai.models.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi-token-plan-ams.ts",
+      "target": "function:packages/ai/src/providers/xiaomi-token-plan-ams.ts:xiaomiTokenPlanAmsProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi-token-plan-ams.ts",
+      "target": "function:packages/ai/src/providers/xiaomi-token-plan-ams.ts:xiaomiTokenPlanAmsProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi-token-plan-cn.ts",
+      "target": "function:packages/ai/src/providers/xiaomi-token-plan-cn.ts:xiaomiTokenPlanCnProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi-token-plan-cn.ts",
+      "target": "function:packages/ai/src/providers/xiaomi-token-plan-cn.ts:xiaomiTokenPlanCnProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi-token-plan-sgp.ts",
+      "target": "function:packages/ai/src/providers/xiaomi-token-plan-sgp.ts:xiaomiTokenPlanSgpProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi-token-plan-sgp.ts",
+      "target": "function:packages/ai/src/providers/xiaomi-token-plan-sgp.ts:xiaomiTokenPlanSgpProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi.ts",
+      "target": "function:packages/ai/src/providers/xiaomi.ts:xiaomiProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/xiaomi.ts",
+      "target": "function:packages/ai/src/providers/xiaomi.ts:xiaomiProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/zai-coding-cn.ts",
+      "target": "function:packages/ai/src/providers/zai-coding-cn.ts:zaiCodingCnProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/zai-coding-cn.ts",
+      "target": "function:packages/ai/src/providers/zai-coding-cn.ts:zaiCodingCnProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/providers/zai.ts",
+      "target": "function:packages/ai/src/providers/zai.ts:zaiProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/providers/zai.ts",
+      "target": "function:packages/ai/src/providers/zai.ts:zaiProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/abort.ts",
+      "target": "function:packages/ai/src/utils/abort.ts:operationSignal",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/abort.ts",
+      "target": "function:packages/ai/src/utils/abort.ts:operationSignal",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/abort.ts",
+      "target": "function:packages/ai/src/utils/abort.ts:raceWithAbortSignal",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/abort.ts",
+      "target": "function:packages/ai/src/utils/abort.ts:raceWithAbortSignal",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/ai/src/utils/sleep.ts",
+      "target": "function:packages/ai/src/utils/sleep.ts:sleep",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/ai/src/utils/sleep.ts",
+      "target": "function:packages/ai/src/utils/sleep.ts:sleep",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/xiaomi-token-plan-ams.ts:xiaomiTokenPlanAmsProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/xiaomi-token-plan-ams.ts:xiaomiTokenPlanAmsProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/xiaomi-token-plan-ams.ts:xiaomiTokenPlanAmsProvider",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/xiaomi-token-plan-cn.ts:xiaomiTokenPlanCnProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/xiaomi-token-plan-cn.ts:xiaomiTokenPlanCnProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/xiaomi-token-plan-cn.ts:xiaomiTokenPlanCnProvider",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/xiaomi-token-plan-sgp.ts:xiaomiTokenPlanSgpProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/xiaomi-token-plan-sgp.ts:xiaomiTokenPlanSgpProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/xiaomi-token-plan-sgp.ts:xiaomiTokenPlanSgpProvider",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/xiaomi.ts:xiaomiProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/xiaomi.ts:xiaomiProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/xiaomi.ts:xiaomiProvider",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/zai-coding-cn.ts:zaiCodingCnProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/zai-coding-cn.ts:zaiCodingCnProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/zai-coding-cn.ts:zaiCodingCnProvider",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/zai.ts:zaiProvider",
+      "target": "function:packages/ai/src/models.ts:createProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/zai.ts:zaiProvider",
+      "target": "function:packages/ai/src/auth/helpers.ts:envApiKeyAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/ai/src/providers/zai.ts:zaiProvider",
+      "target": "function:packages/ai/src/api/openai-completions.lazy.ts:openAICompletionsApi",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

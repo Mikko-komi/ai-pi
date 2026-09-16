@@ -1,0 +1,867 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/agent/src/harness/config.ts",
+      "type": "file",
+      "name": "config.ts",
+      "summary": "校验 tool 名称唯一性、RetryPolicy 与 CompactionSettings 的数值约束。",
+      "tags": [
+        "validation",
+        "configuration",
+        "retry"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/config.ts"
+    },
+    {
+      "id": "file:packages/agent/src/harness/context.ts",
+      "type": "file",
+      "name": "context.ts",
+      "summary": "再导出 Chord Context API，并用 ContextKey 在 context 上挂接 telemetry parent。",
+      "tags": [
+        "barrel",
+        "context",
+        "telemetry",
+        "type-definition"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/context.ts"
+    },
+    {
+      "id": "file:packages/agent/src/harness/env/nodejs.ts",
+      "type": "file",
+      "name": "nodejs.ts",
+      "summary": "Node.js ExecutionEnv：解析路径、拉起 shell、读写文件，并管理子进程树与临时目录。",
+      "tags": [
+        "execution-env",
+        "nodejs",
+        "filesystem",
+        "shell"
+      ],
+      "complexity": "complex",
+      "filePath": "packages/agent/src/harness/env/nodejs.ts",
+      "languageNotes": "覆盖 POSIX/Windows/WSL 的 bash 探测与进程树终止。"
+    },
+    {
+      "id": "file:packages/agent/src/harness/events.ts",
+      "type": "file",
+      "name": "events.ts",
+      "summary": "Harness 事件总线：串行投递、快照级 watch，以及可重快照的缓冲 watcher。",
+      "tags": [
+        "event-handler",
+        "pubsub",
+        "harness"
+      ],
+      "complexity": "complex",
+      "filePath": "packages/agent/src/harness/events.ts"
+    },
+    {
+      "id": "file:packages/agent/src/harness/execution/assistant.ts",
+      "type": "file",
+      "name": "assistant.ts",
+      "summary": "构造 harness assistant 请求选项，并消费模型 EventStream 转发给 observer。",
+      "tags": [
+        "streaming",
+        "assistant",
+        "llm"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/execution/assistant.ts"
+    },
+    {
+      "id": "file:packages/agent/src/harness/execution/effect-gate.ts",
+      "type": "file",
+      "name": "effect-gate.ts",
+      "summary": "可中止的 effect 门闩：admit 执行副作用，signalAbort/close 统一取消进行中的调用。",
+      "tags": [
+        "concurrency",
+        "cancellation",
+        "gate"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/execution/effect-gate.ts"
+    },
+    {
+      "id": "function:packages/agent/src/harness/config.ts:validateToolNames",
+      "type": "function",
+      "name": "validateToolNames",
+      "summary": "检查 tools 名称唯一，重复则抛错。",
+      "tags": [
+        "validation",
+        "tools",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/config.ts",
+      "lineRange": [
+        11,
+        17
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/config.ts:validateRetryPolicy",
+      "type": "function",
+      "name": "validateRetryPolicy",
+      "summary": "校验 RetryPolicy 的次数与延迟字段为安全整数。",
+      "tags": [
+        "validation",
+        "retry",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/config.ts",
+      "lineRange": [
+        19,
+        31
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/config.ts:validateCompactionSettings",
+      "type": "function",
+      "name": "validateCompactionSettings",
+      "summary": "校验压缩 reserve/threshold 为安全整数。",
+      "tags": [
+        "validation",
+        "compaction",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/config.ts",
+      "lineRange": [
+        33,
+        42
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/context.ts:getTelemetryContext",
+      "type": "function",
+      "name": "getTelemetryContext",
+      "summary": "从 context 读取 telemetry parent，缺失则返回 NOOP_TELEMETRY_CONTEXT。",
+      "tags": [
+        "telemetry",
+        "context",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/context.ts",
+      "lineRange": [
+        30,
+        32
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/context.ts:withTelemetryContext",
+      "type": "function",
+      "name": "withTelemetryContext",
+      "summary": "把给定 telemetry parent 写入新的 context。",
+      "tags": [
+        "telemetry",
+        "context",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/context.ts",
+      "lineRange": [
+        35,
+        37
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/env/nodejs.ts:resolveTimeoutMs",
+      "type": "function",
+      "name": "resolveTimeoutMs",
+      "summary": "把 timeout 规范为毫秒，非法值返回 FileError。",
+      "tags": [
+        "validation",
+        "timeout",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/env/nodejs.ts",
+      "lineRange": [
+        46,
+        57
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/env/nodejs.ts:resolvePath",
+      "type": "function",
+      "name": "resolvePath",
+      "summary": "解析 ~、file URL 与相对路径为绝对路径。",
+      "tags": [
+        "filesystem",
+        "path",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/env/nodejs.ts",
+      "lineRange": [
+        59,
+        73
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/env/nodejs.ts:fileKindFromStats",
+      "type": "function",
+      "name": "fileKindFromStats",
+      "summary": "根据 fs.Stats 判断 file/directory/symlink。",
+      "tags": [
+        "filesystem",
+        "function",
+        "nodejs"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/env/nodejs.ts",
+      "lineRange": [
+        75,
+        84
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/env/nodejs.ts:fileInfoFromStats",
+      "type": "function",
+      "name": "fileInfoFromStats",
+      "summary": "把路径与 Stats 组装为 FileInfo Result。",
+      "tags": [
+        "filesystem",
+        "function",
+        "nodejs"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/env/nodejs.ts",
+      "lineRange": [
+        86,
+        99
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/env/nodejs.ts:toFileError",
+      "type": "function",
+      "name": "toFileError",
+      "summary": "把 Node 错误码映射为带 path 的 FileError。",
+      "tags": [
+        "error-handling",
+        "filesystem",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/env/nodejs.ts",
+      "lineRange": [
+        105,
+        129
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/env/nodejs.ts:runCommand",
+      "type": "function",
+      "name": "runCommand",
+      "summary": "spawn 子进程并在超时后杀掉进程树，收集 stdout。",
+      "tags": [
+        "shell",
+        "process",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/env/nodejs.ts",
+      "lineRange": [
+        144,
+        177
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/env/nodejs.ts:getShellConfig",
+      "type": "function",
+      "name": "getShellConfig",
+      "summary": "探测自定义 shell 或平台 bash（含 WSL 遗留路径）。",
+      "tags": [
+        "shell",
+        "platform",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/env/nodejs.ts",
+      "lineRange": [
+        204,
+        246
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/env/nodejs.ts:getShellEnv",
+      "type": "function",
+      "name": "getShellEnv",
+      "summary": "按 inheritEnv 合并基础环境与额外变量。",
+      "tags": [
+        "shell",
+        "environment",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/env/nodejs.ts",
+      "lineRange": [
+        248,
+        259
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/env/nodejs.ts:killProcessTree",
+      "type": "function",
+      "name": "killProcessTree",
+      "summary": "按平台杀掉 pid 及其子进程树。",
+      "tags": [
+        "process",
+        "cleanup",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/env/nodejs.ts",
+      "lineRange": [
+        261,
+        290
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/env/nodejs.ts:waitForChildProcess",
+      "type": "function",
+      "name": "waitForChildProcess",
+      "summary": "等待子进程退出，处理 abort、超时与 stdout spill。",
+      "tags": [
+        "process",
+        "shell",
+        "cancellation"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/env/nodejs.ts",
+      "lineRange": [
+        292,
+        371
+      ]
+    },
+    {
+      "id": "class:packages/agent/src/harness/env/nodejs.ts:NodeTextLineReader",
+      "type": "class",
+      "name": "NodeTextLineReader",
+      "summary": "按块解码文本文件并逐行返回，供 readTextLines 使用。",
+      "tags": [
+        "filesystem",
+        "streaming",
+        "reader"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/env/nodejs.ts",
+      "lineRange": [
+        374,
+        436
+      ]
+    },
+    {
+      "id": "class:packages/agent/src/harness/env/nodejs.ts:NodeExecutionEnv",
+      "type": "class",
+      "name": "NodeExecutionEnv",
+      "summary": "Node ExecutionEnv 实现：exec、文件读写、目录列举、临时文件与 cleanup。",
+      "tags": [
+        "execution-env",
+        "nodejs",
+        "filesystem",
+        "shell"
+      ],
+      "complexity": "complex",
+      "filePath": "packages/agent/src/harness/env/nodejs.ts",
+      "lineRange": [
+        438,
+        924
+      ]
+    },
+    {
+      "id": "class:packages/agent/src/harness/events.ts:HarnessEventBus",
+      "type": "class",
+      "name": "HarnessEventBus",
+      "summary": "串行投递 harness 事件，支持 typed on/emit 与基于快照的 watch。",
+      "tags": [
+        "event-handler",
+        "pubsub",
+        "harness"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/events.ts",
+      "lineRange": [
+        8,
+        163
+      ]
+    },
+    {
+      "id": "class:packages/agent/src/harness/events.ts:BufferedEventWatcher",
+      "type": "class",
+      "name": "BufferedEventWatcher",
+      "summary": "带缓冲与 epoch 的 watcher，可在 resnapshot 边界后重放事件。",
+      "tags": [
+        "event-handler",
+        "watcher",
+        "buffering"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/events.ts",
+      "lineRange": [
+        165,
+        286
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/execution/assistant.ts:createRequestOptions",
+      "type": "function",
+      "name": "createRequestOptions",
+      "summary": "组装 stream 请求选项，注入 telemetry 并调用 beforePayload。",
+      "tags": [
+        "llm",
+        "telemetry",
+        "factory"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/execution/assistant.ts",
+      "lineRange": [
+        65,
+        91
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/execution/assistant.ts:consumeAssistantStream",
+      "type": "function",
+      "name": "consumeAssistantStream",
+      "summary": "迭代 assistant 流事件，转发给 observer，并在结束后跑 afterResponse。",
+      "tags": [
+        "streaming",
+        "assistant",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/execution/assistant.ts",
+      "lineRange": [
+        99,
+        133
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/execution/assistant.ts:streamHarnessAssistant",
+      "type": "function",
+      "name": "streamHarnessAssistant",
+      "summary": "转换消息、请求模型流，并交给 consumeAssistantStream 消费。",
+      "tags": [
+        "streaming",
+        "assistant",
+        "llm"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/execution/assistant.ts",
+      "lineRange": [
+        136,
+        175
+      ]
+    },
+    {
+      "id": "class:packages/agent/src/harness/execution/effect-gate.ts:AbortRequested",
+      "type": "class",
+      "name": "AbortRequested",
+      "summary": "表示 gate 已请求中止；携带 cancellation promise 供调用方等待收尾。",
+      "tags": [
+        "cancellation",
+        "error-handling",
+        "class"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/execution/effect-gate.ts",
+      "lineRange": [
+        2,
+        10
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/execution/effect-gate.ts:createGate",
+      "type": "function",
+      "name": "createGate",
+      "summary": "创建 admit/signalAbort/close 门闩，关闭后拒绝新的副作用。",
+      "tags": [
+        "factory",
+        "gate",
+        "cancellation"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/execution/effect-gate.ts",
+      "lineRange": [
+        31,
+        64
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/agent/src/harness/config.ts",
+      "target": "file:packages/agent/src/harness/compaction/compaction.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/config.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/context.ts",
+      "target": "file:packages/chord/src/context/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/context.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/context.ts",
+      "target": "file:packages/telemetry/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/env/nodejs.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/env/nodejs.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/env/nodejs.ts",
+      "target": "file:packages/agent/src/harness/utils/output-capture.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/events.ts",
+      "target": "file:packages/agent/src/harness/agent-harness.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/events.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/assistant.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/assistant.ts",
+      "target": "file:packages/agent/src/harness/execution/effect-gate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/assistant.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/assistant.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/assistant.ts",
+      "target": "file:packages/agent/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/assistant.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/config.ts",
+      "target": "function:packages/agent/src/harness/config.ts:validateToolNames",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/config.ts",
+      "target": "function:packages/agent/src/harness/config.ts:validateToolNames",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/config.ts",
+      "target": "function:packages/agent/src/harness/config.ts:validateRetryPolicy",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/config.ts",
+      "target": "function:packages/agent/src/harness/config.ts:validateRetryPolicy",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/config.ts",
+      "target": "function:packages/agent/src/harness/config.ts:validateCompactionSettings",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/config.ts",
+      "target": "function:packages/agent/src/harness/config.ts:validateCompactionSettings",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/context.ts",
+      "target": "function:packages/agent/src/harness/context.ts:getTelemetryContext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/context.ts",
+      "target": "function:packages/agent/src/harness/context.ts:getTelemetryContext",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/context.ts",
+      "target": "function:packages/agent/src/harness/context.ts:withTelemetryContext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/context.ts",
+      "target": "function:packages/agent/src/harness/context.ts:withTelemetryContext",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/env/nodejs.ts",
+      "target": "function:packages/agent/src/harness/env/nodejs.ts:resolveTimeoutMs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/env/nodejs.ts",
+      "target": "function:packages/agent/src/harness/env/nodejs.ts:resolvePath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/env/nodejs.ts",
+      "target": "function:packages/agent/src/harness/env/nodejs.ts:fileKindFromStats",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/env/nodejs.ts",
+      "target": "function:packages/agent/src/harness/env/nodejs.ts:fileInfoFromStats",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/env/nodejs.ts",
+      "target": "function:packages/agent/src/harness/env/nodejs.ts:toFileError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/env/nodejs.ts",
+      "target": "function:packages/agent/src/harness/env/nodejs.ts:runCommand",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/env/nodejs.ts",
+      "target": "function:packages/agent/src/harness/env/nodejs.ts:getShellConfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/env/nodejs.ts",
+      "target": "function:packages/agent/src/harness/env/nodejs.ts:getShellEnv",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/env/nodejs.ts",
+      "target": "function:packages/agent/src/harness/env/nodejs.ts:killProcessTree",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/env/nodejs.ts",
+      "target": "function:packages/agent/src/harness/env/nodejs.ts:waitForChildProcess",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/env/nodejs.ts",
+      "target": "class:packages/agent/src/harness/env/nodejs.ts:NodeTextLineReader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/env/nodejs.ts",
+      "target": "class:packages/agent/src/harness/env/nodejs.ts:NodeExecutionEnv",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/env/nodejs.ts",
+      "target": "class:packages/agent/src/harness/env/nodejs.ts:NodeExecutionEnv",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/events.ts",
+      "target": "class:packages/agent/src/harness/events.ts:HarnessEventBus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/events.ts",
+      "target": "class:packages/agent/src/harness/events.ts:HarnessEventBus",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/events.ts",
+      "target": "class:packages/agent/src/harness/events.ts:BufferedEventWatcher",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/assistant.ts",
+      "target": "function:packages/agent/src/harness/execution/assistant.ts:createRequestOptions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/assistant.ts",
+      "target": "function:packages/agent/src/harness/execution/assistant.ts:consumeAssistantStream",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/assistant.ts",
+      "target": "function:packages/agent/src/harness/execution/assistant.ts:consumeAssistantStream",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/assistant.ts",
+      "target": "function:packages/agent/src/harness/execution/assistant.ts:streamHarnessAssistant",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/assistant.ts",
+      "target": "function:packages/agent/src/harness/execution/assistant.ts:streamHarnessAssistant",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/effect-gate.ts",
+      "target": "class:packages/agent/src/harness/execution/effect-gate.ts:AbortRequested",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/effect-gate.ts",
+      "target": "class:packages/agent/src/harness/execution/effect-gate.ts:AbortRequested",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/effect-gate.ts",
+      "target": "function:packages/agent/src/harness/execution/effect-gate.ts:createGate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/execution/effect-gate.ts",
+      "target": "function:packages/agent/src/harness/execution/effect-gate.ts:createGate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/context.ts:withTelemetryContext",
+      "target": "function:packages/chord/src/context/index.ts:withContextValue",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/execution/assistant.ts:createRequestOptions",
+      "target": "function:packages/agent/src/harness/context.ts:getTelemetryContext",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

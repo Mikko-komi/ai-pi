@@ -1,0 +1,1605 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "type": "file",
+      "name": "boundary.ts",
+      "summary": "run 边界：归一化 retry policy、规划 inbox 落盘，并在结束时提交边界事件。",
+      "tags": [
+        "drive",
+        "inbox",
+        "session-commit",
+        "boundary"
+      ],
+      "complexity": "complex",
+      "filePath": "packages/agent/src/harness/runtime/drive/boundary.ts"
+    },
+    {
+      "id": "file:packages/agent/src/harness/runtime/drive/checkpoint.ts",
+      "type": "file",
+      "name": "checkpoint.ts",
+      "summary": "启动 run（注入 prompt 条目）并在 checkpoint 规划 compaction 与 inbox。",
+      "tags": [
+        "drive",
+        "checkpoint",
+        "compaction"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/runtime/drive/checkpoint.ts"
+    },
+    {
+      "id": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "type": "file",
+      "name": "deferred.ts",
+      "summary": "轮询 deferred/suspended 模型响应：准备 poll、发布 intent、消费流并写回。",
+      "tags": [
+        "drive",
+        "deferred",
+        "streaming",
+        "polling"
+      ],
+      "complexity": "complex",
+      "filePath": "packages/agent/src/harness/runtime/drive/deferred.ts"
+    },
+    {
+      "id": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "type": "file",
+      "name": "generation.ts",
+      "summary": "准备 assistant generation（模型、工具、system prompt），发布 intent 并执行或等待重试。",
+      "tags": [
+        "drive",
+        "generation",
+        "streaming",
+        "retry"
+      ],
+      "complexity": "complex",
+      "filePath": "packages/agent/src/harness/runtime/drive/generation.ts"
+    },
+    {
+      "id": "file:packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "type": "file",
+      "name": "reconcile.ts",
+      "summary": "取消调和：尽力取消 deferred、回收 assistant effect，并发布 aborted 终态。",
+      "tags": [
+        "drive",
+        "cancellation",
+        "recovery"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/runtime/drive/reconcile.ts"
+    },
+    {
+      "id": "file:packages/agent/src/harness/runtime/drive/recovery.ts",
+      "type": "file",
+      "name": "recovery.ts",
+      "summary": "从已写入的 assistant 帧重建中断消息，并发布 generation/取消后的响应。",
+      "tags": [
+        "drive",
+        "recovery",
+        "streaming"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/runtime/drive/recovery.ts"
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/boundary.ts:normalizedRetryPolicy",
+      "type": "function",
+      "name": "normalizedRetryPolicy",
+      "summary": "从 lane config 读取并归一化 RetryPolicy。",
+      "tags": [
+        "retry",
+        "config",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/boundary.ts",
+      "lineRange": [
+        44,
+        53
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/boundary.ts:assistantReadyAtBoundary",
+      "type": "function",
+      "name": "assistantReadyAtBoundary",
+      "summary": "在边界处分配 assistant 条目 id，并带上 overflowRecovery 与 retry policy。",
+      "tags": [
+        "drive",
+        "boundary",
+        "assistant"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/boundary.ts",
+      "lineRange": [
+        55,
+        76
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/boundary.ts:planBoundaryInbox",
+      "type": "function",
+      "name": "planBoundaryInbox",
+      "summary": "按 steering/follow-up 规则挑选 inbox，生成 insertEntry/deleteValue 写入。",
+      "tags": [
+        "inbox",
+        "session-commit",
+        "steering"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/runtime/drive/boundary.ts",
+      "lineRange": [
+        79,
+        148
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/boundary.ts:boundaryPlacementEvents",
+      "type": "function",
+      "name": "boundaryPlacementEvents",
+      "summary": "把本次提交的 inbox 条目转成 committed entry 事件。",
+      "tags": [
+        "events",
+        "session-commit",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/boundary.ts",
+      "lineRange": [
+        150,
+        161
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/boundary.ts:finishRunBoundary",
+      "type": "function",
+      "name": "finishRunBoundary",
+      "summary": "跑 after_drive hook、提交边界写入，并返回 settled/waiting 结果。",
+      "tags": [
+        "drive",
+        "boundary",
+        "hooks"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/runtime/drive/boundary.ts",
+      "lineRange": [
+        164,
+        262
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/checkpoint.ts:startRun",
+      "type": "function",
+      "name": "startRun",
+      "summary": "注入 before_run 消息、链接 prompt 条目并提交 starting 状态。",
+      "tags": [
+        "drive",
+        "session-commit",
+        "hooks"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/runtime/drive/checkpoint.ts",
+      "lineRange": [
+        25,
+        92
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/checkpoint.ts:runCheckpoint",
+      "type": "function",
+      "name": "runCheckpoint",
+      "summary": "在 checkpoint 准备压缩阈值、规划 inbox，并决定进入 generation 或结束 run。",
+      "tags": [
+        "drive",
+        "checkpoint",
+        "compaction"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/runtime/drive/checkpoint.ts",
+      "lineRange": [
+        95,
+        190
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/deferred.ts:readDeferredSourceHandle",
+      "type": "function",
+      "name": "readDeferredSourceHandle",
+      "summary": "从 session 读取 deferred 源条目上的 DeferredHandle。",
+      "tags": [
+        "deferred",
+        "session",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/deferred.ts",
+      "lineRange": [
+        48,
+        73
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/deferred.ts:readSourceHandle",
+      "type": "function",
+      "name": "readSourceHandle",
+      "summary": "在 continueOperation 快照下读取 deferred 源 handle。",
+      "tags": [
+        "deferred",
+        "session",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/deferred.ts",
+      "lineRange": [
+        75,
+        88
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/deferred.ts:prepareDeferredPoll",
+      "type": "function",
+      "name": "prepareDeferredPoll",
+      "summary": "解析模型、跑 before_request，并合并 stream options。",
+      "tags": [
+        "deferred",
+        "hooks",
+        "preparation"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/deferred.ts",
+      "lineRange": [
+        90,
+        129
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/deferred.ts:publishPollIntent",
+      "type": "function",
+      "name": "publishPollIntent",
+      "summary": "为 poll 分配响应条目并写入 operation 状态。",
+      "tags": [
+        "deferred",
+        "session-commit",
+        "function"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/runtime/drive/deferred.ts",
+      "lineRange": [
+        131,
+        183
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/deferred.ts:performDeferredPoll",
+      "type": "function",
+      "name": "performDeferredPoll",
+      "summary": "经 gate 调用 streamDeferred，并用 consumeAssistantStream 消费。",
+      "tags": [
+        "deferred",
+        "streaming",
+        "gate"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/deferred.ts",
+      "lineRange": [
+        185,
+        229
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/deferred.ts:pollDeferred",
+      "type": "function",
+      "name": "pollDeferred",
+      "summary": "编排 prepare/publish/perform，失败则 publishConfigurationFailure。",
+      "tags": [
+        "deferred",
+        "orchestration",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/deferred.ts",
+      "lineRange": [
+        231,
+        258
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/deferred.ts:runDeferredSuspended",
+      "type": "function",
+      "name": "runDeferredSuspended",
+      "summary": "从 suspended 状态发起一次 deferred poll。",
+      "tags": [
+        "deferred",
+        "drive",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/deferred.ts",
+      "lineRange": [
+        261,
+        267
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/deferred.ts:recoverDeferredPoll",
+      "type": "function",
+      "name": "recoverDeferredPoll",
+      "summary": "从 effect_pending 恢复未完成的 deferred poll。",
+      "tags": [
+        "deferred",
+        "recovery",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/deferred.ts",
+      "lineRange": [
+        270,
+        276
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/deferred.ts:runDeferred",
+      "type": "function",
+      "name": "runDeferred",
+      "summary": "按状态分派 runDeferredSuspended 或 recoverDeferredPoll。",
+      "tags": [
+        "deferred",
+        "drive",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/deferred.ts",
+      "lineRange": [
+        279,
+        287
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/generation.ts:configurationError",
+      "type": "function",
+      "name": "configurationError",
+      "summary": "构造 generation 配置错误（缺模型或未知 tool）。",
+      "tags": [
+        "error-handling",
+        "generation",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/generation.ts",
+      "lineRange": [
+        42,
+        54
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/generation.ts:resolveSystemPrompt",
+      "type": "function",
+      "name": "resolveSystemPrompt",
+      "summary": "解析 lane 的 systemPrompt 源或静态字符串。",
+      "tags": [
+        "prompt",
+        "generation",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/generation.ts",
+      "lineRange": [
+        56,
+        66
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/generation.ts:prepareGeneration",
+      "type": "function",
+      "name": "prepareGeneration",
+      "summary": "解析模型与活动工具、读取有界上下文，并跑 before_request hooks。",
+      "tags": [
+        "generation",
+        "preparation",
+        "hooks"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/runtime/drive/generation.ts",
+      "lineRange": [
+        68,
+        130
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/generation.ts:publishGenerationIntent",
+      "type": "function",
+      "name": "publishGenerationIntent",
+      "summary": "为 generation 分配响应条目并写入 ready 状态。",
+      "tags": [
+        "generation",
+        "session-commit",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/generation.ts",
+      "lineRange": [
+        132,
+        172
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/generation.ts:performGeneration",
+      "type": "function",
+      "name": "performGeneration",
+      "summary": "打开响应进度，经 streamHarnessAssistant 拉取模型流。",
+      "tags": [
+        "generation",
+        "streaming",
+        "gate"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/runtime/drive/generation.ts",
+      "lineRange": [
+        174,
+        231
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/generation.ts:runRetryWait",
+      "type": "function",
+      "name": "runRetryWait",
+      "summary": "等待 retry notBefore，然后把状态推回 assistant.ready。",
+      "tags": [
+        "retry",
+        "generation",
+        "gate"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/generation.ts",
+      "lineRange": [
+        234,
+        282
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/generation.ts:runGeneration",
+      "type": "function",
+      "name": "runGeneration",
+      "summary": "分派 retry wait 或 prepare/publish/perform generation。",
+      "tags": [
+        "generation",
+        "drive",
+        "orchestration"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/generation.ts",
+      "lineRange": [
+        285,
+        302
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/reconcile.ts:cancelDeferredBestEffort",
+      "type": "function",
+      "name": "cancelDeferredBestEffort",
+      "summary": "尽力调用 models.cancelDeferred，忽略取消失败。",
+      "tags": [
+        "cancellation",
+        "deferred",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "lineRange": [
+        17,
+        38
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/reconcile.ts:readDeferredHandle",
+      "type": "function",
+      "name": "readDeferredHandle",
+      "summary": "在 settle 快照中读取 deferred 源 handle。",
+      "tags": [
+        "deferred",
+        "session",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "lineRange": [
+        40,
+        53
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/reconcile.ts:publishAbortedTerminal",
+      "type": "function",
+      "name": "publishAbortedTerminal",
+      "summary": "写入 aborted 结果、清理 operation 键，并发送终态事件。",
+      "tags": [
+        "cancellation",
+        "session-commit",
+        "function"
+      ],
+      "complexity": "moderate",
+      "filePath": "packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "lineRange": [
+        55,
+        129
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/reconcile.ts:reconcileOperation",
+      "type": "function",
+      "name": "reconcileOperation",
+      "summary": "对 cancel_requested 发 abort、回收 effect，并发布 aborted terminal。",
+      "tags": [
+        "cancellation",
+        "drive",
+        "reconciliation"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "lineRange": [
+        132,
+        173
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/recovery.ts:interruptedAssistantMessage",
+      "type": "function",
+      "name": "interruptedAssistantMessage",
+      "summary": "用部分内容构造 stopReason=aborted 的 assistant 消息。",
+      "tags": [
+        "recovery",
+        "assistant",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/recovery.ts",
+      "lineRange": [
+        22,
+        41
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/recovery.ts:recoverAssistantGeneration",
+      "type": "function",
+      "name": "recoverAssistantGeneration",
+      "summary": "从已落盘帧还原 assistant 消息，再 publishResponse。",
+      "tags": [
+        "recovery",
+        "generation",
+        "streaming"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/recovery.ts",
+      "lineRange": [
+        44,
+        84
+      ]
+    },
+    {
+      "id": "function:packages/agent/src/harness/runtime/drive/recovery.ts:recoverCancelledAssistantEffect",
+      "type": "function",
+      "name": "recoverCancelledAssistantEffect",
+      "summary": "取消路径下从帧还原 assistant 并发布响应。",
+      "tags": [
+        "recovery",
+        "cancellation",
+        "function"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/agent/src/harness/runtime/drive/recovery.ts",
+      "lineRange": [
+        87,
+        126
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "target": "file:packages/agent/src/harness/agent-harness.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/terminal.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "target": "file:packages/agent/src/harness/runtime/lane.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "target": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "target": "file:packages/agent/src/harness/runtime/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "target": "file:packages/agent/src/harness/session/commit.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "target": "file:packages/agent/src/harness/session/session.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "target": "file:packages/agent/src/harness/session/values.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/checkpoint.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/checkpoint.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/structural.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/checkpoint.ts",
+      "target": "file:packages/agent/src/harness/runtime/lane.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/checkpoint.ts",
+      "target": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/checkpoint.ts",
+      "target": "file:packages/agent/src/harness/runtime/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/checkpoint.ts",
+      "target": "file:packages/agent/src/harness/session/commit.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/checkpoint.ts",
+      "target": "file:packages/agent/src/harness/session/session.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/checkpoint.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/checkpoint.ts",
+      "target": "file:packages/agent/src/harness/session/values.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "file:packages/agent/src/harness/execution/assistant.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "file:packages/agent/src/harness/hooks.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "file:packages/agent/src/harness/runtime/lane.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "file:packages/agent/src/harness/runtime/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "file:packages/agent/src/harness/session/session.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "file:packages/agent/src/harness/session/values.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "file:packages/agent/src/harness/execution/assistant.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "file:packages/agent/src/harness/hooks.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/retry.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "file:packages/agent/src/harness/runtime/lane.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "file:packages/agent/src/harness/runtime/transcript.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "file:packages/agent/src/harness/runtime/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "file:packages/agent/src/harness/session/session.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "file:packages/agent/src/harness/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "file:packages/agent/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "target": "file:packages/agent/src/harness/agent-harness.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "target": "file:packages/agent/src/harness/context.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/recovery.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/terminal.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/tools.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "target": "file:packages/agent/src/harness/runtime/lane.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "target": "file:packages/agent/src/harness/runtime/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "target": "file:packages/agent/src/harness/session/session.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/recovery.ts",
+      "target": "file:packages/agent/src/harness/runtime/drive/response.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/recovery.ts",
+      "target": "file:packages/agent/src/harness/runtime/lane.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/recovery.ts",
+      "target": "file:packages/agent/src/harness/runtime/progress.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/recovery.ts",
+      "target": "file:packages/agent/src/harness/runtime/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/recovery.ts",
+      "target": "file:packages/agent/src/harness/session/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/recovery.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/boundary.ts:normalizedRetryPolicy",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/boundary.ts:normalizedRetryPolicy",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/boundary.ts:assistantReadyAtBoundary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/boundary.ts:assistantReadyAtBoundary",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/boundary.ts:planBoundaryInbox",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/boundary.ts:planBoundaryInbox",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/boundary.ts:boundaryPlacementEvents",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/boundary.ts:boundaryPlacementEvents",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/boundary.ts:finishRunBoundary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/boundary.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/boundary.ts:finishRunBoundary",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/checkpoint.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/checkpoint.ts:startRun",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/checkpoint.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/checkpoint.ts:startRun",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/checkpoint.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/checkpoint.ts:runCheckpoint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/checkpoint.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/checkpoint.ts:runCheckpoint",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/deferred.ts:readDeferredSourceHandle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/deferred.ts:readDeferredSourceHandle",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/deferred.ts:readSourceHandle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/deferred.ts:prepareDeferredPoll",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/deferred.ts:publishPollIntent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/deferred.ts:performDeferredPoll",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/deferred.ts:pollDeferred",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/deferred.ts:runDeferredSuspended",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/deferred.ts:runDeferredSuspended",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/deferred.ts:recoverDeferredPoll",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/deferred.ts:recoverDeferredPoll",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/deferred.ts:runDeferred",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/deferred.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/deferred.ts:runDeferred",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/generation.ts:configurationError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/generation.ts:resolveSystemPrompt",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/generation.ts:prepareGeneration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/generation.ts:publishGenerationIntent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/generation.ts:performGeneration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/generation.ts:runRetryWait",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/generation.ts:runRetryWait",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/generation.ts:runGeneration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/generation.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/generation.ts:runGeneration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/reconcile.ts:cancelDeferredBestEffort",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/reconcile.ts:readDeferredHandle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/reconcile.ts:publishAbortedTerminal",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/reconcile.ts:reconcileOperation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/reconcile.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/reconcile.ts:reconcileOperation",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/recovery.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/recovery.ts:interruptedAssistantMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/recovery.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/recovery.ts:recoverAssistantGeneration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/recovery.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/recovery.ts:recoverAssistantGeneration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/recovery.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/recovery.ts:recoverCancelledAssistantEffect",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/agent/src/harness/runtime/drive/recovery.ts",
+      "target": "function:packages/agent/src/harness/runtime/drive/recovery.ts:recoverCancelledAssistantEffect",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/boundary.ts:planBoundaryInbox",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:readLaneQueues",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/boundary.ts:planBoundaryInbox",
+      "target": "function:packages/agent/src/harness/session/commit.ts:insertEntry",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/boundary.ts:boundaryPlacementEvents",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:committedEntryEvents",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/boundary.ts:finishRunBoundary",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:readBoundedContext",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/checkpoint.ts:startRun",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:chainEntries",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/checkpoint.ts:startRun",
+      "target": "function:packages/agent/src/harness/session/types.ts:operationScopeOf",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/checkpoint.ts:startRun",
+      "target": "function:packages/agent/src/harness/session/commit.ts:insertEntry",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/checkpoint.ts:startRun",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:committedEntryEvents",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/checkpoint.ts:runCheckpoint",
+      "target": "function:packages/agent/src/harness/runtime/drive/structural.ts:prepareCompactionThreshold",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/checkpoint.ts:runCheckpoint",
+      "target": "function:packages/agent/src/harness/runtime/drive/boundary.ts:planBoundaryInbox",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/checkpoint.ts:runCheckpoint",
+      "target": "function:packages/agent/src/harness/runtime/drive/boundary.ts:assistantReadyAtBoundary",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/checkpoint.ts:runCheckpoint",
+      "target": "function:packages/agent/src/harness/runtime/drive/boundary.ts:boundaryPlacementEvents",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/checkpoint.ts:runCheckpoint",
+      "target": "function:packages/agent/src/harness/runtime/drive/boundary.ts:finishRunBoundary",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/deferred.ts:prepareDeferredPoll",
+      "target": "function:packages/agent/src/harness/hooks.ts:applyStreamOptionsPatch",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/deferred.ts:performDeferredPoll",
+      "target": "function:packages/agent/src/harness/runtime/drive/response.ts:openAssistantResponse",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/deferred.ts:performDeferredPoll",
+      "target": "function:packages/chord/src/context/index.ts:withAbortSignal",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/deferred.ts:performDeferredPoll",
+      "target": "function:packages/agent/src/harness/context.ts:getTelemetryContext",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/deferred.ts:performDeferredPoll",
+      "target": "function:packages/agent/src/harness/execution/assistant.ts:consumeAssistantStream",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/deferred.ts:pollDeferred",
+      "target": "function:packages/agent/src/harness/runtime/drive/response.ts:publishConfigurationFailure",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/deferred.ts:pollDeferred",
+      "target": "function:packages/agent/src/harness/runtime/drive/response.ts:publishResponse",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/generation.ts:prepareGeneration",
+      "target": "function:packages/agent/src/harness/runtime/transcript.ts:readBoundedContext",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/generation.ts:prepareGeneration",
+      "target": "function:packages/agent/src/harness/hooks.ts:applyStreamOptionsPatch",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/generation.ts:performGeneration",
+      "target": "function:packages/agent/src/harness/runtime/drive/response.ts:openAssistantResponse",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/generation.ts:performGeneration",
+      "target": "function:packages/agent/src/harness/execution/assistant.ts:streamHarnessAssistant",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/generation.ts:performGeneration",
+      "target": "function:packages/chord/src/context/index.ts:withAbortSignal",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/generation.ts:performGeneration",
+      "target": "function:packages/agent/src/harness/context.ts:getTelemetryContext",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/generation.ts:runRetryWait",
+      "target": "function:packages/agent/src/harness/runtime/drive/retry.ts:waitUntil",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/generation.ts:runGeneration",
+      "target": "function:packages/agent/src/harness/runtime/drive/response.ts:publishConfigurationFailure",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/reconcile.ts:cancelDeferredBestEffort",
+      "target": "function:packages/agent/src/harness/context.ts:getTelemetryContext",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/reconcile.ts:readDeferredHandle",
+      "target": "function:packages/agent/src/harness/runtime/drive/deferred.ts:readDeferredSourceHandle",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/reconcile.ts:publishAbortedTerminal",
+      "target": "function:packages/agent/src/harness/runtime/drive/terminal.ts:operationResultRecord",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/reconcile.ts:publishAbortedTerminal",
+      "target": "function:packages/agent/src/harness/runtime/drive/terminal.ts:operationCleanupWrites",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/reconcile.ts:reconcileOperation",
+      "target": "function:packages/agent/src/harness/runtime/drive/recovery.ts:recoverCancelledAssistantEffect",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/reconcile.ts:reconcileOperation",
+      "target": "function:packages/agent/src/harness/runtime/drive/tools.ts:runTools",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/recovery.ts:recoverAssistantGeneration",
+      "target": "function:packages/agent/src/harness/runtime/progress.ts:readAssistantFrames",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/recovery.ts:recoverAssistantGeneration",
+      "target": "function:packages/agent/src/harness/runtime/drive/response.ts:publishResponse",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/recovery.ts:recoverCancelledAssistantEffect",
+      "target": "function:packages/agent/src/harness/runtime/progress.ts:readAssistantFrames",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/agent/src/harness/runtime/drive/recovery.ts:recoverCancelledAssistantEffect",
+      "target": "function:packages/agent/src/harness/runtime/drive/response.ts:publishResponse",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

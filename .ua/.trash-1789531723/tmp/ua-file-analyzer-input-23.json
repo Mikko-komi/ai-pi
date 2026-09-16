@@ -1,0 +1,33 @@
+{
+  "projectRoot": "/Users/elex-mb0203/MyWork/agent-projects/ai-pi",
+  "batchFiles": [
+    {"path": "packages/agent/src/harness/session/index.ts", "language": "typescript", "sizeLines": 35, "fileCategory": "code"},
+    {"path": "packages/coding-agent/src/experimental/mini/main.ts", "language": "typescript", "sizeLines": 24, "fileCategory": "code"},
+    {"path": "packages/coding-agent/src/experimental/mini/server/entry.ts", "language": "typescript", "sizeLines": 12, "fileCategory": "code"},
+    {"path": "packages/coding-agent/src/experimental/mini/server/run.ts", "language": "typescript", "sizeLines": 160, "fileCategory": "code"},
+    {"path": "packages/coding-agent/src/experimental/mini/shared/protocol.ts", "language": "typescript", "sizeLines": 138, "fileCategory": "code"},
+    {"path": "packages/coding-agent/src/experimental/mini/shared/rpc.ts", "language": "typescript", "sizeLines": 233, "fileCategory": "code"},
+    {"path": "packages/coding-agent/src/experimental/mini/shared/transport.ts", "language": "typescript", "sizeLines": 119, "fileCategory": "code"},
+    {"path": "packages/coding-agent/src/experimental/mini/tui/run.ts", "language": "typescript", "sizeLines": 68, "fileCategory": "code"},
+    {"path": "packages/coding-agent/src/experimental/mini/tui/session.ts", "language": "typescript", "sizeLines": 117, "fileCategory": "code"},
+    {"path": "packages/coding-agent/src/experimental/mini/worker/entry.ts", "language": "typescript", "sizeLines": 13, "fileCategory": "code"},
+    {"path": "packages/coding-agent/src/experimental/mini/worker/lane-service.ts", "language": "typescript", "sizeLines": 126, "fileCategory": "code"},
+    {"path": "packages/coding-agent/src/experimental/mini/worker/models-service.ts", "language": "typescript", "sizeLines": 148, "fileCategory": "code"},
+    {"path": "packages/coding-agent/src/experimental/mini/worker/run.ts", "language": "typescript", "sizeLines": 113, "fileCategory": "code"}
+  ],
+  "batchImportData": {
+    "packages/agent/src/harness/session/index.ts": [],
+    "packages/coding-agent/src/experimental/mini/main.ts": ["packages/coding-agent/src/experimental/mini/tui/run.ts"],
+    "packages/coding-agent/src/experimental/mini/server/entry.ts": ["packages/coding-agent/src/experimental/mini/server/run.ts", "packages/coding-agent/src/experimental/mini/shared/transport.ts"],
+    "packages/coding-agent/src/experimental/mini/server/run.ts": ["packages/agent/src/harness/context.ts", "packages/agent/src/harness/env/nodejs.ts", "packages/agent/src/harness/session/index.ts", "packages/coding-agent/src/experimental/mini/shared/protocol.ts", "packages/coding-agent/src/experimental/mini/shared/rpc.ts", "packages/coding-agent/src/experimental/mini/shared/transport.ts"],
+    "packages/coding-agent/src/experimental/mini/shared/protocol.ts": ["packages/agent/src/index.ts", "packages/ai/src/index.ts"],
+    "packages/coding-agent/src/experimental/mini/shared/rpc.ts": ["packages/coding-agent/src/experimental/mini/shared/protocol.ts", "packages/coding-agent/src/experimental/mini/shared/transport.ts"],
+    "packages/coding-agent/src/experimental/mini/shared/transport.ts": [],
+    "packages/coding-agent/src/experimental/mini/tui/run.ts": ["packages/coding-agent/src/config.ts", "packages/coding-agent/src/experimental/mini/shared/transport.ts", "packages/coding-agent/src/experimental/mini/tui/session.ts", "packages/coding-agent/src/experimental/mini/tui/view.ts"],
+    "packages/coding-agent/src/experimental/mini/tui/session.ts": ["packages/agent/src/harness/runtime/reducer.ts", "packages/agent/src/index.ts", "packages/coding-agent/src/experimental/mini/shared/protocol.ts", "packages/coding-agent/src/experimental/mini/shared/rpc.ts", "packages/coding-agent/src/experimental/mini/shared/transport.ts"],
+    "packages/coding-agent/src/experimental/mini/worker/entry.ts": ["packages/coding-agent/src/experimental/mini/worker/run.ts"],
+    "packages/coding-agent/src/experimental/mini/worker/lane-service.ts": ["packages/agent/src/index.ts", "packages/ai/src/index.ts", "packages/coding-agent/src/experimental/mini/shared/protocol.ts"],
+    "packages/coding-agent/src/experimental/mini/worker/models-service.ts": ["packages/coding-agent/src/core/model-runtime.ts", "packages/coding-agent/src/experimental/mini/shared/protocol.ts", "packages/coding-agent/src/modes/interactive/model-catalog-refresh.ts"],
+    "packages/coding-agent/src/experimental/mini/worker/run.ts": ["packages/agent/src/index.ts", "packages/agent/src/node.ts", "packages/coding-agent/src/core/model-resolver.ts", "packages/coding-agent/src/core/model-runtime.ts", "packages/coding-agent/src/experimental/mini/shared/protocol.ts", "packages/coding-agent/src/experimental/mini/shared/rpc.ts", "packages/coding-agent/src/experimental/mini/shared/transport.ts", "packages/coding-agent/src/experimental/mini/worker/lane-service.ts", "packages/coding-agent/src/experimental/mini/worker/models-service.ts"]
+  }
+}

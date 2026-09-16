@@ -1,0 +1,4 @@
+1. packages/chord/PLANNING.md (860 lines, language: markdown, fileCategory: docs)
+2. packages/chord/README.md (205 lines, language: markdown, fileCategory: docs)
+3. packages/chord/package.json (72 lines, language: json, fileCategory: config)
+4. packages/chord/tsconfig.build.json (9 lines, language: json, fileCategory: config)

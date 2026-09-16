@@ -1,0 +1,2634 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 20,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 20,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 20
+    }
+  },
+  "results": [
+    {
+      "path": "packages/coding-agent/docs/compaction.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 444,
+      "nonEmptyLines": 330,
+      "sections": [
+        {
+          "heading": "Compaction & Branch Summarization",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Overview",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Compaction",
+          "level": 2,
+          "line": 25
+        },
+        {
+          "heading": "When It Triggers",
+          "level": 3,
+          "line": 27
+        },
+        {
+          "heading": "How It Works",
+          "level": 3,
+          "line": 41
+        },
+        {
+          "heading": "Split Turns",
+          "level": 3,
+          "line": 83
+        },
+        {
+          "heading": "Cut Point Rules",
+          "level": 3,
+          "line": 111
+        },
+        {
+          "heading": "CompactionEntry Structure",
+          "level": 3,
+          "line": 121
+        },
+        {
+          "heading": "Branch Summarization",
+          "level": 2,
+          "line": 150
+        },
+        {
+          "heading": "When It Triggers",
+          "level": 3,
+          "line": 152
+        },
+        {
+          "heading": "How It Works",
+          "level": 3,
+          "line": 156
+        },
+        {
+          "heading": "Cumulative File Tracking",
+          "level": 3,
+          "line": 181
+        },
+        {
+          "heading": "BranchSummaryEntry Structure",
+          "level": 3,
+          "line": 189
+        },
+        {
+          "heading": "Summary Format",
+          "level": 2,
+          "line": 217
+        },
+        {
+          "heading": "Message Serialization",
+          "level": 3,
+          "line": 257
+        },
+        {
+          "heading": "Custom Summarization via Extensions",
+          "level": 2,
+          "line": 273
+        },
+        {
+          "heading": "session_before_compact",
+          "level": 3,
+          "line": 277
+        },
+        {
+          "heading": "Converting Messages to Text",
+          "level": 4,
+          "line": 314
+        },
+        {
+          "heading": "session_compact_failed",
+          "level": 3,
+          "line": 351
+        },
+        {
+          "heading": "session_before_tree",
+          "level": 3,
+          "line": 366
+        },
+        {
+          "heading": "Settings",
+          "level": 2,
+          "line": 398
+        },
+        {
+          "heading": "Per-model overrides",
+          "level": 3,
+          "line": 420
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 22
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/containerization.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 156,
+      "nonEmptyLines": 107,
+      "sections": [
+        {
+          "heading": "Containerization",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Choose a pattern",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Gondolin",
+          "level": 2,
+          "line": 20
+        },
+        {
+          "heading": "Plain Docker",
+          "level": 2,
+          "line": 46
+        },
+        {
+          "heading": "OpenShell",
+          "level": 2,
+          "line": 80
+        },
+        {
+          "heading": "Docker Sandboxes",
+          "level": 2,
+          "line": 114
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/custom-provider.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 777,
+      "nonEmptyLines": 631,
+      "sections": [
+        {
+          "heading": "Custom Providers",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Example Extensions",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "Table of Contents",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "Quick Reference",
+          "level": 2,
+          "line": 31
+        },
+        {
+          "heading": "Override Existing Provider",
+          "level": 2,
+          "line": 93
+        },
+        {
+          "heading": "Register New Provider",
+          "level": 2,
+          "line": 121
+        },
+        {
+          "heading": "Unregister Provider",
+          "level": 2,
+          "line": 188
+        },
+        {
+          "heading": "API Types",
+          "level": 3,
+          "line": 219
+        },
+        {
+          "heading": "Auth Header",
+          "level": 3,
+          "line": 270
+        },
+        {
+          "heading": "OAuth Support",
+          "level": 2,
+          "line": 286
+        },
+        {
+          "heading": "OAuthLoginCallbacks",
+          "level": 3,
+          "line": 352
+        },
+        {
+          "heading": "OAuthCredentials",
+          "level": 3,
+          "line": 383
+        },
+        {
+          "heading": "Custom Streaming API",
+          "level": 2,
+          "line": 395
+        },
+        {
+          "heading": "Stream Pattern",
+          "level": 3,
+          "line": 407
+        },
+        {
+          "heading": "Event Types",
+          "level": 3,
+          "line": 481
+        },
+        {
+          "heading": "Content Blocks",
+          "level": 3,
+          "line": 502
+        },
+        {
+          "heading": "Tool Calls",
+          "level": 3,
+          "line": 522
+        },
+        {
+          "heading": "Usage and Cost",
+          "level": 3,
+          "line": 553
+        },
+        {
+          "heading": "Context Overflow Errors",
+          "level": 3,
+          "line": 567
+        },
+        {
+          "heading": "Registration",
+          "level": 3,
+          "line": 621
+        },
+        {
+          "heading": "Testing Your Implementation",
+          "level": 2,
+          "line": 635
+        },
+        {
+          "heading": "Config Reference",
+          "level": 2,
+          "line": 655
+        },
+        {
+          "heading": "Model Definition Reference",
+          "level": 2,
+          "line": 697
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 23
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/development.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 90,
+      "nonEmptyLines": 61,
+      "sections": [
+        {
+          "heading": "Development",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Setup",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Experimental remote harness",
+          "level": 3,
+          "line": 22
+        },
+        {
+          "heading": "Forking / Rebranding",
+          "level": 2,
+          "line": 35
+        },
+        {
+          "heading": "Path Resolution",
+          "level": 2,
+          "line": 50
+        },
+        {
+          "heading": "Debug Command",
+          "level": 2,
+          "line": 62
+        },
+        {
+          "heading": "Testing",
+          "level": 2,
+          "line": 68
+        },
+        {
+          "heading": "Published package smoke test",
+          "level": 3,
+          "line": 76
+        },
+        {
+          "heading": "Project Structure",
+          "level": 2,
+          "line": 82
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/docs.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 160,
+      "nonEmptyLines": 160,
+      "sections": [
+        {
+          "heading": "navigation",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "redirects",
+          "level": 1,
+          "line": 150
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/environment-variables.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 99,
+      "nonEmptyLines": 72,
+      "sections": [
+        {
+          "heading": "Environment Variables",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Process Marker",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Shell Tool Session Environment",
+          "level": 2,
+          "line": 20
+        },
+        {
+          "heading": "Custom Shell Tools",
+          "level": 3,
+          "line": 51
+        },
+        {
+          "heading": "Pi Process Configuration",
+          "level": 2,
+          "line": 75
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/extensions.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 3033,
+      "nonEmptyLines": 2370,
+      "sections": [
+        {
+          "heading": "Extensions",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "Table of Contents",
+          "level": 2,
+          "line": 31
+        },
+        {
+          "heading": "Quick Start",
+          "level": 2,
+          "line": 56
+        },
+        {
+          "heading": "Extension Locations",
+          "level": 2,
+          "line": 109
+        },
+        {
+          "heading": "Available Imports",
+          "level": 2,
+          "line": 139
+        },
+        {
+          "heading": "Writing an Extension",
+          "level": 2,
+          "line": 154
+        },
+        {
+          "heading": "Async factory functions",
+          "level": 3,
+          "line": 183
+        },
+        {
+          "heading": "Long-lived resources and shutdown",
+          "level": 3,
+          "line": 220
+        },
+        {
+          "heading": "Extension Styles",
+          "level": 3,
+          "line": 226
+        },
+        {
+          "heading": "Events",
+          "level": 2,
+          "line": 273
+        },
+        {
+          "heading": "Lifecycle Overview",
+          "level": 3,
+          "line": 275
+        },
+        {
+          "heading": "Startup Events",
+          "level": 3,
+          "line": 351
+        },
+        {
+          "heading": "project_trust",
+          "level": 4,
+          "line": 353
+        },
+        {
+          "heading": "Resource Events",
+          "level": 3,
+          "line": 370
+        },
+        {
+          "heading": "resources_discover",
+          "level": 4,
+          "line": 372
+        },
+        {
+          "heading": "Session Events",
+          "level": 3,
+          "line": 389
+        },
+        {
+          "heading": "session_start",
+          "level": 4,
+          "line": 393
+        },
+        {
+          "heading": "session_info_changed",
+          "level": 4,
+          "line": 405
+        },
+        {
+          "heading": "session_before_switch",
+          "level": 4,
+          "line": 416
+        },
+        {
+          "heading": "session_before_fork",
+          "level": 4,
+          "line": 435
+        },
+        {
+          "heading": "session_before_compact / session_compact / session_compact_failed",
+          "level": 4,
+          "line": 452
+        },
+        {
+          "heading": "session_before_tree / session_tree",
+          "level": 4,
+          "line": 493
+        },
+        {
+          "heading": "session_shutdown",
+          "level": 4,
+          "line": 516
+        },
+        {
+          "heading": "Agent Events",
+          "level": 3,
+          "line": 528
+        },
+        {
+          "heading": "before_agent_start",
+          "level": 4,
+          "line": 530
+        },
+        {
+          "heading": "agent_start / agent_end / agent_settled",
+          "level": 4,
+          "line": 567
+        },
+        {
+          "heading": "ui_prompt_start / ui_prompt_end",
+          "level": 4,
+          "line": 583
+        },
+        {
+          "heading": "turn_start / turn_end",
+          "level": 4,
+          "line": 601
+        },
+        {
+          "heading": "message_start / message_update / message_end",
+          "level": 4,
+          "line": 615
+        },
+        {
+          "heading": "tool_execution_start / tool_execution_update / tool_execution_end",
+          "level": 4,
+          "line": 651
+        },
+        {
+          "heading": "context",
+          "level": 4,
+          "line": 675
+        },
+        {
+          "heading": "before_provider_headers",
+          "level": 4,
+          "line": 687
+        },
+        {
+          "heading": "before_provider_request",
+          "level": 4,
+          "line": 705
+        },
+        {
+          "heading": "after_provider_response",
+          "level": 4,
+          "line": 722
+        },
+        {
+          "heading": "Model Events",
+          "level": 3,
+          "line": 738
+        },
+        {
+          "heading": "model_select",
+          "level": 4,
+          "line": 740
+        },
+        {
+          "heading": "thinking_level_select",
+          "level": 4,
+          "line": 761
+        },
+        {
+          "heading": "Tool Events",
+          "level": 3,
+          "line": 776
+        },
+        {
+          "heading": "tool_call",
+          "level": 4,
+          "line": 778
+        },
+        {
+          "heading": "Typing custom tool input",
+          "level": 4,
+          "line": 820
+        },
+        {
+          "heading": "tool_result",
+          "level": 4,
+          "line": 842
+        },
+        {
+          "heading": "User Bash Events",
+          "level": 3,
+          "line": 877
+        },
+        {
+          "heading": "user_bash",
+          "level": 4,
+          "line": 879
+        },
+        {
+          "heading": "Input Events",
+          "level": 3,
+          "line": 909
+        },
+        {
+          "heading": "input",
+          "level": 4,
+          "line": 911
+        },
+        {
+          "heading": "ExtensionContext",
+          "level": 2,
+          "line": 960
+        },
+        {
+          "heading": "ctx.ui",
+          "level": 3,
+          "line": 964
+        },
+        {
+          "heading": "ctx.mode",
+          "level": 3,
+          "line": 968
+        },
+        {
+          "heading": "ctx.hasUI",
+          "level": 3,
+          "line": 972
+        },
+        {
+          "heading": "ctx.cwd",
+          "level": 3,
+          "line": 976
+        },
+        {
+          "heading": "ctx.isProjectTrusted()",
+          "level": 3,
+          "line": 994
+        },
+        {
+          "heading": "ctx.sessionManager",
+          "level": 3,
+          "line": 1000
+        },
+        {
+          "heading": "ctx.modelRegistry / ctx.model / ctx.thinkingLevel / ctx.scopedModels",
+          "level": 3,
+          "line": 1013
+        },
+        {
+          "heading": "Streaming model calls",
+          "level": 4,
+          "line": 1019
+        },
+        {
+          "heading": "ctx.signal",
+          "level": 3,
+          "line": 1025
+        },
+        {
+          "heading": "ctx.isIdle() / ctx.abort() / ctx.hasPendingMessages()",
+          "level": 3,
+          "line": 1050
+        },
+        {
+          "heading": "ctx.shutdown()",
+          "level": 3,
+          "line": 1054
+        },
+        {
+          "heading": "ctx.getContextUsage()",
+          "level": 3,
+          "line": 1072
+        },
+        {
+          "heading": "ctx.compact()",
+          "level": 3,
+          "line": 1083
+        },
+        {
+          "heading": "ctx.getSystemPrompt()",
+          "level": 3,
+          "line": 1099
+        },
+        {
+          "heading": "ExtensionCommandContext",
+          "level": 2,
+          "line": 1115
+        },
+        {
+          "heading": "ctx.getSystemPromptOptions()",
+          "level": 3,
+          "line": 1119
+        },
+        {
+          "heading": "ctx.waitForIdle()",
+          "level": 3,
+          "line": 1132
+        },
+        {
+          "heading": "ctx.newSession(options?)",
+          "level": 3,
+          "line": 1145
+        },
+        {
+          "heading": "ctx.fork(entryId, options?)",
+          "level": 3,
+          "line": 1178
+        },
+        {
+          "heading": "ctx.navigateTree(targetId, options?)",
+          "level": 3,
+          "line": 1204
+        },
+        {
+          "heading": "ctx.switchSession(sessionPath, options?)",
+          "level": 3,
+          "line": 1223
+        },
+        {
+          "heading": "Session replacement lifecycle and footguns",
+          "level": 3,
+          "line": 1266
+        },
+        {
+          "heading": "ctx.reload()",
+          "level": 3,
+          "line": 1309
+        },
+        {
+          "heading": "ExtensionAPI Methods",
+          "level": 2,
+          "line": 1365
+        },
+        {
+          "heading": "pi.on(event, handler)",
+          "level": 3,
+          "line": 1367
+        },
+        {
+          "heading": "pi.registerTool(definition)",
+          "level": 3,
+          "line": 1371
+        },
+        {
+          "heading": "pi.sendMessage(message, options?)",
+          "level": 3,
+          "line": 1422
+        },
+        {
+          "heading": "pi.sendUserMessage(content, options?)",
+          "level": 3,
+          "line": 1445
+        },
+        {
+          "heading": "pi.appendEntry(customType, data?)",
+          "level": 3,
+          "line": 1477
+        },
+        {
+          "heading": "pi.setSessionName(name)",
+          "level": 3,
+          "line": 1495
+        },
+        {
+          "heading": "pi.getSessionName()",
+          "level": 3,
+          "line": 1503
+        },
+        {
+          "heading": "pi.setLabel(entryId, label)",
+          "level": 3,
+          "line": 1514
+        },
+        {
+          "heading": "pi.registerCommand(name, options)",
+          "level": 3,
+          "line": 1531
+        },
+        {
+          "heading": "pi.getCommands()",
+          "level": 3,
+          "line": 1566
+        },
+        {
+          "heading": "pi.registerMessageRenderer(customType, renderer)",
+          "level": 3,
+          "line": 1599
+        },
+        {
+          "heading": "pi.registerMarkdownTransformer(transformer)",
+          "level": 3,
+          "line": 1603
+        },
+        {
+          "heading": "pi.registerEntryRenderer(customType, renderer)",
+          "level": 3,
+          "line": 1624
+        },
+        {
+          "heading": "pi.registerShortcut(shortcut, options)",
+          "level": 3,
+          "line": 1644
+        },
+        {
+          "heading": "pi.registerFlag(name, options)",
+          "level": 3,
+          "line": 1657
+        },
+        {
+          "heading": "pi.exec(command, args, options?)",
+          "level": 3,
+          "line": 1674
+        },
+        {
+          "heading": "pi.getActiveTools() / pi.getAllTools() / pi.setActiveTools(names)",
+          "level": 3,
+          "line": 1683
+        },
+        {
+          "heading": "pi.setModel(model)",
+          "level": 3,
+          "line": 1710
+        },
+        {
+          "heading": "pi.getThinkingLevel() / pi.setThinkingLevel(level)",
+          "level": 3,
+          "line": 1724
+        },
+        {
+          "heading": "pi.events",
+          "level": 3,
+          "line": 1735
+        },
+        {
+          "heading": "pi.registerProvider(name, config)",
+          "level": 3,
+          "line": 1744
+        },
+        {
+          "heading": "pi.unregisterProvider(name)",
+          "level": 3,
+          "line": 1870
+        },
+        {
+          "heading": "State Management",
+          "level": 2,
+          "line": 1885
+        },
+        {
+          "heading": "Custom Tools",
+          "level": 2,
+          "line": 1919
+        },
+        {
+          "heading": "Tool Definition",
+          "level": 3,
+          "line": 1961
+        },
+        {
+          "heading": "Overriding Built-in Tools",
+          "level": 3,
+          "line": 2086
+        },
+        {
+          "heading": "Remote Execution",
+          "level": 3,
+          "line": 2119
+        },
+        {
+          "heading": "Output Truncation",
+          "level": 3,
+          "line": 2176
+        },
+        {
+          "heading": "Multiple Tools",
+          "level": 3,
+          "line": 2228
+        },
+        {
+          "heading": "Custom Rendering",
+          "level": 3,
+          "line": 2246
+        },
+        {
+          "heading": "renderCall",
+          "level": 4,
+          "line": 2279
+        },
+        {
+          "heading": "renderResult",
+          "level": 4,
+          "line": 2298
+        },
+        {
+          "heading": "Keybinding Hints",
+          "level": 4,
+          "line": 2324
+        },
+        {
+          "heading": "Best Practices",
+          "level": 4,
+          "line": 2353
+        },
+        {
+          "heading": "Fallback",
+          "level": 4,
+          "line": 2365
+        },
+        {
+          "heading": "Dynamic Tool Loading",
+          "level": 3,
+          "line": 2371
+        },
+        {
+          "heading": "Models with native deferred loading",
+          "level": 4,
+          "line": 2387
+        },
+        {
+          "heading": "Fallback behavior",
+          "level": 4,
+          "line": 2402
+        },
+        {
+          "heading": "Search tool example",
+          "level": 4,
+          "line": 2410
+        },
+        {
+          "heading": "Custom UI",
+          "level": 2,
+          "line": 2512
+        },
+        {
+          "heading": "Dialogs",
+          "level": 3,
+          "line": 2526
+        },
+        {
+          "heading": "Timed Dialogs with Countdown",
+          "level": 4,
+          "line": 2545
+        },
+        {
+          "heading": "Manual Dismissal with AbortSignal",
+          "level": 4,
+          "line": 2569
+        },
+        {
+          "heading": "Widgets, Status, and Footer",
+          "level": 3,
+          "line": 2596
+        },
+        {
+          "heading": "Autocomplete Providers",
+          "level": 3,
+          "line": 2696
+        },
+        {
+          "heading": "Custom Components",
+          "level": 3,
+          "line": 2741
+        },
+        {
+          "heading": "Overlay Mode (Experimental)",
+          "level": 4,
+          "line": 2773
+        },
+        {
+          "heading": "Custom Editor",
+          "level": 3,
+          "line": 2806
+        },
+        {
+          "heading": "Message and Entry Rendering",
+          "level": 3,
+          "line": 2858
+        },
+        {
+          "heading": "Theme Colors",
+          "level": 3,
+          "line": 2899
+        },
+        {
+          "heading": "Error Handling",
+          "level": 2,
+          "line": 2932
+        },
+        {
+          "heading": "Mode Behavior",
+          "level": 2,
+          "line": 2938
+        },
+        {
+          "heading": "Examples Reference",
+          "level": 2,
+          "line": 2949
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 123
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/index.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 84,
+      "nonEmptyLines": 58,
+      "sections": [
+        {
+          "heading": "Pi Documentation",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Quick start",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Start here",
+          "level": 2,
+          "line": 39
+        },
+        {
+          "heading": "Customization",
+          "level": 2,
+          "line": 52
+        },
+        {
+          "heading": "Programmatic usage",
+          "level": 2,
+          "line": 62
+        },
+        {
+          "heading": "Reference",
+          "level": 2,
+          "line": 69
+        },
+        {
+          "heading": "Platform setup",
+          "level": 2,
+          "line": 74
+        },
+        {
+          "heading": "Development",
+          "level": 2,
+          "line": 82
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/json.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 98,
+      "nonEmptyLines": 77,
+      "sections": [
+        {
+          "heading": "JSON Event Stream Mode",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Event Types",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Message Types",
+          "level": 2,
+          "line": 54
+        },
+        {
+          "heading": "Output Format",
+          "level": 2,
+          "line": 67
+        },
+        {
+          "heading": "Example",
+          "level": 2,
+          "line": 94
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/keybindings.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 239,
+      "nonEmptyLines": 189,
+      "sections": [
+        {
+          "heading": "Keybindings",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Key Format",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "All Actions",
+          "level": 2,
+          "line": 25
+        },
+        {
+          "heading": "TUI Editor Cursor Movement",
+          "level": 3,
+          "line": 27
+        },
+        {
+          "heading": "TUI Editor Deletion",
+          "level": 3,
+          "line": 48
+        },
+        {
+          "heading": "TUI Input",
+          "level": 3,
+          "line": 59
+        },
+        {
+          "heading": "TUI Kill Ring",
+          "level": 3,
+          "line": 67
+        },
+        {
+          "heading": "TUI Clipboard and Selection",
+          "level": 3,
+          "line": 75
+        },
+        {
+          "heading": "TUI Fullscreen Viewport",
+          "level": 3,
+          "line": 87
+        },
+        {
+          "heading": "Application",
+          "level": 3,
+          "line": 121
+        },
+        {
+          "heading": "Sessions",
+          "level": 3,
+          "line": 132
+        },
+        {
+          "heading": "Models and Thinking",
+          "level": 3,
+          "line": 147
+        },
+        {
+          "heading": "Display and Message Queue",
+          "level": 3,
+          "line": 159
+        },
+        {
+          "heading": "Tree Navigation",
+          "level": 3,
+          "line": 168
+        },
+        {
+          "heading": "Scoped Models Selector",
+          "level": 3,
+          "line": 184
+        },
+        {
+          "heading": "Custom Configuration",
+          "level": 2,
+          "line": 196
+        },
+        {
+          "heading": "Emacs Example",
+          "level": 3,
+          "line": 212
+        },
+        {
+          "heading": "Vim Example",
+          "level": 3,
+          "line": 228
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 18
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/llama-cpp.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 101,
+      "nonEmptyLines": 71,
+      "sections": [
+        {
+          "heading": "llama.cpp",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Start the router",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Configure Pi",
+          "level": 2,
+          "line": 46
+        },
+        {
+          "heading": "Manage models",
+          "level": 2,
+          "line": 68
+        },
+        {
+          "heading": "Troubleshooting",
+          "level": 2,
+          "line": 89
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/models.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 574,
+      "nonEmptyLines": 487,
+      "sections": [
+        {
+          "heading": "Custom Models",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Table of Contents",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Minimal Example",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "Full Example",
+          "level": 2,
+          "line": 65
+        },
+        {
+          "heading": "Google AI Studio Example",
+          "level": 2,
+          "line": 94
+        },
+        {
+          "heading": "Supported APIs",
+          "level": 2,
+          "line": 121
+        },
+        {
+          "heading": "Provider Configuration",
+          "level": 2,
+          "line": 132
+        },
+        {
+          "heading": "Value Resolution",
+          "level": 3,
+          "line": 147
+        },
+        {
+          "heading": "Custom Headers",
+          "level": 3,
+          "line": 178
+        },
+        {
+          "heading": "Model Configuration",
+          "level": 2,
+          "line": 197
+        },
+        {
+          "heading": "Sampling Parameters",
+          "level": 3,
+          "line": 239
+        },
+        {
+          "heading": "Thinking Level Map",
+          "level": 3,
+          "line": 259
+        },
+        {
+          "heading": "Overriding Built-in Providers",
+          "level": 2,
+          "line": 302
+        },
+        {
+          "heading": "Per-model Overrides",
+          "level": 2,
+          "line": 339
+        },
+        {
+          "heading": "Anthropic Messages Compatibility",
+          "level": 2,
+          "line": 389
+        },
+        {
+          "heading": "OpenAI Compatibility",
+          "level": 2,
+          "line": 439
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 16
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/packages.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 228,
+      "nonEmptyLines": 171,
+      "sections": [
+        {
+          "heading": "Pi Packages",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "Table of Contents",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Install and Manage",
+          "level": 2,
+          "line": 18
+        },
+        {
+          "heading": "Package Sources",
+          "level": 2,
+          "line": 52
+        },
+        {
+          "heading": "npm",
+          "level": 3,
+          "line": 56
+        },
+        {
+          "heading": "git",
+          "level": 3,
+          "line": 76
+        },
+        {
+          "heading": "Local Paths",
+          "level": 3,
+          "line": 107
+        },
+        {
+          "heading": "Creating a Pi Package",
+          "level": 2,
+          "line": 116
+        },
+        {
+          "heading": "Gallery Metadata",
+          "level": 3,
+          "line": 135
+        },
+        {
+          "heading": "Package Structure",
+          "level": 2,
+          "line": 156
+        },
+        {
+          "heading": "Convention Directories",
+          "level": 3,
+          "line": 158
+        },
+        {
+          "heading": "Dependencies",
+          "level": 2,
+          "line": 167
+        },
+        {
+          "heading": "Package Filtering",
+          "level": 2,
+          "line": 190
+        },
+        {
+          "heading": "Enable and Disable Resources",
+          "level": 2,
+          "line": 218
+        },
+        {
+          "heading": "Scope and Deduplication",
+          "level": 2,
+          "line": 222
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 15
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/prompt-templates.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 96,
+      "nonEmptyLines": 69,
+      "sections": [
+        {
+          "heading": "Prompt Templates",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "Locations",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Format",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "Argument Hints",
+          "level": 3,
+          "line": 35
+        },
+        {
+          "heading": "Usage",
+          "level": 2,
+          "line": 55
+        },
+        {
+          "heading": "Arguments",
+          "level": 2,
+          "line": 65
+        },
+        {
+          "heading": "Loading Rules",
+          "level": 2,
+          "line": 93
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/providers.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 317,
+      "nonEmptyLines": 238,
+      "sections": [
+        {
+          "heading": "Providers",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Table of Contents",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Subscriptions",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "OpenAI Codex",
+          "level": 3,
+          "line": 28
+        },
+        {
+          "heading": "Claude Pro/Max",
+          "level": 3,
+          "line": 33
+        },
+        {
+          "heading": "GitHub Copilot",
+          "level": 3,
+          "line": 37
+        },
+        {
+          "heading": "xAI (Grok/X subscription)",
+          "level": 3,
+          "line": 42
+        },
+        {
+          "heading": "OpenRouter",
+          "level": 3,
+          "line": 47
+        },
+        {
+          "heading": "Radius",
+          "level": 3,
+          "line": 54
+        },
+        {
+          "heading": "API Keys",
+          "level": 2,
+          "line": 58
+        },
+        {
+          "heading": "Environment Variables or Auth File",
+          "level": 3,
+          "line": 60
+        },
+        {
+          "heading": "Auth File",
+          "level": 4,
+          "line": 109
+        },
+        {
+          "heading": "Key Resolution",
+          "level": 3,
+          "line": 159
+        },
+        {
+          "heading": "Cloud Providers",
+          "level": 2,
+          "line": 187
+        },
+        {
+          "heading": "Azure OpenAI",
+          "level": 3,
+          "line": 189
+        },
+        {
+          "heading": "Amazon Bedrock",
+          "level": 3,
+          "line": 205
+        },
+        {
+          "heading": "Cloudflare AI Gateway",
+          "level": 3,
+          "line": 250
+        },
+        {
+          "heading": "Cloudflare Workers AI",
+          "level": 3,
+          "line": 274
+        },
+        {
+          "heading": "Google Vertex AI",
+          "level": 3,
+          "line": 286
+        },
+        {
+          "heading": "llama.cpp",
+          "level": 2,
+          "line": 298
+        },
+        {
+          "heading": "Custom Providers",
+          "level": 2,
+          "line": 304
+        },
+        {
+          "heading": "Resolution Order",
+          "level": 2,
+          "line": 310
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 22
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/quickstart.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 167,
+      "nonEmptyLines": 106,
+      "sections": [
+        {
+          "heading": "Quickstart",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Install",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Uninstall",
+          "level": 3,
+          "line": 15
+        },
+        {
+          "heading": "Authenticate",
+          "level": 2,
+          "line": 42
+        },
+        {
+          "heading": "Option 1: subscription login",
+          "level": 3,
+          "line": 46
+        },
+        {
+          "heading": "Option 2: API key",
+          "level": 3,
+          "line": 56
+        },
+        {
+          "heading": "First session",
+          "level": 2,
+          "line": 69
+        },
+        {
+          "heading": "Give pi project instructions",
+          "level": 2,
+          "line": 86
+        },
+        {
+          "heading": "Common things to try",
+          "level": 2,
+          "line": 107
+        },
+        {
+          "heading": "Reference files",
+          "level": 3,
+          "line": 109
+        },
+        {
+          "heading": "Run shell commands",
+          "level": 3,
+          "line": 120
+        },
+        {
+          "heading": "Switch models",
+          "level": 3,
+          "line": 130
+        },
+        {
+          "heading": "Continue later",
+          "level": 3,
+          "line": 134
+        },
+        {
+          "heading": "Non-interactive mode",
+          "level": 3,
+          "line": 147
+        },
+        {
+          "heading": "Next steps",
+          "level": 2,
+          "line": 159
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 15
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/rpc.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 1618,
+      "nonEmptyLines": 1254,
+      "sections": [
+        {
+          "heading": "RPC Mode",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Starting RPC Mode",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Protocol Overview",
+          "level": 2,
+          "line": 20
+        },
+        {
+          "heading": "Framing",
+          "level": 3,
+          "line": 28
+        },
+        {
+          "heading": "Commands",
+          "level": 2,
+          "line": 39
+        },
+        {
+          "heading": "Prompting",
+          "level": 3,
+          "line": 41
+        },
+        {
+          "heading": "prompt",
+          "level": 4,
+          "line": 43
+        },
+        {
+          "heading": "steer",
+          "level": 4,
+          "line": 80
+        },
+        {
+          "heading": "follow_up",
+          "level": 4,
+          "line": 102
+        },
+        {
+          "heading": "abort",
+          "level": 4,
+          "line": 124
+        },
+        {
+          "heading": "clear_queue",
+          "level": 4,
+          "line": 137
+        },
+        {
+          "heading": "new_session",
+          "level": 4,
+          "line": 160
+        },
+        {
+          "heading": "State",
+          "level": 3,
+          "line": 183
+        },
+        {
+          "heading": "get_state",
+          "level": 4,
+          "line": 185
+        },
+        {
+          "heading": "get_messages",
+          "level": 4,
+          "line": 218
+        },
+        {
+          "heading": "Model",
+          "level": 3,
+          "line": 238
+        },
+        {
+          "heading": "set_model",
+          "level": 4,
+          "line": 240
+        },
+        {
+          "heading": "cycle_model",
+          "level": 4,
+          "line": 258
+        },
+        {
+          "heading": "get_available_models",
+          "level": 4,
+          "line": 282
+        },
+        {
+          "heading": "Thinking",
+          "level": 3,
+          "line": 302
+        },
+        {
+          "heading": "set_thinking_level",
+          "level": 4,
+          "line": 304
+        },
+        {
+          "heading": "cycle_thinking_level",
+          "level": 4,
+          "line": 321
+        },
+        {
+          "heading": "get_available_thinking_levels",
+          "level": 4,
+          "line": 339
+        },
+        {
+          "heading": "Queue Modes",
+          "level": 3,
+          "line": 359
+        },
+        {
+          "heading": "set_steering_mode",
+          "level": 4,
+          "line": 361
+        },
+        {
+          "heading": "set_follow_up_mode",
+          "level": 4,
+          "line": 378
+        },
+        {
+          "heading": "Compaction",
+          "level": 3,
+          "line": 395
+        },
+        {
+          "heading": "compact",
+          "level": 4,
+          "line": 397
+        },
+        {
+          "heading": "set_auto_compaction",
+          "level": 4,
+          "line": 436
+        },
+        {
+          "heading": "Retry",
+          "level": 3,
+          "line": 449
+        },
+        {
+          "heading": "set_auto_retry",
+          "level": 4,
+          "line": 451
+        },
+        {
+          "heading": "abort_retry",
+          "level": 4,
+          "line": 464
+        },
+        {
+          "heading": "Bash",
+          "level": 3,
+          "line": 477
+        },
+        {
+          "heading": "bash",
+          "level": 4,
+          "line": 479
+        },
+        {
+          "heading": "abort_bash",
+          "level": 4,
+          "line": 539
+        },
+        {
+          "heading": "Session",
+          "level": 3,
+          "line": 552
+        },
+        {
+          "heading": "get_session_stats",
+          "level": 4,
+          "line": 554
+        },
+        {
+          "heading": "export_html",
+          "level": 4,
+          "line": 597
+        },
+        {
+          "heading": "switch_session",
+          "level": 4,
+          "line": 620
+        },
+        {
+          "heading": "fork",
+          "level": 4,
+          "line": 638
+        },
+        {
+          "heading": "clone",
+          "level": 4,
+          "line": 666
+        },
+        {
+          "heading": "get_fork_messages",
+          "level": 4,
+          "line": 694
+        },
+        {
+          "heading": "get_entries",
+          "level": 4,
+          "line": 717
+        },
+        {
+          "heading": "get_tree",
+          "level": 4,
+          "line": 747
+        },
+        {
+          "heading": "get_last_assistant_text",
+          "level": 4,
+          "line": 775
+        },
+        {
+          "heading": "set_session_name",
+          "level": 4,
+          "line": 795
+        },
+        {
+          "heading": "Commands",
+          "level": 3,
+          "line": 814
+        },
+        {
+          "heading": "get_commands",
+          "level": 4,
+          "line": 816
+        },
+        {
+          "heading": "Events",
+          "level": 2,
+          "line": 855
+        },
+        {
+          "heading": "Event Types",
+          "level": 3,
+          "line": 859
+        },
+        {
+          "heading": "agent_start",
+          "level": 3,
+          "line": 885
+        },
+        {
+          "heading": "agent_end",
+          "level": 3,
+          "line": 893
+        },
+        {
+          "heading": "agent_settled",
+          "level": 3,
+          "line": 905
+        },
+        {
+          "heading": "turn_start / turn_end",
+          "level": 3,
+          "line": 913
+        },
+        {
+          "heading": "message_start / message_end",
+          "level": 3,
+          "line": 929
+        },
+        {
+          "heading": "message_update (Streaming)",
+          "level": 3,
+          "line": 938
+        },
+        {
+          "heading": "bash_execution_update",
+          "level": 3,
+          "line": 998
+        },
+        {
+          "heading": "tool_execution_start / tool_execution_update / tool_execution_end",
+          "level": 3,
+          "line": 1012
+        },
+        {
+          "heading": "queue_update",
+          "level": 3,
+          "line": 1057
+        },
+        {
+          "heading": "compaction_start / compaction_end",
+          "level": 3,
+          "line": 1069
+        },
+        {
+          "heading": "auto_retry_start / auto_retry_end",
+          "level": 3,
+          "line": 1109
+        },
+        {
+          "heading": "summarization_retry_scheduled / summarization_retry_attempt_start / summarization_retry_finished",
+          "level": 3,
+          "line": 1141
+        },
+        {
+          "heading": "extension_error",
+          "level": 3,
+          "line": 1171
+        },
+        {
+          "heading": "Extension UI Protocol",
+          "level": 2,
+          "line": 1184
+        },
+        {
+          "heading": "Extension UI Requests (stdout)",
+          "level": 3,
+          "line": 1207
+        },
+        {
+          "heading": "select",
+          "level": 4,
+          "line": 1211
+        },
+        {
+          "heading": "confirm",
+          "level": 4,
+          "line": 1228
+        },
+        {
+          "heading": "input",
+          "level": 4,
+          "line": 1245
+        },
+        {
+          "heading": "editor",
+          "level": 4,
+          "line": 1261
+        },
+        {
+          "heading": "notify",
+          "level": 4,
+          "line": 1277
+        },
+        {
+          "heading": "setStatus",
+          "level": 4,
+          "line": 1293
+        },
+        {
+          "heading": "setWidget",
+          "level": 4,
+          "line": 1309
+        },
+        {
+          "heading": "setTitle",
+          "level": 4,
+          "line": 1326
+        },
+        {
+          "heading": "set_editor_text",
+          "level": 4,
+          "line": 1339
+        },
+        {
+          "heading": "Extension UI Responses (stdin)",
+          "level": 3,
+          "line": 1352
+        },
+        {
+          "heading": "Value response (select, input, editor)",
+          "level": 4,
+          "line": 1356
+        },
+        {
+          "heading": "Confirmation response (confirm)",
+          "level": 4,
+          "line": 1362
+        },
+        {
+          "heading": "Cancellation response (any dialog)",
+          "level": 4,
+          "line": 1368
+        },
+        {
+          "heading": "Error Handling",
+          "level": 2,
+          "line": 1376
+        },
+        {
+          "heading": "Types",
+          "level": 2,
+          "line": 1400
+        },
+        {
+          "heading": "Model",
+          "level": 3,
+          "line": 1409
+        },
+        {
+          "heading": "UserMessage",
+          "level": 3,
+          "line": 1431
+        },
+        {
+          "heading": "AssistantMessage",
+          "level": 3,
+          "line": 1444
+        },
+        {
+          "heading": "ToolResultMessage",
+          "level": 3,
+          "line": 1471
+        },
+        {
+          "heading": "BashExecutionMessage",
+          "level": 3,
+          "line": 1494
+        },
+        {
+          "heading": "Attachment",
+          "level": 3,
+          "line": 1511
+        },
+        {
+          "heading": "Example: Basic Client (Python)",
+          "level": 2,
+          "line": 1526
+        },
+        {
+          "heading": "Example: Interactive Client (Node.js)",
+          "level": 2,
+          "line": 1562
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 88
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/sdk.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 1226,
+      "nonEmptyLines": 954,
+      "sections": [
+        {
+          "heading": "SDK",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "Quick Start",
+          "level": 2,
+          "line": 16
+        },
+        {
+          "heading": "Installation",
+          "level": 2,
+          "line": 36
+        },
+        {
+          "heading": "Core Concepts",
+          "level": 2,
+          "line": 44
+        },
+        {
+          "heading": "createAgentSession()",
+          "level": 3,
+          "line": 46
+        },
+        {
+          "heading": "AgentSession",
+          "level": 3,
+          "line": 66
+        },
+        {
+          "heading": "createAgentSessionRuntime() and AgentSessionRuntime",
+          "level": 3,
+          "line": 118
+        },
+        {
+          "heading": "Prompting and Message Queueing",
+          "level": 3,
+          "line": 182
+        },
+        {
+          "heading": "Agent and AgentState",
+          "level": 3,
+          "line": 238
+        },
+        {
+          "heading": "Events",
+          "level": 3,
+          "line": 264
+        },
+        {
+          "heading": "Options Reference",
+          "level": 2,
+          "line": 332
+        },
+        {
+          "heading": "Directories",
+          "level": 3,
+          "line": 334
+        },
+        {
+          "heading": "Model",
+          "level": 3,
+          "line": 369
+        },
+        {
+          "heading": "API Keys and OAuth",
+          "level": 3,
+          "line": 444
+        },
+        {
+          "heading": "System Prompt",
+          "level": 3,
+          "line": 503
+        },
+        {
+          "heading": "Tools",
+          "level": 3,
+          "line": 520
+        },
+        {
+          "heading": "Tools with Custom cwd",
+          "level": 4,
+          "line": 556
+        },
+        {
+          "heading": "Custom Tools",
+          "level": 3,
+          "line": 581
+        },
+        {
+          "heading": "Extensions",
+          "level": 3,
+          "line": 615
+        },
+        {
+          "heading": "Skills",
+          "level": 3,
+          "line": 676
+        },
+        {
+          "heading": "Context Files",
+          "level": 3,
+          "line": 706
+        },
+        {
+          "heading": "Slash Commands",
+          "level": 3,
+          "line": 726
+        },
+        {
+          "heading": "Session Management",
+          "level": 3,
+          "line": 755
+        },
+        {
+          "heading": "Settings Management",
+          "level": 3,
+          "line": 864
+        },
+        {
+          "heading": "ResourceLoader",
+          "level": 2,
+          "line": 915
+        },
+        {
+          "heading": "Return Value",
+          "level": 2,
+          "line": 938
+        },
+        {
+          "heading": "Complete Example",
+          "level": 2,
+          "line": 961
+        },
+        {
+          "heading": "Run Modes",
+          "level": 2,
+          "line": 1037
+        },
+        {
+          "heading": "InteractiveMode",
+          "level": 3,
+          "line": 1041
+        },
+        {
+          "heading": "runPrintMode",
+          "level": 3,
+          "line": 1081
+        },
+        {
+          "heading": "runRpcMode",
+          "level": 3,
+          "line": 1118
+        },
+        {
+          "heading": "RPC Mode Alternative",
+          "level": 2,
+          "line": 1152
+        },
+        {
+          "heading": "Exports",
+          "level": 2,
+          "line": 1173
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 33
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/security.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 59,
+      "nonEmptyLines": 36,
+      "sections": [
+        {
+          "heading": "Security",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Project Trust",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "No Built-in Sandbox",
+          "level": 2,
+          "line": 31
+        },
+        {
+          "heading": "Running Untrusted or Unmonitored Work",
+          "level": 2,
+          "line": 39
+        },
+        {
+          "heading": "Reporting Security Issues",
+          "level": 2,
+          "line": 55
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "packages/coding-agent/docs/session-format.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 450,
+      "nonEmptyLines": 349,
+      "sections": [
+        {
+          "heading": "Session File Format",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "File Location",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Deleting Sessions",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "Session Version",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "Source Files",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "Message Types",
+          "level": 2,
+          "line": 39
+        },
+        {
+          "heading": "Content Blocks",
+          "level": 3,
+          "line": 43
+        },
+        {
+          "heading": "Base Message Types (from pi-ai)",
+          "level": 3,
+          "line": 77
+        },
+        {
+          "heading": "Extended Message Types (from pi-coding-agent)",
+          "level": 3,
+          "line": 137
+        },
+        {
+          "heading": "AgentMessage Union",
+          "level": 3,
+          "line": 176
+        },
+        {
+          "heading": "Entry Base",
+          "level": 2,
+          "line": 189
+        },
+        {
+          "heading": "Entry Types",
+          "level": 2,
+          "line": 202
+        },
+        {
+          "heading": "SessionHeader",
+          "level": 3,
+          "line": 204
+        },
+        {
+          "heading": "SessionMessageEntry",
+          "level": 3,
+          "line": 218
+        },
+        {
+          "heading": "ModelChangeEntry",
+          "level": 3,
+          "line": 228
+        },
+        {
+          "heading": "ThinkingLevelChangeEntry",
+          "level": 3,
+          "line": 236
+        },
+        {
+          "heading": "CompactionEntry",
+          "level": 3,
+          "line": 244
+        },
+        {
+          "heading": "BranchSummaryEntry",
+          "level": 3,
+          "line": 259
+        },
+        {
+          "heading": "CustomEntry",
+          "level": 3,
+          "line": 274
+        },
+        {
+          "heading": "CustomMessageEntry",
+          "level": 3,
+          "line": 284
+        },
+        {
+          "heading": "LabelEntry",
+          "level": 3,
+          "line": 297
+        },
+        {
+          "heading": "SessionInfoEntry",
+          "level": 3,
+          "line": 307
+        },
+        {
+          "heading": "Tree Structure",
+          "level": 2,
+          "line": 317
+        },
+        {
+          "heading": "Context Building",
+          "level": 2,
+          "line": 332
+        },
+        {
+          "heading": "Parsing Example",
+          "level": 2,
+          "line": 355
+        },
+        {
+          "heading": "SessionManager API",
+          "level": 2,
+          "line": 397
+        },
+        {
+          "heading": "Static Creation Methods",
+          "level": 3,
+          "line": 401
+        },
+        {
+          "heading": "Static Listing Methods",
+          "level": 3,
+          "line": 408
+        },
+        {
+          "heading": "Instance Methods - Session Management",
+          "level": 3,
+          "line": 413
+        },
+        {
+          "heading": "Instance Methods - Appending (all return entry ID)",
+          "level": 3,
+          "line": 418
+        },
+        {
+          "heading": "Instance Methods - Tree Navigation",
+          "level": 3,
+          "line": 428
+        },
+        {
+          "heading": "Instance Methods - Context & Info",
+          "level": 3,
+          "line": 440
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 32
+      }
+    }
+  ]
+}

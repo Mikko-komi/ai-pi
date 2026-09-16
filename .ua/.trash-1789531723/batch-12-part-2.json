@@ -1,0 +1,1370 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "type": "file",
+      "name": "model-runtime.ts",
+      "filePath": "packages/coding-agent/src/core/model-runtime.ts",
+      "summary": "组合内置与扩展 provider、同步凭证并刷新可用性，对外提供 stream/complete 运行时。",
+      "tags": [
+        "service",
+        "runtime",
+        "auth"
+      ],
+      "complexity": "complex",
+      "languageNotes": "凭证写操作串行入队，避免 auth.json 与运行时覆盖互相踩踏。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/model-runtime.ts:mergeHeaders",
+      "type": "function",
+      "name": "mergeHeaders",
+      "filePath": "packages/coding-agent/src/core/model-runtime.ts",
+      "lineRange": [
+        113,
+        127
+      ],
+      "summary": "浅合并请求头，后者覆盖前者的同名键。",
+      "tags": [
+        "utility",
+        "headers",
+        "merge"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/core/model-runtime.ts:CredentialSynchronizationError",
+      "type": "class",
+      "name": "CredentialSynchronizationError",
+      "filePath": "packages/coding-agent/src/core/model-runtime.ts",
+      "lineRange": [
+        94,
+        111
+      ],
+      "summary": "凭证同步失败时携带 provider、操作类型与凭证上下文。",
+      "tags": [
+        "error-handling",
+        "auth",
+        "credentials"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime",
+      "type": "class",
+      "name": "ModelRuntime",
+      "filePath": "packages/coding-agent/src/core/model-runtime.ts",
+      "lineRange": [
+        130,
+        795
+      ],
+      "summary": "组合 provider、同步凭证、刷新可用性，并执行 stream/complete 与登录登出。",
+      "tags": [
+        "runtime",
+        "service",
+        "auth"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/models-store.ts",
+      "type": "file",
+      "name": "models-store.ts",
+      "filePath": "packages/coding-agent/src/core/models-store.ts",
+      "summary": "以内存或文件存储 models.json，带 revision 检测与可中止读写。",
+      "tags": [
+        "data-model",
+        "persistence",
+        "storage"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/coding-agent/src/core/models-store.ts:InMemoryCodingAgentModelsStore",
+      "type": "class",
+      "name": "InMemoryCodingAgentModelsStore",
+      "filePath": "packages/coding-agent/src/core/models-store.ts",
+      "lineRange": [
+        26,
+        44
+      ],
+      "summary": "内存版 models 存储，用于测试或不落盘场景。",
+      "tags": [
+        "storage",
+        "in-memory",
+        "models"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/core/models-store.ts:FileModelsStore",
+      "type": "class",
+      "name": "FileModelsStore",
+      "filePath": "packages/coding-agent/src/core/models-store.ts",
+      "lineRange": [
+        47,
+        147
+      ],
+      "summary": "文件版 models.json 存储，带 revision 检测与可中止读写。",
+      "tags": [
+        "storage",
+        "persistence",
+        "models"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/output-guard.ts",
+      "type": "file",
+      "name": "output-guard.ts",
+      "filePath": "packages/coding-agent/src/core/output-guard.ts",
+      "summary": "接管 process.stdout.write，支持原始字节输出、背压等待与恢复。",
+      "tags": [
+        "utility",
+        "io",
+        "stdout"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "接管 stdout 是为了在 TUI 渲染期间仍能写出不受控的原始输出。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/output-guard.ts:writeRawStdoutChunk",
+      "type": "function",
+      "name": "writeRawStdoutChunk",
+      "filePath": "packages/coding-agent/src/core/output-guard.ts",
+      "lineRange": [
+        20,
+        43
+      ],
+      "summary": "向原始 stdout 写入一块文本，并处理背压。",
+      "tags": [
+        "io",
+        "stdout",
+        "backpressure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/output-guard.ts:takeOverStdout",
+      "type": "function",
+      "name": "takeOverStdout",
+      "filePath": "packages/coding-agent/src/core/output-guard.ts",
+      "lineRange": [
+        45,
+        70
+      ],
+      "summary": "接管 process.stdout.write，避免 TUI 干扰原始输出。",
+      "tags": [
+        "io",
+        "stdout",
+        "lifecycle"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/output-guard.ts:restoreStdout",
+      "type": "function",
+      "name": "restoreStdout",
+      "filePath": "packages/coding-agent/src/core/output-guard.ts",
+      "lineRange": [
+        72,
+        79
+      ],
+      "summary": "恢复被接管的 process.stdout.write。",
+      "tags": [
+        "io",
+        "stdout",
+        "lifecycle"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/output-guard.ts:isStdoutTakenOver",
+      "type": "function",
+      "name": "isStdoutTakenOver",
+      "filePath": "packages/coding-agent/src/core/output-guard.ts",
+      "lineRange": [
+        81,
+        83
+      ],
+      "summary": "查询 stdout 是否已被接管。",
+      "tags": [
+        "io",
+        "stdout",
+        "predicate"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/output-guard.ts:writeRawStdout",
+      "type": "function",
+      "name": "writeRawStdout",
+      "filePath": "packages/coding-agent/src/core/output-guard.ts",
+      "lineRange": [
+        85,
+        93
+      ],
+      "summary": "对外写入原始 stdout 文本，必要时分块写出。",
+      "tags": [
+        "io",
+        "stdout",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/output-guard.ts:waitForRawStdoutBackpressure",
+      "type": "function",
+      "name": "waitForRawStdoutBackpressure",
+      "filePath": "packages/coding-agent/src/core/output-guard.ts",
+      "lineRange": [
+        95,
+        103
+      ],
+      "summary": "等待原始 stdout 背压解除后再继续写入。",
+      "tags": [
+        "io",
+        "stdout",
+        "backpressure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/output-guard.ts:flushRawStdout",
+      "type": "function",
+      "name": "flushRawStdout",
+      "filePath": "packages/coding-agent/src/core/output-guard.ts",
+      "lineRange": [
+        105,
+        108
+      ],
+      "summary": "刷新原始 stdout 缓冲区。",
+      "tags": [
+        "io",
+        "stdout",
+        "flush"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/package-manager.ts",
+      "type": "file",
+      "name": "package-manager.ts",
+      "filePath": "packages/coding-agent/src/core/package-manager.ts",
+      "summary": "解析 npm/git/本地包源，安装更新并按 manifest 与 ignore 规则收集 skills、prompts、themes、extensions。",
+      "tags": [
+        "service",
+        "package-manager",
+        "resource-discovery"
+      ],
+      "complexity": "complex",
+      "languageNotes": "同一套 collect/applyPatterns 路径同时服务显式包与自动发现资源。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/package-manager.ts:getEnv",
+      "type": "function",
+      "name": "getEnv",
+      "filePath": "packages/coding-agent/src/core/package-manager.ts",
+      "lineRange": [
+        16,
+        33
+      ],
+      "summary": "在 Linux 空 process.env 时从 /proc/self/environ 重建环境变量。",
+      "tags": [
+        "utility",
+        "environment",
+        "linux"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/package-manager.ts:getExtensionTempFolder",
+      "type": "function",
+      "name": "getExtensionTempFolder",
+      "filePath": "packages/coding-agent/src/core/package-manager.ts",
+      "lineRange": [
+        225,
+        230
+      ],
+      "summary": "返回 agent 目录下的扩展临时文件夹路径。",
+      "tags": [
+        "utility",
+        "paths",
+        "extension"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/package-manager.ts:prefixIgnorePattern",
+      "type": "function",
+      "name": "prefixIgnorePattern",
+      "filePath": "packages/coding-agent/src/core/package-manager.ts",
+      "lineRange": [
+        232,
+        253
+      ],
+      "summary": "为 ignore 规则加上目录前缀，使其相对包根生效。",
+      "tags": [
+        "ignore",
+        "path",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/package-manager.ts:addIgnoreRules",
+      "type": "function",
+      "name": "addIgnoreRules",
+      "filePath": "packages/coding-agent/src/core/package-manager.ts",
+      "lineRange": [
+        255,
+        273
+      ],
+      "summary": "读取目录中的 ignore 文件并加入 matcher。",
+      "tags": [
+        "ignore",
+        "filesystem",
+        "discovery"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/package-manager.ts:expandPackageGlob",
+      "type": "function",
+      "name": "expandPackageGlob",
+      "filePath": "packages/coding-agent/src/core/package-manager.ts",
+      "lineRange": [
+        288,
+        297
+      ],
+      "summary": "在包根目录下展开 glob 模式为文件路径。",
+      "tags": [
+        "glob",
+        "discovery",
+        "filesystem"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/package-manager.ts:splitPatterns",
+      "type": "function",
+      "name": "splitPatterns",
+      "filePath": "packages/coding-agent/src/core/package-manager.ts",
+      "lineRange": [
+        299,
+        310
+      ],
+      "summary": "把资源条目拆成包含与排除模式两组。",
+      "tags": [
+        "parser",
+        "patterns",
+        "filtering"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/package-manager.ts:collectFiles",
+      "type": "function",
+      "name": "collectFiles",
+      "filePath": "packages/coding-agent/src/core/package-manager.ts",
+      "lineRange": [
+        312,
+        361
+      ],
+      "summary": "递归收集匹配文件，可跳过 node_modules 并应用 ignore。",
+      "tags": [
+        "discovery",
+        "filesystem",
+        "filtering"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/package-manager.ts:collectSkillEntries",
+      "type": "function",
+      "name": "collectSkillEntries",
+      "filePath": "packages/coding-agent/src/core/package-manager.ts",
+      "lineRange": [
+        365,
+        442
+      ],
+      "summary": "按模式收集 skill 文件条目，支持目录与单文件。",
+      "tags": [
+        "discovery",
+        "skills",
+        "filesystem"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/package-manager.ts:findGitRepoRoot",
+      "type": "function",
+      "name": "findGitRepoRoot",
+      "filePath": "packages/coding-agent/src/core/package-manager.ts",
+      "lineRange": [
+        448,
+        460
+      ],
+      "summary": "从起始目录向上查找 git 仓库根。",
+      "tags": [
+        "git",
+        "filesystem",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/package-manager.ts:collectAncestorAgentsSkillDirs",
+      "type": "function",
+      "name": "collectAncestorAgentsSkillDirs",
+      "filePath": "packages/coding-agent/src/core/package-manager.ts",
+      "lineRange": [
+        462,
+        481
+      ],
+      "summary": "收集祖先目录中的 agents/skills 路径。",
+      "tags": [
+        "discovery",
+        "skills",
+        "filesystem"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/package-manager.ts:collectAutoPromptEntries",
+      "type": "function",
+      "name": "collectAutoPromptEntries",
+      "filePath": "packages/coding-agent/src/core/package-manager.ts",
+      "lineRange": [
+        483,
+        518
+      ],
+      "summary": "自动发现可加载的 prompt 模板文件。",
+      "tags": [
+        "discovery",
+        "prompt",
+        "autoload"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/package-manager.ts:collectAutoThemeEntries",
+      "type": "function",
+      "name": "collectAutoThemeEntries",
+      "filePath": "packages/coding-agent/src/core/package-manager.ts",
+      "lineRange": [
+        520,
+        555
+      ],
+      "summary": "自动发现可加载的主题文件。",
+      "tags": [
+        "discovery",
+        "theme",
+        "autoload"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/package-manager.ts:resolveExtensionEntries",
+      "type": "function",
+      "name": "resolveExtensionEntries",
+      "filePath": "packages/coding-agent/src/core/package-manager.ts",
+      "lineRange": [
+        557,
+        585
+      ],
+      "summary": "解析包内扩展入口，优先读取 pi manifest。",
+      "tags": [
+        "discovery",
+        "extension",
+        "manifest"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/package-manager.ts:collectAutoExtensionEntries",
+      "type": "function",
+      "name": "collectAutoExtensionEntries",
+      "filePath": "packages/coding-agent/src/core/package-manager.ts",
+      "lineRange": [
+        587,
+        639
+      ],
+      "summary": "自动发现可加载的扩展入口文件。",
+      "tags": [
+        "discovery",
+        "extension",
+        "autoload"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/package-manager.ts:matchesAnyPattern",
+      "type": "function",
+      "name": "matchesAnyPattern",
+      "filePath": "packages/coding-agent/src/core/package-manager.ts",
+      "lineRange": [
+        655,
+        681
+      ],
+      "summary": "判断路径是否匹配任一 glob 模式。",
+      "tags": [
+        "matching",
+        "glob",
+        "filtering"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/package-manager.ts:matchesAnyExactPattern",
+      "type": "function",
+      "name": "matchesAnyExactPattern",
+      "filePath": "packages/coding-agent/src/core/package-manager.ts",
+      "lineRange": [
+        688,
+        706
+      ],
+      "summary": "判断路径是否精确匹配给定模式。",
+      "tags": [
+        "matching",
+        "path",
+        "filtering"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/package-manager.ts:isEnabledByOverrides",
+      "type": "function",
+      "name": "isEnabledByOverrides",
+      "filePath": "packages/coding-agent/src/core/package-manager.ts",
+      "lineRange": [
+        712,
+        729
+      ],
+      "summary": "按 override 模式决定某资源路径是否启用。",
+      "tags": [
+        "override",
+        "filtering",
+        "settings"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/package-manager.ts:applyPatterns",
+      "type": "function",
+      "name": "applyPatterns",
+      "filePath": "packages/coding-agent/src/core/package-manager.ts",
+      "lineRange": [
+        739,
+        785
+      ],
+      "summary": "对路径列表应用包含与排除模式，得到最终集合。",
+      "tags": [
+        "filtering",
+        "patterns",
+        "discovery"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/package-manager.ts:applyAutoloadDisabledPatterns",
+      "type": "function",
+      "name": "applyAutoloadDisabledPatterns",
+      "filePath": "packages/coding-agent/src/core/package-manager.ts",
+      "lineRange": [
+        787,
+        804
+      ],
+      "summary": "过滤被禁用自动加载规则命中的路径。",
+      "tags": [
+        "filtering",
+        "autoload",
+        "settings"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/coding-agent/src/core/package-manager.ts:DefaultPackageManager",
+      "type": "class",
+      "name": "DefaultPackageManager",
+      "filePath": "packages/coding-agent/src/core/package-manager.ts",
+      "lineRange": [
+        806,
+        2699
+      ],
+      "summary": "安装、更新、移除 npm/git/本地包，并收集可加载的扩展与资源文件。",
+      "tags": [
+        "package-manager",
+        "service",
+        "installer"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/coding-agent/src/core/pi-manifest.ts",
+      "type": "file",
+      "name": "pi-manifest.ts",
+      "filePath": "packages/coding-agent/src/core/pi-manifest.ts",
+      "summary": "从 package.json 读取 pi 清单字段，定位扩展、skills 等资源入口。",
+      "tags": [
+        "config",
+        "manifest",
+        "parser"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/core/pi-manifest.ts:readPiManifest",
+      "type": "function",
+      "name": "readPiManifest",
+      "filePath": "packages/coding-agent/src/core/pi-manifest.ts",
+      "lineRange": [
+        17,
+        35
+      ],
+      "summary": "读取 package.json 中的 pi 清单字段并做基本校验。",
+      "tags": [
+        "parser",
+        "manifest",
+        "config"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "target": "file:packages/ai/src/providers/all.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "target": "file:packages/coding-agent/src/core/auth-storage.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "target": "file:packages/coding-agent/src/core/model-config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "target": "file:packages/coding-agent/src/core/models-store.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "target": "file:packages/coding-agent/src/core/provider-composer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "target": "file:packages/coding-agent/src/core/remote-catalog-provider.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "target": "file:packages/coding-agent/src/core/runtime-credentials.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "target": "file:packages/coding-agent/src/utils/abort.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/models-store.ts",
+      "target": "file:packages/ai/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/models-store.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/models-store.ts",
+      "target": "file:packages/coding-agent/src/core/auth-storage.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/models-store.ts",
+      "target": "file:packages/coding-agent/src/utils/abort.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/models-store.ts",
+      "target": "file:packages/coding-agent/src/utils/paths.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/models-store.ts",
+      "target": "file:packages/coding-agent/src/utils/text.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "file:packages/coding-agent/src/config.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "file:packages/coding-agent/src/core/output-guard.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "file:packages/coding-agent/src/core/pi-manifest.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "file:packages/coding-agent/src/core/settings-manager.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "file:packages/coding-agent/src/utils/child-process.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "file:packages/coding-agent/src/utils/git.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "file:packages/coding-agent/src/utils/paths.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "file:packages/coding-agent/src/utils/text.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/pi-manifest.ts",
+      "target": "file:packages/coding-agent/src/utils/text.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "target": "function:packages/coding-agent/src/core/model-runtime.ts:mergeHeaders",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "target": "class:packages/coding-agent/src/core/model-runtime.ts:CredentialSynchronizationError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "target": "class:packages/coding-agent/src/core/model-runtime.ts:CredentialSynchronizationError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "target": "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/model-runtime.ts",
+      "target": "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/models-store.ts",
+      "target": "class:packages/coding-agent/src/core/models-store.ts:InMemoryCodingAgentModelsStore",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/models-store.ts",
+      "target": "class:packages/coding-agent/src/core/models-store.ts:InMemoryCodingAgentModelsStore",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/models-store.ts",
+      "target": "class:packages/coding-agent/src/core/models-store.ts:FileModelsStore",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/models-store.ts",
+      "target": "class:packages/coding-agent/src/core/models-store.ts:FileModelsStore",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/output-guard.ts",
+      "target": "function:packages/coding-agent/src/core/output-guard.ts:writeRawStdoutChunk",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/output-guard.ts",
+      "target": "function:packages/coding-agent/src/core/output-guard.ts:takeOverStdout",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/output-guard.ts",
+      "target": "function:packages/coding-agent/src/core/output-guard.ts:takeOverStdout",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/output-guard.ts",
+      "target": "function:packages/coding-agent/src/core/output-guard.ts:restoreStdout",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/output-guard.ts",
+      "target": "function:packages/coding-agent/src/core/output-guard.ts:restoreStdout",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/output-guard.ts",
+      "target": "function:packages/coding-agent/src/core/output-guard.ts:isStdoutTakenOver",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/output-guard.ts",
+      "target": "function:packages/coding-agent/src/core/output-guard.ts:isStdoutTakenOver",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/output-guard.ts",
+      "target": "function:packages/coding-agent/src/core/output-guard.ts:writeRawStdout",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/output-guard.ts",
+      "target": "function:packages/coding-agent/src/core/output-guard.ts:writeRawStdout",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/output-guard.ts",
+      "target": "function:packages/coding-agent/src/core/output-guard.ts:waitForRawStdoutBackpressure",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/output-guard.ts",
+      "target": "function:packages/coding-agent/src/core/output-guard.ts:waitForRawStdoutBackpressure",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/output-guard.ts",
+      "target": "function:packages/coding-agent/src/core/output-guard.ts:flushRawStdout",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/output-guard.ts",
+      "target": "function:packages/coding-agent/src/core/output-guard.ts:flushRawStdout",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "function:packages/coding-agent/src/core/package-manager.ts:getEnv",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "function:packages/coding-agent/src/core/package-manager.ts:getExtensionTempFolder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "function:packages/coding-agent/src/core/package-manager.ts:getExtensionTempFolder",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "function:packages/coding-agent/src/core/package-manager.ts:prefixIgnorePattern",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "function:packages/coding-agent/src/core/package-manager.ts:addIgnoreRules",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "function:packages/coding-agent/src/core/package-manager.ts:expandPackageGlob",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "function:packages/coding-agent/src/core/package-manager.ts:splitPatterns",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "function:packages/coding-agent/src/core/package-manager.ts:collectFiles",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "function:packages/coding-agent/src/core/package-manager.ts:collectSkillEntries",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "function:packages/coding-agent/src/core/package-manager.ts:findGitRepoRoot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "function:packages/coding-agent/src/core/package-manager.ts:collectAncestorAgentsSkillDirs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "function:packages/coding-agent/src/core/package-manager.ts:collectAutoPromptEntries",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "function:packages/coding-agent/src/core/package-manager.ts:collectAutoThemeEntries",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "function:packages/coding-agent/src/core/package-manager.ts:resolveExtensionEntries",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "function:packages/coding-agent/src/core/package-manager.ts:collectAutoExtensionEntries",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "function:packages/coding-agent/src/core/package-manager.ts:matchesAnyPattern",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "function:packages/coding-agent/src/core/package-manager.ts:matchesAnyExactPattern",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "function:packages/coding-agent/src/core/package-manager.ts:isEnabledByOverrides",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "function:packages/coding-agent/src/core/package-manager.ts:applyPatterns",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "function:packages/coding-agent/src/core/package-manager.ts:applyAutoloadDisabledPatterns",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "class:packages/coding-agent/src/core/package-manager.ts:DefaultPackageManager",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/package-manager.ts",
+      "target": "class:packages/coding-agent/src/core/package-manager.ts:DefaultPackageManager",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/pi-manifest.ts",
+      "target": "function:packages/coding-agent/src/core/pi-manifest.ts:readPiManifest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/core/pi-manifest.ts",
+      "target": "function:packages/coding-agent/src/core/pi-manifest.ts:readPiManifest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime",
+      "target": "function:packages/coding-agent/src/config.ts:getAgentDir",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime",
+      "target": "class:packages/coding-agent/src/core/model-config.ts:ModelConfig",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime",
+      "target": "function:packages/coding-agent/src/core/remote-catalog-provider.ts:withRemoteCatalog",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:composeModelProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime",
+      "target": "function:packages/coding-agent/src/utils/abort.ts:operationSignal",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:resolveCompatibilityRequestConfig",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:resolveConfiguredModelHeaders",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime",
+      "target": "function:packages/coding-agent/src/utils/abort.ts:raceWithAbortSignal",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:configuredRequestAuthStatus",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/model-runtime.ts:ModelRuntime",
+      "target": "function:packages/coding-agent/src/core/provider-composer.ts:validateExtensionProvider",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/models-store.ts:FileModelsStore",
+      "target": "function:packages/coding-agent/src/config.ts:getAgentDir",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/models-store.ts:FileModelsStore",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:normalizePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/models-store.ts:FileModelsStore",
+      "target": "function:packages/coding-agent/src/utils/text.ts:stripBom",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/models-store.ts:FileModelsStore",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:getFileRevision",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/models-store.ts:FileModelsStore",
+      "target": "function:packages/coding-agent/src/utils/abort.ts:raceWithAbortSignal",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/package-manager.ts:addIgnoreRules",
+      "target": "function:packages/coding-agent/src/core/skills.ts:prefixIgnorePattern",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/package-manager.ts:collectFiles",
+      "target": "function:packages/coding-agent/src/core/skills.ts:addIgnoreRules",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/package-manager.ts:collectSkillEntries",
+      "target": "function:packages/coding-agent/src/core/skills.ts:addIgnoreRules",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/package-manager.ts:collectAutoPromptEntries",
+      "target": "function:packages/coding-agent/src/core/skills.ts:addIgnoreRules",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/package-manager.ts:collectAutoThemeEntries",
+      "target": "function:packages/coding-agent/src/core/skills.ts:addIgnoreRules",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/package-manager.ts:resolveExtensionEntries",
+      "target": "function:packages/coding-agent/src/core/pi-manifest.ts:readPiManifest",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/package-manager.ts:collectAutoExtensionEntries",
+      "target": "function:packages/coding-agent/src/core/extensions/loader.ts:resolveExtensionEntries",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/package-manager.ts:collectAutoExtensionEntries",
+      "target": "function:packages/coding-agent/src/core/skills.ts:addIgnoreRules",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/package-manager.ts:DefaultPackageManager",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:resolvePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/package-manager.ts:DefaultPackageManager",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:isLocalPath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/package-manager.ts:DefaultPackageManager",
+      "target": "function:packages/coding-agent/src/utils/git.ts:parseGitUrl",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/package-manager.ts:DefaultPackageManager",
+      "target": "function:packages/coding-agent/src/utils/text.ts:stripBom",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/package-manager.ts:DefaultPackageManager",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:markPathIgnoredByCloudSync",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/package-manager.ts:DefaultPackageManager",
+      "target": "function:packages/coding-agent/src/core/pi-manifest.ts:readPiManifest",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/package-manager.ts:DefaultPackageManager",
+      "target": "function:packages/coding-agent/src/utils/paths.ts:canonicalizePath",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/package-manager.ts:DefaultPackageManager",
+      "target": "function:packages/coding-agent/src/utils/child-process.ts:spawnProcess",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/package-manager.ts:DefaultPackageManager",
+      "target": "function:packages/coding-agent/src/core/output-guard.ts:isStdoutTakenOver",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/coding-agent/src/core/package-manager.ts:DefaultPackageManager",
+      "target": "function:packages/coding-agent/src/utils/child-process.ts:spawnProcessSync",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/coding-agent/src/core/pi-manifest.ts:readPiManifest",
+      "target": "function:packages/coding-agent/src/utils/text.ts:stripBom",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

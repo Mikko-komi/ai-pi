@@ -1,0 +1,35 @@
+Analyze these files and produce GraphNode and GraphEdge objects.
+Project root: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi`
+Project: `pi-monorepo`
+Batch: `21/45`
+Skill directory: `/Users/elex-mb0203/.cursor/plugins/local/Understand-Anything/understand-anything-plugin/skills/understand`
+Output: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-21.json` OR `batch-21-part-<k>.json`.
+UA_DIR: `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua`
+Load `batchImportData` and `neighborMap` from `/Users/elex-mb0203/MyWork/agent-projects/ai-pi/.ua/intermediate/batch-briefs/batch-21.json`.
+Pass every listed file through to `batchFiles` with path, language, sizeLines, fileCategory.
+
+> **Language directive**: Generate all textual content in **Chinese (zh)**. Keep technical terms in English when no standard translation exists.
+
+Files:
+1. packages/chord/src/api.ts (90 lines, language: typescript, fileCategory: code)
+2. packages/chord/src/delta/index.ts (1267 lines, language: typescript, fileCategory: code)
+3. packages/chord/src/facets/host.ts (906 lines, language: typescript, fileCategory: code)
+4. packages/chord/src/facets/loader.ts (6 lines, language: typescript, fileCategory: code)
+5. packages/chord/src/json.ts (50 lines, language: typescript, fileCategory: code)
+6. packages/chord/src/node/bundle-loader.ts (416 lines, language: typescript, fileCategory: code)
+7. packages/chord/src/node/bundle.ts (222 lines, language: typescript, fileCategory: code)
+8. packages/chord/src/node/manifest.ts (39 lines, language: typescript, fileCategory: code)
+9. packages/chord/src/node/package.ts (232 lines, language: typescript, fileCategory: code)
+10. packages/chord/src/services/consumer.ts (660 lines, language: typescript, fileCategory: code)
+11. packages/chord/src/services/errors.ts (26 lines, language: typescript, fileCategory: code)
+12. packages/chord/src/services/handle.ts (113 lines, language: typescript, fileCategory: code)
+13. packages/chord/src/services/instances.ts (147 lines, language: typescript, fileCategory: code)
+14. packages/chord/src/services/loopback.ts (17 lines, language: typescript, fileCategory: code)
+15. packages/chord/src/services/provider.ts (586 lines, language: typescript, fileCategory: code)
+16. packages/chord/src/services/state-codec.ts (158 lines, language: typescript, fileCategory: code)
+17. packages/chord/src/services/state-internals.ts (20 lines, language: typescript, fileCategory: code)
+18. packages/chord/src/services/state.ts (139 lines, language: typescript, fileCategory: code)
+19. packages/chord/src/services/wire.ts (234 lines, language: typescript, fileCategory: code)
+20. packages/chord/src/types.ts (261 lines, language: typescript, fileCategory: code)
+
+Respond with only a brief summary: parts written, total nodes/edges, files skipped.

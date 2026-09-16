@@ -1,0 +1,13 @@
+{
+  "projectRoot": "/Users/elex-mb0203/MyWork/agent-projects/ai-pi",
+  "batchFiles": [
+    {"path": "packages/session-backends/sqlite-node/README.md", "language": "markdown", "sizeLines": 33, "fileCategory": "docs"},
+    {"path": "packages/session-backends/sqlite-node/package.json", "language": "json", "sizeLines": 45, "fileCategory": "config"},
+    {"path": "packages/session-backends/sqlite-node/tsconfig.build.json", "language": "json", "sizeLines": 11, "fileCategory": "config"}
+  ],
+  "batchImportData": {
+    "packages/session-backends/sqlite-node/README.md": [],
+    "packages/session-backends/sqlite-node/package.json": [],
+    "packages/session-backends/sqlite-node/tsconfig.build.json": []
+  }
+}

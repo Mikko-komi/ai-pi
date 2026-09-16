@@ -1,0 +1,492 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/chord/src/node.ts",
+      "type": "file",
+      "name": "node.ts",
+      "filePath": "packages/chord/src/node.ts",
+      "summary": "Chord Node 侧 barrel：导出 facet bundle loader、artifact 读取与清单格式常量。",
+      "tags": [
+        "barrel",
+        "node",
+        "plugin",
+        "loader"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/client/src/client.ts",
+      "type": "file",
+      "name": "client.ts",
+      "filePath": "packages/client/src/client.ts",
+      "summary": "Pi 协议客户端：管理 Connection 生命周期、RPC request、服务目录与有序 service 订阅。",
+      "tags": [
+        "rpc",
+        "client",
+        "service",
+        "protocol"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:packages/client/src/client.ts:Client",
+      "type": "class",
+      "name": "Client",
+      "filePath": "packages/client/src/client.ts",
+      "lineRange": [
+        62,
+        445
+      ],
+      "summary": "面向调用方的协议客户端：握手、附件会话、request/subscribeService，以及连接态与 attachment 监听。",
+      "tags": [
+        "client",
+        "rpc",
+        "service",
+        "lifecycle"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/client/src/client.ts:createClientServiceTransport",
+      "type": "function",
+      "name": "createClientServiceTransport",
+      "filePath": "packages/client/src/client.ts",
+      "lineRange": [
+        448,
+        474
+      ],
+      "summary": "把 Client.request / subscribeService 适配为 Chord RemoteServiceTransport。",
+      "tags": [
+        "adapter",
+        "service",
+        "factory"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/client/src/connection.ts",
+      "type": "file",
+      "name": "connection.ts",
+      "filePath": "packages/client/src/connection.ts",
+      "summary": "字节传输之上的协议连接状态机：握手、分帧解码、send/fail，以及 connecting/connected/disconnected 生命周期。",
+      "tags": [
+        "connection",
+        "protocol",
+        "state-machine",
+        "transport"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:packages/client/src/connection.ts:Connection",
+      "type": "class",
+      "name": "Connection",
+      "filePath": "packages/client/src/connection.ts",
+      "lineRange": [
+        41,
+        245
+      ],
+      "summary": "封装 ByteTransportFactory：完成 hello 握手、按序发送 ClientMessage，并把关闭/错误归一成 DisconnectedError。",
+      "tags": [
+        "connection",
+        "state-machine",
+        "protocol"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/client/src/errors.ts",
+      "type": "file",
+      "name": "errors.ts",
+      "filePath": "packages/client/src/errors.ts",
+      "summary": "客户端错误类型：ServerError、DisconnectedError、ClientDisposedError，以及 unknown → Error 的归一化助手。",
+      "tags": [
+        "error-handling",
+        "错误处理",
+        "type-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/client/src/errors.ts:ServerError",
+      "type": "class",
+      "name": "ServerError",
+      "filePath": "packages/client/src/errors.ts",
+      "lineRange": [
+        3,
+        11
+      ],
+      "summary": "包装协议层 ProtocolError，保留 ProtocolErrorCode。",
+      "tags": [
+        "error-handling",
+        "protocol",
+        "rpc"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/client/src/errors.ts:DisconnectedError",
+      "type": "class",
+      "name": "DisconnectedError",
+      "filePath": "packages/client/src/errors.ts",
+      "lineRange": [
+        13,
+        18
+      ],
+      "summary": "表示传输已断开；可携带 cause，供连接状态机统一失败路径。",
+      "tags": [
+        "error-handling",
+        "connection",
+        "transport"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/client/src/errors.ts:ClientDisposedError",
+      "type": "class",
+      "name": "ClientDisposedError",
+      "filePath": "packages/client/src/errors.ts",
+      "lineRange": [
+        20,
+        25
+      ],
+      "summary": "在 Client.dispose 之后继续调用 API 时抛出。",
+      "tags": [
+        "error-handling",
+        "lifecycle",
+        "client"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/client/src/errors.ts:toError",
+      "type": "function",
+      "name": "toError",
+      "filePath": "packages/client/src/errors.ts",
+      "lineRange": [
+        27,
+        29
+      ],
+      "summary": "把 unknown 收成 Error，非 Error 则 String() 包装。",
+      "tags": [
+        "error-handling",
+        "utility",
+        "normalization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/client/src/errors.ts:toDisconnectedError",
+      "type": "function",
+      "name": "toDisconnectedError",
+      "filePath": "packages/client/src/errors.ts",
+      "lineRange": [
+        31,
+        34
+      ],
+      "summary": "把任意失败收成 DisconnectedError，已是该类型则原样返回。",
+      "tags": [
+        "error-handling",
+        "utility",
+        "connection"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/client/src/client.ts",
+      "target": "file:packages/chord/src/context/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/client/src/client.ts",
+      "target": "file:packages/chord/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/client/src/client.ts",
+      "target": "file:packages/client/src/connection.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/client/src/client.ts",
+      "target": "file:packages/client/src/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/client/src/client.ts",
+      "target": "file:packages/client/src/promise.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/client/src/client.ts",
+      "target": "file:packages/client/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/client/src/client.ts",
+      "target": "file:packages/protocol/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/client/src/connection.ts",
+      "target": "file:packages/client/src/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/client/src/connection.ts",
+      "target": "file:packages/client/src/promise.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/client/src/connection.ts",
+      "target": "file:packages/client/src/transport.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/client/src/connection.ts",
+      "target": "file:packages/client/src/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/client/src/connection.ts",
+      "target": "file:packages/protocol/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/client/src/errors.ts",
+      "target": "file:packages/protocol/src/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/client/src/client.ts",
+      "target": "class:packages/client/src/client.ts:Client",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/client/src/client.ts",
+      "target": "function:packages/client/src/client.ts:createClientServiceTransport",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/client/src/client.ts",
+      "target": "class:packages/client/src/client.ts:Client",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/client/src/client.ts",
+      "target": "function:packages/client/src/client.ts:createClientServiceTransport",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/client/src/client.ts:Client",
+      "target": "class:packages/client/src/connection.ts:Connection",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/client/src/client.ts:Client",
+      "target": "function:packages/client/src/promise.ts:createPromiseResolvers",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/client/src/client.ts:Client",
+      "target": "function:packages/client/src/errors.ts:toError",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/client/src/client.ts:Client",
+      "target": "class:packages/client/src/errors.ts:ServerError",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/client/src/client.ts:Client",
+      "target": "class:packages/client/src/errors.ts:DisconnectedError",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/client/src/client.ts:Client",
+      "target": "class:packages/client/src/errors.ts:ClientDisposedError",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/client/src/client.ts:Client",
+      "target": "function:packages/protocol/src/index.ts:isServerId",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/client/src/client.ts:createClientServiceTransport",
+      "target": "class:packages/client/src/client.ts:Client",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/client/src/connection.ts",
+      "target": "class:packages/client/src/connection.ts:Connection",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/client/src/connection.ts",
+      "target": "class:packages/client/src/connection.ts:Connection",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/client/src/connection.ts:Connection",
+      "target": "function:packages/client/src/promise.ts:createPromiseResolvers",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/client/src/connection.ts:Connection",
+      "target": "function:packages/client/src/errors.ts:toDisconnectedError",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/client/src/connection.ts:Connection",
+      "target": "function:packages/client/src/errors.ts:toError",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:packages/client/src/connection.ts:Connection",
+      "target": "class:packages/client/src/errors.ts:ServerError",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/client/src/errors.ts",
+      "target": "class:packages/client/src/errors.ts:ServerError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/client/src/errors.ts",
+      "target": "class:packages/client/src/errors.ts:DisconnectedError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/client/src/errors.ts",
+      "target": "class:packages/client/src/errors.ts:ClientDisposedError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/client/src/errors.ts",
+      "target": "function:packages/client/src/errors.ts:toError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/client/src/errors.ts",
+      "target": "function:packages/client/src/errors.ts:toDisconnectedError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/client/src/errors.ts",
+      "target": "class:packages/client/src/errors.ts:ServerError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/client/src/errors.ts",
+      "target": "class:packages/client/src/errors.ts:DisconnectedError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/client/src/errors.ts",
+      "target": "class:packages/client/src/errors.ts:ClientDisposedError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/client/src/errors.ts",
+      "target": "function:packages/client/src/errors.ts:toError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/client/src/errors.ts",
+      "target": "function:packages/client/src/errors.ts:toDisconnectedError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:packages/client/src/errors.ts:toDisconnectedError",
+      "target": "function:packages/client/src/errors.ts:toError",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

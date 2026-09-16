@@ -1,0 +1,287 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/coding-agent/src/core/radius.ts",
+      "type": "file",
+      "name": "radius.ts",
+      "filePath": "packages/coding-agent/src/core/radius.ts",
+      "summary": "导出 Radius provider 的稳定标识常量 RADIUS_PROVIDER_ID，供 coding-agent 核心按名称识别该供应商。",
+      "tags": ["type-definition", "provider-id", "常量"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:packages/coding-agent/src/experimental/mini/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/coding-agent/src/experimental/mini/README.md",
+      "summary": "说明 experimental mini：在 AgentHarness 上拆成 TUI、server、worker 三进程，经 Unix socket 与 pipe 做 JSON RPC，并覆盖拓扑、布局、RPC 与状态复制。",
+      "tags": ["documentation", "experimental", "rpc", "architecture"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/plugin.ts",
+      "type": "file",
+      "name": "plugin.ts",
+      "filePath": "packages/coding-agent/src/experimental/plugin.ts",
+      "summary": "实验性 plugin API 的 barrel：再导出 AgentController、PresentationUI、SlashCommands 及其请求/响应类型，供外部插件对接。",
+      "tags": ["barrel", "entry-point", "experimental", "type-definition"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:packages/coding-agent/src/experimental/services/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/coding-agent/src/experimental/services/README.md",
+      "summary": "描述 experimental 客户端/服务端 service slices：Facet 生成 RPC 目录、Session 附件校验，以及 AgentController、SlashCommands、PresentationUI 等切片现状与后续点。",
+      "tags": ["documentation", "experimental", "rpc", "services"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/experimental/source-resolver.ts",
+      "type": "file",
+      "name": "source-resolver.ts",
+      "filePath": "packages/coding-agent/src/experimental/source-resolver.ts",
+      "summary": "预加载的 Node module resolve hook：读取仓库 tsconfig paths，把 @earendil-works/* 别名解析到源文件，避免内部进程静默落到过期 dist。",
+      "tags": ["module-resolution", "experimental", "runtime", "tsconfig"],
+      "complexity": "moderate",
+      "languageNotes": "使用 node:module 的 registerHooks 拦截 resolve；Node 原生可剥 TypeScript，但不会应用 workspace path aliases。"
+    },
+    {
+      "id": "function:packages/coding-agent/src/experimental/source-resolver.ts:resolveSourcePath",
+      "type": "function",
+      "name": "resolveSourcePath",
+      "filePath": "packages/coding-agent/src/experimental/source-resolver.ts",
+      "lineRange": [70, 86],
+      "summary": "把 tsconfig 替换路径落到仓库内真实文件，并在 .js/.mjs/.cjs 与对应 .ts/.mts/.cts、index.ts 之间尝试候选。",
+      "tags": ["module-resolution", "path-alias", "filesystem"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/modes/interactive/components/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/coding-agent/src/modes/interactive/components/index.ts",
+      "summary": "交互模式 TUI 组件 barrel：再导出消息、选择器、编辑器、工具执行与首次设置等扩展用 UI 组件及类型。",
+      "tags": ["barrel", "entry-point", "component", "tui"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/utils/deprecation.ts",
+      "type": "file",
+      "name": "deprecation.ts",
+      "filePath": "packages/coding-agent/src/utils/deprecation.ts",
+      "summary": "按消息去重后用黄色 console.warn 发出 deprecation 警告，并提供测试用的状态清空函数。",
+      "tags": ["utility", "deprecation", "warning"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/deprecation.ts:warnDeprecation",
+      "type": "function",
+      "name": "warnDeprecation",
+      "filePath": "packages/coding-agent/src/utils/deprecation.ts",
+      "lineRange": [5, 9],
+      "summary": "同一消息只警告一次：记入 Set 后用 chalk.yellow 打印 Deprecation warning。",
+      "tags": ["utility", "deprecation", "warning"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/coding-agent/src/utils/deprecation.ts:clearDeprecationWarningsForTests",
+      "type": "function",
+      "name": "clearDeprecationWarningsForTests",
+      "filePath": "packages/coding-agent/src/utils/deprecation.ts",
+      "lineRange": [12, 14],
+      "summary": "清空已发出的 deprecation 警告集合，供测试隔离重复警告状态。",
+      "tags": ["utility", "test", "deprecation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/coding-agent/src/utils/highlight-js.d.ts",
+      "type": "file",
+      "name": "highlight-js.d.ts",
+      "filePath": "packages/coding-agent/src/utils/highlight-js.d.ts",
+      "summary": "为 highlight.js 的 core/index 与 languages/*.js 子路径补充 ambient module 声明，覆盖 highlight 与 registerLanguage。",
+      "tags": ["type-definition", "ambient-module", "highlight.js"],
+      "complexity": "simple",
+      "languageNotes": "declare module 补齐 highlight.js 细粒度 ESM 入口的类型，官方包这些路径通常缺声明。"
+    },
+    {
+      "id": "file:packages/coding-agent/vitest.config.ts",
+      "type": "file",
+      "name": "vitest.config.ts",
+      "filePath": "packages/coding-agent/vitest.config.ts",
+      "summary": "coding-agent 的 Vitest 配置：合并仓库基座，默认 PI_OFFLINE、30s 超时，并把 pi-ai/agent-core/tui 别名指到源码。",
+      "tags": ["test", "configuration", "vitest", "alias"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/protocol/vitest.config.ts",
+      "type": "file",
+      "name": "vitest.config.ts",
+      "filePath": "packages/protocol/vitest.config.ts",
+      "summary": "protocol 包的轻量 Vitest 配置：node 环境、globals，并用 source resolve conditions 优先源码。",
+      "tags": ["test", "configuration", "vitest"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/server/src/testing/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/server/src/testing/index.ts",
+      "summary": "server 测试工具 barrel：再导出 Unix 测试客户端、TestHarness/TestServerHost 与 createTestServer。",
+      "tags": ["barrel", "entry-point", "test", "harness"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/server/src/transports/unix/address.ts",
+      "type": "file",
+      "name": "address.ts",
+      "filePath": "packages/server/src/transports/unix/address.ts",
+      "summary": "由逻辑 serverId 推导本地 Unix socket 路径，并强制 serverId 为规范小写 UUIDv4。",
+      "tags": ["unix-socket", "validation", "transport"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/server/src/transports/unix/address.ts:getUnixSocketPath",
+      "type": "function",
+      "name": "getUnixSocketPath",
+      "filePath": "packages/server/src/transports/unix/address.ts",
+      "lineRange": [4, 9],
+      "summary": "校验 serverId 为规范小写 UUIDv4 后，返回 serverDirectory 下的 <id>.sock 路径。",
+      "tags": ["unix-socket", "validation", "path"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/server/vitest.config.ts",
+      "type": "file",
+      "name": "vitest.config.ts",
+      "filePath": "packages/server/vitest.config.ts",
+      "summary": "server 包 Vitest 配置：source conditions，并把 agent-core、pi-ai、telemetry、protocol 的裸名与子路径别名到源码。",
+      "tags": ["test", "configuration", "vitest", "alias"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/session-backends/sqlite-node/src/sqlite/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/session-backends/sqlite-node/src/sqlite/index.ts",
+      "summary": "sqlite-node 存储层 barrel：再导出 repo/sql/storage 实现以及 SqliteDatabase 等类型。",
+      "tags": ["barrel", "entry-point", "sqlite", "storage"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/session-backends/sqlite-node/vitest.benchmark.config.ts",
+      "type": "file",
+      "name": "vitest.benchmark.config.ts",
+      "filePath": "packages/session-backends/sqlite-node/vitest.benchmark.config.ts",
+      "summary": "sqlite-node session 基准测试的 Vitest 配置：跑 benchmark/session/**/*.bench.ts，并把 telemetry/agent-core/pi-ai 指到源码。",
+      "tags": ["test", "benchmark", "vitest", "configuration"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/session-backends/sqlite-node/vitest.config.ts",
+      "type": "file",
+      "name": "vitest.config.ts",
+      "filePath": "packages/session-backends/sqlite-node/vitest.config.ts",
+      "summary": "sqlite-node 单元测试 Vitest 配置：v8 coverage（src/**/*.ts）以及 telemetry/agent-core/pi-ai 源码别名。",
+      "tags": ["test", "configuration", "vitest", "coverage"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/telemetry/src/testing/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/telemetry/src/testing/index.ts",
+      "summary": "telemetry 适配器一致性测试 barrel：再导出 createTelemetryAdapterConformance 及 fixture/case 类型。",
+      "tags": ["barrel", "entry-point", "test", "telemetry"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:vitest.base.ts",
+      "type": "file",
+      "name": "vitest.base.ts",
+      "filePath": "vitest.base.ts",
+      "summary": "仓库共享 Vitest 基座：导出 workspaceSourcePaths，并把 chord、telemetry、pi-ai、agent-core、client/server/tui 等包别名到源码入口。",
+      "tags": ["test", "configuration", "vitest", "alias", "workspace"],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/coding-agent/vitest.config.ts",
+      "target": "file:vitest.base.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/coding-agent/src/experimental/source-resolver.ts",
+      "target": "function:packages/coding-agent/src/experimental/source-resolver.ts:resolveSourcePath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/deprecation.ts",
+      "target": "function:packages/coding-agent/src/utils/deprecation.ts:warnDeprecation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/deprecation.ts",
+      "target": "function:packages/coding-agent/src/utils/deprecation.ts:clearDeprecationWarningsForTests",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/deprecation.ts",
+      "target": "function:packages/coding-agent/src/utils/deprecation.ts:warnDeprecation",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/coding-agent/src/utils/deprecation.ts",
+      "target": "function:packages/coding-agent/src/utils/deprecation.ts:clearDeprecationWarningsForTests",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/address.ts",
+      "target": "function:packages/server/src/transports/unix/address.ts:getUnixSocketPath",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/server/src/transports/unix/address.ts",
+      "target": "function:packages/server/src/transports/unix/address.ts:getUnixSocketPath",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "document:packages/coding-agent/src/experimental/services/README.md",
+      "target": "file:packages/coding-agent/src/experimental/plugin.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/src/experimental/mini/README.md",
+      "target": "file:packages/coding-agent/src/modes/interactive/components/index.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:packages/coding-agent/src/experimental/mini/README.md",
+      "target": "document:packages/coding-agent/src/experimental/services/README.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}
