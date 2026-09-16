@@ -1,5 +1,7 @@
 # @earendil-works/chord
 
+> 中文译本：[README.zh.md](README.zh.md)
+
 Chord is an application-composition runtime for systems assembled from
 plugins/extensions. It provides facets, services, replicated state, and a
 pluggable remote-service boundary. It is developed as a standalone package in

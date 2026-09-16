@@ -1,5 +1,7 @@
 # Security Policy
 
+> 中文译本：[SECURITY.zh.md](SECURITY.zh.md)
+
 This document should guide you about understanding the security concept behind
 Pi and also where the boundaries are.
 

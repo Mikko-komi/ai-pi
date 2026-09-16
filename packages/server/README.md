@@ -1,5 +1,7 @@
 # @earendil-works/pi-server
 
+> 中文译本：[README.zh.md](README.zh.md)
+
 Experimental local server for the new durable Session and Agent Harness interfaces.
 
 The current slice supports server- and Session-scoped facet-service routing and multi-presentation attachment. `RoutedServerServiceHost.attachClient()` creates one connection-scoped server service endpoint with narrow attachment-management capabilities. `RoutedSessionHandle.attachClient()` returns a presentation-scoped Session capability. Its `invokeService()` forwards an opaque service/member envelope to the selected Session endpoint; the server validates the attachment route but does not load the facet contract.

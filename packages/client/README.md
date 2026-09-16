@@ -1,5 +1,7 @@
 # @earendil-works/pi-client
 
+> 中文译本：[README.zh.md](README.zh.md)
+
 Transport-neutral client for the experimental Pi service protocol.
 
 ```ts

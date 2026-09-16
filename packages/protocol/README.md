@@ -1,5 +1,7 @@
 # @earendil-works/pi-protocol
 
+> 中文译本：[README.zh.md](README.zh.md)
+
 Runtime-neutral routed envelopes, CBOR encoding, and byte-stream framing for the experimental Pi protocol.
 
 Protocol version `8` defines:

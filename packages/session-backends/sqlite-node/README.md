@@ -1,5 +1,7 @@
 # @earendil-works/pi-session-backend-sqlite-node
 
+> 中文译本：[README.zh.md](README.zh.md)
+
 Node `node:sqlite` Session backend for `@earendil-works/pi-agent-core`.
 
 ```ts

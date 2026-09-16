@@ -1,5 +1,7 @@
 # Contributing to pi
 
+> 中文译本：[CONTRIBUTING.zh.md](CONTRIBUTING.zh.md)
+
 This guide exists to save both sides time.
 
 ## Philosophy

@@ -1,5 +1,7 @@
 # @earendil-works/pi-telemetry
 
+> 中文译本：[README.zh.md](README.zh.md)
+
 Vendor-neutral telemetry contracts and typed schema utilities for pi packages.
 
 This package provides:

@@ -1,5 +1,7 @@
 # Development Rules
 
+> 中文译本：[AGENTS.zh.md](AGENTS.zh.md)
+
 ## Conversational Style
 
 - Keep answers short and concise
