@@ -1,3 +1,9 @@
+/**
+ * Cartesian eval table: baseline and candidates × repetitions.
+ *
+ * 展开 baseline/candidate 与 repetition 的笛卡尔表。每行 harness 会写入迭代 artifact。
+ */
+
 import { createHash } from "node:crypto";
 import {
 	attachHarnessRunToError,
@@ -7,8 +13,18 @@ import {
 	type JsonValue,
 } from "vitest-evals/harness";
 
+/**
+ * Artifact key for the current eval-table iteration identity.
+ *
+ * 表迭代身份的 artifact 键。reporter 靠它把 run 对齐到对照分组。
+ */
 export const EVAL_HARNESS_ITERATION_ARTIFACT = "vitestEvalsHarnessIteration";
 
+/**
+ * Identity of one harness iteration inside an eval table.
+ *
+ * 一次表迭代的身份。`schemaVersion` 固定为 1；`groupKey` 由输入和 repetition 派生。
+ */
 export type EvalHarnessIterationArtifact = {
 	schemaVersion: 1;
 	evalSet: string;
@@ -19,30 +35,55 @@ export type EvalHarnessIterationArtifact = {
 	repetition: number;
 };
 
+/**
+ * One table cell: a harness wrapper plus its display name and repetition.
+ *
+ * 表的一行。`harness` 已包上迭代 artifact，不是原始 harness。
+ */
 export type EvalHarnessTableRow<TInput, TOutput extends JsonValue | undefined> = {
 	harness: Harness<TInput, TOutput>;
 	name: string;
 	repetition: number;
 };
 
+/**
+ * Two-harness table: one baseline and one candidate.
+ *
+ * 单 candidate 的表选项。`repetitions` 缺省走环境变量或 1。
+ */
 export type EvalHarnessTablePairOptions<TInput, TOutput extends JsonValue | undefined> = {
 	baseline: Harness<TInput, TOutput>;
 	candidate: Harness<TInput, TOutput>;
 	repetitions?: number;
 };
 
+/**
+ * Multi-candidate table against one shared baseline.
+ *
+ * 多 candidate 的表选项。名字必须在整个 evalSet 内唯一。
+ */
 export type EvalHarnessTableCandidatesOptions<TInput, TOutput extends JsonValue | undefined> = {
 	baseline: Harness<TInput, TOutput>;
 	candidates: readonly Harness<TInput, TOutput>[];
 	repetitions?: number;
 };
 
+/**
+ * Eval table options: a single candidate or a candidate list.
+ *
+ * 表选项联合。`candidate` 与 `candidates` 二选一，由调用签名区分。
+ */
 export type EvalHarnessTableOptions<TInput, TOutput extends JsonValue | undefined> =
 	| EvalHarnessTablePairOptions<TInput, TOutput>
 	| EvalHarnessTableCandidatesOptions<TInput, TOutput>;
 
 type EvalHarnessIterationPlan = Omit<EvalHarnessIterationArtifact, "groupKey">;
 
+/**
+ * Narrow a JSON artifact to an iteration identity, or return undefined.
+ *
+ * 收窄迭代 artifact。字段不对返回 undefined，不抛。
+ */
 export function parseEvalHarnessIterationArtifact(
 	value: JsonValue | undefined,
 ): EvalHarnessIterationArtifact | undefined {
@@ -107,10 +148,20 @@ function deriveInputKey(input: unknown): string {
 	return createHash("sha256").update(canonicalInput).digest("hex");
 }
 
+/**
+ * Stable group key for one input plus repetition.
+ *
+ * 输入和 repetition 的分组键。对象优先用非空 `id`，否则对规范化 JSON 做哈希。
+ */
 export function deriveEvalGroupKey(input: unknown, repetition: number): string {
 	return JSON.stringify([deriveInputKey(input), repetition]);
 }
 
+/**
+ * Resolve a positive integer repetition count from options or the environment.
+ *
+ * 解析重复次数。显式值优先，否则 `PI_EVAL_REPETITIONS`，再否则 1；非正整数抛。
+ */
 export function resolveEvalRepetitions(
 	explicit: number | undefined,
 	environmentValue: string | undefined = process.env.PI_EVAL_REPETITIONS,
@@ -165,6 +216,11 @@ function withIterationArtifact<TInput, TOutput extends JsonValue | undefined>(
 	};
 }
 
+/**
+ * Expand baseline and candidates into per-repetition harness rows.
+ *
+ * 展开对照表。空 evalSet、无 candidate、重名或非法 repetitions 都抛。
+ */
 export function evalHarnessTable<TInput, TOutput extends JsonValue | undefined>(
 	evalSet: string,
 	options: EvalHarnessTablePairOptions<TInput, TOutput>,

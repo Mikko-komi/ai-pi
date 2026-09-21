@@ -1,3 +1,9 @@
+/**
+ * Experimental `client` command: connect to a server and run a session.
+ *
+ * 实验 client 子命令。`--session-id` / `--continue` / `--resume` 三选一。
+ */
+
 import { Command, flagOption, stringOption } from "../command.ts";
 import {
 	type AuthInput,
@@ -9,6 +15,11 @@ import {
 	unsupportedOptions,
 } from "../command-options.ts";
 
+/**
+ * Parsed experimental client invocation.
+ *
+ * client 调用。`--provider` 必须搭配 `--model`；prompt 最多一段且不能是 flag。
+ */
 export interface ClientCommand {
 	readonly command: "client";
 	readonly auth?: AuthInput;
@@ -22,6 +33,11 @@ export interface ClientCommand {
 	readonly prompt?: string;
 }
 
+/**
+ * Host callback that executes a parsed client command.
+ *
+ * 执行已解析 client 调用的宿主回调。CLI 只解析，不在这里连服务。
+ */
 export interface ClientCommandContext {
 	runClient(command: ClientCommand): void | Promise<void>;
 }
@@ -35,6 +51,11 @@ const providerOption = stringOption("--provider");
 const modelOption = stringOption("--model");
 const pluginPackageOption = stringOption("-e", { repeatable: true });
 
+/**
+ * Experimental client command tree with connect, session, model, and auth options.
+ *
+ * client 命令定义。`--` 后的单段非空参数当 prompt；其余 leftover 当不支持选项。
+ */
 export const clientCommand = new Command<ClientCommand, ClientCommandContext>("client")
 	.option(connectOption)
 	.option(sessionIdOption)

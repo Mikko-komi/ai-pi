@@ -1,3 +1,9 @@
+/**
+ * Experimental `server` command: host a coding-agent server.
+ *
+ * 实验 server 子命令。`--provider` 必须搭配 `--model`；leftover argv 一律不支持。
+ */
+
 import { isServerId, type ServerId } from "@earendil-works/pi-protocol";
 import { Command, stringOption, valueOption } from "../command.ts";
 import {
@@ -8,6 +14,11 @@ import {
 	unsupportedOptions,
 } from "../command-options.ts";
 
+/**
+ * Parsed experimental server invocation.
+ *
+ * server 调用。`--server-id` 必须是小写 UUIDv4。
+ */
 export interface ServerCommand {
 	readonly command: "server";
 	readonly auth?: AuthInput;
@@ -18,6 +29,11 @@ export interface ServerCommand {
 	readonly sessionDir?: string;
 }
 
+/**
+ * Host callback that executes a parsed server command.
+ *
+ * 执行已解析 server 调用的宿主回调。CLI 只解析，不在这里起服务。
+ */
 export interface ServerCommandContext {
 	runServer(command: ServerCommand): void | Promise<void>;
 }
@@ -32,6 +48,11 @@ const providerOption = stringOption("--provider");
 const modelOption = stringOption("--model");
 const pluginPackageOption = stringOption("-e", { repeatable: true });
 
+/**
+ * Experimental server command tree with server-id, session, model, and auth options.
+ *
+ * server 命令定义。有 leftover argv 就失败，不吞未知选项。
+ */
 export const serverCommand = new Command<ServerCommand, ServerCommandContext>("server")
 	.option(serverIdOption)
 	.option(sessionDirOption)

@@ -1,3 +1,9 @@
+/**
+ * Pairwise harness comparison summaries for eval observations.
+ *
+ * 把多次 harness 观察收成 baseline/candidate 对照报告。不成对或没分的进 diagnostics。
+ */
+
 import { styleText } from "node:util";
 
 type HarnessObservationOutcome = "scored" | "unscored" | "skipped" | "pending" | "errored";
@@ -16,9 +22,19 @@ type HarnessObservationBase = {
 	estimatedCostUsd?: number;
 };
 
+/**
+ * One scored or unscored observation from a single harness iteration.
+ *
+ * 单次 harness 迭代的观察。只有 `scored` 才带 `score`。
+ */
 export type HarnessObservation = HarnessObservationBase &
 	({ outcome: "scored"; score: number } | { outcome: Exclude<HarnessObservationOutcome, "scored">; score?: never });
 
+/**
+ * Mean and delta for one numeric metric across eligible observation pairs.
+ *
+ * 一对 harness 上某数值指标的均值差。缺值或非有限数不进 eligible。
+ */
 export type PairedMetricSummary = {
 	totalPairs: number;
 	eligiblePairs: number;
@@ -27,6 +43,11 @@ export type PairedMetricSummary = {
 	meanDelta: number | null;
 };
 
+/**
+ * Pass-rate lift and win/tie counts for one baseline/candidate pair.
+ *
+ * 正确率对照。`score >= 1` 算通过；两边都 scored 才进 eligible。
+ */
 export type CorrectnessLiftSummary = {
 	totalPairs: number;
 	eligiblePairs: number;
@@ -38,6 +59,11 @@ export type CorrectnessLiftSummary = {
 	ties: number;
 };
 
+/**
+ * Correctness and cost/latency comparison for one baseline and one candidate.
+ *
+ * 一对 harness 的对照。正确率、token、时延、估算费用各一份摘要。
+ */
 export type HarnessPairComparison = {
 	baseline: string;
 	candidate: string;
@@ -47,6 +73,11 @@ export type HarnessPairComparison = {
 	estimatedCostUsd: PairedMetricSummary;
 };
 
+/**
+ * Why one observation could not enter a pairwise comparison.
+ *
+ * 不能成对对照的原因。缺观察、重复、出错或没分都记在这里。
+ */
 export type HarnessComparisonDiagnostic = {
 	evalSet: string;
 	groupKey: string;
@@ -57,11 +88,21 @@ export type HarnessComparisonDiagnostic = {
 	reason: "missing-observation" | "duplicate-observation" | "harness-error" | "missing-score" | "unscorable-outcome";
 };
 
+/**
+ * All pairwise comparisons for one named eval set.
+ *
+ * 一个 evalSet 的全部对照。baseline 对每个 candidate 各一行。
+ */
 export type HarnessEvalSetReport = {
 	evalSet: string;
 	comparisons: HarnessPairComparison[];
 };
 
+/**
+ * Versioned comparison report across eval sets, plus diagnostics.
+ *
+ * 对照报告。`schemaVersion` 固定为 1。
+ */
 export type HarnessComparisonReport = {
 	schemaVersion: 1;
 	evalSets: HarnessEvalSetReport[];
@@ -297,6 +338,11 @@ function compareHarnesses(
 	};
 }
 
+/**
+ * Group observations and emit pairwise comparisons plus diagnostics.
+ *
+ * 按 evalSet 分组出对照。不成对或不 scored 的观察进 diagnostics。
+ */
 export function summarizeHarnessComparisons(observations: readonly HarnessObservation[]): HarnessComparisonReport {
 	const evalSets: HarnessEvalSetReport[] = [];
 	const diagnostics: HarnessComparisonDiagnostic[] = [];
@@ -371,6 +417,11 @@ function formatMetric(
 	return formatReportLine(label, `${delta} ${values}${coverage}`);
 }
 
+/**
+ * Format a comparison report as a human-readable ANSI string.
+ *
+ * 把对照报告打成终端文本。没有任何对照时返回空串。
+ */
 export function formatHarnessComparisonReport(report: HarnessComparisonReport): string {
 	if (report.evalSets.every(({ comparisons }) => comparisons.length === 0)) return "";
 	const lines = [styleText("bold", "Eval Comparisons")];

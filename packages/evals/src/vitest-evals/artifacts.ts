@@ -1,3 +1,9 @@
+/**
+ * Vitest artifact adapters for Pi eval session and source snapshots.
+ *
+ * 把 Pi eval 的 session/source 快照挂到 vitest artifact，并可落到磁盘。
+ */
+
 import { createHash } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
 import { basename, join, relative } from "node:path";
@@ -10,6 +16,11 @@ import {
 } from "vitest";
 import type { HarnessRun } from "vitest-evals/harness";
 
+/**
+ * Artifact key for the raw Pi session JSONL snapshot.
+ *
+ * harness `setArtifact` 用的 session JSONL 键。reporter 落盘前会滤掉这个键。
+ */
 export const PI_SESSION_SNAPSHOT_ARTIFACT = "piSessionJsonl";
 
 const evalSessionArtifactKey = Symbol("pi-evals-session-artifact");
@@ -22,6 +33,11 @@ interface PiSessionAttachment extends TestAttachment {
 	bodyEncoding: "utf-8";
 }
 
+/**
+ * UTF-8 source file attachment recorded alongside an eval run.
+ *
+ * 源码附件。落盘时 `name` 必须是单段文件名，不能带路径分隔。
+ */
 export interface SourceAttachment extends TestAttachment {
 	name: string;
 	contentType: string;
@@ -48,6 +64,11 @@ declare module "vitest" {
 	}
 }
 
+/**
+ * Record a Pi session JSONL snapshot onto a vitest test case when present.
+ *
+ * 有 session 快照才挂 vitest artifact。缺 `runId` 或类型不对就抛。
+ */
 export async function recordEvalSessionArtifact(
 	task: Readonly<RunnerTestCase>,
 	run: Pick<HarnessRun, "artifacts">,
@@ -72,6 +93,11 @@ export async function recordEvalSessionArtifact(
 	});
 }
 
+/**
+ * Record one source-file attachment onto a vitest test case.
+ *
+ * 把一份源码附件挂到 test case。`runId` 由调用方给出。
+ */
 export async function recordEvalSourceArtifact(
 	task: Readonly<RunnerTestCase>,
 	runId: string,
@@ -84,6 +110,11 @@ export async function recordEvalSourceArtifact(
 	});
 }
 
+/**
+ * Write matching session/source artifacts under a run-specific directory.
+ *
+ * 按 runId 落盘 session/source 附件。文件名必须是 basename，权限 0700/0600。
+ */
 export async function persistEvalArtifactReferences(
 	artifacts: ReadonlyArray<TestArtifact>,
 	runId: string,

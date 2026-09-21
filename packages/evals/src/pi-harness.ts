@@ -1,3 +1,9 @@
+/**
+ * Isolated Pi coding-agent harness for vitest-evals.
+ *
+ * 给 vitest-evals 造隔离的 Pi coding-agent harness。每次 run 用临时 home/cwd，结束后删掉。
+ */
+
 import { existsSync } from "node:fs";
 import { mkdir, mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -26,6 +32,11 @@ import {
 } from "vitest-evals/harness";
 import { PI_SESSION_SNAPSHOT_ARTIFACT } from "./vitest-evals/artifacts.ts";
 
+/**
+ * Prompt steps for one isolated Pi coding-agent eval run.
+ *
+ * 一次 eval 的输入。字符串当单条 prompt；`reload` 夹在 prompt 之间重载扩展。
+ */
 export type PiCodingAgentInput = string | Array<{ type: "prompt"; content: string } | { type: "reload" }>;
 
 type PiCodingAgentModelSelection = {
@@ -54,6 +65,11 @@ type PiCodingAgentHarnessWithOutput<TOutput extends JsonValue> = PiCodingAgentHa
 // Comparative evals intentionally remove the documentation block using stable prompt markers instead of changing Pi's
 // production prompt builder. The isolated eval prompt has no project context or skills between these markers. If
 // that setup changes, this transform must be updated so baseline and candidate still differ only by documentation.
+/**
+ * Strip the built-in Pi documentation block from a default system prompt.
+ *
+ * 切掉默认 system prompt 里的 Pi documentation 段。缺标记就抛，不静默跳过。
+ */
 export function excludePiDocumentation(defaultPrompt: string): string {
 	const documentationStart = defaultPrompt.indexOf("\nPi documentation (read only");
 	if (documentationStart === -1) throw new Error("Default Pi system prompt has no Pi documentation section.");
@@ -62,6 +78,11 @@ export function excludePiDocumentation(defaultPrompt: string): string {
 	return defaultPrompt.slice(0, documentationStart) + defaultPrompt.slice(cwdStart);
 }
 
+/**
+ * Resolve the eval model from an explicit selection or `PI_PROVIDER`/`PI_MODEL`.
+ *
+ * 解析 eval 用的 provider/id。两边都空或只空一边就抛。
+ */
 export function resolveModelSelection(
 	explicitModel: PiCodingAgentModelSelection | undefined,
 	environment: { PI_PROVIDER?: string; PI_MODEL?: string } = process.env,
@@ -288,6 +309,11 @@ async function runPiCodingAgent<TOutput extends JsonValue>(
 	};
 }
 
+/**
+ * Build a vitest-evals harness that runs isolated Pi coding-agent sessions.
+ *
+ * 造隔离 Pi harness。可选 `output` 把会话收成结构化结果，否则输出助手文本。
+ */
 export function createPiCodingAgentHarness<TOutput extends JsonValue>(
 	options: PiCodingAgentHarnessWithOutput<TOutput>,
 ): Harness<PiCodingAgentInput, TOutput>;

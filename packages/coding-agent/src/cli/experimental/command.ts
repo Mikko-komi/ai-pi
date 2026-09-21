@@ -1,19 +1,50 @@
+/**
+ * Minimal command tree for the experimental CLI: options, parse, and execute.
+ *
+ * 实验 CLI 的命令树。解析失败收 errors，不在这里 `process.exit`。
+ */
+
+/**
+ * Parsed invocation that at least names the selected command.
+ *
+ * 已解析调用的最小形状。`command` 是子命令名。
+ */
 export interface NamedCommandInvocation {
 	readonly command: string;
 }
 
+/**
+ * Parse outcome: a typed invocation or collected errors.
+ *
+ * 解析结果。失败只带 errors，不带部分 command。
+ */
 export type CommandParseResult<TInvocation extends NamedCommandInvocation = NamedCommandInvocation> =
 	| { readonly ok: true; readonly command: TInvocation }
 	| { readonly ok: false; readonly errors: readonly string[] };
 
+/**
+ * Execute outcome: the invocation that ran or collected errors.
+ *
+ * 执行结果。解析失败原样返回；成功表示 action 已跑完。
+ */
 export type CommandExecutionResult<TInvocation extends NamedCommandInvocation = NamedCommandInvocation> =
 	| { readonly ok: true; readonly command: TInvocation }
 	| { readonly ok: false; readonly errors: readonly string[] };
 
+/**
+ * Single-option parse outcome: a value or one error string.
+ *
+ * 单个选项的解析。失败是一条 error，不是数组。
+ */
 export type CommandOptionParseResult<TValue> =
 	| { readonly ok: true; readonly value: TValue }
 	| { readonly ok: false; readonly error: string };
 
+/**
+ * Named flag or value option registered on a command.
+ *
+ * 命令选项。`name` 必须以 `-` 开头；flag 不吃值。
+ */
 export interface CommandOption<TValue> {
 	readonly name: `-${string}`;
 	readonly flag?: boolean;
@@ -21,6 +52,11 @@ export interface CommandOption<TValue> {
 	parse(value: string): CommandOptionParseResult<TValue>;
 }
 
+/**
+ * Build a value option with a custom parser.
+ *
+ * 带自定义 parse 的取值选项。默认不可重复，除非 `repeatable`。
+ */
 export function valueOption<TValue>(
 	name: `-${string}`,
 	parse: (value: string) => CommandOptionParseResult<TValue>,
@@ -29,6 +65,11 @@ export function valueOption<TValue>(
 	return { name, parse, ...options };
 }
 
+/**
+ * Build a string value option that always accepts the raw token.
+ *
+ * 原样收字符串的取值选项。解析永不失败。
+ */
 export function stringOption(
 	name: `-${string}`,
 	options: { readonly repeatable?: boolean } = {},
@@ -36,16 +77,31 @@ export function stringOption(
 	return valueOption(name, (value) => ({ ok: true, value }), options);
 }
 
+/**
+ * Build a boolean flag that takes no value.
+ *
+ * 布尔开关。出现即为 true；带 `=` 值会在命令解析时报错。
+ */
 export function flagOption(name: `-${string}`): CommandOption<boolean> {
 	return { name, flag: true, parse: () => ({ ok: true, value: true }) };
 }
 
+/**
+ * Option values and leftover argv after option parsing.
+ *
+ * 选项解析后的输入。`value` 取第一次出现；未知 `--` 之后的都进 remainingArgs。
+ */
 export interface ParsedCommandInput {
 	readonly remainingArgs: readonly string[];
 	value<TValue>(option: CommandOption<TValue>): TValue | undefined;
 	values<TValue>(option: CommandOption<TValue>): readonly TValue[];
 }
 
+/**
+ * Builder outcome used to materialize a typed invocation.
+ *
+ * builder 的产出。与 parse 结果同形：成功带 command，失败带 errors。
+ */
 export type CommandBuildResult<TInvocation extends NamedCommandInvocation> =
 	| { readonly ok: true; readonly command: TInvocation }
 	| { readonly ok: false; readonly errors: readonly string[] };
@@ -70,6 +126,11 @@ interface RegisteredCommand {
 	execute(argv: readonly string[], context: unknown): Promise<CommandExecutionResult>;
 }
 
+/**
+ * Fluent command node: options, builder, action, and nested subcommands.
+ *
+ * 命令节点。parse/execute 先分派子命令；自己要有 builder，execute 还要有 action。
+ */
 export class Command<
 	TOwnInvocation extends NamedCommandInvocation,
 	TContext,

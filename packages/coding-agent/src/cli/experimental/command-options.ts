@@ -1,7 +1,18 @@
+/**
+ * Shared experimental CLI options for auth and transport addresses.
+ *
+ * 实验 CLI 共用的 auth / `--connect` 选项。token 与 token-file 互斥。
+ */
+
 import { posix } from "node:path";
 import { isServerId, type ServerId } from "@earendil-works/pi-protocol";
 import { type ParsedCommandInput, stringOption, valueOption } from "./command.ts";
 
+/**
+ * Inline token or file-path source for experimental command auth.
+ *
+ * 实验命令的认证来源。token 与 file 两种，不能同时给。
+ */
 export type AuthInput =
 	| { readonly type: "token"; readonly token: string }
 	| { readonly type: "file"; readonly path: string };
@@ -16,9 +27,25 @@ interface RadiusTransportAddress {
 	readonly serverId: ServerId;
 }
 
+/**
+ * Unix socket path or Radius server-id address from `--connect`.
+ *
+ * `--connect` 地址。unix 必须是 `unix:///` 绝对路径；radius 要小写 UUIDv4。
+ */
 export type TransportAddress = UnixTransportAddress | RadiusTransportAddress;
 
+/**
+ * `--auth-token` string option.
+ *
+ * 内联 token 选项。与 `--auth-token-file` 互斥，由 `parseAuth` 检查。
+ */
 export const authTokenOption = stringOption("--auth-token");
+
+/**
+ * `--auth-token-file` path option.
+ *
+ * token 文件路径选项。与 `--auth-token` 互斥。
+ */
 export const authTokenFileOption = stringOption("--auth-token-file");
 
 function parseAuthInput(options: { readonly authToken?: string; readonly authTokenFile?: string }): {
@@ -86,6 +113,11 @@ function parseTransportAddress(value: string): { address?: TransportAddress; err
 	return { address: { transport: "unix", path } };
 }
 
+/**
+ * `--connect` option that parses a unix or radius transport address.
+ *
+ * 解析 `--connect`。非法 URL 或不受支持的 scheme 返回 error，不抛。
+ */
 export const connectOption = valueOption("--connect", (value) => {
 	const result = parseTransportAddress(value);
 	return result.address
@@ -93,6 +125,11 @@ export const connectOption = valueOption("--connect", (value) => {
 		: { ok: false, error: result.error ?? `Invalid --connect address "${value}"` };
 });
 
+/**
+ * Read mutually exclusive auth options from parsed command input.
+ *
+ * 从已解析输入取 auth。两个选项都给则只回 errors。
+ */
 export function parseAuth(input: ParsedCommandInput): { auth?: AuthInput; errors: string[] } {
 	return parseAuthInput({
 		authToken: input.value(authTokenOption),
@@ -100,6 +137,11 @@ export function parseAuth(input: ParsedCommandInput): { auth?: AuthInput; errors
 	});
 }
 
+/**
+ * Error if leftover argv remains on an experimental command.
+ *
+ * remainingArgs 非空时提示实验命令还不支持既有 CLI 选项。空则空数组。
+ */
 export function unsupportedOptions(command: string, input: ParsedCommandInput): string[] {
 	if (input.remainingArgs.length === 0) return [];
 	return [`The experimental ${command} command does not support existing CLI options yet`];

@@ -1,3 +1,9 @@
+/**
+ * Vitest reporter that writes eval run artifacts and comparison summaries.
+ *
+ * 跑完后打对照摘要，并在设了 `PI_EVAL_ARTIFACT_DIR` 时落盘 runs/report。
+ */
+
 import { randomUUID } from "node:crypto";
 import { appendFile, mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
@@ -85,6 +91,11 @@ function collectHarnessObservations(modules: ReadonlyArray<TestModule>): Harness
 	return observations;
 }
 
+/**
+ * Vitest reporter for harness-run JSONL and pairwise comparison output.
+ *
+ * 按 case 追加 runs.jsonl；整轮结束再出对照。中断的 run 不写对照。
+ */
 export default class EvalHarnessReporter implements Reporter {
 	private vitest: Vitest | undefined;
 
