@@ -1,3 +1,9 @@
+/**
+ * Typed AI-request and harness telemetry schemas plus span starters.
+ *
+ * agent 自有的 AI 请求和 harness span 词表。类型别名从 schema 推导；启动器把 span 写进 Context。
+ */
+
 import type {
 	ExactTelemetryAttributes,
 	SchemaTelemetrySpan,
@@ -39,6 +45,11 @@ export type {
 	TypedSpanStarter,
 } from "@earendil-works/pi-telemetry";
 
+/**
+ * Typed span vocabulary for one logical AI provider request.
+ *
+ * 一次对 AI 提供方的逻辑请求。span 名是 `pi.ai.request`。
+ */
 export const AI_TELEMETRY_SCHEMA = {
 	version: 1,
 	spans: {
@@ -117,24 +128,37 @@ export const AI_TELEMETRY_SCHEMA = {
 	},
 } as const satisfies TelemetrySchemaDefinition;
 
+/** AI 请求 schema 里的 span 名。 */
 export type AiSpanName = TelemetrySchemaSpanName<typeof AI_TELEMETRY_SCHEMA>;
+/** 指定 AI span 的启动属性。 */
 export type AiSpanStartAttributes<Name extends AiSpanName> = TelemetrySchemaSpanStartAttributes<
 	typeof AI_TELEMETRY_SCHEMA,
 	Name
 >;
+/** 指定 AI span 的结束属性。 */
 export type AiSpanEndAttributes<Name extends AiSpanName> = TelemetrySchemaSpanEndAttributes<
 	typeof AI_TELEMETRY_SCHEMA,
 	Name
 >;
+/** 指定 AI span 的启动加结束属性。 */
 export type AiSpanAttributes<Name extends AiSpanName> = AiSpanStartAttributes<Name> & AiSpanEndAttributes<Name>;
+/** 指定 AI span 上的事件名。 */
 export type AiSpanEventName<Name extends AiSpanName> = TelemetrySchemaSpanEventName<typeof AI_TELEMETRY_SCHEMA, Name>;
+/** 指定 AI span 上某事件的属性。 */
 export type AiSpanEventAttributes<
 	Name extends AiSpanName,
 	EventName extends AiSpanEventName<Name>,
 > = TelemetrySchemaSpanEventAttributes<typeof AI_TELEMETRY_SCHEMA, Name, EventName>;
+/** 按名收窄的 AI schema span。 */
 export type AiTelemetrySpan<Name extends AiSpanName> = SchemaTelemetrySpan<typeof AI_TELEMETRY_SCHEMA, Name>;
+/** AI schema 里任意一个 span。 */
 export type AiSpan = TelemetrySchemaSpanUnion<typeof AI_TELEMETRY_SCHEMA>;
 
+/**
+ * Start a typed AI-request span and bind it onto Context for the callback.
+ *
+ * 打开一个 AI 请求 span，并把它写进 callback 的 Context。
+ */
 export function startAiSpan<Name extends AiSpanName, const Attributes extends AiSpanStartAttributes<Name>, Result>(
 	name: Name,
 	attributes: ExactTelemetryAttributes<AiSpanStartAttributes<Name>, Attributes>,
@@ -230,6 +254,11 @@ const operationErrorAttributes = {
 	},
 } as const;
 
+/**
+ * Typed span vocabulary for admitted harness work: run, tools, hooks, and session writes.
+ *
+ * 已受理 harness 工作的 span 词表：run / 工具 / 钩子 / 会话写。
+ */
 export const HARNESS_TELEMETRY_SCHEMA = {
 	version: 1,
 	spans: {
@@ -591,34 +620,51 @@ export const HARNESS_TELEMETRY_SCHEMA = {
 	},
 } as const satisfies TelemetrySchemaDefinition;
 
-/** Combined typed span vocabulary for agent-owned AI-request and harness telemetry. */
+/**
+ * Combined typed span vocabulary for agent-owned AI-request and harness telemetry.
+ *
+ * 把 AI 请求 schema 和 harness schema 合成一份词表。
+ */
 export const AGENT_TELEMETRY_SCHEMAS = [AI_TELEMETRY_SCHEMA, HARNESS_TELEMETRY_SCHEMA] as const;
 
+/** harness schema 里的 span 名。 */
 export type HarnessSpanName = TelemetrySchemaSpanName<typeof HARNESS_TELEMETRY_SCHEMA>;
+/** 指定 harness span 的启动属性。 */
 export type HarnessSpanStartAttributes<Name extends HarnessSpanName> = TelemetrySchemaSpanStartAttributes<
 	typeof HARNESS_TELEMETRY_SCHEMA,
 	Name
 >;
+/** 指定 harness span 的结束属性。 */
 export type HarnessSpanEndAttributes<Name extends HarnessSpanName> = TelemetrySchemaSpanEndAttributes<
 	typeof HARNESS_TELEMETRY_SCHEMA,
 	Name
 >;
+/** 指定 harness span 的启动加结束属性。 */
 export type HarnessSpanAttributes<Name extends HarnessSpanName> = HarnessSpanStartAttributes<Name> &
 	HarnessSpanEndAttributes<Name>;
+/** 指定 harness span 上的事件名。 */
 export type HarnessSpanEventName<Name extends HarnessSpanName> = TelemetrySchemaSpanEventName<
 	typeof HARNESS_TELEMETRY_SCHEMA,
 	Name
 >;
+/** 指定 harness span 上某事件的属性。 */
 export type HarnessSpanEventAttributes<
 	Name extends HarnessSpanName,
 	EventName extends HarnessSpanEventName<Name>,
 > = TelemetrySchemaSpanEventAttributes<typeof HARNESS_TELEMETRY_SCHEMA, Name, EventName>;
+/** 按名收窄的 harness schema span。 */
 export type HarnessTelemetrySpan<Name extends HarnessSpanName> = SchemaTelemetrySpan<
 	typeof HARNESS_TELEMETRY_SCHEMA,
 	Name
 >;
+/** harness schema 里任意一个 span。 */
 export type HarnessSpan = TelemetrySchemaSpanUnion<typeof HARNESS_TELEMETRY_SCHEMA>;
 
+/**
+ * Start a typed harness span and bind it onto Context for the callback.
+ *
+ * 打开一个 harness span，并把它写进 callback 的 Context。
+ */
 export function startHarnessSpan<
 	Name extends HarnessSpanName,
 	const Attributes extends HarnessSpanStartAttributes<Name>,

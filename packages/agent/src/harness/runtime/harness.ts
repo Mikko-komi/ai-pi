@@ -1,3 +1,9 @@
+/**
+ * Runtime AgentHarness: owns lanes and process-local config, but is not itself a lane.
+ *
+ * AgentHarness 运行时。按名管理 lane 和进程配置；故障会封全部 lane。
+ */
+
 import type { Models, RetryPolicy } from "@earendil-works/pi-ai";
 import type { QueueMode } from "../../types.ts";
 import type {
@@ -25,7 +31,11 @@ import { Lane } from "./lane.ts";
 import { readLaneStorage, restoreLaneState, restoreSession } from "./restore.ts";
 import { type Config, type LaneState, SliceNotImplemented } from "./types.ts";
 
-/** Runtime implementation of AgentHarness. The harness manages lanes but is not itself a lane. */
+/**
+ * Runtime implementation of AgentHarness. The harness manages lanes but is not itself a lane.
+ *
+ * AgentHarness 实现。按名获取或创建 lane；关或故障后新调用立刻拒。
+ */
 export class Harness<TContext extends object | undefined> implements AgentHarness<TContext> {
 	readonly session: Session;
 	readonly models: Models;
@@ -371,7 +381,11 @@ export class Harness<TContext extends object | undefined> implements AgentHarnes
 	}
 }
 
-/** Attach runtime without starting provider, tool, hook, or timer effects. */
+/**
+ * Attach runtime without starting provider, tool, hook, or timer effects.
+ *
+ * 挂上 runtime，不启动任何效果。只恢复完整配置过的 lane；open 列出仍在进行的操作。
+ */
 export async function createAgentHarness<TContext extends object | undefined = object | undefined>(
 	options: AgentHarnessOptions<TContext>,
 	context: Context,

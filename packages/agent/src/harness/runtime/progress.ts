@@ -1,3 +1,9 @@
+/**
+ * Persist streaming assistant frames and tool snapshots through process-local progress channels.
+ *
+ * 把流式帧和工具快照落到 pending 地址。seal 后不再写；drain 等最后一次提交。
+ */
+
 import type { AssistantMessageFrame } from "@earendil-works/pi-ai";
 import type { AgentToolResult } from "../../types.ts";
 import type { Context } from "../context.ts";
@@ -6,12 +12,22 @@ import { appendList, pendingAssistantFrames, pendingToolOutput, setValue } from 
 import type { Lane } from "./lane.ts";
 import type { Drive, LaneState } from "./types.ts";
 
+/**
+ * Fire-and-forget writer that commits progress items while the drive still owns the target.
+ *
+ * 进度通道。write 在 seal 后丢弃；通道不再拥有目标则不提交。
+ */
 export interface ProgressChannel<T> {
 	write(item: T): void;
 	seal(): void;
 	drain(): Promise<void>;
 }
 
+/**
+ * Read all persisted assistant frames for one response entry, oldest first.
+ *
+ * 读一条响应的全部 assistant 帧。升序分页，直到一页不满。
+ */
 export async function readAssistantFrames(
 	reader: SessionReader,
 	operationId: string,
@@ -66,6 +82,11 @@ function openProgress<TContext extends object | undefined, T>(
 	};
 }
 
+/**
+ * Open a channel that appends assistant frames while the effect-pending response still matches.
+ *
+ * 打开帧进度通道。只有 effect_pending 且 responseEntryId 对得上才提交。
+ */
 export function openFrameProgress<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,
@@ -87,6 +108,11 @@ export function openFrameProgress<TContext extends object | undefined>(
 	);
 }
 
+/**
+ * Open a channel that snapshots tool output while that call is effect-pending.
+ *
+ * 打开工具进度通道。只有对应 call 仍是 effect_pending 才覆盖快照。
+ */
 export function openToolProgress<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,

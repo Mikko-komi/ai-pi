@@ -1,3 +1,9 @@
+/**
+ * One configured lane: serialized mutation line, operation ownership, and a process-local drive.
+ *
+ * 一条已配置 lane。状态只走序列化 mutation line；Drive 是唯一顶层状态写者。
+ */
+
 import {
 	type Api,
 	type ImageContent,
@@ -217,7 +223,11 @@ function capturedModel(operation: Operation): ModelIdentity | undefined {
 	}
 }
 
-/** Runtime implementation of one configured lane. */
+/**
+ * Runtime implementation of one configured lane.
+ *
+ * 一条 lane 的运行时。owned state 是权威投影；改状态用替换，不原地改。
+ */
 export class Lane<TContext extends object | undefined> implements AgentLane {
 	readonly name: string;
 	readonly session: Session;

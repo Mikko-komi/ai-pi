@@ -36,6 +36,10 @@ _Avoid_: session 持久化, runtime drive
 已完成：agent harness 的 session 公共类型、commit / fork / memory、以及 jsonl 存储合同。
 _Avoid_: testing 夹具, runtime drive
 
+**第七刀核心**:
+已完成：AgentHarness 门面剩余结果/事件类型、telemetry schema、runtime 公共入口（Harness / Lane / restore / transcript）。
+_Avoid_: drive 内部过程
+
 **AgentHarness**:
 agent-core 里按 lane 驱动持久化会话的门面，和旧的 `Agent` 循环并列，不替代 `AgentSession`。
 _Avoid_: Agent, AgentSession

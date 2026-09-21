@@ -1,3 +1,9 @@
+/**
+ * Reconstruct process-local lane state from Session scalars without starting work.
+ *
+ * 从 Session 标量重建 lane 投影。不启动效果、不解释下一步该怎么走。
+ */
+
 import type { Context } from "../context.ts";
 import { SessionInvariantError } from "../session/session.ts";
 import type {
@@ -50,6 +56,11 @@ type LaneValues = {
 	laneState: StoredValue<DurableLaneState> | undefined;
 };
 
+/**
+ * Classification of a lane's stored scalars: absent, bare branch tip, or complete lane.
+ *
+ * lane 存储分类。三者要么全缺、只剩 tip、要么 tip/config/state 齐全；半套立刻抛。
+ */
 export type ClassifiedLaneStorage =
 	| { kind: "absent" }
 	| { kind: "branch"; tip: StoredValue<string | null> }
@@ -75,6 +86,11 @@ function classifyLaneStorage(lane: string, values: LaneValues): ClassifiedLaneSt
 	return { kind: "lane", tip, configuration, laneState };
 }
 
+/**
+ * Read and classify one lane's stored scalars.
+ *
+ * 读并分类一条 lane 的标量。半套配置当 invariant 故障。
+ */
 export async function readLaneStorage(
 	reader: SessionReader,
 	lane: string,
@@ -88,7 +104,11 @@ export async function readLaneStorage(
 	return classifyLaneStorage(lane, { tip, configuration, laneState });
 }
 
-/** Restore every complete configured AgentLane in one coherent Session read. */
+/**
+ * Restore every complete configured AgentLane in one coherent Session read.
+ *
+ * 一次相干读恢复全部完整 lane。只有 tip 的裸分支跳过。
+ */
 export function restoreSession(session: Session, context: Context): Promise<Map<string, LaneState>> {
 	return session.mutate(async (reader) => {
 		const [tips, configurations, states] = await Promise.all([
@@ -114,7 +134,11 @@ export function restoreSession(session: Session, context: Context): Promise<Map<
 	}, context);
 }
 
-/** Restore one configured lane without starting work or interpreting its state. */
+/**
+ * Restore one configured lane without starting work or interpreting its state.
+ *
+ * 恢复一条完整 lane。缺 tip 或缺 config 立刻抛，不创建。
+ */
 export function restoreLane(session: Session, lane: string, context: Context): Promise<LaneState> {
 	return session.mutate(async (reader) => {
 		const stored = await readLaneStorage(reader, lane, context);
@@ -128,6 +152,11 @@ export function restoreLane(session: Session, lane: string, context: Context): P
 	}, context);
 }
 
+/**
+ * Materialize live LaneState from classified complete storage, including the current operation if any.
+ *
+ * 从齐全存储拼出 LaneState。当前操作的 meta/state 必须存在且与 intent 对齐。
+ */
 export async function restoreLaneState(
 	reader: SessionReader,
 	lane: string,

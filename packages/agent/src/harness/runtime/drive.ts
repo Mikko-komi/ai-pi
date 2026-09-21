@@ -1,3 +1,9 @@
+/**
+ * Dispatch one installed drive through durable procedures until settlement or a wait.
+ *
+ * 已安装 Drive 的调度。按 state.at 分派，直到 settled 或 durable wait。
+ */
+
 import type { DriveOutcome } from "../agent-harness.ts";
 import { AbortRequested } from "../execution/effect-gate.ts";
 import { SessionInvariantError } from "../session/session.ts";
@@ -25,7 +31,11 @@ function currentOperation<TContext extends object | undefined>(lane: Lane<TConte
 	return operation;
 }
 
-/** Drive one installed pass through direct durable procedures until settlement or a durable wait. */
+/**
+ * Drive one installed pass through direct durable procedures until settlement or a durable wait.
+ *
+ * 跑一轮已安装 drive。无进展且未取消则抛 invariant；AbortRequested 等取消后再 continue。
+ */
 export async function driveOperation<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,

@@ -4,6 +4,11 @@
  * AgentHarness API 的带 tag 错误。和 `types.ts` 里文件系统 `Result` 是两套：这里描述 lane / 操作冲突。
  */
 
+/**
+ * Success-or-tagged-error outcome used by AgentHarness APIs.
+ *
+ * 成功或带 tag 失败。和 `types.ts` 的文件系统 Result 不是同一套。
+ */
 export type Result<TValue, TError> = { ok: true; value: TValue } | { ok: false; error: TError };
 
 /**

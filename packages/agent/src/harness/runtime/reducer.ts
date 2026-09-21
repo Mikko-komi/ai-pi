@@ -1,6 +1,17 @@
+/**
+ * Fold harness events into a mutable lane snapshot for watchers.
+ *
+ * 把事件叠进可变 lane 快照。navigation 结束必须 rebase，不能就地猜 tip。
+ */
+
 import type { HarnessEvent, LaneSnapshot, LaneWatchEvent } from "../agent-harness.ts";
 import type { OperationResultRecord } from "../session/types.ts";
 
+/**
+ * Reducer hint: rebase means the watcher must recapture from storage.
+ *
+ * 归约提示。rebase 表示导航已改树，必须重拍快照。
+ */
 export type LaneSnapshotReduction = "rebase" | undefined;
 
 type LaneOperationSnapshot = NonNullable<LaneSnapshot["operation"]>;
@@ -18,7 +29,11 @@ function matchingOperation(
 	return snapshot.operation?.id === operationId ? snapshot.operation : undefined;
 }
 
-/** Apply one harness event to a mutable lane snapshot. Navigation completion requires a fresh snapshot. */
+/**
+ * Apply one harness event to a mutable lane snapshot. Navigation completion requires a fresh snapshot.
+ *
+ * 就地叠一个事件。返回 rebase 时调用方必须重读，不能继续叠。
+ */
 export function reduceLaneSnapshot(
 	snapshot: LaneSnapshot,
 	event: HarnessEvent | LaneWatchEvent,
