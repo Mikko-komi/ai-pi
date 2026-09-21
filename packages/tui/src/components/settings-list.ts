@@ -1,9 +1,20 @@
+/**
+ * Searchable settings rows that cycle values or open a submenu.
+ *
+ * 设置列表。Enter 循环 `values` 或打开 submenu；submenu 关闭后可 `navigateTo`。
+ */
+
 import { fuzzyFilter } from "../fuzzy.ts";
 import { getKeybindings } from "../keybindings.ts";
 import type { Component, TuiMouseEvent, TuiMouseEventResult } from "../tui.ts";
 import { truncateToWidth, visibleWidth, wrapTextWithAnsi } from "../utils.ts";
 import { Input } from "./input.ts";
 
+/**
+ * One settings row: label/value, optional cycle list or submenu factory.
+ *
+ * 一行设置。`id` 唯一；`values` 与 `submenu` 二选一或都无（只展示）。
+ */
 export interface SettingItem {
 	/** Unique identifier for this setting */
 	id: string;
@@ -23,6 +34,11 @@ export interface SettingItem {
 	) => Component;
 }
 
+/**
+ * Stylers for label, value, description, cursor glyph, and hint line.
+ *
+ * 标签/值/描述/光标/提示的着色。selected 只影响当前行。
+ */
 export interface SettingsListTheme {
 	label: (text: string, selected: boolean) => string;
 	value: (text: string, selected: boolean) => string;
@@ -31,10 +47,20 @@ export interface SettingsListTheme {
 	hint: (text: string) => string;
 }
 
+/**
+ * Whether {@link SettingsList} hosts an inline search {@link Input}.
+ *
+ * 开搜索才挂 Input。默认关。
+ */
 export interface SettingsListOptions {
 	enableSearch?: boolean;
 }
 
+/**
+ * Navigable settings list with optional fuzzy search and nested submenu.
+ *
+ * 可搜索设置页。子菜单打开时输入先给子组件；取消先关子菜单再关本列表。
+ */
 export class SettingsList implements Component {
 	private items: SettingItem[];
 	private filteredItems: SettingItem[];

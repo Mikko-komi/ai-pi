@@ -1,3 +1,9 @@
+/**
+ * Contract for swap-in editor widgets used by the coding-agent session.
+ *
+ * 可替换编辑器的合同。扩展自实现 vim/emacs，核心只认这组读写与回调。
+ */
+
 import type { AutocompleteProvider } from "./autocomplete.ts";
 import type { Component } from "./tui.ts";
 
@@ -7,6 +13,8 @@ import type { Component } from "./tui.ts";
  * This allows extensions to provide their own editor implementation
  * (e.g., vim mode, emacs mode, custom keybindings) while maintaining
  * compatibility with the core application.
+ *
+ * 自定义编辑器必须实现文本读写与输入。其余能力可选，缺了核心走降级。
  */
 export interface EditorComponent extends Component {
 	// =========================================================================

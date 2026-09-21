@@ -1,26 +1,57 @@
+/**
+ * Terminal image protocols, capability detection, and inline encode/fallback.
+ *
+ * 终端内嵌图。未探测到协议则 `images: null`；tmux 下默认不发图协议。
+ */
+
 import { execSync } from "node:child_process";
 import { homedir } from "node:os";
 import { isAbsolute } from "node:path";
 import { pathToFileURL } from "node:url";
 
+/**
+ * Detected inline-image protocol, or null when images must fall back to text.
+ *
+ * 内嵌图协议。`null` 只能走 {@link imageFallback}。
+ */
 export type ImageProtocol = "kitty" | "iterm2" | null;
 
+/**
+ * Cached terminal features: images, truecolor, OSC 8 hyperlinks.
+ *
+ * 终端能力缓存。环境变量 `PI_*` 可覆盖自动探测。
+ */
 export interface TerminalCapabilities {
 	images: ImageProtocol;
 	trueColor: boolean;
 	hyperlinks: boolean;
 }
 
+/**
+ * Pixel size of one terminal cell, used to convert image px to rows/cols.
+ *
+ * 单格像素。TUI 收到查询应答后更新；默认 9×18。
+ */
 export interface CellDimensions {
 	widthPx: number;
 	heightPx: number;
 }
 
+/**
+ * Pixel width/height of an image payload.
+ *
+ * 图像像素尺寸。解析失败时组件侧会给兜底值。
+ */
 export interface ImageDimensions {
 	widthPx: number;
 	heightPx: number;
 }
 
+/**
+ * Cell caps and Kitty placement flags for {@link renderImage}.
+ *
+ * 渲染上限。复用 `imageId` 才会登记 metadata 供裁剪/删除。
+ */
 export interface ImageRenderOptions {
 	maxWidthCells?: number;
 	maxHeightCells?: number;
@@ -37,10 +68,20 @@ let capabilityOverrides: Partial<TerminalCapabilities> = {};
 // Default cell dimensions - updated by TUI when terminal responds to query
 let cellDimensions: CellDimensions = { widthPx: 9, heightPx: 18 };
 
+/**
+ * Current cell pixel size (default until the terminal reports otherwise).
+ *
+ * 当前格子像素。未查询到应答前是默认值。
+ */
 export function getCellDimensions(): CellDimensions {
 	return cellDimensions;
 }
 
+/**
+ * Replace the process-wide cell pixel size.
+ *
+ * 写入格子像素。后续 {@link calculateImageCellSize} 用新值。
+ */
 export function setCellDimensions(dims: CellDimensions): void {
 	cellDimensions = dims;
 }
@@ -136,6 +177,11 @@ function parseBooleanCapabilityOverride(value: string | undefined): boolean | un
 	return value === "1" ? true : value === "0" ? false : undefined;
 }
 
+/**
+ * Detect capabilities from env, then apply `PI_IMAGE_PROTOCOL` / `PI_TRUE_COLOR` / `PI_HYPERLINKS`.
+ *
+ * 探测能力。tmux 默认无图；超链接只在 tmux 确认转发或环境明确支持时开。
+ */
 export function detectCapabilities(tmuxForwardsHyperlink: () => boolean = probeTmuxHyperlinks): TerminalCapabilities {
 	const hyperlinks = parseBooleanCapabilityOverride(process.env.PI_HYPERLINKS);
 	const detected = detectCapabilitiesFromEnvironment(
@@ -157,6 +203,11 @@ export function detectCapabilities(tmuxForwardsHyperlink: () => boolean = probeT
 	};
 }
 
+/**
+ * Cached capabilities, merging detection with {@link setCapabilityOverrides}.
+ *
+ * 带缓存的能力。未缓存则探测一次并叠 override。
+ */
 export function getCapabilities(): TerminalCapabilities {
 	if (!cachedCapabilities) {
 		const hyperlinks = capabilityOverrides.hyperlinks;
@@ -168,11 +219,20 @@ export function getCapabilities(): TerminalCapabilities {
 	return cachedCapabilities;
 }
 
+/**
+ * Drop the cached capabilities so the next read re-detects.
+ *
+ * 清缓存。override 仍在，下次 get 会再探测再叠。
+ */
 export function resetCapabilitiesCache(): void {
 	cachedCapabilities = null;
 }
 
-/** Override selected auto-detected capabilities. */
+/**
+ * Override selected auto-detected capabilities.
+ *
+ * 部分覆盖探测结果。值没变则不失效缓存。
+ */
 export function setCapabilityOverrides(overrides: Partial<TerminalCapabilities>): void {
 	if (
 		capabilityOverrides.images === overrides.images &&
@@ -185,7 +245,11 @@ export function setCapabilityOverrides(overrides: Partial<TerminalCapabilities>)
 	cachedCapabilities = null;
 }
 
-/** Override the cached capabilities. Useful in tests to exercise both code paths. */
+/**
+ * Override the cached capabilities. Useful in tests to exercise both code paths.
+ *
+ * 整份替换缓存。测试用；不改 override。
+ */
 export function setCapabilities(caps: TerminalCapabilities): void {
 	cachedCapabilities = caps;
 }
@@ -193,6 +257,11 @@ export function setCapabilities(caps: TerminalCapabilities): void {
 const KITTY_PREFIX = "\x1b_G";
 const ITERM2_PREFIX = "\x1b]1337;File=";
 
+/**
+ * Whether a rendered line contains a Kitty or iTerm2 image sequence.
+ *
+ * 行内是否有图序列。合成 overlay 时必须整行跳过。
+ */
 export function isImageLine(line: string): boolean {
 	// Fast path: sequence at line start (single-row images)
 	if (line.startsWith(KITTY_PREFIX) || line.startsWith(ITERM2_PREFIX)) {
@@ -206,12 +275,19 @@ export function isImageLine(line: string): boolean {
  * Generate a random image ID for Kitty graphics protocol.
  * Uses random IDs to avoid collisions between different module instances
  * (e.g., main app vs extensions).
+ *
+ * 随机 Kitty image id，避开多实例撞号。范围 [1, 0xffffffff]。
  */
 export function allocateImageId(): number {
 	// Use random ID in range [1, 0xffffffff] to avoid collisions
 	return Math.floor(Math.random() * 0xfffffffe) + 1;
 }
 
+/**
+ * Encode base64 pixels as a Kitty graphics transmission (+ optional placement).
+ *
+ * 编 Kitty 传输序列。大数据分块；`q=2` 抑制终端回执。
+ */
 export function encodeKitty(
 	base64Data: string,
 	options: {
@@ -261,6 +337,8 @@ export function encodeKitty(
 /**
  * Delete a Kitty graphics image by ID.
  * Uses uppercase 'I' to also free the image data.
+ *
+ * 按 id 删图并释放像素。返回要写出的序列，不自己 write。
  */
 export function deleteKittyImage(imageId: number): string {
 	return `\x1b_Ga=d,d=I,i=${imageId},q=2\x1b\\`;
@@ -269,16 +347,27 @@ export function deleteKittyImage(imageId: number): string {
 /**
  * Delete all visible Kitty graphics images.
  * Uses uppercase 'A' to also free the image data.
+ *
+ * 删所有可见图并释放数据。退 alt screen 时用。
  */
 export function deleteAllKittyImages(): string {
 	return "\x1b_Ga=d,d=A,q=2\x1b\\";
 }
 
-/** Delete all visible Kitty placements while retaining their uploaded image data. */
+/**
+ * Delete all visible Kitty placements while retaining their uploaded image data.
+ *
+ * 只拆 placement，保留已上传像素，便于滚出后再放。
+ */
 export function deleteAllKittyPlacements(): string {
 	return "\x1b_Ga=d,d=a,q=2\x1b\\";
 }
 
+/**
+ * Encode an iTerm2 inline-file OSC 1337 sequence.
+ *
+ * 编 iTerm2 内嵌文件序列。默认 inline；name 会再 base64。
+ */
 export function encodeITerm2(
 	base64Data: string,
 	options: {
@@ -307,11 +396,21 @@ export function encodeITerm2(
 	return `\x1b]1337;File=${params.join(";")}:${base64Data}\x07`;
 }
 
+/**
+ * Image size in terminal cells after aspect-preserving scale.
+ *
+ * 缩放后的列×行。至少 1×1，且不超过给定上限。
+ */
 export interface ImageCellSize {
 	columns: number;
 	rows: number;
 }
 
+/**
+ * Registered Kitty image: id, cell size, and original pixel size.
+ *
+ * 已登记的 Kitty 图。裁剪/placement 靠这张表，不解析像素。
+ */
 export interface KittyImageMetadata extends ImageCellSize {
 	imageId: number;
 	widthPx: number;
@@ -322,6 +421,11 @@ interface RegisteredKittyImageMetadata extends KittyImageMetadata {
 	transmissionGeneration: number;
 }
 
+/**
+ * Placement-only command plus cache accounting for an already-uploaded image.
+ *
+ * 只放不传的 placement。`replacementLine` 把传输段换成 placement 段。
+ */
 export interface KittyImagePlacement {
 	imageId: number;
 	transmissionGeneration: number;
@@ -334,6 +438,11 @@ export interface KittyImagePlacement {
 const kittyImageMetadata = new Map<number, RegisteredKittyImageMetadata>();
 let kittyTransmissionGeneration = 0;
 
+/**
+ * Remember metadata for an image id; evicts oldest past 1000 entries.
+ *
+ * 登记 metadata 并递增 transmissionGeneration。同 id 先删后写。
+ */
 export function registerKittyImageMetadata(metadata: KittyImageMetadata): void {
 	kittyTransmissionGeneration += 1;
 	kittyImageMetadata.delete(metadata.imageId);
@@ -351,6 +460,11 @@ function getRegisteredKittyImageMetadata(line: string): RegisteredKittyImageMeta
 	return imageId === undefined ? undefined : kittyImageMetadata.get(Number.parseInt(imageId, 10));
 }
 
+/**
+ * Look up registered metadata from a Kitty sequence's `i=` id.
+ *
+ * 从行里的 i= 查表。没登记过返回 undefined。
+ */
 export function getKittyImageMetadata(line: string): KittyImageMetadata | undefined {
 	const metadata = getRegisteredKittyImageMetadata(line);
 	if (!metadata) return undefined;
@@ -383,7 +497,11 @@ const KITTY_PLACEMENT_CONTROL_KEYS = new Set([
 	"V",
 ]);
 
-/** Build a placement-only command for an image line emitted by {@link renderImage}. */
+/**
+ * Build a placement-only command for an image line emitted by {@link renderImage}.
+ *
+ * 从已渲染行抽出 placement。缺 metadata 或序列残缺返回 undefined。
+ */
 export function getKittyImagePlacement(line: string): KittyImagePlacement | undefined {
 	const match = /\x1b_G([^;]*);/.exec(line);
 	const metadata = getRegisteredKittyImageMetadata(line);
@@ -418,6 +536,11 @@ export function getKittyImagePlacement(line: string): KittyImagePlacement | unde
 	};
 }
 
+/**
+ * Rewrite a Kitty line so only a vertical slice of rows is placed.
+ *
+ * 按行裁 Kitty 图。参数越界或无需裁则原样返回。
+ */
 export function cropKittyImageLine(line: string, hiddenRows: number, visibleRows: number): string {
 	const metadata = getKittyImageMetadata(line);
 	const match = /\x1b_G([^;]*);/.exec(line);
@@ -432,6 +555,11 @@ export function cropKittyImageLine(line: string, hiddenRows: number, visibleRows
 	return `${line.slice(0, match.index)}\x1b_G${controls.join(",")};${line.slice(match.index + match[0].length)}`;
 }
 
+/**
+ * Scale image pixels into cells, preserving aspect ratio within max width/height.
+ *
+ * 像素换格子。上下限都至少 1；高度上限可省。
+ */
 export function calculateImageCellSize(
 	imageDimensions: ImageDimensions,
 	maxWidthCells: number,
@@ -458,6 +586,11 @@ export function calculateImageCellSize(
 	};
 }
 
+/**
+ * Row count for an image fitted to `targetWidthCells`.
+ *
+ * 给定目标列宽时的行数。委托 {@link calculateImageCellSize}。
+ */
 export function calculateImageRows(
 	imageDimensions: ImageDimensions,
 	targetWidthCells: number,
@@ -466,6 +599,11 @@ export function calculateImageRows(
 	return calculateImageCellSize(imageDimensions, targetWidthCells, undefined, cellDimensions).rows;
 }
 
+/**
+ * Read IHDR width/height from a base64 PNG, or null if the header is invalid.
+ *
+ * 读 PNG IHDR。太短或签名不对返回 null。
+ */
 export function getPngDimensions(base64Data: string): ImageDimensions | null {
 	try {
 		const buffer = Buffer.from(base64Data, "base64");
@@ -487,6 +625,11 @@ export function getPngDimensions(base64Data: string): ImageDimensions | null {
 	}
 }
 
+/**
+ * Scan a base64 JPEG for the SOF frame size, or null on parse failure.
+ *
+ * 扫 JPEG SOF 尺寸。坏数据返回 null，不抛。
+ */
 export function getJpegDimensions(base64Data: string): ImageDimensions | null {
 	try {
 		const buffer = Buffer.from(base64Data, "base64");
@@ -530,6 +673,11 @@ export function getJpegDimensions(base64Data: string): ImageDimensions | null {
 	}
 }
 
+/**
+ * Read logical screen width/height from a base64 GIF, or null if invalid.
+ *
+ * 读 GIF 逻辑屏尺寸。签名不对返回 null。
+ */
 export function getGifDimensions(base64Data: string): ImageDimensions | null {
 	try {
 		const buffer = Buffer.from(base64Data, "base64");
@@ -552,6 +700,11 @@ export function getGifDimensions(base64Data: string): ImageDimensions | null {
 	}
 }
 
+/**
+ * Read VP8/VP8L/VP8X dimensions from a base64 WebP, or null if invalid.
+ *
+ * 读 WebP 尺寸。不是 RIFF/WEBP 或块不够返回 null。
+ */
 export function getWebpDimensions(base64Data: string): ImageDimensions | null {
 	try {
 		const buffer = Buffer.from(base64Data, "base64");
@@ -591,6 +744,11 @@ export function getWebpDimensions(base64Data: string): ImageDimensions | null {
 	}
 }
 
+/**
+ * Dispatch to a format-specific header parser by MIME type.
+ *
+ * 按 MIME 读尺寸。不认识的类型返回 null。
+ */
 export function getImageDimensions(base64Data: string, mimeType: string): ImageDimensions | null {
 	if (mimeType === "image/png") {
 		return getPngDimensions(base64Data);
@@ -607,6 +765,11 @@ export function getImageDimensions(base64Data: string, mimeType: string): ImageD
 	return null;
 }
 
+/**
+ * Encode an image for the current protocol, or null when images are unsupported.
+ *
+ * 按当前协议出序列。无协议返回 null，调用方走 fallback。
+ */
 export function renderImage(
 	base64Data: string,
 	imageDimensions: ImageDimensions,
@@ -661,6 +824,8 @@ export function renderImage(
  *
  * @param text - The visible text to display
  * @param url - The URL to link to
+ *
+ * OSC 8 超链接。终端不支持时序列被忽略，只剩可见文本。
  */
 export function hyperlink(text: string, url: string): string {
 	return `\x1b]8;;${url}\x1b\\${text}\x1b]8;;\x1b\\`;
@@ -679,6 +844,8 @@ function shortenImagePath(filename: string): string {
  * Text fallback when the terminal cannot render inline images.
  * Absolute paths are shown shortened (~/...) and, when OSC 8 hyperlinks are
  * available, linked to file:// so the full path remains openable.
+ *
+ * 无图时的一行文案。绝对路径可缩成 ~/ 并在有 OSC 8 时链到 file://。
  */
 export function imageFallback(mimeType: string, dimensions?: ImageDimensions, filename?: string): string {
 	const parts: string[] = [];

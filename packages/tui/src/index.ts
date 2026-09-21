@@ -1,3 +1,9 @@
+/**
+ * Public barrel for `@earendil-works/pi-tui`.
+ *
+ * 包的再导出门面。定义写在各模块，这里不另立合同。
+ */
+
 // Core TUI interfaces and classes
 
 export { Marked, type Token, type Tokens } from "marked";

@@ -1,3 +1,9 @@
+/**
+ * Multi-line editor with paste markers, autocomplete, undo, and kill-ring.
+ *
+ * 会话主编辑器。paste marker 在编辑里当原子段，折行时才按字素切开。
+ */
+
 import type { AutocompleteProvider, AutocompleteSuggestions } from "../autocomplete.ts";
 import { getKeybindings } from "../keybindings.ts";
 import { decodePrintableKey, matchesKey } from "../keys.ts";
@@ -100,6 +106,8 @@ function segmentWithMarkers(
 /**
  * Represents a chunk of text for word-wrap layout.
  * Tracks both the text content and its position in the original line.
+ *
+ * 折行后的一段。`startIndex`/`endIndex` 指回原行，供光标映射。
  */
 export interface TextChunk {
 	text: string;
@@ -117,6 +125,8 @@ export interface TextChunk {
  * @param preSegmented - Optional pre-segmented graphemes (e.g. with paste-marker awareness).
  *                       When omitted the default Intl.Segmenter is used.
  * @returns Array of chunks with text and position information
+ *
+ * 按词折行，超宽词再按字素切。CJK 邻接可断；paste marker 视觉可切、逻辑仍原子。
  */
 export function wordWrapLine(line: string, maxWidth: number, preSegmented?: Intl.SegmentData[]): TextChunk[] {
 	if (!line || maxWidth <= 0) {
@@ -232,11 +242,21 @@ interface LayoutLine {
 	cursorPos?: number;
 }
 
+/**
+ * Border color and autocomplete list theme for {@link Editor}.
+ *
+ * 边框色与补全列表主题。缺了调用方必须自己给。
+ */
 export interface EditorTheme {
 	borderColor: (str: string) => string;
 	selectList: SelectListTheme;
 }
 
+/**
+ * Horizontal padding and autocomplete dropdown height.
+ *
+ * 左右 padding 与补全最多可见条数。
+ */
 export interface EditorOptions {
 	paddingX?: number;
 	autocompleteMaxVisible?: number;
@@ -281,6 +301,11 @@ function createScrollBorder(direction: "↑" | "↓", hiddenLineCount: number, w
 	return sliceByColumn(indicator, 0, indicatorWidth, true) + ellipsis;
 }
 
+/**
+ * Focusable multi-line prompt editor used by interactive mode.
+ *
+ * 多行可聚焦编辑器。提交走 `onSubmit`；历史/补全/kill 都挂在这一个组件上。
+ */
 export class Editor implements Component, Focusable {
 	private state: EditorState = {
 		lines: [""],

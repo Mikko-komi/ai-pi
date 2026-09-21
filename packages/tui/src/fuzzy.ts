@@ -2,13 +2,25 @@
  * Fuzzy matching utilities.
  * Matches if all query characters appear in order (not necessarily consecutive).
  * Lower score = better match.
+ *
+ * 子序列模糊匹配。分数越低越好；空 query 视为全中。
  */
 
+/**
+ * Whether a query subsequence-matches text, plus a ranking score.
+ *
+ * 是否命中与排序分。`matches: false` 时 score 无意义。
+ */
 export interface FuzzyMatch {
 	matches: boolean;
 	score: number;
 }
 
+/**
+ * Score one query against one text. Lower score is a better match.
+ *
+ * 单条子序列打分。字母+数字可对调再试，对调命中加罚。
+ */
 export function fuzzyMatch(query: string, text: string): FuzzyMatch {
 	const queryLower = query.toLowerCase();
 	const textLower = text.toLowerCase();
@@ -95,6 +107,8 @@ export function fuzzyMatch(query: string, text: string): FuzzyMatch {
 /**
  * Filter and sort items by fuzzy match quality (best matches first).
  * Supports whitespace- and slash-separated tokens: all tokens must match.
+ *
+ * 按 token 全中过滤并按分排序。空白 query 原样返回。
  */
 export function fuzzyFilter<T>(items: T[], query: string, getText: (item: T) => string): T[] {
 	if (!query.trim()) {

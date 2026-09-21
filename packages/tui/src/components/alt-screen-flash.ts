@@ -1,3 +1,9 @@
+/**
+ * Transient inverted-video flash lines for the alternate-screen renderer.
+ *
+ * 全屏模式的短暂提示。超时自删并 `requestRender`；dispose 清全部定时器。
+ */
+
 import type { Component } from "../tui.ts";
 import { truncateToWidth } from "../utils.ts";
 
@@ -9,7 +15,11 @@ interface FlashEntry {
 	timer: NodeJS.Timeout;
 }
 
-/** Transient messages composited by the alternate-screen renderer. */
+/**
+ * Transient messages composited by the alternate-screen renderer.
+ *
+ * 反色短消息列表。宽不够就截断；不参与焦点。
+ */
 export class AltScreenFlashContainer implements Component {
 	private readonly entries: FlashEntry[] = [];
 	private nextId = 0;

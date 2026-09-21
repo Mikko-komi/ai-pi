@@ -15,6 +15,8 @@
  *
  * Based on code from OpenTUI (https://github.com/anomalyco/opentui)
  * MIT License - Copyright (c) 2025 opentui
+ *
+ * 把 stdin 碎块收成完整转义/粘贴序列再发出。半截 CSI 当普通键会误触发。
  */
 
 import { EventEmitter } from "events";
@@ -256,6 +258,11 @@ function extractCompleteSequences(buffer: string): { sequences: string[]; remain
 	return { sequences, remainder: "" };
 }
 
+/**
+ * Timeouts for incomplete escape sequences versus a lone ESC.
+ *
+ * 半截序列与单独 ESC 的等待上限。SSH 高延迟要加大 `escapeTimeout`。
+ */
 export type StdinBufferOptions = {
 	/**
 	 * Maximum time to wait for an incomplete sequence such as CSI or mouse
@@ -269,6 +276,11 @@ export type StdinBufferOptions = {
 	escapeTimeout?: number;
 };
 
+/**
+ * Events emitted after a complete stdin sequence is assembled.
+ *
+ * 拼完才发：普通序列走 `data`，括号粘贴走 `paste`。
+ */
 export type StdinBufferEventMap = {
 	data: [string];
 	paste: [string];
@@ -277,6 +289,8 @@ export type StdinBufferEventMap = {
 /**
  * Buffers stdin input and emits complete sequences via the 'data' event.
  * Handles partial escape sequences that arrive across multiple chunks.
+ *
+ * 拼序列的状态机。超时才把残留当完整；括号粘贴期间不拆 ESC。
  */
 export class StdinBuffer extends EventEmitter<StdinBufferEventMap> {
 	private buffer: string = "";

@@ -1,3 +1,9 @@
+/**
+ * Alternate-screen TUI: layout viewport, mouse selection, search, Kitty images.
+ *
+ * 全屏 TUI。进 1049 备用屏；stop 必须退屏并清 Kitty 图，避免主屏残留。
+ */
+
 import {
 	AltScreenSearchComponent,
 	AltScreenSearchIndex,
@@ -162,6 +168,11 @@ interface SearchHighlightRange {
 	current: boolean;
 }
 
+/**
+ * Mouse, search styling, clipboard, and jump-to-end options for alt-screen.
+ *
+ * 全屏交互选项。`copyOnSelect` 默认 true；无 `copySelection` 则走 OSC 52。
+ */
 export interface TuiAltScreenOptions {
 	/** Number of logical lines moved for each mouse-wheel event. */
 	wheelScrollLines?: number;
@@ -191,7 +202,11 @@ export interface TuiAltScreenOptions {
 	copySelection?: (text: string) => Promise<boolean>;
 }
 
-/** Alternate-screen TUI with a scrollable, application-owned viewport. */
+/**
+ * Alternate-screen TUI with a scrollable, application-owned viewport.
+ *
+ * 应用自管视口。选区/搜索/滚动条都在这里，不交给终端模拟器。
+ */
 export class TuiAltScreen extends TuiBase implements ViewportTUI {
 	readonly mode = "fullscreen" as const;
 	readonly [VIEWPORT_TUI] = true as const;

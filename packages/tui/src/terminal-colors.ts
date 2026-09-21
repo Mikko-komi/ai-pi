@@ -1,9 +1,25 @@
+/**
+ * OSC 11 / color-scheme report parsers for terminal theme detection.
+ *
+ * 解析终端回的背景色和明暗方案。格式不对返回 undefined。
+ */
+
+/**
+ * 0–255 sRGB triple from an OSC 11 background reply.
+ *
+ * OSC 11 解析出的 RGB。通道已归一到 0–255。
+ */
 export interface RgbColor {
 	r: number;
 	g: number;
 	b: number;
 }
 
+/**
+ * Light vs dark scheme reported by the terminal.
+ *
+ * 终端自报的明暗。不是自己算亮度。
+ */
 export type TerminalColorScheme = "dark" | "light";
 
 function hexToRgb(hex: string): RgbColor {
@@ -28,10 +44,20 @@ function parseOscHexChannel(channel: string): number | undefined {
 const OSC11_BACKGROUND_COLOR_RESPONSE_PATTERN = /^\x1b\]11;([^\x07\x1b]*)(?:\x07|\x1b\\)$/i;
 const COLOR_SCHEME_REPORT_PATTERN = /^(?:\x1b\[\?997;(1|2)n)+$/;
 
+/**
+ * Whether `data` is a complete OSC 11 background-color reply.
+ *
+ * 是否整段 OSC 11 背景色应答。只判形，不解析值。
+ */
 export function isOsc11BackgroundColorResponse(data: string): boolean {
 	return OSC11_BACKGROUND_COLOR_RESPONSE_PATTERN.test(data);
 }
 
+/**
+ * Parse OSC 11 `#rrggbb`, `#rrrrggggbbbb`, or `rgb:r/g/b` into 8-bit RGB.
+ *
+ * 解析 OSC 11 颜色值。对不上或通道非法返回 undefined。
+ */
 export function parseOsc11BackgroundColor(data: string): RgbColor | undefined {
 	const match = data.match(OSC11_BACKGROUND_COLOR_RESPONSE_PATTERN);
 	if (!match) {
@@ -64,6 +90,11 @@ export function parseOsc11BackgroundColor(data: string): RgbColor | undefined {
 	return r !== undefined && g !== undefined && b !== undefined ? { r, g, b } : undefined;
 }
 
+/**
+ * Parse a CSI `?997;1|2n` color-scheme report into dark or light.
+ *
+ * 解析 `?997` 方案报告。`2` 为 light，其余匹配为 dark。
+ */
 export function parseTerminalColorSchemeReport(data: string): TerminalColorScheme | undefined {
 	const match = data.match(COLOR_SCHEME_REPORT_PATTERN);
 	if (!match) {

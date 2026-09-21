@@ -1,8 +1,16 @@
+/**
+ * Wrapped multi-line text with optional padding and background.
+ *
+ * 按宽折行再加边距。空文本不占行；改文本必须失效缓存。
+ */
+
 import type { Component } from "../tui.ts";
 import { applyBackgroundToLine, visibleWidth, wrapTextWithAnsi } from "../utils.ts";
 
 /**
  * Text component - displays multi-line text with word wrapping
+ *
+ * 折行文本。空或纯空白不输出行；宽或文本变了才重算。
  */
 export class Text implements Component {
 	private text: string;

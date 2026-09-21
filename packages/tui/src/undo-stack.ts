@@ -3,6 +3,8 @@
  *
  * Stores deep clones of state snapshots. Popped snapshots are returned
  * directly (no re-cloning) since they are already detached.
+ *
+ * 撤销栈。push 深拷贝；pop 出的快照已脱离，不再拷。
  */
 export class UndoStack<S> {
 	private stack: S[] = [];

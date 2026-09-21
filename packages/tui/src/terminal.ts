@@ -1,3 +1,9 @@
+/**
+ * Process stdin/stdout terminal: raw mode, keyboard protocol, paste, progress.
+ *
+ * 真终端适配。start 开 raw/粘贴/协议探测；stop 必须还原，避免把 shell 留在 raw。
+ */
+
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { setKittyProtocolActive } from "./keys.ts";
@@ -13,10 +19,20 @@ const DESIRED_KITTY_KEYBOARD_PROTOCOL_FLAGS = 7;
 const KEYBOARD_PROTOCOL_RESPONSE_FRAGMENT_TIMEOUT_MS = 150;
 const KITTY_KEYBOARD_PROTOCOL_QUERY = `\x1b[>${DESIRED_KITTY_KEYBOARD_PROTOCOL_FLAGS}u\x1b[?u\x1b[c`;
 
+/**
+ * Parsed reply during Kitty / device-attributes keyboard-protocol probe.
+ *
+ * 协议探测应答。Kitty flags 或 DA；对不上的序列不算探测。
+ */
 export type KeyboardProtocolNegotiationSequence =
 	| { type: "kitty-flags"; flags: number }
 	| { type: "device-attributes" };
 
+/**
+ * Parse a Kitty flags (`CSI ? <n> u`) or DA (`CSI ? ... c`) probe reply.
+ *
+ * 解析探测应答。半截 CSI 不算 complete。
+ */
 export function parseKeyboardProtocolNegotiationSequence(
 	sequence: string,
 ): KeyboardProtocolNegotiationSequence | undefined {
@@ -34,6 +50,11 @@ function isKeyboardProtocolNegotiationSequencePrefix(sequence: string): boolean 
 	return sequence === "\x1b[" || /^\x1b\[\?[\d;]*$/.test(sequence);
 }
 
+/**
+ * Whether this process is Apple Terminal on Darwin (`TERM_PROGRAM`).
+ *
+ * 是否 Apple Terminal。用来决定要不要把 Shift+Enter 补成 CSI-u。
+ */
 export function isAppleTerminalSession(): boolean {
 	return process.platform === "darwin" && process.env.TERM_PROGRAM === "Apple_Terminal";
 }
@@ -42,6 +63,8 @@ export function isAppleTerminalSession(): boolean {
  * Refresh terminal dimensions on POSIX platforms by sending SIGWINCH to this process.
  * Best-effort: some environments (restricted seccomp or LSM policies) return EACCES
  * for `kill(2)`; in that case the dimensions refresh is skipped rather than crashing.
+ *
+ * 给自己发 SIGWINCH 刷新行列。Win32 或不许 kill 则跳过，不抛。
  */
 export function refreshTerminalDimensions(): void {
 	if (process.platform === "win32" || process.pid <= 0) return;
@@ -52,6 +75,11 @@ export function refreshTerminalDimensions(): void {
 	}
 }
 
+/**
+ * Rewrite a bare CR to Kitty Shift+Enter when native Shift is held.
+ *
+ * 原生层说按着 Shift 且字节是 `\\r` 才改写成 CSI-u。否则原样。
+ */
 export function normalizeNativeShiftEnterInput(
 	data: string,
 	shouldDetectNativeShiftEnter: boolean,
@@ -61,12 +89,19 @@ export function normalizeNativeShiftEnterInput(
 	return data;
 }
 
+/**
+ * Apple Terminal Shift+Enter rewrite; no-op on other emulators.
+ *
+ * Apple Terminal 专用的 Shift+Enter 归一。其它终端原样返回。
+ */
 export function normalizeAppleTerminalInput(data: string, isAppleTerminal: boolean, isShiftPressed: boolean): string {
 	return normalizeNativeShiftEnterInput(data, isAppleTerminal, isShiftPressed);
 }
 
 /**
  * Minimal terminal interface for TUI
+ *
+ * TUI 所需的终端能力。实现必须能 start/stop、写、量行列、动光标。
  */
 export interface Terminal {
 	// Start the terminal with input and resize handlers
@@ -119,6 +154,8 @@ const DEFAULT_SSH_ESCAPE_TIMEOUT_MS = 100;
  * Resolve how long to wait for the rest of an escape sequence before
  * dispatching a lone ESC as the Escape key. Legacy Alt+key input is ESC plus
  * another byte, so high-latency transports need a longer reassembly window.
+ *
+ * ESC 等待。`PI_TUI_ESC_TIMEOUT` 优先；SSH 默认 100ms，否则 10ms。
  */
 export function resolveEscapeTimeoutMs(env: NodeJS.ProcessEnv = process.env): number {
 	const configured = Number(env.PI_TUI_ESC_TIMEOUT);
@@ -133,6 +170,8 @@ export function resolveEscapeTimeoutMs(env: NodeJS.ProcessEnv = process.env): nu
 
 /**
  * Real terminal using process.stdin/stdout
+ *
+ * 进程 stdin/stdout。stop 必须关 raw、关粘贴、弹出键盘协议，避免污染父 shell。
  */
 export class ProcessTerminal implements Terminal {
 	private wasRaw = false;

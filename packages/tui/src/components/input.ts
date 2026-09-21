@@ -1,3 +1,9 @@
+/**
+ * Single-line focused input with Emacs kill/yank and undo.
+ *
+ * 单行输入。粘贴去换行；宽不够横向滚，保证光标可见。
+ */
+
 import { getKeybindings } from "../keybindings.ts";
 import { decodeKittyPrintable } from "../keys.ts";
 import { KillRing } from "../kill-ring.ts";
@@ -13,6 +19,11 @@ interface InputState {
 	cursor: number;
 }
 
+/**
+ * Prompt, placeholder, and placeholder styling for {@link Input}.
+ *
+ * 提示符与空值占位。缺省 prompt 为 `> `。
+ */
 export interface InputOptions {
 	prompt?: string;
 	placeholder?: string;
@@ -21,6 +32,8 @@ export interface InputOptions {
 
 /**
  * Input component - single-line text input with horizontal scrolling
+ *
+ * 单行可聚焦输入。聚焦时在光标处发 {@link CURSOR_MARKER}。
  */
 export class Input implements Component, Focusable {
 	private value: string = "";

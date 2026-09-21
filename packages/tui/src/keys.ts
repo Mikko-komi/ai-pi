@@ -16,6 +16,8 @@
  * - Key - Helper object for creating typed key identifiers
  * - setKittyProtocolActive(active) - Set global Kitty protocol state
  * - isKittyProtocolActive() - Query global Kitty protocol state
+ *
+ * 终端按键识别。Kitty 开着时歧义序列按 Kitty 映射，不能当旧式 Alt。
  */
 
 // =============================================================================
@@ -27,6 +29,8 @@ let _kittyProtocolActive = false;
 /**
  * Set the global Kitty keyboard protocol state.
  * Called by ProcessTerminal after detecting protocol support.
+ *
+ * 进程级 Kitty 开关。解析歧义序列前必须先设对。
  */
 export function setKittyProtocolActive(active: boolean): void {
 	_kittyProtocolActive = active;
@@ -34,6 +38,8 @@ export function setKittyProtocolActive(active: boolean): void {
 
 /**
  * Query whether Kitty keyboard protocol is currently active.
+ *
+ * 当前是否按 Kitty 解释按键。只读全局位。
  */
 export function isKittyProtocolActive(): boolean {
 	return _kittyProtocolActive;
@@ -148,6 +154,8 @@ type ModifiedKeyId<Key extends string, RemainingModifiers extends ModifierName =
 /**
  * Union type of all valid key identifiers.
  * Provides autocomplete and catches typos at compile time.
+ *
+ * 合法按键 id。修饰符按 ctrl/shift/alt/super 组合，编译期抓拼写。
  */
 export type KeyId = BaseKey | ModifiedKeyId<BaseKey>;
 
@@ -159,6 +167,8 @@ export type KeyId = BaseKey | ModifiedKeyId<BaseKey>;
  * - Key.backtick, Key.comma, Key.period, etc. for symbol keys
  * - Key.ctrl("c"), Key.alt("x"), Key.super("k") for single modifiers
  * - Key.ctrlShift("p"), Key.ctrlAlt("x"), Key.ctrlSuper("k") for combined modifiers
+ *
+ * 构造 typed {@link KeyId}。符号键用名字字段，避免源码里写裸标点。
  */
 export const Key = {
 	// Special keys
@@ -501,6 +511,8 @@ const matchesLegacyModifierSequence = (data: string, key: LegacyModifierKey, mod
 /**
  * Event types from Kitty keyboard protocol (flag 2)
  * 1 = key press, 2 = key repeat, 3 = key release
+ *
+ * Kitty 按键相位。没开 flag 2 时只有 press 有意义。
  */
 export type KeyEventType = "press" | "repeat" | "release";
 
@@ -523,6 +535,8 @@ let _lastEventType: KeyEventType = "press";
 /**
  * Check if the last parsed key event was a key release.
  * Only meaningful when Kitty keyboard protocol with flag 2 is active.
+ *
+ * 是否松开事件。括号粘贴内容即使含 `:3` 也不算。
  */
 export function isKeyRelease(data: string): boolean {
 	// Don't treat bracketed paste content as key release, even if it contains
@@ -553,6 +567,8 @@ export function isKeyRelease(data: string): boolean {
 /**
  * Check if the last parsed key event was a key repeat.
  * Only meaningful when Kitty keyboard protocol with flag 2 is active.
+ *
+ * 是否自动重复。粘贴体同样排除。
  */
 export function isKeyRepeat(data: string): boolean {
 	// Don't treat bracketed paste content as key repeat, even if it contains
@@ -816,6 +832,8 @@ function parseKeyId(
  *
  * @param data - Raw input data from terminal
  * @param keyId - Key identifier (e.g., "ctrl+c", "escape", Key.ctrl("c"))
+ *
+ * 原始字节是否等于该 {@link KeyId}。Kitty 与旧式序列都认。
  */
 export function matchesKey(data: string, keyId: KeyId): boolean {
 	const parsed = parseKeyId(keyId);
@@ -1248,6 +1266,11 @@ function formatParsedKey(codepoint: number, modifier: number, baseLayoutKey?: nu
 	return formatKeyNameWithModifiers(keyName, modifier);
 }
 
+/**
+ * Parse raw terminal bytes into a {@link KeyId} string, or undefined.
+ *
+ * 解析成 key id。Kitty 开启时 `\x1b\r`/`\n` 是 shift+enter，不是 alt+enter。
+ */
 export function parseKey(data: string): string | undefined {
 	const kitty = parseKittySequence(data);
 	if (kitty) {
@@ -1346,6 +1369,8 @@ const KITTY_PRINTABLE_ALLOWED_MODIFIERS = MODIFIERS.shift | LOCK_MASK;
  *
  * @param data - Raw input data from terminal
  * @returns The printable character, or undefined if not a printable CSI-u sequence
+ *
+ * 只收纯键或 Shift 的 CSI-u。Ctrl/Alt/Super 留给 keybinding，不插入正文。
  */
 export function decodeKittyPrintable(data: string): string | undefined {
 	const match = data.match(KITTY_CSI_U_REGEX);
@@ -1396,6 +1421,11 @@ function decodeModifyOtherKeysPrintable(data: string): string | undefined {
 	}
 }
 
+/**
+ * Decode Kitty CSI-u or modifyOtherKeys into a printable character.
+ *
+ * 可打印键解码。两种协议都试；都不是则 undefined。
+ */
 export function decodePrintableKey(data: string): string | undefined {
 	return decodeKittyPrintable(data) ?? decodeModifyOtherKeysPrintable(data);
 }

@@ -1,6 +1,17 @@
+/**
+ * Animated status line that requests TUI renders on each frame.
+ *
+ * 转圈状态行。改文案或帧会 `requestRender`；停了必须清 interval。
+ */
+
 import type { TUI } from "../tui.ts";
 import { Text } from "./text.ts";
 
+/**
+ * Spinner frames and interval for {@link Loader}.
+ *
+ * 空 `frames` 隐藏指示器。`intervalMs` 非法回落到默认。
+ */
 export interface LoaderIndicatorOptions {
 	/** Animation frames. Use an empty array to hide the indicator. */
 	frames?: string[];
@@ -13,6 +24,8 @@ const DEFAULT_INTERVAL_MS = 80;
 
 /**
  * Loader component that updates with an optional spinning animation.
+ *
+ * 继承 Text。构造即 start；`setIndicator` 会重启动画。
  */
 export class Loader extends Text {
 	private frames = [...DEFAULT_FRAMES];

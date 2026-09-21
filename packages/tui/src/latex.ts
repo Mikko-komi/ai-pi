@@ -1,3 +1,9 @@
+/**
+ * Best-effort LaTeX math to Unicode text for terminal markdown.
+ *
+ * 把基础数学公式收成终端 Unicode。不支持或畸形返回 undefined，不抛。
+ */
+
 import { visibleWidth } from "./utils.ts";
 
 const SYMBOLS: Readonly<Record<string, string>> = {
@@ -1364,6 +1370,11 @@ class LatexParser {
 	}
 }
 
+/**
+ * Display vs inline layout for {@link renderLatex}.
+ *
+ * `display` 为真才竖排分数和算子上下限。
+ */
 export interface RenderLatexOptions {
 	/** Stack fractions and operator limits vertically for display math (default: false). */
 	display?: boolean;
@@ -1372,6 +1383,8 @@ export interface RenderLatexOptions {
 /**
  * Render a basic LaTeX math expression as terminal-friendly Unicode text.
  * Returns undefined when the expression contains unsupported or malformed syntax.
+ *
+ * 不支持的宏或坏语法返回 undefined。成功则去公共缩进，保护空格还原成普通空格。
  */
 export function renderLatex(source: string, options: RenderLatexOptions = {}): string | undefined {
 	const layoutNodes: LayoutNode[] = [];

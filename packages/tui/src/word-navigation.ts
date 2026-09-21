@@ -1,3 +1,9 @@
+/**
+ * Word-boundary cursor movement for editors and single-line inputs.
+ *
+ * 按词跳光标。默认 Intl 分词；原子段（如 paste marker）整块跳过。
+ */
+
 import { getWordSegmenter, isWhitespaceChar, PUNCTUATION_REGEX } from "./utils.ts";
 
 const wordSegmenter = getWordSegmenter();
@@ -5,6 +11,8 @@ const wordSegmenter = getWordSegmenter();
 /**
  * Options for word navigation functions.
  * When omitted, uses the default Intl.Segmenter word segmentation.
+ *
+ * 自定义分词与原子段。省略则用默认 word Segmenter。
  */
 export interface WordNavigationOptions {
 	/** Custom segmenter returning word segments for the given text. */
@@ -18,6 +26,8 @@ export interface WordNavigationOptions {
  * Skips trailing whitespace, then stops at the next word/punctuation boundary.
  *
  * Pure function - does not mutate any state.
+ *
+ * 从 cursor 往回跳一词。先吃尾空白，再停在词/标点边界。不改入参。
  */
 export function findWordBackward(text: string, cursor: number, options?: WordNavigationOptions): number {
 	if (cursor <= 0) return 0;
@@ -74,6 +84,8 @@ export function findWordBackward(text: string, cursor: number, options?: WordNav
  * Skips leading whitespace, then stops at the next word/punctuation boundary.
  *
  * Pure function - does not mutate any state.
+ *
+ * 从 cursor 往前跳一词。先吃前空白，再停在词/标点边界。不改入参。
  */
 export function findWordForward(text: string, cursor: number, options?: WordNavigationOptions): number {
 	if (cursor >= text.length) return text.length;

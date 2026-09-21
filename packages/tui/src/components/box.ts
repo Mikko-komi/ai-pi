@@ -1,3 +1,9 @@
+/**
+ * Padded container that paints a background over its children.
+ *
+ * 给子组件加边距和背景。鼠标坐标先扣 padding 再往下派。
+ */
+
 import { type Component, dispatchMouseEvent, type TuiMouseDispatchResult, type TuiMouseEvent } from "../tui.ts";
 import { applyBackgroundToLine, visibleWidth } from "../utils.ts";
 
@@ -10,6 +16,8 @@ type RenderCache = {
 
 /**
  * Box component - a container that applies padding and background to all children
+ *
+ * 子组件垂直堆叠。空子列表渲染空数组，不垫 padding。
  */
 export class Box implements Component {
 	children: Component[] = [];

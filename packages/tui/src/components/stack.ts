@@ -1,6 +1,17 @@
+/**
+ * Flex-style stack layout shared by {@link VStack} and {@link HStack}.
+ *
+ * 栈布局合同与尺寸分配。`visible` 为假的孩子不参与分配。
+ */
+
 import { LAYOUT_NODE, type LayoutViewport, type StackLayoutEntry, type StackLayoutNode } from "../layout-node.ts";
 import { type Component, Container } from "../tui.ts";
 
+/**
+ * Flex extras for one stack child: basis/grow/shrink and optional visibility.
+ *
+ * 单个孩子的 flex 参数。`visible` 按视口决定是否入局。
+ */
 export interface StackEntryOptions {
 	basis?: number | "auto";
 	grow?: number;
@@ -10,12 +21,27 @@ export interface StackEntryOptions {
 	visible?: (viewport: LayoutViewport) => boolean;
 }
 
+/**
+ * A stack child plus its flex options.
+ *
+ * 带 flex 选项的孩子。`component` 是真正渲染的节点。
+ */
 export interface StackEntry extends StackEntryOptions {
 	component: Component;
 }
 
+/**
+ * Either a bare component or a component wrapped with flex options.
+ *
+ * 裸组件或带选项的条目。裸组件按默认 flex 收。
+ */
 export type StackChild = Component | StackEntry;
 
+/**
+ * Gap and cross-axis alignment for a stack.
+ *
+ * 栈间距与交叉轴对齐。默认 stretch。
+ */
 export interface StackOptions {
 	gap?: number;
 	align?: "stretch" | "start" | "center" | "end";
@@ -29,6 +55,11 @@ function normalizeSize(value: number | undefined, fallback: number): number {
 	return value === undefined || !Number.isFinite(value) ? fallback : Math.max(0, Math.floor(value));
 }
 
+/**
+ * Container that records flex entries and exposes a {@link LAYOUT_NODE}.
+ *
+ * 抽象栈。具体方向由子类 `layoutType` 定；增删孩子必须同步 `entries`。
+ */
 export abstract class Stack extends Container {
 	protected readonly entries: StackLayoutEntry[] = [];
 	protected readonly gap: number;
@@ -79,6 +110,11 @@ export abstract class Stack extends Container {
 	}
 }
 
+/**
+ * Filter stack entries whose `visible` predicate accepts the viewport.
+ *
+ * 去掉当前视口不可见的条目。无 predicate 视为可见。
+ */
 export function visibleStackEntries(
 	entries: readonly StackLayoutEntry[],
 	viewport: LayoutViewport,
@@ -132,6 +168,11 @@ function distribute(
 	}
 }
 
+/**
+ * Assign integer sizes from basis/intrinsic values, then grow or shrink to fit.
+ *
+ * 按 basis 或 intrinsic 起步，再 grow/shrink 吃满 `availableSize`。未给可用尺寸则不分配余量。
+ */
 export function allocateStackSizes(
 	entries: readonly StackLayoutEntry[],
 	intrinsicSizes: readonly number[],

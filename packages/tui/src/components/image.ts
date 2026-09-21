@@ -1,3 +1,9 @@
+/**
+ * Inline terminal image component (Kitty / iTerm2, with text fallback).
+ *
+ * 终端内嵌图。无协议时画 fallback 文案；Kitty 首次渲染才分配 imageId。
+ */
+
 import {
 	allocateImageId,
 	getCapabilities,
@@ -10,10 +16,20 @@ import {
 import type { Component } from "../tui.ts";
 import { truncateToWidth } from "../utils.ts";
 
+/**
+ * Style for the text fallback when the terminal cannot draw images.
+ *
+ * 无图协议时 fallback 文案的颜色。
+ */
 export interface ImageTheme {
 	fallbackColor: (str: string) => string;
 }
 
+/**
+ * Cell-size caps and optional Kitty id reuse for {@link Image}.
+ *
+ * 格子上限与可选复用 imageId。动画/更新要传同一 id。
+ */
 export interface ImageOptions {
 	maxWidthCells?: number;
 	maxHeightCells?: number;
@@ -22,6 +38,11 @@ export interface ImageOptions {
 	imageId?: number;
 }
 
+/**
+ * Renders one image into terminal cells, or a styled fallback line.
+ *
+ * 按协议出序列，并用空行占住行高。读不出尺寸时默认 800×600。
+ */
 export class Image implements Component {
 	private base64Data: string;
 	private mimeType: string;

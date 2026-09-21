@@ -1,8 +1,16 @@
+/**
+ * Single-line truncated text that never wraps.
+ *
+ * 只取第一行，超出视口宽截断。多行源文本的其余行丢掉。
+ */
+
 import type { Component } from "../tui.ts";
 import { truncateToWidth, visibleWidth } from "../utils.ts";
 
 /**
  * Text component that truncates to fit viewport width
+ *
+ * 单行截断。换行后的内容不渲染。
  */
 export class TruncatedText implements Component {
 	private text: string;

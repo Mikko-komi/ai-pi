@@ -56,6 +56,10 @@ _Avoid_: TUI 组件, experimental CLI
 已完成：`packages/coding-agent/src/utils` 的导出符号。
 _Avoid_: .d.ts, 再导出
 
+**第十二刀核心**:
+已完成：`packages/tui/src` 的导出符号（TUI 门面、按键、布局、组件）。
+_Avoid_: 类方法, native 构建脚本
+
 **AgentHarness**:
 agent-core 里按 lane 驱动持久化会话的门面，和旧的 `Agent` 循环并列，不替代 `AgentSession`。
 _Avoid_: Agent, AgentSession

@@ -1,3 +1,9 @@
+/**
+ * Slash-command and file-path autocomplete providers for the editor.
+ *
+ * 斜杠命令与路径补全。`getSuggestions` 无建议返回 null，不抛给编辑器。
+ */
+
 import { spawn } from "child_process";
 import { readdirSync, statSync } from "fs";
 import { homedir } from "os";
@@ -221,6 +227,11 @@ async function walkDirectoryWithFd(
 	});
 }
 
+/**
+ * One completion row: inserted `value`, shown `label`, optional description.
+ *
+ * 补全一行。`value` 写回缓冲，`label` 只展示。
+ */
 export interface AutocompleteItem {
 	value: string;
 	label: string;
@@ -229,6 +240,11 @@ export interface AutocompleteItem {
 
 type Awaitable<T> = T | Promise<T>;
 
+/**
+ * Named slash command, optional argument hint, and argument completions.
+ *
+ * 斜杠命令。`getArgumentCompletions` 返回 null 表示这条没有参数补全。
+ */
 export interface SlashCommand {
 	name: string;
 	description?: string;
@@ -238,11 +254,21 @@ export interface SlashCommand {
 	getArgumentCompletions?(argumentPrefix: string): Awaitable<AutocompleteItem[] | null>;
 }
 
+/**
+ * Suggestion list plus the prefix that will be replaced on apply.
+ *
+ * 建议集与要被替换的前缀。空 items 不应作为成功结果返回。
+ */
 export interface AutocompleteSuggestions {
 	items: AutocompleteItem[];
 	prefix: string; // What we're matching against (e.g., "/" or "src/")
 }
 
+/**
+ * Pluggable autocomplete: suggest, apply, optional Tab file-trigger.
+ *
+ * 补全提供者。`signal` abort 后应尽快空结果返回，不要再写缓冲。
+ */
 export interface AutocompleteProvider {
 	/** Characters that should naturally trigger this provider at token boundaries. */
 	triggerCharacters?: string[];
@@ -274,7 +300,11 @@ export interface AutocompleteProvider {
 	shouldTriggerFileCompletion?(lines: string[], cursorLine: number, cursorCol: number): boolean;
 }
 
-// Combined provider that handles both slash commands and file paths
+/**
+ * Combined provider that handles both slash commands and file paths.
+ *
+ * 斜杠命令 + `@`/`路径` 文件补全。无 fd 时 `@` 模糊搜为空；目录不可读返回 []。
+ */
 export class CombinedAutocompleteProvider implements AutocompleteProvider {
 	private commands: (SlashCommand | AutocompleteItem)[];
 	private basePath: string;

@@ -1,5 +1,16 @@
+/**
+ * Vertical flex stack of TUI children.
+ *
+ * 纵向分配高并拼接行。gap 插空行；孩子不够高则垫空行。
+ */
+
 import { allocateStackSizes, Stack, type StackChild, type StackOptions, visibleStackEntries } from "./stack.ts";
 
+/**
+ * Column-oriented {@link Stack}: children stack top to bottom at full width.
+ *
+ * 纵向栈。按 intrinsic 高分配，宽度吃满视口。
+ */
 export class VStack extends Stack {
 	protected readonly layoutType = "vstack" as const;
 

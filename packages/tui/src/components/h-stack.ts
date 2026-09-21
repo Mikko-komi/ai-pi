@@ -1,7 +1,18 @@
+/**
+ * Horizontal flex stack of TUI children.
+ *
+ * 横向分配宽并合成行。零宽孩子占位但不渲染。
+ */
+
 import { compositeTuiLine } from "../tui.ts";
 import { visibleWidth } from "../utils.ts";
 import { allocateStackSizes, Stack, type StackChild, type StackOptions, visibleStackEntries } from "./stack.ts";
 
+/**
+ * Row-oriented {@link Stack}: children share one height and sit side by side.
+ *
+ * 横向栈。按 intrinsic 宽分配，再用 {@link compositeTuiLine} 铺到同一组行。
+ */
 export class HStack extends Stack {
 	protected readonly layoutType = "hstack" as const;
 

@@ -1,7 +1,15 @@
+/**
+ * Empty vertical space in a TUI tree.
+ *
+ * 只占行、不画字。默认一行。
+ */
+
 import type { Component } from "../tui.ts";
 
 /**
  * Spacer component that renders empty lines
+ *
+ * 渲染 `lines` 条空行。无缓存。
  */
 export class Spacer implements Component {
 	private lines: number;

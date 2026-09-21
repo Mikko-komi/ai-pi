@@ -1,3 +1,9 @@
+/**
+ * Terminal text metrics: visible width, wrap, slice, ANSI extraction.
+ *
+ * 终端可见度量。ANSI/OSC/APC 不占格；宽字符与 emoji 按格子算，不能用 string.length。
+ */
+
 import { eastAsianWidth } from "get-east-asian-width";
 
 // segmenters (shared instance)
@@ -6,6 +12,8 @@ const wordSegmenter = new Intl.Segmenter(undefined, { granularity: "word" });
 
 /**
  * Get the shared grapheme segmenter instance.
+ *
+ * 进程共享的字素 Segmenter。不要每次 new。
  */
 export function getGraphemeSegmenter(): Intl.Segmenter {
 	return graphemeSegmenter;
@@ -13,6 +21,8 @@ export function getGraphemeSegmenter(): Intl.Segmenter {
 
 /**
  * Get the shared word segmenter instance.
+ *
+ * 进程共享的词 Segmenter。给按词跳光标用。
  */
 export function getWordSegmenter(): Intl.Segmenter {
 	return wordSegmenter;
@@ -51,6 +61,11 @@ const rgiEmojiRegex = /^\p{RGI_Emoji}$/v;
 const WIDTH_CACHE_SIZE = 512;
 const widthCache = new Map<string, number>();
 
+/**
+ * Scripts that allow a wrap opportunity between adjacent non-space graphemes.
+ *
+ * CJK 邻接可断行。折行时一边是这些文字就可以切。
+ */
 export const cjkBreakRegex =
 	/[\p{Script_Extensions=Han}\p{Script_Extensions=Hiragana}\p{Script_Extensions=Katakana}\p{Script_Extensions=Hangul}\p{Script_Extensions=Bopomofo}]/u;
 
@@ -236,6 +251,8 @@ function graphemeWidth(segment: string): number {
 
 /**
  * Calculate the visible width of a string in terminal columns.
+ *
+ * 可见列宽。剥转义、tab 当 3 格；结果有上限缓存。
  */
 export function visibleWidth(str: string): number {
 	if (str.length === 0) {
@@ -294,7 +311,11 @@ export function visibleWidth(str: string): number {
 	return width;
 }
 
-/** Remove ANSI, OSC, and APC control sequences while preserving visible text. */
+/**
+ * Remove ANSI, OSC, and APC control sequences while preserving visible text.
+ *
+ * 去掉控制序列，留下可见字。无 ESC 则原样返回。
+ */
 export function stripTerminalSequences(str: string): string {
 	if (!str.includes("\x1b")) return str;
 	let result = "";
@@ -316,7 +337,11 @@ interface GraphemeCellRange {
 	end: number;
 }
 
-/** Return the terminal-cell range occupied by the grapheme at a visible column. */
+/**
+ * Return the terminal-cell range occupied by the grapheme at a visible column.
+ *
+ * 列上那个字素占的 [start, end)。宽字符点到右半格也算同一个。
+ */
 export function getGraphemeCellRange(line: string, column: number): GraphemeCellRange | undefined {
 	let currentCol = 0;
 	let i = 0;
@@ -340,7 +365,11 @@ export function getGraphemeCellRange(line: string, column: number): GraphemeCell
 	return undefined;
 }
 
-/** Return the OSC 8 hyperlink covering a visible terminal column. */
+/**
+ * Return the OSC 8 hyperlink covering a visible terminal column.
+ *
+ * 该列上的 OSC 8 URL。无活动链接或列越界返回 undefined。
+ */
 export function getOsc8LinkAtColumn(line: string, column: number): string | undefined {
 	let activeUrl: string | undefined;
 	let currentCol = 0;
@@ -365,6 +394,9 @@ export function getOsc8LinkAtColumn(line: string, column: number): string | unde
 	return undefined;
 }
 
+const THAI_LAO_AM_REGEX = /[\u0e33\u0eb3]/;
+const THAI_LAO_AM_GLOBAL_REGEX = /[\u0e33\u0eb3]/g;
+
 /**
  * Normalize text for terminal output without changing logical editor content.
  * Some terminals render precomposed Thai/Lao AM vowels inconsistently during
@@ -372,10 +404,9 @@ export function getOsc8LinkAtColumn(line: string, column: number): string | unde
  * width but avoid stale-cell artifacts in terminal renderers. Visible tabs are
  * expanded to the fixed width used by layout so terminal tab stops cannot wrap
  * a logical line, while tabs inside terminal string sequences stay untouched.
+ *
+ * 写出前归一。泰/老 AM 拆开避免残格；可见 tab 扩成 3 空格，序列里的 tab 不动。
  */
-const THAI_LAO_AM_REGEX = /[\u0e33\u0eb3]/;
-const THAI_LAO_AM_GLOBAL_REGEX = /[\u0e33\u0eb3]/g;
-
 export function normalizeTerminalOutput(str: string): string {
 	let normalized = str;
 	if (THAI_LAO_AM_REGEX.test(normalized)) {
@@ -402,6 +433,8 @@ export function normalizeTerminalOutput(str: string): string {
 
 /**
  * Extract ANSI escape sequences from a string at the given position.
+ *
+ * 从 pos 取一段 CSI/OSC/APC。不是 ESC 或残缺返回 null。
  */
 export function extractAnsiCode(str: string, pos: number): { code: string; length: number } | null {
 	if (pos >= str.length || str[pos] !== "\x1b") return null;
@@ -743,7 +776,11 @@ function updateTrackerFromText(text: string, tracker: AnsiCodeTracker): void {
 	}
 }
 
-/** Return only the background color active at the end of an ANSI-styled string. */
+/**
+ * Return only the background color active at the end of an ANSI-styled string.
+ *
+ * 串末仍生效的背景 ANSI。没有背景则空串。
+ */
 export function getActiveBackgroundAnsi(text: string): string {
 	const tracker = new AnsiCodeTracker();
 	updateTrackerFromText(text, tracker);
@@ -839,6 +876,8 @@ function splitIntoTokensWithAnsi(text: string): string[] {
  * @param text - Text to wrap (may contain ANSI codes and newlines)
  * @param width - Maximum visible width per line
  * @returns Array of wrapped lines (NOT padded to width)
+ *
+ * 只折行，不补空格、不上底色。活动 ANSI 跨行续上。
  */
 export function wrapTextWithAnsi(text: string, width: number): string[] {
 	if (!text) {
@@ -946,10 +985,17 @@ function wrapSingleLine(line: string, width: number): string[] {
 	return wrapped.length > 0 ? wrapped.map((line) => line.trimEnd()) : [""];
 }
 
+/**
+ * ASCII punctuation treated as word-navigation boundaries inside a word-like segment.
+ *
+ * 词内 ASCII 标点。Intl 把它们算进 word 时，按词跳仍在这里切开。
+ */
 export const PUNCTUATION_REGEX = /[(){}[\]<>.,;:'"!?+\-=*/\\|&%^$#@~`]/;
 
 /**
  * Check if a character is whitespace.
+ *
+ * 是否空白。按 JS `\\s`，含换行。
  */
 export function isWhitespaceChar(char: string): boolean {
 	return /\s/.test(char);
@@ -957,6 +1003,8 @@ export function isWhitespaceChar(char: string): boolean {
 
 /**
  * Check if a character is punctuation.
+ *
+ * 是否 {@link PUNCTUATION_REGEX} 里的 ASCII 标点。
  */
 export function isPunctuationChar(char: string): boolean {
 	return PUNCTUATION_REGEX.test(char);
@@ -1038,6 +1086,8 @@ function breakLongWord(word: string, width: number, tracker: AnsiCodeTracker): s
  * @param width - Total width to pad to
  * @param bgFn - Background color function
  * @returns Line with background applied and padded to width
+ *
+ * 先垫到 width 再套 bgFn。宽不够不截断。
  */
 export function applyBackgroundToLine(line: string, width: number, bgFn: (text: string) => string): string {
 	// Calculate padding needed
@@ -1060,6 +1110,8 @@ export function applyBackgroundToLine(line: string, width: number, bgFn: (text: 
  * @param ellipsis - Ellipsis string to append when truncating (default: "...")
  * @param pad - If true, pad result with spaces to exactly maxWidth (default: false)
  * @returns Truncated text, optionally padded to exactly maxWidth
+ *
+ * 按可见宽截断，可加省略号。ANSI 不计宽；maxWidth≤0 返回空串。
  */
 export function truncateToWidth(
 	text: string,
@@ -1202,12 +1254,18 @@ export function truncateToWidth(
 /**
  * Extract a range of visible columns from a line. Handles ANSI codes and wide chars.
  * @param strict - If true, exclude wide chars at boundary that would extend past the range
+ *
+ * 按列切片，只返回文本。`strict` 时贴边宽字符整颗丢掉。
  */
 export function sliceByColumn(line: string, startCol: number, length: number, strict = false): string {
 	return sliceWithWidth(line, startCol, length, strict).text;
 }
 
-/** Like sliceByColumn but also returns the actual visible width of the result. */
+/**
+ * Like sliceByColumn but also returns the actual visible width of the result.
+ *
+ * 带实测宽的切片。`strict` 丢掉贴边宽字符后 width 可能小于 length。
+ */
 export function sliceWithWidth(
 	line: string,
 	startCol: number,
@@ -1262,6 +1320,8 @@ const pooledStyleTracker = new AnsiCodeTracker();
  * Extract "before" and "after" segments from a line in a single pass.
  * Used for overlay compositing where we need content before and after the overlay region.
  * Preserves styling from before the overlay that should affect content after it.
+ *
+ * 一次扫出 overlay 前后段。前段样式要能作用到后段。
  */
 export function extractSegments(
 	line: string,

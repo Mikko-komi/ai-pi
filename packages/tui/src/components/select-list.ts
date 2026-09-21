@@ -1,3 +1,9 @@
+/**
+ * Filterable, keyboard-and-mouse selectable list.
+ *
+ * 可选列表。过滤后索引钳在范围内；空过滤结果画 no-match，不崩。
+ */
+
 import { getKeybindings } from "../keybindings.ts";
 import type { Component, TuiMouseEvent, TuiMouseEventResult } from "../tui.ts";
 import { truncateToWidth, visibleWidth } from "../utils.ts";
@@ -9,12 +15,22 @@ const MIN_DESCRIPTION_WIDTH = 10;
 const normalizeToSingleLine = (text: string): string => text.replace(/[\r\n]+/g, " ").trim();
 const clamp = (value: number, min: number, max: number): number => Math.max(min, Math.min(value, max));
 
+/**
+ * One row in a {@link SelectList}: value, label, optional description.
+ *
+ * 列表一行。`value` 是选中回传，`label` 是左栏展示。
+ */
 export interface SelectItem {
 	value: string;
 	label: string;
 	description?: string;
 }
 
+/**
+ * ANSI stylers for selected row, description, scroll hint, and empty state.
+ *
+ * 选中行、描述、滚动信息和无匹配的着色。
+ */
 export interface SelectListTheme {
 	selectedPrefix: (text: string) => string;
 	selectedText: (text: string) => string;
@@ -23,6 +39,11 @@ export interface SelectListTheme {
 	noMatch: (text: string) => string;
 }
 
+/**
+ * Context passed when the primary column must be truncated.
+ *
+ * 左栏截断回调的上下文。自定义截断（如路径）用这个。
+ */
 export interface SelectListTruncatePrimaryContext {
 	text: string;
 	maxWidth: number;
@@ -31,12 +52,22 @@ export interface SelectListTruncatePrimaryContext {
 	isSelected: boolean;
 }
 
+/**
+ * Primary-column width bounds and optional truncate function.
+ *
+ * 左栏宽上下限。不设则用默认 32 与描述栏最小宽。
+ */
 export interface SelectListLayoutOptions {
 	minPrimaryColumnWidth?: number;
 	maxPrimaryColumnWidth?: number;
 	truncatePrimary?: (context: SelectListTruncatePrimaryContext) => string;
 }
 
+/**
+ * Scrollable pick list with prefix filter and optional two-column layout.
+ *
+ * 可过滤选择列表。确认/取消走 keybinding；鼠标按在行上才选。
+ */
 export class SelectList implements Component {
 	private items: SelectItem[] = [];
 	private filteredItems: SelectItem[] = [];

@@ -1,3 +1,9 @@
+/**
+ * Transcript search: corpus index, match keys, and the find overlay widget.
+ *
+ * 全屏 transcript 搜索。空白折叠成单空格；行未变则复用语料。
+ */
+
 import { Input } from "./components/input.ts";
 import { getKeybindings } from "./keybindings.ts";
 import type { Component, Focusable } from "./tui.ts";
@@ -19,12 +25,22 @@ interface SearchCorpus {
 	spans: SearchSourceSpan[];
 }
 
+/**
+ * One highlighted span of a match, in rendered row/column cells.
+ *
+ * 命中的一段格子范围。`endCol` 不含。
+ */
 export interface AltScreenSearchSegment {
 	row: number;
 	startCol: number;
 	endCol: number;
 }
 
+/**
+ * A query hit that may span multiple rows after wrap.
+ *
+ * 一次命中。折行后可以多段；空 segments 不会进结果。
+ */
 export interface AltScreenSearchMatch {
 	segments: AltScreenSearchSegment[];
 }
@@ -147,12 +163,21 @@ function findSearchCorpusMatches(corpus: SearchCorpus, normalizedQuery: string):
 	return matches;
 }
 
+/**
+ * Cached search output plus whether the match list was rebuilt.
+ *
+ * 缓存查询结果。`changed` 为假则可沿用上次选中项。
+ */
 export interface AltScreenSearchResult {
 	matches: AltScreenSearchMatch[];
 	changed: boolean;
 }
 
-/** Cache the searchable corpus and matches while rendered transcript lines remain unchanged. */
+/**
+ * Cache the searchable corpus and matches while rendered transcript lines remain unchanged.
+ *
+ * 行引用未变则不重建语料。query 归一后相同也不重搜。
+ */
 export class AltScreenSearchIndex {
 	private sourceLines: string[] | undefined;
 	private corpus: SearchCorpus | undefined;
@@ -183,17 +208,32 @@ export class AltScreenSearchIndex {
 	}
 }
 
+/**
+ * One-shot search without caching the corpus.
+ *
+ * 一次性搜索。空 query（归一后）返回 []。
+ */
 export function findAltScreenSearchMatches(lines: readonly string[], query: string): AltScreenSearchMatch[] {
 	const normalizedQuery = normalizeQuery(query);
 	return normalizedQuery ? findSearchCorpusMatches(buildSearchCorpus(lines), normalizedQuery) : [];
 }
 
+/**
+ * Stable key from first/last segment cells, for retaining selection across edits.
+ *
+ * 用首尾格子做稳定键。无 segment 返回空串。
+ */
 export function getAltScreenSearchMatchKey(match: AltScreenSearchMatch): string {
 	const first = match.segments[0];
 	const last = match.segments[match.segments.length - 1];
 	return first && last ? `${first.row}:${first.startCol}:${last.row}:${last.endCol}` : "";
 }
 
+/**
+ * Find box: query input, match count, and prev/next buttons.
+ *
+ * 搜索浮层。焦点转给内部 Input；宽为 1 只画边框三行。
+ */
 export class AltScreenSearchComponent implements Component, Focusable {
 	private readonly input = new Input({
 		prompt: " ",

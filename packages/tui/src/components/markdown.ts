@@ -1,3 +1,9 @@
+/**
+ * Terminal markdown renderer with ANSI theme hooks and optional LaTeX.
+ *
+ * 把 Markdown 收成带 ANSI 的行。解析失败不抛；宽变了才重排。
+ */
+
 import { Marked, type Token, Tokenizer, type TokenizerExtension, type Tokens } from "marked";
 import { renderLatex } from "../latex.ts";
 import { getCapabilities, hyperlink, isImageLine } from "../terminal-image.ts";
@@ -177,6 +183,8 @@ markdownParser.use({ extensions: [...LATEX_MARKDOWN_EXTENSIONS] });
 /**
  * Default text styling for markdown content.
  * Applied to all text unless overridden by markdown formatting.
+ *
+ * 正文底色。块级 theme 覆盖它，而不是反过来。
  */
 export interface DefaultTextStyle {
 	/** Foreground color function */
@@ -196,6 +204,8 @@ export interface DefaultTextStyle {
 /**
  * Theme functions for markdown elements.
  * Each function takes text and returns styled text with ANSI codes.
+ *
+ * 各元素着色。`highlightCode` 可选；缺了代码块不着色。
  */
 export interface MarkdownTheme {
 	heading: (text: string) => string;
@@ -217,6 +227,11 @@ export interface MarkdownTheme {
 	codeBlockIndent?: string;
 }
 
+/**
+ * Parse/render toggles: list markers, backslash escapes, pre-transform, LaTeX.
+ *
+ * 解析开关。`renderLatex` 默认开；transform 看到的是内容可用宽。
+ */
 export interface MarkdownOptions {
 	/** Preserve source list markers instead of normalizing them. */
 	preserveOrderedListMarkers?: boolean;
@@ -233,6 +248,11 @@ interface InlineStyleContext {
 	stylePrefix: string;
 }
 
+/**
+ * Cached markdown-to-terminal-lines component.
+ *
+ * 按宽缓存渲染行。图片行不折；LaTeX 失败则保留源文本。
+ */
 export class Markdown implements Component {
 	private text: string;
 	private paddingX: number; // Left/right padding

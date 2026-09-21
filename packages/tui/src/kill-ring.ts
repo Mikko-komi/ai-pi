@@ -4,6 +4,8 @@
  * Tracks killed (deleted) text entries. Consecutive kills can accumulate
  * into a single entry. Supports yank (paste most recent) and yank-pop
  * (cycle through older entries).
+ *
+ * Emacs kill 环。连续 kill 可并入一条；yank 贴最近，yank-pop 轮换旧条。
  */
 export class KillRing {
 	private ring: string[] = [];

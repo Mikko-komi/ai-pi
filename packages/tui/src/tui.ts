@@ -1,5 +1,7 @@
 /**
  * Minimal TUI implementation with differential rendering
+ *
+ * 组件树、焦点、overlay 与差分渲染的公共合同。具体屏由 Main/Alt 实现。
  */
 
 import { performance } from "node:perf_hooks";
@@ -16,12 +18,24 @@ import { getCapabilities, isImageLine, setCellDimensions } from "./terminal-imag
 import { extractSegments, normalizeTerminalOutput, sliceByColumn, sliceWithWidth, visibleWidth } from "./utils.ts";
 
 /**
- * Component interface - all components must implement this
+ * Mouse event phase after SGR / legacy sequences are normalized.
+ *
+ * 归一后的鼠标相位。`click` 由 press+release 合成，不是终端原生。
  */
 export type TuiMouseEventType = "press" | "release" | "move" | "drag" | "click" | "wheel";
+
+/**
+ * Mouse button that produced the event, or `none` for move/wheel.
+ *
+ * 鼠标键。移动和滚轮用 `none`。
+ */
 export type TuiMouseButton = "left" | "middle" | "right" | "none";
 
-/** Normalized cell-based mouse event. Coordinates are zero-based. */
+/**
+ * Normalized cell-based mouse event. Coordinates are zero-based.
+ *
+ * 格子坐标鼠标事件。`x/y` 相对接收组件，`screenX/Y` 相对终端。
+ */
 export interface TuiMouseEvent {
 	type: TuiMouseEventType;
 	button: TuiMouseButton;
@@ -43,6 +57,11 @@ export interface TuiMouseEvent {
 	clickCount?: number;
 }
 
+/**
+ * What a component wants after handling a mouse event.
+ *
+ * 处理结果。`capture`/`focus` 隐含 handled；不设 render 则按事件类型给默认。
+ */
 export interface TuiMouseEventResult {
 	/** Stop propagation and suppress renderer-level fallback behavior. */
 	handled?: boolean;
@@ -57,7 +76,11 @@ export interface TuiMouseEventResult {
 	render?: boolean;
 }
 
-/** Internal target metadata used by containers and alternate-screen dispatch. */
+/**
+ * Internal target metadata used by containers and alternate-screen dispatch.
+ *
+ * 派发目标：组件加原点。后续 drag/release 用它重算局部坐标。
+ */
 export interface TuiMouseDispatchTarget {
 	component: Component;
 	originX: number;
@@ -66,7 +89,11 @@ export interface TuiMouseDispatchTarget {
 	height: number;
 }
 
-/** Result of dispatching to a concrete component. */
+/**
+ * Result of dispatching to a concrete component.
+ *
+ * 已命中具体组件的结果。`handled` 恒 true；`focusTarget` 可以是代理父容器。
+ */
 export interface TuiMouseDispatchResult extends TuiMouseEventResult {
 	handled: true;
 	target: TuiMouseDispatchTarget;
@@ -77,6 +104,8 @@ export interface TuiMouseDispatchResult extends TuiMouseEventResult {
 /**
  * Dispatch an event to a component and retain the exact target and coordinate
  * transform. Containers use this when forwarding events to nested children.
+ *
+ * 派给组件并记下 target。子结果已带 target 则原样上传；全假标志当没处理。
  */
 export function dispatchMouseEvent(component: Component, event: TuiMouseEvent): TuiMouseDispatchResult | undefined {
 	const result = component.handleMouse?.(event);
@@ -97,7 +126,11 @@ export function dispatchMouseEvent(component: Component, event: TuiMouseEvent): 
 	};
 }
 
-/** Recreate local coordinates for a previously dispatched mouse target. */
+/**
+ * Recreate local coordinates for a previously dispatched mouse target.
+ *
+ * 用屏幕坐标减 origin 得到局部 x/y。宽高改成 target 当时的。
+ */
 export function retargetMouseEvent(event: TuiMouseEvent, target: TuiMouseDispatchTarget): TuiMouseEvent {
 	return {
 		...event,
@@ -108,6 +141,11 @@ export function retargetMouseEvent(event: TuiMouseEvent, target: TuiMouseDispatc
 	};
 }
 
+/**
+ * Renderable TUI node: lines for a width, optional input/mouse, invalidate.
+ *
+ * 组件合同。`render` 必须按给定宽返回行；invalidate 清缓存，主题切换会调。
+ */
 export interface Component {
 	/**
 	 * Render the component to lines for the given viewport width
@@ -135,7 +173,18 @@ export interface Component {
 	invalidate(): void;
 }
 
+/**
+ * Optional rewrite/consume decision from a global input listener.
+ *
+ * 全局输入监听的返回。`consume` 吃掉不再给焦点组件；可改写 `data`。
+ */
 export type TuiInputListenerResult = { consume?: boolean; data?: string } | undefined;
+
+/**
+ * Process-wide stdin hook installed on a {@link TUI}.
+ *
+ * TUI 级输入钩子。返回 undefined 表示不干预。
+ */
 export type TuiInputListener = (data: string) => TuiInputListenerResult;
 type PendingOsc11BackgroundQuery = {
 	settled: boolean;
@@ -148,13 +197,19 @@ type PendingOsc11BackgroundQuery = {
  * When focused, the component should emit CURSOR_MARKER at the cursor position
  * in its render output. TUI will find this marker and position the hardware
  * cursor there for proper IME candidate window positioning.
+ *
+ * 可聚焦。`focused` 为真时必须在光标处发 {@link CURSOR_MARKER}，否则 IME 窗口错位。
  */
 export interface Focusable {
 	/** Set by TUI when focus changes. Component should emit CURSOR_MARKER when true. */
 	focused: boolean;
 }
 
-/** Type guard to check if a component implements Focusable */
+/**
+ * Type guard to check if a component implements Focusable
+ *
+ * 鸭子判断：非 null 且有 `focused` 字段。没有该字段的组件不能当焦点。
+ */
 export function isFocusable(component: Component | null): component is Component & Focusable {
 	return component !== null && "focused" in component;
 }
@@ -164,6 +219,8 @@ export function isFocusable(component: Component | null): component is Component
  * This is a zero-width escape sequence that terminals ignore.
  * Components emit this at the cursor position when focused.
  * TUI finds and strips this marker, then positions the hardware cursor there.
+ *
+ * 零宽 APC 光标标记。终端忽略；TUI 剥掉后把硬件光标放到该列。
  */
 export const CURSOR_MARKER = "\x1b_pi:c\x07";
 
@@ -171,6 +228,8 @@ export { visibleWidth };
 
 /**
  * Anchor position for overlays
+ *
+ * overlay 锚点。默认 center；再叠 offset/row/col。
  */
 export type OverlayAnchor =
 	| "center"
@@ -185,6 +244,8 @@ export type OverlayAnchor =
 
 /**
  * Margin configuration for overlays
+ *
+ * overlay 距终端四边的边距。数字 margin 会扩成四边相同。
  */
 export interface OverlayMargin {
 	top?: number;
@@ -193,7 +254,11 @@ export interface OverlayMargin {
 	left?: number;
 }
 
-/** Value that can be absolute (number) or percentage (string like "50%") */
+/**
+ * Value that can be absolute (number) or percentage (string like "50%")
+ *
+ * 绝对列/行或相对终端百分比。百分比相对的是当前终端尺寸。
+ */
 export type SizeValue = number | `${number}%`;
 
 /** Parse a SizeValue into absolute value given a reference size */
@@ -211,6 +276,8 @@ function parseSizeValue(value: SizeValue | undefined, referenceSize: number): nu
 /**
  * Options for overlay positioning and sizing.
  * Values can be absolute numbers or percentage strings (e.g., "50%").
+ *
+ * overlay 尺寸与位置。`visible` 每帧重评；`nonCapturing` 不抢键盘焦点。
  */
 export interface OverlayOptions {
 	// === Sizing ===
@@ -250,13 +317,21 @@ export interface OverlayOptions {
 	nonCapturing?: boolean;
 }
 
-/** Options for {@link OverlayHandle.unfocus}. */
+/**
+ * Options for {@link OverlayHandle.unfocus}.
+ *
+ * 释放 overlay 焦点后的显式目标。不传则按栈规则回退。
+ */
 export interface OverlayUnfocusOptions {
 	/** Explicit target to focus after releasing this overlay. */
 	target: Component | null;
 }
 
-/** Last rendered terminal-relative overlay rectangle. */
+/**
+ * Last rendered terminal-relative overlay rectangle.
+ *
+ * 上一帧 overlay 的终端矩形。隐藏或未画过则 handle 返回 undefined。
+ */
 export interface OverlayBounds {
 	row: number;
 	col: number;
@@ -266,6 +341,8 @@ export interface OverlayBounds {
 
 /**
  * Handle returned by showOverlay for controlling the overlay
+ *
+ * overlay 控制柄。`hide` 永久移除；`setHidden` 只是暂时不画。
  */
 export interface OverlayHandle {
 	/** Permanently remove the overlay (cannot be shown again) */
@@ -315,6 +392,8 @@ type OverlayFocusRestorePolicy = "clear" | "preserve";
 
 /**
  * Container - a component that contains other components
+ *
+ * 垂直拼接子组件。鼠标按 y 命中孩子；孩子要焦点且自己能 handleInput 则焦点留在容器。
  */
 export class Container implements Component {
 	children: Component[] = [];
@@ -383,7 +462,11 @@ export class Container implements Component {
  */
 const SEGMENT_RESET = "\x1b[0m\x1b]8;;\x07";
 
-/** Composite overlay content into a terminal line at a fixed column. */
+/**
+ * Composite overlay content into a terminal line at a fixed column.
+ *
+ * 把 overlay 行铺进基行。基行是图像协议行则不覆盖，避免拆 Kitty/iTerm 序列。
+ */
 export function compositeTuiLine(
 	baseLine: string,
 	overlayLine: string,
@@ -415,13 +498,28 @@ export function compositeTuiLine(
 	return visibleWidth(result) <= totalWidth ? result : sliceByColumn(result, 0, totalWidth, true);
 }
 
+/**
+ * Main-screen incremental mode vs alternate-screen viewport mode.
+ *
+ * `regular` 写主屏/回滚区；`fullscreen` 进 alt screen。
+ */
 export type TuiMode = "regular" | "fullscreen";
 
+/**
+ * Stop flags when handing the terminal to another TUI instance.
+ *
+ * `preserveScreen` 留给下一个 TUI 接着画，不清屏、不退协议。
+ */
 export interface TuiStopOptions {
 	/** Leave renderer output in place for another TUI taking over the same terminal. */
 	preserveScreen?: boolean;
 }
 
+/**
+ * Running TUI: children, focus, overlays, render loop, terminal queries.
+ *
+ * 运行中的 TUI。start 之后才接输入；stop 停循环。具体差分算法在子类。
+ */
 export interface TUI extends Component {
 	readonly mode: TuiMode;
 	children: Component[];
@@ -451,17 +549,37 @@ export interface TUI extends Component {
 	queryTerminalColorScheme(options: { timeoutMs: number }): Promise<TerminalColorScheme | undefined>;
 }
 
+/**
+ * Brand symbol for a TUI that owns a layout viewport (alt-screen).
+ *
+ * 视口 TUI 的品牌符号。主屏实现不带这个。
+ */
 export const VIEWPORT_TUI = Symbol.for("@earendil-works/pi-tui/viewport");
 
+/**
+ * TUI that lays out a dedicated root into a fixed terminal viewport.
+ *
+ * 有独立 layout 根的 TUI。`setLayoutRoot` 换根，不换 children 文档流。
+ */
 export interface ViewportTUI extends TUI {
 	readonly [VIEWPORT_TUI]: true;
 	setLayoutRoot(component: Component | undefined): void;
 }
 
+/**
+ * Whether `tui` is branded as {@link ViewportTUI}.
+ *
+ * 看品牌符号，不看 class。
+ */
 export function isViewportTUI(tui: TUI): tui is ViewportTUI {
 	return (tui as Partial<ViewportTUI>)[VIEWPORT_TUI] === true;
 }
 
+/**
+ * Shared TUI runtime: focus, overlays, input listeners, render scheduling.
+ *
+ * 公共运行时。子类实现 `mode` 和真正写屏；这里不管主屏还是 alt screen。
+ */
 export abstract class TuiBase extends Container implements TUI {
 	abstract readonly mode: TuiMode;
 	public terminal: Terminal;

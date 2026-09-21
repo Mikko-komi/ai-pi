@@ -1,3 +1,9 @@
+/**
+ * Main-screen TUI: incremental line diffs into the terminal scrollback.
+ *
+ * 主屏差分渲染。只重写变化行；图像行收缩时要发删除序列，否则残影。
+ */
+
 import * as fs from "node:fs";
 import * as os from "node:os";
 import * as path from "node:path";
@@ -110,6 +116,11 @@ function isTermuxSession(): boolean {
 	return Boolean(process.env.TERMUX_VERSION);
 }
 
+/**
+ * Snapshot of main-screen diff state for pause/resume across TUI instances.
+ *
+ * 主屏差分快照。交给下一个 TUI 接画；图像行恢复时清空，避免复用失效 id。
+ */
 export interface TuiMainScreenRenderState {
 	previousLines: string[];
 	previousWidth: number;
@@ -120,7 +131,11 @@ export interface TuiMainScreenRenderState {
 	previousViewportTop: number;
 }
 
-/** TUI implementation that renders into the terminal's main screen and scrollback. */
+/**
+ * TUI implementation that renders into the terminal's main screen and scrollback.
+ *
+ * 主屏 TUI。大写入按 1MiB 切块，避免单次字符串撑爆 V8。
+ */
 export class TuiMainScreen extends TuiBase implements TUI {
 	readonly mode = "regular" as const;
 	private previousLines: string[] = [];

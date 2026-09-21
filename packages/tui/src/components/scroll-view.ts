@@ -1,8 +1,24 @@
+/**
+ * Single-child vertical viewport with optional follow-end and scrollbar.
+ *
+ * 恰好一个孩子的滚动视口。增删孩子抛错；滚动偏移由 layout 写入。
+ */
+
 import { LAYOUT_NODE, type ScrollLayoutNode } from "../layout-node.ts";
 import { type Component, Container } from "../tui.ts";
 
+/**
+ * Scrollbar visibility: never, on activity, or always reserved.
+ *
+ * 滚动条显隐。`always` 会从内容宽扣一列。
+ */
 export type ScrollViewScrollbar = "hidden" | "auto" | "always";
 
+/**
+ * Follow-end, primary-viewport, overscroll, and scrollbar options.
+ *
+ * 只支持 `axis: "vertical"`。别的轴构造即抛。
+ */
 export interface ScrollViewOptions {
 	axis?: "vertical";
 	follow?: "none" | "end";
@@ -14,11 +30,21 @@ export interface ScrollViewOptions {
 	scrollbarHideDelayMs?: number;
 }
 
+/**
+ * Extra flags for an explicit `scrollTo`.
+ *
+ * `disableFollow` 即使滚到末尾也不恢复 follow-end。
+ */
 export interface ScrollViewScrollToOptions {
 	/** Keep follow-end disabled even when the target is the current content end. */
 	disableFollow?: boolean;
 }
 
+/**
+ * Vertical clip of one child; layout reads this as a `scroll` {@link LAYOUT_NODE}.
+ *
+ * 单孩子滚动容器。`addChild`/`removeChild`/`clear` 一律抛，防止破坏不变量。
+ */
 export class ScrollView extends Container {
 	private readonly child: Component;
 	readonly followEnd: boolean;

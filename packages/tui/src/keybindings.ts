@@ -1,8 +1,16 @@
+/**
+ * Named action-to-key map with user overrides and conflict detection.
+ *
+ * 动作名到按键。用户绑定覆盖默认；同一键被多个用户动作抢走才记冲突。
+ */
+
 import { type KeyId, matchesKey } from "./keys.ts";
 
 /**
  * Global keybinding registry.
  * Downstream packages can add keybindings via declaration merging.
+ *
+ * 动作名注册表。下游用 declaration merging 加键；值恒为 true 只作品牌。
  */
 export interface Keybindings {
 	// Editor navigation and editing
@@ -58,16 +66,42 @@ export interface Keybindings {
 	"tui.altScreen.bottom": true;
 }
 
+/**
+ * One registered action name.
+ *
+ * 已注册动作名。未 merge 进 {@link Keybindings} 的字符串过不了类型。
+ */
 export type Keybinding = keyof Keybindings;
 
+/**
+ * Default keys and optional description for one action.
+ *
+ * 一条动作的默认键与说明。空数组表示默认不绑定。
+ */
 export interface KeybindingDefinition {
 	defaultKeys: KeyId | KeyId[];
 	description?: string;
 }
 
+/**
+ * Map of action id to definition. Extra string keys allowed for app-level ids.
+ *
+ * 动作 id → 定义。应用层 id 可以是尚未 merge 的字符串。
+ */
 export type KeybindingDefinitions = Record<string, KeybindingDefinition>;
+
+/**
+ * User overrides: action id to one key, many keys, or undefined to keep default.
+ *
+ * 用户覆盖。`undefined` 表示沿用默认，不是解绑。
+ */
 export type KeybindingsConfig = Record<string, KeyId | KeyId[] | undefined>;
 
+/**
+ * Built-in TUI action definitions (editor, input, select, alt-screen).
+ *
+ * 包内置动作表。全屏滚动键有意盖住未修饰的编辑器 Page/Home/End。
+ */
 export const TUI_KEYBINDINGS = {
 	"tui.editor.cursorUp": { defaultKeys: "up", description: "Move cursor up" },
 	"tui.editor.cursorDown": { defaultKeys: "down", description: "Move cursor down" },
@@ -209,6 +243,11 @@ export const TUI_KEYBINDINGS = {
 	"tui.altScreen.bottom": { defaultKeys: "end", description: "Scroll viewport to bottom" },
 } as const satisfies KeybindingDefinitions;
 
+/**
+ * A physical key claimed by more than one user binding.
+ *
+ * 用户配置里同一键被多个动作抢走。默认键互撞不算。
+ */
 export interface KeybindingConflict {
 	key: KeyId;
 	keybindings: string[];
@@ -228,6 +267,11 @@ function normalizeKeys(keys: KeyId | KeyId[] | undefined): KeyId[] {
 	return result;
 }
 
+/**
+ * Resolves definitions plus user config into matchable key lists.
+ *
+ * 解析后的键表。未知动作 id 的用户项丢掉；冲突只来自用户互相抢键。
+ */
 export class KeybindingsManager {
 	private definitions: KeybindingDefinitions;
 	private userBindings: KeybindingsConfig;
@@ -308,10 +352,20 @@ export class KeybindingsManager {
 
 let globalKeybindings: KeybindingsManager | null = null;
 
+/**
+ * Install the process-wide keybinding manager.
+ *
+ * 换成全局管理器。组件通过 {@link getKeybindings} 读，不自己 new。
+ */
 export function setKeybindings(keybindings: KeybindingsManager): void {
 	globalKeybindings = keybindings;
 }
 
+/**
+ * The process-wide manager, lazily created from {@link TUI_KEYBINDINGS}.
+ *
+ * 全局管理器。未 set 过则用内置表惰性新建。
+ */
 export function getKeybindings(): KeybindingsManager {
 	if (!globalKeybindings) {
 		globalKeybindings = new KeybindingsManager(TUI_KEYBINDINGS);

@@ -1,3 +1,9 @@
+/**
+ * Absolute-position layout frames for the alternate-screen renderer.
+ *
+ * 全屏模式的一帧布局。量尺寸、裁剪、画滚动条；命中测试走 clip 不是 rect。
+ */
+
 import type { ScrollView } from "./components/scroll-view.ts";
 import { allocateStackSizes, visibleStackEntries } from "./components/stack.ts";
 import { getLayoutNode } from "./layout-node.ts";
@@ -13,6 +19,11 @@ import {
 
 const OSC133_ZONE_PREFIX = /^(?:\x1b\]133;[ABC](?:\x07|\x1b\\))+/;
 
+/**
+ * Inclusive-origin rectangle in terminal cells.
+ *
+ * 格子矩形。右/下边界是 x+width / y+height，不含。
+ */
 export interface LayoutRect {
 	x: number;
 	y: number;
@@ -20,6 +31,11 @@ export interface LayoutRect {
 	height: number;
 }
 
+/**
+ * Positioned component in a {@link LayoutFrame}, with clip and optional scroll.
+ *
+ * 一帧里的盒子。`clip` 是与祖先相交后的可见区；layer 大的先命中。
+ */
 export interface LayoutBox {
 	component: Component;
 	rect: LayoutRect;
@@ -33,6 +49,11 @@ export interface LayoutBox {
 	layer: number;
 }
 
+/**
+ * One laid-out and painted fullscreen frame.
+ *
+ * 已排版并画好的一帧。`lines` 长度等于 height。
+ */
 export interface LayoutFrame {
 	root: LayoutBox;
 	width: number;
@@ -41,6 +62,11 @@ export interface LayoutFrame {
 	primaryScrollView?: ScrollView;
 }
 
+/**
+ * Cell geometry of a painted scrollbar track and thumb.
+ *
+ * 滚动条几何。列在盒子右缘；内容不高过视口则没有几何。
+ */
 export interface ScrollbarGeometry {
 	column: number;
 	trackTop: number;
@@ -277,6 +303,11 @@ function replaceScrollbarCell(
 	return `${before}${beforePadding}${targetStyle}${cellPaddingBefore}${replacement}${cellPaddingAfter}${after}`;
 }
 
+/**
+ * Compute scrollbar geometry for a scroll box, if a bar should exist.
+ *
+ * 没有 scrollView 或宽高为 0 返回 undefined。`includeHiddenAuto` 才把藏着的 auto 条算出来给拖拽。
+ */
 export function getScrollbarGeometry(box: LayoutBox, includeHiddenAuto = false): ScrollbarGeometry | undefined {
 	if (!box.scrollView || box.rect.width <= 0 || box.rect.height <= 0) return undefined;
 
@@ -376,6 +407,11 @@ function paintBox(box: LayoutBox, screen: string[], totalWidth: number): void {
 	paintScrollbar(box, screen, totalWidth);
 }
 
+/**
+ * Layout `root` into a terminal-sized frame and paint lines.
+ *
+ * 量、排、画一帧。宽高至少 1。primary scroll 是第一个标了 primary 的，否则第一个 scroll。
+ */
 export function renderLayoutFrame(
 	root: Component,
 	width: number,
@@ -411,7 +447,11 @@ function containsPoint(rect: LayoutRect, x: number, y: number): boolean {
 	return x >= rect.x && x < rect.x + rect.width && y >= rect.y && y < rect.y + rect.height;
 }
 
-/** Return the visual hit path from the deepest component to the layout root. */
+/**
+ * Return the visual hit path from the deepest component to the layout root.
+ *
+ * 命中路径，深/高层在前。点必须在 clip 内。
+ */
 export function getLayoutBoxesAt(frame: LayoutFrame, x: number, y: number): LayoutBox[] {
 	const result: Array<{ box: LayoutBox; depth: number }> = [];
 	const visit = (box: LayoutBox, depth: number): void => {
@@ -424,6 +464,11 @@ export function getLayoutBoxesAt(frame: LayoutFrame, x: number, y: number): Layo
 	return result.map(({ box }) => box);
 }
 
+/**
+ * Find the layout box whose `scrollView` is this instance.
+ *
+ * 按引用找滚动盒。没有则 undefined。
+ */
 export function getScrollViewBox(frame: LayoutFrame, scrollView: ScrollView): LayoutBox | undefined {
 	const visit = (box: LayoutBox): LayoutBox | undefined => {
 		if (box.scrollView === scrollView) return box;
@@ -436,6 +481,11 @@ export function getScrollViewBox(frame: LayoutFrame, scrollView: ScrollView): La
 	return visit(frame.root);
 }
 
+/**
+ * Scroll views whose clip and rect contain `(x, y)`, deepest first.
+ *
+ * 点下的滚动视口，深的在前。只认同时落在 clip 与 rect 的。
+ */
 export function getScrollViewsAt(frame: LayoutFrame, x: number, y: number): ScrollView[] {
 	const result: Array<{ scrollView: ScrollView; depth: number }> = [];
 	const visit = (box: LayoutBox, depth: number): void => {
