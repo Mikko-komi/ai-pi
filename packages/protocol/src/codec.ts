@@ -1,3 +1,9 @@
+/**
+ * Validate, CBOR-encode, and incrementally decode Chord protocol messages.
+ *
+ * 协议消息编解码。先 TypeBox+JSON 校验再成帧；解码失败后该 decoder 作废。
+ */
+
 import { isJsonValue } from "@earendil-works/chord";
 import { Check } from "typebox/value";
 import { decodeCbor, encodeCbor } from "./cbor/index.ts";
@@ -10,6 +16,11 @@ import {
 	ServerMessageSchema,
 } from "./protocol.ts";
 
+/**
+ * Message failed schema/JSON validation or codec/framing limits.
+ *
+ * 协议校验失败。schema 不对、非 JSON 值、或编解码/成帧出错都走它。
+ */
 export class ProtocolValidationError extends Error {
 	constructor(message: string) {
 		super(message);
@@ -17,6 +28,11 @@ export class ProtocolValidationError extends Error {
 	}
 }
 
+/**
+ * Validate an unknown value as a client protocol message.
+ *
+ * 校验客户端消息。必须过 ClientMessageSchema 且是 JSON 值，否则抛。
+ */
 export function parseClientMessage(value: unknown): ClientMessage {
 	if (!Check(ClientMessageSchema, value) || !isJsonValue(value)) {
 		throw new ProtocolValidationError("Invalid client protocol message");
@@ -24,6 +40,11 @@ export function parseClientMessage(value: unknown): ClientMessage {
 	return value;
 }
 
+/**
+ * Validate an unknown value as a server protocol message.
+ *
+ * 校验服务端消息。必须过 ServerMessageSchema 且是 JSON 值，否则抛。
+ */
 export function parseServerMessage(value: unknown): ServerMessage {
 	if (!Check(ServerMessageSchema, value) || !isJsonValue(value)) {
 		throw new ProtocolValidationError("Invalid server protocol message");
@@ -52,12 +73,20 @@ function encodeProtocolMessage<T>(
 	}
 }
 
-/** Validates and encodes one complete length-prefixed client message. */
+/**
+ * Validates and encodes one complete length-prefixed client message.
+ *
+ * 校验并编成一帧客户端消息。编码失败也包装成 ProtocolValidationError。
+ */
 export function encodeClientMessage(message: ClientMessage, options?: FrameDecoderOptions): Uint8Array {
 	return encodeProtocolMessage(message, parseClientMessage, "client", options);
 }
 
-/** Validates and encodes one complete length-prefixed server message. */
+/**
+ * Validates and encodes one complete length-prefixed server message.
+ *
+ * 校验并编成一帧服务端消息。编码失败也包装成 ProtocolValidationError。
+ */
 export function encodeServerMessage(message: ServerMessage, options?: FrameDecoderOptions): Uint8Array {
 	return encodeProtocolMessage(message, parseServerMessage, "server", options);
 }
@@ -102,7 +131,11 @@ class ValidatedMessageDecoder<T> {
 	}
 }
 
-/** Incrementally decodes and validates framed client messages. */
+/**
+ * Incrementally decodes and validates framed client messages.
+ *
+ * 增量解码客户端帧。一次失败后后续 push/end 继续抛。
+ */
 export class ClientMessageDecoder {
 	private readonly decoder: ValidatedMessageDecoder<ClientMessage>;
 
@@ -119,7 +152,11 @@ export class ClientMessageDecoder {
 	}
 }
 
-/** Incrementally decodes and validates framed server messages. */
+/**
+ * Incrementally decodes and validates framed server messages.
+ *
+ * 增量解码服务端帧。一次失败后后续 push/end 继续抛。
+ */
 export class ServerMessageDecoder {
 	private readonly decoder: ValidatedMessageDecoder<ServerMessage>;
 
@@ -136,6 +173,11 @@ export class ServerMessageDecoder {
 	}
 }
 
+/**
+ * Type-guard for the single supported protocol version integer.
+ *
+ * 版本守卫。只认 PROTOCOL_VERSION 这一个整数。
+ */
 export function isSupportedProtocolVersion(version: number): version is typeof PROTOCOL_VERSION {
 	return Number.isInteger(version) && version === PROTOCOL_VERSION;
 }

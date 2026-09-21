@@ -1,3 +1,9 @@
+/**
+ * In-process telemetry recorder used as the backend-neutral reference adapter.
+ *
+ * 进程内记录器。span 快照可取出；记录失败必须被动吞掉，不能打断业务。
+ */
+
 import type {
 	AttributeValue,
 	SpanAttributes,
@@ -8,11 +14,21 @@ import type {
 } from "./index.ts";
 import { NOOP_TELEMETRY_CONTEXT } from "./noop.ts";
 
+/**
+ * Immutable snapshot of one recorded span event.
+ *
+ * 已记录事件的只读快照。attributes 已拷过，调用方改不影响库内状态。
+ */
 export interface RecordedTelemetryEvent {
 	readonly name: string;
 	readonly attributes: Readonly<SpanAttributes>;
 }
 
+/**
+ * Immutable snapshot of one recorded span, including parent and settlement.
+ *
+ * 已记录 span 的只读快照。parentId 为 null 表示根；endSequence 只在结算后有。
+ */
 export interface RecordedTelemetrySpan {
 	readonly id: number;
 	readonly parentId: number | null;
@@ -188,6 +204,8 @@ function startInMemorySpan<T>(
 /**
  * Backend-neutral reference implementation that records spans in process memory.
  * Create a fresh instance to isolate tests or independent recording scopes.
+ *
+ * 内存参考实现。新实例隔离记录范围；父 span 已结算则子 span 改走 noop。
  */
 export class InMemoryTelemetryContext implements TelemetryContext {
 	private readonly state: InMemoryTelemetryState = {

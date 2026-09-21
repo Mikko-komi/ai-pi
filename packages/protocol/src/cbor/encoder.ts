@@ -1,3 +1,9 @@
+/**
+ * Encode one value into the protocol's definite-length RFC 8949 subset.
+ *
+ * 编码严格 CBOR 子集。不定长、tag、循环、洞、undefined、非有限数都不收。
+ */
+
 import {
 	CborError,
 	type CborOptions,
@@ -207,7 +213,11 @@ function encodeValue(
 	throw new CborError(`Unsupported CBOR value type: ${typeof value}`);
 }
 
-/** Encodes the protocol's strict, definite-length RFC 8949 subset. */
+/**
+ * Encodes the protocol's strict, definite-length RFC 8949 subset.
+ *
+ * 编一个值。只收 JSON 友好的有限值；超限或循环抛 CborError。
+ */
 export function encodeCbor(value: unknown, options?: CborOptions): Uint8Array {
 	const resolved = resolveOptions(options);
 	const writer = new CborWriter(resolved.maxByteLength);

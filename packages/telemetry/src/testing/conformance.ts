@@ -1,3 +1,9 @@
+/**
+ * Runner-independent conformance suite for the callback telemetry adapter contract.
+ *
+ * 回调式适配器合同的符合性套件。不绑定具体测试框架。
+ */
+
 import { deepStrictEqual, doesNotThrow, fail, ok, strictEqual } from "node:assert/strict";
 import type { SpanAttributes, SpanOptions, SpanStatus, TelemetrySpan } from "../index.ts";
 import type { RecordedTelemetrySpan } from "../memory.ts";
@@ -57,7 +63,11 @@ function unreadable<T extends object>(value: T): T {
 	});
 }
 
-/** Creates runner-independent cases for the callback telemetry adapter contract. */
+/**
+ * Creates runner-independent cases for the callback telemetry adapter contract.
+ *
+ * 按 factory 生成用例列表。生命周期、状态、记录、亲子和被动性都要过。
+ */
 export function createTelemetryAdapterConformance(
 	factory: TelemetryAdapterFixtureFactory,
 ): readonly TelemetryAdapterConformanceCase[] {

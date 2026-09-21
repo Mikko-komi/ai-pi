@@ -1,14 +1,34 @@
+/**
+ * Length-prefixed frame codec for one CBOR payload on the wire.
+ *
+ * 长度前缀成帧。4 字节大端长度 + payload；超限或截断必须失败且不可恢复。
+ */
+
 const FRAME_HEADER_LENGTH = 4;
 const MAX_UINT32 = 0xffff_ffff;
 const PAYLOAD_BLOCK_SIZE = 64 * 1024;
 
-/** Default upper bound for one framed CBOR payload. */
+/**
+ * Default upper bound for one framed CBOR payload.
+ *
+ * 单帧 payload 默认上限。16 MiB；解码器选项可改，但不能超 u32。
+ */
 export const DEFAULT_MAX_FRAME_LENGTH = 16 * 1024 * 1024;
 
+/**
+ * Decoder limits for one framed stream.
+ *
+ * 解码器上限。maxFrameLength 省略则用 {@link DEFAULT_MAX_FRAME_LENGTH}。
+ */
 export interface FrameDecoderOptions {
 	maxFrameLength?: number;
 }
 
+/**
+ * Fatal framing error; the decoder is no longer usable after it is thrown.
+ *
+ * 成帧致命错误。抛出后 decoder 进入 failed，后续 push/end 继续抛。
+ */
 export class FrameError extends Error {
 	constructor(message: string) {
 		super(message);
@@ -24,7 +44,11 @@ function resolveMaxFrameLength(options: FrameDecoderOptions | undefined): number
 	return value;
 }
 
-/** Prefixes a payload with its unsigned 32-bit big-endian byte length. */
+/**
+ * Prefixes a payload with its unsigned 32-bit big-endian byte length.
+ *
+ * 给 payload 加 4 字节大端长度。非 Uint8Array 或超 u32 直接抛。
+ */
 export function encodeFrame(payload: Uint8Array): Uint8Array {
 	if (!(payload instanceof Uint8Array)) throw new TypeError("Frame payload must be a Uint8Array");
 	if (payload.byteLength > MAX_UINT32) throw new RangeError("Frame payload exceeds the unsigned 32-bit length limit");
@@ -40,7 +64,11 @@ export function encodeFrame(payload: Uint8Array): Uint8Array {
 
 type DecoderState = "open" | "ended" | "failed";
 
-/** Incrementally splits arbitrary byte chunks into length-prefixed payloads. */
+/**
+ * Incrementally splits arbitrary byte chunks into length-prefixed payloads.
+ *
+ * 增量拆帧。push 吃任意分片；end 时若还剩半帧就失败。
+ */
 export class FrameDecoder {
 	private readonly header = new Uint8Array(FRAME_HEADER_LENGTH);
 	private headerLength = 0;

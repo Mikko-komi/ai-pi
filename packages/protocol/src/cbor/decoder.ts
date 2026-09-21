@@ -1,3 +1,9 @@
+/**
+ * Decode exactly one item from the protocol's strict RFC 8949 subset.
+ *
+ * 解码严格 CBOR 子集。必须刚好一项，不能有尾随字节、tag 或不定长。
+ */
+
 import {
 	CborError,
 	type CborOptions,
@@ -157,7 +163,11 @@ class CborReader {
 	}
 }
 
-/** Decodes exactly one item from the protocol's strict RFC 8949 subset. */
+/**
+ * Decodes exactly one item from the protocol's strict RFC 8949 subset.
+ *
+ * 解刚好一项。输入必须是 Uint8Array；尾随数据或超限抛 CborError。
+ */
 export function decodeCbor(bytes: Uint8Array, options?: CborOptions): unknown {
 	if (!(bytes instanceof Uint8Array)) throw new TypeError("CBOR input must be a Uint8Array");
 	const resolved = resolveOptions(options);

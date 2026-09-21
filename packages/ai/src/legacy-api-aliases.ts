@@ -1,3 +1,9 @@
+/**
+ * Deprecated per-API stream aliases preserved for old import paths.
+ *
+ * 旧 API 别名。新代码从对应 `api/*` 或 `*Api()` 取 stream；本文件只做转发。
+ */
+
 import { anthropicMessagesApi } from "./api/anthropic-messages.lazy.ts";
 import type { AnthropicOptions } from "./api/anthropic-messages.ts";
 import { azureOpenAIResponsesApi } from "./api/azure-openai-responses.lazy.ts";
@@ -25,83 +31,147 @@ const openAICodexResponsesStreams = openAICodexResponsesApi();
 const openAICompletionsStreams = openAICompletionsApi();
 const openAIResponsesStreams = openAIResponsesApi();
 
-/** @deprecated Use `stream` from `@earendil-works/pi-ai/api/anthropic-messages` or `anthropicMessagesApi().stream`. */
+/**
+ * @deprecated Use `stream` from `@earendil-works/pi-ai/api/anthropic-messages` or `anthropicMessagesApi().stream`.
+ *
+ * 旧 Anthropic stream 别名。新代码走 anthropic-messages 模块或 `anthropicMessagesApi().stream`。
+ */
 export const streamAnthropic = anthropicMessagesStreams.stream as StreamFunction<
 	"anthropic-messages",
 	AnthropicOptions
 >;
-/** @deprecated Use `streamSimple` from `@earendil-works/pi-ai/api/anthropic-messages` or `anthropicMessagesApi().streamSimple`. */
+/**
+ * @deprecated Use `streamSimple` from `@earendil-works/pi-ai/api/anthropic-messages` or `anthropicMessagesApi().streamSimple`.
+ *
+ * 旧 Anthropic streamSimple 别名。新代码走 anthropic-messages 模块或 `anthropicMessagesApi().streamSimple`。
+ */
 export const streamSimpleAnthropic = anthropicMessagesStreams.streamSimple as StreamFunction<
 	"anthropic-messages",
 	SimpleStreamOptions
 >;
 
-/** @deprecated Use `stream` from `@earendil-works/pi-ai/api/azure-openai-responses` or `azureOpenAIResponsesApi().stream`. */
+/**
+ * @deprecated Use `stream` from `@earendil-works/pi-ai/api/azure-openai-responses` or `azureOpenAIResponsesApi().stream`.
+ *
+ * 旧 Azure OpenAI Responses stream 别名。新代码走 azure-openai-responses 模块或 `azureOpenAIResponsesApi().stream`。
+ */
 export const streamAzureOpenAIResponses = azureOpenAIResponsesStreams.stream as StreamFunction<
 	"azure-openai-responses",
 	AzureOpenAIResponsesOptions
 >;
-/** @deprecated Use `streamSimple` from `@earendil-works/pi-ai/api/azure-openai-responses` or `azureOpenAIResponsesApi().streamSimple`. */
+/**
+ * @deprecated Use `streamSimple` from `@earendil-works/pi-ai/api/azure-openai-responses` or `azureOpenAIResponsesApi().streamSimple`.
+ *
+ * 旧 Azure OpenAI Responses streamSimple 别名。新代码走对应模块或 `azureOpenAIResponsesApi().streamSimple`。
+ */
 export const streamSimpleAzureOpenAIResponses = azureOpenAIResponsesStreams.streamSimple as StreamFunction<
 	"azure-openai-responses",
 	SimpleStreamOptions
 >;
 
-/** @deprecated Use `stream` from `@earendil-works/pi-ai/api/google-generative-ai` or `googleGenerativeAIApi().stream`. */
+/**
+ * @deprecated Use `stream` from `@earendil-works/pi-ai/api/google-generative-ai` or `googleGenerativeAIApi().stream`.
+ *
+ * 旧 Google Generative AI stream 别名。新代码走 google-generative-ai 模块或 `googleGenerativeAIApi().stream`。
+ */
 export const streamGoogle = googleGenerativeAIStreams.stream as StreamFunction<"google-generative-ai", GoogleOptions>;
-/** @deprecated Use `streamSimple` from `@earendil-works/pi-ai/api/google-generative-ai` or `googleGenerativeAIApi().streamSimple`. */
+/**
+ * @deprecated Use `streamSimple` from `@earendil-works/pi-ai/api/google-generative-ai` or `googleGenerativeAIApi().streamSimple`.
+ *
+ * 旧 Google Generative AI streamSimple 别名。新代码走对应模块或 `googleGenerativeAIApi().streamSimple`。
+ */
 export const streamSimpleGoogle = googleGenerativeAIStreams.streamSimple as StreamFunction<
 	"google-generative-ai",
 	SimpleStreamOptions
 >;
 
-/** @deprecated Use `stream` from `@earendil-works/pi-ai/api/google-vertex` or `googleVertexApi().stream`. */
+/**
+ * @deprecated Use `stream` from `@earendil-works/pi-ai/api/google-vertex` or `googleVertexApi().stream`.
+ *
+ * 旧 Google Vertex stream 别名。新代码走 google-vertex 模块或 `googleVertexApi().stream`。
+ */
 export const streamGoogleVertex = googleVertexStreams.stream as StreamFunction<"google-vertex", GoogleVertexOptions>;
-/** @deprecated Use `streamSimple` from `@earendil-works/pi-ai/api/google-vertex` or `googleVertexApi().streamSimple`. */
+/**
+ * @deprecated Use `streamSimple` from `@earendil-works/pi-ai/api/google-vertex` or `googleVertexApi().streamSimple`.
+ *
+ * 旧 Google Vertex streamSimple 别名。新代码走对应模块或 `googleVertexApi().streamSimple`。
+ */
 export const streamSimpleGoogleVertex = googleVertexStreams.streamSimple as StreamFunction<
 	"google-vertex",
 	SimpleStreamOptions
 >;
 
-/** @deprecated Use `stream` from `@earendil-works/pi-ai/api/mistral-conversations` or `mistralConversationsApi().stream`. */
+/**
+ * @deprecated Use `stream` from `@earendil-works/pi-ai/api/mistral-conversations` or `mistralConversationsApi().stream`.
+ *
+ * 旧 Mistral stream 别名。新代码走 mistral-conversations 模块或 `mistralConversationsApi().stream`。
+ */
 export const streamMistral = mistralConversationsStreams.stream as StreamFunction<
 	"mistral-conversations",
 	MistralOptions
 >;
-/** @deprecated Use `streamSimple` from `@earendil-works/pi-ai/api/mistral-conversations` or `mistralConversationsApi().streamSimple`. */
+/**
+ * @deprecated Use `streamSimple` from `@earendil-works/pi-ai/api/mistral-conversations` or `mistralConversationsApi().streamSimple`.
+ *
+ * 旧 Mistral streamSimple 别名。新代码走对应模块或 `mistralConversationsApi().streamSimple`。
+ */
 export const streamSimpleMistral = mistralConversationsStreams.streamSimple as StreamFunction<
 	"mistral-conversations",
 	SimpleStreamOptions
 >;
 
-/** @deprecated Use `stream` from `@earendil-works/pi-ai/api/openai-codex-responses` or `openAICodexResponsesApi().stream`. */
+/**
+ * @deprecated Use `stream` from `@earendil-works/pi-ai/api/openai-codex-responses` or `openAICodexResponsesApi().stream`.
+ *
+ * 旧 OpenAI Codex Responses stream 别名。新代码走 openai-codex-responses 模块或 `openAICodexResponsesApi().stream`。
+ */
 export const streamOpenAICodexResponses = openAICodexResponsesStreams.stream as StreamFunction<
 	"openai-codex-responses",
 	OpenAICodexResponsesOptions
 >;
-/** @deprecated Use `streamSimple` from `@earendil-works/pi-ai/api/openai-codex-responses` or `openAICodexResponsesApi().streamSimple`. */
+/**
+ * @deprecated Use `streamSimple` from `@earendil-works/pi-ai/api/openai-codex-responses` or `openAICodexResponsesApi().streamSimple`.
+ *
+ * 旧 OpenAI Codex Responses streamSimple 别名。新代码走对应模块或 `openAICodexResponsesApi().streamSimple`。
+ */
 export const streamSimpleOpenAICodexResponses = openAICodexResponsesStreams.streamSimple as StreamFunction<
 	"openai-codex-responses",
 	SimpleStreamOptions
 >;
 
-/** @deprecated Use `stream` from `@earendil-works/pi-ai/api/openai-completions` or `openAICompletionsApi().stream`. */
+/**
+ * @deprecated Use `stream` from `@earendil-works/pi-ai/api/openai-completions` or `openAICompletionsApi().stream`.
+ *
+ * 旧 OpenAI Completions stream 别名。新代码走 openai-completions 模块或 `openAICompletionsApi().stream`。
+ */
 export const streamOpenAICompletions = openAICompletionsStreams.stream as StreamFunction<
 	"openai-completions",
 	OpenAICompletionsOptions
 >;
-/** @deprecated Use `streamSimple` from `@earendil-works/pi-ai/api/openai-completions` or `openAICompletionsApi().streamSimple`. */
+/**
+ * @deprecated Use `streamSimple` from `@earendil-works/pi-ai/api/openai-completions` or `openAICompletionsApi().streamSimple`.
+ *
+ * 旧 OpenAI Completions streamSimple 别名。新代码走对应模块或 `openAICompletionsApi().streamSimple`。
+ */
 export const streamSimpleOpenAICompletions = openAICompletionsStreams.streamSimple as StreamFunction<
 	"openai-completions",
 	SimpleStreamOptions
 >;
 
-/** @deprecated Use `stream` from `@earendil-works/pi-ai/api/openai-responses` or `openAIResponsesApi().stream`. */
+/**
+ * @deprecated Use `stream` from `@earendil-works/pi-ai/api/openai-responses` or `openAIResponsesApi().stream`.
+ *
+ * 旧 OpenAI Responses stream 别名。新代码走 openai-responses 模块或 `openAIResponsesApi().stream`。
+ */
 export const streamOpenAIResponses = openAIResponsesStreams.stream as StreamFunction<
 	"openai-responses",
 	OpenAIResponsesOptions
 >;
-/** @deprecated Use `streamSimple` from `@earendil-works/pi-ai/api/openai-responses` or `openAIResponsesApi().streamSimple`. */
+/**
+ * @deprecated Use `streamSimple` from `@earendil-works/pi-ai/api/openai-responses` or `openAIResponsesApi().streamSimple`.
+ *
+ * 旧 OpenAI Responses streamSimple 别名。新代码走对应模块或 `openAIResponsesApi().streamSimple`。
+ */
 export const streamSimpleOpenAIResponses = openAIResponsesStreams.streamSimple as StreamFunction<
 	"openai-responses",
 	SimpleStreamOptions

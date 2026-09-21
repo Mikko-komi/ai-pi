@@ -68,6 +68,10 @@ _Avoid_: 再导出, 测试夹具
 已完成：interactive TUI 组件与 llama 扩展导出。
 _Avoid_: 类方法, experimental
 
+**第十五刀核心**:
+已完成：telemetry / protocol 公共合同，以及 pi-ai 剩余非适配器入口。
+_Avoid_: 厂商 API 适配器, experimental
+
 **AgentHarness**:
 agent-core 里按 lane 驱动持久化会话的门面，和旧的 `Agent` 循环并列，不替代 `AgentSession`。
 _Avoid_: Agent, AgentSession
