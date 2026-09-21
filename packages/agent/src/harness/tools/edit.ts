@@ -1,3 +1,11 @@
+/**
+ * Built-in edit tool.
+ *
+ * Applies unique, non-overlapping exact-text replacements to one file.
+ *
+ * 内置 edit 工具。相对原文件做不重叠的唯一替换；同路径突变经队列串行。
+ */
+
 import { type Static, Type } from "typebox";
 import type { AgentHarnessTool, FileError } from "../types.ts";
 import {
@@ -36,6 +44,11 @@ const editSchema = Type.Object(
 	{},
 );
 
+/**
+ * Parameters accepted by the edit tool.
+ *
+ * edit 工具的入参。每条 oldText 必须在原文件里唯一且互不重叠。
+ */
 export type EditToolInput = Static<typeof editSchema>;
 type LegacyEditToolInput = EditToolInput & { oldText?: unknown; newText?: unknown };
 type SingleEditInput = { oldText: string; newText: string };
@@ -46,6 +59,11 @@ function isSingleEditInput(value: unknown): value is SingleEditInput {
 	return typeof edit.oldText === "string" && typeof edit.newText === "string";
 }
 
+/**
+ * Diff details attached to a successful edit.
+ *
+ * 编辑成功后附带的 diff。firstChangedLine 是新文件里第一处改动。
+ */
 export interface EditToolDetails {
 	diff: string;
 	patch: string;
@@ -87,6 +105,11 @@ function editAccessError(path: string, error: FileError): Error {
 	return new Error(`Could not edit file: ${path}. Error code: ${error.code}.`, { cause: error });
 }
 
+/**
+ * Create the built-in edit tool bound to an ExecutionToolContext.
+ *
+ * 创建内置 edit 工具。相对原文件做不重叠替换；写盘前经突变队列。
+ */
 export function createEditTool<TContext extends ExecutionToolContext = ExecutionToolContext>(): AgentHarnessTool<
 	TContext,
 	typeof editSchema,

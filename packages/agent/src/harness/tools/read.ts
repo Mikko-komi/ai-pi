@@ -1,3 +1,12 @@
+/**
+ * Built-in read tool.
+ *
+ * Reads text or supported images. Text is truncated from the head; images
+ * become attachments.
+ *
+ * 内置 read 工具。文本从头截断；支持的图片当附件，BMP 没 processor 就省略。
+ */
+
 import type { ImageContent, TextContent } from "@earendil-works/pi-ai";
 import { type Static, Type } from "typebox";
 import type { Context } from "../context.ts";
@@ -20,16 +29,36 @@ const readSchema = Type.Object({
 	limit: Type.Optional(Type.Number({ description: "Maximum number of lines to read" })),
 });
 
+/**
+ * Parameters accepted by the read tool.
+ *
+ * read 工具的入参。offset 从 1 起；超文件末尾会抛。
+ */
 export type ReadToolInput = Static<typeof readSchema>;
 
+/**
+ * Details attached to a truncated text read.
+ *
+ * 文本被截断时附带的截断信息。完整读完则 details 为 undefined。
+ */
 export interface ReadToolDetails {
 	truncation?: TruncationResult;
 }
 
+/**
+ * Result of an injected image processor.
+ *
+ * 注入的图片处理器结果。失败只带说明，不当附件。
+ */
 export type ReadImageProcessorResult =
 	| { ok: true; data: string; mimeType: string; hints: string[] }
 	| { ok: false; message: string };
 
+/**
+ * Optional converter/resizer used when reading image files.
+ *
+ * 读图时可选的转换/缩放实现。没配则原样 base64，BMP 省略。
+ */
 export type ReadImageProcessor = (
 	bytes: Uint8Array,
 	mimeType: string,
@@ -37,6 +66,11 @@ export type ReadImageProcessor = (
 	context: Context,
 ) => Promise<ReadImageProcessorResult>;
 
+/**
+ * Options for createReadTool.
+ *
+ * createReadTool 的选项。没配 imageProcessor 时 BMP 不会当附件发出。
+ */
 export interface ReadToolOptions {
 	/** Whether an injected image processor should resize images. Default: true. */
 	autoResizeImages?: boolean;
@@ -44,6 +78,11 @@ export interface ReadToolOptions {
 	imageProcessor?: ReadImageProcessor;
 }
 
+/**
+ * Create the built-in read tool bound to an ExecutionToolContext.
+ *
+ * 创建内置 read 工具。文本从头截；支持的图片当附件，路径经 resolveReadToolPath。
+ */
 export function createReadTool<TContext extends ExecutionToolContext = ExecutionToolContext>(
 	options?: ReadToolOptions,
 ): AgentHarnessTool<TContext, typeof readSchema, ReadToolDetails | undefined> {

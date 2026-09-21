@@ -1,4 +1,14 @@
-/** Expected internal control flow when cancellation wins effect admission. */
+/**
+ * Effect admission gate for one drive pass.
+ *
+ * 一轮 drive 的副作用准入口。取消抢到准入时抛 AbortRequested，不是故障。
+ */
+
+/**
+ * Expected internal control flow when cancellation wins effect admission.
+ *
+ * 取消抢到准入时抛的控制流错误。不是故障；携带尚未完成的 cancellation Promise。
+ */
 export class AbortRequested extends Error {
 	readonly cancellation: Promise<void>;
 
@@ -9,13 +19,21 @@ export class AbortRequested extends Error {
 	}
 }
 
-/** Procedure-facing synchronous admission capability for one drive pass. */
+/**
+ * Procedure-facing synchronous admission capability for one drive pass.
+ *
+ * 一轮 drive 的准入口。aborting 抛 AbortRequested；closed 抛关闭错误。
+ */
 export interface Gate {
 	readonly signal: AbortSignal;
 	admit<T>(invoke: () => T): T;
 }
 
-/** Owner-facing lifecycle controls for one drive pass. */
+/**
+ * Owner-facing lifecycle controls for one drive pass.
+ *
+ * 一轮 drive 的拥有者控制面。open → aborting → closed；重复调用是空操作。
+ */
 export interface GateControl {
 	beginAbort(cancellation: Promise<void>): void;
 	signalAbort(): void;
@@ -27,7 +45,11 @@ type GateState =
 	| { status: "aborting"; cancellation: Promise<void> }
 	| { status: "closed"; error: Error };
 
-/** Create separate procedure-facing and owner-facing views of one effect gate. */
+/**
+ * Create separate procedure-facing and owner-facing views of one effect gate.
+ *
+ * 拆出 procedure 侧 Gate 和拥有者侧 GateControl。两边看同一份状态。
+ */
 export function createGate(): { gate: Gate; control: GateControl } {
 	let state: GateState = { status: "open" };
 	const controller = new AbortController();

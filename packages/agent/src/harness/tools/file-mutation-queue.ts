@@ -1,3 +1,11 @@
+/**
+ * Per-environment file-mutation queue.
+ *
+ * Serializes writes/edits that target the same canonical path.
+ *
+ * 按 ExecutionEnv 和规范路径串行化文件突变。不同路径仍可并行。
+ */
+
 import type { Context } from "../context.ts";
 import type { ExecutionEnv } from "../types.ts";
 import { getOrThrow } from "../types.ts";
@@ -26,7 +34,11 @@ async function getMutationQueueKey(env: ExecutionEnv, path: string, context: Con
 	throw canonicalPath.error;
 }
 
-/** Serialize file mutations targeting the same environment and canonical path. */
+/**
+ * Serialize file mutations targeting the same environment and canonical path.
+ *
+ * 同 env、同规范路径的突变串行。不同路径仍并行；路径尚未存在时退回绝对路径。
+ */
 export async function withFileMutationQueue<T>(
 	env: ExecutionEnv,
 	path: string,

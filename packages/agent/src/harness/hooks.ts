@@ -1,3 +1,12 @@
+/**
+ * Ordered harness hook registry and aggregate runner.
+ *
+ * Hooks run in registration order. Failures are reported and usually skipped;
+ * before_drive fails closed.
+ *
+ * 有序 hook 注册表和聚合运行器。按注册序跑；失败多数上报后跳过，before_drive 失败即停。
+ */
+
 import type { HookHandler, HookInvocation, HookMap, HookName, Hooks } from "./agent-harness.ts";
 import { type Context, withAbortSignal } from "./context.ts";
 import type { Gate } from "./execution/effect-gate.ts";
@@ -11,7 +20,11 @@ interface HookRegistration {
 
 type HookErrorReporter = (error: Error, hook: HookName, lane: string, context: Context) => void | Promise<void>;
 
-/** Ordered harness hook registry and aggregate runner. */
+/**
+ * Ordered harness hook registry and aggregate runner.
+ *
+ * 有序 hook 注册表和聚合运行器。按注册序跑；失败多数上报后跳过，before_drive 失败即停。
+ */
 export class HookRegistry implements Hooks {
 	private readonly registrations = new Map<HookName, HookRegistration[]>();
 	private readonly reportError: HookErrorReporter;
@@ -443,6 +456,11 @@ export class HookRegistry implements Hooks {
 	}
 }
 
+/**
+ * Apply a stream-options patch onto a base options object.
+ *
+ * 把 patch 叠到 streamOptions 上。字段为 undefined 表示删除；headers/metadata 按键合并。
+ */
 export function applyStreamOptionsPatch(
 	base: AgentHarnessStreamOptions,
 	patch: AgentHarnessStreamOptionsPatch,

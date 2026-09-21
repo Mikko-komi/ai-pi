@@ -1,7 +1,17 @@
+/**
+ * Shared utilities for compaction and branch summarization.
+ *
+ * 压缩和分支摘要共用的文件跟踪与会话序列化。
+ */
+
 import { contentText, type Message } from "@earendil-works/pi-ai";
 import type { AgentMessage } from "../../types.ts";
 
-/** File paths touched by a session branch or compaction range. */
+/**
+ * File paths touched by a session branch or compaction range.
+ *
+ * 工具碰到的路径集合。read/written/edited 分开记，合成列表时再去重。
+ */
 export interface FileOperations {
 	/** Files read but not necessarily modified. */
 	read: Set<string>;
@@ -11,7 +21,11 @@ export interface FileOperations {
 	edited: Set<string>;
 }
 
-/** Create an empty file-operation accumulator. */
+/**
+ * Create an empty file-operation accumulator.
+ *
+ * 空的文件操作集合。
+ */
 export function createFileOps(): FileOperations {
 	return {
 		read: new Set(),
@@ -20,7 +34,11 @@ export function createFileOps(): FileOperations {
 	};
 }
 
-/** Add file operations from assistant tool calls to an accumulator. */
+/**
+ * Add file operations from assistant tool calls to an accumulator.
+ *
+ * 从 assistant 的 toolCall 抽出路径。只认 read/write/edit。
+ */
 export function extractFileOpsFromMessage(message: AgentMessage, fileOps: FileOperations): void {
 	if (message.role !== "assistant") return;
 	if (!("content" in message) || !Array.isArray(message.content)) return;
@@ -50,7 +68,11 @@ export function extractFileOpsFromMessage(message: AgentMessage, fileOps: FileOp
 	}
 }
 
-/** Compute sorted read-only and modified file lists from accumulated operations. */
+/**
+ * Compute sorted read-only and modified file lists from accumulated operations.
+ *
+ * 合成最终文件列表。改过的从只读里剔除，两边都排序。
+ */
 export function computeFileLists(fileOps: FileOperations): { readFiles: string[]; modifiedFiles: string[] } {
 	const modified = new Set([...fileOps.edited, ...fileOps.written]);
 	const readOnly = [...fileOps.read].filter((f) => !modified.has(f)).sort();
@@ -58,7 +80,11 @@ export function computeFileLists(fileOps: FileOperations): { readFiles: string[]
 	return { readFiles: readOnly, modifiedFiles };
 }
 
-/** Format file lists as summary metadata tags. */
+/**
+ * Format file lists as summary metadata tags.
+ *
+ * 把文件列表收成摘要尾部的 XML。两边都空则返回空串。
+ */
 export function formatFileOperations(readFiles: string[], modifiedFiles: string[]): string {
 	const sections: string[] = [];
 	if (readFiles.length > 0) {
@@ -87,7 +113,11 @@ function truncateForSummary(text: string, maxChars: number): string {
 	return `${text.slice(0, maxChars)}\n\n[... ${truncatedChars} more characters truncated]`;
 }
 
-/** Serialize LLM messages to plain text for summarization prompts. */
+/**
+ * Serialize LLM messages to plain text for summarization prompts.
+ *
+ * 把 LLM 消息收成纯文本给摘要模型看。须先 convertToLlm；tool result 截断。
+ */
 export function serializeConversation(messages: Message[]): string {
 	const parts: string[] = [];
 

@@ -1,3 +1,9 @@
+/**
+ * Assistant-stream consumption for one already-approved provider request.
+ *
+ * 消费一条已批准的 assistant 流。不改调用方消息列表；观察者失败会冒泡。
+ */
+
 import type {
 	Context as AiContext,
 	Api,
@@ -15,13 +21,21 @@ import type { SettledAssistantMessage } from "../session/types.ts";
 import type { AgentHarnessStreamOptions } from "../types.ts";
 import { AbortRequested } from "./effect-gate.ts";
 
-/** HTTP response metadata captured before the provider response body is consumed. */
+/**
+ * HTTP response metadata captured before the provider response body is consumed.
+ *
+ * 读响应体之前抓到的 HTTP 元数据。afterResponse 能看到，但不保证每个传输都填。
+ */
 export interface AssistantResponseMetadata {
 	status?: number;
 	headers?: Record<string, string>;
 }
 
-/** Process-local lifecycle observer for one assistant stream. */
+/**
+ * Process-local lifecycle observer for one assistant stream.
+ *
+ * 一条 assistant 流的进程内观察者。start 必须恰好一次，且在 update/done 之前。
+ */
 export interface AssistantStreamObserver {
 	start(
 		message: AssistantMessage,
@@ -32,7 +46,11 @@ export interface AssistantStreamObserver {
 	end(message: SettledAssistantMessage, context: Context): void | Promise<void>;
 }
 
-/** Executable inputs for one already-approved assistant provider request. */
+/**
+ * Executable inputs for one already-approved assistant provider request.
+ *
+ * 已批准请求的可执行输入。本模块不负责审批，只负责发流和收流。
+ */
 export interface HarnessAssistantStreamConfig {
 	model: Model<Api>;
 	systemPrompt: string;
@@ -96,6 +114,11 @@ function isUpdateEvent(
 	return event.type !== "start" && event.type !== "done" && event.type !== "error";
 }
 
+/**
+ * Drain one assistant event stream and notify the observer of start/update/end.
+ *
+ * 抽干一条 assistant 流并通知观察者。start 必须恰好一次；afterResponse 里的 AbortRequested 被吞掉。
+ */
 export async function consumeAssistantStream(
 	stream: AssistantMessageEventStream,
 	observer: AssistantStreamObserver,
@@ -132,7 +155,11 @@ export async function consumeAssistantStream(
 	return finalMessage;
 }
 
-/** Stream one assistant response without mutating the caller's message list. */
+/**
+ * Stream one assistant response without mutating the caller's message list.
+ *
+ * 发一条 assistant 请求并抽干流。调用方消息列表只被切片拷贝，不被原地改。
+ */
 export async function streamHarnessAssistant(
 	messages: AgentMessage[],
 	config: HarnessAssistantStreamConfig,

@@ -1,3 +1,9 @@
+/**
+ * Built-in harness execution tools.
+ *
+ * 内置执行工具的再导出入口。本文件不定义新符号。
+ */
+
 export {
 	type BashExecution,
 	type BashPrepare,

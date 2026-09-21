@@ -1,9 +1,25 @@
+/**
+ * Bounded shell-output view and incremental update helpers.
+ *
+ * 有界 shell 输出视图。写入在限速时折叠成最新视图；空闲后第一次和最终 flush 立即发出。
+ */
+
 import type { Context } from "../context.ts";
 import type { ShellOutputCaptureOptions, ShellOutputMetadata, ShellOutputUpdate, ShellOutputView } from "../types.ts";
 import { AdaptivePublisher } from "./adaptive-publisher.ts";
 import { DEFAULT_MAX_BYTES, DEFAULT_MAX_LINES, truncateHead, truncateTail, utf8ByteLength } from "./truncate.ts";
 
+/**
+ * Minimum interval between adaptive output publications.
+ *
+ * 自适应发布的最短间隔。也限制事件个数。
+ */
 export const OUTPUT_MIN_EMIT_INTERVAL_MS = 100;
+/**
+ * Target encoded-bytes-per-second used to size publication delays.
+ *
+ * 按编码字节算发布延迟的目标速率。大窗口换更长等待。
+ */
 export const OUTPUT_TARGET_BYTES_PER_SECOND = 100 * 1024;
 
 const INVALID_SHELL_OUTPUT = /[\x00-\x08\x0b-\x1f\ufff9-\ufffb]/g;
@@ -22,6 +38,8 @@ interface OutputCaptureHandlers {
  * view. Small changes remain responsive; complete window turnovers purchase a
  * proportionally longer delay. The first update after idle and an explicit
  * final flush are immediate.
+ *
+ * 维护并发布一份有界 shell 输出。限速期间的写入折叠成最新视图；空闲后第一次和最终 flush 立即发出。
  */
 export class OutputCapture {
 	readonly #maxBytes: number;
@@ -150,6 +168,11 @@ export class OutputCapture {
 	}
 }
 
+/**
+ * Apply one incremental shell-output update onto the current view.
+ *
+ * 把一次增量更新叠到当前视图。replace 整份替换；metadata 只改元数据。
+ */
 export function applyShellOutputUpdate(
 	current: ShellOutputView | undefined,
 	update: ShellOutputUpdate,
@@ -211,6 +234,11 @@ function suffixPrefixOverlap(before: string, after: string, scan: number): numbe
 	return 0;
 }
 
+/**
+ * Strip control characters that are unsafe to keep in captured shell text.
+ *
+ * 去掉捕获文本里不安全的控制字符。不含 TAB/LF。
+ */
 export function sanitizeShellOutput(text: string): string {
 	return text.replace(INVALID_SHELL_OUTPUT, "");
 }

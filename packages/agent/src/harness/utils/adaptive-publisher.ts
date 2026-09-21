@@ -1,3 +1,14 @@
+/**
+ * Latest-state publisher that drops intermediate mutations.
+ *
+ * 只发最新状态。中间突变不排队；空闲后第一次立即发，之后按编码大小买延迟。
+ */
+
+/**
+ * Callbacks and rate limits for one AdaptivePublisher.
+ *
+ * AdaptivePublisher 的回调和限速。publish 前已提交基线，重入不会重复同一增量。
+ */
 export interface AdaptivePublisherOptions<TValue, TUpdate> {
 	snapshot(): TValue;
 	update(previous: TValue | undefined, current: TValue): TUpdate | undefined;
@@ -14,6 +25,8 @@ export interface AdaptivePublisherOptions<TValue, TUpdate> {
  * The first dirty state after idle is immediate. Each publication then buys a
  * delay proportional to its encoded size, with a minimum interval that also
  * bounds event count. A single trailing timer guarantees eventual publication.
+ *
+ * 只发最新状态，中间突变丢掉。空闲后第一次立即发；一条尾巴定时器保证最终发出。
  */
 export class AdaptivePublisher<TValue, TUpdate> {
 	readonly #options: AdaptivePublisherOptions<TValue, TUpdate>;

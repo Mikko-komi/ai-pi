@@ -1,3 +1,12 @@
+/**
+ * Branch summarization for tree navigation.
+ *
+ * When navigating to a different point in the session tree, this generates
+ * a summary of the branch being left so context isn't lost.
+ *
+ * 离开一条分支时给它做摘要。导航后旧枝上下文靠这条摘要留下。
+ */
+
 import {
 	type Api,
 	contentText,
@@ -29,7 +38,11 @@ import {
 	serializeConversation,
 } from "./utils.ts";
 
-/** Generated branch summary data ready to be persisted as a branch-summary entry. */
+/**
+ * Generated branch summary data ready to be persisted as a branch-summary entry.
+ *
+ * 分支摘要结果。中止或失败走 Result，不抛。
+ */
 export interface BranchSummaryResult {
 	summary: string;
 	usage?: Usage;
@@ -37,7 +50,11 @@ export interface BranchSummaryResult {
 	modifiedFiles: string[];
 }
 
-/** File-operation details stored on generated branch summary entries. */
+/**
+ * File-operation details stored on generated branch summary entries.
+ *
+ * 分支摘要条目里记下的文件清单。给嵌套分支累计跟踪用。
+ */
 export interface BranchSummaryDetails {
 	/** Files read while exploring the summarized branch. */
 	readFiles: string[];
@@ -47,7 +64,11 @@ export interface BranchSummaryDetails {
 
 export type { FileOperations } from "./utils.ts";
 
-/** Prepared branch content for summarization. */
+/**
+ * Prepared branch content for summarization.
+ *
+ * 准备拿去摘要的消息和文件操作。超预算从最新往回截。
+ */
 export interface BranchPreparation {
 	/** Messages selected for the branch summary. */
 	messages: AgentMessage[];
@@ -57,7 +78,11 @@ export interface BranchPreparation {
 	totalTokens: number;
 }
 
-/** Entries selected for branch summarization. */
+/**
+ * Entries selected for branch summarization.
+ *
+ * 离开路径上要摘要的条目，以及与目标的共同祖先。
+ */
 export interface CollectEntriesResult {
 	/** Entries to summarize in chronological order. */
 	entries: Entry[];
@@ -65,7 +90,11 @@ export interface CollectEntriesResult {
 	commonAncestorId: string | null;
 }
 
-/** Options for generating a branch summary. */
+/**
+ * Options for generating a branch summary.
+ *
+ * 生成分支摘要的模型调用选项。`replaceInstructions` 为真时整段替换默认提示。
+ */
 export interface GenerateBranchSummaryOptions {
 	/** Provider collection the summarization request goes through; owns auth resolution. */
 	models: Models;
@@ -83,7 +112,11 @@ export interface GenerateBranchSummaryOptions {
 	callbacks?: RetryCallbacks;
 }
 
-/** Collect entries that should be summarized before navigating to a different session tree entry. */
+/**
+ * Collect entries that should be summarized before navigating to a different session tree entry.
+ *
+ * 收集离开路径上该摘要的条目。不在 compaction 边界停下，旧摘要也当上下文。
+ */
 export async function collectEntriesForBranchSummary(
 	branch: Pick<Branch, "findEntries">,
 	session: Pick<Session, "getEntry">,
@@ -132,7 +165,11 @@ function getMessageFromEntry(entry: Entry): AgentMessage | undefined {
 	}
 }
 
-/** Prepare branch entries for summarization within an optional token budget. */
+/**
+ * Prepare branch entries for summarization within an optional token budget.
+ *
+ * 按 token 预算从新到旧挑消息。文件操作仍扫全量，不因预算丢掉累计路径。
+ */
 export function prepareBranchEntries(entries: Entry[], tokenBudget: number = 0): BranchPreparation {
 	const messages: AgentMessage[] = [];
 	const fileOps = createFileOps();
@@ -215,7 +252,11 @@ Use this EXACT format:
 
 Keep each section concise. Preserve exact file paths, function names, and error messages.`;
 
-/** Generate a summary for abandoned branch entries. */
+/**
+ * Generate a summary for abandoned branch entries.
+ *
+ * 给抛弃的分支生成摘要。空内容给占位句；中止/失败走 Result，不抛。
+ */
 export function generateBranchSummary(
 	entries: Entry[],
 	options: GenerateBranchSummaryOptions,
@@ -233,12 +274,21 @@ export function generateBranchSummary(
 	);
 }
 
+/**
+ * Prompt-only options for a prepared branch-summary request.
+ *
+ * 已准备分支上的提示选项。`replaceInstructions` 为真时整段替换默认提示。
+ */
 export interface PreparedBranchSummaryOptions {
 	customInstructions?: string;
 	replaceInstructions?: boolean;
 }
 
-/** Generate a prepared branch summary through a caller-owned one-request boundary. */
+/**
+ * Generate a prepared branch summary through a caller-owned one-request boundary.
+ *
+ * 经调用方提供的 request 生成分支摘要。空内容给占位句。
+ */
 export async function generateBranchSummaryWithRequest(
 	preparation: BranchPreparation,
 	options: PreparedBranchSummaryOptions,

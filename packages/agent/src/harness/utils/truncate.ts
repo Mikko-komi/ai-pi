@@ -6,12 +6,34 @@
  * - Byte limit (default: 50KB)
  *
  * Never returns partial lines (except bash tail truncation edge case).
+ *
+ * 工具输出截断。行数和字节谁先到谁赢；除 bash 尾截边角外不返回半行。
  */
 
+/**
+ * Default maximum lines kept by tool-output truncation.
+ *
+ * 默认最多保留 2000 行。
+ */
 export const DEFAULT_MAX_LINES = 2000;
+/**
+ * Default maximum UTF-8 bytes kept by tool-output truncation.
+ *
+ * 默认最多保留 50KB。
+ */
 export const DEFAULT_MAX_BYTES = 50 * 1024; // 50KB
+/**
+ * Maximum characters kept on one grep match line.
+ *
+ * 单条 grep 命中最多 500 字符。
+ */
 export const GREP_MAX_LINE_LENGTH = 500; // Max chars per grep match line
 
+/**
+ * Result of truncating a tool output.
+ *
+ * 截断结果。截没截、撞了哪条限、输出了多少行/字节都在这里。
+ */
 export interface TruncationResult {
 	/** The truncated content */
 	content: string;
@@ -37,6 +59,11 @@ export interface TruncationResult {
 	maxBytes: number;
 }
 
+/**
+ * Optional overrides for the default line and byte limits.
+ *
+ * 覆盖默认行/字节上限。没给就用 DEFAULT_MAX_*。
+ */
 export interface TruncationOptions {
 	/** Maximum number of lines (default: 2000) */
 	maxLines?: number;
@@ -51,6 +78,11 @@ interface RuntimeBuffer {
 const runtimeBuffer = (globalThis as { Buffer?: RuntimeBuffer }).Buffer;
 const nonAsciiPattern = /[^\x00-\x7f]/;
 
+/**
+ * Count UTF-8 bytes in a string without requiring Node Buffer.
+ *
+ * 算 UTF-8 字节数。有 Buffer 就用它；孤立代理项按 3 字节计。
+ */
 export function utf8ByteLength(content: string): number {
 	if (runtimeBuffer) return runtimeBuffer.byteLength(content, "utf8");
 
@@ -111,6 +143,8 @@ function replaceUnpairedSurrogates(content: string): string {
 
 /**
  * Format bytes as human-readable size.
+ *
+ * 把字节数收成 B/KB/MB。小于 1KB 用整数 B。
  */
 export function formatSize(bytes: number): string {
 	if (bytes < 1024) {
@@ -128,6 +162,8 @@ export function formatSize(bytes: number): string {
  *
  * Never returns partial lines. If first line exceeds byte limit,
  * returns empty content with firstLineExceedsLimit=true.
+ *
+ * 从头截。不返回半行；首行超字节限则空内容并标 firstLineExceedsLimit。
  */
 export function truncateHead(content: string, options: TruncationOptions = {}): TruncationResult {
 	const maxLines = options.maxLines ?? DEFAULT_MAX_LINES;
@@ -218,6 +254,8 @@ export function truncateHead(content: string, options: TruncationOptions = {}): 
  * Suitable for bash output where you want to see the end (errors, final results).
  *
  * May return partial first line if the last line of original content exceeds byte limit.
+ *
+ * 从尾截。原最后一行超字节限时允许半行，并标 lastLinePartial。
  */
 export function truncateTail(content: string, options: TruncationOptions = {}): TruncationResult {
 	const maxLines = options.maxLines ?? DEFAULT_MAX_LINES;
@@ -338,6 +376,8 @@ function truncateStringToBytesFromEnd(str: string, maxBytes: number): string {
 /**
  * Truncate a single line to max characters, adding [truncated] suffix.
  * Used for grep match lines.
+ *
+ * 按字符截一行并加后缀。给 grep 命中用，不是按字节。
  */
 export function truncateLine(
 	line: string,

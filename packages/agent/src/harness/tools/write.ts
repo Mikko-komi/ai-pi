@@ -1,3 +1,11 @@
+/**
+ * Built-in write tool.
+ *
+ * Creates or overwrites a file and creates missing parent directories.
+ *
+ * 内置 write 工具。整文件覆盖；同路径突变经队列串行。
+ */
+
 import { type Static, Type } from "typebox";
 import type { AgentHarnessTool } from "../types.ts";
 import { getOrThrow } from "../types.ts";
@@ -10,8 +18,18 @@ const writeSchema = Type.Object({
 	content: Type.String({ description: "Content to write to the file" }),
 });
 
+/**
+ * Parameters accepted by the write tool.
+ *
+ * write 工具的入参。content 是整文件内容，不是补丁。
+ */
 export type WriteToolInput = Static<typeof writeSchema>;
 
+/**
+ * Create the built-in write tool bound to an ExecutionToolContext.
+ *
+ * 创建内置 write 工具。整文件覆盖；同路径突变经队列串行。
+ */
 export function createWriteTool<TContext extends ExecutionToolContext = ExecutionToolContext>(): AgentHarnessTool<
 	TContext,
 	typeof writeSchema,

@@ -1,9 +1,16 @@
 /**
  * Shared diff computation utilities for the edit and similar tools.
+ *
+ * edit 工具共用的换行、模糊匹配和 diff。匹配相对原文件，不增量叠。
  */
 
 import * as Diff from "diff";
 
+/**
+ * Detect the first line ending in content.
+ *
+ * 认文件的第一种换行。没有换行当 LF；CRLF 必须出现在第一个 LF 之前。
+ */
 export function detectLineEnding(content: string): "\r\n" | "\n" {
 	const crlfIdx = content.indexOf("\r\n");
 	const lfIdx = content.indexOf("\n");
@@ -12,10 +19,20 @@ export function detectLineEnding(content: string): "\r\n" | "\n" {
 	return crlfIdx < lfIdx ? "\r\n" : "\n";
 }
 
+/**
+ * Convert CRLF and lone CR to LF.
+ *
+ * 把 CRLF 和单独 CR 收成 LF。匹配前先统一，避免换行差异当不匹配。
+ */
 export function normalizeToLF(text: string): string {
 	return text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
 }
 
+/**
+ * Restore LF-normalized text to the original line ending.
+ *
+ * 把 LF 文本写回原换行。ending 为 LF 时原样返回。
+ */
 export function restoreLineEndings(text: string, ending: "\r\n" | "\n"): string {
 	return ending === "\r\n" ? text.replace(/\n/g, "\r\n") : text;
 }
@@ -26,6 +43,8 @@ export function restoreLineEndings(text: string, ending: "\r\n" | "\n"): string 
  * - Normalize smart quotes to ASCII equivalents
  * - Normalize Unicode dashes/hyphens to ASCII hyphen
  * - Normalize special Unicode spaces to regular space
+ *
+ * 模糊匹配用的规范化。行尾空白、弯引号、破折号和特殊空格都收到 ASCII。
  */
 export function normalizeForFuzzyMatch(text: string): string {
 	return (
@@ -124,6 +143,8 @@ function applyReplacements(content: string, replacements: TextReplacement[], off
  * are rewritten from the normalized base, and all other lines are copied back
  * from `originalContent`. The actual replacement ranges drive preservation so
  * duplicate normalized lines cannot be aligned to the wrong occurrence.
+ *
+ * 把规范化空间里的替换叠回原文。没碰到的行保持原字节；行数必须一致。
  */
 export function applyReplacementsPreservingUnchangedLines(
 	originalContent: string,
@@ -168,6 +189,11 @@ export function applyReplacementsPreservingUnchangedLines(
 	return result;
 }
 
+/**
+ * Outcome of exact-then-fuzzy search for one oldText.
+ *
+ * 先精确后模糊的查找结果。模糊命中时 contentForReplacement 是规范化文本。
+ */
 export interface FuzzyMatchResult {
 	/** Whether a match was found */
 	found: boolean;
@@ -184,11 +210,21 @@ export interface FuzzyMatchResult {
 	contentForReplacement: string;
 }
 
+/**
+ * One targeted text replacement.
+ *
+ * 一条相对原文件的替换。oldText 必须唯一且不与同批其他编辑重叠。
+ */
 export interface Edit {
 	oldText: string;
 	newText: string;
 }
 
+/**
+ * Before/after content after applying edits in LF-normalized space.
+ *
+ * 在 LF 空间套完编辑后的前后文本。写盘前还要恢复 BOM 和原换行。
+ */
 export interface AppliedEditsResult {
 	baseContent: string;
 	newContent: string;
@@ -199,6 +235,8 @@ export interface AppliedEditsResult {
  * When fuzzy matching is used, the returned contentForReplacement is the
  * fuzzy-normalized version of the content (trailing whitespace stripped,
  * Unicode quotes/dashes normalized to ASCII).
+ *
+ * 先精确后模糊找 oldText。模糊命中后替换必须在规范化空间做。
  */
 export function fuzzyFindText(content: string, oldText: string): FuzzyMatchResult {
 	// Try exact match first
@@ -240,7 +278,11 @@ export function fuzzyFindText(content: string, oldText: string): FuzzyMatchResul
 	};
 }
 
-/** Strip UTF-8 BOM if present, return both the BOM (if any) and the text without it */
+/**
+ * Strip UTF-8 BOM if present, return both the BOM (if any) and the text without it.
+ *
+ * 剥 UTF-8 BOM。有则单独还回，写盘时再拼上。
+ */
 export function stripBom(content: string): { bom: string; text: string } {
 	return content.startsWith("\uFEFF") ? { bom: "\uFEFF", text: content.slice(1) } : { bom: "", text: content };
 }
@@ -297,6 +339,8 @@ function getNoChangeError(path: string, totalEdits: number): Error {
  * fuzzy matching, the operation runs in fuzzy-normalized content space and then
  * overlays those line-level changes onto the original content so unchanged line
  * blocks keep their original bytes.
+ *
+ * 相对同一份原文套多条替换。空 oldText、找不到、重复或重叠都抛；结果无变化也抛。
  */
 export function applyEditsToNormalizedContent(
 	normalizedContent: string,
@@ -362,7 +406,11 @@ export function applyEditsToNormalizedContent(
 	return { baseContent, newContent };
 }
 
-/** Generate a standard unified patch. */
+/**
+ * Generate a standard unified patch.
+ *
+ * 生成标准 unified patch。只含文件头，不含时间戳。
+ */
 export function generateUnifiedPatch(path: string, oldContent: string, newContent: string, contextLines = 4): string {
 	return Diff.createTwoFilesPatch(path, path, oldContent, newContent, undefined, undefined, {
 		context: contextLines,
@@ -373,6 +421,8 @@ export function generateUnifiedPatch(path: string, oldContent: string, newConten
 /**
  * Generate a display-oriented diff string with line numbers and context.
  * Returns both the diff string and the first changed line number (in the new file).
+ *
+ * 带行号的展示用 diff。firstChangedLine 是新文件里第一处改动。
  */
 export function generateDiffString(
 	oldContent: string,

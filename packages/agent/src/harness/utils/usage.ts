@@ -1,5 +1,16 @@
+/**
+ * Usage arithmetic helpers.
+ *
+ * Token 用量加减。缺省可选字段按 0 加，两边都缺则不写出。
+ */
+
 import type { Usage } from "@earendil-works/pi-ai";
 
+/**
+ * Zeroed usage and cost totals.
+ *
+ * 全零 Usage。作累加起点。
+ */
 export function emptyUsage(): Usage {
 	return {
 		input: 0,
@@ -11,6 +22,11 @@ export function emptyUsage(): Usage {
 	};
 }
 
+/**
+ * Add two usage records field by field.
+ *
+ * 逐字段相加。cacheWrite1h/reasoning 两边都缺则不出现在结果里。
+ */
 export function addUsage(left: Usage, right: Usage): Usage {
 	return {
 		input: left.input + right.input,

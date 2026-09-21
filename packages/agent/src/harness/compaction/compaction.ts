@@ -1,3 +1,12 @@
+/**
+ * Context compaction for long sessions.
+ *
+ * Pure functions for cut points and summaries. Persistence and reload live
+ * outside this module.
+ *
+ * 长会话的上下文压缩。这里只算切点和摘要；写盘和重载由 Session 层做。
+ */
+
 import {
 	type Context as AiContext,
 	type Api,
@@ -28,7 +37,11 @@ import {
 	serializeConversation,
 } from "./utils.ts";
 
-/** File-operation details stored on generated compaction entries. */
+/**
+ * File-operation details stored on generated compaction entries.
+ *
+ * 压缩检查点附带的文件清单。给后续压缩累计跟踪用。
+ */
 export interface CompactionDetails extends Record<string, JsonValue> {
 	/** Files read in the compacted history. */
 	readFiles: string[];
@@ -94,7 +107,11 @@ function getMessageFromEntryForCompaction(entry: Entry): AgentMessage | undefine
 	return getMessageFromEntry(entry);
 }
 
-/** Generated compaction data ready to be persisted as a compaction entry. */
+/**
+ * Generated compaction data ready to be persisted as a compaction entry.
+ *
+ * compact() 的产出。id/parent 由 Session 层写盘时补。
+ */
 export interface CompactResult<T = JsonValue> {
 	/** Summary text that replaces compacted history in future context. */
 	summary: string;
@@ -108,12 +125,22 @@ export interface CompactResult<T = JsonValue> {
 	details?: T;
 }
 
+/**
+ * Caller-owned one-request boundary for a single summarization call.
+ *
+ * 一次摘要请求的调用口。调用方自管模型调用；这里不碰 Models。
+ */
 export type SummaryRequest = (
 	aiContext: AiContext,
 	options: SimpleStreamOptions,
 	context: Context,
 ) => Promise<AssistantMessage>;
 
+/**
+ * Attach abort, telemetry, and a non-reusable cache policy to a summary request.
+ *
+ * 给摘要请求补 abort/telemetry，并关掉可复用缓存。摘要是一次性请求。
+ */
 export function createSummaryRequestOptions(options: SimpleStreamOptions, context: Context): SimpleStreamOptions {
 	return {
 		...options,
@@ -124,6 +151,11 @@ export function createSummaryRequestOptions(options: SimpleStreamOptions, contex
 	};
 }
 
+/**
+ * Run one completeSimple summarization call with optional retry.
+ *
+ * 走 Models.completeSimple 做一次摘要。瞬时失败按策略重试，确定失败和中止立刻返回。
+ */
 export async function completeSimpleWithRetries(
 	models: Models,
 	model: Model<Api>,
@@ -143,7 +175,11 @@ export async function completeSimpleWithRetries(
 	);
 }
 
-/** Compaction thresholds and retention settings. */
+/**
+ * Compaction thresholds and retention settings.
+ *
+ * 压缩开关和预算。关掉时 shouldCompact 恒为假。
+ */
 export interface CompactionSettings {
 	/** Enable automatic compaction decisions. */
 	enabled: boolean;
@@ -153,14 +189,22 @@ export interface CompactionSettings {
 	keepRecentTokens: number;
 }
 
-/** Default compaction settings used by the harness. */
+/**
+ * Default compaction settings used by the harness.
+ *
+ * 默认压缩预算。调用方没覆盖就用这组。
+ */
 export const DEFAULT_COMPACTION_SETTINGS: CompactionSettings = {
 	enabled: true,
 	reserveTokens: 16384,
 	keepRecentTokens: 20000,
 };
 
-/** Calculate total context tokens from provider usage. */
+/**
+ * Calculate total context tokens from provider usage.
+ *
+ * 从 usage 取当前上下文 token。有 native totalTokens 就用它。
+ */
 export function calculateContextTokens(usage: Usage): number {
 	return usage.totalTokens || usage.input + usage.output + usage.cacheRead + usage.cacheWrite;
 }
@@ -179,7 +223,11 @@ function getAssistantUsage(msg: AgentMessage): Usage | undefined {
 	return undefined;
 }
 
-/** Return usage from the last valid assistant message in session entries. */
+/**
+ * Return usage from the last valid assistant message in session entries.
+ *
+ * 从条目里找最近一条有效 assistant usage。中止、出错和全零的不算。
+ */
 export function getLastAssistantUsage(entries: Entry[]): Usage | undefined {
 	for (let i = entries.length - 1; i >= 0; i--) {
 		const entry = entries[i];
@@ -191,7 +239,11 @@ export function getLastAssistantUsage(entries: Entry[]): Usage | undefined {
 	return undefined;
 }
 
-/** Estimated context-token usage for a message list. */
+/**
+ * Estimated context-token usage for a message list.
+ *
+ * 上下文 token 估计。有 usage 时只另估其后的尾巴。
+ */
 export interface ContextUsageEstimate {
 	/** Estimated total context tokens. */
 	tokens: number;
@@ -211,7 +263,11 @@ function getLastAssistantUsageInfo(messages: AgentMessage[]): { usage: Usage; in
 	return undefined;
 }
 
-/** Estimate context tokens for messages using provider usage when available. */
+/**
+ * Estimate context tokens for messages using provider usage when available.
+ *
+ * 估当前上下文 token。优先最后一条有效 usage，其后用字符启发式补。
+ */
 export function estimateContextTokens(messages: AgentMessage[]): ContextUsageEstimate {
 	const usageInfo = getLastAssistantUsageInfo(messages);
 
@@ -242,7 +298,11 @@ export function estimateContextTokens(messages: AgentMessage[]): ContextUsageEst
 	};
 }
 
-/** Return whether context usage exceeds the configured compaction threshold. */
+/**
+ * Return whether context usage exceeds the configured compaction threshold.
+ *
+ * 是否该压。未启用恒为假；超过窗口减去 reserveTokens 才触发。
+ */
 export function shouldCompact(contextTokens: number, contextWindow: number, settings: CompactionSettings): boolean {
 	if (!settings.enabled) return false;
 	return contextTokens > contextWindow - settings.reserveTokens;
@@ -266,7 +326,11 @@ function estimateTextAndImageContentChars(content: string | Array<{ type: string
 	return chars;
 }
 
-/** Estimate token count for one message using a conservative character heuristic. */
+/**
+ * Estimate token count for one message using a conservative character heuristic.
+ *
+ * 用字符/4 估一条消息的 token。偏保守（估高）。
+ */
 export function estimateTokens(message: AgentMessage): number {
 	let chars = 0;
 
@@ -339,7 +403,11 @@ function findValidCutPoints(entries: Entry[], startIndex: number, endIndex: numb
 	return cutPoints;
 }
 
-/** Find the user-visible message that starts the turn containing an entry. */
+/**
+ * Find the user-visible message that starts the turn containing an entry.
+ *
+ * 从给定条目往回找本轮起点。找不到返回 -1。
+ */
 export function findTurnStartIndex(entries: Entry[], entryIndex: number, startIndex: number): number {
 	for (let i = entryIndex; i >= startIndex; i--) {
 		const entry = entries[i];
@@ -356,7 +424,11 @@ export function findTurnStartIndex(entries: Entry[], entryIndex: number, startIn
 	return -1;
 }
 
-/** Cut point selected for compaction. */
+/**
+ * Cut point selected for compaction.
+ *
+ * 压缩切点。`isSplitTurn` 为真时本轮前缀还要单独摘要。
+ */
 export interface CutPointResult {
 	/** Index of the first entry retained after compaction. */
 	firstKeptEntryIndex: number;
@@ -366,7 +438,11 @@ export interface CutPointResult {
 	isSplitTurn: boolean;
 }
 
-/** Find the compaction cut point that keeps approximately the requested recent-token budget. */
+/**
+ * Find the compaction cut point that keeps approximately the requested recent-token budget.
+ *
+ * 在窗口内找切点，尽量保住 keepRecentTokens。不切在 toolResult 上。
+ */
 export function findCutPoint(
 	entries: Entry[],
 	startIndex: number,
@@ -417,6 +493,11 @@ export function findCutPoint(
 	};
 }
 
+/**
+ * System prompt for summarization requests.
+ *
+ * 摘要模型的系统提示。只许出结构化摘要，不许续聊。
+ */
 export const SUMMARIZATION_SYSTEM_PROMPT = `You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.
 
 Do NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary.`;
@@ -493,7 +574,11 @@ Use this EXACT format:
 
 Keep each section concise. Preserve exact file paths, function names, and error messages.`;
 
-/** Generate or update a conversation summary for compaction. */
+/**
+ * Generate or update a conversation summary for compaction.
+ *
+ * 生成或更新摘要文本。有 previousSummary 时走增量提示。
+ */
 export async function generateSummary(
 	currentMessages: AgentMessage[],
 	models: Models,
@@ -521,7 +606,11 @@ export async function generateSummary(
 	return result.ok ? ok(result.value.text) : err(result.error);
 }
 
-/** Generate or update a conversation summary and return its provider usage. */
+/**
+ * Generate or update a conversation summary and return its provider usage.
+ *
+ * 生成或更新摘要并带回 usage。中止和失败走 Result，不抛。
+ */
 export function generateSummaryWithUsage(
 	currentMessages: AgentMessage[],
 	models: Models,
@@ -543,6 +632,11 @@ export function generateSummaryWithUsage(
 	);
 }
 
+/**
+ * Model and budget for one generateSummaryWithRequest call.
+ *
+ * generateSummaryWithRequest 的模型和预算。有 previousSummary 时走增量提示。
+ */
 export interface SummaryGenerationOptions {
 	model: Model<Api>;
 	reserveTokens: number;
@@ -551,7 +645,11 @@ export interface SummaryGenerationOptions {
 	thinkingLevel?: ThinkingLevel;
 }
 
-/** Generate one summary through a caller-owned one-request boundary. */
+/**
+ * Generate one summary through a caller-owned one-request boundary.
+ *
+ * 经调用方提供的 request 生成一条摘要。中止和失败走 Result，不抛。
+ */
 export async function generateSummaryWithRequest(
 	currentMessages: AgentMessage[],
 	options: SummaryGenerationOptions,
@@ -610,7 +708,11 @@ export async function generateSummaryWithRequest(
 	return ok({ text: textContent, usage: response.usage });
 }
 
-/** Prepared inputs for a compaction run. */
+/**
+ * Prepared inputs for a compaction run.
+ *
+ * compact() 的输入。没有可压内容时 prepare 返回 undefined。
+ */
 export interface CompactionPreparation {
 	/** Messages summarized into the history summary. */
 	messagesToSummarize: AgentMessage[];
@@ -630,7 +732,11 @@ export interface CompactionPreparation {
 	settings: CompactionSettings;
 }
 
-/** Prepare session entries for compaction, or return undefined when compaction is not applicable. */
+/**
+ * Prepare session entries for compaction, or return undefined when compaction is not applicable.
+ *
+ * 算下一次压缩的切点和待摘要消息。末条已是 compaction 或没有可压内容时返回 undefined。
+ */
 export function prepareCompaction(
 	pathEntries: Entry[],
 	settings: CompactionSettings,
@@ -723,7 +829,11 @@ Be concise. Focus on what's needed to understand the kept suffix.`;
 
 export { serializeConversation } from "./utils.ts";
 
-/** Generate compaction summary data from prepared session history. */
+/**
+ * Generate compaction summary data from prepared session history.
+ *
+ * 按准备数据生成压缩摘要。切在轮中时再压一轮前缀，并附上文件列表。
+ */
 export function compact(
 	preparation: CompactionPreparation,
 	models: Models,
@@ -743,13 +853,22 @@ export function compact(
 	);
 }
 
+/**
+ * Model and thinking level for one compactWithRequest call.
+ *
+ * compactWithRequest 的模型和思考级别。请求边界由调用方提供。
+ */
 export interface CompactGenerationOptions {
 	model: Model<Api>;
 	customInstructions?: string;
 	thinkingLevel?: ThinkingLevel;
 }
 
-/** Generate compaction data through a caller-owned boundary for each provider request. */
+/**
+ * Generate compaction data through a caller-owned boundary for each provider request.
+ *
+ * 经调用方提供的 request 生成压缩数据。切在轮中时再压一轮前缀。
+ */
 export async function compactWithRequest(
 	preparation: CompactionPreparation,
 	options: CompactGenerationOptions,

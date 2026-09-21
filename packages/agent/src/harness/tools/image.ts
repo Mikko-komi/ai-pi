@@ -1,5 +1,16 @@
+/**
+ * Image sniffing and base64 encoding for the read tool.
+ *
+ * 读工具用的图片嗅探和 base64。只认静态 jpg/png/gif/webp/bmp。
+ */
+
 const PNG_SIGNATURE = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
 
+/**
+ * Detect a supported still-image MIME type from magic bytes.
+ *
+ * 从魔数认静态图类型。动画 PNG、JPEG XL 和无法解析的 BMP 返回 undefined。
+ */
 export function detectSupportedImageMimeType(buffer: Uint8Array): string | undefined {
 	if (startsWith(buffer, [0xff, 0xd8, 0xff])) return buffer[3] === 0xf7 ? undefined : "image/jpeg";
 	if (startsWith(buffer, PNG_SIGNATURE)) return isPng(buffer) && !isAnimatedPng(buffer) ? "image/png" : undefined;
@@ -9,6 +20,11 @@ export function detectSupportedImageMimeType(buffer: Uint8Array): string | undef
 	return undefined;
 }
 
+/**
+ * Encode bytes as standard base64.
+ *
+ * 标准 base64。不依赖 Node Buffer，短输入也按 3 字节补 '='。
+ */
 export function encodeBase64(bytes: Uint8Array): string {
 	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 	let output = "";

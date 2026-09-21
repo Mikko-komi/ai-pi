@@ -1,3 +1,12 @@
+/**
+ * Built-in bash tool.
+ *
+ * Runs a command in the current working directory and returns combined stdout
+ * and stderr, truncated from the tail.
+ *
+ * 内置 bash 工具。合并 stdout/stderr，从尾截断；超时和失败抛错。
+ */
+
 import { type Static, Type } from "typebox";
 import type { Context } from "../context.ts";
 import type { AgentHarnessTool, ShellOutputTruncation, ShellOutputView } from "../types.ts";
@@ -13,13 +22,28 @@ const bashSchema = Type.Object({
 	timeout: Type.Optional(Type.Number({ description: "Timeout in seconds (optional, no default timeout)" })),
 });
 
+/**
+ * Parameters accepted by the bash tool.
+ *
+ * bash 工具的入参。timeout 是秒；非法超时立刻抛。
+ */
 export type BashToolInput = Static<typeof bashSchema>;
 
+/**
+ * Truncation metadata attached to a bash result.
+ *
+ * 输出被截断时附带的信息。完整输出可落到 fullOutputPath。
+ */
 export interface BashToolDetails {
 	truncation?: ShellOutputTruncation;
 	fullOutputPath?: string;
 }
 
+/**
+ * Concrete command about to be executed, after prefix and prepare hooks.
+ *
+ * 前缀和 prepare 之后真正要跑的命令。cwd/env 可被 prepare 改。
+ */
 export interface BashExecution {
 	command: string;
 	cwd: string;
@@ -27,12 +51,22 @@ export interface BashExecution {
 	inheritEnv: boolean;
 }
 
+/**
+ * Hook that mutates a bash execution before it is spawned.
+ *
+ * 开跑前改命令/cwd/env 的钩子。可以异步。
+ */
 export type BashPrepare<TContext extends ExecutionToolContext = ExecutionToolContext> = (
 	execution: BashExecution,
 	toolContext: TContext,
 	context: Context,
 ) => void | Promise<void>;
 
+/**
+ * Options for createBashTool.
+ *
+ * createBashTool 的选项。commandPrefix 叠在用户命令前面。
+ */
 export interface BashToolOptions<TContext extends ExecutionToolContext = ExecutionToolContext> {
 	commandPrefix?: string;
 	prepare?: BashPrepare<TContext>;
@@ -48,6 +82,11 @@ function validateTimeout(timeout: number | undefined): void {
 	}
 }
 
+/**
+ * Create the built-in bash tool bound to an ExecutionToolContext.
+ *
+ * 创建内置 bash 工具。输出从尾截；非零退出和超时抛错。
+ */
 export function createBashTool<TContext extends ExecutionToolContext = ExecutionToolContext>(
 	options?: BashToolOptions<TContext>,
 ): AgentHarnessTool<TContext, typeof bashSchema, BashToolDetails | undefined> {

@@ -1,3 +1,12 @@
+/**
+ * Node.js implementation of ExecutionEnv.
+ *
+ * Filesystem, path, and shell operations go through this adapter. Failures
+ * return Result instead of throwing.
+ *
+ * Node 上的 ExecutionEnv。文件、路径和 shell 都走这里；失败写进 Result，不抛。
+ */
+
 import { type ChildProcess, spawn } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { constants, createWriteStream, type WriteStream } from "node:fs";
@@ -435,6 +444,11 @@ class NodeTextLineReader implements TextLineReader {
 	}
 }
 
+/**
+ * Node.js implementation of ExecutionEnv.
+ *
+ * Node 上的 ExecutionEnv。文件、路径和 shell 都走这里；失败写进 Result，不抛。
+ */
 export class NodeExecutionEnv implements ExecutionEnv {
 	cwd: string;
 	private shellPath?: string;

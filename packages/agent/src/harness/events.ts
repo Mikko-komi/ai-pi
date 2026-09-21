@@ -1,10 +1,23 @@
+/**
+ * Passive harness event bus.
+ *
+ * Handler failures stay isolated and become handler_error events. Delivery is
+ * serialized on one tail.
+ *
+ * 被动事件总线。监听器失败互不影响，改发 handler_error；投递按全局尾巴串行。
+ */
+
 import type { EventListener, Events, HarnessEvent, HarnessEventType, WatchHandle } from "./agent-harness.ts";
 import type { Context } from "./context.ts";
 
 type UntypedEventListener = (event: HarnessEvent, context: Context) => void | Promise<void>;
 type ResnapshotCapture<T> = (context: Context, markBoundary: () => void) => Promise<T>;
 
-/** Passive harness event bus with isolated handler failures. */
+/**
+ * Passive harness event bus with isolated handler failures.
+ *
+ * 被动事件总线。监听器失败互不影响；close 后新订阅抛，投递按尾巴串行。
+ */
 export class HarnessEventBus implements Events {
 	private readonly listeners = new Map<HarnessEventType, Set<UntypedEventListener>>();
 	private readonly watchListeners = new Set<UntypedEventListener>();
