@@ -1,3 +1,9 @@
+/**
+ * Non-interactive experimental client: list, attach, or prompt a Session.
+ *
+ * 非交互实验 client。无 session 且无 prompt 才 list；prompt 创建 Session 要求恰好一台已发现 server。
+ */
+
 import { resolve } from "node:path";
 import { BACKGROUND_CONTEXT, type LaneWatchEvent } from "@earendil-works/pi-agent-core";
 import type { AssistantMessage } from "@earendil-works/pi-ai";
@@ -6,6 +12,11 @@ import { activateBuiltinClientServices, openClientRuntime } from "./client-runti
 import type { AgentOperationResponse } from "./services/agent-controller.ts";
 import type { SessionAddress } from "./services/sessions.ts";
 
+/**
+ * Outcome of {@link runClient}: listed sessions, an attachment, or a completed prompt.
+ *
+ * client 结果。三种互斥；prompted.text 取该 operation 的 assistant 全文，没有则为空串。
+ */
 export type ClientResult =
 	| {
 			readonly kind: "list";
@@ -14,6 +25,11 @@ export type ClientResult =
 	| { readonly kind: "attached"; readonly serverId: string; readonly sessionId: string }
 	| { readonly kind: "prompted"; readonly serverId: string; readonly sessionId: string; readonly text: string };
 
+/**
+ * Options for {@link runClient}.
+ *
+ * 非交互 client 选项。onEvent 按 snapshot 序投递；directory 省略时与 runtime 相同默认。
+ */
 export interface RunClientOptions {
 	/** Directory searched when --connect is omitted. Defaults to PI_SERVER_DIR or ~/.pi/server. */
 	readonly directory?: string;
@@ -21,7 +37,11 @@ export interface RunClientOptions {
 	readonly onEvent?: (event: LaneWatchEvent) => void | Promise<void>;
 }
 
-/** Discover servers, then list Sessions, attach to one, or create one for a prompt. */
+/**
+ * Discover servers, then list Sessions, attach to one, or create one for a prompt.
+ *
+ * 发现 server 后 list / attach / prompt。多台 server 命中同一 sessionId 失败；Radius 不在远端缺失时本地创建。
+ */
 export async function runClient(command: ClientCommand, options: RunClientOptions = {}): Promise<ClientResult> {
 	const runtime = await openClientRuntime(command, { directory: options.directory });
 	try {

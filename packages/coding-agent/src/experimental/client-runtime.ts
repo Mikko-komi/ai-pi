@@ -1,3 +1,9 @@
+/**
+ * Experimental client runtime: discover or activate servers and open service namespaces.
+ *
+ * 实验 client 运行时。发现或拉起 server，再打开 server/session 服务源；dispose 必须收齐 client 与 reconnect。
+ */
+
 import { basename } from "node:path";
 import { BACKGROUND_CONTEXT } from "@earendil-works/chord/context";
 import { Client, ServerError } from "@earendil-works/pi-client";
@@ -19,10 +25,20 @@ import { PresentationPlugins } from "./services/plugins.ts";
 import { SessionDirectory, SessionManagement } from "./services/sessions.ts";
 import { Transcript } from "./services/transcript.ts";
 
+/**
+ * One discovered or explicitly addressed experimental server.
+ *
+ * 一条 server 路由。unix 带 socket 路径；radius 只带 serverId。
+ */
 export type ClientRuntimeRoute =
 	| ({ readonly transport: "unix" } & UnixServerRoute)
 	| { readonly transport: "radius"; readonly serverId: ServerId };
 
+/**
+ * Live client plus server/session service sources for one route.
+ *
+ * 一条路由上的活连接。server 与 session 两个 namespace 都已打开，尚未挂内置 facade。
+ */
 export interface ClientRuntimeServer {
 	readonly route: ClientRuntimeRoute;
 	readonly client: Client;
@@ -30,6 +46,11 @@ export interface ClientRuntimeServer {
 	readonly session: SessionServiceSource;
 }
 
+/**
+ * Client runtime server after built-in session facades are connected.
+ *
+ * 已挂内置 facade 的 server。directory/management 在 server 侧，agent/transcript 在 session 侧。
+ */
 export interface ActivatedClientRuntimeServer extends ClientRuntimeServer {
 	readonly directory: SessionDirectory;
 	readonly management: SessionManagement;
@@ -39,17 +60,31 @@ export interface ActivatedClientRuntimeServer extends ClientRuntimeServer {
 	readonly transcript: Transcript;
 }
 
+/**
+ * Open experimental presentation: one or more servers and a single dispose.
+ *
+ * 一次实验展示的运行时。dispose 幂等；失败聚合成 AggregateError，不半关。
+ */
 export interface ClientRuntime {
 	readonly servers: readonly ClientRuntimeServer[];
 	dispose(): Promise<void>;
 }
 
+/**
+ * Options for {@link openClientRuntime}.
+ *
+ * 打开运行时的选项。省略 directory 时走 PI_SERVER_DIR 或 ~/.pi/server。
+ */
 export interface OpenClientRuntimeOptions {
 	/** Directory searched when --connect is omitted. Defaults to PI_SERVER_DIR or ~/.pi/server. */
 	readonly directory?: string;
 }
 
-/** Open live server/session service namespaces for one experimental presentation. */
+/**
+ * Open live server/session service namespaces for one experimental presentation.
+ *
+ * 为一次展示打开 server/session 服务源。auth 只用于 radius；选 model 只在自动拉起新 server 时合法。
+ */
 export async function openClientRuntime(
 	command: ClientCommand,
 	options: OpenClientRuntimeOptions = {},
@@ -182,7 +217,11 @@ export async function openClientRuntime(
 	}
 }
 
-/** Acquire and connect the built-in service facades used by the non-interactive client. */
+/**
+ * Acquire and connect the built-in service facades used by the non-interactive client.
+ *
+ * 挂上非交互 client 用的内置 facade。attach/detach 必须等到 session source 对齐，remove 当前附件还要等 detached。
+ */
 export async function activateBuiltinClientServices(
 	server: ClientRuntimeServer,
 ): Promise<ActivatedClientRuntimeServer> {

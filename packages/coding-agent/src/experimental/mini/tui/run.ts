@@ -1,5 +1,7 @@
 /**
  * The presentation host: find or start the session server, attach to a session, run the view.
+ *
+ * 展示宿主：找到或拉起 session server，附着会话，再跑视图。
  */
 
 import { spawn } from "node:child_process";
@@ -15,6 +17,11 @@ const SELF_EXTENSION = extname(fileURLToPath(import.meta.url));
 const SERVER_ENTRY = fileURLToPath(new URL(`../server/entry${SELF_EXTENSION}`, import.meta.url));
 const SERVER_START_TIMEOUT_MS = 10_000;
 
+/**
+ * Startup options for the mini TUI.
+ *
+ * mini TUI 启动选项。continueSession 只在相同 cwd 的会话里取最新一条。
+ */
 export interface TuiOptions {
 	cwd?: string;
 	continueSession?: boolean;
@@ -45,6 +52,11 @@ async function ensureServer(transport: Transport, socketPath: string, sessionsRo
 	throw new Error("Timed out waiting for the mini session server");
 }
 
+/**
+ * Find or start the mini session server, attach, and run the view until exit.
+ *
+ * 找到或拉起 mini server 再跑视图。socket 连不上才 spawn；超时抛错，不无限等。
+ */
 export async function runTui(options: TuiOptions = {}): Promise<void> {
 	const cwd = options.cwd ?? process.cwd();
 	const root = join(getAgentDir(), "experimental");

@@ -1,3 +1,9 @@
+/**
+ * Session-worker facet host and remote endpoints scoped by attachment.
+ *
+ * worker 内 facet 宿主。invoke 按 serverConnectionId+attachmentId 复用 endpoint；dispose 关掉全部。
+ */
+
 import {
 	type Context,
 	createFacetHost,
@@ -20,6 +26,11 @@ import { createModelsServiceFacet } from "./models-provider.ts";
 import { SessionPlugins } from "./plugins.ts";
 import { createTranscriptServiceFacet } from "./transcript-provider.ts";
 
+/**
+ * Harness and optional dependencies needed to start a Session worker.
+ *
+ * worker 启动所需的 harness。lane 缺省取 main；facetLoader 缺省空插件。
+ */
 export interface SessionWorkerRuntime {
 	readonly harness: AgentHarness;
 	readonly lane?: AgentLane;
@@ -28,6 +39,11 @@ export interface SessionWorkerRuntime {
 	readonly facetLoader?: FacetLoader;
 }
 
+/**
+ * Attachment scope for one remote service invocation.
+ *
+ * 一次附着的调用范围。serverConnectionId + attachmentId 才能对上 endpoint。
+ */
 export interface WorkerServiceScope {
 	readonly serverConnectionId: string;
 	readonly attachmentId: string;
@@ -38,12 +54,22 @@ interface ScopedServiceEndpoint {
 	readonly endpoint: RemoteServiceEndpoint;
 }
 
+/**
+ * Worker-side remote service endpoints for attached presentations.
+ *
+ * worker 侧远端服务端点。invoke 按 scope 复用；dispose 等插件 reload 尾巴结束。
+ */
 export interface SessionWorkerServices {
 	invoke(call: ServiceCall, scope: WorkerServiceScope, context: Context): Promise<JsonValue | undefined>;
 	removeSubscriptions(matches: (scope: WorkerServiceScope) => boolean): void;
 	dispose(): Promise<void>;
 }
 
+/**
+ * Assemble controller, models, transcript, and plugin facets for one worker.
+ *
+ * 装配 controller/models/transcript/plugins。插件 reload 失败不替换已加载代。
+ */
 export async function createSessionWorkerServices(options: {
 	readonly lane: AgentLane;
 	readonly modelRuntime: ModelRuntime | undefined;

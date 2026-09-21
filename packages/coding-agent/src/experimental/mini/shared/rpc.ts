@@ -6,6 +6,8 @@
  * does not provide goes to `forward`, which is what makes the server transparent: a TUI uses
  * `lane.prompt`, the server does not provide `lane`, so it hands the call to the attached worker.
  * The same rule lets a worker use `sessions.list` back through the server.
+ *
+ * 整份协议：call/result/error/cancel/event/ping，外加按名转发。本端不提供的服务走 forward，所以 server 对 TUI 透明。
  */
 
 import type { Remote, ServiceToken } from "./protocol.ts";
@@ -20,8 +22,18 @@ type Frame =
 	| { kind: "announce"; services: string[] }
 	| { kind: "ping" };
 
+/**
+ * Forwards a call this peer does not provide. The server uses it to hand `lane.*` to the attached worker.
+ *
+ * 本端未提供的调用转发器。server 用来把 lane.* 交给已附着 worker。
+ */
 export type Forward = (method: string, args: unknown[]) => Promise<unknown>;
 
+/**
+ * Options for one outbound call.
+ *
+ * 单次调用选项。signal 取消并通知对端停止；timeoutMs 省略表示无时限。
+ */
 export interface CallOptions {
 	/** Abandon the call and tell the peer to stop. */
 	signal?: AbortSignal;
@@ -29,6 +41,11 @@ export interface CallOptions {
 	timeoutMs?: number;
 }
 
+/**
+ * Options for {@link createPeer}.
+ *
+ * 建 peer 的选项。deadMs 默认 15s；0 关闭存活探测。
+ */
 export interface PeerOptions {
 	/** Handles calls for services this peer does not provide. */
 	forward?: Forward;
@@ -38,6 +55,11 @@ export interface PeerOptions {
 
 const DEFAULT_DEAD_MS = 15_000;
 
+/**
+ * Bidirectional peer on one connection.
+ *
+ * 一条连接上的双向 peer。provide 后 announce；use 可落到对端或下一跳。
+ */
 export interface RpcPeer {
 	/** Register an implementation and announce the name to the other side. */
 	provide<TApi extends object, TEvent>(token: ServiceToken<TApi, TEvent>, implementation: TApi): void;
@@ -61,7 +83,11 @@ export interface RpcPeer {
 	close(): void;
 }
 
-/** A bidirectional peer on one connection. */
+/**
+ * A bidirectional peer on one connection.
+ *
+ * 一个连接一个 peer。JSON 里 undefined 结果会变成 null；对端消失靠任意帧续命。
+ */
 export function createPeer(connection: Connection, options: PeerOptions = {}): RpcPeer {
 	const services = new Map<string, object>();
 	const provided = new Set<string>();

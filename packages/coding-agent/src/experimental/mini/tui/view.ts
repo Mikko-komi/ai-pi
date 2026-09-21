@@ -3,6 +3,8 @@
  *
  * Everything it renders comes from a replicated `SessionView` snapshot, and everything it does is a
  * command that answers with data. Whether that view is in-process or a socket away is invisible here.
+ *
+ * 视图。不持有 harness/lane/session/runtime；只渲染复制快照，命令只回数据。
  */
 
 import type { AgentMessage, Entry, LaneSnapshot } from "@earendil-works/pi-agent-core";
@@ -437,7 +439,11 @@ function runLogin(
 	});
 }
 
-/** Run the view against one attached session until the user exits. */
+/**
+ * Run the view against one attached session until the user exits.
+ *
+ * 对着一个已附着会话跑视图，直到用户退出。提交时若有 operation 则 steer，否则 prompt；abort 不因本地 snapshot 可能过期而吞掉。
+ */
 export async function runView(client: AttachedSession): Promise<void> {
 	initTheme();
 	let exit = (): void => {};

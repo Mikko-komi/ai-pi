@@ -88,6 +88,10 @@ _Avoid_: models.generated.ts, 厂商目录快照
 已完成：evals harness 与 coding-agent experimental CLI。
 _Avoid_: *.eval.ts 用例
 
+**第二十刀核心**:
+已完成：coding-agent experimental（含 mini / services / llama 外的扩展入口）以及零散遗漏导出。学习 JSDoc 覆盖到仓库各包的定义导出；生成目录 `*.models.ts` / `models.generated.ts` 不写。
+_Avoid_: 生成模型目录, 测试用例, 类方法
+
 **AgentHarness**:
 agent-core 里按 lane 驱动持久化会话的门面，和旧的 `Agent` 循环并列，不替代 `AgentSession`。
 _Avoid_: Agent, AgentSession

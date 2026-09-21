@@ -1,3 +1,9 @@
+/**
+ * Experimental interactive TUI: attach a Session and drive it through services.
+ *
+ * 实验交互 TUI。只走复制的 main-lane snapshot；Radius 断线后必须关 lane 再等重附着。
+ */
+
 import { resolve } from "node:path";
 import {
 	combineFacetLoaders,
@@ -49,10 +55,20 @@ import {
 } from "./services/slash-commands-provider.ts";
 import { Transcript, type Transcript as TranscriptService } from "./services/transcript.ts";
 
+/**
+ * Options for {@link runClientTui}, including an optional extra facet loader.
+ *
+ * TUI 启动选项。facetLoader 与展示插件加载器合并，不能替代 server 下发的 artifact。
+ */
 export interface RunClientTuiOptions extends OpenClientRuntimeOptions {
 	readonly facetLoader?: FacetLoader;
 }
 
+/**
+ * Server/session sources the TUI binds after the runtime is open.
+ *
+ * TUI 绑定的一条 server。radius 为真才订 connection/attachment，本地 unix 不走重连 UI。
+ */
 export interface ClientTuiServer {
 	readonly serverId: string;
 	readonly radius: boolean;
@@ -87,7 +103,11 @@ const selectTheme = {
 	noMatch: (text: string) => theme.fg("warning", text),
 };
 
-/** Service-only presentation driven by a replicated main-lane snapshot. */
+/**
+ * Service-only presentation driven by a replicated main-lane snapshot.
+ *
+ * 只消费服务的展示。slash 选择器占用 editor 槽；busy 时只响应退出，不把输入喂给编辑器。
+ */
 export class ExperimentalClientTui implements Component {
 	readonly #ui: TUI;
 	readonly #requestRender: () => void;
@@ -724,6 +744,11 @@ async function prepareClientSession(
 	}
 }
 
+/**
+ * Run the experimental client TUI until the user exits.
+ *
+ * 跑实验 TUI 直到退出。关屏后必须 dispose 组件与 runtime，避免 socket 泄漏。
+ */
 export async function runClientTui(command: ClientCommand, options: RunClientTuiOptions = {}): Promise<void> {
 	const cwd = process.cwd();
 	const agentDir = getAgentDir();

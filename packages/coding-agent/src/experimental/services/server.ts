@@ -1,3 +1,9 @@
+/**
+ * Server-scoped Chord services for session directory, management, and presentation plugins.
+ *
+ * 实验 server 的服务宿主。目录复制给所有 client；突变串行，prepare 后才能 reload 插件。
+ */
+
 import {
 	type Context,
 	createRemoteServiceEndpoint,
@@ -16,12 +22,22 @@ import {
 	type SessionSummary,
 } from "./sessions.ts";
 
+/**
+ * Hosted server services plus refresh and dispose.
+ *
+ * 实验 server 的服务宿主。refresh 重刷目录；dispose 释放全部 attachment。
+ */
 export interface ExperimentalServerServices {
 	readonly host: RoutedServerServiceHost;
 	refresh(context?: Context): Promise<void>;
 	dispose(): Promise<void>;
 }
 
+/**
+ * Assemble session directory, management, and presentation-plugin services.
+ *
+ * 装配目录/管理/插件服务。突变串行；未 prepare 的 reload 抛错。
+ */
 export async function createExperimentalServerServices(options: {
 	list(context: Context): Promise<SessionSummary[]>;
 	create(createOptions: SessionCreateOptions, context: Context): Promise<SessionSummary>;

@@ -9,6 +9,8 @@
  * presentation holds the snapshot and knows its subscription id, so there is nothing to buffer here.
  *
  * The fold is the harness's `reduceLaneSnapshot`: a replica must not have a second opinion.
+ *
+ * 展示侧半边：一条连接、按 token 取服务、一份复制快照。视图不分辨谁提供服务；对齐由 worker 的 watch/start 完成，这里不二次缓冲。折叠只用 harness 的 reduceLaneSnapshot。
  */
 
 import { randomUUID } from "node:crypto";
@@ -29,6 +31,11 @@ import {
 import { createPeer } from "../shared/rpc.ts";
 import type { Transport } from "../shared/transport.ts";
 
+/**
+ * An attached session. `state` is the current replica; `close` shuts the peer.
+ *
+ * 已附着会话。state 是当前复制快照；close 关掉底层 peer。
+ */
 export interface AttachedSession {
 	state(): SessionSnapshot;
 	subscribe(listener: () => void): () => void;
@@ -41,6 +48,11 @@ export interface AttachedSession {
 /** Attach spawns a worker when none is running; runs and other lane calls stay unbounded. */
 const ATTACH_TIMEOUT_MS = 60_000;
 
+/**
+ * List session summaries through a short-lived server connection.
+ *
+ * 短连接列出会话。用完立刻关 peer，不保持附着。
+ */
 export async function listSessions(transport: Transport): Promise<SessionSummary[]> {
 	const peer = createPeer(await transport.connect());
 	try {
@@ -50,7 +62,11 @@ export async function listSessions(transport: Transport): Promise<SessionSummary
 	}
 }
 
-/** Attach to `sessionId`, or to a new session when it is null. */
+/**
+ * Attach to `sessionId`, or to a new session when it is null.
+ *
+ * 先 Sessions.attach 再 watch/start。rebase 换订阅，旧 id 的事件丢弃。
+ */
 export async function connect(transport: Transport, sessionId: string | null, cwd: string): Promise<AttachedSession> {
 	const peer = createPeer(await transport.connect());
 	const lane = peer.use(Lane);

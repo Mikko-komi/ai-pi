@@ -4,6 +4,8 @@
  * The lane, harness, and model registry stay here. Each presentation gets its own `lane.watch()`,
  * whose snapshot and event stream the harness already pairs with no gap and no duplicate, so nothing
  * here re-implements that alignment: a subscription is just a watch handle plus an id.
+ *
+ * worker 侧 Lane 实现。lane/harness/注册表留在这里；每个展示自己的 watch，对齐已由 harness 保证，这里不重做。
  */
 
 import { randomUUID } from "node:crypto";
@@ -18,6 +20,11 @@ import type {
 	SessionSnapshot,
 } from "../shared/protocol.ts";
 
+/**
+ * Dependencies for {@link LaneService}. Catalog state belongs to `Models`; the snapshot carries a copy.
+ *
+ * 建 {@link LaneService} 的依赖。modelsState 来自 Models 服务，快照只带副本。
+ */
 export interface LaneServiceOptions {
 	lane: AgentLane;
 	models: Models;
@@ -28,6 +35,11 @@ export interface LaneServiceOptions {
 	publish: (subscriptionId: string, to: string, event: HarnessEvent) => void;
 }
 
+/**
+ * Worker-side `Lane` implementation: one watch handle plus id per presentation.
+ *
+ * worker 侧 Lane。watch 未 start 会无限缓冲；close 必须退订全部。
+ */
 export class LaneService implements LaneServiceApi {
 	readonly #options: LaneServiceOptions;
 	readonly #watches = new Map<string, { handle: WatchHandle<LaneSnapshot>; to: string }>();

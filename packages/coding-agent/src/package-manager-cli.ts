@@ -1,3 +1,9 @@
+/**
+ * CLI handlers for install/remove/update/list and the resource config TUI.
+ *
+ * 包管理与 config 命令。解析失败返回 false 交给其它命令；自身错误只设 exitCode。
+ */
+
 import {
 	existsSync,
 	mkdirSync,
@@ -43,6 +49,11 @@ import {
 	quarantineWindowsNativeDependencies,
 } from "./utils/windows-self-update.ts";
 
+/**
+ * Package-manager subcommand name. `uninstall` normalizes to `remove` during parse.
+ *
+ * 包管理子命令名。uninstall 在解析时归一成 remove。
+ */
 export type PackageCommand = "install" | "remove" | "update" | "list";
 
 type UpdateTarget = { type: "all" } | { type: "self" } | { type: "extensions"; source?: string } | { type: "models" };
@@ -147,6 +158,11 @@ function cleanupManagedStaging(managedRoot: string): void {
 	}
 }
 
+/**
+ * Best-effort cleanup of leftover managed-install staging directories.
+ *
+ * 尽量清托管安装的 staging。拿不到 update 锁或根无效则静默返回。
+ */
 export function cleanupManagedInstall(): void {
 	let managedRoot: string | undefined;
 	try {
@@ -721,6 +737,11 @@ function prepareWindowsNpmSelfUpdate(): void {
 	quarantineWindowsNativeDependencies(packageDir);
 }
 
+/**
+ * Runtime options for package and config commands.
+ *
+ * 包/config 命令运行时选项。extensionFactories 只用于项目信任探测。
+ */
 export interface PackageCommandRuntimeOptions {
 	extensionFactories?: InlineExtension[];
 }
@@ -788,6 +809,11 @@ async function createCommandSettingsManager(options: {
 	return { settingsManager, projectTrustWarnings };
 }
 
+/**
+ * Handle `pi config`, or return false if the first argument is not `config`.
+ *
+ * 处理 config。未信任项目加 -l 失败；成功后 process.exit(0)，不回到调用方。
+ */
 export async function handleConfigCommand(
 	args: string[],
 	runtimeOptions: PackageCommandRuntimeOptions = {},
@@ -861,6 +887,11 @@ export async function handleConfigCommand(
 	process.exit(0);
 }
 
+/**
+ * Handle install/remove/update/list, or return false if argv is not a package command.
+ *
+ * 处理包命令。update 默认只更 pi；写项目配置要求已信任或 --approve。
+ */
 export async function handlePackageCommand(
 	args: string[],
 	runtimeOptions: PackageCommandRuntimeOptions = {},

@@ -1,3 +1,9 @@
+/**
+ * Experimental replaceable server: profile lock, activation, and Session worker host.
+ *
+ * 可替换实验 server。稳定 coordinator 端点后挂一代 backend；被替换时 detach worker，不杀。
+ */
+
 import { randomUUID } from "node:crypto";
 import { chmod, lstat, mkdir, readFile, writeFile } from "node:fs/promises";
 import { homedir } from "node:os";
@@ -48,13 +54,34 @@ import { createExperimentalServerServices } from "./services/server.ts";
 import type { SessionCreateOptions, SessionSummary } from "./services/sessions.ts";
 import { SessionPluginSelectionConflictError, SessionWorkerManager } from "./session-worker-manager.ts";
 
+/**
+ * Environment variable for the experimental server directory.
+ *
+ * 服务器目录环境变量名。缺省 ~/.pi/server。
+ */
 export const ENV_SERVER_DIR = "PI_SERVER_DIR";
+
+/**
+ * Environment variable for the logical experimental server id.
+ *
+ * 逻辑 server id 环境变量名。缺省读目录里的 default-server-id。
+ */
 export const ENV_SERVER_ID = "PI_SERVER_ID";
 
+/**
+ * Resolve the experimental server directory to an absolute path.
+ *
+ * 收成绝对 server 目录。参数 > env > ~/.pi/server。
+ */
 export function resolveServerDirectory(directory?: string): string {
 	return resolvePath(directory ?? process.env[ENV_SERVER_DIR] ?? join(homedir(), ".pi", "server"));
 }
 
+/**
+ * Create or tighten a 0700 server directory owned by the current POSIX user.
+ *
+ * 建 0700 且属当前用户的目录。非 POSIX 抛。
+ */
 export async function ensurePrivateServerDirectory(directory: string): Promise<void> {
 	if (typeof process.getuid !== "function") throw new Error("Unix socket directory requires a POSIX user ID");
 	await mkdir(directory, { recursive: true, mode: 0o700 });
@@ -66,6 +93,11 @@ export async function ensurePrivateServerDirectory(directory: string): Promise<v
 	await chmod(directory, 0o700);
 }
 
+/**
+ * Resolve the experimental Session directory to an absolute path.
+ *
+ * 收成绝对 Session 目录。缺省 agentDir/experimental/sessions。
+ */
 export function resolveSessionDirectory(sessionDir?: string): string {
 	return resolvePath(sessionDir ?? join(getAgentDir(), "experimental", "sessions"));
 }
@@ -75,12 +107,21 @@ const LOCK_RETRY_MS = 25;
 const LOCK_WAIT_MS = 30_000;
 const DEFAULT_SERVER_ID_FILE = "default-server-id";
 
+/**
+ * Locked logical server id plus the launcher-lock release.
+ *
+ * 锁住的逻辑 server id。release 才让出 launcher 锁。
+ */
 export interface ServerProfile {
 	readonly serverId: ServerId;
 	release(): Promise<void>;
 }
 
-/** Lock one logical server ID in a shared experimental server directory. */
+/**
+ * Lock one logical server ID in a shared experimental server directory.
+ *
+ * 锁共享目录里的一个逻辑 server id。没指定就读或写 default-server-id。
+ */
 export async function acquireServerProfile(directory: string, requestedServerId?: string): Promise<ServerProfile> {
 	await mkdir(directory, { recursive: true, mode: 0o700 });
 	let serverId: ServerId;
@@ -128,11 +169,21 @@ export async function acquireServerProfile(directory: string, requestedServerId?
 const ACTIVATION_TIMEOUT_MS = 10_000;
 const ACTIVATION_RETRY_MS = 10;
 
+/**
+ * Connected client and unix route for an activated logical server.
+ *
+ * 已连上的 client + unix route。
+ */
 export interface ActivatedServer {
 	readonly client: Client;
 	readonly route: UnixServerRoute;
 }
 
+/**
+ * Inputs for ensuring a logical server is reachable.
+ *
+ * 激活输入。provider 有则必须有 model。
+ */
 export interface ActivateServerOptions {
 	readonly directory: string;
 	readonly requestedServerId?: ServerId | string;
@@ -141,7 +192,11 @@ export interface ActivateServerOptions {
 	readonly model?: string;
 }
 
-/** Ensure the selected logical server is reachable, launching the current Pi installation if needed. */
+/**
+ * Ensure the selected logical server is reachable, launching the current Pi installation if needed.
+ *
+ * 确保逻辑 server 可达，必要时拉起当前安装。已有实例时不能再改 model。
+ */
 export async function activateServer(options: ActivateServerOptions): Promise<ActivatedServer> {
 	if (options.provider !== undefined && options.model === undefined) {
 		throw new Error("Server model provider requires a model");
@@ -197,6 +252,11 @@ export async function activateServer(options: ActivateServerOptions): Promise<Ac
 	}
 }
 
+/**
+ * Serialize automatic cold activation of one logical server.
+ *
+ * 串行化冷启动。activation 锁与 launcher 锁分开。
+ */
 export function acquireServerActivation(directory: string, serverId: ServerId): Promise<() => Promise<void>> {
 	return lockfile.lock(join(directory, `activation-${serverId}`), {
 		realpath: false,
@@ -244,7 +304,11 @@ async function connect(route: UnixServerRoute): Promise<Client | undefined> {
 const AUTO_SERVER_STARTUP_GRACE_MS = 10_000;
 const AUTO_SERVER_IDLE_GRACE_MS = 1_000;
 
-/** Reconcile operator, startup, client, and worker holds for one server generation. */
+/**
+ * Reconcile operator, startup, client, and worker holds for one server generation.
+ *
+ * 调和 keepAlive / 启动宽限 / 连接 / worker 持有。全空才在 idle grace 后退休。
+ */
 export class ServerLifetime {
 	readonly #keepAlive: boolean;
 	#connectionCount = 0;
@@ -320,6 +384,11 @@ export class ServerLifetime {
 	}
 }
 
+/**
+ * Handle for a started experimental server generation.
+ *
+ * 已启动 runtime 句柄。close 幂等；closed 等彻底收尾。
+ */
 export interface RunningServer {
 	readonly serverId: string;
 	readonly sessionDir: string;
@@ -330,6 +399,11 @@ export interface RunningServer {
 	close(): Promise<void>;
 }
 
+/**
+ * Inputs for starting a replaceable experimental server.
+ *
+ * startServer 输入。pluginPackages undefined 恢复档案；空列表清空。
+ */
 export interface StartServerOptions {
 	/** Server profile and socket directory. Defaults to PI_SERVER_DIR or ~/.pi/server. */
 	readonly directory?: string;
@@ -517,7 +591,11 @@ async function startServerBackend(
 	};
 }
 
-/** Start a replaceable experimental server behind the stable coordinator endpoint. */
+/**
+ * Start a replaceable experimental server behind the stable coordinator endpoint.
+ *
+ * 在稳定 coordinator 端点后启动可替换 server。被替换时 detach worker，不杀。
+ */
 export async function startServer(options: StartServerOptions = {}): Promise<RunningServer> {
 	if (options.provider !== undefined && options.model === undefined) {
 		throw new Error("Server model provider requires a model");
@@ -706,7 +784,11 @@ export async function startServer(options: StartServerOptions = {}): Promise<Run
 	}
 }
 
-/** Start an operator-held server while serializing against automatic cold activation. */
+/**
+ * Start an operator-held server while serializing against automatic cold activation.
+ *
+ * 操作员持有的前台 server。先抢 activation 锁再 start，keepAlive 固定 true。
+ */
 export async function startForegroundServer(
 	options: Omit<StartServerOptions, "keepAlive"> = {},
 ): Promise<RunningServer> {
@@ -753,7 +835,11 @@ function parseServerModelOptions(value: string | undefined): { provider?: string
 	return provider === undefined ? { model } : { provider, model };
 }
 
-/** Run an automatically activated server until its client and Session demand disappears. */
+/**
+ * Run an automatically activated server until its client and Session demand disappears.
+ *
+ * 自动激活的内部进程。keepAlive=false，无连接/worker 后退出。
+ */
 export async function runServerProcess(args: readonly string[]): Promise<void> {
 	const [directory, serverId, sessionDir, serializedModel] = args;
 	if (args.length > 4) throw new Error("Internal server received unexpected arguments");

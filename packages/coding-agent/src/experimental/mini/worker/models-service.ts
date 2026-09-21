@@ -3,6 +3,8 @@
  *
  * `ModelRuntime`, `Model`, and provider objects stay here. What leaves is a serializable catalog and
  * account list, plus login prompts and notices as data.
+ *
+ * worker 侧 Models。ModelRuntime/Model/供应商对象留在这里；出去的是可序列化目录、账号，以及作为数据的登录提问/通知。
  */
 
 import { randomUUID } from "node:crypto";
@@ -19,6 +21,11 @@ import type {
 
 const CATALOG_REFRESH_TIMEOUT_MS = 15_000;
 
+/**
+ * Worker-side `Models` implementation: catalog snapshot plus login dialog events.
+ *
+ * worker 侧 Models。提问用事件发出，回答走 authReply；取消回答 null。
+ */
 export class ModelsService implements ModelsServiceApi {
 	readonly #runtime: ModelRuntime;
 	readonly #publish: (event: ModelsEvent) => void;

@@ -1,3 +1,9 @@
+/**
+ * Presentation-client remote sources for server-scoped and selected-Session bindings.
+ *
+ * 展示 client 的远端服务源。server 源跟连接走；Session 源跟 attachment 走，dispose 释放全部 binding。
+ */
+
 import {
 	type Context,
 	createRemoteServiceBinding,
@@ -15,20 +21,40 @@ import { BACKGROUND_CONTEXT } from "@earendil-works/chord/context";
 import { type Client, createClientServiceTransport } from "@earendil-works/pi-client";
 import type { SessionTarget } from "@earendil-works/pi-protocol";
 
+/**
+ * Connection status replicated to a presentation client.
+ *
+ * 复制给展示侧的连接状态。connecting 带 attempt；disconnected 才有 reason。
+ */
 export type ServerConnectionState =
 	| { status: "connecting"; attempt: number }
 	| { status: "connected"; since: string }
 	| { status: "disconnected"; since: string; reason: string; retryAt: string | null };
 
+/**
+ * Attachment status for the selected Session.
+ *
+ * 选中 Session 的附着状态。detached 没有 sessionId；其余状态都有。
+ */
 export type SessionAttachmentState =
 	| { status: "detached" }
 	| { status: "attaching" | "attached" | "degraded"; sessionId: string };
 
+/**
+ * Server-scoped remote service source for one presentation client.
+ *
+ * server 范围的远端源。绑定随 client 连接切换；dispose 后再 open 抛错。
+ */
 export interface ServerServiceSource extends RemoteServiceSource {
 	readonly connection: ReplicatedState<ServerConnectionState>;
 	dispose(context: Context): Promise<void>;
 }
 
+/**
+ * Selected-Session remote service source for one presentation client.
+ *
+ * 选中 Session 的远端源。whenAttached 只等当前这一代 hydrate；dispose 释放全部 binding。
+ */
 export interface SessionServiceSource extends RemoteServiceSource {
 	readonly attachment: ReplicatedState<SessionAttachmentState>;
 	/** Wait for the exact current attachment generation to finish hydrating. */
@@ -38,6 +64,11 @@ export interface SessionServiceSource extends RemoteServiceSource {
 	dispose(context: Context): Promise<void>;
 }
 
+/**
+ * Optional error sink when constructing a remote service source.
+ *
+ * 构造远端源的可选参数。onError 缺省吞掉过渡失败。
+ */
 export interface ServiceSourceOptions {
 	readonly onError?: (error: Error) => void;
 }
@@ -350,12 +381,20 @@ class SessionServiceSourceImpl implements SessionServiceSource {
 	}
 }
 
-/** Create the server-scoped remote service source for one presentation client. */
+/**
+ * Create the server-scoped remote service source for one presentation client.
+ *
+ * 为一个 presentation client 建 server 范围的远端源。disposed 后再 open 会抛。
+ */
 export function createServerServiceSource(client: Client, options: ServiceSourceOptions = {}): ServerServiceSource {
 	return new ServerServiceSourceImpl(client, options);
 }
 
-/** Create the selected-Session remote service source for one presentation client. */
+/**
+ * Create the selected-Session remote service source for one presentation client.
+ *
+ * 为一个 presentation client 建选中 Session 的远端源。attachment 跟 client 走。
+ */
 export function createSessionServiceSource(client: Client, options: ServiceSourceOptions = {}): SessionServiceSource {
 	return new SessionServiceSourceImpl(client, options);
 }

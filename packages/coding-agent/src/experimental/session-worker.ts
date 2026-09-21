@@ -1,3 +1,9 @@
+/**
+ * Isolated Session worker process: harness, demand lifecycle, and coordinator control protocol.
+ *
+ * 独立 Session worker。锁住会话文件后跑 harness；无 demand/操作/hold 才退休。
+ */
+
 import { createConnection, type Socket } from "node:net";
 import { isAbsolute } from "node:path";
 import {
@@ -65,11 +71,39 @@ const RemoteServiceErrorCodeSchema = Type.Unsafe<RemoteServiceErrorCode>(
 	Type.String({ pattern: `^(?:${REMOTE_SERVICE_ERROR_CODES.join("|")})$` }),
 );
 
+/**
+ * Environment variable for the coordinator control-socket path.
+ *
+ * 控制套接字地址环境变量名。缺了不能连 coordinator。
+ */
 export const SESSION_WORKER_CONTROL_ADDRESS_ENV = "PI_SESSION_WORKER_CONTROL_ADDRESS";
+
+/**
+ * Environment variable for the worker's control token.
+ *
+ * 控制令牌环境变量名。和 ready 事件对账。
+ */
 export const SESSION_WORKER_CONTROL_TOKEN_ENV = "PI_SESSION_WORKER_CONTROL_TOKEN";
+
+/**
+ * Environment variable for the session path encoded as base64url.
+ *
+ * session path 的 base64url 环境变量名。不是明文路径。
+ */
 export const SESSION_WORKER_SESSION_KEY_ENV = "PI_SESSION_WORKER_SESSION_KEY_BASE64";
+
+/**
+ * Environment variable for the worker's coordinator peer id.
+ *
+ * coordinator peer id 环境变量名。注册时必须有。
+ */
 export const SESSION_WORKER_PEER_ID_ENV = "PI_SESSION_WORKER_PEER_ID";
 
+/**
+ * Typebox schema for Jsonl session metadata sent into a worker.
+ *
+ * worker 启动元数据的校验。cwd/path 还要调用方再查绝对路径。
+ */
 export const SessionWorkerMetadataSchema = StrictObject({
 	id: Type.String({ minLength: 1 }),
 	createdAt: Type.Integer(),
@@ -80,6 +114,11 @@ export const SessionWorkerMetadataSchema = StrictObject({
 	parentSessionId: Type.Optional(Type.String()),
 });
 
+/**
+ * Typebox schema for the worker argv JSON options object.
+ *
+ * worker argv JSON 的校验。provider 有则必须有 model。
+ */
 export const SessionWorkerOptionsSchema = StrictObject({
 	sessionDir: Type.String({ minLength: 1 }),
 	metadata: SessionWorkerMetadataSchema,
@@ -87,22 +126,54 @@ export const SessionWorkerOptionsSchema = StrictObject({
 	model: Type.Optional(Type.String({ minLength: 1 })),
 	pluginManifestPaths: Type.Array(Type.String({ minLength: 1 })),
 });
+
+/**
+ * Validated options for starting a Session worker.
+ *
+ * 校验后的 worker 启动选项。
+ */
 export type SessionWorkerOptions = Static<typeof SessionWorkerOptionsSchema>;
 
+/**
+ * Typebox schema for one attached service-invocation scope.
+ *
+ * 一次服务调用的附着范围校验。
+ */
 export const WorkerOperationScopeSchema = StrictObject({
 	serverConnectionId: Type.String(),
 	attachmentId: Type.String(),
 });
+
+/**
+ * Attachment scope shared with Session worker services.
+ *
+ * 与 WorkerServiceScope 同形。跨进程对账用。
+ */
 export type WorkerOperationScope = WorkerServiceScope;
 
+/**
+ * Typebox schema for a coordinator-delivered service call.
+ *
+ * coordinator 下发的一次服务调用。
+ */
 export const WorkerOperationRequestSchema = StrictObject({
 	type: Type.Literal("operation"),
 	requestId: Type.String({ minLength: 1 }),
 	scope: WorkerOperationScopeSchema,
 	call: ServiceCallSchema,
 });
+/**
+ * Validated operation command from the current server generation.
+ *
+ * 校验后的 operation 命令。
+ */
 export type WorkerOperationRequest = Static<typeof WorkerOperationRequestSchema>;
 
+/**
+ * Typebox schema for a worker operation result or error.
+ *
+ * worker 回的 result 或 error。
+ */
 export const WorkerOperationResponseSchema = Type.Union([
 	StrictObject({
 		type: Type.Literal("operation_result"),
@@ -118,8 +189,18 @@ export const WorkerOperationResponseSchema = Type.Union([
 		message: Type.String(),
 	}),
 ]);
+/**
+ * Validated worker reply for one operation.
+ *
+ * 校验后的操作回包。
+ */
 export type WorkerOperationResponse = Static<typeof WorkerOperationResponseSchema>;
 
+/**
+ * Typebox schema for server-to-worker control commands.
+ *
+ * server→worker 控制命令联合。
+ */
 export const SessionWorkerCommandSchema = Type.Union([
 	Type.Object({ type: Type.Literal("shutdown") }),
 	Type.Object({ type: Type.Literal("discover_workers") }),
@@ -137,8 +218,18 @@ export const SessionWorkerCommandSchema = Type.Union([
 		scope: WorkerOperationScopeSchema,
 	}),
 ]);
+/**
+ * Validated control command received by a worker.
+ *
+ * 校验后的控制命令。
+ */
 export type SessionWorkerCommand = Static<typeof SessionWorkerCommandSchema>;
 
+/**
+ * Typebox schema for worker-to-server events.
+ *
+ * worker→server 事件联合。
+ */
 export const SessionWorkerEventSchema = Type.Union([
 	Type.Object({
 		type: Type.Literal("worker_ready"),
@@ -185,9 +276,18 @@ export const SessionWorkerEventSchema = Type.Union([
 		update: Type.Unknown(),
 	}),
 ]);
+/**
+ * Validated event emitted by a Session worker.
+ *
+ * 校验后的 worker 事件。
+ */
 export type SessionWorkerEvent = Static<typeof SessionWorkerEventSchema>;
 
-/** Worker-local reconciliation of server-generation demand and Harness activity. */
+/**
+ * Worker-local reconciliation of server-generation demand and Harness activity.
+ *
+ * 按 server 代 demand 和 Harness 活动决定何时退休。无 demand/操作/hold 才 retire。
+ */
 export class WorkerLifecycle {
 	readonly #initialDemandGraceMs: number;
 	readonly #orphanDemandGraceMs: number;
@@ -316,7 +416,18 @@ export class WorkerLifecycle {
 
 const DEFAULT_INITIAL_DEMAND_GRACE_MS = 10_000;
 const DEFAULT_ORPHAN_DEMAND_GRACE_MS = 30_000;
+/**
+ * Test-only override for the initial demand grace period, in milliseconds.
+ *
+ * 初始 demand 宽限毫秒。测试用双下划线环境变量。
+ */
 export const SESSION_WORKER_INITIAL_DEMAND_GRACE_ENV = "__PI_SESSION_WORKER_INITIAL_DEMAND_GRACE_MS";
+
+/**
+ * Test-only override for orphan-demand grace after server disconnect, in milliseconds.
+ *
+ * 孤儿 demand 宽限毫秒。测试用双下划线环境变量。
+ */
 export const SESSION_WORKER_ORPHAN_DEMAND_GRACE_ENV = "__PI_SESSION_WORKER_ORPHAN_DEMAND_GRACE_MS";
 
 const CoordinatorInputSchema = Type.Union([
@@ -516,6 +627,11 @@ async function closeResources(resources: {
 	if (errors.length > 1) throw new AggregateError(errors, "Session worker cleanup failed");
 }
 
+/**
+ * Factory that builds the harness runtime for one Session worker.
+ *
+ * 注入 harness 工厂。测试可换，生产走 coding-agent。
+ */
 export type CreateSessionWorkerHarness = (
 	session: Session<JsonlSessionMetadata>,
 	options: SessionWorkerOptions,
@@ -768,6 +884,11 @@ async function run(options: SessionWorkerOptions, createHarness: CreateSessionWo
 	}
 }
 
+/**
+ * Run a Session worker with an injected harness factory.
+ *
+ * 用给定工厂跑 worker。选项非法或失败会发 worker_failed。
+ */
 export async function runSessionWorkerWithHarness(
 	args: readonly string[],
 	createHarness: CreateSessionWorkerHarness,
@@ -871,6 +992,11 @@ async function createCodingAgentHarness(
 	}
 }
 
+/**
+ * Production Session worker entry that uses the coding-agent harness.
+ *
+ * 生产入口。固定 coding-agent harness。
+ */
 export function runSessionWorkerProcess(args: readonly string[]): Promise<void> {
 	return runSessionWorkerWithHarness(args, createCodingAgentHarness);
 }

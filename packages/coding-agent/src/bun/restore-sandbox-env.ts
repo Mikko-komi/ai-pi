@@ -8,6 +8,8 @@
  * Keep this in sync with getBunSandboxEnvValue() in
  * packages/ai/src/utils/provider-env.ts. The ai package duplicates the lookup
  * for direct consumers that do not go through this coding-agent entrypoint.
+ *
+ * Bun 编译二进制在沙箱里 process.env 为空时的补救。Linux 从 /proc/self/environ 恢复；与 ai 包 getBunSandboxEnvValue 保持同步。
  */
 
 import { readFileSync } from "node:fs";
@@ -15,6 +17,8 @@ import { readFileSync } from "node:fs";
 /**
  * Restore environment variables from `/proc/self/environ` when running
  * inside a sandbox where Bun's `process.env` is empty.
+ *
+ * 在 Bun 的 process.env 被沙箱掏空时，从 `/proc/self/environ` 恢复环境变量。非 Bun 或 env 已有键则直接返回；读不到 /proc 忽略，不抛。
  */
 export function restoreSandboxEnv(): void {
 	if (!process.versions?.bun) return;

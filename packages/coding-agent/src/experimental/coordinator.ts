@@ -1,3 +1,9 @@
+/**
+ * Opaque message router between one current server generation and Session worker peers.
+ *
+ * coordinator 只路由，不解释 Pi/session/worker payload。同时只认一代 server。
+ */
+
 import { randomUUID } from "node:crypto";
 import { chmod, lstat, unlink } from "node:fs/promises";
 import { createConnection, createServer, type Server, type Socket } from "node:net";
@@ -11,6 +17,11 @@ import {
 	spawnInternalProcess,
 } from "./process.ts";
 
+/**
+ * Control-protocol version required to register with the coordinator.
+ *
+ * 控制协议版本。对不上拒绝注册。
+ */
 export const COORDINATOR_PROTOCOL_VERSION = 3;
 const COORDINATOR_START_TIMEOUT_MS = 10_000;
 const COORDINATOR_RETRY_MS = 10;
@@ -28,18 +39,32 @@ const CoordinatorMessageSchema = Type.Union([
 ]);
 type CoordinatorMessage = Static<typeof CoordinatorMessageSchema>;
 
+/**
+ * Server-side coordinator events after registration.
+ *
+ * server 侧看到的 peer 连接/消息。不含 server_registered。
+ */
 export type CoordinatorConnectionEvent =
 	| { readonly type: "peer_connected"; readonly peerId: string }
 	| { readonly type: "peer_disconnected"; readonly peerId: string }
 	| { readonly type: "message"; readonly from: string; readonly payload: unknown };
 
+/**
+ * Inputs for connecting a server to the coordinator control socket.
+ *
+ * 连控制套接字的参数。serverConnectionId 缺省现场生成。
+ */
 export interface CoordinatorConnectionOptions {
 	readonly controlPath: string;
 	readonly endpoint: string;
 	readonly serverConnectionId?: string;
 }
 
-/** The server-side endpoint of the coordinator's intentionally opaque message router. */
+/**
+ * The server-side endpoint of the coordinator's intentionally opaque message router.
+ *
+ * server 侧到 coordinator 的端点。只路由不解释 payload；被替换后 wasReplaced=true。
+ */
 export class CoordinatorConnection {
 	readonly serverConnectionId: string;
 	readonly replaced: Promise<void>;
@@ -180,10 +205,20 @@ export class CoordinatorConnection {
 	}
 }
 
+/**
+ * Placeholder control connection that keeps a just-started coordinator from exiting empty.
+ *
+ * 启动租约。close 断开占位连接，让空闲 coordinator 能退。
+ */
 export interface CoordinatorStartupLease {
 	close(): void;
 }
 
+/**
+ * Reuse a live coordinator or spawn one and wait until its control socket accepts.
+ *
+ * 保证 coordinator 在跑。已有就复用；拉起失败超时抛。
+ */
 export async function ensureCoordinator(publicPath: string, controlPath: string): Promise<CoordinatorStartupLease> {
 	const existing = await tryConnect(controlPath);
 	if (existing) return { close: () => existing.destroy() };
@@ -298,6 +333,11 @@ let emptyTimer: NodeJS.Timeout | undefined;
 const publicServer = createServer((socket) => acceptPublicConnection(socket));
 const controlServer = createServer((socket) => acceptControlConnection(socket));
 
+/**
+ * Run the coordinator process until it is empty long enough to exit.
+ *
+ * coordinator 进程入口。空闲一段时间无 server/peer 就退出。不可重入。
+ */
 export async function runCoordinatorProcess(args: readonly string[]): Promise<void> {
 	if (running) throw new Error("Coordinator process is already running");
 	const [requestedPublicPath, requestedControlPath] = args;

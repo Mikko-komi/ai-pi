@@ -1,3 +1,9 @@
+/**
+ * Worker-side Transcript service that watches the main AgentLane.
+ *
+ * 把 lane.watch 灌进复制 state。activate 只能一次；hydration 不重放 event。
+ */
+
 import { defineFacet, type Facet, type MutableReplicatedState } from "@earendil-works/chord";
 import { BACKGROUND_CONTEXT } from "@earendil-works/chord/context";
 import {
@@ -17,6 +23,11 @@ interface TranscriptRuntime {
 	dispose(): Promise<void>;
 }
 
+/**
+ * Watch one AgentLane and publish snapshot plus source event.
+ *
+ * 把 lane.watch 灌进 TranscriptState。activate 重复调用抛错；rebase 失败会钉住后续事件。
+ */
 export function createTranscriptService(
 	lane: AgentLane,
 	createState: (initial: TranscriptState) => MutableReplicatedState<TranscriptState>,
@@ -90,6 +101,11 @@ export function createTranscriptService(
 	};
 }
 
+/**
+ * Provide Transcript from a Session worker facet host.
+ *
+ * 把 Transcript 挂到 facet host。own dispose 停 watch。
+ */
 export function createTranscriptServiceFacet(lane: AgentLane): Facet {
 	return defineFacet({
 		id: "@pi/transcript",

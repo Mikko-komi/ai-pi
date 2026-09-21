@@ -1,3 +1,9 @@
+/**
+ * Server-owned bookkeeping for Session worker processes behind the coordinator.
+ *
+ * 一个可替换 server 进程持有的 Session/进程账本。detach 不杀 worker；shutdown 才停。
+ */
+
 import type { ChildProcess } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { isAbsolute } from "node:path";
@@ -36,6 +42,11 @@ const WORKER_SHUTDOWN_TIMEOUT_MS = 10_000;
 const WORKER_DISCOVERY_TIMEOUT_MS = 5_000;
 const WORKER_DEMAND_TIMEOUT_MS = 5_000;
 
+/**
+ * The Session is already active or starting with a different plugin selection.
+ *
+ * 同一 Session 已用另一套插件。不是启动超时。
+ */
 export class SessionPluginSelectionConflictError extends Error {
 	constructor(message: string) {
 		super(message);
@@ -94,7 +105,11 @@ interface PendingLaunch {
 	reject(error: Error): void;
 }
 
-/** Session and process bookkeeping owned by one replaceable server process. */
+/**
+ * Session and process bookkeeping owned by one replaceable server process.
+ *
+ * 一个可替换 server 进程持有的 Session/进程账本。detach 不杀 worker；shutdown 才停。
+ */
 export class SessionWorkerManager {
 	readonly workerPids = new Map<string, number>();
 	readonly #coordinator: Pick<

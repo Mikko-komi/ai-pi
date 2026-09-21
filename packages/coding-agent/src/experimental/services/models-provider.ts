@@ -1,3 +1,9 @@
+/**
+ * Worker-side Models service implementation and Chord facet.
+ *
+ * worker 侧模型服务。用 lane + ModelRuntime 灌复制态；facet 在 activate 时才写首份 catalog。
+ */
+
 import { type Context, defineFacet, type Facet, type MutableReplicatedState } from "@earendil-works/chord";
 import { BACKGROUND_CONTEXT } from "@earendil-works/chord/context";
 import type { AgentLane, ThinkingLevel } from "@earendil-works/pi-agent-core";
@@ -6,11 +12,21 @@ import type { ModelRuntime } from "../../core/model-runtime.ts";
 import type { SettingsManager } from "../../core/settings-manager.ts";
 import { Models, type Models as ModelsService, type ModelsState } from "./models.ts";
 
+/**
+ * Models service plus the activate hook that seeds replicated state.
+ *
+ * 服务实例加 activate。activate 才写首份 catalog/configuration。
+ */
 export interface ModelsServiceRuntime {
 	readonly service: ModelsService;
 	activate(context: Context): Promise<void>;
 }
 
+/**
+ * Implement Models against one AgentLane and optional ModelRuntime.
+ *
+ * 用 lane + ModelRuntime 实现 Models。未知模型 select 抛错；没有 runtime 时 refresh 仍更新本地 catalog。
+ */
 export function createModelsService(
 	lane: AgentLane,
 	modelRuntime: ModelRuntime | undefined,
@@ -115,6 +131,11 @@ export function createModelsService(
 	};
 }
 
+/**
+ * Provide Models from a Session worker facet host.
+ *
+ * 把 Models 挂到 facet host。activate 时才灌 state。
+ */
 export function createModelsServiceFacet(options: {
 	readonly lane: AgentLane;
 	readonly modelRuntime: ModelRuntime | undefined;

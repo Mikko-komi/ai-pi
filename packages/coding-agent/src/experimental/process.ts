@@ -1,13 +1,33 @@
+/**
+ * Spawn and detect Pi-owned internal processes (coordinator, server, session-worker).
+ *
+ * 拉起/识别 Pi 内部进程。角色写在环境变量里，子进程必须 consume，免得孙进程继承。
+ */
+
 import { type ChildProcess, spawn } from "node:child_process";
 import { join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { getPackageDir, isBunBinary, isBundledNode } from "../config.ts";
 
+/**
+ * Environment variable that marks a Pi-owned internal process role.
+ *
+ * 内部进程角色环境变量名。子进程必须 consume，免得孙进程继承。
+ */
 export const INTERNAL_PROCESS_ENV = "__PI_INTERNAL_SPAWN";
 
+/**
+ * Supported roles for a Pi-owned internal process.
+ *
+ * 三种内部角色。其他字符串在读取时抛。
+ */
 export type InternalProcessRole = "coordinator" | "server" | "session-worker";
 
-/** Detect a directly executed source or unbundled internal-process module. */
+/**
+ * Detect a directly executed source or unbundled internal-process module.
+ *
+ * 判断是否直接执行源文件。Bun 二进制和 bundled node 永远 false。
+ */
 export function isDirectInternalProcessEntry(moduleUrl: string): boolean {
 	return (
 		!isBunBinary &&
@@ -17,7 +37,11 @@ export function isDirectInternalProcessEntry(moduleUrl: string): boolean {
 	);
 }
 
-/** Read and validate an internal process role without consuming it. */
+/**
+ * Read and validate an internal process role without consuming it.
+ *
+ * 读角色不消费。非法值抛。
+ */
 export function getInternalProcessRole(): InternalProcessRole | undefined {
 	const role = process.env[INTERNAL_PROCESS_ENV];
 	if (role === undefined) return undefined;
@@ -25,19 +49,32 @@ export function getInternalProcessRole(): InternalProcessRole | undefined {
 	throw new Error(`Unsupported internal process role: ${role}`);
 }
 
-/** Read, validate, and remove the role so descendants do not inherit it. */
+/**
+ * Read, validate, and remove the role so descendants do not inherit it.
+ *
+ * 读并删掉角色。避免后代继承。
+ */
 export function consumeInternalProcessRole(): InternalProcessRole | undefined {
 	const role = getInternalProcessRole();
 	delete process.env[INTERNAL_PROCESS_ENV];
 	return role;
 }
 
+/**
+ * Optional spawn overrides for an internal process.
+ *
+ * spawn 覆盖。Bun 二进制不能带 entryUrl。
+ */
 export interface InternalProcessSpawnOptions {
 	readonly entryUrl?: URL;
 	readonly env?: NodeJS.ProcessEnv;
 }
 
-/** Spawn a detached Pi-owned process consistently across Node and compiled Bun. */
+/**
+ * Spawn a detached Pi-owned process consistently across Node and compiled Bun.
+ *
+ * 跨 Node/Bun 拉起 detached 内部进程。stdio ignore，并自己 unref。
+ */
 export function spawnInternalProcess(
 	role: InternalProcessRole,
 	args: readonly string[],
@@ -69,7 +106,11 @@ export function spawnInternalProcess(
 	return child;
 }
 
-/** Force a spawned internal process to exit and wait until it can no longer take ownership. */
+/**
+ * Force a spawned internal process to exit and wait until it can no longer take ownership.
+ *
+ * SIGKILL 并等到不能再占有。已退出直接返回。
+ */
 export async function terminateInternalProcess(child: ChildProcess): Promise<void> {
 	if (child.pid === undefined || child.exitCode !== null || child.signalCode !== null) return;
 	const terminated = new Promise<void>((resolve) => {
@@ -96,8 +137,18 @@ function defaultEntryUrl(role: InternalProcessRole, override: URL | undefined): 
 	return new URL(javaScript ? "session-worker.js" : "session-worker.ts", import.meta.url);
 }
 
+/**
+ * Maximum encoded size of one coordinator control line, including the newline.
+ *
+ * 控制行上限。超了拒写或拆连接，不截断。
+ */
 export const MAX_CONTROL_LINE_BYTES = 128 * 1024 * 1024;
 
+/**
+ * Encode one JSON control message as a single newline-terminated line.
+ *
+ * JSON 行加换行。超上限抛，不截断。
+ */
 export function encodeControlLine(message: unknown): string {
 	const line = `${JSON.stringify(message)}\n`;
 	if (Buffer.byteLength(line) > MAX_CONTROL_LINE_BYTES) throw new Error("Internal control message is too large");

@@ -1,3 +1,9 @@
+/**
+ * Local slash-command registry and built-in /model /thinking /compact /reload facets.
+ *
+ * 进程内斜杠命令表与内置命令。同名 register 抛；内置命令在 activate 时 replace。
+ */
+
 import { defineFacet, type Facet, type JsonValue } from "@earendil-works/chord";
 import type { ThinkingLevel } from "@earendil-works/pi-agent-core";
 import { AgentController } from "./agent-controller.ts";
@@ -21,6 +27,11 @@ interface RegisteredSlashCommand {
 	closed: boolean;
 }
 
+/**
+ * In-process slash-command table with stacked same-name replacements.
+ *
+ * 进程内斜杠命令表。同名 register 抛；replace 叠代，unsubscribe 才露出下一层。
+ */
 export class SlashCommandRegistry implements SlashCommands {
 	readonly #commands = new Map<string, RegisteredSlashCommand[]>();
 	readonly #listeners = new Set<(commands: readonly SlashCommandContribution[]) => void>();
@@ -74,6 +85,11 @@ export class SlashCommandRegistry implements SlashCommands {
 	}
 }
 
+/**
+ * Provide a SlashCommandRegistry as the local SlashCommands service.
+ *
+ * 把 registry 挂成 SlashCommands。默认新建空表。
+ */
 export function createSlashCommandsRuntimeFacet(registry = new SlashCommandRegistry()): Facet {
 	return defineFacet({
 		id: "@pi/slash-commands-runtime",
@@ -83,6 +99,11 @@ export function createSlashCommandsRuntimeFacet(registry = new SlashCommandRegis
 	});
 }
 
+/**
+ * Register built-in /model, /thinking, /compact, and /reload commands.
+ *
+ * 注册内置斜杠命令。activate 时 replace，own 负责卸。
+ */
 export function createBuiltInSlashCommandsFacet(options: {
 	reloadPresentationPlugins(data: JsonValue): Promise<void>;
 }): Facet {

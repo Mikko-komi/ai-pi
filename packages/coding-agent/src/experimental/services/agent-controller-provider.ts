@@ -1,3 +1,9 @@
+/**
+ * Worker-side AgentController implementation over the main AgentLane.
+ *
+ * 把 worker 持有的主 lane 收成展示侧命令门面。lane 错误变成 AgentOperationError，不抛内部 _tag。
+ */
+
 import type { AgentLane, OperationResultRecord, SuspendedRun } from "@earendil-works/pi-agent-core";
 import type { ImageContent } from "@earendil-works/pi-ai";
 import type {
@@ -8,6 +14,11 @@ import type {
 	AgentQueueResponse,
 } from "./agent-controller.ts";
 
+/**
+ * Adapt one worker-owned AgentLane into the presentation-safe AgentController.
+ *
+ * 用一条 AgentLane 实现 AgentController。abort/cancel 失败仍抛 Error；start 类失败走 accepted=false。
+ */
 export function createAgentController(lane: AgentLane): AgentControllerService {
 	const queue = async (
 		operation: "steer" | "followUp" | "nextRun",

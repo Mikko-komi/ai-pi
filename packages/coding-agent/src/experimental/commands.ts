@@ -1,3 +1,9 @@
+/**
+ * Development-only experimental CLI dispatch for `server` and `client`.
+ *
+ * 开发用实验命令分派。未开实验开关或首参不是 server/client 则返回 false，不 parse。
+ */
+
 import chalk from "chalk";
 import { cli } from "../cli/experimental/cli.ts";
 import type { ClientCommand } from "../cli/experimental/commands/client.ts";
@@ -89,7 +95,11 @@ async function runClientCommand(command: ClientCommand): Promise<void> {
 	for (const session of result.sessions) console.log(`${session.serverId}\t${session.sessionId}`);
 }
 
-/** Development-only command dispatch. Published entrypoints must not import this module. */
+/**
+ * Development-only command dispatch. Published entrypoints must not import this module.
+ *
+ * 实验子命令入口。失败只设 exitCode，返回 true 表示已接管，调用方不得再走正式 CLI。
+ */
 export async function runExperimentalCommand(args: string[]): Promise<boolean> {
 	if (!areExperimentalFeaturesEnabled() || (args[0] !== "server" && args[0] !== "client")) return false;
 	try {

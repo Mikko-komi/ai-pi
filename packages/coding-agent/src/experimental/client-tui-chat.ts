@@ -1,3 +1,9 @@
+/**
+ * Snapshot-driven chat widgets for the experimental service-only TUI.
+ *
+ * 实验 TUI 的 transcript 视图。只吃 LaneSnapshot；发散时整表重画，不猜增量。
+ */
+
 import type { AgentMessage, Entry, LaneSnapshot } from "@earendil-works/pi-agent-core";
 import type { AssistantMessage } from "@earendil-works/pi-ai";
 import { Container, Spacer, Text, TruncatedText, type TUI } from "@earendil-works/pi-tui";
@@ -17,7 +23,11 @@ function userMessageText(message: AgentMessage): string {
 		.join("");
 }
 
-/** Snapshot-driven transcript used by the service-only experimental presentation. */
+/**
+ * Snapshot-driven transcript used by the service-only experimental presentation.
+ *
+ * 由 snapshot 驱动的对话区。apply 只追加已对齐条目；主题刷新必须清空再重放。
+ */
 export class ExperimentalChatView {
 	static readonly #renderers: Record<string, ToolRenderers> = createAllToolRenderers();
 

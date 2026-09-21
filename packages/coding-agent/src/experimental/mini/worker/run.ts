@@ -4,6 +4,8 @@
  * It owns every live object — storage, harness, lane, model runtime — and publishes them only as the
  * `Lane` and `Models` services. It speaks JSON over its stdio pipes to the server that spawned it,
  * and can call server services (`Sessions`) over the same peer.
+ *
+ * 会话 worker：每会话一进程。活对象全在这里，只以 Lane/Models 发布；经 stdio 与拉起它的 server 说话，并可经同一 peer 调 Sessions。
  */
 
 import {
@@ -48,7 +50,11 @@ async function openSession(
 	return repo.open(metadata, context);
 }
 
-/** Run one session worker until its stdio closes. `sessionId` undefined creates a new session. */
+/**
+ * Run one session worker until its stdio closes. `sessionId` undefined creates a new session.
+ *
+ * 跑一个会话 worker 直到 stdio 关闭。服务可到达后才 resume 上次未完成的 operation；stdio 关闭后按序收 lane/harness/repo。
+ */
 export async function runSessionWorker(options: {
 	sessionsRoot: string;
 	sessionId?: string;

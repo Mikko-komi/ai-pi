@@ -4,6 +4,8 @@
  * It provides `Sessions` and holds no agent state. Any other service name is forwarded to the worker
  * the calling client is attached to, and every worker event is pushed back to that worker's clients.
  * Workers reach `Sessions` over the same peer, because the routing rule is symmetric.
+ *
+ * 会话 server。只提供 Sessions、不持有 agent 状态；其它服务名转给已附着 worker，事件按订阅回推。
  */
 
 import { spawn } from "node:child_process";
@@ -49,6 +51,11 @@ async function listSessions(sessionsRoot: string): Promise<SessionSummary[]> {
 	}
 }
 
+/**
+ * Accept presentations, spawn one worker per session, and route until idle retirement.
+ *
+ * 接连接并按会话路由。同 session 并发 attach 必须共享一个 worker；无人订阅才杀进程。
+ */
 export async function runServer(options: { transport: Transport; sessionsRoot: string }): Promise<void> {
 	const routes = new Map<string, Route>();
 	let presentations = 0;

@@ -1,10 +1,26 @@
+/**
+ * Experimental Radius session relay: multiplexed host and reconnecting client.
+ *
+ * Radius 会话中继。host 多路复用一条 WebSocket；client 断线指数退避重连并恢复上次 Session。
+ */
+
 import type { ByteTransport, ByteTransportFactory, ByteTransportHandlers, Client } from "@earendil-works/pi-client";
 import { DEFAULT_MAX_FRAME_LENGTH, type ServerId } from "@earendil-works/pi-protocol";
 import type { Server } from "@earendil-works/pi-server";
 import { WebSocket } from "undici";
 import type { RadiusRelayAuthResolver } from "./radius-auth.ts";
 
+/**
+ * WebSocket subprotocol the experimental server presents as a Radius host.
+ *
+ * host 子协议。握手后 `protocol` 必须与此完全一致，否则关连接。
+ */
 export const RADIUS_RELAY_HOST_SUBPROTOCOL = "pi-session-relay.host.v1";
+/**
+ * WebSocket subprotocol the experimental client presents as a Radius peer.
+ *
+ * client 子协议。与 host 不同名；选错协议视为握手失败。
+ */
 export const RADIUS_RELAY_CLIENT_SUBPROTOCOL = "pi-session-relay.client.v1";
 
 const RELAY_DATA_HEADER_BYTES = 18;
@@ -38,6 +54,11 @@ interface RadiusRelayErrorEvent extends Event {
 	readonly message?: string;
 }
 
+/**
+ * Subset of the browser WebSocket API used by the Radius relay.
+ *
+ * 中继用的 WebSocket 表面。binaryType 必须是 arraybuffer；本地 close 码只能是 1000 或 4xxx。
+ */
 export interface RadiusRelayWebSocket {
 	binaryType: "arraybuffer" | "blob";
 	readonly bufferedAmount: number;
@@ -68,6 +89,11 @@ export interface RadiusRelayWebSocket {
 	removeEventListener(type: "error", listener: (event: RadiusRelayErrorEvent) => void): void;
 }
 
+/**
+ * Factory that opens a Radius relay WebSocket with a subprotocol and bearer.
+ *
+ * 打开中继 socket 的工厂。测试可注入；默认走 undici WebSocket。
+ */
 export type RadiusRelayWebSocketFactory = (options: {
 	readonly url: string;
 	readonly protocol: string;
@@ -86,12 +112,22 @@ interface RelayByteConnectionHandler {
 	onError(error: Error): void;
 }
 
+/**
+ * Host-loop status reported to the foreground server UI.
+ *
+ * host 循环状态。connecting 可被 UI 吞掉；retrying 才带 error 文案。
+ */
 export type RadiusRelayHostStatus =
 	| { readonly status: "not_authenticated" }
 	| { readonly status: "connecting" }
 	| { readonly status: "connected" }
 	| { readonly status: "retrying"; readonly error: string };
 
+/**
+ * Options for {@link RadiusRelayHost}.
+ *
+ * host 选项。server.accept 每条 connection_open 调一次；缺 auth 时循环等待，不退出。
+ */
 export interface RadiusRelayHostOptions {
 	readonly serverId: ServerId;
 	readonly server: Pick<Server, "accept">;
@@ -100,7 +136,11 @@ export interface RadiusRelayHostOptions {
 	readonly onStatus?: (status: RadiusRelayHostStatus) => void;
 }
 
-/** Maintain the experimental server's multiplexed, authenticated Radius host connection. */
+/**
+ * Maintain the experimental server's multiplexed, authenticated Radius host connection.
+ *
+ * 维持 server 侧多路 host。同一 connection_id 复用即协议错误；close 必须丢掉全部子连接。
+ */
 export class RadiusRelayHost {
 	readonly #options: RadiusRelayHostOptions;
 	readonly #abortController = new AbortController();
@@ -311,6 +351,11 @@ export class RadiusRelayHost {
 	}
 }
 
+/**
+ * Build a client transport factory that dials Radius and speaks raw binary frames.
+ *
+ * 建 client 传输工厂。resolve auth 必须 required；收到非二进制消息立刻失败。
+ */
 export function createRadiusClientTransportFactory(options: {
 	readonly serverId: ServerId;
 	readonly auth: RadiusRelayAuthResolver;
@@ -340,7 +385,11 @@ type RadiusReconnectClient = Pick<
 	| "reconnect"
 >;
 
-/** Reconnect one established Radius client and restore its last selected Session. */
+/**
+ * Reconnect one established Radius client and restore its last selected Session.
+ *
+ * 重连已建立的 Radius client。记住上次 sessionId；主动 detach 且仍 connected 才清期望。
+ */
 export class RadiusClientReconnect {
 	readonly #client: RadiusReconnectClient;
 	readonly #reattach: (sessionId: string) => Promise<void>;
@@ -589,6 +638,11 @@ function parseHostControlMessage(value: string): HostInputControlMessage {
 	throw new Error("Invalid Radius relay control message");
 }
 
+/**
+ * Encode a version-1 binary relay frame: header plus payload for one connection id.
+ *
+ * 编 v1 数据帧。connectionId 必须是小写 UUIDv4；非法 id 抛 TypeError，不写出坏帧。
+ */
 export function encodeRelayDataFrame(connectionId: string, payload: Uint8Array): ArrayBuffer {
 	if (!CONNECTION_ID_PATTERN.test(connectionId)) throw new TypeError("Invalid Radius relay connection ID");
 	const frame = new Uint8Array(RELAY_DATA_HEADER_BYTES + payload.byteLength);
@@ -602,6 +656,11 @@ export function encodeRelayDataFrame(connectionId: string, payload: Uint8Array):
 	return frame.buffer;
 }
 
+/**
+ * Parse a version-1 binary relay frame, or return undefined if the header is invalid.
+ *
+ * 解 v1 数据帧。版本/类型/id 不对返回 undefined，不抛；调用方再当协议错误。
+ */
 export function parseRelayDataFrame(
 	frame: ArrayBuffer,
 ): { readonly connectionId: string; readonly payload: ArrayBuffer } | undefined {
