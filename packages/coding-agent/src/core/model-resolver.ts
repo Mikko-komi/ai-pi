@@ -1,5 +1,7 @@
 /**
  * Model resolution, scoping, and initial selection
+ *
+ * 模型解析、范围选择和初始选用。CLI / session / settings 的优先级在 `findInitialModel`。
  */
 
 import type { ThinkingLevel } from "@earendil-works/pi-agent-core";
@@ -16,7 +18,11 @@ import { isValidThinkingLevel } from "../cli/args.ts";
 import { DEFAULT_THINKING_LEVEL } from "./defaults.ts";
 import type { ModelRuntime } from "./model-runtime.ts";
 
-/** Default model IDs for each known provider */
+/**
+ * Default model IDs for each known provider
+ *
+ * 各已知 provider 的默认模型 id。只在该 provider 已有可用模型时才当候选。
+ */
 export const defaultModelPerProvider: Record<KnownProvider, string> = {
 	"amazon-bedrock": "us.anthropic.claude-opus-4-6-v1",
 	"ant-ling": "Ring-2.6-1T",
@@ -60,6 +66,11 @@ export const defaultModelPerProvider: Record<KnownProvider, string> = {
 	"xiaomi-token-plan-sgp": "mimo-v2.5-pro",
 };
 
+/**
+ * A model selected by a scope pattern, with optional thinking level.
+ *
+ * 范围模式选出的模型。`thinkingLevel` 仅在模式里写了才有。
+ */
 export interface ScopedModel {
 	model: Model<Api>;
 	/** Thinking level if explicitly specified in pattern (e.g., "model:high"), undefined otherwise */
@@ -83,6 +94,8 @@ function isAlias(id: string): boolean {
  * Find an exact model reference match.
  * Supports either a bare model id or a canonical provider/modelId reference.
  * When matching by bare id, ambiguous matches across providers are rejected.
+ *
+ * 精确匹配 provider/id 或裸 id。裸 id 跨 provider 歧义时返回 undefined。
  */
 export function findExactModelReferenceMatch(
 	modelReference: string,
@@ -164,6 +177,11 @@ function tryMatchModel(modelPattern: string, availableModels: Model<Api>[]): Mod
 	}
 }
 
+/**
+ * Result of parsing one model pattern, including thinking-level suffix.
+ *
+ * 一条模式的解析结果。`warning` 存在时不要采用解析出的 thinkingLevel。
+ */
 export interface ParsedModelResult {
 	model: Model<Api> | undefined;
 	/** Thinking level if explicitly specified in pattern, undefined otherwise */
@@ -199,6 +217,8 @@ function buildFallbackModel(provider: string, modelId: string, availableModels: 
  *    - If suffix is invalid, warn and recurse on prefix with "off"
  *
  * @internal Exported for testing
+ *
+ * 从模式拆出模型和思考级别。先整串匹配，再从最后一个冒号切开。
  */
 export function parseModelPattern(
 	pattern: string,
@@ -265,6 +285,8 @@ export function parseModelPattern(
  * Supports models with colons in their IDs (e.g., OpenRouter's model:exacto).
  * The algorithm tries to match the full pattern first, then progressively
  * strips colon-suffixes to find a match.
+ *
+ * 解析 --models 模式时的非致命问题。不匹配或非法思考级别都是 warning。
  */
 export interface ModelScopeDiagnostic {
 	type: "warning";
@@ -273,11 +295,21 @@ export interface ModelScopeDiagnostic {
 	pattern: string;
 }
 
+/**
+ * Scoped models plus diagnostics for the unresolved patterns.
+ *
+ * 范围解析结果。有诊断也不丢已匹配的模型。
+ */
 export interface ResolveModelScopeResult {
 	scopedModels: ScopedModel[];
 	diagnostics: ModelScopeDiagnostic[];
 }
 
+/**
+ * Resolve --models patterns against an already-loaded catalog.
+ *
+ * 对着已有目录解析模式。同一模型只收一次。
+ */
 export function resolveModelScopeFromModels(
 	patterns: string[],
 	models: readonly Model<Api>[],
@@ -360,6 +392,11 @@ export function resolveModelScopeFromModels(
 	return { scopedModels, diagnostics };
 }
 
+/**
+ * Resolve --models patterns from ModelRuntime availability.
+ *
+ * 从 ModelRuntime 的可用列表解析模式。不打印，只返回诊断。
+ */
 export async function resolveModelScopeWithDiagnostics(
 	patterns: string[],
 	modelRuntime: ModelRuntime,
@@ -368,6 +405,11 @@ export async function resolveModelScopeWithDiagnostics(
 	return resolveModelScopeFromModels(patterns, await modelRuntime.getAvailable(undefined, options));
 }
 
+/**
+ * Resolve --models patterns and print diagnostics to stderr.
+ *
+ * 解析模式并把诊断打到 stderr。给 CLI 用，SDK 应走 WithDiagnostics。
+ */
 export async function resolveModelScope(
 	patterns: string[],
 	modelRuntime: ModelRuntime,
@@ -380,6 +422,11 @@ export async function resolveModelScope(
 	return scopedModels;
 }
 
+/**
+ * Single-model CLI resolution, including parse-only thinking level.
+ *
+ * CLI 单模型解析。`error` 有值时 `model` 必为 undefined。
+ */
 export interface ResolveCliModelResult {
 	model: Model<Api> | undefined;
 	thinkingLevel?: ThinkingLevel;
@@ -401,6 +448,8 @@ export interface ResolveCliModelResult {
  *
  * Note: This does not apply the thinking level by itself, but it may *parse* and
  * return a thinking level from "<pattern>:<thinking>" so the caller can apply it.
+ *
+ * 从 CLI 旗标解析一个模型。不自己应用思考级别，只可能从 pattern 里拆出来。
  */
 export function resolveCliModel(options: {
 	cliProvider?: string;
@@ -604,6 +653,11 @@ export function resolveCliModel(options: {
 	};
 }
 
+/**
+ * Initial model chosen at session start.
+ *
+ * 会话起步选用的模型。`fallbackMessage` 表示没用上会话里存的那个。
+ */
 export interface InitialModelResult {
 	model: Model<Api> | undefined;
 	thinkingLevel: ThinkingLevel;
@@ -617,6 +671,8 @@ export interface InitialModelResult {
  * 3. Restored from session (if continuing/resuming)
  * 4. Saved default from settings
  * 5. First available model with valid API key
+ *
+ * 按 CLI、范围模型、已存默认、可用列表选起步模型。恢复会话里的模型不在这里做。
  */
 export async function findInitialModel(options: {
 	cliProvider?: string;
@@ -709,6 +765,8 @@ export async function findInitialModel(options: {
 
 /**
  * Restore model from session, with fallback to available models
+ *
+ * 从会话恢复模型。不存在或没鉴权就退到当前模型或可用列表。
  */
 export async function restoreModelFromSession(
 	savedProvider: string,

@@ -27,16 +27,31 @@ import { loadSkills } from "./skills.ts";
 import { createSourceInfo, type SourceInfo } from "./source-info.ts";
 import { resetTimings } from "./timings.ts";
 
+/**
+ * Extra skill/prompt/theme paths injected after the first load.
+ *
+ * 首次加载后再挂上的路径。带 PathMetadata，供 `extendResources` 用。
+ */
 export interface ResourceExtensionPaths {
 	skillPaths?: Array<{ path: string; metadata: PathMetadata }>;
 	promptPaths?: Array<{ path: string; metadata: PathMetadata }>;
 	themePaths?: Array<{ path: string; metadata: PathMetadata }>;
 }
 
+/**
+ * Options for ResourceLoader.reload.
+ *
+ * reload 选项。给了 `resolveProjectTrust` 就先不信任地装扩展，再问信任。
+ */
 export interface ResourceLoaderReloadOptions {
 	resolveProjectTrust?: (input: { extensionsResult: LoadExtensionsResult }) => Promise<boolean>;
 }
 
+/**
+ * Loaded extensions, skills, prompts, themes, and system-prompt texts.
+ *
+ * 会话要用的资源快照。实现负责发现、去重和信任门控。
+ */
 export interface ResourceLoader {
 	getExtensions(): LoadExtensionsResult;
 	getSkills(): { skills: Skill[]; diagnostics: ResourceDiagnostic[] };
@@ -116,6 +131,11 @@ function findShadowedContextFile(cwd: string): string | undefined {
 	return worktreeContextFile ? join(mainRepoRoot, basename(worktreeContextFile.path)) : undefined;
 }
 
+/**
+ * Walk cwd ancestors and the agent dir for AGENTS.md / CLAUDE.md.
+ *
+ * 收集项目上下文文件。嵌套 worktree 会丢掉被影子挡住的主仓库那份，避免同一份指示吃两遍。
+ */
 export function loadProjectContextFiles(options: {
 	cwd: string;
 	agentDir: string;
@@ -156,6 +176,11 @@ export function loadProjectContextFiles(options: {
 	return contextFiles;
 }
 
+/**
+ * Construction options for DefaultResourceLoader.
+ *
+ * 默认加载器的装配选项。`no*` 关掉一类发现；override 回调在发现之后改结果。
+ */
 export interface DefaultResourceLoaderOptions {
 	cwd: string;
 	agentDir: string;
@@ -193,6 +218,11 @@ export interface DefaultResourceLoaderOptions {
 	appendSystemPromptOverride?: (base: string[]) => string[];
 }
 
+/**
+ * Discovers and caches extensions, skills, prompts, themes, and prompt files.
+ *
+ * 默认资源加载器。包解析、扩展冲突和信任门控都在 `reload` 里做完。
+ */
 export class DefaultResourceLoader implements ResourceLoader {
 	private cwd: string;
 	private agentDir: string;

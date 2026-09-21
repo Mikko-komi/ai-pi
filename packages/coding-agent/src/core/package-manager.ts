@@ -64,6 +64,11 @@ function getNpmVersionRange(version: string | undefined): string | undefined {
 	return version ? (validRange(version) ?? undefined) : undefined;
 }
 
+/**
+ * Provenance of one resolved resource path.
+ *
+ * 一条资源路径的来源。`origin: package` 优先级最低。
+ */
 export interface PathMetadata {
 	source: string;
 	scope: SourceScope;
@@ -71,12 +76,22 @@ export interface PathMetadata {
 	baseDir?: string;
 }
 
+/**
+ * One discovered path plus whether it is enabled.
+ *
+ * 发现后的一条路径。同路径先写入的 metadata 赢；`enabled` 表示是否加载。
+ */
 export interface ResolvedResource {
 	path: string;
 	enabled: boolean;
 	metadata: PathMetadata;
 }
 
+/**
+ * Enabled and disabled paths grouped by resource kind.
+ *
+ * 四类资源的解析结果。按优先级排序后同路径只留第一次，供碰撞时定赢家。
+ */
 export interface ResolvedPaths {
 	extensions: ResolvedResource[];
 	skills: ResolvedResource[];
@@ -84,8 +99,18 @@ export interface ResolvedPaths {
 	themes: ResolvedResource[];
 }
 
+/**
+ * What to do when a configured package is not installed.
+ *
+ * 配置了但没装上时的动作。`error` 会 throw。
+ */
 export type MissingSourceAction = "install" | "skip" | "error";
 
+/**
+ * Progress event for install/remove/update/clone/pull.
+ *
+ * 包操作进度。start/complete/error 成对；失败会再抛出去。
+ */
 export interface ProgressEvent {
 	type: "start" | "progress" | "complete" | "error";
 	action: "install" | "remove" | "update" | "clone" | "pull";
@@ -93,8 +118,18 @@ export interface ProgressEvent {
 	message?: string;
 }
 
+/**
+ * Listener for package-manager progress events.
+ *
+ * 进度回调。可不设。
+ */
 export type ProgressCallback = (event: ProgressEvent) => void;
 
+/**
+ * A configured package that has a newer npm/git revision.
+ *
+ * 已配置且有更新的包。pinned / local 不会出现在这里。
+ */
 export interface PackageUpdate {
 	source: string;
 	displayName: string;
@@ -102,6 +137,11 @@ export interface PackageUpdate {
 	scope: Exclude<SourceScope, "temporary">;
 }
 
+/**
+ * One packages[] entry as shown to the user.
+ *
+ * settings 里的一条包。`filtered` 表示用了对象形式。
+ */
 export interface ConfiguredPackage {
 	source: string;
 	scope: "user" | "project";
@@ -109,6 +149,11 @@ export interface ConfiguredPackage {
 	installedPath?: string;
 }
 
+/**
+ * Installs, updates, and resolves extension/skill/prompt/theme packages.
+ *
+ * 包与本地资源的解析门面。项目未信任时拒绝碰项目存储。
+ */
 export interface PackageManager {
 	resolve(onMissing?: (source: string) => Promise<MissingSourceAction>): Promise<ResolvedPaths>;
 	install(source: string, options?: { local?: boolean }): Promise<void>;
@@ -222,6 +267,11 @@ function getHomeDir(): string {
 	return process.env.HOME || homedir();
 }
 
+/**
+ * Ensure and return the per-agent temp folder for temporary extensions.
+ *
+ * 给临时扩展用的 temp 目录。会 mkdir 并 chmod 0700。
+ */
 export function getExtensionTempFolder(agentDir: string): string {
 	const tempFolder = join(agentDir, "tmp", "extensions");
 	mkdirSync(tempFolder, { recursive: true, mode: 0o700 });
@@ -803,6 +853,11 @@ function applyAutoloadDisabledPatterns(allPaths: string[], patterns: string[], b
 	return result;
 }
 
+/**
+ * Default PackageManager: npm/git/local sources plus auto-discovered dirs.
+ *
+ * 默认实现。`resolve` 按项目 > 用户 > 包的优先级排序；同路径只留第一次。
+ */
 export class DefaultPackageManager implements PackageManager {
 	private cwd: string;
 	private agentDir: string;

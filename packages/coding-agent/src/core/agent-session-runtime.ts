@@ -1,3 +1,9 @@
+/**
+ * Session replacement runtime that owns the current AgentSession and cwd-bound services.
+ *
+ * 持有当前 AgentSession 及其 cwd 服务。替换会话必须先拆掉当前运行时；创建失败把错误交给调用方。
+ */
+
 import { constants, copyFileSync, existsSync, mkdirSync } from "node:fs";
 import { basename, join, parse, resolve } from "node:path";
 import { resolvePath } from "../utils/paths.ts";
@@ -19,6 +25,8 @@ import { SessionManager } from "./session-manager.ts";
  *
  * The caller gets the created session, its cwd-bound services, and all
  * diagnostics collected during setup.
+ *
+ * 一次 runtime 创建的结果。会话、cwd 服务和诊断一起返回，调用方决定警告是否展示。
  */
 export interface CreateAgentSessionRuntimeResult extends CreateAgentSessionResult {
 	services: AgentSessionServices;
@@ -31,6 +39,8 @@ export interface CreateAgentSessionRuntimeResult extends CreateAgentSessionResul
  * The factory closes over process-global fixed inputs, recreates cwd-bound
  * services for the effective cwd, resolves session options against those
  * services, and finally creates the AgentSession.
+ *
+ * 按目标 cwd 和 SessionManager 装配完整 runtime。工厂闭包只抓进程级固定输入，cwd 服务每次重建。
  */
 export type CreateAgentSessionRuntimeFactory = (options: {
 	cwd: string;
@@ -42,6 +52,8 @@ export type CreateAgentSessionRuntimeFactory = (options: {
 
 /**
  * Thrown when /import references a JSONL file path that does not exist.
+ *
+ * `/import` 指向的 JSONL 不存在时抛出。路径必须是解析后的绝对路径。
  */
 export class SessionImportFileNotFoundError extends Error {
 	readonly filePath: string;
@@ -70,6 +82,8 @@ function extractUserMessageText(content: string | Array<{ type: string; text?: s
  * Session replacement methods tear down the current runtime first, then create
  * and apply the next runtime. If creation fails, the error is propagated to the
  * caller. The caller is responsible for user-facing error handling.
+ *
+ * 当前会话及其 cwd 服务的持有者。替换必须先 teardown；创建失败不回滚到半新状态，错误交给调用方。
  */
 export class AgentSessionRuntime {
 	private rebindSession?: (session: AgentSession) => Promise<void>;
@@ -418,6 +432,8 @@ export class AgentSessionRuntime {
  *
  * The same factory is stored on the returned AgentSessionRuntime and reused for
  * later /new, /resume, /fork, and import flows.
+ *
+ * 用工厂和初始会话目标造出第一个 runtime。同一工厂会留给后续 `/new` `/resume` `/fork` `/import`。
  */
 export async function createAgentSessionRuntime(
 	createRuntime: CreateAgentSessionRuntimeFactory,

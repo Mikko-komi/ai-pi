@@ -6,18 +6,38 @@ import { CONFIG_DIR_NAME } from "../config.ts";
 import { canonicalizePath, resolvePath } from "../utils/paths.ts";
 import { stripBom } from "../utils/text.ts";
 
+/**
+ * Stored trust answer for a directory: yes, no, or unset.
+ *
+ * 目录的信任答案。`null` 表示没有记录，沿祖先继续找。
+ */
 export type ProjectTrustDecision = boolean | null;
 
+/**
+ * Nearest stored trust decision for a cwd.
+ *
+ * 离 cwd 最近的一条已存决策。祖先上的 true/false 会罩住子目录。
+ */
 export interface ProjectTrustStoreEntry {
 	path: string;
 	decision: boolean;
 }
 
+/**
+ * One write to the trust store.
+ *
+ * 一次写入。`decision: null` 删掉该路径的记录。
+ */
 export interface ProjectTrustUpdate {
 	path: string;
 	decision: ProjectTrustDecision;
 }
 
+/**
+ * One choice shown in the trust prompt.
+ *
+ * 信任提示里的一项。`updates` 为空表示只对本次会话生效。
+ */
 export interface ProjectTrustOption {
 	label: string;
 	trusted: boolean;
@@ -57,12 +77,22 @@ function findNearestTrustEntry(data: TrustFile, cwd: string): ProjectTrustStoreE
 	}
 }
 
+/**
+ * Parent directory of cwd, if any.
+ *
+ * cwd 的父路径。根目录返回 undefined。
+ */
 export function getProjectTrustParentPath(cwd: string): string | undefined {
 	const trustPath = normalizeCwd(cwd);
 	const parentDir = dirname(trustPath);
 	return parentDir === trustPath ? undefined : parentDir;
 }
 
+/**
+ * Build the Trust / Trust parent / Do not trust choices.
+ *
+ * 拼出信任选项。`includeSessionOnly` 才加入仅本次会话的两项。
+ */
 export function getProjectTrustOptions(cwd: string, options?: { includeSessionOnly?: boolean }): ProjectTrustOption[] {
 	const trustPath = normalizeCwd(cwd);
 	const trustOptions: ProjectTrustOption[] = [
@@ -181,6 +211,8 @@ function withTrustFileLock<T>(path: string, fn: () => T): T {
  * cwd or one of its ancestors. Returns false when no such project resources
  * exist. The user/global ~/.agents/skills directory is always treated as a
  * trusted user resource and is ignored here, even when cwd is $HOME.
+ *
+ * 判断 cwd 有没有必须过信任门的项目资源。用户家目录下的 `~/.agents/skills` 不算。
  */
 export function hasTrustRequiringProjectResources(cwd: string): boolean {
 	const homeDir = canonicalizePath(resolvePath(process.env.HOME || homedir()));
@@ -206,6 +238,11 @@ export function hasTrustRequiringProjectResources(cwd: string): boolean {
 	}
 }
 
+/**
+ * File-backed store of per-directory project-trust decisions.
+ *
+ * `agentDir/trust.json`。读写带锁；`get` 沿祖先找最近的 true/false。
+ */
 export class ProjectTrustStore {
 	private trustPath: string;
 

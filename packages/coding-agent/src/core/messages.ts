@@ -3,28 +3,52 @@
  *
  * Extends the base AgentMessage type with coding-agent specific message types,
  * and provides a transformer to convert them to LLM-compatible messages.
+ *
+ * coding-agent 的自定义消息和转 LLM 形态。扩展类型经 declaration merging 挂到 AgentMessage。
  */
 
 import type { AgentMessage } from "@earendil-works/pi-agent-core";
 import type { ImageContent, Message, TextContent } from "@earendil-works/pi-ai";
 
+/**
+ * Wrapper prefix for a compaction summary in LLM context.
+ *
+ * 压缩摘要进模型上下文时的前缀包装。
+ */
 export const COMPACTION_SUMMARY_PREFIX = `The conversation history before this point was compacted into the following summary:
 
 <summary>
 `;
 
+/**
+ * Wrapper suffix for a compaction summary in LLM context.
+ *
+ * 压缩摘要进模型上下文时的闭合标签。
+ */
 export const COMPACTION_SUMMARY_SUFFIX = `
 </summary>`;
 
+/**
+ * Wrapper prefix for a branch summary in LLM context.
+ *
+ * 分支摘要进模型上下文时的前缀包装。
+ */
 export const BRANCH_SUMMARY_PREFIX = `The following is a summary of a branch that this conversation came back from:
 
 <summary>
 `;
 
+/**
+ * Wrapper suffix for a branch summary in LLM context.
+ *
+ * 分支摘要进模型上下文时的闭合标签。
+ */
 export const BRANCH_SUMMARY_SUFFIX = `</summary>`;
 
 /**
  * Message type for bash executions via the ! command.
+ *
+ * `!` 命令的 bash 执行记录。`excludeFromContext` 为真时 convertToLlm 丢掉它。
  */
 export interface BashExecutionMessage {
 	role: "bashExecution";
@@ -42,6 +66,8 @@ export interface BashExecutionMessage {
 /**
  * Message type for extension-injected messages via sendMessage().
  * These are custom messages that extensions can inject into the conversation.
+ *
+ * 扩展注入的自定义消息。进 LLM 时当作用户消息。
  */
 export interface CustomMessage<T = unknown> {
 	role: "custom";
@@ -52,6 +78,11 @@ export interface CustomMessage<T = unknown> {
 	timestamp: number;
 }
 
+/**
+ * Runtime message for a summarized abandoned branch.
+ *
+ * 运行时里的分支摘要消息。由 BranchSummaryEntry 投影出来。
+ */
 export interface BranchSummaryMessage {
 	role: "branchSummary";
 	summary: string;
@@ -59,6 +90,11 @@ export interface BranchSummaryMessage {
 	timestamp: number;
 }
 
+/**
+ * Runtime message for a compacted history checkpoint.
+ *
+ * 运行时里的压缩摘要消息。由 CompactionEntry 投影出来。
+ */
 export interface CompactionSummaryMessage {
 	role: "compactionSummary";
 	summary: string;
@@ -78,6 +114,8 @@ declare module "@earendil-works/pi-agent-core" {
 
 /**
  * Convert a BashExecutionMessage to user message text for LLM context.
+ *
+ * 把 bash 执行收成给模型看的用户文本。取消、非零退出和截断都会标出来。
  */
 export function bashExecutionToText(msg: BashExecutionMessage): string {
 	let text = `Ran \`${msg.command}\`\n`;
@@ -97,6 +135,11 @@ export function bashExecutionToText(msg: BashExecutionMessage): string {
 	return text;
 }
 
+/**
+ * Build a BranchSummaryMessage from a session entry.
+ *
+ * 从会话条目字段构造运行时分支摘要消息。时间戳从 ISO 转毫秒。
+ */
 export function createBranchSummaryMessage(summary: string, fromId: string, timestamp: string): BranchSummaryMessage {
 	return {
 		role: "branchSummary",
@@ -106,6 +149,11 @@ export function createBranchSummaryMessage(summary: string, fromId: string, time
 	};
 }
 
+/**
+ * Build a CompactionSummaryMessage from a session entry.
+ *
+ * 从会话条目字段构造运行时压缩摘要消息。时间戳从 ISO 转毫秒。
+ */
 export function createCompactionSummaryMessage(
 	summary: string,
 	tokensBefore: number,
@@ -119,7 +167,11 @@ export function createCompactionSummaryMessage(
 	};
 }
 
-/** Convert CustomMessageEntry to AgentMessage format */
+/**
+ * Convert CustomMessageEntry to AgentMessage format
+ *
+ * 把 CustomMessageEntry 收成运行时 CustomMessage。
+ */
 export function createCustomMessage(
 	customType: string,
 	content: string | (TextContent | ImageContent)[],
@@ -144,6 +196,8 @@ export function createCustomMessage(
  * - Agent's transormToLlm option (for prompt calls and queued messages)
  * - Compaction's generateSummary (for summarization)
  * - Custom extensions and tools
+ *
+ * 把含自定义类型的 AgentMessage 收成模型消息。`!!` 的 bash 不进上下文。
  */
 export function convertToLlm(messages: AgentMessage[]): Message[] {
 	return messages

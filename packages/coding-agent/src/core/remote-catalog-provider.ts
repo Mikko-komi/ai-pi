@@ -1,3 +1,9 @@
+/**
+ * Overlay a persisted pi.dev model catalog onto a built-in provider.
+ *
+ * 把 pi.dev 目录叠到内置 provider 上。比本地生成时间旧的缓存不会盖住静态模型。
+ */
+
 import type { Api, Model, ModelsStoreEntry, Provider } from "@earendil-works/pi-ai";
 import { VERSION } from "../config.ts";
 import { fetchWithRetry } from "../utils/management-http.ts";
@@ -5,6 +11,11 @@ import { getPiUserAgent } from "../utils/pi-user-agent.ts";
 
 const DEFAULT_CATALOG_BASE_URL = "https://pi.dev";
 const REMOTE_CATALOG_ATTEMPT_TIMEOUT_MS = 4_000;
+/**
+ * Minimum time between unforced remote catalog refreshes.
+ *
+ * 非强制刷新的最小间隔。未到期且已有校验器时不发网。
+ */
 export const REMOTE_CATALOG_REFRESH_INTERVAL_MS = 4 * 60 * 60 * 1000;
 
 function mergeModels(baseline: readonly Model<Api>[], dynamic: readonly Model<Api>[]): Model<Api>[] {
@@ -42,7 +53,11 @@ function remoteModels(
 	return entry.models;
 }
 
-/** Add a persisted pi.dev catalog overlay to a static built-in provider. */
+/**
+ * Add a persisted pi.dev catalog overlay to a static built-in provider.
+ *
+ * 给内置 provider 加上可持久化的远程目录。304 只动新鲜度，不能把 overlay 清空。
+ */
 export function withRemoteCatalog(
 	provider: Provider,
 	catalogBaseUrl: string = DEFAULT_CATALOG_BASE_URL,

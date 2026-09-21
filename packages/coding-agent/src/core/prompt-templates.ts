@@ -7,6 +7,8 @@ import { createSyntheticSourceInfo, type SourceInfo } from "./source-info.ts";
 
 /**
  * Represents a prompt template loaded from a markdown file
+ *
+ * 从 markdown 加载的提示模板。名字取自文件名，正文是 frontmatter 后的 body。
  */
 export interface PromptTemplate {
 	name: string;
@@ -20,6 +22,8 @@ export interface PromptTemplate {
 /**
  * Parse command arguments respecting quoted strings (bash-style)
  * Returns array of arguments
+ *
+ * 按 bash 风格拆命令参数。引号成对，不递归转义。
  */
 export function parseCommandArgs(argsString: string): string[] {
 	const args: string[] = [];
@@ -66,6 +70,8 @@ export function parseCommandArgs(argsString: string): string[] {
  *
  * Note: Replacement happens on the template string only. Argument and default values
  * containing patterns like $1, $@, or $ARGUMENTS are NOT recursively substituted.
+ *
+ * 展开模板占位符。替换只发生在模板串上，参数值里的 $1/$@ 不再展开。
  */
 export function substituteArgs(content: string, args: string[]): string {
 	const allArgs = args.join(" ");
@@ -174,6 +180,11 @@ function loadTemplatesFromDir(dir: string, getSourceInfo: (filePath: string) => 
 	return templates;
 }
 
+/**
+ * Options for loadPromptTemplates.
+ *
+ * 加载选项。`includeDefaults` 决定要不要扫全局/项目 prompts 目录。
+ */
 export interface LoadPromptTemplatesOptions {
 	/** Working directory for project-local templates. */
 	cwd: string;
@@ -190,6 +201,8 @@ export interface LoadPromptTemplatesOptions {
  * 1. Global: agentDir/prompts/
  * 2. Project: cwd/{CONFIG_DIR_NAME}/prompts/
  * 3. Explicit prompt paths
+ *
+ * 从默认目录和显式路径收集模板。这里不去重，调用方自己处理撞名。
  */
 export function loadPromptTemplates(options: LoadPromptTemplatesOptions): PromptTemplate[] {
 	const resolvedCwd = resolvePath(options.cwd);
@@ -265,6 +278,8 @@ export function loadPromptTemplates(options: LoadPromptTemplatesOptions): Prompt
 /**
  * Expand a prompt template if it matches a template name.
  * Returns the expanded content or the original text if not a template.
+ *
+ * 若文本以 `/name` 开头且能对上模板就展开，否则原样返回。
  */
 export function expandPromptTemplate(text: string, templates: PromptTemplate[]): string {
 	if (!text.startsWith("/")) return text;

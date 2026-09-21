@@ -1,3 +1,9 @@
+/**
+ * ModelsStore implementations for in-memory tests and models-store.json.
+ *
+ * 动态目录的 ModelsStore。读返回 structuredClone，避免调用方改到缓存。
+ */
+
 import { join } from "node:path";
 import type { ModelsStore, ModelsStoreEntry, ModelsStoreOperationOptions } from "@earendil-works/pi-ai";
 import { getAgentDir } from "../config.ts";
@@ -23,6 +29,11 @@ type ModelsFileReadState = {
 // Optimize the common path without retaining an unbounded set of custom paths.
 let sharedModelsFileReadState: { path: string; readState: ModelsFileReadState } | undefined;
 
+/**
+ * In-memory ModelsStore for tests and ephemeral runtimes.
+ *
+ * 内存目录仓。读写都 clone，条目互不影响。
+ */
 export class InMemoryCodingAgentModelsStore implements ModelsStore {
 	private readonly entries = new Map<string, ModelsStoreEntry>();
 
@@ -43,7 +54,11 @@ export class InMemoryCodingAgentModelsStore implements ModelsStore {
 	}
 }
 
-/** Locked JSON-backed storage for dynamically refreshed provider catalogs. */
+/**
+ * Locked JSON-backed storage for dynamically refreshed provider catalogs.
+ *
+ * 带锁的 JSON 目录仓。同默认路径共享读状态；写在锁内完成。
+ */
 export class FileModelsStore implements ModelsStore {
 	private readonly storage: AuthStorageBackend;
 	private readonly path: string;

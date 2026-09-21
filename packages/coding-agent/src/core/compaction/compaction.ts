@@ -3,6 +3,8 @@
  *
  * Pure functions for compaction logic. The session manager handles I/O,
  * and after compaction the session is reloaded.
+ *
+ * 长会话的上下文压缩。这里只算切点和摘要；写盘和重载由 SessionManager 做。
  */
 
 import type { AgentMessage, StreamFn, ThinkingLevel } from "@earendil-works/pi-agent-core";
@@ -30,7 +32,11 @@ import {
 // File Operation Tracking
 // ============================================================================
 
-/** Details stored in CompactionEntry.details for file tracking */
+/**
+ * Details stored in CompactionEntry.details for file tracking
+ *
+ * 压缩检查点附带的文件清单。给后续压缩累计跟踪用。
+ */
 export interface CompactionDetails {
 	readFiles: string[];
 	modifiedFiles: string[];
@@ -84,7 +90,11 @@ function getMessageFromEntryForCompaction(entry: SessionEntry): AgentMessage | u
 	return sessionEntryToContextMessages(entry)[0];
 }
 
-/** Result from compact() - SessionManager adds uuid/parentUuid when saving */
+/**
+ * Result from compact() - SessionManager adds uuid/parentUuid when saving
+ *
+ * compact() 的产出。id/parent 由 SessionManager 写盘时补。
+ */
 export interface CompactionResult<T = unknown> {
 	summary: string;
 	firstKeptEntryId: string;
@@ -123,12 +133,22 @@ function combineUsage(first: Usage, second: Usage): Usage {
 // Types
 // ============================================================================
 
+/**
+ * Token thresholds that decide when and how much to compact.
+ *
+ * 压缩开关和预算。关掉时 shouldCompact 恒为假。
+ */
 export interface CompactionSettings {
 	enabled: boolean;
 	reserveTokens: number;
 	keepRecentTokens: number;
 }
 
+/**
+ * Default compaction thresholds.
+ *
+ * 默认压缩预算。调用方没覆盖就用这组。
+ */
 export const DEFAULT_COMPACTION_SETTINGS: CompactionSettings = {
 	enabled: true,
 	reserveTokens: 16384,
@@ -142,6 +162,8 @@ export const DEFAULT_COMPACTION_SETTINGS: CompactionSettings = {
 /**
  * Calculate total context tokens from usage.
  * Uses the native totalTokens field when available, falls back to computing from components.
+ *
+ * 从 usage 取当前上下文 token。有 native totalTokens 就用它。
  */
 export function calculateContextTokens(usage: Usage): number {
 	return usage.totalTokens || usage.input + usage.output + usage.cacheRead + usage.cacheWrite;
@@ -168,6 +190,8 @@ function getAssistantUsage(msg: AgentMessage): Usage | undefined {
 
 /**
  * Find the last valid assistant message usage from session entries.
+ *
+ * 从条目里找最近一条有效 assistant usage。中止、出错和全零的不算。
  */
 export function getLastAssistantUsage(entries: SessionEntry[]): Usage | undefined {
 	for (let i = entries.length - 1; i >= 0; i--) {
@@ -180,6 +204,11 @@ export function getLastAssistantUsage(entries: SessionEntry[]): Usage | undefine
 	return undefined;
 }
 
+/**
+ * Token estimate split into last known usage and trailing messages.
+ *
+ * 上下文 token 估计。有 usage 时只另估其后的尾巴。
+ */
 export interface ContextUsageEstimate {
 	tokens: number;
 	usageTokens: number;
@@ -198,6 +227,8 @@ function getLastAssistantUsageInfo(messages: AgentMessage[]): { usage: Usage; in
 /**
  * Estimate context tokens from messages, using the last assistant usage when available.
  * If there are messages after the last usage, estimate their tokens with estimateTokens.
+ *
+ * 估当前上下文 token。优先最后一条有效 usage，其后用字符启发式补。
  */
 export function estimateContextTokens(messages: AgentMessage[]): ContextUsageEstimate {
 	const usageInfo = getLastAssistantUsageInfo(messages);
@@ -231,6 +262,8 @@ export function estimateContextTokens(messages: AgentMessage[]): ContextUsageEst
 
 /**
  * Check if compaction should trigger based on context usage.
+ *
+ * 是否该压。未启用恒为假；超过窗口减去 reserveTokens 才触发。
  */
 export function shouldCompact(contextTokens: number, contextWindow: number, settings: CompactionSettings): boolean {
 	if (!settings.enabled) return false;
@@ -262,6 +295,8 @@ function estimateTextAndImageContentChars(content: string | Array<{ type: string
 /**
  * Estimate token count for a message using chars/4 heuristic.
  * This is conservative (overestimates tokens).
+ *
+ * 用字符/4 估一条消息的 token。偏保守（估高）。
  */
 export function estimateTokens(message: AgentMessage): number {
 	let chars = 0;
@@ -365,6 +400,8 @@ function findValidCutPoints(entries: SessionEntry[], startIndex: number, endInde
 /**
  * Find the context-visible user-role message that starts the turn containing the given entry index.
  * Returns -1 if no turn start found before the index.
+ *
+ * 从给定条目往回找本轮起点。找不到返回 -1。
  */
 export function findTurnStartIndex(entries: SessionEntry[], entryIndex: number, startIndex: number): number {
 	for (let i = entryIndex; i >= startIndex; i--) {
@@ -375,6 +412,11 @@ export function findTurnStartIndex(entries: SessionEntry[], entryIndex: number, 
 	return -1;
 }
 
+/**
+ * Where recent history should be kept after a compaction cut.
+ *
+ * 压缩切点。`isSplitTurn` 为真时本轮前缀还要单独摘要。
+ */
 export interface CutPointResult {
 	/** Index of first entry to keep */
 	firstKeptEntryIndex: number;
@@ -399,6 +441,8 @@ export interface CutPointResult {
  * - isSplitTurn: whether we're cutting in the middle of a turn
  *
  * Only considers entries between `startIndex` and `endIndex` (exclusive).
+ *
+ * 在窗口内找切点，尽量保住 keepRecentTokens。不切在 toolResult 上。
  */
 export function findCutPoint(
 	entries: SessionEntry[],
@@ -541,6 +585,8 @@ ${UPDATE_SUMMARIZATION_INSTRUCTIONS}`;
 /**
  * Returns an error message when a summarization response cannot safely be persisted.
  * A length stop contains partial text and must not become a session checkpoint.
+ *
+ * 摘要响应能否落盘。error 和 length 停都失败，半成品不能当检查点。
  */
 export function getSummarizationFailure(response: AssistantMessage, label: string): string | undefined {
 	if (response.stopReason === "error") {
@@ -575,6 +621,8 @@ function createSummarizationOptions(
  * `terminated`, socket close) honor the configured retry policy instead of failing
  * the whole compaction on the first attempt. Deterministic errors and aborts return
  * immediately (see {@link retryAssistantCall}).
+ *
+ * 压缩/分支摘要共用的 LLM 调用口。瞬时失败按策略重试，确定失败和中止立刻返回。
  */
 export async function completeSummarization(
 	model: Model<any>,
@@ -601,6 +649,8 @@ export async function completeSummarization(
 /**
  * Generate a summary of the conversation using the LLM.
  * If previousSummary is provided, uses the update prompt to merge.
+ *
+ * 生成或更新摘要文本。有 previousSummary 时走增量提示。
  */
 export async function generateSummary(
 	currentMessages: AgentMessage[],
@@ -652,7 +702,11 @@ function buildSummarizationContext(promptText: string): Context {
 	};
 }
 
-/** Generate or update a conversation summary and return its provider usage. */
+/**
+ * Generate or update a conversation summary and return its provider usage.
+ *
+ * 生成或更新摘要并带回 usage。工具调用或半成品会抛错。
+ */
 export async function generateSummaryWithUsage(
 	currentMessages: AgentMessage[],
 	model: Model<any>,
@@ -729,6 +783,11 @@ export async function generateSummaryWithUsage(
 // Compaction Preparation (for extensions)
 // ============================================================================
 
+/**
+ * Precomputed cut and message sets for a compaction pass.
+ *
+ * compact() 的输入。没有可压内容或会话缺 UUID 时 prepare 返回 undefined。
+ */
 export interface CompactionPreparation {
 	/** UUID of first entry to keep */
 	firstKeptEntryId: string;
@@ -747,6 +806,11 @@ export interface CompactionPreparation {
 	settings: CompactionSettings;
 }
 
+/**
+ * Compute the cut and message sets for the next compaction.
+ *
+ * 算下一次压缩的切点和待摘要消息。末条已是 compaction 或没有可压内容时返回 undefined。
+ */
 export function prepareCompaction(
 	pathEntries: SessionEntry[],
 	settings: CompactionSettings,
@@ -854,6 +918,8 @@ Be concise. Focus on what's needed to understand the kept suffix.`;
  * @param preparation - Pre-calculated preparation from prepareCompaction()
  * @param customInstructions - Optional custom focus for the summary
  * @param sessionId - Optional routing session ID forwarded without enabling prompt caching
+ *
+ * 按准备数据生成压缩摘要。切在轮中时再压一轮前缀，并附上文件列表。
  */
 export async function compact(
 	preparation: CompactionPreparation,

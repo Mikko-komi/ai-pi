@@ -6,6 +6,8 @@
  * - Register LLM-callable tools
  * - Register commands, keyboard shortcuts, and CLI flags
  * - Interact with the user via UI primitives
+ *
+ * 扩展系统的对外类型。扩展通过事件、工具、命令、快捷键和 UI 原语接入；这里只定义契约，不跑生命周期。
  */
 
 import type {
@@ -94,7 +96,11 @@ export type { AppKeybinding, KeybindingsManager } from "../keybindings.ts";
 // UI Context
 // ============================================================================
 
-/** Options for extension UI dialogs. */
+/**
+ * Options for extension UI dialogs.
+ *
+ * 扩展对话框选项。`signal` / `timeout` 都能关掉对话框。
+ */
 export interface ExtensionUIDialogOptions {
 	/** AbortSignal to programmatically dismiss the dialog. */
 	signal?: AbortSignal;
@@ -102,19 +108,35 @@ export interface ExtensionUIDialogOptions {
 	timeout?: number;
 }
 
-/** Placement for extension widgets. */
+/**
+ * Placement for extension widgets.
+ *
+ * 小部件相对编辑器的位置。只有上下两档。
+ */
 export type WidgetPlacement = "aboveEditor" | "belowEditor";
 
-/** Options for extension widgets. */
+/**
+ * Options for extension widgets.
+ *
+ * 小部件选项。缺省挂在编辑器上方。
+ */
 export interface ExtensionWidgetOptions {
 	/** Where the widget is rendered. Defaults to "aboveEditor". */
 	placement?: WidgetPlacement;
 }
 
-/** Raw terminal input listener for extensions. */
+/**
+ * Raw terminal input listener for extensions.
+ *
+ * 原始终端输入回调。返回 `consume` 表示吃掉这次输入。
+ */
 export type TerminalInputHandler = (data: string) => { consume?: boolean; data?: string } | undefined;
 
-/** Working indicator configuration for the interactive streaming loader. */
+/**
+ * Working indicator configuration for the interactive streaming loader.
+ *
+ * 流式加载指示器。空 `frames` 会整行藏起来。
+ */
 export interface WorkingIndicatorOptions {
 	/** Animation frames. Use an empty array to hide the indicator entirely. Custom frames are rendered verbatim. */
 	frames?: string[];
@@ -122,13 +144,25 @@ export interface WorkingIndicatorOptions {
 	intervalMs?: number;
 }
 
-/** Wrap the current autocomplete provider with additional behavior. */
+/**
+ * Wrap the current autocomplete provider with additional behavior.
+ *
+ * 包装现有补全器。必须再交出一个 AutocompleteProvider。
+ */
 export type AutocompleteProviderFactory = (current: AutocompleteProvider) => AutocompleteProvider;
+
+/**
+ * Custom editor factory for `setEditorComponent`.
+ *
+ * 自定义编辑器工厂。传 `undefined` 表示回到内置编辑器。
+ */
 export type EditorFactory = (tui: TUI, theme: EditorTheme, keybindings: KeybindingsManager) => EditorComponent;
 
 /**
  * UI context for extensions to request interactive UI.
  * Each mode (interactive, RPC, print) provides its own implementation.
+ *
+ * 扩展要交互 UI 时走这里。各模式自己实现；没有 UI 的模式给 no-op。
  */
 export interface ExtensionUIContext {
 	/** Show a selector and return the user's choice. */
@@ -287,6 +321,11 @@ export interface ExtensionUIContext {
 // Extension Context
 // ============================================================================
 
+/**
+ * Token usage for the active model.
+ *
+ * 当前模型的上下文用量。刚 compaction 完时 `tokens` 可能是 null。
+ */
 export interface ContextUsage {
 	/** Estimated context tokens, or null if unknown (e.g. right after compaction, before next LLM response). */
 	tokens: number | null;
@@ -295,6 +334,11 @@ export interface ContextUsage {
 	percent: number | null;
 }
 
+/**
+ * Options for triggering compaction from an extension.
+ *
+ * 扩展触发 compaction 的选项。不阻塞；完成/失败走回调。
+ */
 export interface CompactOptions {
 	customInstructions?: string;
 	onComplete?: (result: CompactionResult) => void;
@@ -303,9 +347,16 @@ export interface CompactOptions {
 
 /**
  * Context passed to extension event handlers.
+ *
+ * 运行模式。`tui` 才能用终端专用 UI。
  */
 export type ExtensionMode = "tui" | "rpc" | "json" | "print";
 
+/**
+ * Context passed to extension event handlers and tools.
+ *
+ * 事件/工具里的 ctx。只读会话；切会话后旧 ctx 会失效。
+ */
 export interface ExtensionContext {
 	/** UI methods for user interaction */
 	ui: ExtensionUIContext;
@@ -351,6 +402,8 @@ export interface ExtensionContext {
 /**
  * Extended context for command handlers.
  * Includes session control methods only safe in user-initiated commands.
+ *
+ * 命令处理器的 ctx。比事件 ctx 多会话控制；只在用户发起的命令里安全。
  */
 export interface ExtensionCommandContext extends ExtensionContext {
 	/** Get the current base system-prompt construction options. */
@@ -392,6 +445,8 @@ export interface ExtensionCommandContext extends ExtensionContext {
  * Fresh command-capable context bound to the replacement session after a session switch.
  *
  * This is passed to `withSession()` callbacks on `newSession()`, `fork()`, and `switchSession()`.
+ *
+ * 切会话后绑在新会话上的命令 ctx。`withSession` 必须用这个，不能继续用旧 ctx。
  */
 export interface ReplacedSessionContext extends ExtensionCommandContext {
 	sendMessage<T = unknown>(
@@ -409,7 +464,11 @@ export interface ReplacedSessionContext extends ExtensionCommandContext {
 // Tool Types
 // ============================================================================
 
-/** Rendering options for tool results */
+/**
+ * Rendering options for tool results
+ *
+ * 工具结果渲染选项。`isPartial` 表示还在流。
+ */
 export interface ToolRenderResultOptions {
 	/** Whether the result view is expanded */
 	expanded: boolean;
@@ -417,7 +476,11 @@ export interface ToolRenderResultOptions {
 	isPartial: boolean;
 }
 
-/** Context passed to tool renderers. */
+/**
+ * Context passed to tool renderers.
+ *
+ * 工具行渲染上下文。同一次 toolCallId 的 call/result 共用 `args` 和 `state`。
+ */
 export interface ToolRenderContext<TState = any, TArgs = any> {
 	/** Current tool call arguments. Shared across call/result renders for the same tool call. */
 	args: TArgs;
@@ -447,6 +510,8 @@ export interface ToolRenderContext<TState = any, TArgs = any> {
 
 /**
  * Tool definition for registerTool().
+ *
+ * registerTool() 的定义。`execute` 是必须的；渲染和 prompt 片段可选。
  */
 export interface ToolDefinition<TParams extends TSchema = TSchema, TDetails = unknown, TState = any> {
 	/** Tool name (used in LLM tool calls) */
@@ -507,6 +572,8 @@ type AnyToolDefinition = ToolDefinition<any, any, any>;
  * Use this when assigning a tool to a variable or passing it through arrays such
  * as `customTools`, where contextual typing would otherwise widen params to
  * `unknown`.
+ *
+ * 保住独立工具变量的参数推断。直接丢进数组时否则会宽成 unknown。
  */
 export function defineTool<TParams extends TSchema, TDetails = unknown, TState = any>(
 	tool: ToolDefinition<TParams, TDetails, TState>,
@@ -518,18 +585,38 @@ export function defineTool<TParams extends TSchema, TDetails = unknown, TState =
 // Startup/Resource Events
 // ============================================================================
 
+/**
+ * Project-trust prompt event.
+ *
+ * 项目信任询问。扩展可以代答，避免内置对话框。
+ */
 export interface ProjectTrustEvent {
 	type: "project_trust";
 	cwd: string;
 }
 
+/**
+ * Trust decision from a project_trust handler.
+ *
+ * 信任决定。`undecided` 让下一个 handler 继续。
+ */
 export type ProjectTrustEventDecision = "yes" | "no" | "undecided";
 
+/**
+ * Result of a project_trust handler.
+ *
+ * 信任结果。`remember` 表示写入持久设置。
+ */
 export interface ProjectTrustEventResult {
 	trusted: ProjectTrustEventDecision;
 	remember?: boolean;
 }
 
+/**
+ * Context for project_trust handlers.
+ *
+ * 信任询问时的精简 ctx。UI 只有对话框四件套。
+ */
 export interface ProjectTrustContext {
 	cwd: string;
 	mode: ExtensionMode;
@@ -537,19 +624,32 @@ export interface ProjectTrustContext {
 	ui: Pick<ExtensionUIContext, "select" | "confirm" | "input" | "notify">;
 }
 
+/**
+ * Handler for project_trust.
+ *
+ * 信任询问回调。第一个给出 yes/no 的胜出。
+ */
 export type ProjectTrustHandler = (
 	event: ProjectTrustEvent,
 	ctx: ProjectTrustContext,
 ) => Promise<ProjectTrustEventResult> | ProjectTrustEventResult;
 
-/** Fired after session_start to allow extensions to provide additional resource paths. */
+/**
+ * Fired after session_start to allow extensions to provide additional resource paths.
+ *
+ * session_start 之后让扩展补资源路径。startup 和 reload 都会发。
+ */
 export interface ResourcesDiscoverEvent {
 	type: "resources_discover";
 	cwd: string;
 	reason: "startup" | "reload";
 }
 
-/** Result from resources_discover event handler */
+/**
+ * Result from resources_discover event handler
+ *
+ * 额外 skill / prompt / theme 路径。runner 会带上 extensionPath。
+ */
 export interface ResourcesDiscoverResult {
 	skillPaths?: string[];
 	promptPaths?: string[];
@@ -560,7 +660,11 @@ export interface ResourcesDiscoverResult {
 // Session Events
 // ============================================================================
 
-/** Fired when a session is started, loaded, or reloaded */
+/**
+ * Fired when a session is started, loaded, or reloaded
+ *
+ * 会话启动、加载或 reload。`previousSessionFile` 只在切会话时有。
+ */
 export interface SessionStartEvent {
 	type: "session_start";
 	/** Why this session start happened. */
@@ -569,28 +673,44 @@ export interface SessionStartEvent {
 	previousSessionFile?: string;
 }
 
-/** Fired when the current session metadata changes. */
+/**
+ * Fired when the current session metadata changes.
+ *
+ * 会话元数据变了。`name` 为 undefined 表示清掉显示名。
+ */
 export interface SessionInfoChangedEvent {
 	type: "session_info_changed";
 	/** Current normalized session name. Undefined when the name is cleared. */
 	name: string | undefined;
 }
 
-/** Fired before switching to another session (can be cancelled) */
+/**
+ * Fired before switching to another session (can be cancelled)
+ *
+ * 切会话前。handler 可以 cancel。
+ */
 export interface SessionBeforeSwitchEvent {
 	type: "session_before_switch";
 	reason: "new" | "resume";
 	targetSessionFile?: string;
 }
 
-/** Fired before forking a session (can be cancelled) */
+/**
+ * Fired before forking a session (can be cancelled)
+ *
+ * fork 前。handler 可以 cancel 或跳过对话恢复。
+ */
 export interface SessionBeforeForkEvent {
 	type: "session_before_fork";
 	entryId: string;
 	position: "before" | "at";
 }
 
-/** Fired before context compaction (can be cancelled or customized) */
+/**
+ * Fired before context compaction (can be cancelled or customized)
+ *
+ * compaction 前。可以 cancel，或直接给 compaction 结果。
+ */
 export interface SessionBeforeCompactEvent {
 	type: "session_before_compact";
 	preparation: CompactionPreparation;
@@ -603,7 +723,11 @@ export interface SessionBeforeCompactEvent {
 	signal: AbortSignal;
 }
 
-/** Fired after context compaction succeeds */
+/**
+ * Fired after context compaction succeeds
+ *
+ * compaction 成功后。`fromExtension` 表示内容来自扩展。
+ */
 export interface SessionCompactEvent {
 	type: "session_compact";
 	compactionEntry: CompactionEntry;
@@ -614,7 +738,11 @@ export interface SessionCompactEvent {
 	willRetry: boolean;
 }
 
-/** Fired after context compaction fails or is aborted */
+/**
+ * Fired after context compaction fails or is aborted
+ *
+ * compaction 失败或中止。`aborted` 和 `errorMessage` 互斥语义。
+ */
 export interface SessionCompactFailedEvent {
 	type: "session_compact_failed";
 	/** What triggered the compaction: manual /compact, the context threshold, or context overflow recovery */
@@ -629,7 +757,11 @@ export interface SessionCompactFailedEvent {
 	fromExtension: boolean;
 }
 
-/** Fired before an extension runtime is torn down due to quit, reload, or session replacement. */
+/**
+ * Fired before an extension runtime is torn down due to quit, reload, or session replacement.
+ *
+ * 扩展运行时要拆掉。quit / reload / 换会话都会发。
+ */
 export interface SessionShutdownEvent {
 	type: "session_shutdown";
 	reason: "quit" | "reload" | "new" | "resume" | "fork";
@@ -637,7 +769,11 @@ export interface SessionShutdownEvent {
 	targetSessionFile?: string;
 }
 
-/** Preparation data for tree navigation */
+/**
+ * Preparation data for tree navigation
+ *
+ * 树导航的准备数据。`replaceInstructions` 为真时自定义说明替换默认 prompt。
+ */
 export interface TreePreparation {
 	targetId: string;
 	oldLeafId: string | null;
@@ -652,14 +788,22 @@ export interface TreePreparation {
 	label?: string;
 }
 
-/** Fired before navigating in the session tree (can be cancelled) */
+/**
+ * Fired before navigating in the session tree (can be cancelled)
+ *
+ * 树导航前。可以 cancel 或自己给 summary。
+ */
 export interface SessionBeforeTreeEvent {
 	type: "session_before_tree";
 	preparation: TreePreparation;
 	signal: AbortSignal;
 }
 
-/** Fired after navigating in the session tree */
+/**
+ * Fired after navigating in the session tree
+ *
+ * 树导航完成后。`fromExtension` 表示是扩展发起的。
+ */
 export interface SessionTreeEvent {
 	type: "session_tree";
 	newLeafId: string | null;
@@ -668,6 +812,11 @@ export interface SessionTreeEvent {
 	fromExtension?: boolean;
 }
 
+/**
+ * Union of session lifecycle events.
+ *
+ * 会话生命周期事件联合。before_* 可取消。
+ */
 export type SessionEvent =
 	| SessionStartEvent
 	| SessionInfoChangedEvent
@@ -684,13 +833,21 @@ export type SessionEvent =
 // Agent Events
 // ============================================================================
 
-/** Fired before each LLM call. Can modify messages. */
+/**
+ * Fired before each LLM call. Can modify messages.
+ *
+ * 每次 LLM 调用前。可以改 messages。
+ */
 export interface ContextEvent {
 	type: "context";
 	messages: AgentMessage[];
 }
 
-/** Fired before a provider request is sent. Can replace the payload. */
+/**
+ * Fired before a provider request is sent. Can replace the payload.
+ *
+ * provider 请求发出前。返回值整份替换 payload。
+ */
 export interface BeforeProviderRequestEvent {
 	type: "before_provider_request";
 	payload: unknown;
@@ -700,20 +857,30 @@ export interface BeforeProviderRequestEvent {
  * Fired after request headers are assembled, before the provider HTTP call.
  * Handlers mutate `headers` in place (e.g. to inject tracing/session headers);
  * the return value is ignored. A `null` value deletes that header.
+ *
+ * 请求头发齐后、HTTP 发出前。就地改 `headers`；`null` 删键。
  */
 export interface BeforeProviderHeadersEvent {
 	type: "before_provider_headers";
 	headers: ProviderHeaders;
 }
 
-/** Fired after a provider response is received and before the response stream is consumed. */
+/**
+ * Fired after a provider response is received and before the response stream is consumed.
+ *
+ * 收到 provider 响应、消费 body 之前。只读状态码和头。
+ */
 export interface AfterProviderResponseEvent {
 	type: "after_provider_response";
 	status: number;
 	headers: Record<string, string>;
 }
 
-/** Fired after user submits prompt but before agent loop. */
+/**
+ * Fired after user submits prompt but before agent loop.
+ *
+ * 用户提交后、agent 循环前。能改 system prompt，也能塞自定义消息。
+ */
 export interface BeforeAgentStartEvent {
 	type: "before_agent_start";
 	/** The raw user prompt text (after expansion). */
@@ -726,25 +893,46 @@ export interface BeforeAgentStartEvent {
 	systemPromptOptions: BuildSystemPromptOptions;
 }
 
-/** Fired when an agent loop starts */
+/**
+ * Fired when an agent loop starts
+ *
+ * agent 循环开始。无载荷。
+ */
 export interface AgentStartEvent {
 	type: "agent_start";
 }
 
-/** Fired when an agent loop ends */
+/**
+ * Fired when an agent loop ends
+ *
+ * agent 循环结束。带着本轮消息。
+ */
 export interface AgentEndEvent {
 	type: "agent_end";
 	messages: AgentMessage[];
 }
 
-/** Fired after an agent run has fully settled and no automatic retry, compaction, or queued continuation will run. */
+/**
+ * Fired after an agent run has fully settled and no automatic retry, compaction, or queued continuation will run.
+ *
+ * 本轮彻底落地：不会再自动 retry、compaction 或排队续跑。
+ */
 export interface AgentSettledEvent {
 	type: "agent_settled";
 }
 
+/**
+ * Kind of blocking extension UI prompt.
+ *
+ * 阻塞式扩展 UI 的种类。和 ui_prompt_* 事件对应。
+ */
 export type UIPromptKind = "select" | "confirm" | "input" | "editor" | "custom";
 
-/** Fired when Pi starts waiting on a blocking user-facing extension UI prompt. */
+/**
+ * Fired when Pi starts waiting on a blocking user-facing extension UI prompt.
+ *
+ * 开始等用户在扩展 UI 上点选。嵌套 prompt 只报最外层。
+ */
 export interface UIPromptStartEvent {
 	type: "ui_prompt_start";
 	reason: "ui_prompt";
@@ -752,7 +940,11 @@ export interface UIPromptStartEvent {
 	title?: string;
 }
 
-/** Fired when Pi is no longer waiting on a blocking user-facing extension UI prompt. */
+/**
+ * Fired when Pi is no longer waiting on a blocking user-facing extension UI prompt.
+ *
+ * 不再等扩展 UI。和 start 成对。
+ */
 export interface UIPromptEndEvent {
 	type: "ui_prompt_end";
 	reason: "ui_prompt";
@@ -760,14 +952,22 @@ export interface UIPromptEndEvent {
 	title?: string;
 }
 
-/** Fired at the start of each turn */
+/**
+ * Fired at the start of each turn
+ *
+ * 一轮开始。`turnIndex` 从 0 计。
+ */
 export interface TurnStartEvent {
 	type: "turn_start";
 	turnIndex: number;
 	timestamp: number;
 }
 
-/** Fired at the end of each turn */
+/**
+ * Fired at the end of each turn
+ *
+ * 一轮结束。带着助手消息和本轮工具结果。
+ */
 export interface TurnEndEvent {
 	type: "turn_end";
 	turnIndex: number;
@@ -775,26 +975,42 @@ export interface TurnEndEvent {
 	toolResults: ToolResultMessage[];
 }
 
-/** Fired when a message starts (user, assistant, or toolResult) */
+/**
+ * Fired when a message starts (user, assistant, or toolResult)
+ *
+ * 一条消息开始（user / assistant / toolResult）。
+ */
 export interface MessageStartEvent {
 	type: "message_start";
 	message: AgentMessage;
 }
 
-/** Fired during assistant message streaming with token-by-token updates */
+/**
+ * Fired during assistant message streaming with token-by-token updates
+ *
+ * 助手消息流式增量。带着底层 assistant 事件。
+ */
 export interface MessageUpdateEvent {
 	type: "message_update";
 	message: AgentMessage;
 	assistantMessageEvent: AssistantMessageEvent;
 }
 
-/** Fired when a message ends */
+/**
+ * Fired when a message ends
+ *
+ * 一条消息结束。handler 可以换消息，但不能改 role。
+ */
 export interface MessageEndEvent {
 	type: "message_end";
 	message: AgentMessage;
 }
 
-/** Fired when a tool starts executing */
+/**
+ * Fired when a tool starts executing
+ *
+ * 工具开始执行。`args` 是当时的入参快照。
+ */
 export interface ToolExecutionStartEvent {
 	type: "tool_execution_start";
 	toolCallId: string;
@@ -802,7 +1018,11 @@ export interface ToolExecutionStartEvent {
 	args: any;
 }
 
-/** Fired during tool execution with partial/streaming output */
+/**
+ * Fired during tool execution with partial/streaming output
+ *
+ * 工具执行中的部分输出。`partialResult` 形态由工具自定。
+ */
 export interface ToolExecutionUpdateEvent {
 	type: "tool_execution_update";
 	toolCallId: string;
@@ -811,7 +1031,11 @@ export interface ToolExecutionUpdateEvent {
 	partialResult: any;
 }
 
-/** Fired when a tool finishes executing */
+/**
+ * Fired when a tool finishes executing
+ *
+ * 工具执行结束。`isError` 为真时 `result` 仍可能有内容。
+ */
 export interface ToolExecutionEndEvent {
 	type: "tool_execution_end";
 	toolCallId: string;
@@ -824,9 +1048,18 @@ export interface ToolExecutionEndEvent {
 // Model Events
 // ============================================================================
 
+/**
+ * How the current model was chosen.
+ *
+ * 模型是怎么被选上的。`restore` 来自会话恢复。
+ */
 export type ModelSelectSource = "set" | "cycle" | "restore";
 
-/** Fired when a new model is selected */
+/**
+ * Fired when a new model is selected
+ *
+ * 选了新模型。`previousModel` 在首次选择时可能空。
+ */
 export interface ModelSelectEvent {
 	type: "model_select";
 	model: Model<any>;
@@ -834,7 +1067,11 @@ export interface ModelSelectEvent {
 	source: ModelSelectSource;
 }
 
-/** Fired when a new thinking level is selected */
+/**
+ * Fired when a new thinking level is selected
+ *
+ * 选了新思考级别。会按模型能力夹紧后再发。
+ */
 export interface ThinkingLevelSelectEvent {
 	type: "thinking_level_select";
 	level: ThinkingLevel;
@@ -845,7 +1082,11 @@ export interface ThinkingLevelSelectEvent {
 // User Bash Events
 // ============================================================================
 
-/** Fired when user executes a bash command via ! or !! prefix */
+/**
+ * Fired when user executes a bash command via ! or !! prefix
+ *
+ * 用户用 ! / !! 跑 bash。!! 不进 LLM 上下文。
+ */
 export interface UserBashEvent {
 	type: "user_bash";
 	/** The command to execute */
@@ -860,10 +1101,18 @@ export interface UserBashEvent {
 // Input Events
 // ============================================================================
 
-/** Source of user input */
+/**
+ * Source of user input
+ *
+ * 用户输入从哪来。extension 走 sendUserMessage。
+ */
 export type InputSource = "interactive" | "rpc" | "extension";
 
-/** Fired when user input is received, before agent processing */
+/**
+ * Fired when user input is received, before agent processing
+ *
+ * 用户输入到达、agent 处理前。可以 transform 或 handled。
+ */
 export interface InputEvent {
 	type: "input";
 	/** The input text */
@@ -876,7 +1125,11 @@ export interface InputEvent {
 	streamingBehavior?: "steer" | "followUp";
 }
 
-/** Result from input event handler */
+/**
+ * Result from input event handler
+ *
+ * input handler 的结果。`handled` 会短路后续 handler。
+ */
 export type InputEventResult =
 	| { action: "continue" }
 	| { action: "transform"; text: string; images?: ImageContent[] }
@@ -891,46 +1144,91 @@ interface ToolCallEventBase {
 	toolCallId: string;
 }
 
+/**
+ * Built-in bash tool_call payload.
+ *
+ * bash 工具调用。`input` 可就地改，改完不重验。
+ */
 export interface BashToolCallEvent extends ToolCallEventBase {
 	toolName: "bash";
 	input: BashToolInput;
 }
 
+/**
+ * Built-in PowerShell tool_call payload.
+ *
+ * PowerShell 工具调用。同样就地改 input，不重验。
+ */
 export interface PowerShellToolCallEvent extends ToolCallEventBase {
 	toolName: "powershell";
 	input: PowerShellToolInput;
 }
 
+/**
+ * Built-in read tool_call payload.
+ *
+ * read 工具调用。就地改 input，不重验。
+ */
 export interface ReadToolCallEvent extends ToolCallEventBase {
 	toolName: "read";
 	input: ReadToolInput;
 }
 
+/**
+ * Built-in edit tool_call payload.
+ *
+ * edit 工具调用。就地改 input，不重验。
+ */
 export interface EditToolCallEvent extends ToolCallEventBase {
 	toolName: "edit";
 	input: EditToolInput;
 }
 
+/**
+ * Built-in write tool_call payload.
+ *
+ * write 工具调用。就地改 input，不重验。
+ */
 export interface WriteToolCallEvent extends ToolCallEventBase {
 	toolName: "write";
 	input: WriteToolInput;
 }
 
+/**
+ * Built-in grep tool_call payload.
+ *
+ * grep 工具调用。就地改 input，不重验。
+ */
 export interface GrepToolCallEvent extends ToolCallEventBase {
 	toolName: "grep";
 	input: GrepToolInput;
 }
 
+/**
+ * Built-in find tool_call payload.
+ *
+ * find 工具调用。就地改 input，不重验。
+ */
 export interface FindToolCallEvent extends ToolCallEventBase {
 	toolName: "find";
 	input: FindToolInput;
 }
 
+/**
+ * Built-in ls tool_call payload.
+ *
+ * ls 工具调用。就地改 input，不重验。
+ */
 export interface LsToolCallEvent extends ToolCallEventBase {
 	toolName: "ls";
 	input: LsToolInput;
 }
 
+/**
+ * Extension-registered tool_call payload.
+ *
+ * 扩展自定义工具调用。`toolName` 是 string，会挡住字面量收窄。
+ */
 export interface CustomToolCallEvent extends ToolCallEventBase {
 	toolName: string;
 	input: Record<string, unknown>;
@@ -941,6 +1239,8 @@ export interface CustomToolCallEvent extends ToolCallEventBase {
  *
  * `event.input` is mutable. Mutate it in place to patch tool arguments before execution.
  * Later `tool_call` handlers see earlier mutations. No re-validation is performed after mutation.
+ *
+ * 工具执行前。就地改 input；`block` 才能拦住。
  */
 export type ToolCallEvent =
 	| BashToolCallEvent
@@ -963,52 +1263,101 @@ interface ToolResultEventBase {
 	usage?: Usage;
 }
 
+/**
+ * Built-in bash tool_result payload.
+ *
+ * bash 执行结果。`details` 可能空。
+ */
 export interface BashToolResultEvent extends ToolResultEventBase {
 	toolName: "bash";
 	details: BashToolDetails | undefined;
 }
 
+/**
+ * Built-in PowerShell tool_result payload.
+ *
+ * PowerShell 执行结果。`details` 可能空。
+ */
 export interface PowerShellToolResultEvent extends ToolResultEventBase {
 	toolName: "powershell";
 	details: PowerShellToolDetails | undefined;
 }
 
+/**
+ * Built-in read tool_result payload.
+ *
+ * read 执行结果。`details` 可能空。
+ */
 export interface ReadToolResultEvent extends ToolResultEventBase {
 	toolName: "read";
 	details: ReadToolDetails | undefined;
 }
 
+/**
+ * Built-in edit tool_result payload.
+ *
+ * edit 执行结果。`details` 可能空。
+ */
 export interface EditToolResultEvent extends ToolResultEventBase {
 	toolName: "edit";
 	details: EditToolDetails | undefined;
 }
 
+/**
+ * Built-in write tool_result payload.
+ *
+ * write 执行结果。没有 details。
+ */
 export interface WriteToolResultEvent extends ToolResultEventBase {
 	toolName: "write";
 	details: undefined;
 }
 
+/**
+ * Built-in grep tool_result payload.
+ *
+ * grep 执行结果。`details` 可能空。
+ */
 export interface GrepToolResultEvent extends ToolResultEventBase {
 	toolName: "grep";
 	details: GrepToolDetails | undefined;
 }
 
+/**
+ * Built-in find tool_result payload.
+ *
+ * find 执行结果。`details` 可能空。
+ */
 export interface FindToolResultEvent extends ToolResultEventBase {
 	toolName: "find";
 	details: FindToolDetails | undefined;
 }
 
+/**
+ * Built-in ls tool_result payload.
+ *
+ * ls 执行结果。`details` 可能空。
+ */
 export interface LsToolResultEvent extends ToolResultEventBase {
 	toolName: "ls";
 	details: LsToolDetails | undefined;
 }
 
+/**
+ * Extension-registered tool_result payload.
+ *
+ * 自定义工具执行结果。`details` 形态由工具自定。
+ */
 export interface CustomToolResultEvent extends ToolResultEventBase {
 	toolName: string;
 	details: unknown;
 }
 
-/** Fired after a tool executes. Can modify result. */
+/**
+ * Fired after a tool executes. Can modify result.
+ *
+ * 工具执行后。可以改 content / details / isError。
+ */
 export type ToolResultEvent =
 	| BashToolResultEvent
 	| PowerShellToolResultEvent
@@ -1020,28 +1369,67 @@ export type ToolResultEvent =
 	| LsToolResultEvent
 	| CustomToolResultEvent;
 
-// Type guards for ToolResultEvent
+/**
+ * Narrow a tool result to bash.
+ *
+ * 收窄成 bash 结果。只看 `toolName`。
+ */
 export function isBashToolResult(e: ToolResultEvent): e is BashToolResultEvent {
 	return e.toolName === "bash";
 }
+/**
+ * Narrow a tool result to PowerShell.
+ *
+ * 收窄成 PowerShell 结果。只看 `toolName`。
+ */
 export function isPowerShellToolResult(e: ToolResultEvent): e is PowerShellToolResultEvent {
 	return e.toolName === "powershell";
 }
+/**
+ * Narrow a tool result to read.
+ *
+ * 收窄成 read 结果。只看 `toolName`。
+ */
 export function isReadToolResult(e: ToolResultEvent): e is ReadToolResultEvent {
 	return e.toolName === "read";
 }
+/**
+ * Narrow a tool result to edit.
+ *
+ * 收窄成 edit 结果。只看 `toolName`。
+ */
 export function isEditToolResult(e: ToolResultEvent): e is EditToolResultEvent {
 	return e.toolName === "edit";
 }
+/**
+ * Narrow a tool result to write.
+ *
+ * 收窄成 write 结果。只看 `toolName`。
+ */
 export function isWriteToolResult(e: ToolResultEvent): e is WriteToolResultEvent {
 	return e.toolName === "write";
 }
+/**
+ * Narrow a tool result to grep.
+ *
+ * 收窄成 grep 结果。只看 `toolName`。
+ */
 export function isGrepToolResult(e: ToolResultEvent): e is GrepToolResultEvent {
 	return e.toolName === "grep";
 }
+/**
+ * Narrow a tool result to find.
+ *
+ * 收窄成 find 结果。只看 `toolName`。
+ */
 export function isFindToolResult(e: ToolResultEvent): e is FindToolResultEvent {
 	return e.toolName === "find";
 }
+/**
+ * Narrow a tool result to ls.
+ *
+ * 收窄成 ls 结果。只看 `toolName`。
+ */
 export function isLsToolResult(e: ToolResultEvent): e is LsToolResultEvent {
 	return e.toolName === "ls";
 }
@@ -1065,6 +1453,8 @@ export function isLsToolResult(e: ToolResultEvent): e is LsToolResultEvent {
  *
  * Note: Direct narrowing via `event.toolName === "bash"` doesn't work because
  * CustomToolCallEvent.toolName is `string` which overlaps with all literals.
+ *
+ * 按工具名收窄 ToolCallEvent。内置不用类型参数；自定义必须显式给。
  */
 export function isToolCallEventType(toolName: "bash", event: ToolCallEvent): event is BashToolCallEvent;
 export function isToolCallEventType(toolName: "powershell", event: ToolCallEvent): event is PowerShellToolCallEvent;
@@ -1082,7 +1472,11 @@ export function isToolCallEventType(toolName: string, event: ToolCallEvent): boo
 	return event.toolName === toolName;
 }
 
-/** Union of all event types */
+/**
+ * Union of all event types
+ *
+ * 扩展能订的全部事件。专用 emitXxx 的事件不走通用 emit。
+ */
 export type ExtensionEvent =
 	| ProjectTrustEvent
 	| ResourcesDiscoverEvent
@@ -1116,12 +1510,27 @@ export type ExtensionEvent =
 // Event Results
 // ============================================================================
 
+/**
+ * Optional replacement messages from a context handler.
+ *
+ * context handler 的返回。给了 `messages` 就整份换掉。
+ */
 export interface ContextEventResult {
 	messages?: AgentMessage[];
 }
 
+/**
+ * Replacement payload from before_provider_request.
+ *
+ * before_provider_request 的返回。非 undefined 就当新 payload。
+ */
 export type BeforeProviderRequestEventResult = unknown;
 
+/**
+ * Block / terminate hint from a tool_call handler.
+ *
+ * tool_call handler 的返回。拦工具用 `block`，改参要改 event.input。
+ */
 export interface ToolCallEventResult {
 	/** Block tool execution. To modify arguments, mutate `event.input` in place instead. */
 	block?: boolean;
@@ -1133,7 +1542,11 @@ export interface ToolCallEventResult {
 	terminate?: boolean;
 }
 
-/** Result from user_bash event handler */
+/**
+ * Result from user_bash event handler
+ *
+ * user_bash 的返回。给 `result` 表示扩展自己跑完了。
+ */
 export interface UserBashEventResult {
 	/** Custom operations to use for execution */
 	operations?: BashOperations;
@@ -1141,6 +1554,11 @@ export interface UserBashEventResult {
 	result?: BashResult;
 }
 
+/**
+ * Patch applied after a tool_result handler.
+ *
+ * tool_result 的补丁。只覆盖给了的字段。
+ */
 export interface ToolResultEventResult {
 	content?: (TextContent | ImageContent)[];
 	details?: unknown;
@@ -1148,31 +1566,61 @@ export interface ToolResultEventResult {
 	usage?: Usage;
 }
 
+/**
+ * Replacement message from a message_end handler.
+ *
+ * message_end 的返回。替换消息必须保持原 role。
+ */
 export interface MessageEndEventResult {
 	/** Replace the finalized message. The replacement must keep the original message role. */
 	message?: AgentMessage;
 }
 
+/**
+ * Optional custom message or system-prompt replacement before the agent loop.
+ *
+ * before_agent_start 的返回。多个 systemPrompt 会串起来。
+ */
 export interface BeforeAgentStartEventResult {
 	message?: Pick<CustomMessage, "customType" | "content" | "display" | "details">;
 	/** Replace the system prompt for this turn. If multiple extensions return this, they are chained. */
 	systemPrompt?: string;
 }
 
+/**
+ * Cancel flag for session_before_switch.
+ *
+ * 切会话前的结果。`cancel` 中止切换。
+ */
 export interface SessionBeforeSwitchResult {
 	cancel?: boolean;
 }
 
+/**
+ * Cancel / restore flags for session_before_fork.
+ *
+ * fork 前的结果。`skipConversationRestore` 只建空会话。
+ */
 export interface SessionBeforeForkResult {
 	cancel?: boolean;
 	skipConversationRestore?: boolean;
 }
 
+/**
+ * Cancel or supply compaction output before built-in compaction.
+ *
+ * compaction 前的结果。给 `compaction` 就跳过内置压缩。
+ */
 export interface SessionBeforeCompactResult {
 	cancel?: boolean;
 	compaction?: CompactionResult;
 }
 
+/**
+ * Cancel or override tree-navigation summarization.
+ *
+ * 树导航前的结果。给 `summary` 就不再自动摘要。
+ */
 export interface SessionBeforeTreeResult {
 	cancel?: boolean;
 	summary?: {
@@ -1192,30 +1640,60 @@ export interface SessionBeforeTreeResult {
 // Message and Entry Rendering
 // ============================================================================
 
+/**
+ * Options for custom message renderers.
+ *
+ * 自定义消息渲染选项。`outputPad` 来自设置。
+ */
 export interface MessageRenderOptions {
 	expanded: boolean;
 	/** Horizontal padding configured by the outputPad setting. */
 	outputPad: number;
 }
 
+/**
+ * Context given to a Markdown transformer.
+ *
+ * Markdown 变换时的上下文。流式中宽度可能还在变。
+ */
 export interface MarkdownTransformContext {
 	messageType: "user" | "assistant" | "assistant-thinking";
 	isStreaming: boolean;
 	availableWidth: number;
 }
 
+/**
+ * Transform user/assistant Markdown before Pi renders it.
+ *
+ * 渲染前改 user/assistant Markdown。按注册顺序串。
+ */
 export type MarkdownTransformer = (markdown: string, context: MarkdownTransformContext) => string;
 
+/**
+ * Options for custom session-entry renderers.
+ *
+ * 自定义 session entry 的渲染选项。
+ */
 export interface EntryRenderOptions {
 	expanded: boolean;
 }
 
+/**
+ * Renderer for a CustomMessage in the transcript.
+ *
+ * CustomMessage 的渲染器。返回 undefined 就回落到默认。
+ */
 export type MessageRenderer<T = unknown> = (
 	message: CustomMessage<T>,
 	options: MessageRenderOptions,
 	theme: Theme,
 ) => Component | undefined;
 
+/**
+ * Renderer for a CustomEntry that is not sent to the LLM.
+ *
+ * CustomEntry 的渲染器。这类 entry 不进 LLM 上下文。
+ */
 export type EntryRenderer<T = unknown> = (
 	entry: CustomEntry<T>,
 	options: EntryRenderOptions,
@@ -1226,6 +1704,11 @@ export type EntryRenderer<T = unknown> = (
 // Command Registration
 // ============================================================================
 
+/**
+ * Command registered by an extension.
+ *
+ * 扩展注册的命令。`name` 是注册名，冲突时 runner 会加后缀。
+ */
 export interface RegisteredCommand {
 	name: string;
 	sourceInfo: SourceInfo;
@@ -1234,6 +1717,11 @@ export interface RegisteredCommand {
 	handler: (args: string, ctx: ExtensionCommandContext) => Promise<void>;
 }
 
+/**
+ * Registered command plus the name users actually invoke.
+ *
+ * 带调用名的命令。`invocationName` 才是用户打的那个。
+ */
 export interface ResolvedCommand extends RegisteredCommand {
 	invocationName: string;
 }
@@ -1242,12 +1730,18 @@ export interface ResolvedCommand extends RegisteredCommand {
 // Extension API
 // ============================================================================
 
-/** Handler function type for events */
+/**
+ * Handler function type for events
+ *
+ * 事件处理函数。允许 void；有结果的事件才看返回值。
+ */
 // biome-ignore lint/suspicious/noConfusingVoidType: void allows bare return statements
 export type ExtensionHandler<E, R = undefined> = (event: E, ctx: ExtensionContext) => Promise<R | void> | R | void;
 
 /**
  * ExtensionAPI passed to extension factory functions.
+ *
+ * 工厂函数拿到的 pi。注册写进本扩展；动作委托共享 runtime。
  */
 export interface ExtensionAPI {
 	// =========================================================================
@@ -1509,7 +2003,11 @@ export interface ExtensionAPI {
 // Provider Registration Types
 // ============================================================================
 
-/** Configuration for registering a provider via pi.registerProvider(). */
+/**
+ * Configuration for registering a provider via pi.registerProvider().
+ *
+ * registerProvider 的配置。给 models 会换掉该 provider 已有模型。
+ */
 export interface ProviderConfig {
 	/** Display name for the provider in UI. */
 	name?: string;
@@ -1556,7 +2054,11 @@ export interface ProviderConfig {
 	};
 }
 
-/** Configuration for a model within a provider. */
+/**
+ * Configuration for a model within a provider.
+ *
+ * provider 里的一条模型。`reasoning` 决定能不能开 thinking。
+ */
 export interface ProviderModelConfig {
 	/** Model ID (e.g., "claude-sonnet-4-20250514"). */
 	id: string;
@@ -1584,9 +2086,18 @@ export interface ProviderModelConfig {
 	compat?: Model<Api>["compat"];
 }
 
-/** Extension factory function type. Supports both sync and async initialization. */
+/**
+ * Extension factory function type. Supports both sync and async initialization.
+ *
+ * 扩展工厂。同步异步都行；抛错则这次加载作废。
+ */
 export type ExtensionFactory = (pi: ExtensionAPI) => void | Promise<void>;
 
+/**
+ * Inline factory or named factory object used by the SDK.
+ *
+ * 内联扩展。对象形态才能在启动列表里显示名字。
+ */
 export type InlineExtension =
 	| ExtensionFactory
 	| {
@@ -1601,11 +2112,21 @@ export type InlineExtension =
 // Loaded Extension Types
 // ============================================================================
 
+/**
+ * Tool definition plus the extension that registered it.
+ *
+ * 已注册工具加上来源。同名时先注册的赢。
+ */
 export interface RegisteredTool {
 	definition: ToolDefinition;
 	sourceInfo: SourceInfo;
 }
 
+/**
+ * CLI flag registered by an extension.
+ *
+ * 扩展注册的 CLI flag。默认值只在还没人设过时写入。
+ */
 export interface ExtensionFlag {
 	name: string;
 	description?: string;
@@ -1614,6 +2135,11 @@ export interface ExtensionFlag {
 	extensionPath: string;
 }
 
+/**
+ * Keyboard shortcut registered by an extension.
+ *
+ * 扩展快捷键。和内置保留键冲突会被丢掉。
+ */
 export interface ExtensionShortcut {
 	shortcut: KeyId;
 	description?: string;
@@ -1623,48 +2149,124 @@ export interface ExtensionShortcut {
 
 type HandlerFn = (...args: unknown[]) => Promise<unknown>;
 
+/**
+ * Runtime implementation of `pi.sendMessage`.
+ *
+ * pi.sendMessage 的实现。加载期是会 throw 的桩。
+ */
 export type SendMessageHandler = <T = unknown>(
 	message: Pick<CustomMessage<T>, "customType" | "content" | "display" | "details">,
 	options?: { triggerTurn?: boolean; deliverAs?: "steer" | "followUp" | "nextTurn" },
 ) => void;
 
+/**
+ * Runtime implementation of `pi.sendUserMessage`.
+ *
+ * pi.sendUserMessage 的实现。总会触发一轮。
+ */
 export type SendUserMessageHandler = (
 	content: string | (TextContent | ImageContent)[],
 	options?: { deliverAs?: "steer" | "followUp"; expandPromptTemplates?: boolean },
 ) => void;
 
+/**
+ * Runtime implementation of `pi.appendEntry`.
+ *
+ * pi.appendEntry 的实现。只写会话，不送模型。
+ */
 export type AppendEntryHandler = <T = unknown>(customType: string, data?: T) => void;
 
+/**
+ * Runtime implementation of `pi.setSessionName`.
+ *
+ * pi.setSessionName 的实现。只改显示名。
+ */
 export type SetSessionNameHandler = (name: string) => void;
 
+/**
+ * Runtime implementation of `pi.getSessionName`.
+ *
+ * pi.getSessionName 的实现。没设过就 undefined。
+ */
 export type GetSessionNameHandler = () => string | undefined;
 
+/**
+ * Runtime implementation of `pi.getActiveTools`.
+ *
+ * 当前启用的工具名。
+ */
 export type GetActiveToolsHandler = () => string[];
 
-/** Tool info with name, description, parameter schema, prompt guidelines, and source metadata. */
+/**
+ * Tool info with name, description, parameter schema, prompt guidelines, and source metadata.
+ *
+ * 工具对外摘要。带 schema、guideline 和来源。
+ */
 export type ToolInfo = Pick<ToolDefinition, "name" | "description" | "parameters" | "promptGuidelines"> & {
 	sourceInfo: SourceInfo;
 };
 
+/**
+ * Runtime implementation of `pi.getAllTools`.
+ *
+ * 全部已配置工具的摘要。
+ */
 export type GetAllToolsHandler = () => ToolInfo[];
 
+/**
+ * Runtime implementation of `pi.getCommands`.
+ *
+ * 当前会话能用的斜杠命令。
+ */
 export type GetCommandsHandler = () => SlashCommandInfo[];
 
+/**
+ * Runtime implementation of `pi.setActiveTools`.
+ *
+ * 按名字设启用工具。
+ */
 export type SetActiveToolsHandler = (toolNames: string[]) => void;
 
+/**
+ * Runtime callback after the registered tool set changes.
+ *
+ * 工具集合变了后刷新。加载期是空操作。
+ */
 export type RefreshToolsHandler = () => void;
 
+/**
+ * Runtime implementation of `pi.setModel`.
+ *
+ * 只改本会话模型。provider 没配认证就返回 false。
+ */
 export type SetModelHandler = (model: Model<any>) => Promise<boolean>;
 
+/**
+ * Runtime implementation of `pi.getThinkingLevel`.
+ *
+ * 读当前思考级别。
+ */
 export type GetThinkingLevelHandler = () => ThinkingLevel;
 
+/**
+ * Runtime implementation of `pi.setThinkingLevel`.
+ *
+ * 只改本会话思考级别，并按模型能力夹紧。
+ */
 export type SetThinkingLevelHandler = (level: ThinkingLevel) => void;
 
+/**
+ * Runtime implementation of `pi.setLabel`.
+ *
+ * 给某条 entry 打/清标签。
+ */
 export type SetLabelHandler = (entryId: string, label: string | undefined) => void;
 
 /**
  * Shared state created by loader, used during registration and runtime.
  * Contains flag values (defaults set during registration, CLI values set after).
+ *
+ * loader 建的共享状态。flag 和排队的 provider 注册都在这。
  */
 export interface ExtensionRuntimeState {
 	flagValues: Map<string, boolean | string>;
@@ -1692,6 +2294,8 @@ export interface ExtensionRuntimeState {
 /**
  * Action implementations for pi.* API methods.
  * Provided to runner.initialize(), copied into the shared runtime.
+ *
+ * pi.* 动作实现。loader 先塞 throw 桩，runner.bindCore 再换真货。
  */
 export interface ExtensionActions {
 	sendMessage: SendMessageHandler;
@@ -1713,6 +2317,8 @@ export interface ExtensionActions {
 /**
  * Actions for ExtensionContext (ctx.* in event handlers).
  * Required by all modes.
+ *
+ * 事件 ctx 的动作。所有模式都要给。
  */
 export interface ExtensionContextActions {
 	getModel: () => Model<any> | undefined;
@@ -1732,6 +2338,8 @@ export interface ExtensionContextActions {
 /**
  * Actions for ExtensionCommandContext (ctx.* in command handlers).
  * Only needed for interactive mode where extension commands are invokable.
+ *
+ * 命令 ctx 的会话控制。只有能调扩展命令的模式才需要。
  */
 export interface ExtensionCommandContextActions {
 	waitForIdle: () => Promise<void>;
@@ -1758,10 +2366,16 @@ export interface ExtensionCommandContextActions {
 /**
  * Full runtime = state + actions.
  * Created by loader with throwing action stubs, completed by runner.initialize().
+ *
+ * 状态加动作。bindCore 之前动作还是桩。
  */
 export interface ExtensionRuntime extends ExtensionRuntimeState, ExtensionActions {}
 
-/** Loaded extension with all registered items. */
+/**
+ * Loaded extension with all registered items.
+ *
+ * 一个已加载扩展及其全部注册项。
+ */
 export interface Extension {
 	path: string;
 	resolvedPath: string;
@@ -1777,7 +2391,11 @@ export interface Extension {
 	shortcuts: Map<KeyId, ExtensionShortcut>;
 }
 
-/** Result of loading extensions. */
+/**
+ * Result of loading extensions.
+ *
+ * 加载结果。`runtime` 在 runner 绑定前动作会 throw。
+ */
 export interface LoadExtensionsResult {
 	extensions: Extension[];
 	errors: Array<{ path: string; error: string }>;
@@ -1789,6 +2407,11 @@ export interface LoadExtensionsResult {
 // Extension Error
 // ============================================================================
 
+/**
+ * Error thrown by an extension handler, recorded for diagnostics.
+ *
+ * 扩展 handler 抛错后的记录。给诊断，不中断其它扩展。
+ */
 export interface ExtensionError {
 	extensionPath: string;
 	event: string;

@@ -1,4 +1,8 @@
-/** Immutable, credential-blind models.json snapshot. */
+/**
+ * Immutable, credential-blind models.json snapshot.
+ *
+ * 不可变且不看凭证的 models.json 快照。坏文件得到空表加 error，不 throw。
+ */
 
 import { readFile } from "node:fs/promises";
 import { type Static, Type } from "typebox";
@@ -214,8 +218,25 @@ const ModelsConfigSchema = Type.Object({
 });
 const validateModelsConfig = Compile(ModelsConfigSchema);
 
+/**
+ * One model definition from models.json.
+ *
+ * models.json 里的一条模型定义。缺 api / baseUrl 时由 provider 或内置默认补。
+ */
 export type ModelsJsonModel = Static<typeof ModelDefinitionSchema>;
+
+/**
+ * Partial override applied on top of a resolved model.
+ *
+ * 覆盖已解析模型的字段。只改写出的项，不删模型。
+ */
 export type ModelsJsonModelOverride = Static<typeof ModelOverrideSchema>;
+
+/**
+ * One provider object from models.json.
+ *
+ * models.json 里的一个 provider。`oauth` 为 radius 时必须有 baseUrl。
+ */
 export type ModelsJsonProvider = Static<typeof ProviderConfigSchema>;
 type ModelsJson = Static<typeof ModelsConfigSchema>;
 
@@ -238,7 +259,11 @@ function deepFreeze<T>(value: T): T {
 	return Object.freeze(value);
 }
 
-/** One immutable load of models.json. */
+/**
+ * One immutable load of models.json.
+ *
+ * 一次加载的 models.json。provider 映射被冻结；缺文件当空配置。
+ */
 export class ModelConfig {
 	private readonly providers: ReadonlyMap<string, ModelsJsonProvider>;
 	private readonly error: string | undefined;

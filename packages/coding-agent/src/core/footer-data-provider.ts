@@ -1,8 +1,19 @@
+/**
+ * Footer git-branch and extension-status data for the interactive TUI.
+ *
+ * 页脚用的 git 分支和扩展状态。扩展自己拿不到这些，必须经这个 provider。
+ */
+
 import { type ExecFileException, execFile, spawnSync } from "child_process";
 import { existsSync, type FSWatcher, readFileSync, type Stats, statSync, unwatchFile, watchFile } from "fs";
 import { dirname, join, resolve } from "path";
 import { closeWatcher, FS_WATCH_RETRY_DELAY_MS, watchWithErrorHandler } from "../utils/fs-watch.ts";
 
+/**
+ * Git metadata paths resolved from a working directory.
+ *
+ * 从 cwd 向上找到的 git 元数据路径。worktree 的 `commonGitDir` 可能和 `repoDir` 不同。
+ */
 export type GitPaths = {
 	repoDir: string;
 	commonGitDir: string;
@@ -12,6 +23,8 @@ export type GitPaths = {
 /**
  * Find git metadata paths by walking up from cwd.
  * Handles both regular git repos (.git is a directory) and worktrees (.git is a file).
+ *
+ * 从 cwd 向上找 git 元数据。普通仓库 `.git` 是目录，worktree 是文件。
  */
 export function findGitPaths(cwd: string): GitPaths | null {
 	let dir = cwd;
@@ -95,6 +108,8 @@ function shouldPollGitHead(repoDir: string): boolean {
 /**
  * Provides git branch and extension statuses - data not otherwise accessible to extensions.
  * Context usage on ctx.getContextUsage(), token stats on ctx.sessionManager.getEntries(), model info on ctx.model.
+ *
+ * 给页脚和扩展提供 git 分支与扩展状态。上下文用量和模型信息不走这里。
  */
 export class FooterDataProvider {
 	private cwd: string;
@@ -381,7 +396,11 @@ export class FooterDataProvider {
 	}
 }
 
-/** Read-only view for extensions - excludes setExtensionStatus, setAvailableProviderCount and dispose */
+/**
+ * Read-only view for extensions - excludes setExtensionStatus, setAvailableProviderCount and dispose
+ *
+ * 给扩展的只读视图。不含 `setExtensionStatus` / `setAvailableProviderCount` / `dispose`。
+ */
 export type ReadonlyFooterDataProvider = Pick<
 	FooterDataProvider,
 	"getGitBranch" | "getExtensionStatuses" | "getAvailableProviderCount" | "onBranchChange"

@@ -1,3 +1,9 @@
+/**
+ * Synchronous ModelRuntime facade kept for extension compatibility.
+ *
+ * 给扩展的同步门面。coding-agent 内部应直接用 ModelRuntime。
+ */
+
 import type {
 	Api,
 	AssistantMessage,
@@ -16,6 +22,11 @@ import type { ModelRuntime } from "./model-runtime.ts";
 import type { AuthStatus, ProviderConfigInput } from "./provider-composer.ts";
 
 export type { ProviderConfigInput } from "./provider-composer.ts";
+/**
+ * Sync-style auth resolution returned to extensions.
+ *
+ * 扩展看到的鉴权结果。失败只带 error 字符串，不 throw。
+ */
 export type ResolvedRequestAuth =
 	| {
 			ok: true;
@@ -30,6 +41,8 @@ export { clearApiKeyCache } from "./provider-composer.ts";
 /**
  * Synchronous compatibility facade exposed to extensions.
  * Coding-agent internals use ModelRuntime directly.
+ *
+ * 扩展用的同步兼容门面。内部读的是 ModelRuntime 快照。
  */
 export class ModelRegistry {
 	private readonly runtime: ModelRuntime;

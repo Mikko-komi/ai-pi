@@ -1,6 +1,8 @@
 /**
  * Resolve configuration values that may be shell commands, environment variables, or literals.
  * Used by auth-storage.ts and model-registry.ts.
+ *
+ * 解析可能是命令、环境变量或字面量的配置值。命令结果按进程寿命缓存。
  */
 
 import { execSync, spawnSync } from "child_process";
@@ -112,25 +114,50 @@ function resolveTemplate(parts: TemplatePart[], env?: Record<string, string>): s
 	return resolved;
 }
 
+/**
+ * Single env-var name when the value is exactly one `$VAR` / `${VAR}`.
+ *
+ * 值恰好是一个环境变量引用时返回变量名。命令或字面量返回 undefined。
+ */
 export function getConfigValueEnvVarName(config: string): string | undefined {
 	const reference = parseConfigValueReference(config);
 	if (reference.type !== "template") return undefined;
 	return reference.parts.length === 1 && reference.parts[0]?.type === "env" ? reference.parts[0].name : undefined;
 }
 
+/**
+ * All env-var names interpolated in a config template.
+ *
+ * 模板里出现的全部环境变量名。命令型配置返回空数组。
+ */
 export function getConfigValueEnvVarNames(config: string): string[] {
 	const reference = parseConfigValueReference(config);
 	return reference.type === "template" ? getTemplateEnvVarNames(reference.parts) : [];
 }
 
+/**
+ * Env-var names that are not set in the provided or process env.
+ *
+ * 当前环境里还缺的变量名。用来判断配置是否齐。
+ */
 export function getMissingConfigValueEnvVarNames(config: string, env?: Record<string, string>): string[] {
 	return getConfigValueEnvVarNames(config).filter((name) => resolveEnvConfigValue(name, env) === undefined);
 }
 
+/**
+ * Whether the config value is a `!command` shell form.
+ *
+ * 是否以 `!` 开头的命令型配置。
+ */
 export function isCommandConfigValue(config: string): boolean {
 	return parseConfigValueReference(config).type === "command";
 }
 
+/**
+ * Whether every interpolated env var is present (commands always count as configured).
+ *
+ * 模板所需环境变量是否都在。命令型一律视为已配置。
+ */
 export function isConfigValueConfigured(config: string, env?: Record<string, string>): boolean {
 	return getMissingConfigValueEnvVarNames(config, env).length === 0;
 }
@@ -141,6 +168,8 @@ export function isConfigValueConfigured(config: string, env?: Record<string, str
  * - Interpolates "$ENV_VAR" or "${ENV_VAR}" references with the named environment variable
  * - In non-command values, "$$" escapes a literal "$" and "$!" escapes a literal "!"
  * - Otherwise treats the value as a literal
+ *
+ * 解析配置值。`!` 命令走缓存；缺环境变量返回 undefined。
  */
 export function resolveConfigValue(config: string, env?: Record<string, string>): string | undefined {
 	const reference = parseConfigValueReference(config);
@@ -217,6 +246,8 @@ function executeCommand(commandConfig: string): string | undefined {
 
 /**
  * Resolve all header values using the same resolution logic as API keys.
+ *
+ * 不走命令缓存地解析配置值。测试和必须看到最新命令输出时用。
  */
 export function resolveConfigValueUncached(config: string, env?: Record<string, string>): string | undefined {
 	const reference = parseConfigValueReference(config);
@@ -226,6 +257,11 @@ export function resolveConfigValueUncached(config: string, env?: Record<string, 
 	return resolveTemplate(reference.parts, env);
 }
 
+/**
+ * Resolve a config value or throw a description-specific error.
+ *
+ * 解析失败就 throw。错误信息带上 description，方便指向是哪个 key / header。
+ */
 export function resolveConfigValueOrThrow(config: string, description: string, env?: Record<string, string>): string {
 	const resolvedValue = resolveConfigValueUncached(config, env);
 	if (resolvedValue !== undefined) {
@@ -252,6 +288,8 @@ export function resolveConfigValueOrThrow(config: string, description: string, e
 
 /**
  * Resolve all header values using the same resolution logic as API keys.
+ *
+ * 按 API key 同一套规则解析全部头。解不出的头直接丢掉。
  */
 export function resolveHeaders(
 	headers: Record<string, string> | undefined,
@@ -268,6 +306,11 @@ export function resolveHeaders(
 	return Object.keys(resolved).length > 0 ? resolved : undefined;
 }
 
+/**
+ * Resolve headers or throw on the first unresolvable value.
+ *
+ * 任一头解析失败就 throw。不会返回缺项的半套头。
+ */
 export function resolveHeadersOrThrow(
 	headers: Record<string, string> | undefined,
 	description: string,
@@ -281,7 +324,11 @@ export function resolveHeadersOrThrow(
 	return Object.keys(resolved).length > 0 ? resolved : undefined;
 }
 
-/** Clear the config value command cache. Exported for testing. */
+/**
+ * Clear the config value command cache. Exported for testing.
+ *
+ * 清空命令结果缓存。测试用。
+ */
 export function clearConfigValueCache(): void {
 	commandResultCache.clear();
 }

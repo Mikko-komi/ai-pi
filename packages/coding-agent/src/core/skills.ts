@@ -64,6 +64,11 @@ function addIgnoreRules(ig: IgnoreMatcher, dir: string, rootDir: string): void {
 	}
 }
 
+/**
+ * YAML frontmatter accepted on a skill file.
+ *
+ * skill 文件头。`disable-model-invocation` 为真时只走显式 `/skill` 命令。
+ */
 export interface SkillFrontmatter {
 	name?: string;
 	description?: string;
@@ -71,6 +76,11 @@ export interface SkillFrontmatter {
 	[key: string]: unknown;
 }
 
+/**
+ * One loaded skill.
+ *
+ * 一条已加载 skill。`baseDir` 是 SKILL.md 所在目录，相对路径相对它解析。
+ */
 export interface Skill {
 	name: string;
 	description: string;
@@ -80,6 +90,11 @@ export interface Skill {
 	disableModelInvocation: boolean;
 }
 
+/**
+ * Skills plus discovery/validation diagnostics.
+ *
+ * 加载结果。缺 description 的不进列表；其余校验失败仍可能带回 skill。
+ */
 export interface LoadSkillsResult {
 	skills: Skill[];
 	diagnostics: ResourceDiagnostic[];
@@ -126,6 +141,11 @@ function validateDescription(description: unknown): string[] {
 	return errors;
 }
 
+/**
+ * Options for scanning one directory.
+ *
+ * 扫一个目录。`source` 决定写出的 SourceInfo。
+ */
 export interface LoadSkillsFromDirOptions {
 	/** Directory to scan for skills */
 	dir: string;
@@ -164,6 +184,8 @@ function createSkillSourceInfo(filePath: string, baseDir: string, source: string
  * - if a directory contains SKILL.md, treat it as a skill root and do not recurse further
  * - otherwise, load direct .md children in the root
  * - recurse into subdirectories to find SKILL.md
+ *
+ * 从目录发现 skill。有 SKILL.md 当根不再往下；否则只收根上的 .md，子目录继续找 SKILL.md。
  */
 export function loadSkillsFromDir(options: LoadSkillsFromDirOptions): LoadSkillsResult {
 	const { dir, source } = options;
@@ -351,6 +373,8 @@ function loadSkillFromFile(
  *
  * Skills with disableModelInvocation=true are excluded from the prompt
  * (they can only be invoked explicitly via /skill:name commands).
+ *
+ * 把可见 skill 编进系统提示。关掉 model invocation 的不进列表，只能 `/skill:name` 显式调。
  */
 export function formatSkillsForPrompt(skills: Skill[], fileReadTool: "read" | "bash" = "read"): string {
 	const visibleSkills = skills.filter((s) => !s.disableModelInvocation);
@@ -391,6 +415,11 @@ function escapeXml(str: string): string {
 		.replace(/'/g, "&apos;");
 }
 
+/**
+ * Options for loadSkills.
+ *
+ * 全量加载选项。`includeDefaults` 决定要不要扫用户/项目默认目录。
+ */
 export interface LoadSkillsOptions {
 	/** Working directory for project-local skills. */
 	cwd: string;
@@ -405,6 +434,8 @@ export interface LoadSkillsOptions {
 /**
  * Load skills from all configured locations.
  * Returns skills and any validation diagnostics.
+ *
+ * 从默认目录和显式路径加载。同名先到先得，同一 realpath 静默跳过。
  */
 export function loadSkills(options: LoadSkillsOptions): LoadSkillsResult {
 	const { agentDir, skillPaths, includeDefaults } = options;

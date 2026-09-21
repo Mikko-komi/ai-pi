@@ -1,5 +1,7 @@
 /**
  * Shared command execution utilities for extensions and custom tools.
+ *
+ * 扩展和自定义工具共用的命令执行。不走 shell，timeout / abort 都会杀进程。
  */
 
 import { spawn } from "node:child_process";
@@ -7,6 +9,8 @@ import { waitForChildProcess } from "../utils/child-process.ts";
 
 /**
  * Options for executing shell commands.
+ *
+ * 单次命令的取消、超时和 cwd。`timeout` 为 0 或未设则不限时。
  */
 export interface ExecOptions {
 	/** AbortSignal to cancel the command */
@@ -19,6 +23,8 @@ export interface ExecOptions {
 
 /**
  * Result of executing a shell command.
+ *
+ * 命令结束后的 stdout/stderr/code。`killed` 表示被超时或 abort 杀掉。
  */
 export interface ExecResult {
 	stdout: string;
@@ -30,6 +36,8 @@ export interface ExecResult {
 /**
  * Execute a shell command and return stdout/stderr/code.
  * Supports timeout and abort signal.
+ *
+ * 执行命令并收集输出。stdio 不继承，避免子进程挂住管道。
  */
 export async function execCommand(
 	command: string,

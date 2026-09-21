@@ -1,10 +1,17 @@
 /**
  * System prompt construction and project context loading
+ *
+ * 拼系统提示：工具清单、指南、项目上下文和 skill 列表。
  */
 
 import { getDocsPath, getExamplesPath, getReadmePath } from "../config.ts";
 import { formatSkillsForPrompt, type Skill } from "./skills.ts";
 
+/**
+ * Inputs for buildSystemPrompt.
+ *
+ * 拼系统提示的输入。`customPrompt` 会整段替换默认正文，上下文和 skill 仍可后挂。
+ */
 export interface BuildSystemPromptOptions {
 	/** Custom system prompt (replaces default). */
 	customPrompt?: string;
@@ -24,7 +31,11 @@ export interface BuildSystemPromptOptions {
 	skills?: Skill[];
 }
 
-/** Build the system prompt with tools, guidelines, and context */
+/**
+ * Build the system prompt with tools, guidelines, and context
+ *
+ * 拼出系统提示。有 custom 就替换默认正文；skill 只在具备 read/bash 时追加。
+ */
 export function buildSystemPrompt(options: BuildSystemPromptOptions): string {
 	const {
 		customPrompt,

@@ -1,3 +1,9 @@
+/**
+ * Optional provider attribution and session headers merged onto model requests.
+ *
+ * 合并归因头和会话头。调用方传入的头最后盖上去；遥测关闭则不加默认归因。
+ */
+
 import type { Api, Model, ProviderHeaders } from "@earendil-works/pi-ai";
 import type { SettingsManager } from "./settings-manager.ts";
 import { isInstallTelemetryEnabled } from "./telemetry.ts";
@@ -76,6 +82,11 @@ function getSessionHeaders(model: Model<Api>, sessionId: string | undefined): Re
 	return { "x-opencode-session": sessionId, "x-opencode-client": "pi" };
 }
 
+/**
+ * Merge session, default attribution, and caller headers for one request.
+ *
+ * 按会话头、默认归因、调用方头的顺序合并。结果为空则返回 undefined。
+ */
 export function mergeProviderAttributionHeaders(
 	model: Model<Api>,
 	settingsManager: SettingsManager,

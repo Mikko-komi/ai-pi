@@ -1,3 +1,9 @@
+/**
+ * App-level keybinding catalog, migration, and keybindings.json manager.
+ *
+ * 应用层快捷键。Windows / WSL 用另一套默认键，避免和终端抢快捷键。
+ */
+
 import {
 	type Keybinding,
 	type KeybindingDefinitions,
@@ -11,6 +17,11 @@ import { join } from "path";
 import { getAgentDir } from "../config.ts";
 import { stripBom } from "../utils/text.ts";
 
+/**
+ * Coding-agent action names mixed into the TUI keybinding catalog.
+ *
+ * 应用动作名。用来扩充 TUI 的 Keybindings，值恒为 true 只做类型标记。
+ */
 export interface AppKeybindings {
 	"app.interrupt": true;
 	"app.clear": true;
@@ -57,8 +68,18 @@ export interface AppKeybindings {
 	"app.tree.filter.cycleBackward": true;
 }
 
+/**
+ * One app-level keybinding name.
+ *
+ * AppKeybindings 的键名。配置和迁移都用这个名字。
+ */
 export type AppKeybinding = keyof AppKeybindings;
 
+/**
+ * Whether to use the Windows/WSL default key set.
+ *
+ * Windows 或 WSL 上改用另一套默认键。检测看平台和 WSL 环境变量。
+ */
 export function useWindowsKeybindings(
 	platform: NodeJS.Platform = process.platform,
 	env: NodeJS.ProcessEnv = process.env,
@@ -72,6 +93,11 @@ declare module "@earendil-works/pi-tui" {
 
 const windowsKeybindings = useWindowsKeybindings();
 
+/**
+ * Default keybinding definitions for TUI plus coding-agent actions.
+ *
+ * 默认键位表。用户配置覆盖 `defaultKeys`，不改 description。
+ */
 export const KEYBINDINGS = {
 	...TUI_KEYBINDINGS,
 	"tui.editor.undo": {
@@ -317,6 +343,11 @@ function toKeybindingsConfig(value: Record<string, unknown>): KeybindingsConfig 
 	return config;
 }
 
+/**
+ * Rename legacy keybinding keys to the current catalog names.
+ *
+ * 旧键名迁到现名。新旧键同时存在时丢掉旧键，避免一份配置生效两次。
+ */
 export function migrateKeybindingsConfig(rawConfig: Record<string, unknown>): {
 	config: Record<string, unknown>;
 	migrated: boolean;
@@ -368,6 +399,11 @@ function loadRawConfig(path: string): Record<string, unknown> | undefined {
 	}
 }
 
+/**
+ * Keybindings manager that reloads keybindings.json.
+ *
+ * 读 keybindings.json 的管理器。reload 只覆盖用户绑定，不丢默认表。
+ */
 export class KeybindingsManager extends TuiKeybindingsManager {
 	private configPath: string | undefined;
 

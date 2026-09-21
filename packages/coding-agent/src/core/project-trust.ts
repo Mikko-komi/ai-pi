@@ -9,8 +9,18 @@ import {
 	type ProjectTrustStore,
 } from "./trust-manager.ts";
 
+/**
+ * How the coding-agent process is talking to the user.
+ *
+ * 进程和用户的交互方式。只有 interactive 才会弹出信任选择。
+ */
 export type AppMode = "interactive" | "print" | "json" | "rpc";
 
+/**
+ * Inputs for resolving whether the current project is trusted.
+ *
+ * 解析项目信任的输入。`trustOverride` 有值就直接用，不再读 store。
+ */
 export interface ResolveProjectTrustedOptions {
 	cwd: string;
 	trustStore: ProjectTrustStore;
@@ -43,6 +53,11 @@ function saveProjectTrustPromptResult(trustStore: ProjectTrustStore, result: Pro
 	}
 }
 
+/**
+ * Decide whether project-local settings and resources may load.
+ *
+ * 决定能不能加载项目层资源。顺序：覆盖值 → 无门控资源则信任 → 扩展 hook → store → default → UI。
+ */
 export async function resolveProjectTrusted(options: ResolveProjectTrustedOptions): Promise<boolean> {
 	if (options.trustOverride !== undefined) {
 		return options.trustOverride;

@@ -1,5 +1,7 @@
 /**
  * Shared utilities for compaction and branch summarization.
+ *
+ * 压缩和分支摘要共用的文件跟踪与会话序列化。
  */
 
 import type { AgentMessage } from "@earendil-works/pi-agent-core";
@@ -9,12 +11,22 @@ import { contentText, type Message } from "@earendil-works/pi-ai";
 // File Operation Tracking
 // ============================================================================
 
+/**
+ * Sets of file paths touched by read/write/edit tools.
+ *
+ * 工具碰到的路径集合。read/written/edited 分开记，合成列表时再去重。
+ */
 export interface FileOperations {
 	read: Set<string>;
 	written: Set<string>;
 	edited: Set<string>;
 }
 
+/**
+ * Empty file-operation sets.
+ *
+ * 空的文件操作集合。
+ */
 export function createFileOps(): FileOperations {
 	return {
 		read: new Set(),
@@ -25,6 +37,8 @@ export function createFileOps(): FileOperations {
 
 /**
  * Extract file operations from tool calls in an assistant message.
+ *
+ * 从 assistant 的 toolCall 抽出路径。只认 read/write/edit。
  */
 export function extractFileOpsFromMessage(message: AgentMessage, fileOps: FileOperations): void {
 	if (message.role !== "assistant") return;
@@ -58,6 +72,8 @@ export function extractFileOpsFromMessage(message: AgentMessage, fileOps: FileOp
 /**
  * Compute final file lists from file operations.
  * Returns readFiles (files only read, not modified) and modifiedFiles.
+ *
+ * 合成最终文件列表。改过的从只读里剔除，两边都排序。
  */
 export function computeFileLists(fileOps: FileOperations): { readFiles: string[]; modifiedFiles: string[] } {
 	const modified = new Set([...fileOps.edited, ...fileOps.written]);
@@ -68,6 +84,8 @@ export function computeFileLists(fileOps: FileOperations): { readFiles: string[]
 
 /**
  * Format file operations as XML tags for summary.
+ *
+ * 把文件列表收成摘要尾部的 XML。两边都空则返回空串。
  */
 export function formatFileOperations(readFiles: string[], modifiedFiles: string[]): string {
 	const sections: string[] = [];
@@ -105,6 +123,8 @@ function truncateForSummary(text: string, maxChars: number): string {
  *
  * Tool results are truncated to keep the summarization request within
  * reasonable token budgets. Full content is not needed for summarization.
+ *
+ * 把 LLM 消息收成纯文本给摘要模型看。须先 convertToLlm；tool result 截断。
  */
 export function serializeConversation(messages: Message[]): string {
 	const parts: string[] = [];
@@ -153,6 +173,11 @@ export function serializeConversation(messages: Message[]): string {
 // Summarization System Prompt
 // ============================================================================
 
+/**
+ * System prompt that forbids continuing the conversation.
+ *
+ * 摘要模型的系统提示。只许出结构化摘要，不许续聊。
+ */
 export const SUMMARIZATION_SYSTEM_PROMPT = `You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.
 
 Do NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary.`;

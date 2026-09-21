@@ -3,6 +3,8 @@
  *
  * When navigating to a different point in the session tree, this generates
  * a summary of the branch being left so context isn't lost.
+ *
+ * 离开一条分支时给它做摘要。导航后旧枝上下文靠这条摘要留下。
  */
 
 import type { AgentMessage, StreamFn } from "@earendil-works/pi-agent-core";
@@ -31,6 +33,11 @@ import {
 // Types
 // ============================================================================
 
+/**
+ * Outcome of generating a branch summary.
+ *
+ * 分支摘要结果。中止或失败走 aborted/error，不抛。
+ */
 export interface BranchSummaryResult {
 	summary?: string;
 	usage?: Usage;
@@ -40,7 +47,11 @@ export interface BranchSummaryResult {
 	error?: string;
 }
 
-/** Details stored in BranchSummaryEntry.details for file tracking */
+/**
+ * Details stored in BranchSummaryEntry.details for file tracking
+ *
+ * 分支摘要条目里记下的文件清单。给嵌套分支累计跟踪用。
+ */
 export interface BranchSummaryDetails {
 	readFiles: string[];
 	modifiedFiles: string[];
@@ -48,6 +59,11 @@ export interface BranchSummaryDetails {
 
 export type { FileOperations } from "./utils.ts";
 
+/**
+ * Messages and file ops selected for a branch summary.
+ *
+ * 准备拿去摘要的消息和文件操作。超预算从最新往回截。
+ */
 export interface BranchPreparation {
 	/** Messages extracted for summarization, in chronological order */
 	messages: AgentMessage[];
@@ -57,6 +73,11 @@ export interface BranchPreparation {
 	totalTokens: number;
 }
 
+/**
+ * Abandoned-path entries and their common ancestor.
+ *
+ * 离开路径上要摘要的条目，以及与目标的共同祖先。
+ */
 export interface CollectEntriesResult {
 	/** Entries to summarize, in chronological order */
 	entries: SessionEntry[];
@@ -64,6 +85,11 @@ export interface CollectEntriesResult {
 	commonAncestorId: string | null;
 }
 
+/**
+ * LLM options for summarizing an abandoned branch.
+ *
+ * 生成分支摘要的模型调用选项。`replaceInstructions` 为真时整段替换默认提示。
+ */
 export interface GenerateBranchSummaryOptions {
 	/** Model to use for summarization */
 	model: Model<any>;
@@ -104,6 +130,8 @@ export interface GenerateBranchSummaryOptions {
  * @param oldLeafId - Current position (where we're navigating from)
  * @param targetId - Target position (where we're navigating to)
  * @returns Entries to summarize and the common ancestor
+ *
+ * 收集离开路径上该摘要的条目。不在 compaction 边界停下，旧摘要也当上下文。
  */
 export function collectEntriesForBranchSummary(
 	session: ReadonlySessionManager,
@@ -191,6 +219,8 @@ function getMessageFromEntry(entry: SessionEntry): AgentMessage | undefined {
  *
  * @param entries - Entries in chronological order
  * @param tokenBudget - Maximum tokens to include (0 = no limit)
+ *
+ * 按 token 预算从新到旧挑消息。文件操作仍扫全量，不因预算丢掉累计路径。
  */
 export function prepareBranchEntries(entries: SessionEntry[], tokenBudget: number = 0): BranchPreparation {
 	const messages: AgentMessage[] = [];
@@ -289,6 +319,8 @@ Keep each section concise. Preserve exact file paths, function names, and error 
  *
  * @param entries - Session entries to summarize (chronological order)
  * @param options - Generation options
+ *
+ * 给抛弃的分支生成摘要。空内容给占位句；中止/失败走结果字段，不抛。
  */
 export async function generateBranchSummary(
 	entries: SessionEntry[],

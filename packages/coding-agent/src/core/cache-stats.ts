@@ -1,16 +1,28 @@
+/**
+ * Session prompt-cache miss accounting for transcript notices.
+ *
+ * 会话级 prompt-cache 浪费统计。compaction / branch_summary 会重置前序请求，换模型不重置。
+ */
+
 import type { AssistantMessage } from "@earendil-works/pi-ai";
 import type { SessionEntry } from "./session-manager.ts";
 
 /**
  * Prompt-cache TTL: idle gaps longer than this are worth mentioning as the
  * likely cause of a miss. Anthropic's default cache TTL is 5 minutes.
+ *
+ * 空闲超过这个时长才值得提 TTL。按 Anthropic 默认 5 分钟。
  */
 export const CACHE_TTL_MS = 5 * 60 * 1000;
 
 /** Per-turn misses at or below this are cache breakpoint granularity noise. */
 const NOISE_FLOOR_TOKENS = 1024;
 
-/** A counted cache miss on a single assistant message. */
+/**
+ * A counted cache miss on a single assistant message.
+ *
+ * 单条 assistant 消息上计入的 cache miss。低于噪声地板的不算。
+ */
 export interface CacheMiss {
 	/** Prompt tokens that were in the previous turn's prompt but not read from cache. */
 	missedTokens: number;
@@ -22,6 +34,11 @@ export interface CacheMiss {
 	modelChanged: boolean;
 }
 
+/**
+ * Session-wide cache-waste totals.
+ *
+ * 会话累计浪费。`missCount` 只计超过噪声地板的轮次。
+ */
 export interface CacheWasteTotals {
 	missedTokens: number;
 	missedCost: number;
@@ -29,7 +46,11 @@ export interface CacheWasteTotals {
 	missCount: number;
 }
 
-/** Minimal pricing lookup, satisfied by ModelRuntime. Cost is $/million tokens. */
+/**
+ * Minimal pricing lookup, satisfied by ModelRuntime. Cost is $/million tokens.
+ *
+ * 最小计价查询。cost 单位是 $/百万 token。
+ */
 export interface ModelPriceSource {
 	getModel(provider: string, modelId: string): { cost: { cacheRead: number } } | undefined;
 }
@@ -134,6 +155,8 @@ function scan(
 /**
  * Cumulative cache waste across a session: prompt tokens that should have been
  * cache reads (they were in the previous turn's prompt) but were re-billed.
+ *
+ * 会话里本该命中 cache 却被重新计费的 prompt token 累计。
  */
 export function computeCacheWaste(entries: SessionEntry[], models: ModelPriceSource): CacheWasteTotals {
 	return scan(entries, models).totals;
@@ -143,6 +166,8 @@ export function computeCacheWaste(entries: SessionEntry[], models: ModelPriceSou
  * All counted cache misses across a session, keyed by the assistant message
  * (by reference) that paid for them. Used to re-derive transcript notices when
  * rebuilding the chat from entries (resume, post-compaction rebuild).
+ *
+ * 按 assistant 消息引用收集计入的 miss。重建 transcript 通知时按引用找回。
  */
 export function collectCacheMisses(
 	entries: SessionEntry[],
@@ -154,6 +179,8 @@ export function collectCacheMisses(
 /**
  * Detect a cache miss on a just-completed assistant message.
  * `entries` must not yet contain `message` (message_end fires before persistence).
+ *
+ * 刚结束的 assistant 消息上的 miss。`entries` 里还不能有这条 message。
  */
 export function detectCacheMiss(
 	entries: SessionEntry[],

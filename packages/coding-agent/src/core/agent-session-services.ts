@@ -1,3 +1,9 @@
+/**
+ * Cwd-bound service assembly for AgentSession, separate from session construction.
+ *
+ * 按有效 cwd 装配基础设施。不创建 AgentSession，好让会话选项先对着这些服务解析。
+ */
+
 import { join } from "node:path";
 import type { ThinkingLevel } from "@earendil-works/pi-agent-core";
 import type { Model } from "@earendil-works/pi-ai";
@@ -21,6 +27,8 @@ import { SettingsManager } from "./settings-manager.ts";
  * Runtime creation returns diagnostics to the caller instead of printing or
  * exiting. The app layer decides whether warnings should be shown and whether
  * errors should abort startup.
+ *
+ * 创建服务或会话时收集的非致命问题。运行时只返回，不打印、不退出。
  */
 export interface AgentSessionRuntimeDiagnostic {
 	type: "info" | "warning" | "error";
@@ -33,6 +41,8 @@ export interface AgentSessionRuntimeDiagnostic {
  * These services are recreated whenever the effective session cwd changes.
  * CLI-provided resource paths should be resolved to absolute paths before they
  * reach this function, so later cwd switches do not reinterpret them.
+ *
+ * 创建 cwd 绑定服务的输入。CLI 资源路径必须先收成绝对路径，免得换 cwd 后再解释一遍。
  */
 export interface CreateAgentSessionServicesOptions {
 	cwd: string;
@@ -50,6 +60,8 @@ export interface CreateAgentSessionServicesOptions {
  *
  * Use this after services exist and any cwd-bound model/tool/session options
  * have been resolved against those services.
+ *
+ * 已有服务后创建 AgentSession 的输入。模型、工具等选项必须先对着这些服务解析完。
  */
 export interface CreateAgentSessionFromServicesOptions {
 	services: AgentSessionServices;
@@ -69,6 +81,8 @@ export interface CreateAgentSessionFromServicesOptions {
  *
  * This is infrastructure only. The AgentSession itself is created separately so
  * session options can be resolved against these services first.
+ *
+ * 某一个有效 cwd 上的一组服务。只含基础设施，不含 AgentSession。
  */
 export interface AgentSessionServices {
 	cwd: string;
@@ -131,6 +145,8 @@ function applyExtensionFlagValues(
  * Create cwd-bound runtime services.
  *
  * Returns services plus diagnostics. It does not create an AgentSession.
+ *
+ * 创建 cwd 绑定服务并返回诊断。不创建 AgentSession。
  */
 export async function createAgentSessionServices(
 	options: CreateAgentSessionServicesOptions,
@@ -198,6 +214,8 @@ export async function createAgentSessionServices(
  * This keeps session creation separate from service creation so callers can
  * resolve model, thinking, tools, and other session inputs against the target
  * cwd before constructing the session.
+ *
+ * 用已有服务创建 AgentSession。服务创建和会话创建分开，好让选项先对着目标 cwd 解析。
  */
 export async function createAgentSessionFromServices(
 	options: CreateAgentSessionFromServicesOptions,

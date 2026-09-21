@@ -1,6 +1,16 @@
+/**
+ * CredentialStore overlay for process-lifetime API keys that are not persisted.
+ *
+ * 运行时 API key 覆盖层。覆盖只活在进程内，`modify` 仍落到下层 store。
+ */
+
 import type { AuthOperationOptions, Credential, CredentialInfo, CredentialStore } from "@earendil-works/pi-ai";
 
-/** Async credential store overlay for non-persistent runtime API keys. */
+/**
+ * Async credential store overlay for non-persistent runtime API keys.
+ *
+ * 给非持久 API key 用的异步覆盖层。`read` 先看覆盖；`delete` 会同时清覆盖。
+ */
 export class RuntimeCredentials implements CredentialStore {
 	private readonly store: CredentialStore;
 	private readonly overrides = new Map<string, string>();

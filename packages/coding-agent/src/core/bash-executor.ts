@@ -4,6 +4,8 @@
  * This module provides a unified bash execution implementation used by:
  * - AgentSession.executeBash() for interactive and RPC modes
  * - Direct calls from modes that need bash execution
+ *
+ * 带流式和取消的 bash 执行。AgentSession 和各模式共用这一套，不各自 spawn。
  */
 
 import { randomBytes } from "node:crypto";
@@ -19,6 +21,11 @@ import { DEFAULT_MAX_BYTES, truncateTail } from "./tools/truncate.ts";
 // Types
 // ============================================================================
 
+/**
+ * Options for streaming bash execution.
+ *
+ * 流式 bash 的回调和取消信号。`onChunk` 收到的已是清洗后的文本。
+ */
 export interface BashExecutorOptions {
 	/** Callback for streaming output chunks (already sanitized) */
 	onChunk?: (chunk: string) => void;
@@ -26,6 +33,11 @@ export interface BashExecutorOptions {
 	signal?: AbortSignal;
 }
 
+/**
+ * Outcome of one bash execution.
+ *
+ * 一次执行结果。取消时 `exitCode` 为 undefined；超长输出才给 `fullOutputPath`。
+ */
 export interface BashResult {
 	/** Combined stdout + stderr output (sanitized, possibly truncated) */
 	output: string;
@@ -46,6 +58,8 @@ export interface BashResult {
 /**
  * Execute a bash command using custom BashOperations.
  * Used for remote execution (SSH, containers, etc.).
+ *
+ * 用自定义 BashOperations 跑命令。远程（SSH / 容器）也走这里，超长输出落到临时文件。
  */
 export async function executeBashWithOperations(
 	command: string,

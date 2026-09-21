@@ -76,22 +76,42 @@ export interface SessionEntryBase {
 	timestamp: string;
 }
 
+/**
+ * Tree entry that holds one AgentMessage.
+ *
+ * 树上的一条对话消息。压缩/分支摘要不能走这个类型落盘。
+ */
 export interface SessionMessageEntry extends SessionEntryBase {
 	type: "message";
 	message: AgentMessage;
 }
 
+/**
+ * Tree entry that records a thinking-level change.
+ *
+ * 思考级别变更节点。不进 LLM 正文，只影响 SessionContext.thinkingLevel。
+ */
 export interface ThinkingLevelChangeEntry extends SessionEntryBase {
 	type: "thinking_level_change";
 	thinkingLevel: string;
 }
 
+/**
+ * Tree entry that records a model switch.
+ *
+ * 模型切换节点。不进 LLM 正文，只影响 SessionContext.model。
+ */
 export interface ModelChangeEntry extends SessionEntryBase {
 	type: "model_change";
 	provider: string;
 	modelId: string;
 }
 
+/**
+ * Checkpoint that replaces older history with a summary.
+ *
+ * 压缩检查点。context 从这条摘要加 firstKeptEntryId 往后重建。
+ */
 export interface CompactionEntry<T = unknown> extends SessionEntryBase {
 	type: "compaction";
 	summary: string;
@@ -105,6 +125,11 @@ export interface CompactionEntry<T = unknown> extends SessionEntryBase {
 	fromHook?: boolean;
 }
 
+/**
+ * Summary of an abandoned branch, stored on the new path.
+ *
+ * 抛弃分支的摘要节点。进 LLM 上下文；details 不送给模型。
+ */
 export interface BranchSummaryEntry<T = unknown> extends SessionEntryBase {
 	type: "branch_summary";
 	fromId: string;
@@ -126,6 +151,8 @@ export interface BranchSummaryEntry<T = unknown> extends SessionEntryBase {
  *
  * Does NOT participate in LLM context (ignored by buildSessionContext).
  * For injecting content into context, see CustomMessageEntry.
+ *
+ * 扩展持久化自己的状态。不进 LLM；要进上下文用 CustomMessageEntry。
  */
 export interface CustomEntry<T = unknown> extends SessionEntryBase {
 	type: "custom";
@@ -133,14 +160,22 @@ export interface CustomEntry<T = unknown> extends SessionEntryBase {
 	data?: T;
 }
 
-/** Label entry for user-defined bookmarks/markers on entries. */
+/**
+ * Label entry for user-defined bookmarks/markers on entries.
+ *
+ * 用户书签。label 为空表示清掉该 target 上的标记。
+ */
 export interface LabelEntry extends SessionEntryBase {
 	type: "label";
 	targetId: string;
 	label: string | undefined;
 }
 
-/** Session metadata entry (e.g., user-defined display name). */
+/**
+ * Session metadata entry (e.g., user-defined display name).
+ *
+ * 会话元数据。空 name 会清掉显示名。
+ */
 export interface SessionInfoEntry extends SessionEntryBase {
 	type: "session_info";
 	name?: string;
@@ -157,6 +192,8 @@ export interface SessionInfoEntry extends SessionEntryBase {
  * display controls TUI rendering:
  * - false: hidden entirely
  * - true: rendered with distinct styling (different from user messages)
+ *
+ * 扩展注入并进 LLM 的消息。details 不送给模型；display 只影响 TUI。
  */
 export interface CustomMessageEntry<T = unknown> extends SessionEntryBase {
 	type: "custom_message";
@@ -348,12 +385,20 @@ function migrateToCurrentVersion(entries: FileEntry[]): boolean {
 	return true;
 }
 
-/** Exported for testing */
+/**
+ * Exported for testing
+ *
+ * 把条目就地迁到当前版本。测试入口。
+ */
 export function migrateSessionEntries(entries: FileEntry[]): void {
 	migrateToCurrentVersion(entries);
 }
 
-/** Exported for compaction.test.ts */
+/**
+ * Exported for compaction.test.ts
+ *
+ * 按行解析 JSONL 会话。坏行跳过，不抛。
+ */
 export function parseSessionEntries(content: string): FileEntry[] {
 	const entries: FileEntry[] = [];
 	const lines = content.trim().split("\n");
@@ -371,6 +416,11 @@ export function parseSessionEntries(content: string): FileEntry[] {
 	return entries;
 }
 
+/**
+ * Find the newest compaction entry, or null.
+ *
+ * 从后往前找最近一条 compaction。没有就返回 null。
+ */
 export function getLatestCompactionEntry(entries: SessionEntry[]): CompactionEntry | null {
 	for (let i = entries.length - 1; i >= 0; i--) {
 		if (entries[i].type === "compaction") {
@@ -437,6 +487,8 @@ function getSessionContextSettings(path: SessionEntry[]): Pick<SessionContext, "
 /**
  * Project one selected session entry into LLM/runtime messages.
  * Plain custom entries are display/state entries and do not participate in context.
+ *
+ * 把一条树节点投影成运行时消息。plain custom 和元数据节点不进上下文。
  */
 export function sessionEntryToContextMessages(entry: SessionEntry): AgentMessage[] {
 	if (entry.type === "message") {
@@ -472,6 +524,8 @@ export function sessionEntryToContextMessages(entry: SessionEntry): AgentMessage
  * the latest compaction is represented by the compaction entry itself, followed
  * by the kept entries starting at firstKeptEntryId and all entries after the
  * compaction entry. Older summarized entries are omitted.
+ *
+ * 沿 leaf 路径拼压缩感知的活动条目。最新 compaction 当检查点，更早被摘要的丢掉。
  */
 export function buildContextEntries(
 	entries: SessionEntry[],
@@ -515,6 +569,8 @@ export function buildContextEntries(
  * Build the session context from entries using tree traversal.
  * If leafId is provided, walks from that entry to root.
  * Handles compaction and branch summaries along the path.
+ *
+ * 从 leaf 走到根，拼给模型看的消息、思考级别和模型。
  */
 export function buildSessionContext(
 	entries: SessionEntry[],
@@ -538,6 +594,11 @@ function getDefaultSessionDirPath(cwd: string, agentDir: string = getDefaultAgen
 	return join(resolvedAgentDir, "sessions", safePath);
 }
 
+/**
+ * Compute the default session directory for a cwd, creating it if missing.
+ *
+ * cwd 对应的默认会话目录。不存在就建出来。
+ */
 export function getDefaultSessionDir(cwd: string, agentDir: string = getDefaultAgentDir()): string {
 	const sessionDir = getDefaultSessionDirPath(cwd, agentDir);
 	if (!existsSync(sessionDir)) {
@@ -568,7 +629,11 @@ function parseSessionEntryLine(line: string): FileEntry | null {
 	}
 }
 
-/** Exported for testing */
+/**
+ * Exported for testing
+ *
+ * 同步读 JSONL 会话。缺文件或头无效返回空；半行会补换行。
+ */
 export function loadEntriesFromFile(filePath: string): FileEntry[] {
 	const resolvedFilePath = normalizePath(filePath);
 	if (!existsSync(resolvedFilePath)) return [];
@@ -690,7 +755,11 @@ function sessionCwdMatches(cwd: string | undefined, resolvedCwd: string): boolea
 	return cwd !== undefined && cwd !== "" && resolvePath(cwd) === resolvedCwd;
 }
 
-/** Exported for testing */
+/**
+ * Exported for testing
+ *
+ * 找目录里最近改过的会话文件。可按 cwd 过滤；发现失败返回 null。
+ */
 export function findMostRecentSession(sessionDir: string, cwd?: string): string | null {
 	const resolvedSessionDir = normalizePath(sessionDir);
 	const resolvedCwd = cwd ? resolvePath(cwd) : undefined;
@@ -823,6 +892,11 @@ async function buildSessionInfo(filePath: string): Promise<SessionInfo | null> {
 	}
 }
 
+/**
+ * Progress callback while listing session files.
+ *
+ * 列会话时的进度回调。参数是已加载数和总数。
+ */
 export type SessionListProgress = (loaded: number, total: number) => void;
 
 const MAX_CONCURRENT_SESSION_INFO_LOADS = 10;

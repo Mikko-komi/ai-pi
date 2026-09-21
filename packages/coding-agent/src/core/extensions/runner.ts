@@ -1,5 +1,7 @@
 /**
  * Extension runner - executes extensions and manages their lifecycle.
+ *
+ * 跑扩展并管生命周期。加载在 loader；这里负责绑定动作、发事件、拼 ctx。
  */
 
 import type { AgentMessage } from "@earendil-works/pi-agent-core";
@@ -159,36 +161,73 @@ type RunnerEmitResult<TEvent extends RunnerEmitEvent> = TEvent extends { type: "
 				? SessionBeforeTreeResult | undefined
 				: undefined;
 
+/**
+ * Callback for errors thrown by extension handlers.
+ *
+ * 扩展 handler 抛错时的监听。不改变事件派发本身。
+ */
 export type ExtensionErrorListener = (error: ExtensionError) => void;
 
+/**
+ * Command-context implementation for starting a new session.
+ *
+ * 命令 ctx 的 newSession。切完必须用 withSession 里的新 ctx。
+ */
 export type NewSessionHandler = (options?: {
 	parentSession?: string;
 	setup?: (sessionManager: SessionManager) => Promise<void>;
 	withSession?: (ctx: ReplacedSessionContext) => Promise<void>;
 }) => Promise<{ cancelled: boolean }>;
 
+/**
+ * Command-context implementation for forking a session.
+ *
+ * 命令 ctx 的 fork。旧 ctx 在替换后即失效。
+ */
 export type ForkHandler = (
 	entryId: string,
 	options?: { position?: "before" | "at"; withSession?: (ctx: ReplacedSessionContext) => Promise<void> },
 ) => Promise<{ cancelled: boolean }>;
 
+/**
+ * Command-context implementation for session-tree navigation.
+ *
+ * 命令 ctx 的树导航。cancelled 表示扩展或用户中止了这次跳转。
+ */
 export type NavigateTreeHandler = (
 	targetId: string,
 	options?: { summarize?: boolean; customInstructions?: string; replaceInstructions?: boolean; label?: string },
 ) => Promise<{ cancelled: boolean }>;
 
+/**
+ * Command-context implementation for switching session files.
+ *
+ * 命令 ctx 的切会话文件。替换后只能用 withSession 的 ctx。
+ */
 export type SwitchSessionHandler = (
 	sessionPath: string,
 	options?: { withSession?: (ctx: ReplacedSessionContext) => Promise<void> },
 ) => Promise<{ cancelled: boolean }>;
 
+/**
+ * Command-context implementation for reloading extensions and resources.
+ *
+ * 命令 ctx 的 reload。await 之后旧 ctx 不能再用。
+ */
 export type ReloadHandler = () => Promise<void>;
 
+/**
+ * Command-context implementation for graceful shutdown.
+ *
+ * 优雅退出。所有模式的 ctx 都能调。
+ */
 export type ShutdownHandler = () => void;
 
 /**
  * Helper function to emit session_shutdown event to extensions.
  * Returns true if the event was emitted, false if there were no handlers.
+ *
+ * 有 handler 才发 session_shutdown。没人订就返回 false。
  */
 export async function emitSessionShutdownEvent(
 	extensionRunner: ExtensionRunner,
@@ -201,6 +240,11 @@ export async function emitSessionShutdownEvent(
 	return false;
 }
 
+/**
+ * Ask loaded extensions for a project-trust decision.
+ *
+ * 问扩展要不要信任项目。第一个 yes/no 胜出；undecided 继续往下。
+ */
 export async function emitProjectTrustEvent(
 	extensionsResult: LoadExtensionsResult,
 	event: ProjectTrustEvent,
@@ -266,6 +310,11 @@ const noOpUIContext: ExtensionUIContext = {
 	setToolsExpanded: () => {},
 };
 
+/**
+ * Executes loaded extensions: binds actions, emits events, and builds ctx.
+ *
+ * 已加载扩展的运行时。绑定前动作是桩；invalidate 后旧 ctx 一律 throw。
+ */
 export class ExtensionRunner {
 	private extensions: Extension[];
 	private runtime: ExtensionRuntime;

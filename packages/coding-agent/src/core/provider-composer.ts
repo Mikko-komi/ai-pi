@@ -1,3 +1,9 @@
+/**
+ * Compose built-in, models.json, and extension provider layers without reading credentials.
+ *
+ * 把内置、models.json、扩展三层合成 Provider。合成时不读凭证；缺鉴权方法会 throw。
+ */
+
 import {
 	type Api,
 	type ApiKeyAuth,
@@ -30,6 +36,11 @@ import {
 	resolveHeadersOrThrow,
 } from "./resolve-config-value.ts";
 
+/**
+ * Extension-supplied OAuth method for a registered provider.
+ *
+ * 扩展提供的 OAuth。`usesCallbackServer` 已废弃，规范鉴权流会忽略它。
+ */
 export interface ExtensionOAuthConfig {
 	name: string;
 	/** Whether access through this auth method is backed by a provider subscription. */
@@ -42,7 +53,11 @@ export interface ExtensionOAuthConfig {
 	modifyModels?(models: Model<Api>[], credentials: OAuthCredentials): Model<Api>[];
 }
 
-/** Input type for the extension registerProvider API. */
+/**
+ * Input type for the extension registerProvider API.
+ *
+ * 扩展 `registerProvider` 的输入。`streamSimple` 必须同时给 `api`。
+ */
 export interface ProviderConfigInput {
 	name?: string;
 	baseUrl?: string;
@@ -70,12 +85,22 @@ export interface ProviderConfigInput {
 	refreshModels?(context: RefreshModelsContext): Promise<NonNullable<ProviderConfigInput["models"]>>;
 }
 
+/**
+ * Whether a provider currently has configured auth, and where it came from.
+ *
+ * 当前是否配了鉴权及来源。`configured` 为 false 表示配了但环境变量还没齐。
+ */
 export type AuthStatus = {
 	configured: boolean;
 	source?: "stored" | "runtime" | "environment" | "fallback" | "models_json_key" | "models_json_command";
 	label?: string;
 };
 
+/**
+ * Clear the resolved API-key / config-value command cache.
+ *
+ * 清掉配置值命令缓存。与 resolve-config-value 的缓存是同一份。
+ */
 export const clearApiKeyCache = clearConfigValueCache;
 
 function mergeCompat(
@@ -413,6 +438,11 @@ function rawModelHeaders(
 	return Object.keys(headers).length > 0 ? headers : undefined;
 }
 
+/**
+ * Validate an extension provider against built-in and models.json layers.
+ *
+ * 校验扩展 provider 能否合成。`streamSimple` 缺 `api` 或模型结构不合法就 throw。
+ */
 export function validateExtensionProvider(
 	providerId: string,
 	base: Provider | undefined,
@@ -425,7 +455,11 @@ export function validateExtensionProvider(
 	applyExtension(providerId, applyModelsJson(providerId, base?.getModels() ?? [], modelsConfig), extension);
 }
 
-/** Compose built-in, models.json, and extension layers without reading credentials. */
+/**
+ * Compose built-in, models.json, and extension layers without reading credentials.
+ *
+ * 合成三层 Provider，不读凭证。`modelOverrides` 最后盖上。
+ */
 export function composeModelProvider(
 	providerId: string,
 	base: Provider | undefined,
@@ -531,6 +565,11 @@ export function composeModelProvider(
 	return provider;
 }
 
+/**
+ * Resolve per-model headers from models.json and extension config.
+ *
+ * 解析模型级头。解析失败 throw，不返回半套头。
+ */
 export function resolveConfiguredModelHeaders(
 	model: Model<Api>,
 	config: ModelsJsonProvider | undefined,
@@ -544,11 +583,21 @@ export function resolveConfiguredModelHeaders(
 	);
 }
 
+/**
+ * Headers and auth-header flag used by the ModelRegistry compatibility path.
+ *
+ * 兼容路径用的头和是否补 Authorization。`authHeader` 为 true 时调用方还得自备 apiKey。
+ */
 export interface CompatibilityRequestConfig {
 	headers?: ProviderHeaders;
 	authHeader: boolean;
 }
 
+/**
+ * Build compatibility request headers without performing login.
+ *
+ * 不登录，只拼兼容请求配置。模型自带头盖过配置头。
+ */
 export function resolveCompatibilityRequestConfig(
 	model: Model<Api>,
 	config: ModelsJsonProvider | undefined,
@@ -564,6 +613,11 @@ export function resolveCompatibilityRequestConfig(
 	};
 }
 
+/**
+ * Auth status implied by models.json / extension apiKey config alone.
+ *
+ * 只看配置里的 apiKey。没有配置返回 undefined，而不是「未配置」。
+ */
 export function configuredRequestAuthStatus(
 	config: ModelsJsonProvider | undefined,
 	extension: ProviderConfigInput | undefined,

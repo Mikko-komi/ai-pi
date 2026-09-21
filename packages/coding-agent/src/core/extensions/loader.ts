@@ -1,6 +1,7 @@
 /**
  * Extension loader - loads TypeScript extension modules using jiti.
  *
+ * 用 jiti 加载扩展模块。编译二进制走 virtualModules；源码/dist 走 alias。
  */
 
 import * as fs from "node:fs";
@@ -155,6 +156,11 @@ interface ExtensionCacheToken {
 	generation: number;
 }
 
+/**
+ * Drop the in-process extension factory cache.
+ *
+ * 清掉扩展工厂缓存。换 cwd 或手动失效时用；generation 跟着加一。
+ */
 export function clearExtensionCache(): void {
 	extensionCache.clear();
 	extensionCacheCwd = undefined;
@@ -173,6 +179,8 @@ function useExtensionCacheCwd(cwd: string): ExtensionCacheToken {
 /**
  * Create a runtime with throwing stubs for action methods.
  * Runner.bindCore() replaces these with real implementations.
+ *
+ * 建一份动作还是 throw 桩的 runtime。bindCore 之前不能调 pi 动作。
  */
 export function createExtensionRuntime(): ExtensionRuntime {
 	const notInitialized = () => {
@@ -593,6 +601,8 @@ async function loadExtension(
 
 /**
  * Create an Extension from an inline factory function.
+ *
+ * 用内联工厂直接做成 Extension。不走磁盘，也不进缓存。
  */
 export async function loadExtensionFromFactory(
 	factory: ExtensionFactory,
@@ -648,6 +658,11 @@ async function loadExtensionsInternal(
 	};
 }
 
+/**
+ * Load extensions from explicit file paths without caching factories.
+ *
+ * 按路径加载。失败记进 errors，不拖垮其它扩展。
+ */
 export async function loadExtensions(
 	paths: string[],
 	cwd: string,
@@ -657,6 +672,11 @@ export async function loadExtensions(
 	return loadExtensionsInternal(paths, cwd, eventBus, runtime);
 }
 
+/**
+ * Load extensions from paths, reusing cached factories for the same cwd.
+ *
+ * 带缓存的加载。cwd 变了会先整表清掉。
+ */
 export async function loadExtensionsCached(
 	paths: string[],
 	cwd: string,
@@ -757,6 +777,8 @@ function discoverExtensionsInDir(dir: string): string[] {
 
 /**
  * Discover and load extensions from standard locations.
+ *
+ * 先扫项目/全局目录，再合并配置路径。同绝对路径只加载一次。
  */
 export async function discoverAndLoadExtensions(
 	configuredPaths: string[],

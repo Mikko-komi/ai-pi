@@ -17,8 +17,12 @@ _Avoid_: public 方法, 内部 class
 _Avoid_: 核心代码（未限定范围时）
 
 **第二刀核心**:
-本轮扩充：agent 的 stream / proxy / search、harness 门面与类型、coding-agent 的 SDK / SessionManager / ModelRuntime。
+已完成：agent 的 stream / proxy / search、harness 门面与类型、coding-agent 的 SDK / SessionManager / ModelRuntime。
 _Avoid_: 工具实现细节, telemetry schema 别名
+
+**第三刀核心**:
+已完成：`packages/coding-agent/src/core` 除 `tools/` 与 `export-html/` 外的导出符号。
+_Avoid_: 工具实现, HTML 导出渲染
 
 **AgentHarness**:
 agent-core 里按 lane 驱动持久化会话的门面，和旧的 `Agent` 循环并列，不替代 `AgentSession`。

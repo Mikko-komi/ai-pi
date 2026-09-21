@@ -10,6 +10,11 @@ import { normalizePath, resolvePath } from "../utils/paths.ts";
 import { stripBom } from "../utils/text.ts";
 import { DEFAULT_HTTP_IDLE_TIMEOUT_MS, parseHttpIdleTimeoutMs } from "./http-dispatcher.ts";
 
+/**
+ * Per-model compaction token overrides.
+ *
+ * 按模型覆盖压缩预算。缺的字段回落到全局 `CompactionSettings`。
+ */
 export interface CompactionModelOverride {
 	reserveTokens?: number;
 	keepRecentTokens?: number;
@@ -20,6 +25,11 @@ const DEFAULT_COMPACTION_TOKEN_SETTINGS: Required<CompactionModelOverride> = {
 	keepRecentTokens: 20000,
 };
 
+/**
+ * Compaction switch and token budgets.
+ *
+ * 会话压缩开关和预算。`modelOverrides` 必须用精确的 `provider/modelId` 键。
+ */
 export interface CompactionSettings {
 	enabled?: boolean; // default: true
 	reserveTokens?: number; // default: 16384
@@ -27,17 +37,32 @@ export interface CompactionSettings {
 	modelOverrides?: Record<string, CompactionModelOverride>; // exact "provider/modelId" keys
 }
 
+/**
+ * Branch-summary token budget and prompt behavior.
+ *
+ * 分支摘要的预算。`skipPrompt` 为真时不弹确认，默认不做摘要。
+ */
 export interface BranchSummarySettings {
 	reserveTokens?: number; // default: 16384 (tokens reserved for prompt + LLM response)
 	skipPrompt?: boolean; // default: false - when true, skips "Summarize branch?" prompt and defaults to no summary
 }
 
+/**
+ * SDK/provider request timeout and retry limits.
+ *
+ * 底层 provider 的超时和重试。和 agent 循环那一层重试分开。
+ */
 export interface ProviderRetrySettings {
 	timeoutMs?: number; // SDK/provider request timeout in milliseconds
 	maxRetries?: number; // SDK/provider retry attempts
 	maxRetryDelayMs?: number; // default: 60000 (max server-requested delay before failing)
 }
 
+/**
+ * Agent-loop retry policy plus optional provider overrides.
+ *
+ * Agent 循环的重试。`provider` 只改 SDK 那一层。
+ */
 export interface RetrySettings {
 	enabled?: boolean; // default: true
 	maxRetries?: number; // default: 3
@@ -46,9 +71,25 @@ export interface RetrySettings {
 	provider?: ProviderRetrySettings;
 }
 
+/**
+ * TUI presentation mode from pi-tui.
+ *
+ * 终端界面模式。值来自 pi-tui，settings 只存这个别名。
+ */
 export type TuiMode = RendererTuiMode;
+
+/**
+ * What to print when leaving fullscreen TUI.
+ *
+ * 退出全屏时的输出。regular 模式忽略这项。
+ */
 export type FullscreenExitOutput = "transcript" | "resume-hint";
 
+/**
+ * Terminal capability and display overrides.
+ *
+ * 终端显示覆盖。`images` / `trueColor` / `hyperlinks` 为 auto 时走探测。
+ */
 export interface TerminalSettings {
 	showImages?: boolean; // default: true (only relevant if terminal supports images)
 	imageWidthCells?: number; // default: 60 (preferred inline image width in terminal cells)
@@ -59,11 +100,21 @@ export interface TerminalSettings {
 	trueColor?: boolean | "auto";
 }
 
+/**
+ * Image preprocessing before sending to the model.
+ *
+ * 发给模型前的图片处理。`blockImages` 为真则一张都不送。
+ */
 export interface ImageSettings {
 	autoResize?: boolean; // default: true (resize images to 2000x2000 max for better model compatibility)
 	blockImages?: boolean; // default: false - when true, prevents all images from being sent to LLM providers
 }
 
+/**
+ * Custom token budgets for thinking levels.
+ *
+ * 思考级别的自定义 token 预算。缺的级别用模型默认。
+ */
 export interface ThinkingBudgetsSettings {
 	minimal?: number;
 	low?: number;
@@ -71,19 +122,44 @@ export interface ThinkingBudgetsSettings {
 	high?: number;
 }
 
+/**
+ * When to render mermaid diagrams in markdown output.
+ *
+ * mermaid 何时渲染。缺省 streaming。
+ */
 export type MermaidRenderingMode = "off" | "final" | "streaming";
 
+/**
+ * Markdown renderer options.
+ *
+ * Markdown 渲染选项。只影响展示，不改模型输入。
+ */
 export interface MarkdownSettings {
 	codeBlockIndent?: string; // default: "  "
 	mermaid?: MermaidRenderingMode; // default: "streaming"
 }
 
+/**
+ * Optional warning toggles.
+ *
+ * 可选告警开关。缺省打开 Anthropic extra-usage 提示。
+ */
 export interface WarningSettings {
 	anthropicExtraUsage?: boolean; // default: true
 }
 
+/**
+ * Default answer when a project has not been trusted yet.
+ *
+ * 项目尚未信任时的默认答案。只写全局 settings。
+ */
 export type DefaultProjectTrust = "ask" | "always" | "never";
 
+/**
+ * Transport used for model streaming.
+ *
+ * 模型流式传输方式。缺省 auto。
+ */
 export type TransportSetting = Transport;
 
 /**
@@ -91,6 +167,8 @@ export type TransportSetting = Transport;
  * - String form: load all resources from the package
  * - Object form: filter which resources to load
  * - autoload=false: start empty and only apply explicit resource patterns
+ *
+ * npm/git 包来源。字符串全开；对象可过滤；`autoload=false` 从空集只套显式模式。
  */
 export type PackageSource =
 	| string
@@ -103,6 +181,11 @@ export type PackageSource =
 			themes?: string[];
 	  };
 
+/**
+ * User/project settings document merged by SettingsManager.
+ *
+ * settings.json 的形状。项目层覆盖全局；未信任项目不读项目文件。
+ */
 export interface Settings {
 	lastChangelogVersion?: string;
 	defaultProvider?: string;
@@ -196,16 +279,36 @@ function parseTimeoutSetting(value: unknown, settingName: string): number | unde
 	return undefined;
 }
 
+/**
+ * Which settings.json a write or error refers to.
+ *
+ * 一次读写对准的 settings.json。global 是 agentDir，project 是 cwd/.pi。
+ */
 export type SettingsScope = "global" | "project";
 
+/**
+ * Options when constructing a SettingsManager.
+ *
+ * 构造选项。`projectTrusted` 缺省 true；为 false 时项目层当空对象。
+ */
 export interface SettingsManagerCreateOptions {
 	projectTrusted?: boolean;
 }
 
+/**
+ * Persistence backend for one settings.json pair.
+ *
+ * 一对 settings.json 的存储。`withLock` 里返回 `undefined` 表示不写。
+ */
 export interface SettingsStorage {
 	withLock(scope: SettingsScope, fn: (current: string | undefined) => string | undefined): void;
 }
 
+/**
+ * One failed load or persist of a settings file.
+ *
+ * 一次 settings 读写失败。`drainErrors` 取出后清空。
+ */
 export interface SettingsError {
 	scope: SettingsScope;
 	path?: string;
@@ -222,6 +325,11 @@ function toSettingsError(scope: SettingsScope, error: unknown, path?: string): S
 	};
 }
 
+/**
+ * File-backed SettingsStorage using settings.json plus a lockfile.
+ *
+ * 文件存储。锁在目标文件上；目录只在真正要写时创建。
+ */
 export class FileSettingsStorage implements SettingsStorage {
 	private globalSettingsPath: string;
 	private projectSettingsPath: string;
@@ -291,6 +399,11 @@ export class FileSettingsStorage implements SettingsStorage {
 	}
 }
 
+/**
+ * In-memory SettingsStorage for tests.
+ *
+ * 内存存储。不碰磁盘，两个 scope 各一份字符串。
+ */
 export class InMemorySettingsStorage implements SettingsStorage {
 	private global: string | undefined;
 	private project: string | undefined;
@@ -308,6 +421,11 @@ export class InMemorySettingsStorage implements SettingsStorage {
 	}
 }
 
+/**
+ * Loads, merges, and persists global and project settings.
+ *
+ * 全局/项目 settings 的读写门面。未信任项目不读不写项目文件；解析失败则那一层停写，以免覆盖坏文件。
+ */
 export class SettingsManager {
 	private storage: SettingsStorage;
 	private globalSettings: Settings;

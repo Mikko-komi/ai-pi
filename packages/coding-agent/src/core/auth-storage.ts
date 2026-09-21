@@ -1,6 +1,8 @@
 /**
  * CredentialStore implementation backed by auth.json.
  * Provider auth orchestration belongs to ModelRuntime and pi-ai Models.
+ *
+ * auth.json 上的 CredentialStore。登录编排在 ModelRuntime / pi-ai Models，这里只存凭证。
  */
 
 import type { AuthOperationOptions, Credential, CredentialInfo, CredentialStore } from "@earendil-works/pi-ai";
@@ -38,6 +40,11 @@ type AuthFileReadState = {
 
 let sharedAuthFileReadState: { authPath: string; readState: AuthFileReadState } | undefined;
 
+/**
+ * Locking backend for auth.json reads and writes.
+ *
+ * 读写 auth.json 的加锁后端。写文件只在创建时设 0o600，已有文件的权限不动。
+ */
 export interface AuthStorageBackend {
 	withLock<T>(fn: (current: string | undefined) => LockResult<T>): T;
 	withLockAsync<T>(
@@ -46,6 +53,11 @@ export interface AuthStorageBackend {
 	): Promise<T>;
 }
 
+/**
+ * Filesystem lock + JSON backend for auth.json.
+ *
+ * 文件锁后端。锁竞争会重试；compromised lock 必须中止写入。
+ */
 export class FileAuthStorageBackend implements AuthStorageBackend {
 	private authPath: string;
 
@@ -200,6 +212,11 @@ export class FileAuthStorageBackend implements AuthStorageBackend {
 	}
 }
 
+/**
+ * Read-only CredentialStore over an existing auth.json.
+ *
+ * 只读视图。`modify` / `delete` 必须 throw；读 api_key 会解析配置值，命令型 key 原样返回。
+ */
 export class ReadOnlyAuthStorage implements CredentialStore {
 	private readonly authPath: string;
 	private data: AuthStorageData | undefined;
@@ -289,6 +306,11 @@ export class ReadOnlyAuthStorage implements CredentialStore {
 	}
 }
 
+/**
+ * In-memory lock-compatible auth backend for tests.
+ *
+ * 内存后端。异步操作串行，abort 时取消等待而不是写一半。
+ */
 export class InMemoryAuthStorageBackend implements AuthStorageBackend {
 	private value: string | undefined;
 	private asyncChain: Promise<unknown> = Promise.resolve();
@@ -323,6 +345,8 @@ export class InMemoryAuthStorageBackend implements AuthStorageBackend {
 
 /**
  * Credential storage backed by a JSON file.
+ *
+ * 可写的 JSON 凭证仓。同路径实例共享读缓存；解析失败保留上次有效快照。
  */
 export class AuthStorage implements CredentialStore {
 	private storage: AuthStorageBackend;
@@ -492,6 +516,8 @@ export class AuthStorage implements CredentialStore {
 /**
  * One-off synchronous read of a stored credential from an auth.json file,
  * without instantiating a store or resolving configured key values.
+ *
+ * 一次性同步读某 provider 的原始凭证。不建 store，也不解析配置值。
  */
 export function readStoredCredential(
 	providerId: string,
