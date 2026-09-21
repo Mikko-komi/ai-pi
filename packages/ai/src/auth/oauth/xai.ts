@@ -1,5 +1,7 @@
 /**
  * xAI OAuth device-code flow.
+ *
+ * xAI 订阅 OAuth。设备码换 token；refresh 提前 skew，避免请求中途过期。
  */
 
 import type { OAuthAuth, OAuthCredential, ProviderAuthInteraction } from "../types.ts";
@@ -226,6 +228,11 @@ async function refreshXaiToken(refreshToken: string, signal: AbortSignal): Promi
 	return credentialsFromTokenResponse(response.body, refreshToken);
 }
 
+/**
+ * xAI SuperGrok / X Premium OAuth implementation.
+ *
+ * xAI 订阅 OAuth 实现。toAuth 把 access 当 apiKey。
+ */
 export const xaiOAuth: OAuthAuth = {
 	name: "xAI (Grok/X subscription)",
 	isSubscription: true,

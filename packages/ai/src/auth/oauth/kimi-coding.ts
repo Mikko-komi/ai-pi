@@ -4,6 +4,8 @@
  * RFC 8628 device authorization grant against https://auth.kimi.com with JSON
  * responses. The access token authenticates requests to
  * https://api.kimi.com/coding as an `Authorization: Bearer` header.
+ *
+ * Kimi Code 订阅 OAuth。RFC 8628 设备码；请求头带 Bearer access。
  */
 
 import { getProviderEnvValue } from "../../utils/provider-env.ts";
@@ -278,6 +280,11 @@ async function loginKimiCoding(interaction: ProviderAuthInteraction): Promise<OA
 	return { type: "oauth", access: token.access, refresh: token.refresh, expires: token.expires };
 }
 
+/**
+ * Kimi Code subscription OAuth implementation.
+ *
+ * Kimi Code 订阅 OAuth 实现。toAuth 写 Authorization 头，不当成 apiKey。
+ */
 export const kimiCodingOAuth: OAuthAuth = {
 	name: "Kimi Code (subscription)",
 	isSubscription: true,

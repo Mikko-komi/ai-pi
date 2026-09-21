@@ -1,3 +1,9 @@
+/**
+ * HTML pages shown in the OAuth loopback browser callback.
+ *
+ * OAuth 回环页 HTML。只渲染成功/失败文案，不做协议。
+ */
+
 const LOGO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" aria-hidden="true"><path fill="#fff" fill-rule="evenodd" d="M165.29 165.29 H517.36 V400 H400 V517.36 H282.65 V634.72 H165.29 Z M282.65 282.65 V400 H400 V282.65 Z"/><path fill="#fff" d="M517.36 400 H634.72 V634.72 H517.36 Z"/></svg>`;
 
 function escapeHtml(value: string): string {
@@ -91,6 +97,11 @@ function renderPage(options: { title: string; heading: string; message: string; 
 </html>`;
 }
 
+/**
+ * Success page HTML for a completed OAuth callback.
+ *
+ * OAuth 成功页。message 会做 HTML 转义。
+ */
 export function oauthSuccessHtml(message: string): string {
 	return renderPage({
 		title: "Authentication successful",
@@ -99,6 +110,11 @@ export function oauthSuccessHtml(message: string): string {
 	});
 }
 
+/**
+ * Error page HTML for a failed OAuth callback.
+ *
+ * OAuth 失败页。details 可选，一并转义。
+ */
 export function oauthErrorHtml(message: string, details?: string): string {
 	return renderPage({
 		title: "Authentication failed",

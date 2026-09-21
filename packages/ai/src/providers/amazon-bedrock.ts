@@ -1,3 +1,9 @@
+/**
+ * Built-in Amazon Bedrock provider factory.
+ *
+ * Amazon Bedrock 内建 Provider 工厂。鉴权可 token 或 AWS 链；环境凭证不写入 store。
+ */
+
 import { bedrockConverseStreamApi } from "../api/bedrock-converse-stream.lazy.ts";
 import type { ApiKeyAuth } from "../auth/types.ts";
 import { createProvider, type Provider } from "../models.ts";
@@ -79,6 +85,11 @@ const bedrockAuth: ApiKeyAuth = {
 	},
 };
 
+/**
+ * Construct the built-in Amazon Bedrock provider.
+ *
+ * 构造 Amazon Bedrock Provider。resolve 能探测环境 AWS 凭证，但不把它们拷进 pi store。
+ */
 export function amazonBedrockProvider(): Provider<"bedrock-converse-stream"> {
 	return createProvider({
 		id: "amazon-bedrock",

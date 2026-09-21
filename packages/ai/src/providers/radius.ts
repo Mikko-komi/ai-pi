@@ -1,3 +1,9 @@
+/**
+ * Radius gateway provider with a persisted, dynamically refreshed catalog.
+ *
+ * Radius 网关 Provider。目录可持久化并动态刷新；本文件不实现 OAuth 与协议。
+ */
+
 import { piMessagesApi } from "../api/pi-messages.lazy.ts";
 import { envApiKeyAuth, lazyOAuth } from "../auth/helpers.ts";
 import { loadRadiusOAuth } from "../auth/oauth/load.ts";
@@ -10,13 +16,22 @@ import {
 	normalizeRadiusGatewayUrl,
 } from "./radius-config.ts";
 
+/**
+ * Construction overrides for a Radius gateway provider.
+ *
+ * 构造 Radius Provider 的覆盖项。缺省 id/name/gateway 走内建默认值。
+ */
 export interface RadiusProviderOptions {
 	id?: string;
 	name?: string;
 	gateway?: string;
 }
 
-/** Radius gateway provider with a persisted, dynamically refreshed catalog. */
+/**
+ * Radius gateway provider with a persisted, dynamically refreshed catalog.
+ *
+ * 构造 Radius 网关 Provider。刷新先恢复存储/legacy 凭证目录，再按允许联网拉取 `/v1/config`。
+ */
 export function radiusProvider(options: RadiusProviderOptions = {}): Provider<"pi-messages"> {
 	const id = options.id ?? "radius";
 	const name = options.name ?? "Radius";

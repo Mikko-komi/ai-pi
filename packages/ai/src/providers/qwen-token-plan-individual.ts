@@ -1,8 +1,19 @@
+/**
+ * Built-in Qwen Token Plan Individual provider factory.
+ *
+ * 通义 Token Plan 个人套餐内建 Provider 工厂。挂独立目录；endpoint 与东南亚套餐相同。
+ */
+
 import { openAICompletionsApi } from "../api/openai-completions.lazy.ts";
 import { envApiKeyAuth } from "../auth/helpers.ts";
 import { createProvider, type Provider } from "../models.ts";
 import { QWEN_TOKEN_PLAN_INDIVIDUAL_MODELS } from "./qwen-token-plan-individual.models.ts";
 
+/**
+ * Construct the built-in Qwen Token Plan Individual provider.
+ *
+ * 构造通义 Token Plan 个人套餐 Provider。鉴权走与东南亚套餐同一环境 key；目录独立。
+ */
 export function qwenTokenPlanIndividualProvider(): Provider<"openai-completions"> {
 	return createProvider({
 		id: "qwen-token-plan-individual",

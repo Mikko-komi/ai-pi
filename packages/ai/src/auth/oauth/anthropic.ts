@@ -3,6 +3,8 @@
  *
  * NOTE: This module uses Node.js http.createServer for the OAuth callback server.
  * It is only intended for CLI use, not browser environments.
+ *
+ * Anthropic 订阅 OAuth。login/refresh 走官方授权；仅 CLI，回环服务器依赖 Node http。
  */
 
 import type { Server } from "node:http";
@@ -352,6 +354,11 @@ async function refreshAnthropicToken(refreshToken: string, signal: AbortSignal):
 	};
 }
 
+/**
+ * Anthropic Claude Pro/Max OAuth implementation.
+ *
+ * Anthropic 订阅 OAuth 实现。toAuth 把 access 当 apiKey；不在这里造 Provider。
+ */
 export const anthropicOAuth: OAuthAuth = {
 	name: "Anthropic (Claude Pro/Max)",
 	isSubscription: true,

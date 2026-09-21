@@ -1,3 +1,9 @@
+/**
+ * Built-in Anthropic provider factory.
+ *
+ * Anthropic 内建 Provider 工厂。apiKey 与 Claude Pro/Max OAuth 并列；流交给 anthropic-messages。
+ */
+
 import { anthropicMessagesApi } from "../api/anthropic-messages.lazy.ts";
 import { lazyOAuth } from "../auth/helpers.ts";
 import { loadAnthropicOAuth } from "../auth/oauth/load.ts";
@@ -40,6 +46,11 @@ function anthropicApiKeyAuth(): ApiKeyAuth {
 	};
 }
 
+/**
+ * Construct the built-in Anthropic provider.
+ *
+ * 构造 Anthropic 内建 Provider。apiKey 解析 stored 与环境 token；另挂订阅 OAuth。
+ */
 export function anthropicProvider(): Provider<"anthropic-messages"> {
 	return createProvider({
 		id: "anthropic",

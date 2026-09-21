@@ -1,3 +1,9 @@
+/**
+ * Built-in Google Vertex AI provider factory.
+ *
+ * Google Vertex 内建 Provider 工厂。鉴权可 apiKey 或 ADC；ADC 还要 project 与 location。
+ */
+
 import { googleVertexApi } from "../api/google-vertex.lazy.ts";
 import type { ApiKeyAuth } from "../auth/types.ts";
 import { createProvider, type Provider } from "../models.ts";
@@ -89,6 +95,11 @@ const vertexAuth: ApiKeyAuth = {
 	},
 };
 
+/**
+ * Construct the built-in Google Vertex AI provider.
+ *
+ * 构造 Google Vertex Provider。ADC 路径与项目/区域由实现自己读环境，本工厂只挂鉴权。
+ */
 export function googleVertexProvider(): Provider<"google-vertex"> {
 	return createProvider({
 		id: "google-vertex",

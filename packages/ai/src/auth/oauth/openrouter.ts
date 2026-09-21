@@ -9,6 +9,8 @@
  *
  * NOTE: This module uses Node.js http.createServer for the OAuth callback server.
  * It is only intended for CLI use, not browser environments.
+ *
+ * OpenRouter OAuth。授权码换成长期 API key；回环与手工粘贴竞速。仅 CLI。
  */
 
 import { createServer, type Server, type ServerResponse } from "node:http";
@@ -298,6 +300,11 @@ async function loginOpenRouter(interaction: ProviderAuthInteraction): Promise<OA
 	}
 }
 
+/**
+ * OpenRouter OAuth implementation.
+ *
+ * OpenRouter OAuth 实现。refresh 原样返回凭证，因为换到的是长期 key。
+ */
 export const openRouterOAuth: OAuthAuth = {
 	name: "OpenRouter OAuth",
 	loginLabel: "Sign in with OpenRouter",

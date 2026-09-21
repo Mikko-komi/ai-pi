@@ -1,6 +1,8 @@
 /**
  * PKCE utilities using Web Crypto API.
  * Works in both Node.js 20+ and browsers.
+ *
+ * PKCE 工具。用 Web Crypto 生成 verifier/challenge；Node 20+ 与浏览器都能跑。
  */
 
 /**
@@ -17,6 +19,8 @@ function base64urlEncode(bytes: Uint8Array): string {
 /**
  * Generate PKCE code verifier and challenge.
  * Uses Web Crypto API for cross-platform compatibility.
+ *
+ * 生成 PKCE verifier 与 SHA-256 challenge。不碰 Node crypto。
  */
 export async function generatePKCE(): Promise<{ verifier: string; challenge: string }> {
 	// Generate random verifier

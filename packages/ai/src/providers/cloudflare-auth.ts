@@ -1,3 +1,9 @@
+/**
+ * Cloudflare Workers AI and AI Gateway api-key auth.
+ *
+ * Cloudflare 两套 apiKey 鉴权。字段按 credential 优先、环境回落合并；缺必填项则未解析。
+ */
+
 import type { ApiKeyAuth, ApiKeyCredential, AuthContext } from "../auth/types.ts";
 import type { ProviderEnv } from "../types.ts";
 
@@ -51,6 +57,11 @@ async function resolveCloudflareEnv(
 	};
 }
 
+/**
+ * Workers AI api-key auth: API key plus account id.
+ *
+ * Workers AI 鉴权。只要 apiKey 与 account；不收 gateway id。
+ */
 export function cloudflareWorkersAIAuth(): ApiKeyAuth {
 	return {
 		name: "Cloudflare API key",
@@ -71,6 +82,11 @@ export function cloudflareWorkersAIAuth(): ApiKeyAuth {
 	};
 }
 
+/**
+ * AI Gateway api-key auth: API key, account id, and gateway id.
+ *
+ * AI Gateway 鉴权。还要 gateway id；请求头走 cf-aig-authorization，清掉默认 Authorization。
+ */
 export function cloudflareAIGatewayAuth(): ApiKeyAuth {
 	return {
 		name: "Cloudflare API key",

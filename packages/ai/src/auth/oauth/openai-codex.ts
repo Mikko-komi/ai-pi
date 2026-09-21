@@ -3,6 +3,8 @@
  *
  * NOTE: This module uses Node.js crypto and http for the OAuth callback.
  * It is only intended for CLI use, not browser environments.
+ *
+ * OpenAI Codex 订阅 OAuth。浏览器或设备码登录；仅 CLI。
  */
 
 // NEVER convert to top-level imports - breaks browser/Vite builds
@@ -512,6 +514,11 @@ async function refreshOpenAICodexToken(refreshToken: string, signal: AbortSignal
 	return credentialsFromToken(await refreshAccessToken(refreshToken, signal));
 }
 
+/**
+ * OpenAI Codex (ChatGPT Plus/Pro) OAuth implementation.
+ *
+ * OpenAI Codex 订阅 OAuth 实现。login 先选浏览器或设备码；refresh 走官方 token 端点。
+ */
 export const openaiCodexOAuth: OAuthAuth = {
 	name: "OpenAI (ChatGPT Plus/Pro)",
 	isSubscription: true,

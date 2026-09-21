@@ -80,6 +80,10 @@ _Avoid_: 类方法, 再导出
 已完成：pi-ai 各厂商流式 API 适配器（anthropic / openai / google / bedrock 等）。
 _Avoid_: *.models.ts 目录
 
+**第十八刀核心**:
+已完成：pi-ai provider 工厂与 OAuth 登录实现（不含 *.models.ts 目录）。
+_Avoid_: models.generated.ts, 厂商目录快照
+
 **AgentHarness**:
 agent-core 里按 lane 驱动持久化会话的门面，和旧的 `Agent` 循环并列，不替代 `AgentSession`。
 _Avoid_: Agent, AgentSession

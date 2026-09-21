@@ -7,6 +7,8 @@
  *
  * NOTE: This module uses node:http for the OAuth callback server.
  * It is only intended for CLI use, not browser environments.
+ *
+ * Radius 网关 OAuth。客户端 API 在网关，浏览器授权端点需发现；目录加载归 Provider。
  */
 
 // NEVER convert to top-level imports - breaks browser/Vite builds
@@ -349,11 +351,21 @@ async function loginWithDeviceCode(gateway: string, interaction: ProviderAuthInt
 	});
 }
 
+/**
+ * Options for constructing a Radius gateway OAuth flow.
+ *
+ * 构造 Radius 网关 OAuth 的参数。gateway 会规范化。
+ */
 export interface RadiusOAuthOptions {
 	name: string;
 	gateway: string;
 }
 
+/**
+ * Build Radius OAuth against a specific gateway.
+ *
+ * 按网关构造 Radius OAuth。浏览器或设备码登录；目录刷新不在这里。
+ */
 export function createRadiusOAuth(options: RadiusOAuthOptions): OAuthAuth {
 	const gateway = normalizeRadiusGatewayUrl(options.gateway);
 

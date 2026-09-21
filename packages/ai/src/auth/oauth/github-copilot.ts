@@ -1,5 +1,7 @@
 /**
  * GitHub Copilot OAuth flow
+ *
+ * GitHub Copilot 订阅 OAuth。设备码换 Copilot token；toAuth 按凭证推导 proxy baseUrl。
  */
 
 import { GITHUB_COPILOT_MODELS } from "../../providers/github-copilot.models.ts";
@@ -490,6 +492,11 @@ function copilotEnterpriseDomain(credential: OAuthCredential): string | undefine
 	return normalizeDomain(enterpriseUrl) ?? undefined;
 }
 
+/**
+ * GitHub Copilot OAuth implementation.
+ *
+ * GitHub Copilot 订阅 OAuth 实现。refresh 可带企业域名；不在这里过滤模型目录。
+ */
 export const githubCopilotOAuth: OAuthAuth = {
 	name: "GitHub Copilot",
 	isSubscription: true,
