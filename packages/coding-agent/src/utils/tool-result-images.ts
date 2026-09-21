@@ -1,8 +1,24 @@
+/**
+ * Normalize tool-result image blocks before they enter session history.
+ *
+ * 处理失败保留原块，不删工具输出。无图时返回原数组引用。
+ */
+
 import type { ImageContent, TextContent } from "@earendil-works/pi-ai";
 import { processImage } from "./image-process.ts";
 
+/**
+ * Text or image block that may appear in a tool result.
+ *
+ * 就是 pi-ai 的 TextContent | ImageContent。
+ */
 export type ToolResultContent = TextContent | ImageContent;
 
+/**
+ * Options for normalizeToolResultImages.
+ *
+ * autoResizeImages 默认 true。
+ */
 export interface NormalizeToolResultImagesOptions {
 	/** Whether oversized images are resized to inline provider limits. Default: true */
 	autoResizeImages?: boolean;
@@ -18,6 +34,8 @@ export interface NormalizeToolResultImagesOptions {
  * so normalize them once as they enter history.
  *
  * Returns the original array when nothing changed so callers can skip rewriting the result.
+ *
+ * 无变化返回原数组。processImage 失败保留原 image 块。
  */
 export async function normalizeToolResultImages(
 	content: ToolResultContent[],

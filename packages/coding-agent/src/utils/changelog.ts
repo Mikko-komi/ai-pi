@@ -1,6 +1,17 @@
+/**
+ * Parse CHANGELOG.md version entries and rewrite local links to pinned GitHub URLs.
+ *
+ * 读 `## [x.y.z]` 条目。相对链接钉到对应 tag；解析失败返回空数组。
+ */
+
 import path from "node:path";
 import { existsSync, readFileSync } from "fs";
 
+/**
+ * One changelog version section.
+ *
+ * 一条 `##` 版本块。content 含标题行，已 trim。
+ */
 export interface ChangelogEntry {
 	major: number;
 	minor: number;
@@ -97,6 +108,11 @@ function normalizeChangelogLinkTarget(target: string, tag: string): string {
 	return `https://github.com/${GITHUB_REPO}/${route}/${tag}/${encodeURI(repositoryPath)}${query}${fragment}`;
 }
 
+/**
+ * Rewrite changelog markdown links to pinned GitHub URLs for `version`.
+ *
+ * 相对路径钉到该 tag。旧 pi-mono URL 改到 earendil-works/pi。逃出仓库的路径不动。
+ */
 export function normalizeChangelogLinks(markdown: string, version: string | ChangelogEntry): string {
 	const tag = normalizeTag(version);
 	return markdown.replace(INLINE_MARKDOWN_LINK_RE, (_match, prefix, target, suffix) => {
@@ -107,6 +123,8 @@ export function normalizeChangelogLinks(markdown: string, version: string | Chan
 /**
  * Parse changelog entries from CHANGELOG.md
  * Scans for ## lines and collects content until next ## or EOF
+ *
+ * 扫 `## [x.y.z]`。文件不存在或读失败返回 []。解析不出版本的 `##` 丢掉。
  */
 export function parseChangelog(changelogPath: string): ChangelogEntry[] {
 	if (!existsSync(changelogPath)) {
@@ -169,6 +187,8 @@ export function parseChangelog(changelogPath: string): ChangelogEntry[] {
 
 /**
  * Compare versions. Returns: -1 if v1 < v2, 0 if v1 === v2, 1 if v1 > v2
+ *
+ * 按 major/minor/patch 相减，负则 v1 小。差值可以大于 1。
  */
 export function compareVersions(v1: ChangelogEntry, v2: ChangelogEntry): number {
 	if (v1.major !== v2.major) return v1.major - v2.major;
@@ -178,6 +198,8 @@ export function compareVersions(v1: ChangelogEntry, v2: ChangelogEntry): number 
 
 /**
  * Get entries newer than lastVersion
+ *
+ * lastVersion 按 `.` 拆三段，缺段当 0。只保留 compare > 0 的条目。
  */
 export function getNewEntries(entries: ChangelogEntry[], lastVersion: string): ChangelogEntry[] {
 	// Parse lastVersion

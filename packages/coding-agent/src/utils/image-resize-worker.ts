@@ -1,3 +1,9 @@
+/**
+ * Worker-thread entry that runs resizeImageInProcess and posts the result.
+ *
+ * 没有 parentPort 立刻抛。无效请求当 error 回传，不退出码区分。
+ */
+
 import { parentPort } from "node:worker_threads";
 import { type ImageResizeOptions, type ResizedImage, resizeImageInProcess } from "./image-resize-core.ts";
 

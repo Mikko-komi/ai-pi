@@ -26,6 +26,12 @@
  * SOFTWARE.
  */
 
+/**
+ * Strip ANSI escape sequences from a string.
+ *
+ * 去掉 OSC/CSI 转义。非字符串抛 TypeError；没有 ESC/CSI 原样返回。
+ */
+
 function ansiRegex({ onlyFirst = false }: { onlyFirst?: boolean } = {}): RegExp {
 	// Valid string terminator sequences are BEL, ESC\, and 0x9c
 	const ST = "(?:\\u0007|\\u001B\\u005C|\\u009C)";
@@ -43,6 +49,11 @@ function ansiRegex({ onlyFirst = false }: { onlyFirst?: boolean } = {}): RegExp 
 
 const regex = ansiRegex();
 
+/**
+ * Remove ANSI escape sequences from `value`.
+ *
+ * 非字符串抛 TypeError。没有 ESC 或 CSI 走快路径原样返回。
+ */
 export function stripAnsi(value: string): string {
 	if (typeof value !== "string") {
 		throw new TypeError(`Expected a \`string\`, got \`${typeof value}\``);

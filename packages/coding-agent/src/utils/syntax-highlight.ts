@@ -1,3 +1,9 @@
+/**
+ * highlight.js wrapper that renders themed ANSI from HTML spans.
+ *
+ * 常用语言启动时注册。其余语言异步补齐失败也不影响已注册语言和 plaintext。
+ */
+
 import hljs from "highlight.js/lib/core.js";
 import bash from "highlight.js/lib/languages/bash.js";
 import c from "highlight.js/lib/languages/c.js";
@@ -50,6 +56,11 @@ for (const [name, language] of Object.entries(eagerLanguages)) {
 
 let allLanguagesPromise: Promise<void> | undefined;
 
+/**
+ * Register the remaining highlight.js languages in a later turn.
+ *
+ * 只跑一次。import 失败仍 resolve，eager 语言可用。
+ */
 export function loadAllHighlightLanguages(): Promise<void> {
 	if (!allLanguagesPromise) {
 		allLanguagesPromise = new Promise((resolve) => {
@@ -67,9 +78,25 @@ export function loadAllHighlightLanguages(): Promise<void> {
 	return allLanguagesPromise;
 }
 
+/**
+ * Theme callback that paints one token string.
+ *
+ * 输入已是解码后的纯文本，不是 HTML。
+ */
 export type HighlightFormatter = (text: string) => string;
+
+/**
+ * Partial map from highlight.js scope to a formatter.
+ *
+ * 缺 key 时按 `.` / `-` 前缀回退，再退 default。
+ */
 export type HighlightTheme = Partial<Record<string, HighlightFormatter>>;
 
+/**
+ * Options for highlight().
+ *
+ * 有 language 走指定语法；否则 highlightAuto，可用 languageSubset 收窄。
+ */
 export interface HighlightOptions {
 	language?: string;
 	ignoreIllegals?: boolean;
@@ -143,6 +170,11 @@ function isSpanOpenTagStart(html: string, index: number): boolean {
 	return nextChar === ">" || nextChar === " " || nextChar === "\t" || nextChar === "\n" || nextChar === "\r";
 }
 
+/**
+ * Paint highlight.js HTML with a theme, decoding entities as text.
+ *
+ * 只认 hljs- class。未知实体的 `&` 当普通字符。
+ */
 export function renderHighlightedHtml(html: string, theme: HighlightTheme = {}): string {
 	let output = "";
 	let textBuffer = "";
@@ -197,6 +229,11 @@ export function renderHighlightedHtml(html: string, theme: HighlightTheme = {}):
 	return output;
 }
 
+/**
+ * Highlight `code` and render it with the given theme.
+ *
+ * language 缺失时自动检测。返回已套 theme 的纯文本，不是 HTML。
+ */
 export function highlight(code: string, options: HighlightOptions = {}): string {
 	const html = options.language
 		? hljs.highlight(code, {
@@ -207,6 +244,11 @@ export function highlight(code: string, options: HighlightOptions = {}): string 
 	return renderHighlightedHtml(html, options.theme);
 }
 
+/**
+ * Whether highlight.js currently knows `name`.
+ *
+ * 未 loadAll 时只覆盖 eager 集合。
+ */
 export function supportsLanguage(name: string): boolean {
 	return hljs.getLanguage(name) !== undefined;
 }

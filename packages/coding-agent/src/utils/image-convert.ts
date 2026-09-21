@@ -1,6 +1,17 @@
+/**
+ * Convert image bytes or base64 payloads to PNG via Photon.
+ *
+ * Photon 不可用或解码失败返回 null。会先按 EXIF 方向摆正再编码。
+ */
+
 import { applyExifOrientation } from "./exif-orientation.ts";
 import { loadPhoton } from "./photon.ts";
 
+/**
+ * Convert raw image bytes to PNG.
+ *
+ * Photon 没装或转换失败返回 null。旋转后的临时图会 free。
+ */
 export async function convertImageBytesToPng(bytes: Uint8Array): Promise<Uint8Array | null> {
 	const photon = await loadPhoton();
 	if (!photon) {
@@ -26,6 +37,8 @@ export async function convertImageBytesToPng(bytes: Uint8Array): Promise<Uint8Ar
 /**
  * Convert image to PNG format for terminal display.
  * Kitty graphics protocol requires PNG format (f=100).
+ *
+ * 已是 PNG 原样返回。转失败返回 null，不抛。
  */
 export async function convertToPng(
 	base64Data: string,

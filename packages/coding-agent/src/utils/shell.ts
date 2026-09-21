@@ -1,8 +1,19 @@
+/**
+ * Resolve bash/PowerShell configs and manage detached child process trees.
+ *
+ * Windows 优先 Git Bash。PowerShell 工具只在 win32。脱离进程靠 pid 集合在关机时杀树。
+ */
+
 import { existsSync } from "node:fs";
 import { delimiter, join } from "node:path";
 import { spawn, spawnSync } from "child_process";
 import { getBinDir } from "../config.ts";
 
+/**
+ * Shell executable plus argv used to run a command string.
+ *
+ * commandTransport 为 stdin 时命令走 stdin，不进 argv。
+ */
 export interface ShellConfig {
 	shell: string;
 	args: string[];
@@ -63,6 +74,8 @@ function findExecutableOnPath(executable: string): string | null {
  * 1. User-specified shellPath
  * 2. On Windows: Git Bash in known locations, then bash on PATH
  * 3. On Unix: /bin/bash, then bash on PATH, then fallback to sh
+ *
+ * 自定义路径不存在抛错。Windows 找不到 bash 抛错；Unix 最后回退 `sh -c`。
  */
 export function getShellConfig(customShellPath?: string): ShellConfig {
 	// 1. Check user-specified shell path
@@ -119,9 +132,18 @@ export function getShellConfig(customShellPath?: string): ShellConfig {
 	return { shell: "sh", args: ["-c"] };
 }
 
+/**
+ * PowerShell argv prefix shared by the powershell tool.
+ *
+ * 固定 -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command。
+ */
 export const POWERSHELL_ARGS = ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-Command"] as const;
 
-/** Resolve PowerShell on Windows, preferring PowerShell 7 when available. */
+/**
+ * Resolve PowerShell on Windows, preferring PowerShell 7 when available.
+ *
+ * 非 win32 抛错。pwsh 优先，否则 powershell.exe。
+ */
 export function getPowerShellConfig(): ShellConfig {
 	if (process.platform !== "win32") {
 		throw new Error("The powershell tool is only available on Windows.");
@@ -135,6 +157,11 @@ export function getPowerShellConfig(): ShellConfig {
 	return { shell, args: [...POWERSHELL_ARGS] };
 }
 
+/**
+ * process.env with the managed bin directory prepended to PATH.
+ *
+ * 已在 PATH 里则不重复。保留原 PATH 键的大小写。
+ */
 export function getShellEnv(): NodeJS.ProcessEnv {
 	const binDir = getBinDir();
 	const pathKey = Object.keys(process.env).find((key) => key.toLowerCase() === "path") ?? "PATH";
@@ -156,6 +183,8 @@ export function getShellEnv(): NodeJS.ProcessEnv {
  * - Lone surrogates
  * - Unicode Format characters (crash string-width due to a bug)
  * - Characters with undefined code points
+ *
+ * 按码点过滤。保留 tab/LF/CR。去掉其它控制符和 U+FFF9–FFFB。
  */
 export function sanitizeBinaryOutput(str: string): string {
 	// Use Array.from to properly iterate over code points (not code units)
@@ -195,14 +224,29 @@ export function sanitizeBinaryOutput(str: string): string {
  */
 const trackedDetachedChildPids = new Set<number>();
 
+/**
+ * Remember a detached child pid so shutdown can kill its tree.
+ *
+ * 只登记，不立即杀。
+ */
 export function trackDetachedChildPid(pid: number): void {
 	trackedDetachedChildPids.add(pid);
 }
 
+/**
+ * Drop a pid from the detached-child set.
+ *
+ * 不存在则无操作。
+ */
 export function untrackDetachedChildPid(pid: number): void {
 	trackedDetachedChildPids.delete(pid);
 }
 
+/**
+ * Kill every tracked detached child tree and clear the set.
+ *
+ * 逐个 killProcessTree，然后清空。
+ */
 export function killTrackedDetachedChildren(): void {
 	for (const pid of trackedDetachedChildPids) {
 		killProcessTree(pid);
@@ -212,6 +256,8 @@ export function killTrackedDetachedChildren(): void {
 
 /**
  * Kill a process and all its children (cross-platform)
+ *
+ * Windows 用 System32 taskkill /T。Unix 先杀进程组，失败再杀 pid。
  */
 export function killProcessTree(pid: number): void {
 	if (process.platform === "win32") {

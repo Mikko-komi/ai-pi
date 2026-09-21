@@ -1,3 +1,9 @@
+/**
+ * Check pi.dev for a newer published package version.
+ *
+ * PI_OFFLINE 不请求。比较失败时字符串不等也当更新。检查错误不抛给调用方。
+ */
+
 import { compare, valid } from "semver";
 import { fetchWithRetry } from "./management-http.ts";
 import { getPiUserAgent } from "./pi-user-agent.ts";
@@ -5,13 +11,22 @@ import { getPiUserAgent } from "./pi-user-agent.ts";
 const LATEST_VERSION_URL = "https://pi.dev/api/latest-version";
 const DEFAULT_VERSION_CHECK_TIMEOUT_MS = 10000;
 
+/**
+ * Latest release payload from pi.dev.
+ *
+ * version 必有。packageName / note 可缺。
+ */
 export interface LatestPiRelease {
 	version: string;
 	packageName?: string;
 	note?: string;
 }
 
-/** Include useful errno details hidden behind Node's generic "fetch failed" error. */
+/**
+ * Include useful errno details hidden behind Node's generic "fetch failed" error.
+ *
+ * 有 cause.code 就附上。否则用 cause.message。
+ */
 export function formatVersionCheckError(error: unknown): string {
 	const rootMessage = error instanceof Error && error.message ? error.message : String(error);
 	const cause = error instanceof Error ? error.cause : undefined;
@@ -31,6 +46,11 @@ export function formatVersionCheckError(error: unknown): string {
 	return causeMessage ? `${rootMessage} (cause: ${causeMessage})` : rootMessage;
 }
 
+/**
+ * Compare two package versions with semver, or undefined if either is invalid.
+ *
+ * 非法 semver 返回 undefined，不抛。
+ */
 export function comparePackageVersions(leftVersion: string, rightVersion: string): number | undefined {
 	const left = valid(leftVersion.trim());
 	const right = valid(rightVersion.trim());
@@ -40,6 +60,11 @@ export function comparePackageVersions(leftVersion: string, rightVersion: string
 	return compare(left, right);
 }
 
+/**
+ * Whether candidate is newer than current.
+ *
+ * semver 不可比时，trim 后字符串不等即视为更新。
+ */
 export function isNewerPackageVersion(candidateVersion: string, currentVersion: string): boolean {
 	const comparison = comparePackageVersions(candidateVersion, currentVersion);
 	if (comparison !== undefined) {
@@ -48,6 +73,11 @@ export function isNewerPackageVersion(candidateVersion: string, currentVersion: 
 	return candidateVersion.trim() !== currentVersion.trim();
 }
 
+/**
+ * Fetch the latest pi release metadata.
+ *
+ * PI_OFFLINE 返回 undefined。HTTP 非 2xx 或缺 version 也是 undefined。
+ */
 export async function getLatestPiRelease(
 	currentVersion: string,
 	options: { timeoutMs?: number; retry?: boolean } = {},
@@ -87,6 +117,11 @@ export async function getLatestPiRelease(
 	};
 }
 
+/**
+ * Fetch only the latest version string.
+ *
+ * 建立在 getLatestPiRelease 上。失败同样 undefined。
+ */
 export async function getLatestPiVersion(
 	currentVersion: string,
 	options: { timeoutMs?: number; retry?: boolean } = {},
@@ -94,6 +129,11 @@ export async function getLatestPiVersion(
 	return (await getLatestPiRelease(currentVersion, options))?.version;
 }
 
+/**
+ * Return the latest release when it is newer than currentVersion.
+ *
+ * PI_SKIP_VERSION_CHECK 或请求失败返回 undefined。
+ */
 export async function checkForNewPiVersion(currentVersion: string): Promise<LatestPiRelease | undefined> {
 	if (process.env.PI_SKIP_VERSION_CHECK) return undefined;
 

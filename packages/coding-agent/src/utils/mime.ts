@@ -1,8 +1,19 @@
+/**
+ * Sniff supported image MIME types from magic bytes.
+ *
+ * 认 JPEG/PNG/GIF/WebP/BMP。JPEG 的 0xF7 和动画 PNG 当不支持。
+ */
+
 import { open } from "node:fs/promises";
 
 const IMAGE_TYPE_SNIFF_BYTES = 4100;
 const PNG_SIGNATURE = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
 
+/**
+ * Detect a supported image MIME type from a buffer prefix.
+ *
+ * 对不上或动画 PNG 返回 null。BMP 还要过 DIB 头检查。
+ */
 export function detectSupportedImageMimeType(buffer: Uint8Array): string | null {
 	if (startsWith(buffer, [0xff, 0xd8, 0xff])) {
 		return buffer[3] === 0xf7 ? null : "image/jpeg";
@@ -22,6 +33,11 @@ export function detectSupportedImageMimeType(buffer: Uint8Array): string | null 
 	return null;
 }
 
+/**
+ * Sniff the first 4100 bytes of a file for a supported image MIME type.
+ *
+ * 读完关句柄。空文件或对不上返回 null。
+ */
 export async function detectSupportedImageMimeTypeFromFile(filePath: string): Promise<string | null> {
 	const fileHandle = await open(filePath, "r");
 	try {

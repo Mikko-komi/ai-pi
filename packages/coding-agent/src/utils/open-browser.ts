@@ -1,3 +1,9 @@
+/**
+ * Open a URL or file in the platform default handler without a shell.
+ *
+ * 从不走 shell。Windows 用 rundll32，不用 `cmd /c start`，避免 URL 注入。
+ */
+
 import { spawn } from "node:child_process";
 
 /**
@@ -6,6 +12,8 @@ import { spawn } from "node:child_process";
  * This intentionally never invokes a shell. On Windows, do not use
  * `cmd /c start`: cmd.exe re-parses metacharacters (&, |, ^, ...) before
  * `start` runs, which would make attacker-controlled URLs injectable.
+ *
+ * spawn 失败忽略。调用方仍会向用户展示 target。
  */
 export function openBrowser(target: string): void {
 	const [cmd, args]: [string, string[]] =

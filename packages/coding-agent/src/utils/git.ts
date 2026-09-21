@@ -1,7 +1,15 @@
+/**
+ * Parse git install sources into a cloneable GitSource.
+ *
+ * 无 `git:` 前缀只收显式协议。路径含 `..` / NUL / 绝对路径则拒绝。
+ */
+
 import hostedGitInfo from "hosted-git-info";
 
 /**
  * Parsed git URL information.
+ *
+ * 可 clone 的源。有 ref 则 pinned，包不会自动跟远端更新。
  */
 export type GitSource = {
 	/** Always "git" for git sources */
@@ -168,6 +176,8 @@ function parseGenericGitUrl(url: string): GitSource | null {
  * Rules:
  * - With git: prefix, accept all historical shorthand forms.
  * - Without git: prefix, only accept explicit protocol URLs.
+ *
+ * 解析失败返回 null。host 或 path 不安全分段直接拒绝。
  */
 export function parseGitUrl(source: string): GitSource | null {
 	const trimmed = source.trim();

@@ -1,3 +1,9 @@
+/**
+ * Resize images off the TUI thread, with in-process fallback.
+ *
+ * 优先 worker；Bun 编译二进制先试字符串入口。worker 加载失败回退进程内 Photon。
+ */
+
 import { Worker } from "node:worker_threads";
 import { type ImageResizeOptions, type ResizedImage, resizeImageInProcess } from "./image-resize-core.ts";
 
@@ -81,6 +87,8 @@ async function resizeImageInWorker(
  * block the TUI event loop. If the worker cannot be loaded (for example in some
  * Bun compiled executable layouts), fall back to in-process resizing so image
  * reads still work.
+ *
+ * worker 失败回退 resizeImageInProcess。调用方的 inputBytes 不会被 transfer 拆掉。
  */
 export async function resizeImage(
 	inputBytes: Uint8Array,
@@ -112,6 +120,8 @@ export async function resizeImage(
 /**
  * Format a dimension note for resized images.
  * This helps the model understand the coordinate mapping.
+ *
+ * 没缩放返回 undefined。比例按 originalWidth / width。
  */
 export function formatDimensionNote(result: ResizedImage): string | undefined {
 	if (!result.wasResized) {

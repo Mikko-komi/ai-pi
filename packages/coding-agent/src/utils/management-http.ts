@@ -1,7 +1,18 @@
+/**
+ * Bounded retry fetch for idempotent management HTTP.
+ *
+ * 只给版本检查、目录、下载用。agent/model 请求禁止走这里。
+ */
+
 type FetchInput = Parameters<typeof fetch>[0];
 
 const RETRYABLE_STATUS_CODES = new Set([408, 425, 429, 500, 502, 503, 504]);
 
+/**
+ * Retry and timeout budget for fetchWithRetry.
+ *
+ * maxRetries 默认 2 次额外尝试。timeoutMs 是总预算；attemptTimeoutMs 只杀当前尝试。
+ */
 export interface FetchRetryOptions {
 	/** Number of additional attempts after the initial request. Defaults to two. */
 	maxRetries?: number;
@@ -23,6 +34,8 @@ export interface FetchRetryOptions {
  *
  * Caller cancellation and timeoutMs are terminal. attemptTimeoutMs aborts
  * only the current attempt so a hung connection can be retried.
+ *
+ * 调用方取消和 timeoutMs 是终态。attemptTimeoutMs 超时可以再试。
  */
 export async function fetchWithRetry(
 	input: FetchInput,

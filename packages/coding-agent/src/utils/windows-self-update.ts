@@ -1,3 +1,9 @@
+/**
+ * Quarantine loaded native addons so Windows can overwrite the package tree.
+ *
+ * 只处理 packageDir 下已加载的 shared object。先改名再拷回，让更新覆盖副本。
+ */
+
 import { randomUUID } from "node:crypto";
 import { copyFileSync, existsSync, mkdirSync, renameSync, rmSync } from "node:fs";
 import { basename, dirname, join, relative, resolve, toNamespacedPath } from "node:path";
@@ -47,6 +53,11 @@ function getLoadedSharedObjectsInPackageDir(packageDir: string): string[] {
 	return loadedFiles;
 }
 
+/**
+ * Delete the `.pi-native-quarantine` directory under the nearest node_modules.
+ *
+ * 找不到 node_modules 直接返回。删除失败忽略（可能仍有进程占着）。
+ */
 export function cleanupWindowsSelfUpdateQuarantine(packageDir: string): void {
 	const quarantineRoot = getQuarantineRoot(packageDir);
 	if (!quarantineRoot) {
@@ -59,6 +70,11 @@ export function cleanupWindowsSelfUpdateQuarantine(packageDir: string): void {
 	}
 }
 
+/**
+ * Move loaded native files aside and copy them back so the originals unlock.
+ *
+ * 没有已加载 native 或找不到 node_modules 则空操作。
+ */
 export function quarantineWindowsNativeDependencies(packageDir: string): void {
 	const resolvedPackageDir = normalizePath(packageDir);
 	const quarantineRoot = getQuarantineRoot(resolvedPackageDir);

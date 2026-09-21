@@ -1,3 +1,9 @@
+/**
+ * Cross-platform spawn wrappers and child-process wait helpers.
+ *
+ * Windows 用 cross-spawn 解 .cmd；Unix 用 node spawn。wait 在 exit 后等管道空闲再收口。
+ */
+
 import {
 	type ChildProcess,
 	type ChildProcessByStdio,
@@ -15,6 +21,11 @@ import crossSpawn from "cross-spawn";
 
 const EXIT_STDIO_GRACE_MS = 100;
 
+/**
+ * Spawn a child process. Windows uses cross-spawn so `.cmd` shims resolve.
+ *
+ * Windows 走 cross-spawn，Unix 走 node spawn。overload 共享这一份注释。
+ */
 export function spawnProcess(
 	command: string,
 	args: string[],
@@ -25,6 +36,11 @@ export function spawnProcess(command: string, args: string[], options: SpawnOpti
 	return process.platform === "win32" ? crossSpawn(command, args, options) : nodeSpawn(command, args, options);
 }
 
+/**
+ * Spawn a child process synchronously with the same Windows/Unix split as `spawnProcess`.
+ *
+ * Windows 走 cross-spawn.sync。编码由调用方在 options 里给。
+ */
 export function spawnProcessSync(
 	command: string,
 	args: string[],
@@ -45,6 +61,8 @@ export function spawnProcessSync(
  * the grace timer is re-armed on every chunk, so an actively writing descendant keeps
  * us reading, while a quiet inherited handle (e.g. a Windows daemonized descendant
  * that never lets `close` fire) still releases us after the grace elapses.
+ *
+ * exit 后管道还在写就重武装闲计时。quiet 的继承句柄超时后仍释放，避免丢尾巴。
  */
 export function waitForChildProcess(child: ChildProcess): Promise<number | null> {
 	return new Promise((resolve, reject) => {

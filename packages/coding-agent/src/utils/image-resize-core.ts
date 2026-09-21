@@ -1,6 +1,17 @@
+/**
+ * In-process Photon resize to dimension and encoded-size limits.
+ *
+ * Photon 不可用或缩不到 maxBytes 返回 null。先限边再比 PNG/JPEG，再降质，再缩尺寸。
+ */
+
 import { applyExifOrientation } from "./exif-orientation.ts";
 import { loadPhoton } from "./photon.ts";
 
+/**
+ * Dimension and encoded-size limits for a resize pass.
+ *
+ * 默认 2000×2000、4.5MB base64、JPEG 质量 80。
+ */
 export interface ImageResizeOptions {
 	maxWidth?: number; // Default: 2000
 	maxHeight?: number; // Default: 2000
@@ -8,6 +19,11 @@ export interface ImageResizeOptions {
 	jpegQuality?: number; // Default: 80
 }
 
+/**
+ * Base64 image plus original and displayed dimensions.
+ *
+ * wasResized 为假时 data 仍是原字节的 base64。
+ */
 export interface ResizedImage {
 	data: string; // base64
 	mimeType: string;
@@ -55,6 +71,8 @@ function encodeCandidate(buffer: Uint8Array, mimeType: string): EncodedCandidate
  * 2. Try both PNG and JPEG formats, pick the smaller one
  * 3. If still too large, try JPEG with decreasing quality
  * 4. If still too large, progressively reduce dimensions until 1x1
+ *
+ * Photon 没有或缩到 1×1 仍超 maxBytes 返回 null。成功路径会 free Photon 图。
  */
 export async function resizeImageInProcess(
 	inputBytes: Uint8Array,

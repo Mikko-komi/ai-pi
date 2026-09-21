@@ -1,3 +1,9 @@
+/**
+ * Locate or download managed `fd` / `rg` binaries.
+ *
+ * 先本地 bin 再 PATH。PI_OFFLINE 和 Android/Termux 不下载。版本查询走 GitHub 页面重定向，不打 api.github.com。
+ */
+
 import { type SpawnSyncReturns, spawnSync } from "child_process";
 import { chmodSync, createWriteStream, existsSync, mkdirSync, readdirSync, renameSync, rmSync } from "fs";
 import { arch, platform } from "os";
@@ -79,7 +85,11 @@ function commandExists(cmd: string): boolean {
 	}
 }
 
-// Get the path to a tool (system-wide or in our tools dir)
+/**
+ * Resolve fd or rg to a local bin path or a PATH command name.
+ *
+ * 本地托管副本优先。都没有返回 null。
+ */
 export function getToolPath(tool: "fd" | "rg"): string | null {
 	const config = TOOLS[tool];
 	if (!config) return null;
@@ -107,6 +117,11 @@ export function getToolPath(tool: "fd" | "rg"): string | null {
 // shared egress IPs such as corporate proxies and CI runners. The web
 // endpoint answers with a redirect to the tagged release at no quota cost
 // and lives on the same origin as the binary download itself.
+/**
+ * Resolve the latest GitHub release tag via the /releases/latest redirect.
+ *
+ * 不走 api.github.com，避免匿名配额。无重定向或路径不像 tag 则抛。
+ */
 export async function getLatestVersion(repo: string): Promise<string> {
 	const response = await fetchWithRetry(
 		`https://github.com/${repo}/releases/latest`,
@@ -336,6 +351,11 @@ const TERMUX_PACKAGES: Record<string, string> = {
 	rg: "ripgrep",
 };
 
+/**
+ * Status line emitted while ensuring a tool.
+ *
+ * type 区分 info 和 warning。否则静默。
+ */
 export interface ToolStatus {
 	type: "info" | "warning";
 	message: string;
@@ -345,6 +365,8 @@ export interface ToolStatus {
  * Ensure a tool is available, downloading if necessary.
  * Reports progress through `onStatus`; status messages are otherwise silent.
  * Returns the tool path, or undefined if unavailable.
+ *
+ * 已有路径直接返回。离线或 Termux 只警告。下载失败返回 undefined。
  */
 export async function ensureTool(
 	tool: "fd" | "rg",

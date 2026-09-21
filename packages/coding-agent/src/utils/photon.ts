@@ -11,6 +11,8 @@
  * Solution:
  * 1. Patch fs.readFileSync to redirect missing photon_rs_bg.wasm reads
  * 2. Copy photon_rs_bg.wasm next to the executable in build:binary
+ *
+ * Photon 加载封装。Node 和 Bun 编译二进制共用。读不到打包路径里的 wasm 时改走可执行文件旁的副本。
  */
 
 import type { PathOrFileDescriptor } from "fs";
@@ -112,6 +114,8 @@ function patchPhotonWasmRead(): () => void {
 /**
  * Load the photon module asynchronously.
  * Returns cached module on subsequent calls.
+ *
+ * 失败缓存 null。加载期间 patch readFileSync，结束后还原。
  */
 export async function loadPhoton(): Promise<typeof import("@silvia-odwyer/photon-node") | null> {
 	if (photonModule) {

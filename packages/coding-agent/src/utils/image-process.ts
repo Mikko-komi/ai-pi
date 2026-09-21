@@ -1,6 +1,17 @@
+/**
+ * Normalize and optionally resize an image for inline provider payloads.
+ *
+ * 不支持格式先转 PNG。resize 失败整张省略。hints 描述转换和坐标缩放。
+ */
+
 import { convertImageBytesToPng } from "./image-convert.ts";
 import { formatDimensionNote, type ImageResizeOptions, resizeImage } from "./image-resize.ts";
 
+/**
+ * Options for processImage.
+ *
+ * autoResizeImages 默认 true。resizeOptions 省略则用 resizeImage 默认上限。
+ */
 export interface ProcessImageOptions {
 	/** Whether to resize images to inline provider limits. Default: true */
 	autoResizeImages?: boolean;
@@ -8,6 +19,11 @@ export interface ProcessImageOptions {
 	resizeOptions?: ImageResizeOptions;
 }
 
+/**
+ * Success payload or an omission message for processImage.
+ *
+ * ok 为假时只给用户可读 message，不含 data。
+ */
 export type ProcessImageResult =
 	| {
 			ok: true;
@@ -69,6 +85,11 @@ function conversionHint(from: string | undefined, to: string): string | undefine
 	return `[Image converted from ${from} to ${to}.]`;
 }
 
+/**
+ * Convert, optionally resize, and encode an image for inline use.
+ *
+ * 转不了或缩不进上限则 ok:false。成功 data 是 base64。
+ */
 export async function processImage(
 	bytes: Uint8Array,
 	mimeType: string,

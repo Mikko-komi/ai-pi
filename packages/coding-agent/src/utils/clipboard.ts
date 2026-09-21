@@ -1,3 +1,9 @@
+/**
+ * Read and write the system clipboard as plain text.
+ *
+ * Linux 优先平台命令；远程会话或本地失败再 OSC 52。全失败才抛。
+ */
+
 import { platform } from "node:os";
 import { getNativeClipboard } from "@earendil-works/pi-tui";
 import { runClipboardCommand } from "./clipboard-command.ts";
@@ -17,7 +23,11 @@ function emitOsc52(text: string): boolean {
 	return true;
 }
 
-/** Read plain text from the system clipboard. */
+/**
+ * Read plain text from the system clipboard.
+ *
+ * Linux 按 Termux / Wayland / X11 试命令。失败或空剪贴板返回 null。
+ */
 export async function readClipboardText(): Promise<string | null> {
 	if (platform() === "linux") {
 		const commands: [string, string[]][] = [];
@@ -38,6 +48,11 @@ export async function readClipboardText(): Promise<string | null> {
 	}
 }
 
+/**
+ * Copy plain text to the system clipboard.
+ *
+ * 先本地写入再 OSC 52，避免终端抢写。全路径失败抛 Error。
+ */
 export async function copyToClipboard(text: string): Promise<void> {
 	const p = platform();
 	let copied = false;

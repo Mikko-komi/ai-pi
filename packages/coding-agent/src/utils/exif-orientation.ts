@@ -1,3 +1,9 @@
+/**
+ * Apply JPEG/WebP EXIF orientation to a Photon image.
+ *
+ * 只处理 JPEG/WebP。方向 1 原样返回。翻转原地改；旋转返回新图，调用方负责 free 旧图。
+ */
+
 import type { PhotonImageType } from "./photon.ts";
 
 type Photon = typeof import("@silvia-odwyer/photon-node");
@@ -142,7 +148,11 @@ function rotate90(photon: Photon, image: PhotonImageType, dstIndex: DstIndexFn):
 	return new photon.PhotonImage(dst, h, w);
 }
 
-// Flip orientations mutate in-place. Rotations return a new image (caller must free the old one if different).
+/**
+ * Apply EXIF orientation 2–8 to a Photon image.
+ *
+ * 翻转原地改。旋转返回新图（调用方必须 free 不同的旧图）。读不到方向当 1。
+ */
 export function applyExifOrientation(
 	photon: Photon,
 	image: PhotonImageType,

@@ -1,6 +1,16 @@
+/**
+ * Spawn a clipboard helper and collect its stdout.
+ *
+ * 失败或超时返回 undefined；空 buffer 算成功。写入端不给输出管道以免常驻。
+ */
+
 import { spawn } from "node:child_process";
 
-/** Undefined means the command failed; an empty buffer is a successful result. */
+/**
+ * Undefined means the command failed; an empty buffer is a successful result.
+ *
+ * 超时 SIGKILL。超 maxBuffer 也当失败。stdin 写失败忽略。
+ */
 export function runClipboardCommand(
 	command: string,
 	args: readonly string[],

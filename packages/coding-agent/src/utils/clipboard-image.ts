@@ -1,3 +1,9 @@
+/**
+ * Read an image from the system clipboard and normalize it to a supported MIME.
+ *
+ * Termux 直接 null。Wayland 空剪贴板不回落到陈旧 X11。不支持格式尽量转 PNG。
+ */
+
 import { getNativeClipboard } from "@earendil-works/pi-tui";
 import { randomUUID } from "crypto";
 import { readFileSync, unlinkSync } from "fs";
@@ -8,6 +14,11 @@ import { runClipboardCommand } from "./clipboard-command.ts";
 import { detectSupportedImageMimeType } from "./mime.ts";
 import { loadPhoton } from "./photon.ts";
 
+/**
+ * Image bytes plus a MIME type from the clipboard.
+ *
+ * 字节和 MIME 一对。MIME 已是 base type，不含参数。
+ */
 export type ClipboardImage = {
 	bytes: Uint8Array;
 	mimeType: string;
@@ -18,6 +29,11 @@ const SUPPORTED_IMAGE_MIME_TYPES = ["image/png", "image/jpeg", "image/webp", "im
 const DEFAULT_LIST_TIMEOUT_MS = 1000;
 const DEFAULT_POWERSHELL_TIMEOUT_MS = 5000;
 
+/**
+ * Detect a Wayland session from environment variables.
+ *
+ * `WAYLAND_DISPLAY` 或 `XDG_SESSION_TYPE=wayland` 即为真。
+ */
 export function isWaylandSession(env: NodeJS.ProcessEnv = process.env): boolean {
 	return Boolean(env.WAYLAND_DISPLAY) || env.XDG_SESSION_TYPE === "wayland";
 }
@@ -26,6 +42,11 @@ function baseMimeType(mimeType: string): string {
 	return mimeType.split(";")[0]?.trim().toLowerCase() ?? mimeType.toLowerCase();
 }
 
+/**
+ * Map a supported image MIME type to a file extension.
+ *
+ * 只认 png/jpeg/webp/gif。其它返回 null。
+ */
 export function extensionForImageMimeType(mimeType: string): string | null {
 	switch (baseMimeType(mimeType)) {
 		case "image/png":
@@ -216,6 +237,11 @@ async function readClipboardImageViaNativeClipboard(): Promise<ClipboardImage | 
 	return { bytes, mimeType: detectSupportedImageMimeType(bytes) ?? "application/octet-stream" };
 }
 
+/**
+ * Read an image from the clipboard, converting unsupported formats to PNG.
+ *
+ * Termux 返回 null。Linux 先 Wayland/WSL 再 xclip；WSL 可回落 PowerShell。无图返回 null。
+ */
 export async function readClipboardImage(options?: {
 	env?: NodeJS.ProcessEnv;
 	platform?: NodeJS.Platform;

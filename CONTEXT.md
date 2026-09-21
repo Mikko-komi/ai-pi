@@ -52,6 +52,10 @@ _Avoid_: models.generated.ts, 厂商 *.models.ts, oauth 实现
 已完成：coding-agent 进程入口、config / CLI / print·rpc·interactive 模式（不含 components）。
 _Avoid_: TUI 组件, experimental CLI
 
+**第十一刀核心**:
+已完成：`packages/coding-agent/src/utils` 的导出符号。
+_Avoid_: .d.ts, 再导出
+
 **AgentHarness**:
 agent-core 里按 lane 驱动持久化会话的门面，和旧的 `Agent` 循环并列，不替代 `AgentSession`。
 _Avoid_: Agent, AgentSession
