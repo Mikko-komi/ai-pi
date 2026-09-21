@@ -1,3 +1,9 @@
+/**
+ * Synthetically settle orphaned assistant or deferred effects.
+ *
+ * 用已提交帧前缀合成孤儿 assistant/deferred 效果。不再打 provider。
+ */
+
 import { type AssistantMessage, reduceAssistantMessageFrames } from "@earendil-works/pi-ai";
 import type {
 	AssistantEffectPendingOperation,
@@ -40,7 +46,11 @@ function interruptedAssistantMessage(
 		: { ...partial, usage: ZERO_USAGE, stopReason: "error", errorMessage: warning };
 }
 
-/** Settle an orphaned assistant request from its bounded committed frame prefix without another provider call. */
+/**
+ * Settle an orphaned assistant request from its bounded committed frame prefix without another provider call.
+ *
+ * 用已提交帧前缀合成中断 assistant，不再打 provider。停因记 error。
+ */
 export async function recoverAssistantGeneration<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,
@@ -83,7 +93,11 @@ export async function recoverAssistantGeneration<TContext extends object | undef
 	return publishResponse(lane, drive, generation, message, { recovery: true });
 }
 
-/** Synthetically settle one cancelled orphaned assistant or deferred effect under its reserved ids. */
+/**
+ * Synthetically settle one cancelled orphaned assistant or deferred effect under its reserved ids.
+ *
+ * 在预留 id 下合成已取消的 assistant/deferred 效果。走 settle，不 continue。
+ */
 export async function recoverCancelledAssistantEffect<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,

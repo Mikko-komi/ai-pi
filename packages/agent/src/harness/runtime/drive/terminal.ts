@@ -1,3 +1,9 @@
+/**
+ * Terminal cleanup writes and immutable operation result records.
+ *
+ * 终态事务的操作后缀删除，以及一次终态决策的不可变观察记录。
+ */
+
 import type { Context } from "../../context.ts";
 import { SessionInvariantError } from "../../session/session.ts";
 import type {
@@ -22,7 +28,11 @@ import {
 	pendingToolOutputPrefix,
 } from "../../session/values.ts";
 
-/** Build the mechanical operation-owned suffix used by an owning procedure's terminal transaction. */
+/**
+ * Build the mechanical operation-owned suffix used by an owning procedure's terminal transaction.
+ *
+ * 终态事务要删的操作后缀。含 meta/state/args/memos/preps、pending 输出、帧和暂存工具结果。
+ */
 export async function operationCleanupWrites(
 	reader: SessionReader,
 	operationId: string,
@@ -59,7 +69,11 @@ export async function operationCleanupWrites(
 	];
 }
 
-/** Construct the immutable observation record for one terminal decision. */
+/**
+ * Construct the immutable observation record for one terminal decision.
+ *
+ * 一次终态决策的不可变观察记录。只有 failed 能带 error。
+ */
 export function operationResultRecord(
 	meta: OperationMeta,
 	status: TerminalStatus,

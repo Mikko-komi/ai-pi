@@ -1,3 +1,9 @@
+/**
+ * Advance one cancelled durable leaf without starting ordinary work.
+ *
+ * 推进已取消的耐久叶子，不开新普通工作。必须匹配本轮 operationId 且 control 已 cancel_requested。
+ */
+
 import type { DeferredHandle } from "@earendil-works/pi-ai";
 import type { HarnessEvent } from "../../agent-harness.ts";
 import { getTelemetryContext } from "../../context.ts";
@@ -128,7 +134,11 @@ async function publishAbortedTerminal<TContext extends object | undefined>(
 	);
 }
 
-/** Advance one cancelled durable leaf without starting new ordinary work. */
+/**
+ * Advance one cancelled durable leaf without starting new ordinary work.
+ *
+ * 推进已取消叶子，不开新普通工作。assistant/deferred 效果合成落盘；tools 仍走批次收口。
+ */
 export async function reconcileOperation<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,

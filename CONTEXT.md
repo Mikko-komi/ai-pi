@@ -40,6 +40,10 @@ _Avoid_: testing 夹具, runtime drive
 已完成：AgentHarness 门面剩余结果/事件类型、telemetry schema、runtime 公共入口（Harness / Lane / restore / transcript）。
 _Avoid_: drive 内部过程
 
+**第八刀核心**:
+已完成：`packages/agent/src/harness/runtime/drive` 的过程导出。agent + coding-agent/src/core 的学习 JSDoc 到此结束。
+_Avoid_: 测试夹具, 类方法, 再导出
+
 **AgentHarness**:
 agent-core 里按 lane 驱动持久化会话的门面，和旧的 `Agent` 循环并列，不替代 `AgentSession`。
 _Avoid_: Agent, AgentSession

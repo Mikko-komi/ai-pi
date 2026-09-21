@@ -1,3 +1,9 @@
+/**
+ * Read tool-batch sources and materialize ready outcomes in source order.
+ *
+ * 读一批工具调用的 assistant 源，并按源顺序物化已就绪结果。未提交的 outcome 不进 transcript。
+ */
+
 import type { AssistantMessage, ToolResultMessage } from "@earendil-works/pi-ai";
 import type { AgentToolCall } from "../../../types.ts";
 import type { HarnessEvent } from "../../agent-harness.ts";
@@ -26,11 +32,21 @@ import {
 import type { Lane } from "../lane.ts";
 import type { Drive } from "../types.ts";
 
+/**
+ * Assistant message and sourceIndex-to-toolCall map for one durable tool batch.
+ *
+ * 一批工具调用的 assistant 消息和 sourceIndex→toolCall。缺块是不变量错误。
+ */
 export type ToolBatchSource = {
 	assistant: AssistantMessage;
 	calls: Map<number, AgentToolCall>;
 };
 
+/**
+ * Load the assistant source and tool-call blocks for one durable batch.
+ *
+ * 从 assistant 条目读出源。每个 call 的 sourceIndex 必须指向 toolCall 块。
+ */
 export async function readToolBatchSource<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,
@@ -69,6 +85,11 @@ function isToolResultMessage(value: unknown): value is ToolResultMessage<unknown
 	return typeof value === "object" && value !== null && "role" in value && value.role === "toolResult";
 }
 
+/**
+ * Resolve one durable ToolCall to its assistant tool-call block.
+ *
+ * 用 sourceIndex 取出 AgentToolCall。缺了是不变量错误。
+ */
 export function toolCallFor(sources: ToolBatchSource, call: ToolCall): AgentToolCall {
 	const source = sources.calls.get(call.sourceIndex);
 	if (source === undefined) {
@@ -77,6 +98,11 @@ export function toolCallFor(sources: ToolBatchSource, call: ToolCall): AgentTool
 	return source;
 }
 
+/**
+ * Rebuild a ToolsOperation with a new batch while keeping the run-wide scope.
+ *
+ * 用新 batch 重建 ToolsOperation，保留 scope。
+ */
 export function withToolBatch(run: ToolsOperation, batch: ToolBatch): ToolsOperation {
 	return { ...operationScopeOf(run), at: "tools", batch };
 }
@@ -277,6 +303,11 @@ async function commitPlacement<TContext extends object | undefined>(
 	);
 }
 
+/**
+ * Emit and commit the source-order prefix of outcome_ready tool results.
+ *
+ * 按源顺序发出并提交前缀 outcome_ready。整批完成才发 turn_end。
+ */
 export async function materializeReady<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,

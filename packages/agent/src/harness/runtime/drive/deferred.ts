@@ -1,3 +1,9 @@
+/**
+ * Poll or recover one deferred provider response.
+ *
+ * 轮询或恢复一条 deferred 响应。本轮没有 permit 只报 waiting，不打 provider。
+ */
+
 import type { Api, DeferredHandle, Model } from "@earendil-works/pi-ai";
 import { type Context, getTelemetryContext, withAbortSignal } from "../../context.ts";
 import { consumeAssistantStream } from "../../execution/assistant.ts";
@@ -45,6 +51,11 @@ function configurationError(identity: LaneConfiguration["model"]): OperationErro
 	};
 }
 
+/**
+ * Read and validate the deferred handle stored on the source assistant entry.
+ *
+ * 从源 assistant 读 deferred handle。必须是 deferred 停因，且身份匹配当前配置。
+ */
 export async function readDeferredSourceHandle(
 	reader: SessionReader,
 	deferred: DeferredLeaf,
@@ -257,7 +268,11 @@ async function pollDeferred<TContext extends object | undefined>(
 	return publishResponse(lane, drive, intent.value, response, recovery ? { recovery: true } : {});
 }
 
-/** Poll one durably suspended deferred response when this pass carries a permit. */
+/**
+ * Poll one durably suspended deferred response when this pass carries a permit.
+ *
+ * 本轮有 permit 才轮询已挂起的 deferred。无 permit 则 waiting。
+ */
 export function runDeferredSuspended<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,
@@ -266,7 +281,11 @@ export function runDeferredSuspended<TContext extends object | undefined>(
 	return pollDeferred(lane, drive, deferred, false);
 }
 
-/** Replace one orphaned unknown-outcome poll under fresh ids when this pass carries a permit. */
+/**
+ * Replace one orphaned unknown-outcome poll under fresh ids when this pass carries a permit.
+ *
+ * 用新 id 替换一次结果未知的孤儿 poll。同样要本轮 permit。
+ */
 export function recoverDeferredPoll<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,
@@ -275,7 +294,11 @@ export function recoverDeferredPoll<TContext extends object | undefined>(
 	return pollDeferred(lane, drive, deferred, true);
 }
 
-/** Advance or report the wait for one deferred run phase. */
+/**
+ * Advance or report the wait for one deferred run phase.
+ *
+ * 按 at 分派 suspended 轮询或 effect_pending 恢复。
+ */
 export function runDeferred<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,

@@ -1,3 +1,9 @@
+/**
+ * Plan and finish one durable run boundary.
+ *
+ * 规划并收口一条耐久 run 边界：选出 inbox、必要时开 assistant，否则写终态。
+ */
+
 import { DEFAULT_MAX_AGENT_RETRY_DELAY_MS } from "@earendil-works/pi-ai";
 import type { HarnessEvent, LaneQueuedItem } from "../../agent-harness.ts";
 import { insertEntry } from "../../session/commit.ts";
@@ -21,11 +27,21 @@ import { committedEntryEvents, entryLifecycleEvents, readBoundedContext, readLan
 import type { Drive, LaneState, ProcedureResult } from "../types.ts";
 import { operationCleanupWrites, operationResultRecord } from "./terminal.ts";
 
+/**
+ * Marker that inbox planning finished and finish mediation still owns the next commit.
+ *
+ * checkpoint 规划已选出 inbox，但还没走 finish 调解。kind 必须是 finish_pending。
+ */
 export interface BoundaryFinishPending {
 	kind: "finish_pending";
 	entryIds: string[];
 }
 
+/**
+ * Planned but uncommitted inbox materialization for one run boundary.
+ *
+ * 一条边界的 inbox 物化计划，尚未提交。有 trigger 才表示本轮会开 assistant。
+ */
 export interface BoundaryPlacement {
 	entries: NewEntry[];
 	writes: Write[];
@@ -41,6 +57,11 @@ type FinishBoundaryOperation =
 	| SummaryReadyOperation
 	| SummaryEffectPendingOperation;
 
+/**
+ * Convert the lane retry config into the session NormalizedRetryPolicy.
+ *
+ * lane 配置收到会话 NormalizedRetryPolicy。关闭重试时 maxAttempts=1；开启时是 maxRetries+1。
+ */
 export function normalizedRetryPolicy<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 ): NormalizedRetryPolicy {
@@ -52,6 +73,11 @@ export function normalizedRetryPolicy<TContext extends object | undefined>(
 	};
 }
 
+/**
+ * Build the assistant.ready leaf for the current boundary trigger.
+ *
+ * 在当前边界构造 assistant.ready。nextAttempt 从 1 起；stepId 新生成。
+ */
 export function assistantReadyAtBoundary<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	state: LaneState,
@@ -75,7 +101,11 @@ export function assistantReadyAtBoundary<TContext extends object | undefined>(
 	};
 }
 
-/** Select and materialize one boundary's lane-owned input without committing it. */
+/**
+ * Select and materialize one boundary's lane-owned input without committing it.
+ *
+ * 选出并物化 inbox，不提交。先 write+steer；无投影 trigger 且允许 follow-up 才补 follow-up。
+ */
 export async function planBoundaryInbox<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,
@@ -147,6 +177,11 @@ export async function planBoundaryInbox<TContext extends object | undefined>(
 	};
 }
 
+/**
+ * Events for one committed inbox placement.
+ *
+ * 已提交 placement 的事件。先 entry 生命周期，再可选 queue_update。
+ */
 export function boundaryPlacementEvents(
 	placement: BoundaryPlacement,
 	commit: CommitResult,
@@ -160,7 +195,11 @@ export function boundaryPlacementEvents(
 	];
 }
 
-/** Replan after before_run_end and commit either renewed work or the terminal run result. */
+/**
+ * Replan after before_run_end and commit either renewed work or the terminal run result.
+ *
+ * before_run_end 后再规划。有 trigger 或 hook follow-up 就开 assistant；否则写 completed 并清操作后缀。
+ */
 export async function finishRunBoundary<TContext extends object | undefined, TState extends FinishBoundaryOperation>(
 	lane: Lane<TContext>,
 	drive: Drive,

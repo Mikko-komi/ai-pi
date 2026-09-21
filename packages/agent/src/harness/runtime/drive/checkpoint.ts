@@ -1,3 +1,9 @@
+/**
+ * Start a run and advance one durable checkpoint.
+ *
+ * 启动 run 并推进一条耐久 checkpoint。每条边界最多一次 commit。
+ */
+
 import { insertEntry } from "../../session/commit.ts";
 import { SessionInvariantError } from "../../session/session.ts";
 import {
@@ -21,7 +27,11 @@ import {
 } from "./boundary.ts";
 import { prepareCompactionThreshold } from "./structural.ts";
 
-/** Consume before_run and commit the initial checkpoint. */
+/**
+ * Consume before_run and commit the initial checkpoint.
+ *
+ * 消费 before_run，提交初始 checkpoint。hook 不能返回 pending assistant。
+ */
 export async function startRun<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,
@@ -91,7 +101,11 @@ export async function startRun<TContext extends object | undefined>(
 	return result.kind === "cancel_requested" ? { kind: "continue" } : result.value;
 }
 
-/** Advance one durable run boundary with at most one commit. */
+/**
+ * Advance one durable run boundary with at most one commit.
+ *
+ * 推进一条耐久 run 边界，最多一次 commit。inbox trigger、阈值 compaction、need_assistant、finish 调解四选一。
+ */
 export async function runCheckpoint<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,

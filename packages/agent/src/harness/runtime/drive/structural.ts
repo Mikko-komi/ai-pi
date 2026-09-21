@@ -1,3 +1,9 @@
+/**
+ * Decide, generate, retry, and recover compaction or branch-summary work.
+ *
+ * 决策、生成、重试和恢复 compaction/branch-summary；也可原子提交未摘要导航。
+ */
+
 import {
 	type Api,
 	type AssistantMessage,
@@ -72,6 +78,11 @@ function durableFileOperations(fileOps: CompactionPreparation["fileOps"]): Durab
 	};
 }
 
+/**
+ * Snapshot compaction preparation into the durable JSON-safe form.
+ *
+ * 把 compaction 准备打成可持久化快照。fileOps 的 Set 收成数组。
+ */
 export function durableCompactionPreparation(
 	preparation: CompactionPreparation,
 ): Extract<DurableStructuralPreparation, { kind: "compaction" }> {
@@ -88,6 +99,11 @@ export function durableCompactionPreparation(
 	};
 }
 
+/**
+ * Snapshot branch-summary preparation into the durable JSON-safe form.
+ *
+ * 把分支摘要准备打成可持久化快照。fileOps 的 Set 收成数组。
+ */
 export function durableBranchPreparation(
 	preparation: BranchPreparation,
 ): Extract<DurableStructuralPreparation, { kind: "branch_summary" }> {
@@ -604,7 +620,11 @@ async function publishStructuralReady<TContext extends object | undefined>(
 	return published.kind === "cancel_requested" ? { kind: "continue" } : published.value;
 }
 
-/** Consume one durable structural preparation and decision hook. */
+/**
+ * Consume one durable structural preparation and decision hook.
+ *
+ * 消费耐久准备和决策 hook。decline/hook 结果立刻发布；否则进 summary.ready。
+ */
 export async function runStructuralDecision<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,
@@ -1006,7 +1026,11 @@ async function publishAttemptResult<TContext extends object | undefined>(
 	return publishStructuralOutcome(lane, drive, effect, { kind: "failed", error: result.error });
 }
 
-/** Execute one ready structural generation attempt. */
+/**
+ * Execute one ready structural generation attempt.
+ *
+ * 执行一次 ready 的结构生成。模型不可用直接失败，不预留嵌套 request。
+ */
 export async function runStructuralGeneration<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,
@@ -1028,7 +1052,11 @@ export async function runStructuralGeneration<TContext extends object | undefine
 	return publishAttemptResult(lane, drive, intent.value, result);
 }
 
-/** Consume one structural retry wait without starting a provider effect. */
+/**
+ * Consume one structural retry wait without starting a provider effect.
+ *
+ * 消费结构重试等待，不开 provider 效果。时刻未到且不等待则回报 waiting。
+ */
 export async function runStructuralRetryWait<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,
@@ -1073,7 +1101,11 @@ export async function runStructuralRetryWait<TContext extends object | undefined
 	return published.kind === "cancel_requested" ? { kind: "continue" } : published.value;
 }
 
-/** Convert an orphaned structural attempt into a fresh numbered attempt or terminal failure. */
+/**
+ * Convert an orphaned structural attempt into a fresh numbered attempt or terminal failure.
+ *
+ * 孤儿结构尝试变成新编号尝试或终态失败。已达 maxAttempts 则失败。
+ */
 export async function recoverStructuralGeneration<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,
@@ -1114,7 +1146,11 @@ export async function recoverStructuralGeneration<TContext extends object | unde
 	return published.kind === "cancel_requested" ? { kind: "continue" } : published.value;
 }
 
-/** Prepare threshold compaction only when no newer compaction already guards this trigger. */
+/**
+ * Prepare threshold compaction only when no newer compaction already guards this trigger.
+ *
+ * 仅当触发点之后没有更新的 compaction 才准备阈值压缩。未启用或模型不可用则跳过。
+ */
 export async function prepareCompactionThreshold<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,
@@ -1151,7 +1187,11 @@ export async function prepareCompactionThreshold<TContext extends object | undef
 	};
 }
 
-/** Prepare one overflow compaction before the response settlement transaction. */
+/**
+ * Prepare one overflow compaction before the response settlement transaction.
+ *
+ * 响应落盘前准备 overflow compaction。已用过 overflow 恢复则跳过。
+ */
 export async function prepareOverflowCompaction<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,
@@ -1169,7 +1209,11 @@ export async function prepareOverflowCompaction<TContext extends object | undefi
 	};
 }
 
-/** Atomically move an unsummarized navigation and finish its operation. */
+/**
+ * Atomically move an unsummarized navigation and finish its operation.
+ *
+ * 原子移动未摘要导航并结束操作。目标必须存在且不同于源 tip；根不能带 label。
+ */
 export function commitNavigation<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,

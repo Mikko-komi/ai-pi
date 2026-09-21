@@ -1,3 +1,9 @@
+/**
+ * Open an assistant stream lifecycle and atomically settle one response.
+ *
+ * 打开 assistant 流生命周期，并原子落盘一条响应。一次事务写 entry、usage、tip 和下一状态。
+ */
+
 import {
 	type AssistantMessageEvent,
 	AssistantMessageFrameEncoder,
@@ -33,6 +39,11 @@ import { retryNotBefore } from "./retry.ts";
 import { prepareOverflowCompaction } from "./structural.ts";
 import { operationCleanupWrites, operationResultRecord } from "./terminal.ts";
 
+/**
+ * Stream observer, after_response hook, and close handle for one reserved assistant entry.
+ *
+ * 一条预留 assistant 条目的观察者、after_response 和 close。close 会 seal/drain 帧进度。
+ */
 export type AssistantResponseLifecycle = {
 	observer: AssistantStreamObserver;
 	afterResponse(
@@ -43,6 +54,11 @@ export type AssistantResponseLifecycle = {
 	close(): Promise<void>;
 };
 
+/**
+ * Open the assistant response lifecycle for one reserved entry id.
+ *
+ * 为预留 response id 打开流生命周期。recovery 只影响事件标记。
+ */
 export function openAssistantResponse<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,
@@ -102,7 +118,11 @@ type ConfigurationFailureState = Extract<
 	{ at: "assistant.ready" | "assistant.retry_wait" | "deferred.suspended" | "deferred.effect_pending" }
 >;
 
-/** Publish a non-retryable request-configuration failure before reserving response ids. */
+/**
+ * Publish a non-retryable request-configuration failure before reserving response ids.
+ *
+ * 配置失败不可重试，且尚未预留 response id。run 以 failed 结束。
+ */
 export async function publishConfigurationFailure<
 	TContext extends object | undefined,
 	TState extends ConfigurationFailureState,
@@ -178,7 +198,11 @@ function deferredHandleIsValid(message: SettledAssistantMessage, generation: Ass
 	);
 }
 
-/** Classify and atomically settle one assistant-generation or deferred-poll response. */
+/**
+ * Classify and atomically settle one assistant-generation or deferred-poll response.
+ *
+ * 分类并原子落盘一条 assistant/deferred 响应。overflow 可开 compaction；仅可重试错误且未超次数才进 retry_wait。
+ */
 export async function publishResponse<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,

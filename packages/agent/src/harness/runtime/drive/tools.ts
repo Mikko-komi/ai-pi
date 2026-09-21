@@ -1,3 +1,9 @@
+/**
+ * Execute, recover, and source-order one durable tool batch.
+ *
+ * 执行、恢复并按源顺序收口一整批耐久工具。effect_pending/outcome_ready 视为恢复。
+ */
+
 import type { ToolResultMessage } from "@earendil-works/pi-ai";
 import type { AgentToolCall, AgentToolResult } from "../../../types.ts";
 import { AbortRequested } from "../../execution/effect-gate.ts";
@@ -652,7 +658,11 @@ async function runParallel<TContext extends object | undefined>(
 	return { kind: "continue" };
 }
 
-/** Execute, recover, stage, and source-order one complete durable tool batch. */
+/**
+ * Execute, recover, stage, and source-order one complete durable tool batch.
+ *
+ * 执行、恢复、暂存并按源顺序落盘一整批耐久工具。已取消批次走顺序且不开新执行。
+ */
 export async function runTools<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,

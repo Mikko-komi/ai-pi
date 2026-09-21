@@ -1,3 +1,9 @@
+/**
+ * Execute one ready assistant generation or its durable retry wait.
+ *
+ * 执行一次 ready 的 assistant 生成，或推进其耐久 retry wait。配置失败在预留 response id 之前结束。
+ */
+
 import type { Api, Model, Tool } from "@earendil-works/pi-ai";
 import type { AgentMessage } from "../../../types.ts";
 import { type Context, getTelemetryContext, withAbortSignal } from "../../context.ts";
@@ -230,7 +236,11 @@ async function performGeneration<TContext extends object | undefined>(
 	}
 }
 
-/** Advance one durable assistant retry wait according to this pass's local wait policy. */
+/**
+ * Advance one durable assistant retry wait according to this pass's local wait policy.
+ *
+ * 按本轮 waitForRetry 推进 assistant.retry_wait。时刻未到且不等待则回报 waiting。
+ */
 export async function runRetryWait<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,
@@ -281,7 +291,11 @@ export async function runRetryWait<TContext extends object | undefined>(
 	return result.kind === "cancel_requested" ? { kind: "continue" } : result.value;
 }
 
-/** Execute one ready assistant generation or advance its durable retry wait. */
+/**
+ * Execute one ready assistant generation or advance its durable retry wait.
+ *
+ * 执行 ready 生成或推进 retry wait。配置失败在预留 response id 之前结束 run。
+ */
 export async function runGeneration<TContext extends object | undefined>(
 	lane: Lane<TContext>,
 	drive: Drive,
