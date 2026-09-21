@@ -1,3 +1,9 @@
+/**
+ * Stream a format-4 or legacy-v3 JSONL source into an atomically published fork.
+ *
+ * 两遍扫描源文件做 fork：先建索引再复制。源文件两遍之间不能被替换；usage 和进行中操作不复制。
+ */
+
 import type { Context } from "../../context.ts";
 import type { FileSystem, TextLineReader } from "../../types.ts";
 import type {
@@ -204,7 +210,11 @@ function projectJsonlForkWrite(
 	}
 }
 
-/** Prepared fork input: format-4 file metadata or an already-normalized legacy source. */
+/**
+ * Prepared fork input: format-4 file metadata or an already-normalized legacy source.
+ *
+ * 已准备好的 fork 源。open 必须带捕获的 nextSeq 边界。
+ */
 export type JsonlForkInput =
 	| { kind: "open"; metadata: JsonlForkSourceMetadata; nextSeq: number }
 	| { kind: "closed"; metadata: JsonlForkSourceMetadata }
@@ -291,6 +301,8 @@ async function* streamForkWrites(
  * Preserve copied sequences and the source's nextSeq while excluding usage and open-operation state.
  * Source files must not be replaced or edited between passes; later append-only writes are excluded
  * by the captured sequence boundary or legacy record count. Does not open the destination Session.
+ *
+ * 两遍读源、原子发布 v4 目标。不改源文件；不打开目标 Session；usage 和进行中操作不复制。
  */
 export async function runJsonlFork(
 	options: {

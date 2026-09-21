@@ -1,3 +1,9 @@
+/**
+ * In-memory Storage and SessionRepo for tests and ephemeral sessions.
+ *
+ * 进程内会话仓库。同一 id 同时只能 open 一次；repo close 会关掉所有 Session。
+ */
+
 import { uuidv7 } from "@earendil-works/pi-ai/utils/uuid";
 import type { Context } from "../context.ts";
 import { InMemoryStorageState } from "./in-memory-storage-state.ts";
@@ -26,14 +32,29 @@ import type {
 } from "./types.ts";
 import type { ListElement, ListReadOptions, StoredValue, Value, ValueList } from "./values.ts";
 
+/**
+ * Clock injection for {@link MemoryStorage}.
+ *
+ * 注入时钟。缺省用 `Date.now`。
+ */
 export interface MemoryStorageOptions {
 	now?: () => number;
 }
 
+/**
+ * Clock injection for {@link MemorySessionRepo}.
+ *
+ * 注入时钟。缺省用 `Date.now`。
+ */
 export interface MemorySessionRepoOptions {
 	now?: () => number;
 }
 
+/**
+ * Process-local Storage. Commits are serialized; fork waits at one source-commit boundary.
+ *
+ * 进程内 Storage。commit 串行；fork 卡在源 commit 队列的一个边界上。
+ */
 export class MemoryStorage implements Storage {
 	private readonly now: () => number;
 	private storageState = new InMemoryStorageState();
@@ -331,6 +352,11 @@ class MemorySessionFacade implements Session {
 	}
 }
 
+/**
+ * Process-local session catalog. One open handle per id; `close` shuts every session.
+ *
+ * 进程内仓库。同一 id 同时只能 open 一次；`close` 会关掉所有 Session。
+ */
 export class MemorySessionRepo implements SessionRepo {
 	private readonly now: () => number;
 	private readonly sessions = new Map<string, MemorySessionRecord>();

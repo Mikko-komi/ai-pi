@@ -1,3 +1,9 @@
+/**
+ * Normalize legacy v3 JSONL sessions into repeatable format-4 writes.
+ *
+ * 把 v3 会话收成可重放的 v4 写。丢弃的记录折叠到最近保留祖先；源文件两遍之间不能改。
+ */
+
 import type { ImageContent, TextContent, Usage } from "@earendil-works/pi-ai";
 import { uuidv7 } from "@earendil-works/pi-ai/utils/uuid";
 import type { AgentMessage, ThinkingLevel } from "../../../types.ts";
@@ -162,6 +168,11 @@ async function resolveLegacyV3ParentSessionId(
 	return parsed.ok ? parsed.value.header.id : undefined;
 }
 
+/**
+ * Build session metadata from a v3 header. Unresolved parent paths stay as `legacyParentSessionPath`.
+ *
+ * 从 v3 头收成元数据。父会话路径解析失败就留下 legacy 路径。
+ */
 export async function metadataFromLegacyV3Header(
 	fileSystem: FileSystem,
 	header: LegacyV3SessionHeader,
@@ -181,6 +192,11 @@ export async function metadataFromLegacyV3Header(
 	return metadata;
 }
 
+/**
+ * Lift a v3 header into a format-4 header without reading entries.
+ *
+ * 把 v3 头收成 v4 header。不读条目。
+ */
 export async function normalizeLegacyV3Header(
 	fileSystem: FileSystem,
 	header: LegacyV3SessionHeader,
@@ -524,6 +540,8 @@ function normalizeLegacyV3Values(inventory: LegacyV3Inventory): CommittedValueSe
  * A captured legacy file exposed as repeatable logical v4 writes.
  * Each pass reopens the path; callers must not replace or edit the source between passes.
  * Structural indexes, label/configuration metadata, and derived current values survive between scans.
+ *
+ * 可重复产出 v4 写的 v3 源。两遍之间源文件不能被替换。
  */
 export class LegacyV3Source {
 	readonly header: JsonlStorageHeader;

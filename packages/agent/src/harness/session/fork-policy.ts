@@ -1,10 +1,26 @@
+/**
+ * Branch-path selection and current-state projection for session forks.
+ *
+ * 决定 fork 复制哪条祖先链、哪些当前标量。未知的 `pi.*` 命名空间直接失败。
+ */
+
 import type { CommittedListAppendWrite, CommittedValueSetWrite } from "./commit.ts";
 import type { ForkOptions } from "./types.ts";
 
+/**
+ * What a fork copies. Branch scope keeps exactly one destination tip.
+ *
+ * fork 复制计划。`branch` 只保留一条 tip。
+ */
 export type ForkCurrentStatePlan =
 	| { scope: "branch"; branch: string; destinationTip: string | null }
 	| { scope: "tree" };
 
+/**
+ * Walk source-tip ancestry and select entries. `entryId` must lie on that chain.
+ *
+ * 沿源 tip 祖先链选条目。`entryId` 必须在这条链上。
+ */
 export function selectBranchFork(
 	options: Extract<ForkOptions, { scope: "branch" }>,
 	source: {
@@ -36,7 +52,11 @@ export function selectBranchFork(
 	return { scope: "branch", branch: options.branch, destinationTip };
 }
 
-/** Project one current scalar row or surviving list element into destination state. */
+/**
+ * Project one current scalar row or surviving list element into destination state.
+ *
+ * 投影一条当前标量/列表。未知 `pi.*` 命名空间抛错。
+ */
 export function projectForkCurrentStateWrite(
 	write: CommittedValueSetWrite | CommittedListAppendWrite,
 	plan: ForkCurrentStatePlan,

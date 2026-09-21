@@ -1,3 +1,9 @@
+/**
+ * Fully materialized in-memory session state shared by MemoryStorage and JsonlStorage.
+ *
+ * 内存里的完整会话状态。不适合数据库或长会话；commit 必须先 validate 再 apply。
+ */
+
 import { addUsage, emptyUsage } from "../utils/usage.ts";
 import {
 	type CommittedListAppendWrite,
@@ -74,6 +80,8 @@ function compareKeys(left: string, right: string): number {
  *
  * This is intentionally unsuitable for database backends and long-running sessions that may not fit in memory.
  * Those backends should query indexed durable state and update durable aggregates within each commit transaction.
+ *
+ * MemoryStorage 和 JsonlStorage 共用的完整内存状态。不适合数据库或装不下的长会话；必须先 validate 再 apply。
  */
 export class InMemoryStorageState {
 	private readonly entries: Map<string, Entry>;

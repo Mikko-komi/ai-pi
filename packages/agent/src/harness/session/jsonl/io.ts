@@ -1,3 +1,9 @@
+/**
+ * JSONL file I/O: header/transaction codec helpers and atomic publishers.
+ *
+ * JSONL 读写辅助。发布必须先写临时文件再 rename；失败要清掉临时文件。
+ */
+
 import type { Context } from "../../context.ts";
 import type { FileError, FileSystem, Result, TextLineReader } from "../../types.ts";
 import type {
@@ -12,11 +18,21 @@ import type {
 import { type JsonlParsedSessionHeader, parseJsonlSessionHeader } from "./codec.ts";
 import type { JsonlStorageHeader } from "./types.ts";
 
+/**
+ * Take a FileSystem Result or throw. For JSONL I/O boundaries only.
+ *
+ * Result 成功取值，失败 throw。只给 JSONL I/O 边界用。
+ */
 export function fileValue<T>(result: Result<T, FileError>, action: string): T {
 	if (!result.ok) throw new Error(`${action}: ${result.error.message}`, { cause: result.error });
 	return result.value;
 }
 
+/**
+ * Read and parse the first line. Missing, torn, or empty lines fail.
+ *
+ * 读并解析第一行。缺行、半行、空行都失败。
+ */
 export async function readJsonlHeader(
 	reader: TextLineReader,
 	path: string,
@@ -63,6 +79,11 @@ function parseCommittedWrite(value: unknown): CommittedWrite {
 	}
 }
 
+/**
+ * Parse one line into committed writes. A single object is one transaction.
+ *
+ * 一行收成 CommittedWrite[]。单对象也当一笔事务。
+ */
 export function parseJsonlTransaction(line: string): CommittedWrite[] {
 	let value: unknown;
 	try {
@@ -73,11 +94,20 @@ export function parseJsonlTransaction(line: string): CommittedWrite[] {
 	return (Array.isArray(value) ? value : [value]).map(parseCommittedWrite);
 }
 
+/**
+ * Serialize a transaction. A single write is not wrapped in an array.
+ *
+ * 事务序列化。只有一条写时不包数组。
+ */
 export function serializeJsonlTransaction(writes: readonly CommittedWrite[]): string {
 	return JSON.stringify(writes.length === 1 ? writes[0] : writes);
 }
 
-/** Publish only after the callback succeeds; it must await each append before returning. */
+/**
+ * Publish only after the callback succeeds; it must await each append before returning.
+ *
+ * 先写临时文件再 rename。回调必须等每次 append 完成。
+ */
 export async function publishFileAtomically(
 	fileSystem: FileSystem,
 	destinationPath: string,
@@ -103,7 +133,11 @@ export async function publishFileAtomically(
 	}
 }
 
-/** Stream a header and complete transactions through the shared atomic publisher. */
+/**
+ * Stream a header and complete transactions through the shared atomic publisher.
+ *
+ * 原子发布 header + 完整事务。
+ */
 export async function publishJsonl(
 	fileSystem: FileSystem,
 	destinationPath: string,

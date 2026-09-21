@@ -1,3 +1,9 @@
+/**
+ * Storage-backed Session implementation and session domain errors.
+ *
+ * 用 Storage 实现的 Session。写路径必须走 MutationLine；关闭后读写都拒。
+ */
+
 import { uuidv7 } from "@earendil-works/pi-ai/utils/uuid";
 import type { AgentMessage } from "../../types.ts";
 import type { Context } from "../context.ts";
@@ -35,13 +41,22 @@ import {
 	type ValueList,
 } from "./values.ts";
 
+/**
+ * Optional injections for a storage-backed session.
+ *
+ * 注入 MutationLine、id 生成器和关闭回调。
+ */
 export interface StorageBackedSessionOptions {
 	mutationLine?: MutationLine;
 	idGenerator?: IdGenerator;
 	onClose?: () => void;
 }
 
-/** Durable session state is internally inconsistent and cannot be safely advanced. */
+/**
+ * Durable session state is internally inconsistent and cannot be safely advanced.
+ *
+ * 会话内部不一致，不能再推进。
+ */
 export class SessionInvariantError extends Error {
 	constructor(message: string) {
 		super(message);
@@ -49,7 +64,11 @@ export class SessionInvariantError extends Error {
 	}
 }
 
-/** A requested Branch name is invalid. */
+/**
+ * A requested Branch name is invalid.
+ *
+ * 分支名非法。空名或含 NUL 都不行。
+ */
 export class SessionInvalidBranchError extends Error {
 	readonly branch: string;
 	readonly reason: string;
@@ -62,7 +81,11 @@ export class SessionInvalidBranchError extends Error {
 	}
 }
 
-/** A requested branch already exists. */
+/**
+ * A requested branch already exists.
+ *
+ * 要创建的分支已经在。
+ */
 export class SessionBranchExistsError extends Error {
 	readonly branch: string;
 
@@ -73,7 +96,11 @@ export class SessionBranchExistsError extends Error {
 	}
 }
 
-/** A pending assistant message cannot be persisted as a session entry. */
+/**
+ * A pending assistant message cannot be persisted as a session entry.
+ *
+ * pending assistant 不能当条目持久化。
+ */
 export class SessionPendingAssistantMessageError extends Error {
 	constructor() {
 		super("Cannot persist a pending assistant message");
@@ -81,7 +108,11 @@ export class SessionPendingAssistantMessageError extends Error {
 	}
 }
 
-/** A requested session entry target does not exist. */
+/**
+ * A requested session entry target does not exist.
+ *
+ * 目标条目不存在。
+ */
 export class SessionUnknownTargetError extends Error {
 	readonly targetId: string;
 
@@ -220,7 +251,11 @@ class StorageBackedBranch implements Branch {
 	}
 }
 
-/** Package-internal typed boundary shared by concrete session repositories. */
+/**
+ * Package-internal typed boundary shared by concrete session repositories.
+ *
+ * 仓库共用的 Session 实现。关闭后读写都拒；`mutate` 回调里不能再调公开 writer。
+ */
 export class StorageBackedSession<TMetadata extends SessionMetadata = SessionMetadata> implements Session<TMetadata> {
 	readonly metadata: TMetadata;
 	readonly idGenerator: IdGenerator;

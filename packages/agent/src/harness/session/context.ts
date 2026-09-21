@@ -1,12 +1,28 @@
+/**
+ * Project a session path into model-visible context messages.
+ *
+ * 把一条路径收成模型上下文。最近一次 compaction 截断更早历史；custom 条目必须有 projector 才进模型。
+ */
+
 import type { AgentMessage } from "../../types.ts";
 import type { Context } from "../context.ts";
 import { createBranchSummaryMessage, createCompactionSummaryMessage } from "../messages.ts";
 import type { CompactionEntry, Entry, EntryProjector } from "./types.ts";
 
+/**
+ * Projectors keyed by custom entry type.
+ *
+ * 按 customType 投影自定义条目。
+ */
 export interface SessionContextBuildOptions {
 	entryProjectors?: Readonly<Record<string, EntryProjector>>;
 }
 
+/**
+ * Truncate a path at the newest compaction. No compaction keeps the whole path.
+ *
+ * 从最近 compaction 截断路径。没有 compaction 就整条路径。
+ */
 export function buildContextEntries(pathEntries: readonly Entry[]): Entry[] {
 	let compaction: CompactionEntry | undefined;
 	let compactionIndex = -1;
@@ -28,6 +44,11 @@ function isContextMessage(message: AgentMessage): boolean {
 	);
 }
 
+/**
+ * Project one entry into model messages. Error/aborted/deferred assistants are dropped.
+ *
+ * 单条 Entry 收成模型消息。error/aborted/deferred assistant 丢掉。
+ */
 export function sessionEntryToContextMessages(entry: Entry): AgentMessage[] {
 	switch (entry.type) {
 		case "message":
@@ -44,6 +65,11 @@ export function sessionEntryToContextMessages(entry: Entry): AgentMessage[] {
 	}
 }
 
+/**
+ * Path entries to model messages. Custom entries without a projector are skipped.
+ *
+ * 路径 → 模型消息。custom 没有 projector 就跳过。
+ */
 export async function buildSessionContext(
 	pathEntries: readonly Entry[],
 	options: SessionContextBuildOptions | undefined,

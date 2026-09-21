@@ -1,7 +1,18 @@
+/**
+ * Build a destination session snapshot from a source snapshot and fork options.
+ *
+ * 从源快照算出 fork 目标状态。源 lane 配置/状态必须成对；操作/pending/usage 不复制。
+ */
+
 import { type ForkCurrentStatePlan, projectForkCurrentStateWrite, selectBranchFork } from "./fork-policy.ts";
 import type { Entry, ForkOptions } from "./types.ts";
 import { branchTip, laneConfig, laneState, type StoredValue, type Value, value } from "./values.ts";
 
+/**
+ * Source entries and current scalars used to compute a fork.
+ *
+ * 源会话的条目和当前标量。`entriesComplete` 为假表示后端只给了请求的分支。
+ */
 export interface ForkSourceSnapshot {
 	entries: Entry[];
 	scalarValues: StoredValue<unknown>[];
@@ -9,6 +20,11 @@ export interface ForkSourceSnapshot {
 	entriesComplete?: boolean;
 }
 
+/**
+ * Logical destination state. `nextSeq` follows the highest copied entry seq.
+ *
+ * 目标逻辑状态。`nextSeq` 紧接已拷条目的最大 seq。
+ */
 export interface ForkDestinationSnapshot {
 	entries: Map<string, Entry>;
 	scalarValues: StoredValue<unknown>[];
@@ -25,7 +41,11 @@ function findStoredValue<T>(values: readonly StoredValue<unknown>[], address: Va
 	) as StoredValue<T> | undefined;
 }
 
-/** Build the complete logical state for a forked destination session. */
+/**
+ * Build the complete logical state for a forked destination session.
+ *
+ * 算出完整目标状态。源 tip 必须能指到条目（除非分支范围且条目不完整）。
+ */
 export function createForkSnapshot(source: ForkSourceSnapshot, options: ForkOptions): ForkDestinationSnapshot {
 	const sourceEntries = new Map(source.entries.map((entry) => [entry.id, entry]));
 	const sourceTips = storedValuesInNamespace(source.scalarValues, branchTip(""));

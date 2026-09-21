@@ -1,3 +1,9 @@
+/**
+ * File-backed format-4 session repository lifecycle.
+ *
+ * 磁盘上的 SessionRepo。同一 cwd+id 同时只能 open 一次；目录名编码会丢信息。
+ */
+
 import { uuidv7 } from "@earendil-works/pi-ai/utils/uuid";
 import type { Context } from "../../context.ts";
 import type { FileInfo, FileSystem } from "../../types.ts";
@@ -42,7 +48,11 @@ function sessionFileName(createdAt: number, id: string): string {
 	return `${timestamp}_${encodeURIComponent(id)}.jsonl`;
 }
 
-/** File-backed format-4 session repository lifecycle. */
+/**
+ * File-backed format-4 session repository lifecycle.
+ *
+ * 磁盘上的 SessionRepo。同一 cwd+id 同时只能 open 一次；目录名编码会丢信息。
+ */
 export class JsonlSessionRepo
 	implements SessionRepo<JsonlSessionMetadata, JsonlSessionCreateOptions, JsonlSessionListOptions>
 {

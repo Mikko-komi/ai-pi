@@ -1,3 +1,9 @@
+/**
+ * JSONL Storage backed by an injected filesystem capability.
+ *
+ * 文件上的 Storage。打开时整文件载入内存；v3 第一次非空 commit 才升到 v4。
+ */
+
 import { uuidv7 } from "@earendil-works/pi-ai/utils/uuid";
 import type { Context } from "../../context.ts";
 import type { FileSystem } from "../../types.ts";
@@ -36,7 +42,11 @@ function splitCompleteLines(content: string): { lines: string[]; torn: boolean }
 
 type JsonlBacking = { kind: "v4" } | { kind: "v3"; source: LegacyV3Source };
 
-/** JSONL storage backed by an injected filesystem capability. */
+/**
+ * JSONL storage backed by an injected filesystem capability.
+ *
+ * 文件上的 Storage。打开时整文件载入内存；v3 第一次非空 commit 才升到 v4。
+ */
 export class JsonlStorage implements Storage {
 	private readonly fileSystem: FileSystem;
 	private readonly path: string;

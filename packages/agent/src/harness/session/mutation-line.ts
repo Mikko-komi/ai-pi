@@ -1,4 +1,14 @@
-/** Serializes complete read-modify-write jobs for one Session. */
+/**
+ * Exclusive serialized mutation queue for one Session.
+ *
+ * 单 Session 的独占写屏障。seal 之后新作业一律拒；已排队作业跑完才释放。
+ */
+
+/**
+ * Serializes complete read-modify-write jobs for one Session.
+ *
+ * 串行完整的读改写作业。seal 之后新作业一律拒。
+ */
 export class MutationLine {
 	private tail: Promise<void> = Promise.resolve();
 	private sealedError: Error | undefined;
