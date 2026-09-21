@@ -1,3 +1,9 @@
+/**
+ * Unix-domain socket transport factory and local server discovery.
+ *
+ * Unix 传输。Windows 不支持；发现只读，坏/旧 socket 跳过。
+ */
+
 import { lstat, readdir } from "node:fs/promises";
 import { createConnection, type Socket } from "node:net";
 import { join } from "node:path";
@@ -16,16 +22,31 @@ const MAX_TIMER_DELAY_MS = 2_147_483_647;
 const UNIX_SOCKET_SUFFIX = ".sock";
 const MAX_CONCURRENT_DISCOVERY_PROBES = 16;
 
+/**
+ * Filesystem path and optional write-queue bound for one Unix transport.
+ *
+ * Unix 传输选项。path 非空；maxPendingBytes 必须是正安全整数。
+ */
 export interface UnixTransportOptions {
 	path: string;
 	maxPendingBytes?: number;
 }
 
+/**
+ * Discovered local server: logical id plus filesystem socket path.
+ *
+ * 发现到的本机路由。serverId 来自文件名，还要握手核对。
+ */
 export interface UnixServerRoute {
 	serverId: ServerId;
 	path: string;
 }
 
+/**
+ * Directory scan and per-socket handshake timeout for Unix discovery.
+ *
+ * 发现选项。directory 是物理路由目录，不是 home 推导。
+ */
 export interface DiscoverUnixServersOptions {
 	/** Directory containing server-addressed Unix sockets. */
 	directory: string;
@@ -33,7 +54,11 @@ export interface DiscoverUnixServersOptions {
 	timeoutMs?: number;
 }
 
-/** Discover reachable local servers by probing server-addressed Unix sockets. */
+/**
+ * Discover reachable local servers by probing server-addressed Unix sockets.
+ *
+ * 扫目录里的 `<uuid>.sock`。坏名、死 socket、id 对不上的跳过；意外 IO 才抛。
+ */
 export async function discoverUnixServers(options: DiscoverUnixServersOptions): Promise<UnixServerRoute[]> {
 	if (process.platform === "win32") throw new Error("Unix transport is not supported on Windows");
 	const directory = options.directory;
@@ -84,7 +109,11 @@ export async function discoverUnixServers(options: DiscoverUnixServersOptions): 
 	return routes.sort((left, right) => left.serverId.localeCompare(right.serverId));
 }
 
-/** Creates fresh Unix-domain socket transports for Client connection attempts in Node-compatible runtimes. */
+/**
+ * Creates fresh Unix-domain socket transports for Client connection attempts in Node-compatible runtimes.
+ *
+ * 每次 connect 新开一条 Unix socket。Windows 直接抛。
+ */
 export function createUnixTransportFactory(options: UnixTransportOptions): ByteTransportFactory {
 	const maxPendingBytes = validateUnixTransportOptions(options);
 	return (handlers) => connectUnixSocket(options.path, maxPendingBytes, handlers);

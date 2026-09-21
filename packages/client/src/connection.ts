@@ -1,3 +1,9 @@
+/**
+ * Handshake and framed-byte pump under a Client.
+ *
+ * 单次连接状态机。connecting 必须先发出 hello；serverId 对不上就断。
+ */
+
 import {
 	DEFAULT_MAX_FRAME_LENGTH,
 	encodeClientMessage,
@@ -38,6 +44,11 @@ interface ConnectionOptions {
 	onStateChange(change: ConnectionStateChange): void;
 }
 
+/**
+ * One client-side transport lifecycle: connect, hello, send, and fail-closed.
+ *
+ * 客户端连接。未 disconnected 时不能再 connect；失败会关传输。
+ */
 export class Connection {
 	readonly #options: ConnectionOptions;
 	readonly #maxFrameLength: number;

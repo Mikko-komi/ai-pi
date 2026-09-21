@@ -1,3 +1,9 @@
+/**
+ * Process-local Session attach/detach router and service-call admission.
+ *
+ * 进程内会话路由。一连接同时只挂一个 attachment；断线等待进行中调用收完再 release。
+ */
+
 import { randomUUID } from "node:crypto";
 import type { JsonValue, ServiceCall, ServiceProviderUpdate } from "@earendil-works/chord";
 import { BACKGROUND_CONTEXT, type Context, type SessionMetadata } from "@earendil-works/pi-agent-core";
@@ -31,6 +37,11 @@ interface SessionRouterOptions<TMetadata extends SessionMetadata> {
 	reportError: (error: unknown) => void;
 }
 
+/**
+ * Routes presentation attachments and Session-scoped service calls for one Server.
+ *
+ * 会话路由器。closing 后拒新 attach；同连接重复 attach 同 session 幂等。
+ */
 export class SessionRouter<TMetadata extends SessionMetadata = SessionMetadata> {
 	private readonly options: SessionRouterOptions<TMetadata>;
 	private readonly hostedSessions = new Map<string, HostedSession>();

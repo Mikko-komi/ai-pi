@@ -1,3 +1,9 @@
+/**
+ * Raw wire client for protocol conformance tests over Unix sockets.
+ *
+ * 线上测试客户端。可发碎帧；不断开自动重连。
+ */
+
 import { once } from "node:events";
 import { createConnection, type Socket } from "node:net";
 import type { JsonValue, ServiceCall } from "@earendil-works/chord";
@@ -18,12 +24,22 @@ interface MessageWaiter {
 	reject: (error: Error) => void;
 }
 
+/**
+ * Byte channel used by ProtocolTestClient, including fragmented sends.
+ *
+ * 测试字节通道。sendFragmented 用来拆帧测 decoder。
+ */
 export interface WireChannel {
 	send(chunk: Uint8Array): Promise<void>;
 	sendFragmented(chunk: Uint8Array, splitAt: number): Promise<void>;
 	close(): Promise<void>;
 }
 
+/**
+ * Handshake-aware test client that records and waits for server frames.
+ *
+ * 协议测试客户端。记下每帧；关连接后 next 一律拒。
+ */
 export class ProtocolTestClient {
 	readonly messages: ServerMessage[] = [];
 	private readonly channel: WireChannel;
@@ -149,6 +165,11 @@ export class ProtocolTestClient {
 	}
 }
 
+/**
+ * Connect a ProtocolTestClient to an existing Unix-domain socket path.
+ *
+ * 连上已有 Unix socket。等 connect 成功再返回。
+ */
 export async function connectUnixTestClient(path: string): Promise<ProtocolTestClient> {
 	const socket = createConnection(path);
 	await once(socket, "connect");

@@ -1,9 +1,20 @@
+/**
+ * In-memory ServerHost, session harness, and deferred helpers for protocol tests.
+ *
+ * 测试宿主。可闸门 open/close/service，用来卡竞态；不是生产 Host。
+ */
+
 import type { JsonValue, ServiceCall } from "@earendil-works/chord";
 import type { Context, Session, SessionMetadata } from "@earendil-works/pi-agent-core";
 import { BACKGROUND_CONTEXT, MemorySessionRepo } from "@earendil-works/pi-agent-core";
 import { SessionAmbiguousError, SessionNotFoundError } from "../errors.ts";
 import type { RoutedServerServiceHost, RoutedSessionHandle, ServerHost } from "../types.ts";
 
+/**
+ * Externally resolvable Promise for test sequencing.
+ *
+ * 测试用可外解 Promise。只 resolve，不提供 reject。
+ */
 export class Deferred<T> {
 	readonly promise: Promise<T>;
 	private resolvePromise!: (value: T) => void;
@@ -24,6 +35,11 @@ interface OpenGate {
 	release: Deferred<void>;
 }
 
+/**
+ * Fake routed Session handle that records attach, service, and close traffic.
+ *
+ * 假会话句柄。记录调用；可用 gate 卡住 close/service。
+ */
 export class TestHarness {
 	readonly session: Session;
 	readonly closed = new Deferred<void>();
@@ -116,6 +132,11 @@ export class TestHarness {
 	}
 }
 
+/**
+ * Minimal server services that implement attach/detach session management.
+ *
+ * 测试用会话管理。只认 attach/detach；别的 member 抛。
+ */
 export function createTestServerServices(): RoutedServerServiceHost {
 	return {
 		attachClient(presentation) {
@@ -148,6 +169,11 @@ export function createTestServerServices(): RoutedServerServiceHost {
 	};
 }
 
+/**
+ * In-memory ServerHost backed by MemorySessionRepo and TestHarness handles.
+ *
+ * 内存宿主。resolve 零/多匹配抛有界错误；open 可闸门或注入失败。
+ */
 export class TestServerHost implements ServerHost {
 	readonly serverServices = createTestServerServices();
 	readonly repo = new MemorySessionRepo({ now: () => 1 });

@@ -1,3 +1,9 @@
+/**
+ * Presentation-layer RPC server: handshake, framing, and routed service calls.
+ *
+ * 展示层 RPC 服务端。先 hello 再 request；业务 payload 不解码。
+ */
+
 import {
 	createServiceStateEncoder,
 	decodeServiceControlCall,
@@ -43,6 +49,11 @@ const DEFAULT_HANDSHAKE_TIMEOUT_MS = 5_000;
 const MAX_UINT32 = 0xffff_ffff;
 const MAX_TIMER_DELAY_MS = 2_147_483_647;
 
+/**
+ * Listener-backed server that handshakes clients and routes Chord service calls.
+ *
+ * 协议服务端。start 只能一次；close 后 closed 结算。serverId 是逻辑身份不是路径。
+ */
 export class Server<TMetadata extends SessionMetadata = SessionMetadata> {
 	readonly serverId: string;
 	/** Resolves after shutdown, or rejects when listener or routed-Session cleanup fails. */

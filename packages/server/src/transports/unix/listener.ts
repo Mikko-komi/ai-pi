@@ -1,3 +1,9 @@
+/**
+ * Unix-domain ServerListener: bind, mode, stale-socket cleanup, and backpressure.
+ *
+ * Unix 监听实现。先绑私有 bind 路径再 link 到公开 path；关停只删自己 inode 的 socket。
+ */
+
 import { createHash, randomUUID } from "node:crypto";
 import type { Stats } from "node:fs";
 import { chmod, link, lstat, mkdir, rename, unlink } from "node:fs/promises";
@@ -187,7 +193,11 @@ class UnixListener implements ServerListener {
 	}
 }
 
-/** @internal Exported only for transport-level verification. */
+/**
+ * @internal Byte connection wrapping one accepted Unix socket.
+ *
+ * 单条 Unix 套接字。只为传输层验证导出；pending 超限就拒写。
+ */
 export class UnixByteConnection implements ByteConnection {
 	private readonly socket: Socket;
 	private readonly gracefulCloseTimeoutMs: number;
@@ -385,6 +395,11 @@ function isErrorCode(error: unknown, code: string): boolean {
 	return error instanceof Error && "code" in error && error.code === code;
 }
 
+/**
+ * Create a ServerListener bound to one Unix-domain socket path.
+ *
+ * 造 Unix 监听器。start 前不占 path；已有活 socket 会拒绑。
+ */
 export function createUnixListener(options: UnixListenerOptions): ServerListener {
 	return new UnixListener(options);
 }

@@ -1,3 +1,9 @@
+/**
+ * Transport-neutral Chord RPC client: handshake, request, and subscriptions.
+ *
+ * 传输无关客户端。先 hello 再 RPC；断线不重放，attachment 就地清空。
+ */
+
 import {
 	createServiceCatalogueCall,
 	createServiceStateDecoder,
@@ -59,6 +65,11 @@ interface ActiveServiceListener {
 	ready: boolean;
 }
 
+/**
+ * Framed RPC client bound to one expected logical server id.
+ *
+ * 协议客户端。hello.serverId 必须对上；dispose 后不可复用。
+ */
 export class Client {
 	readonly #options: ClientOptions;
 	readonly #connection: Connection;
@@ -444,7 +455,11 @@ export class Client {
 	}
 }
 
-/** Adapts a lazily resolved routed client target to a Chord service transport. */
+/**
+ * Adapts a lazily resolved routed client target to a Chord service transport.
+ *
+ * 把懒解析的 RPC 目标收成 Chord 传输。目标空了就抛，不默默换路。
+ */
 export function createClientServiceTransport(
 	client: Client,
 	getTarget: () => RpcTarget | undefined,
