@@ -1,3 +1,9 @@
+/**
+ * Google Vertex AI Gemini adapter.
+ *
+ * 走 Vertex 的 @google/genai。凭据来自环境 / options，不要求 apiKey。
+ */
+
 import {
 	type GenerateContentConfig,
 	type GenerateContentParameters,
@@ -43,6 +49,11 @@ import {
 } from "./google-shared.ts";
 import { buildBaseOptions } from "./simple-options.ts";
 
+/**
+ * Vertex-specific Gemini request options, including project and location.
+ *
+ * project/location 可覆盖模型默认。thinking 语义与 GoogleOptions 相同。
+ */
 export interface GoogleVertexOptions extends StreamOptions {
 	toolChoice?: "auto" | "none" | "any";
 	thinking?: {
@@ -68,6 +79,11 @@ const THINKING_LEVEL_MAP: Record<GoogleApiThinkingLevel, ThinkingLevel> = {
 // Counter for generating unique tool call IDs
 let toolCallCounter = 0;
 
+/**
+ * Stream a Vertex Gemini completion into assistant-message events.
+ *
+ * 立刻返回 stream。自定义 fetch 不支持。凭据解析失败进 error 事件。
+ */
 export const stream: StreamFunction<"google-vertex", GoogleVertexOptions> = (
 	model: Model<"google-vertex">,
 	context: Context,
@@ -311,6 +327,11 @@ export const stream: StreamFunction<"google-vertex", GoogleVertexOptions> = (
 	return stream;
 };
 
+/**
+ * Map SimpleStreamOptions onto Vertex thinking options and stream.
+ *
+ * 不要求 apiKey。无 reasoning 则 thinking.enabled=false。
+ */
 export const streamSimple: StreamFunction<"google-vertex", SimpleStreamOptions> = (
 	model: Model<"google-vertex">,
 	context: Context,

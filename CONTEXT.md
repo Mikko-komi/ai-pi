@@ -76,6 +76,10 @@ _Avoid_: 厂商 API 适配器, experimental
 已完成：`packages/server` 与 `packages/client` 的导出符号。
 _Avoid_: 类方法, 再导出
 
+**第十七刀核心**:
+已完成：pi-ai 各厂商流式 API 适配器（anthropic / openai / google / bedrock 等）。
+_Avoid_: *.models.ts 目录
+
 **AgentHarness**:
 agent-core 里按 lane 驱动持久化会话的门面，和旧的 `Agent` 循环并列，不替代 `AgentSession`。
 _Avoid_: Agent, AgentSession

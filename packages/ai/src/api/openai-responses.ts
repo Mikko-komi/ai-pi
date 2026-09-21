@@ -1,3 +1,9 @@
+/**
+ * OpenAI Responses API adapter.
+ *
+ * 走 /responses。store=false。max_output_tokens 下限 16。GitHub Copilot 会补动态头。
+ */
+
 import OpenAI from "openai";
 import type { ResponseCreateParamsStreaming } from "openai/resources/responses/responses.js";
 import { clampThinkingLevel } from "../models.ts";
@@ -98,7 +104,11 @@ function getPromptCacheOptions(
 	return undefined;
 }
 
-// OpenAI Responses-specific options
+/**
+ * OpenAI Responses-specific request options.
+ *
+ * reasoningEffort=off 不传。serviceTier 参与计价回调。
+ */
 export interface OpenAIResponsesOptions extends StreamOptions {
 	reasoningEffort?: "minimal" | "low" | "medium" | "high" | "xhigh" | "max";
 	reasoningSummary?: "auto" | "detailed" | "concise" | null;
@@ -108,6 +118,8 @@ export interface OpenAIResponsesOptions extends StreamOptions {
 
 /**
  * Generate function for OpenAI Responses API
+ *
+ * 立刻返回 stream。无 key 且无授权头则 error。scratch 字段出错时清掉。
  */
 export const stream: StreamFunction<"openai-responses", OpenAIResponsesOptions> = (
 	model: Model<"openai-responses">,
@@ -207,6 +219,11 @@ export const stream: StreamFunction<"openai-responses", OpenAIResponsesOptions> 
 	return stream;
 };
 
+/**
+ * Map SimpleStreamOptions onto OpenAI Responses options and stream.
+ *
+ * 缺 key 且无授权头同步抛。reasoning=off 不传 effort。
+ */
 export const streamSimple: StreamFunction<"openai-responses", SimpleStreamOptions> = (
 	model: Model<"openai-responses">,
 	context: Context,

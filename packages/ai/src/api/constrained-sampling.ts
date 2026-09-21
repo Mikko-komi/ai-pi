@@ -1,3 +1,9 @@
+/**
+ * JSON-schema strict mode and OpenAI grammar constrained sampling helpers.
+ *
+ * schema 改写失败抛内部 Unsupported 错误。grammar 要求恰好一个 required string 字段。
+ */
+
 import type { Tool } from "../types.ts";
 
 interface JsonSchemaObject {
@@ -113,7 +119,11 @@ function makeJsonSchemaNodeStrict(schema: unknown): void {
 	schema.additionalProperties = false;
 }
 
-/** Convert a tool schema to the strict subset expected by provider constrained sampling. */
+/**
+ * Convert a tool schema to the strict subset expected by provider constrained sampling.
+ *
+ * 根必须是 object。不支持 $ref/oneOf/tuple 等。可选字段不接受 null 则包进 anyOf null。所有 properties 写进 required，additionalProperties=false。
+ */
 export function makeStrictJsonSchema(schema: Tool["parameters"]): Record<string, unknown> {
 	const cloned: unknown = structuredClone(schema);
 	if (!isJsonSchemaObject(cloned)) {
@@ -126,22 +136,42 @@ export function makeStrictJsonSchema(schema: Tool["parameters"]): Record<string,
 	return cloned;
 }
 
+/**
+ * Return tool parameters, rewritten to the strict subset when requested.
+ *
+ * strict 不是 true 则原样返回。true 则走 makeStrictJsonSchema。
+ */
 export function getJsonSchemaToolParameters(tool: Tool, strict: boolean | undefined): Tool["parameters"] {
 	return (strict === true ? makeStrictJsonSchema(tool.parameters) : tool.parameters) as Tool["parameters"];
 }
 
+/**
+ * OpenAI custom-tool grammar: format, definition, and the single string argument name.
+ *
+ * 一次只能约束一个字符串参数。lark 优先于 regex。
+ */
 export interface GrammarConstrainedSampling {
 	format: "lark" | "regex";
 	definition: string;
 	inputProperty: string;
 }
 
+/**
+ * Incremental buffer for wrapping grammar-tool input into a JSON object fragment.
+ *
+ * started/closed 是单调状态。input 只能加长，不能改前缀。
+ */
 export interface GrammarToolInputJsonBuffer {
 	input: string;
 	started: boolean;
 	closed: boolean;
 }
 
+/**
+ * Read the grammar-constrained string argument from a tool call.
+ *
+ * 缺字段或不是 string 就抛。
+ */
 export function getGrammarToolInput(
 	toolName: string,
 	arguments_: Record<string, unknown>,
@@ -154,6 +184,11 @@ export function getGrammarToolInput(
 	return input;
 }
 
+/**
+ * Append a monotonic grammar-input delta as a JSON object fragment.
+ *
+ * 已 closed 且内容相同的再 close 返回 undefined。非前缀增长抛。未开始先写 `{"prop":"`。
+ */
 export function appendGrammarToolInputJsonDelta(
 	buffer: GrammarToolInputJsonBuffer,
 	inputProperty: string,
@@ -205,6 +240,11 @@ function inferGrammarInputProperty(tool: Tool): string {
 	return inputProperty;
 }
 
+/**
+ * Decide whether this tool should be sent as a strict JSON-schema function.
+ *
+ * 非 json_schema 返回 undefined。strict=require 且 schema 不合法或后端不支持则抛。
+ */
 export function resolveJsonSchemaStrictSampling(tool: Tool, supportsStrictMode: boolean): boolean | undefined {
 	const config = tool.constrainedSampling;
 	if (!config || config.type !== "json_schema") return undefined;
@@ -227,6 +267,11 @@ export function resolveJsonSchemaStrictSampling(tool: Tool, supportsStrictMode: 
 	return undefined;
 }
 
+/**
+ * Resolve an OpenAI grammar custom-tool from a tool's constrainedSampling config.
+ *
+ * 非 grammar 或后端不支持返回 undefined。两种 variant 都空则抛。schema 必须恰好一个 required string。
+ */
 export function resolveGrammarConstrainedSampling(
 	tool: Tool,
 	supportsOpenAIGrammarTools: boolean,
@@ -262,6 +307,11 @@ export function resolveGrammarConstrainedSampling(
 	}
 }
 
+/**
+ * Map tool names to their grammar input property for stream conversion.
+ *
+ * 没有 grammar 的工具不进表。tools 为空则空 Map。
+ */
 export function createGrammarToolInputProperties(
 	tools: Tool[] | undefined,
 	supportsOpenAIGrammarTools: boolean,

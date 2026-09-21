@@ -1,3 +1,9 @@
+/**
+ * OpenAI Codex Responses adapter over ChatGPT backend SSE and WebSocket.
+ *
+ * 默认 transport=auto：先 WebSocket，会话已回退或失败再走 SSE。store 必须是 false。
+ */
+
 import type * as NodeZlib from "node:zlib";
 import type {
 	Tool as OpenAITool,
@@ -69,6 +75,11 @@ const CODEX_RESPONSE_STATUSES = new Set<CodexResponseStatus>([
 // Types
 // ============================================================================
 
+/**
+ * Codex Responses request options, including verbosity and reasoning summary.
+ *
+ * reasoningEffort 含 none。textVerbosity 只影响输出长度，不改 thinking。
+ */
 export interface OpenAICodexResponsesOptions extends StreamOptions {
 	reasoningEffort?: "none" | "minimal" | "low" | "medium" | "high" | "xhigh" | "max";
 	reasoningSummary?: "auto" | "concise" | "detailed" | "off" | "on" | null;
@@ -227,6 +238,11 @@ function compressRequestBodyZstd(bodyJson: string): Uint8Array | null {
 // Main Stream Function
 // ============================================================================
 
+/**
+ * Stream a Codex Responses completion over WebSocket or SSE.
+ *
+ * 立刻返回 stream。缺 key 进 error 事件。同一 session 的 WS 失败会钉到 SSE。
+ */
 export const stream: StreamFunction<"openai-codex-responses", OpenAICodexResponsesOptions> = (
 	model: Model<"openai-codex-responses">,
 	context: Context,
@@ -489,6 +505,11 @@ export const stream: StreamFunction<"openai-codex-responses", OpenAICodexRespons
 	return stream;
 };
 
+/**
+ * Map SimpleStreamOptions onto Codex Responses options and stream.
+ *
+ * 缺 key 同步抛。reasoning=off 不传 effort。
+ */
 export const streamSimple: StreamFunction<"openai-codex-responses", SimpleStreamOptions> = (
 	model: Model<"openai-codex-responses">,
 	context: Context,
@@ -860,6 +881,11 @@ interface CachedWebSocketConnection {
 	continuation?: CachedWebSocketContinuationState;
 }
 
+/**
+ * Per-session counters for Codex WebSocket reuse and SSE fallback.
+ *
+ * 只给调试。get 返回拷贝。reset 不关连接。
+ */
 export interface OpenAICodexWebSocketDebugStats {
 	requests: number;
 	connectionsCreated: number;
@@ -901,11 +927,21 @@ function getOrCreateWebSocketDebugStats(sessionId: string): OpenAICodexWebSocket
 	return stats;
 }
 
+/**
+ * Snapshot Codex WebSocket debug counters for one session.
+ *
+ * 没有记录返回 undefined。返回浅拷贝，改它不影响内部表。
+ */
 export function getOpenAICodexWebSocketDebugStats(sessionId: string): OpenAICodexWebSocketDebugStats | undefined {
 	const stats = websocketDebugStats.get(sessionId);
 	return stats ? { ...stats } : undefined;
 }
 
+/**
+ * Clear Codex WebSocket debug counters and SSE-fallback pins.
+ *
+ * 省略 sessionId 则清空全部。不关闭已缓存 socket。
+ */
 export function resetOpenAICodexWebSocketDebugStats(sessionId?: string): void {
 	if (sessionId) {
 		websocketDebugStats.delete(sessionId);
@@ -916,6 +952,11 @@ export function resetOpenAICodexWebSocketDebugStats(sessionId?: string): void {
 	websocketSseFallbackSessions.clear();
 }
 
+/**
+ * Close cached Codex WebSocket sessions.
+ *
+ * 省略 sessionId 则关掉全部。同时清 idle timer。
+ */
 export function closeOpenAICodexWebSocketSessions(sessionId?: string): void {
 	const closeEntry = (entry: CachedWebSocketConnection) => {
 		if (entry.idleTimer) clearTimeout(entry.idleTimer);

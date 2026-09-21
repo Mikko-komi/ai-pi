@@ -1,3 +1,9 @@
+/**
+ * Anthropic Messages API adapter.
+ *
+ * 走 Messages SSE。自适应模型用 effort，旧模型用 budget。thinking 默认 summarized。
+ */
+
 import Anthropic from "@anthropic-ai/sdk";
 import type {
 	BetaStopReason,
@@ -167,8 +173,18 @@ function convertContentBlocks(content: (TextContent | ImageContent)[]):
 	return blocks;
 }
 
+/**
+ * Effort values accepted by adaptive-thinking Anthropic models.
+ *
+ * max 仅 Opus 4.6。xhigh 要更新的模型。旧模型忽略此字段。
+ */
 export type AnthropicEffort = "low" | "medium" | "high" | "xhigh" | "max";
 
+/**
+ * How Claude thinking text is returned on the wire.
+ *
+ * omitted 仍带回签名以便多轮续写。本适配器默认 summarized。
+ */
 export type AnthropicThinkingDisplay = "summarized" | "omitted";
 
 const FINE_GRAINED_TOOL_STREAMING_BETA = "fine-grained-tool-streaming-2025-05-14";
@@ -210,6 +226,11 @@ function defaultSupportsToolReferences(model: Model<"anthropic-messages">): bool
 	return major > 4 || (major === 4 && minor >= 5);
 }
 
+/**
+ * Anthropic Messages request options, including thinking and injected clients.
+ *
+ * thinkingEnabled 未设则不发 thinking。client 若传入则跳过内部建连。
+ */
 export interface AnthropicOptions extends StreamOptions {
 	/**
 	 * Enable extended thinking.
@@ -499,6 +520,11 @@ async function* iterateAnthropicEvents(
 	}
 }
 
+/**
+ * Stream an Anthropic Messages completion into assistant-message events.
+ *
+ * 立刻返回 stream。无 key 且无授权头则 error。见到 message_start 却没有 message_stop 则抛。
+ */
 export const stream: StreamFunction<"anthropic-messages", AnthropicOptions> = (
 	model: Model<"anthropic-messages">,
 	context: Context,
@@ -843,6 +869,11 @@ function mapThinkingLevelToEffort(
 	}
 }
 
+/**
+ * Map SimpleStreamOptions onto Anthropic thinking options and stream.
+ *
+ * 缺 key 且无授权头同步抛。无 reasoning 则 thinkingEnabled=false。自适应模型走 effort，旧模型走预算。
+ */
 export const streamSimple: StreamFunction<"anthropic-messages", SimpleStreamOptions> = (
 	model: Model<"anthropic-messages">,
 	context: Context,

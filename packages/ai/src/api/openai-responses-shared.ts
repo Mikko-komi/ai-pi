@@ -1,3 +1,9 @@
+/**
+ * Shared OpenAI Responses message, tool, and stream conversion.
+ *
+ * Responses / Azure / Codex 共用。toolCall id 是 callId|itemId。流必须见到 completed/incomplete。
+ */
+
 import type OpenAI from "openai";
 import type {
 	Tool as OpenAITool,
@@ -103,6 +109,11 @@ function convertToolResultOutput<TApi extends Api>(
 	return output;
 }
 
+/**
+ * Stream-processing hooks for service-tier pricing and grammar-tool input.
+ *
+ * grammar 工具名映射到唯一字符串参数。serviceTier 回调可选。
+ */
 export interface OpenAIResponsesStreamOptions {
 	serviceTier?: ResponseCreateParamsStreaming["service_tier"];
 	grammarToolInputProperties?: ReadonlyMap<string, string>;
@@ -116,6 +127,11 @@ export interface OpenAIResponsesStreamOptions {
 	) => void;
 }
 
+/**
+ * Options for converting pi messages into Responses API input items.
+ *
+ * includeSystemPrompt 默认 true。deferred 工具按 mode 变成 additional_tools 或 tool_search。
+ */
 export interface ConvertResponsesMessagesOptions {
 	includeSystemPrompt?: boolean;
 	grammarToolInputProperties?: ReadonlyMap<string, string>;
@@ -124,6 +140,11 @@ export interface ConvertResponsesMessagesOptions {
 	toolOptions?: ConvertResponsesToolsOptions;
 }
 
+/**
+ * Options for converting pi tools into Responses API tool declarations.
+ *
+ * strict 默认 false。grammar 优先于 function。deferLoading 原样下发。
+ */
 export interface ConvertResponsesToolsOptions {
 	strict?: boolean | null;
 	supportsStrictMode?: boolean;
@@ -135,6 +156,11 @@ export interface ConvertResponsesToolsOptions {
 // Message conversion
 // =============================================================================
 
+/**
+ * Convert pi messages to OpenAI Responses input items.
+ *
+ * 跨 provider 的 `|` id 会 hash 出 fc_ 前缀。grammar 走 custom_tool_call。不同模型的 fc_ id 省略以免 pairing 校验失败。
+ */
 export function convertResponsesMessages<TApi extends Api>(
 	model: Model<TApi>,
 	context: Context,
@@ -356,6 +382,11 @@ export function convertResponsesMessages<TApi extends Api>(
 // Tool conversion
 // =============================================================================
 
+/**
+ * Convert pi tools to OpenAI Responses tool declarations.
+ *
+ * 有 grammar 则 custom+grammar。否则 function；supportsStrictMode 才写 strict 字段。
+ */
 export function convertResponsesTools(tools: readonly Tool[], options?: ConvertResponsesToolsOptions): OpenAITool[] {
 	const defaultStrict = options?.strict === undefined ? false : options.strict;
 	const supportsStrictMode = options?.supportsStrictMode ?? true;
@@ -429,6 +460,11 @@ type ResponsesOutputSlot =
 
 type ToolCallOutputSlot = Extract<ResponsesOutputSlot, { type: "toolCall" }>;
 
+/**
+ * Consume a Responses SSE stream into an AssistantMessage and emit events.
+ *
+ * 没有 completed/incomplete 就抛。Azure 在 terminal 事件补 encrypted_content。function_call 结束去掉 partialJson。
+ */
 export async function processResponsesStream<TApi extends Api>(
 	openaiStream: AsyncIterable<ResponseStreamEvent>,
 	output: AssistantMessage,

@@ -1,3 +1,9 @@
+/**
+ * OpenAI Chat Completions adapter.
+ *
+ * 走 /chat/completions。toolCall id 去特殊字符并截到 40。GitHub Copilot 会补动态头。
+ */
+
 import OpenAI from "openai";
 import type {
 	ChatCompletionAssistantMessageParam,
@@ -160,6 +166,11 @@ function isOpenAIReasoningDetail(detail: unknown): detail is OpenAIReasoningDeta
 	}
 }
 
+/**
+ * Chat Completions request options, including reasoning and thinking budgets.
+ *
+ * thinkingBudgets 只在 compat 声明预算字段或 `$var: thinking.budget` 时生效。
+ */
 export interface OpenAICompletionsOptions extends StreamOptions {
 	toolChoice?: OpenAI.Chat.Completions.ChatCompletionToolChoiceOption;
 	reasoningEffort?: "minimal" | "low" | "medium" | "high" | "xhigh" | "max";
@@ -167,6 +178,11 @@ export interface OpenAICompletionsOptions extends StreamOptions {
 	thinkingBudgets?: ThinkingBudgets;
 }
 
+/**
+ * Options for converting pi messages into Chat Completions params.
+ *
+ * grammar 工具名映射到唯一字符串参数。
+ */
 export interface ConvertCompletionsMessagesOptions {
 	grammarToolInputProperties?: ReadonlyMap<string, string>;
 }
@@ -308,6 +324,11 @@ function resolveCacheRetention(cacheRetention?: CacheRetention, env?: ProviderEn
 	return "short";
 }
 
+/**
+ * Stream a Chat Completions response into assistant-message events.
+ *
+ * 立刻返回 stream。无 key 且无授权头则 error。scratch 字段出错时清掉。
+ */
 export const stream: StreamFunction<"openai-completions", OpenAICompletionsOptions> = (
 	model: Model<"openai-completions">,
 	context: Context,
@@ -723,6 +744,11 @@ export const stream: StreamFunction<"openai-completions", OpenAICompletionsOptio
 	return stream;
 };
 
+/**
+ * Map SimpleStreamOptions onto Chat Completions options and stream.
+ *
+ * 缺 key 且无授权头同步抛。reasoning=off 不传 effort。
+ */
 export const streamSimple: StreamFunction<"openai-completions", SimpleStreamOptions> = (
 	model: Model<"openai-completions">,
 	context: Context,
@@ -1175,6 +1201,11 @@ function addCacheControlToTextContent(
 	return false;
 }
 
+/**
+ * Convert pi messages to OpenAI Chat Completions message params.
+ *
+ * `|` 分隔的 Responses id 收成 callId_itemId，最长 40。跨模型 thinking 变文本。cache_control 打在最后一条可缓存消息。
+ */
 export function convertMessages(
 	model: Model<"openai-completions">,
 	context: Context,

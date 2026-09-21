@@ -1,3 +1,9 @@
+/**
+ * Azure OpenAI Responses API adapter.
+ *
+ * 走 AzureOpenAI SDK 的 /responses。部署名可被 options / 环境 map 覆盖。max_output_tokens 下限 16。
+ */
+
 import { AzureOpenAI } from "openai";
 import type { ResponseCreateParamsStreaming } from "openai/resources/responses/responses.js";
 import { clampThinkingLevel } from "../models.ts";
@@ -53,7 +59,11 @@ function formatAzureOpenAIError(error: unknown): string {
 	return formatProviderError(normalizeProviderError(error), "Azure OpenAI API error");
 }
 
-// Azure OpenAI Responses-specific options
+/**
+ * Azure-specific Responses request options.
+ *
+ * 资源名、baseUrl、api-version、部署名都可覆盖模型默认。
+ */
 export interface AzureOpenAIResponsesOptions extends StreamOptions {
 	reasoningEffort?: "minimal" | "low" | "medium" | "high" | "xhigh" | "max";
 	toolChoice?: ResponseCreateParamsStreaming["tool_choice"];
@@ -66,6 +76,8 @@ export interface AzureOpenAIResponsesOptions extends StreamOptions {
 
 /**
  * Generate function for Azure OpenAI Responses API
+ *
+ * 立刻返回 stream。缺 key 进 error 事件。scratch 字段出错时清掉。
  */
 export const stream: StreamFunction<"azure-openai-responses", AzureOpenAIResponsesOptions> = (
 	model: Model<"azure-openai-responses">,
@@ -160,6 +172,11 @@ export const stream: StreamFunction<"azure-openai-responses", AzureOpenAIRespons
 	return stream;
 };
 
+/**
+ * Map SimpleStreamOptions onto Azure OpenAI Responses options and stream.
+ *
+ * 缺 key 同步抛。reasoning=off 不传 effort。
+ */
 export const streamSimple: StreamFunction<"azure-openai-responses", SimpleStreamOptions> = (
 	model: Model<"azure-openai-responses">,
 	context: Context,

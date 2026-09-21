@@ -1,5 +1,7 @@
 /**
  * Shared utilities for Google Generative AI and Google Vertex providers.
+ *
+ * Gemini / Vertex 共用：消息转换、thinking 级别、工具声明、停止原因、重试。
  */
 
 import { type Content, FinishReason, FunctionCallingConfigMode, type Part } from "@google/genai";
@@ -24,11 +26,23 @@ type GoogleApiType = "google-generative-ai" | "google-vertex";
 /**
  * Thinking level for Gemini 3 models.
  * Mirrors Google's ThinkingLevel enum values.
+ *
+ * Gemini 3 线上枚举。不含 xhigh/max。
  */
 export type GoogleApiThinkingLevel = "THINKING_LEVEL_UNSPECIFIED" | "MINIMAL" | "LOW" | "MEDIUM" | "HIGH";
+
+/**
+ * pi thinking level after xhigh/max have been excluded.
+ *
+ * 已去掉 xhigh/max。resolve 时 off 收成 high。
+ */
 export type ResolvedGoogleThinkingLevel = Exclude<ThinkingLevel, "xhigh" | "max">;
 
-/** Resolve a supported pi level or model-specific Google mapping to a standard Google level. */
+/**
+ * Resolve a supported pi level or model-specific Google mapping to a standard Google level.
+ *
+ * off 变成 high。先查 thinkingLevelMap 再规范化。映不到四档就抛。
+ */
 export function resolveGoogleThinkingLevel<T extends GoogleApiType>(
 	model: Model<T>,
 	level: ModelThinkingLevel,
@@ -64,6 +78,8 @@ export function resolveGoogleThinkingLevel<T extends GoogleApiType>(
  *   do not merge/move signatures across parts.
  *
  * See: https://ai.google.dev/gemini-api/docs/thought-signatures
+ *
+ * 只认 thought===true。有 thoughtSignature 不等于这块是 thinking。
  */
 export function isThinkingPart(part: Pick<Part, "thought" | "thoughtSignature">): boolean {
 	return part.thought === true;
@@ -77,6 +93,8 @@ export function isThinkingPart(part: Pick<Part, "thought" | "thoughtSignature">)
  *
  * Note: this does NOT merge or move signatures across distinct response parts. It only prevents
  * a signature from being overwritten with `undefined` within the same streamed block.
+ *
+ * 同块内空 incoming 不覆盖已有签名。不跨 part 合并。
  */
 export function retainThoughtSignature(existing: string | undefined, incoming: string | undefined): string | undefined {
 	if (typeof incoming === "string" && incoming.length > 0) return incoming;
@@ -101,6 +119,8 @@ function resolveThoughtSignature(isSameProviderAndModel: boolean, signature: str
 
 /**
  * Models via Google APIs that require explicit tool call IDs in function calls/responses.
+ *
+ * claude- / gpt-oss- / Gemini 3+ 要带 id。更早 Gemini 不带。
  */
 export function requiresToolCallId(modelId: string): boolean {
 	const geminiMajorVersion = getGeminiMajorVersion(modelId);
@@ -127,6 +147,8 @@ function supportsMultimodalFunctionResponse(modelId: string): boolean {
 
 /**
  * Convert internal messages to Gemini Content[] format.
+ *
+ * 跨模型丢掉不可回放的签名。空文本/thinking 无签名则跳过。toolResult 合并进同一 user turn。Gemini 3 以下的图另开一轮。
  */
 export function convertMessages<T extends GoogleApiType>(model: Model<T>, context: Context): Content[] {
 	const contents: Content[] = [];
@@ -314,6 +336,8 @@ function sanitizeForOpenApi(schema: unknown): unknown {
  * anyOf, oneOf, const, etc.). Set `useParameters` to true to use the legacy `parameters`
  * field instead (OpenAPI 3.03 Schema). This is needed for Cloud Code Assist with Claude
  * models, where the API translates `parameters` into Anthropic's `input_schema`.
+ *
+ * 默认 parametersJsonSchema。useParameters 走 OpenAPI parameters，给 Cloud Code Assist 上的 Claude。空工具表返回 undefined。
  */
 export function convertTools(
 	tools: Tool[],
@@ -338,13 +362,21 @@ export function convertTools(
 	];
 }
 
-/** Gemini 3+ enforces required function parameters in validated tool-calling modes. */
+/**
+ * Gemini 3+ enforces required function parameters in validated tool-calling modes.
+ *
+ * 只有 Gemini 主版本 >= 3 为 true。非 gemini 前缀 false。
+ */
 export function supportsGoogleStrictToolSampling(modelId: string): boolean {
 	const majorVersion = getGeminiMajorVersion(modelId);
 	return majorVersion !== undefined && majorVersion >= 3;
 }
 
-/** Map tool choice string to Gemini FunctionCallingConfigMode. */
+/**
+ * Map tool choice string to Gemini FunctionCallingConfigMode.
+ *
+ * auto/none/any 对上枚举。其它值当 auto。
+ */
 export function mapToolChoice(choice: string): FunctionCallingConfigMode {
 	switch (choice) {
 		case "auto":
@@ -358,6 +390,11 @@ export function mapToolChoice(choice: string): FunctionCallingConfigMode {
 	}
 }
 
+/**
+ * Pick Gemini function-calling mode from toolChoice and strict-schema tools.
+ *
+ * none/any 原样映射。有工具需要 strict 则 VALIDATED。否则按 toolChoice，没有则 undefined。
+ */
 export function resolveGoogleFunctionCallingMode(
 	tools: Tool[],
 	toolChoice: string | undefined,
@@ -375,6 +412,8 @@ export function resolveGoogleFunctionCallingMode(
 
 /**
  * Map Gemini FinishReason to our StopReason.
+ *
+ * STOP 变成 stop，MAX_TOKENS 变成 length，其余 error。未列出的枚举值抛。
  */
 export function mapStopReason(reason: FinishReason): StopReason {
 	switch (reason) {
@@ -408,6 +447,8 @@ export function mapStopReason(reason: FinishReason): StopReason {
 
 /**
  * Map string finish reason to our StopReason (for raw API responses).
+ *
+ * 只认 STOP / MAX_TOKENS。其它字符串当 error。
  */
 export function mapStopReasonString(reason: string): StopReason {
 	switch (reason) {
@@ -428,6 +469,8 @@ export function mapStopReasonString(reason: string): StopReason {
  * `headers` property, and retryProviderRequest only retries errors that carry
  * both, so normalize the error by adding the missing `headers` before
  * rethrowing.
+ *
+ * SDK ApiError 补上 headers:undefined 才能进共享重试。只重试 408/409/429/5xx。
  */
 export function retryGoogleRequest<T>(
 	request: () => Promise<T>,

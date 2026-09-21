@@ -1,3 +1,9 @@
+/**
+ * Native Mistral Chat Completions adapter.
+ *
+ * 直打 /v1/chat/completions。toolCall id 收成 9 位字母数字。scratch partialArgs 不落盘。
+ */
+
 import { calculateCost, clampThinkingLevel } from "../models.ts";
 import type {
 	AssistantMessage,
@@ -26,11 +32,13 @@ import { transformMessages } from "./transform-messages.ts";
 const MISTRAL_TOOL_CALL_ID_LENGTH = 9;
 const MAX_MISTRAL_ERROR_BODY_CHARS = 4000;
 
-/**
- * Provider-specific options for the Mistral API.
- */
 type MistralReasoningEffort = "none" | "high";
 
+/**
+ * Provider-specific options for the Mistral API.
+ *
+ * toolChoice / promptMode / reasoningEffort 原样下发。未设 sessionId 或 cacheRetention=none 则不写 prompt 缓存。
+ */
 export interface MistralOptions extends StreamOptions {
 	toolChoice?: "auto" | "none" | "any" | "required" | { type: "function"; function: { name: string } };
 	promptMode?: "reasoning";
@@ -118,6 +126,8 @@ type MistralCompletionEvent = {
 
 /**
  * Stream responses from the native Mistral Chat Completions endpoint.
+ *
+ * 立刻返回 stream。缺 key 进 error 事件。没有 finish_reason 当错误。
  */
 export const stream: StreamFunction<"mistral-conversations", MistralOptions> = (
 	model: Model<"mistral-conversations">,
@@ -177,6 +187,8 @@ export const stream: StreamFunction<"mistral-conversations", MistralOptions> = (
 
 /**
  * Maps provider-agnostic `SimpleStreamOptions` to Mistral options.
+ *
+ * 缺 key 同步抛。off 不传 reasoning。按模型选 promptMode 或 reasoningEffort。
  */
 export const streamSimple: StreamFunction<"mistral-conversations", SimpleStreamOptions> = (
 	model: Model<"mistral-conversations">,

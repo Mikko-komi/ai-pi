@@ -1,3 +1,9 @@
+/**
+ * Google Generative AI (Gemini API) adapter.
+ *
+ * 走 @google/genai。Gemini 3 / Gemma 4 用 thinking level，更早模型用 budgetTokens。
+ */
+
 import {
 	type GenerateContentConfig,
 	type GenerateContentParameters,
@@ -38,6 +44,11 @@ import {
 } from "./google-shared.ts";
 import { buildBaseOptions } from "./simple-options.ts";
 
+/**
+ * Gemini API request options, including optional thinking budget or level.
+ *
+ * thinking.enabled=false 关闭思考。budgetTokens=-1 动态，0 关闭。Gemini 3 走 level。
+ */
 export interface GoogleOptions extends StreamOptions {
 	toolChoice?: "auto" | "none" | "any";
 	thinking?: {
@@ -50,6 +61,11 @@ export interface GoogleOptions extends StreamOptions {
 // Counter for generating unique tool call IDs
 let toolCallCounter = 0;
 
+/**
+ * Stream a Gemini API completion into assistant-message events.
+ *
+ * 立刻返回 stream。自定义 fetch 不支持。缺 key 进 error 事件。
+ */
 export const stream: StreamFunction<"google-generative-ai", GoogleOptions> = (
 	model: Model<"google-generative-ai">,
 	context: Context,
@@ -294,6 +310,11 @@ export const stream: StreamFunction<"google-generative-ai", GoogleOptions> = (
 	return stream;
 };
 
+/**
+ * Map SimpleStreamOptions onto Gemini thinking options and stream.
+ *
+ * 缺 key 同步抛。无 reasoning 则 thinking.enabled=false。Gemini 3 / Gemma 4 用 level，其余用预算。
+ */
 export const streamSimple: StreamFunction<"google-generative-ai", SimpleStreamOptions> = (
 	model: Model<"google-generative-ai">,
 	context: Context,

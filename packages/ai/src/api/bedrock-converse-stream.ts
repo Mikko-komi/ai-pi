@@ -1,3 +1,9 @@
+/**
+ * Amazon Bedrock Converse Stream adapter.
+ *
+ * Node-only，依赖 AWS SDK。Claude 模型的 thinking 语义对齐 Anthropic。鉴权走 SigV4 或 bearer。
+ */
+
 import type { Agent as HttpsAgent } from "node:https";
 import {
 	BedrockRuntimeClient,
@@ -65,8 +71,18 @@ import {
 } from "./simple-options.ts";
 import { transformMessages } from "./transform-messages.ts";
 
+/**
+ * How Claude thinking text is returned on Bedrock.
+ *
+ * omitted 仍带回签名。本适配器默认 summarized，和 Anthropic 路径一致。
+ */
 export type BedrockThinkingDisplay = "summarized" | "omitted";
 
+/**
+ * Bedrock Converse Stream request options, including region and thinking.
+ *
+ * region/profile/bearerToken 可覆盖默认凭据链。requestMetadata 最多 50 对。
+ */
 export interface BedrockOptions extends StreamOptions {
 	region?: string;
 	profile?: string;
@@ -113,6 +129,11 @@ const EMPTY_TEXT_PLACEHOLDER = "<empty>";
 /** Matches the placeholder the Anthropic API path uses for redacted thinking. */
 const REDACTED_THINKING_PLACEHOLDER = "[Reasoning redacted]";
 
+/**
+ * Stream a Bedrock Converse completion into assistant-message events.
+ *
+ * 立刻返回 stream。凭据失败进 error 事件。redacted thinking 用占位文本加签名。
+ */
 export const stream: StreamFunction<"bedrock-converse-stream", BedrockOptions> = (
 	model: Model<"bedrock-converse-stream">,
 	context: Context,
@@ -508,6 +529,11 @@ function addResponseHeadersMiddleware(
 	client.middlewareStack.add(middleware, { step: "deserialize", name: "pi-ai-response-headers" });
 }
 
+/**
+ * Map SimpleStreamOptions onto Bedrock thinking options and stream.
+ *
+ * 不要求 apiKey。无 reasoning 则不发 thinking。旧 Claude 把预算夹进 maxTokens。
+ */
 export const streamSimple: StreamFunction<"bedrock-converse-stream", SimpleStreamOptions> = (
 	model: Model<"bedrock-converse-stream">,
 	context: Context,

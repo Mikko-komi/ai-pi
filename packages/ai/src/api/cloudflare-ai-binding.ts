@@ -25,6 +25,8 @@
  * casting the binding at every call site. {@link AiBinding} takes the cast instead — declare
  * `fetch` optional, check it once at construction — so `env.AI` can be passed as-is. Once
  * workers-types declares `fetch`, the optional marker and the runtime check both go away.
+ *
+ * Worker 里用 AI binding 的 fetch 走网关，免 Cloudflare API token。baseUrl 已是 binding 路由则原样转发，不改写 body。
  */
 
 import type { FetchFunction } from "../types.ts";
@@ -38,6 +40,8 @@ import type { FetchFunction } from "../types.ts";
  * the one member unique to `Ai`, so without it this interface would also accept an `AiGateway`
  * or any hand-rolled `{ fetch }` object, which is exactly the mistake the runtime check reports
  * late.
+ *
+ * 结构类型，不依赖 workers-types。fetch 在运行时一定有，类型标可选是因为官方类型还没声明。aiGatewayLogId 用来和 AiGateway / 手写 `{ fetch }` 区分。
  */
 export interface AiBinding {
 	aiGatewayLogId: string | null;
@@ -53,6 +57,8 @@ export interface AiBinding {
  * requests. Pair it with `Authorization: null` / `x-api-key: null` so the SDKs' placeholder
  * auth headers never reach the gateway, which would treat a request-supplied auth header as a
  * BYOK provider key that overrides its stored keys — the same as it would over HTTPS.
+ *
+ * 占位鉴权值。binding 已预认证。配合 Authorization / x-api-key 置 null，避免网关当成 BYOK。
  */
 export const CLOUDFLARE_GATEWAY_BINDING_AUTH_SENTINEL = "cloudflare-gateway-binding";
 
@@ -76,6 +82,8 @@ export const CLOUDFLARE_GATEWAY_BINDING_AUTH_SENTINEL = "cloudflare-gateway-bind
  *   fetch: createAiBindingFetch(env.AI),
  * });
  * ```
+ *
+ * 构造时检查 fetch，没有立刻抛。eager bind，避免后面属性被改掉。请求原样转发。
  */
 export function createAiBindingFetch(binding: AiBinding): FetchFunction {
 	// `fetch` is optional on the type, so its presence is checked here — early, rather than as a

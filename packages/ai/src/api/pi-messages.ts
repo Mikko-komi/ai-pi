@@ -7,6 +7,8 @@
  * terminal `done`/`error` event. This is the wire protocol spoken by the
  * Radius gateway, but any backend implementing it can be used, e.g. via a
  * models.json custom provider with `"api": "pi-messages"`.
+ *
+ * 一次 POST `{ model, context, options }` 到 `/messages`，SSE 回 assistant 事件。没有 done/error 当错误。
  */
 
 import type {
@@ -28,6 +30,11 @@ import { headersToRecord, providerHeadersToRecord } from "../utils/headers.ts";
 import { parseStreamingJson } from "../utils/json-parse.ts";
 import { getProviderEnvValue } from "../utils/provider-env.ts";
 
+/**
+ * pi-messages request options forwarded to the backend.
+ *
+ * reasoning / toolChoice / cacheRetention 原样下发。debug 只加 query，不进 body。
+ */
 export interface PiMessagesOptions extends StreamOptions {
 	reasoning?: ThinkingLevel;
 	toolChoice?: "auto" | "none" | "required" | { type: "function"; function: { name: string } };
@@ -38,7 +45,11 @@ export interface PiMessagesOptions extends StreamOptions {
 type PiMessagesUsage = AssistantMessage["usage"];
 type PiMessagesStopReason = AssistantMessage["stopReason"];
 
-/** Impact summary of a server-side message rewrite (e.g. a gateway policy). */
+/**
+ * Impact summary of a server-side message rewrite (e.g. a gateway policy).
+ *
+ * 网关改写摘要。changed=false 时计数仍可能是 0。
+ */
 export type PiMessagesRewriteImpact = {
 	policyId: string;
 	policyVersion: number;
@@ -48,7 +59,11 @@ export type PiMessagesRewriteImpact = {
 	systemPromptChanged: boolean;
 };
 
-/** Serialized assistant-message event as sent by a pi-messages backend. */
+/**
+ * Serialized assistant-message event as sent by a pi-messages backend.
+ *
+ * 线上 SSE 事件。done/error 才是终点。rewrite 是网关改写摘要。
+ */
 export type PiMessagesEvent =
 	| { type: "start" }
 	| { type: "text_start"; contentIndex: number }
@@ -93,6 +108,11 @@ type PiMessagesErrorBody = {
 	};
 };
 
+/**
+ * HTTP error from a pi-messages backend, with diagnostic details for the stream.
+ *
+ * message 已可读。code 可选。diagnosticDetails 给诊断，不替代 message。
+ */
 export class PiMessagesResponseError extends Error {
 	code?: string;
 	readonly diagnosticDetails: Record<string, unknown>;
@@ -350,6 +370,11 @@ function resolveCacheRetention(cacheRetention?: CacheRetention, env?: ProviderEn
 	return getProviderEnvValue("PI_CACHE_RETENTION", env) === "long" ? "long" : undefined;
 }
 
+/**
+ * Stream a pi-messages backend into assistant-message events.
+ *
+ * 立刻返回 stream。缺 key 进 error 事件。流中途结束且无终点事件则 error。
+ */
 export const stream: StreamFunction<"pi-messages", PiMessagesOptions> = (
 	model: Model<"pi-messages">,
 	context: Context,
@@ -426,6 +451,11 @@ export const stream: StreamFunction<"pi-messages", PiMessagesOptions> = (
 	return eventStream;
 };
 
+/**
+ * Map SimpleStreamOptions onto pi-messages options and stream.
+ *
+ * 透传 reasoning / toolChoice。debug 若调用方带了就留下。
+ */
 export const streamSimple: StreamFunction<"pi-messages", SimpleStreamOptions> = (
 	model: Model<"pi-messages">,
 	context: Context,

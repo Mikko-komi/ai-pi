@@ -1,3 +1,9 @@
+/**
+ * OpenRouter image generation via chat completions modalities.
+ *
+ * 非流式一次生成。只收下 data: URL 图。失败写 stopReason，不抛给调用方。
+ */
+
 import OpenAI from "openai";
 import type {
 	ChatCompletion,
@@ -37,6 +43,11 @@ type OpenRouterImageGenerationResponse = ChatCompletion & {
 	choices: OpenRouterImageGenerationChoice[];
 };
 
+/**
+ * Generate images (and optional text) through OpenRouter chat completions.
+ *
+ * 缺 key 写成 error 结果。只解析 data:base64 图，其它 URL 丢掉。
+ */
 export const generateImages: ImagesFunction<"openrouter-images", ImagesOptions> = async (
 	model: ImagesModel<"openrouter-images">,
 	context: ImagesContext,
