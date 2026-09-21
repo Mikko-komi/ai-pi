@@ -1,3 +1,9 @@
+/**
+ * Append-only JSONL session trees used by the coding-agent CLI.
+ *
+ * coding-agent 的会话文件：每条有 id/parentId，leaf 指向当前位置。改历史靠移动 leaf，不改旧行。
+ */
+
 import type { AgentMessage } from "@earendil-works/pi-agent-core";
 import { type ImageContent, type Message, type TextContent, type Usage, uuidv7 } from "@earendil-works/pi-ai";
 import { randomUUID } from "crypto";
@@ -27,8 +33,18 @@ import {
 	createCustomMessage,
 } from "./messages.ts";
 
+/**
+ * Current on-disk session format version written by this manager.
+ *
+ * 本管理器写出的会话文件版本。读旧文件时会迁到这个版本。
+ */
 export const CURRENT_SESSION_VERSION = 3;
 
+/**
+ * First JSONL row of a session file.
+ *
+ * 会话文件第一行。v1 没有 `version`。
+ */
 export interface SessionHeader {
 	type: "session";
 	version?: number; // v1 sessions don't have this
@@ -38,11 +54,21 @@ export interface SessionHeader {
 	parentSession?: string;
 }
 
+/**
+ * Options when creating a new session file.
+ *
+ * 新建会话文件的选项。`parentSession` 记录 fork 来源。
+ */
 export interface NewSessionOptions {
 	id?: string;
 	parentSession?: string;
 }
 
+/**
+ * Shared fields on every tree entry except the header.
+ *
+ * 树节点的公共字段。`parentId` 为 null 表示根。
+ */
 export interface SessionEntryBase {
 	type: string;
 	id: string;
@@ -140,7 +166,11 @@ export interface CustomMessageEntry<T = unknown> extends SessionEntryBase {
 	display: boolean;
 }
 
-/** Session entry - has id/parentId for tree structure (returned by "read" methods in SessionManager) */
+/**
+ * Session entry - has id/parentId for tree structure (returned by "read" methods in SessionManager)
+ *
+ * 树上的一条记录。读 API 返回这个，不含文件头。
+ */
 export type SessionEntry =
 	| SessionMessageEntry
 	| ThinkingLevelChangeEntry
@@ -152,10 +182,18 @@ export type SessionEntry =
 	| LabelEntry
 	| SessionInfoEntry;
 
-/** Raw file entry (includes header) */
+/**
+ * Raw file entry (includes header)
+ *
+ * 文件里的一行：头或树节点。
+ */
 export type FileEntry = SessionHeader | SessionEntry;
 
-/** Tree node for getTree() - defensive copy of session structure */
+/**
+ * Tree node for getTree() - defensive copy of session structure
+ *
+ * `getTree()` 的防御拷贝节点，带解析后的 label。
+ */
 export interface SessionTreeNode {
 	entry: SessionEntry;
 	children: SessionTreeNode[];
@@ -165,12 +203,22 @@ export interface SessionTreeNode {
 	labelTimestamp?: string;
 }
 
+/**
+ * Resolved model-facing context for the current leaf.
+ *
+ * 当前 leaf 路径上给模型看的消息、思考级别和模型。
+ */
 export interface SessionContext {
 	messages: AgentMessage[];
 	thinkingLevel: string;
 	model: { provider: string; modelId: string } | null;
 }
 
+/**
+ * Listing metadata for one session file.
+ *
+ * 列会话时的摘要。`cwd` 在旧会话里可能是空字符串。
+ */
 export interface SessionInfo {
 	path: string;
 	id: string;
@@ -187,6 +235,11 @@ export interface SessionInfo {
 	allMessagesText: string;
 }
 
+/**
+ * Read-only subset of {@link SessionManager} for hosts that must not append.
+ *
+ * 只读视图。不能 append，只能查树和拼 context。
+ */
 export type ReadonlySessionManager = Pick<
 	SessionManager,
 	| "getCwd"
@@ -209,6 +262,11 @@ function createSessionId(): string {
 	return uuidv7();
 }
 
+/**
+ * Throw if `id` is not a safe session-file identifier.
+ *
+ * 校验会话 id。非法就 throw，避免写出坏文件名。
+ */
 export function assertValidSessionId(id: string): void {
 	if (!/^[A-Za-z0-9](?:[A-Za-z0-9._-]*[A-Za-z0-9])?$/.test(id)) {
 		throw new Error(
@@ -852,6 +910,8 @@ async function listSessionsFromDir(
  *
  * Use buildSessionContext() to get the resolved message list for the LLM, which
  * handles compaction summaries and follows the path from root to current leaf.
+ *
+ * JSONL 树上的会话。append 挂在当前 leaf 下；分支只移动 leaf，不改旧行。
  */
 export class SessionManager {
 	private sessionId: string = "";

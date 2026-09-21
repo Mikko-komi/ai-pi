@@ -1,3 +1,9 @@
+/**
+ * Coding-agent Models runtime: catalogs, credentials, and stream/auth operations.
+ *
+ * coding-agent 的模型运行时。实现 pi-ai 的 `Models`，并把文件凭证和扩展 provider 合在一起。
+ */
+
 import { dirname, join } from "node:path";
 import {
 	type Api,
@@ -63,6 +69,11 @@ interface ModelRuntimeSnapshot {
 	auth: ReadonlyMap<string, AuthCheck | undefined>;
 }
 
+/**
+ * Options for {@link ModelRuntime.create}.
+ *
+ * 创建运行时的选项。默认不在 create 时走网络刷目录。
+ */
 export interface CreateModelRuntimeOptions {
 	/** Credential storage. Defaults to the file at authPath. */
 	credentials?: CredentialStore;
@@ -81,6 +92,11 @@ export interface CreateModelRuntimeOptions {
 	refreshOnCreate?: boolean;
 }
 
+/**
+ * Per-call auth overrides on top of stored credentials.
+ *
+ * 单次调用覆盖存储凭证。OAuth 默认要求至少还有五分钟有效期。
+ */
 export interface ModelRuntimeAuthOverrides extends AuthOperationOptions {
 	apiKey?: string;
 	env?: Record<string, string>;
@@ -88,9 +104,18 @@ export interface ModelRuntimeAuthOverrides extends AuthOperationOptions {
 	minOAuthValidityMs?: number;
 }
 
+/**
+ * Credential mutation that must also refresh the local model/auth snapshot.
+ *
+ * 改完凭证后必须同步本地模型/鉴权快照的操作。
+ */
 export type CredentialSynchronizationOperation = "login" | "logout" | "setRuntimeApiKey" | "removeRuntimeApiKey";
 
-/** Credentials changed successfully, but the local model/auth snapshot could not be synchronized. */
+/**
+ * Credentials changed successfully, but the local model/auth snapshot could not be synchronized.
+ *
+ * 凭证已经写出去了，但本地快照没跟上。调用方应把这次操作当成半成功。
+ */
 export class CredentialSynchronizationError extends Error {
 	readonly providerId: string;
 	readonly operation: CredentialSynchronizationOperation;
@@ -126,7 +151,11 @@ function mergeHeaders(
 	return merged;
 }
 
-/** Configured pi-ai Models collection used by coding-agent and SDK consumers. */
+/**
+ * Configured pi-ai Models collection used by coding-agent and SDK consumers.
+ *
+ * 给 CLI/SDK 用的 `Models` 实现。内置目录、文件 store 和扩展 provider 都从这里出。
+ */
 export class ModelRuntime implements Models {
 	private readonly models: MutableModels;
 	private readonly credentials: RuntimeCredentials;

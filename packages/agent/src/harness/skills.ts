@@ -1,3 +1,9 @@
+/**
+ * Load Agent Skills from the filesystem through {@link ExecutionEnv}.
+ *
+ * 经 ExecutionEnv 加载 Skill。缺目录就跳过；坏文件记进 diagnostics，不抛错。
+ */
+
 import ignore from "ignore";
 import { parse } from "yaml";
 import type { Context } from "./context.ts";
@@ -9,6 +15,11 @@ const IGNORE_FILE_NAMES = [".gitignore", ".ignore", ".fdignore"];
 
 type IgnoreMatcher = ReturnType<typeof ignore>;
 
+/**
+ * Stable codes for skill-loading warnings.
+ *
+ * 加载 Skill 时的稳定告警码。目前只有 warning，没有把坏 skill 当成硬失败。
+ */
 export type SkillDiagnosticCode =
 	| "file_info_failed"
 	| "list_failed"
@@ -16,7 +27,11 @@ export type SkillDiagnosticCode =
 	| "parse_failed"
 	| "invalid_metadata";
 
-/** Warning produced while loading skills. */
+/**
+ * Warning produced while loading skills.
+ *
+ * 加载 Skill 的告警。`path` 指向出问题的文件或目录。
+ */
 export interface SkillDiagnostic {
 	/** Diagnostic severity. Currently only warnings are emitted. */
 	type: "warning";
@@ -35,7 +50,11 @@ interface SkillFrontmatter {
 	[key: string]: unknown;
 }
 
-/** Format a skill invocation prompt, optionally appending additional user instructions. */
+/**
+ * Format a skill invocation prompt, optionally appending additional user instructions.
+ *
+ * 收成 `<skill>` 块。相对路径相对 skill 文件所在目录解析。
+ */
 export function formatSkillInvocation(skill: Skill, additionalInstructions?: string): string {
 	const skillBlock = `<skill name="${skill.name}" location="${skill.filePath}">\nReferences are relative to ${dirnameEnvPath(skill.filePath)}.\n\n${skill.content}\n</skill>`;
 	return additionalInstructions ? `${skillBlock}\n\n${additionalInstructions}` : skillBlock;
@@ -47,6 +66,8 @@ export function formatSkillInvocation(skill: Skill, additionalInstructions?: str
  * Traverses directories recursively, loads `SKILL.md` files, loads direct root `.md` files with skill
  * frontmatter, honors ignore files, and returns diagnostics for invalid declared skill files. Missing input
  * directories are skipped.
+ *
+ * 从目录树加载 Skill。认 `SKILL.md`，根上带 frontmatter 的 `.md` 也可以；遵守 ignore 文件。
  */
 export async function loadSkills(
 	env: ExecutionEnv,
@@ -82,6 +103,8 @@ export async function loadSkills(
  *
  * Source values are preserved exactly and attached to every loaded skill and diagnostic. The agent package does not
  * interpret source values; applications define their own provenance shape.
+ *
+ * 带来源标签的加载。本包不解读 `source`，原样挂到每条 skill 和 diagnostic 上。
  */
 export async function loadSourcedSkills<TSource, TSkill extends Skill = Skill>(
 	env: ExecutionEnv,

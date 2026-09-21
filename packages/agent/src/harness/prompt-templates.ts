@@ -1,10 +1,25 @@
+/**
+ * Load and expand prompt templates from markdown files.
+ *
+ * 加载并展开 prompt 模板。目录只看直接子级 `.md`，不递归。
+ */
+
 import { parse } from "yaml";
 import type { Context } from "./context.ts";
 import { type ExecutionEnv, type FileInfo, type PromptTemplate, type Result, toError } from "./types.ts";
 
+/**
+ * Stable codes for prompt-template loading warnings.
+ *
+ * 加载模板时的稳定告警码。
+ */
 export type PromptTemplateDiagnosticCode = "file_info_failed" | "list_failed" | "read_failed" | "parse_failed";
 
-/** Warning produced while loading prompt templates. */
+/**
+ * Warning produced while loading prompt templates.
+ *
+ * 加载模板的告警。缺路径会跳过，读/解析失败才进这里。
+ */
 export interface PromptTemplateDiagnostic {
 	/** Diagnostic severity. Currently only warnings are emitted. */
 	type: "warning";
@@ -27,6 +42,8 @@ interface PromptTemplateFrontmatter {
  *
  * Directory inputs load direct `.md` children non-recursively. File inputs load explicit `.md` files. Missing paths and
  * non-markdown files are skipped. Read and parse failures are returned as diagnostics.
+ *
+ * 从路径加载模板。目录不递归；缺路径和非 `.md` 跳过。
  */
 export async function loadPromptTemplates(
 	env: ExecutionEnv,
@@ -68,6 +85,8 @@ export async function loadPromptTemplates(
  *
  * Source values are preserved exactly and attached to every loaded prompt template and diagnostic. The agent package does
  * not interpret source values; applications define their own provenance shape.
+ *
+ * 带来源标签的模板加载。`source` 原样保留，本包不解读。
  */
 export async function loadSourcedPromptTemplates<TSource, TPromptTemplate extends PromptTemplate = PromptTemplate>(
 	env: ExecutionEnv,
@@ -222,7 +241,11 @@ function parseFrontmatter<T extends Record<string, unknown>>(
 	}
 }
 
-/** Parse an argument string using simple shell-style single and double quotes. */
+/**
+ * Parse an argument string using simple shell-style single and double quotes.
+ *
+ * 按简单 shell 引号拆参数。不处理转义反斜杠。
+ */
 export function parseCommandArgs(argsString: string): string[] {
 	const args: string[] = [];
 	let current = "";
@@ -248,7 +271,11 @@ export function parseCommandArgs(argsString: string): string[] {
 	return args;
 }
 
-/** Substitute prompt template placeholders (`$1`, `$@`, `$ARGUMENTS`, `${@:N}`, `${@:N:L}`) with command arguments. */
+/**
+ * Substitute prompt template placeholders (`$1`, `$@`, `$ARGUMENTS`, `${@:N}`, `${@:N:L}`) with command arguments.
+ *
+ * 替换模板占位符。缺的位置参数收成空字符串，不会抛错。
+ */
 export function substituteArgs(content: string, args: string[]): string {
 	let result = content;
 	result = result.replace(/\$(\d+)/g, (_, num: string) => args[parseInt(num, 10) - 1] ?? "");
@@ -264,7 +291,11 @@ export function substituteArgs(content: string, args: string[]): string {
 	return result;
 }
 
-/** Format a prompt template invocation with positional arguments. */
+/**
+ * Format a prompt template invocation with positional arguments.
+ *
+ * 用位置参数展开模板正文。
+ */
 export function formatPromptTemplateInvocation(template: PromptTemplate, args: string[] = []): string {
 	return substituteArgs(template.content, args);
 }

@@ -1,3 +1,9 @@
+/**
+ * Public AgentHarness facade: lanes, operations, hooks, and events.
+ *
+ * 按 lane 驱动持久化会话的门面。和旧的 `Agent` 循环并列；I/O 仍在宿主。
+ */
+
 import type { JsonRepresentation } from "@earendil-works/chord";
 import type {
 	Api,
@@ -74,13 +80,18 @@ import type {
 	Skill,
 } from "./types.ts";
 
-/** Convenience-only suspended run observation, constructed when M8 exposes public drive. */
+/**
+ * Convenience-only suspended run observation, constructed when M8 exposes public drive.
+ *
+ * 挂起的 run 观察值。要等公开 drive 后才有实际构造路径。
+ */
 export interface SuspendedRun {
 	operationId: string;
 	status: "suspended";
 	deferred: DeferredHandle;
 }
 
+/** prompt / skill / template 跑完或挂起后的结果。 */
 export type RunResult = Result<
 	OperationResultRecord | SuspendedRun,
 	LaneBusy | InvalidMessage | UnknownSkill | UnknownTemplate | Closed
@@ -108,6 +119,11 @@ export interface NavigateOptions {
 	customInstructions?: string;
 }
 
+/**
+ * One admitted unit of work a lane can accept.
+ *
+ * lane 能受理的一种工作：prompt、skill、模板、压缩或导航。
+ */
 export type OperationRequest =
 	| { kind: "prompt"; operationId?: string; prompt: string; images?: ImageContent[] }
 	| { kind: "prompt"; operationId?: string; prompt: AgentMessage | AgentMessage[]; images?: never }
@@ -427,6 +443,11 @@ export type Resources = AgentHarnessResources<Skill, PromptTemplate>;
 
 type VoidHookResult = ReturnType<() => void>;
 
+/**
+ * Named hook points and the event/result each handler may see or return.
+ *
+ * 生命周期钩子表。返回 `undefined` 表示不改当前行为。
+ */
 export interface HookMap {
 	before_run: {
 		event: { prompt: AgentMessage[]; resources: Resources };
@@ -515,6 +536,11 @@ export interface Hooks {
 
 export type { EntryProjector } from "./session/types.ts";
 
+/**
+ * Construction inputs for {@link AgentHarness.create}.
+ *
+ * 把一个已打开的 {@link Session} 接到 harness。模型、工具和资源都在这里注入。
+ */
 export interface AgentHarnessOptions<TContext extends object | undefined = object | undefined> {
 	session: Session;
 	models: Models;
@@ -535,6 +561,11 @@ export interface AgentHarnessOptions<TContext extends object | undefined = objec
 	entryProjectors?: Record<string, EntryProjector>;
 }
 
+/**
+ * One named execution lane on a session tree.
+ *
+ * 会话树上的一条执行 lane。同时只能飞一个操作；steer/followUp 进队列。
+ */
 export interface AgentLane {
 	readonly name: string;
 	getTipId(context: Context): Promise<string | null>;
@@ -583,6 +614,11 @@ export interface AcquireLaneOptions {
 	createAt?: string | null;
 }
 
+/**
+ * Durable harness bound to one open session.
+ *
+ * 绑在一个打开 Session 上的门面。用 `lane()` 取执行面；`hooks` / `events` 是只读订阅口。
+ */
 export interface AgentHarness<TContext extends object | undefined = object | undefined> {
 	lane(name: string, context: Context): Promise<AgentLane>;
 	lane(name: string, options: AcquireLaneOptions, context: Context): Promise<AgentLane>;
@@ -611,6 +647,11 @@ export interface AgentHarness<TContext extends object | undefined = object | und
 	close(context: Context): Promise<void>;
 }
 
+/**
+ * Async constructor surface for {@link AgentHarness}.
+ *
+ * 异步构造口。`create` 可能带回已经 open 的操作，供恢复用。
+ */
 export interface AgentHarnessConstructor {
 	create<TContext extends object | undefined = object | undefined>(
 		options: AgentHarnessOptions<TContext>,
@@ -618,5 +659,9 @@ export interface AgentHarnessConstructor {
 	): Promise<{ harness: AgentHarness<TContext>; open: OpenOperation[] }>;
 }
 
-/** Runtime constructor for attaching the durable harness to one open session. */
+/**
+ * Runtime constructor for attaching the durable harness to one open session.
+ *
+ * 运行时构造器。真正实现在 `runtime/harness.ts`。
+ */
 export const AgentHarness = { create: createAgentHarness } satisfies AgentHarnessConstructor;

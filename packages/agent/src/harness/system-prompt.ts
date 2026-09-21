@@ -1,5 +1,16 @@
+/**
+ * Format visible skills into the system-prompt XML block.
+ *
+ * 把可被模型看见的 skill 收成系统提示里的 XML。`disableModelInvocation` 的不会出现。
+ */
+
 import type { Skill } from "./types.ts";
 
+/**
+ * Render skills for the system prompt, omitting model-disabled entries.
+ *
+ * 生成 `<available_skills>` 块。相对路径按 skill 目录解析。
+ */
 export function formatSkillsForSystemPrompt(skills: Skill[]): string {
 	const visibleSkills = skills.filter((skill) => !skill.disableModelInvocation);
 	if (visibleSkills.length === 0) return "";

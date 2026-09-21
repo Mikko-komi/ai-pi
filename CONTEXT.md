@@ -13,8 +13,16 @@ _Avoid_: 文档翻译, 产品注释, 中文 README, 逐条译英文, 方法级�
 _Avoid_: public 方法, 内部 class
 
 **第一刀核心**:
-本轮要加学习注释的四个文件：`packages/agent/src/agent.ts`、`packages/agent/src/agent-loop.ts`、`packages/agent/src/types.ts`、`packages/coding-agent/src/core/agent-session.ts`。
+已完成：`packages/agent/src/agent.ts`、`packages/agent/src/agent-loop.ts`、`packages/agent/src/types.ts`、`packages/coding-agent/src/core/agent-session.ts`。
 _Avoid_: 核心代码（未限定范围时）
+
+**第二刀核心**:
+本轮扩充：agent 的 stream / proxy / search、harness 门面与类型、coding-agent 的 SDK / SessionManager / ModelRuntime。
+_Avoid_: 工具实现细节, telemetry schema 别名
+
+**AgentHarness**:
+agent-core 里按 lane 驱动持久化会话的门面，和旧的 `Agent` 循环并列，不替代 `AgentSession`。
+_Avoid_: Agent, AgentSession
 
 **Agent 循环**:
 agent-core 里从用户消息走到模型调用、工具执行、再决定是否下一轮的过程。入口是 `agentLoop` / `runAgentLoop`。

@@ -1,3 +1,9 @@
+/**
+ * Programmatic factory for an {@link AgentSession} with coding-agent defaults.
+ *
+ * 组装 AgentSession 的 SDK 入口。会装上默认 `streamSimple`，好让没传 `streamFn` 的扩展还能跑。
+ */
+
 import { join } from "node:path";
 import { Agent, type AgentMessage, setDefaultStreamFn, type ThinkingLevel } from "@earendil-works/pi-agent-core";
 import { clampThinkingLevel, type Message, type Model, streamSimple } from "@earendil-works/pi-ai/compat";
@@ -36,6 +42,11 @@ import {
 // provider-agnostic and does not import pi-ai/compat itself.
 setDefaultStreamFn(streamSimple);
 
+/**
+ * Options for {@link createAgentSession}.
+ *
+ * 一次会话的装配选项。工具可见性由 `tools` / `excludeTools` / `noTools` 和 settings 共同决定。
+ */
 export interface CreateAgentSessionOptions {
 	/** Working directory for project-local discovery. Default: process.cwd() */
 	cwd?: string;
@@ -87,7 +98,11 @@ export interface CreateAgentSessionOptions {
 	sessionStartEvent?: SessionStartEvent;
 }
 
-/** Result from createAgentSession */
+/**
+ * Result from createAgentSession
+ *
+ * 装配结果。`modelFallbackMessage` 表示恢复会话时模型和存盘不一致。
+ */
 export interface CreateAgentSessionResult {
 	/** The created session */
 	session: AgentSession;
@@ -169,6 +184,8 @@ function getDefaultAgentDir(): string {
  *   sessionManager: SessionManager.inMemory(),
  * });
  * ```
+ *
+ * 按选项装配 AgentSession。缺省用 cwd、默认 session/settings，以及 ModelRuntime。
  */
 export async function createAgentSession(options: CreateAgentSessionOptions = {}): Promise<CreateAgentSessionResult> {
 	const cwd = resolvePath(options.cwd ?? options.sessionManager?.getCwd() ?? process.cwd());

@@ -1,6 +1,8 @@
 /**
  * Proxy stream function for apps that route LLM calls through a server.
  * The server manages auth and proxies requests to LLM providers.
+ *
+ * 经代理服务器拉模型流。鉴权在服务端；客户端用瘦事件重建 `partial`，带宽更小。
  */
 
 // Internal import for JSON parsing utility
@@ -32,6 +34,8 @@ class ProxyMessageEventStream extends EventStream<AssistantMessageEvent, Assista
 
 /**
  * Proxy event types - server sends these with partial field stripped to reduce bandwidth.
+ *
+ * 代理线上的瘦事件。没有 `partial`，客户端必须自己拼完整 assistant 消息。
  */
 export type ProxyAssistantMessageEvent =
 	| { type: "start" }
@@ -73,6 +77,11 @@ type ProxySerializableStreamOptions = Pick<
 	| "maxRetryDelayMs"
 >;
 
+/**
+ * StreamFn options that add proxy URL and auth on top of serializable provider options.
+ *
+ * 走代理时的选项。`authToken` / `proxyUrl` 只给代理，不会原样转给上游模型。
+ */
 export interface ProxyStreamOptions extends ProxySerializableStreamOptions {
 	/** Local abort signal for the proxy request */
 	signal?: AbortSignal;
@@ -117,6 +126,11 @@ function buildProxyRequestOptions(options: ProxyStreamOptions): ProxySerializabl
 	};
 }
 
+/**
+ * StreamFn that talks to `/api/stream` on a proxy instead of a provider SDK.
+ *
+ * 代理版 `streamFn`。服务端中途断流且没有 done/error 时，客户端会补一条 error，避免一直挂起。
+ */
 export function streamProxy(model: Model<any>, context: Context, options: ProxyStreamOptions): ProxyMessageEventStream {
 	const stream = new ProxyMessageEventStream();
 
