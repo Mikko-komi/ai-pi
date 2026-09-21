@@ -1,3 +1,9 @@
+/**
+ * Stateful agent facade: owns the transcript, queues, and subscribers, and drives the agent loop.
+ *
+ * 有状态门面：持有 transcript、队列和订阅，并驱动 Agent 循环。同一时刻只允许一轮 run；steer / followUp 只在排空点注入。
+ */
+
 import type {
 	ImageContent,
 	Message,
@@ -94,7 +100,11 @@ function createMutableAgentState(
 	};
 }
 
-/** Options for constructing an {@link Agent}. */
+/**
+ * Options for constructing an {@link Agent}.
+ *
+ * 构造 Agent 的入口配置。钩子、队列模式和 `streamFn` 在整轮 run 里复用。
+ */
 export interface AgentOptions {
 	initialState?: Partial<Omit<AgentState, "pendingToolCalls" | "isStreaming" | "streamingMessage" | "errorMessage">>;
 	convertToLlm?: (messages: AgentMessage[]) => Message[] | Promise<Message[]>;
@@ -169,6 +179,8 @@ type ActiveRun = {
  *
  * `Agent` owns the current transcript, emits lifecycle events, executes tools,
  * and exposes queueing APIs for steering and follow-up messages.
+ *
+ * 有状态包装低层 Agent 循环。同一时刻只能有一轮 run；要到 `agent_end` 的监听器都 settle 才算 idle。
  */
 export class Agent {
 	private _state: MutableAgentState;

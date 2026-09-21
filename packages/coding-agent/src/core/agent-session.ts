@@ -11,6 +11,8 @@
  * - Session switching and branching
  *
  * Modes use this class and add their own I/O layer on top.
+ *
+ * 四种运行模式共用的会话门面。I/O 在模式层；这里管持久化、模型、compaction、分支和扩展绑定。
  */
 
 import { readFileSync } from "node:fs";
@@ -117,7 +119,11 @@ import { addUsageToTotals, createUsageTotals } from "./usage-totals.ts";
 // Skill Block Parsing
 // ============================================================================
 
-/** Parsed skill block from a user message */
+/**
+ * Parsed skill block from a user message
+ *
+ * 用户消息里拆出的 skill 名、路径、正文，以及块后面的附加说明。
+ */
 export interface ParsedSkillBlock {
 	name: string;
 	location: string;
@@ -128,6 +134,8 @@ export interface ParsedSkillBlock {
 /**
  * Parse a skill block from message text.
  * Returns null if the text doesn't contain a skill block.
+ *
+ * 只认整段文本恰好是一个 skill 块；对不上返回 null。
  */
 export function parseSkillBlock(text: string): ParsedSkillBlock | null {
 	const match = text.match(/^<skill name="([^"]+)" location="([^"]+)">\n([\s\S]*?)\n<\/skill>(?:\n\n([\s\S]+))?$/);
@@ -140,7 +148,11 @@ export function parseSkillBlock(text: string): ParsedSkillBlock | null {
 	};
 }
 
-/** Session-specific events that extend the core AgentEvent */
+/**
+ * Session-specific events that extend the core AgentEvent
+ *
+ * 在 AgentEvent 上叠加会话层事件。`agent_end` 多了 `willRetry`；另有 compaction / 队列 / retry / bash 增量。
+ */
 export type AgentSessionEvent =
 	| Exclude<AgentEvent, { type: "agent_end" }>
 	| {
@@ -184,7 +196,11 @@ export type AgentSessionEvent =
 	| { type: "summarization_retry_finished" }
 	| { type: "bash_execution_update"; id?: string; delta: string };
 
-/** Listener function for agent session events */
+/**
+ * Listener function for agent session events
+ *
+ * AgentSession 事件回调。和 Agent.subscribe 不同，这里不传入 abort signal，也不等待返回的 Promise。
+ */
 export type AgentSessionEventListener = (event: AgentSessionEvent) => void;
 
 // ============================================================================
@@ -197,6 +213,11 @@ function withoutDeletedHeaders(headers: ProviderHeaders | undefined): Record<str
 		: undefined;
 }
 
+/**
+ * Construction inputs for one {@link AgentSession}.
+ *
+ * 组装一次会话所需的 Agent、存储、设置、cwd 和模型运行时。工具可见性由 allow / deny 与 initialActive 共同决定。
+ */
 export interface AgentSessionConfig {
 	agent: Agent;
 	sessionManager: SessionManager;
@@ -229,6 +250,11 @@ export interface AgentSessionConfig {
 	sessionStartEvent?: SessionStartEvent;
 }
 
+/**
+ * Runtime hooks that bind extensions to a specific run mode.
+ *
+ * 把扩展接到某一种运行模式的 UI / 命令 / 中止 / 关闭。
+ */
 export interface ExtensionBindings {
 	uiContext?: ExtensionUIContext;
 	mode?: ExtensionMode;
@@ -238,7 +264,11 @@ export interface ExtensionBindings {
 	onError?: ExtensionErrorListener;
 }
 
-/** Options for AgentSession.prompt() */
+/**
+ * Options for AgentSession.prompt()
+ *
+ * 一次 prompt 的输入策略。正在流式时必须声明 `steer` 还是 `followUp`。
+ */
 export interface PromptOptions {
 	/** Whether to dispatch extension commands and expand skill commands and prompt templates (default: true) */
 	expandPromptTemplates?: boolean;
@@ -252,13 +282,21 @@ export interface PromptOptions {
 	preflightResult?: (success: boolean) => void;
 }
 
-/** Options for model/thinking mutations. */
+/**
+ * Options for model/thinking mutations.
+ *
+ * `persist: true` 才写全局默认，否则只改本会话。
+ */
 export interface ModelMutationOptions {
 	/** Persist the new value to global defaults. Defaults to session-only. */
 	persist?: boolean;
 }
 
-/** Result from cycleModel() */
+/**
+ * Result from cycleModel()
+ *
+ * 切完模型后的当前模型和思考级别，以及是否只在 `--models` 范围内转。
+ */
 export interface ModelCycleResult {
 	model: Model<any>;
 	thinkingLevel: ThinkingLevel;
@@ -266,7 +304,11 @@ export interface ModelCycleResult {
 	isScoped: boolean;
 }
 
-/** Session statistics for /session command */
+/**
+ * Session statistics for /session command
+ *
+ * `/session` 用的计数和用量快照，不是事件流。
+ */
 export interface SessionStats {
 	sessionFile: string | undefined;
 	sessionId: string;
@@ -303,6 +345,11 @@ function estimateMessagesTokens(messages: AgentMessage[]): number {
 // AgentSession Class
 // ============================================================================
 
+/**
+ * Shared session facade used by interactive, print, RPC, and SDK modes.
+ *
+ * 四种模式共用的会话门面。I/O 在模式层；这里管持久化、模型、compaction、分支和扩展绑定。
+ */
 export class AgentSession {
 	readonly agent: Agent;
 	readonly sessionManager: SessionManager;

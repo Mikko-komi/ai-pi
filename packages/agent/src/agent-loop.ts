@@ -1,6 +1,9 @@
 /**
  * Agent loop that works with AgentMessage throughout.
  * Transforms to Message[] only at the LLM call boundary.
+ *
+ * 整段循环都用 AgentMessage；只在真正调模型时才转成 Message[]。
+ * 内层处理工具和 steering，外层在本该停时再抽 follow-up。
  */
 
 import {
@@ -23,11 +26,18 @@ import type {
 	StreamFn,
 } from "./types.ts";
 
+/**
+ * Receives one agent-loop event. Implementations should settle before returning.
+ *
+ * 循环的事件出口。实现不应抛错打断正常事件序列。
+ */
 export type AgentEventSink = (event: AgentEvent) => Promise<void> | void;
 
 /**
  * Start an agent loop with a new prompt message.
  * The prompt is added to the context and events are emitted for it.
+ *
+ * 流式入口：把 prompts 并进 context，返回 EventStream。底层仍走 `runAgentLoop`。
  */
 export function agentLoop(
 	prompts: AgentMessage[],
@@ -61,6 +71,8 @@ export function agentLoop(
  * **Important:** The last message in context must convert to a `user` or `toolResult` message
  * via `convertToLlm`. If it doesn't, the LLM provider will reject the request.
  * This cannot be validated here since `convertToLlm` is only called once per turn.
+ *
+ * 不追加新用户消息，从现有 context 续跑。最后一条经 `convertToLlm` 后必须是 `user` 或 `toolResult`。
  */
 export function agentLoopContinue(
 	context: AgentContext,
@@ -93,6 +105,11 @@ export function agentLoopContinue(
 	return stream;
 }
 
+/**
+ * Imperative start of a loop: emit the prompt messages, then enter the shared run loop.
+ *
+ * 命令式入口。先发出 prompts 的 message 事件，再进入共享 `runLoop`。返回本轮新增消息。
+ */
 export async function runAgentLoop(
 	prompts: AgentMessage[],
 	context: AgentContext,
@@ -118,6 +135,11 @@ export async function runAgentLoop(
 	return newMessages;
 }
 
+/**
+ * Imperative continuation: do not replay existing transcript events.
+ *
+ * 命令式续跑。不重放已有消息事件；`newMessages` 从空开始。
+ */
 export async function runAgentLoopContinue(
 	context: AgentContext,
 	config: AgentLoopConfig,
