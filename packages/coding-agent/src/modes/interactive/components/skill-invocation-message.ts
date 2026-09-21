@@ -1,3 +1,9 @@
+/**
+ * Collapsible skill-invocation block in the transcript.
+ *
+ * 技能调用块。只画 skill 本身，用户消息另组件渲染。
+ */
+
 import { Box, Markdown, type MarkdownTheme, Text } from "@earendil-works/pi-tui";
 import type { ParsedSkillBlock } from "../../../core/agent-session.ts";
 import { getMarkdownTheme, theme } from "../theme/theme.ts";
@@ -7,6 +13,8 @@ import { keyText } from "./keybinding-hints.ts";
  * Component that renders a skill invocation message with collapsed/expanded state.
  * Uses same background color as custom messages for visual consistency.
  * Only renders the skill block itself - user message is rendered separately.
+ *
+ * 折叠只留技能名；展开出全文。背景跟自定义消息同一套。
  */
 export class SkillInvocationMessageComponent extends Box {
 	private expanded = false;

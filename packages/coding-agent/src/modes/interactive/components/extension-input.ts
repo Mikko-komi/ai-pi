@@ -1,5 +1,7 @@
 /**
  * Simple text input component for extensions.
+ *
+ * 扩展用的单行输入。可选倒计时，到点当取消。
  */
 
 import { Container, type Focusable, getKeybindings, Input, Spacer, Text, type TUI } from "@earendil-works/pi-tui";
@@ -8,11 +10,21 @@ import { CountdownTimer } from "./countdown-timer.ts";
 import { DynamicBorder } from "./dynamic-border.ts";
 import { keyHint } from "./keybinding-hints.ts";
 
+/**
+ * Optional timeout for {@link ExtensionInputComponent}.
+ *
+ * 输入框附加项。`timeout` 要同时有 `tui` 才会倒计时。
+ */
 export interface ExtensionInputOptions {
 	tui?: TUI;
 	timeout?: number;
 }
 
+/**
+ * Bordered single-line input used by extension prompts.
+ *
+ * 扩展弹出的单行输入。焦点转给内部 Input；Enter 提交，Esc 取消。
+ */
 export class ExtensionInputComponent extends Container implements Focusable {
 	private input: Input;
 	private onSubmitCallback: (value: string) => void;

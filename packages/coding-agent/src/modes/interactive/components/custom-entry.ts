@@ -1,3 +1,9 @@
+/**
+ * Session transcript entry rendered by an extension.
+ *
+ * 扩展自定义会话条目。宿主管上下空白，渲染器只出内容。
+ */
+
 import type { Component } from "@earendil-works/pi-tui";
 import { Box, Container, Spacer, Text } from "@earendil-works/pi-tui";
 import type { EntryRenderer } from "../../../core/extensions/types.ts";
@@ -7,6 +13,8 @@ import { theme } from "../theme/theme.ts";
 /**
  * Component that renders a custom session entry from extensions.
  * The host owns transcript spacing; renderer output should provide only its content.
+ *
+ * 调扩展 `EntryRenderer`。抛错改画错误盒；渲染器返回空则不占行。
  */
 export class CustomEntryComponent extends Container {
 	private entry: CustomEntry<unknown>;

@@ -1,3 +1,9 @@
+/**
+ * Session footer: cwd, token totals, and context usage.
+ *
+ * 底栏。token/上下文从 session 算；git 分支和扩展状态来自 provider。
+ */
+
 import { isAbsolute, relative, resolve, sep } from "node:path";
 import { type Component, truncateToWidth, visibleWidth } from "@earendil-works/pi-tui";
 import type { AgentSession } from "../../../core/agent-session.ts";
@@ -20,6 +26,8 @@ function sanitizeStatusText(text: string): string {
 
 /**
  * Format token counts for compact footer display.
+ *
+ * 底栏用的紧凑 token 数。千以上变 k，百万以上变 M。
  */
 export function formatTokens(count: number): string {
 	if (count < 1000) return count.toString();
@@ -29,6 +37,11 @@ export function formatTokens(count: number): string {
 	return `${Math.round(count / 1000000)}M`;
 }
 
+/**
+ * Replace `$HOME` with `~` when cwd is inside the home directory.
+ *
+ * 家目录内的 cwd 收成 `~`。不在家里或没有 home 时原样返回。
+ */
 export function formatCwdForFooter(cwd: string, home: string | undefined): string {
 	if (!home) return cwd;
 
@@ -46,6 +59,8 @@ export function formatCwdForFooter(cwd: string, home: string | undefined): strin
 /**
  * Footer component that shows pwd, token stats, and context usage.
  * Computes token/context stats from session, gets git branch and extension statuses from provider.
+ *
+ * 底栏两行：路径+分支，再加 token/上下文。扩展状态按 key 排序另起一行。
  */
 export class FooterComponent implements Component {
 	private autoCompactEnabled = true;

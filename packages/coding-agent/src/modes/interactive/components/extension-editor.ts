@@ -1,6 +1,8 @@
 /**
  * Multi-line editor component for extensions.
  * Supports Ctrl+G for external editor.
+ *
+ * 扩展用的多行编辑器。焦点转给内部 Editor，方便 IME 定位光标。
  */
 
 import {
@@ -19,6 +21,11 @@ import { getEditorTheme, theme } from "../theme/theme.ts";
 import { DynamicBorder } from "./dynamic-border.ts";
 import { keyHint } from "./keybinding-hints.ts";
 
+/**
+ * Bordered multi-line editor used by extension prompts.
+ *
+ * 扩展弹出的多行输入。提交交全文；Esc 取消；外部编辑走已配置命令。
+ */
 export class ExtensionEditorComponent extends Container implements Focusable {
 	private editor: Editor;
 	private onSubmitCallback: (value: string) => void;

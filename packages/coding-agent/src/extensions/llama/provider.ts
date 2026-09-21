@@ -1,3 +1,9 @@
+/**
+ * Hidden llama.cpp provider wired into the model registry.
+ *
+ * 内置 llama.cpp 供应商。目录由 `/llama` UI 写入；未配置 URL 不联网刷新。
+ */
+
 import type {
 	ApiKeyCredential,
 	AuthContext,
@@ -10,7 +16,18 @@ import type {
 import { stream, streamSimple } from "@earendil-works/pi-ai/compat";
 import { LlamaClient, type LlamaModelInfo, llamaInferenceUrl, normalizeLlamaServerUrl } from "./client.ts";
 
+/**
+ * Stable provider id used in auth, catalog, and `/login`.
+ *
+ * 供应商 id。登录、目录刷新和命令都认这个字符串。
+ */
 export const LLAMA_PROVIDER_ID = "llama.cpp";
+
+/**
+ * Default local router URL when the user leaves the prompt empty.
+ *
+ * 默认本机路由。空输入和缺省 `LLAMA_BASE_URL` 都落到这里。
+ */
 export const DEFAULT_LLAMA_SERVER_URL = "http://127.0.0.1:8080";
 function credentialServerUrl(credential: ApiKeyCredential | undefined): string | undefined {
 	const value = credential?.env?.LLAMA_BASE_URL;
@@ -71,11 +88,21 @@ function toPiModel(model: LlamaModelInfo, serverUrl: string): Model<"openai-comp
 	};
 }
 
+/**
+ * Registered provider plus a hook to replace its in-memory catalog.
+ *
+ * 供应商和目录写入口。`setCatalog` 只改内存，不碰磁盘缓存。
+ */
 export interface LlamaProviderController {
 	provider: Provider<"openai-completions">;
 	setCatalog(models: readonly LlamaModelInfo[], serverUrl: string, options?: { routerAutoload?: boolean }): void;
 }
 
+/**
+ * Build the llama.cpp provider and its catalog setter.
+ *
+ * 建供应商。只暴露 loaded/sleeping，以及 autoload 打开时的未失败 preset。
+ */
 export function createLlamaProvider(): LlamaProviderController {
 	let models: readonly Model<"openai-completions">[] = [];
 

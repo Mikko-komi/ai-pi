@@ -1,3 +1,9 @@
+/**
+ * Searchable model picker for the current session (and optional default).
+ *
+ * 当前会话的模型选择器。可搜；作用域能在全部和已启用之间切。
+ */
+
 import { type Model, modelsAreEqual } from "@earendil-works/pi-ai";
 import {
 	Container,
@@ -36,6 +42,8 @@ type ModelScope = "all" | "scoped";
 
 /**
  * Component that renders a model selector with search
+ *
+ * 带搜索的模型列表。确认切当前模型；另有快捷键可设为默认。
  */
 export class ModelSelectorComponent extends Container implements Focusable {
 	private searchInput: Input;

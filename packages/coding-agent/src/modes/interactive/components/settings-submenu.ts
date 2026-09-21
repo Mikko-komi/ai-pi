@@ -1,3 +1,9 @@
+/**
+ * Reusable one-step and N-step settings submenus.
+ *
+ * 设置里的子弹窗。Esc 回退一步；第 0 步再 Esc 才取消。
+ */
+
 import {
 	type Component,
 	Container,
@@ -17,6 +23,11 @@ const SUBMENU_SELECT_LIST_LAYOUT: SelectListLayoutOptions = {
 	maxPrimaryColumnWidth: 32,
 };
 
+/**
+ * Search and layout knobs for {@link SelectSubmenu}.
+ *
+ * 单步子菜单附加项。`searchable` 打开后打字走模糊过滤。
+ */
 export interface SelectSubmenuOptions {
 	/** Enable type-to-search fuzzy filtering. */
 	searchable?: boolean;
@@ -27,6 +38,8 @@ export interface SelectSubmenuOptions {
 /**
  * Single-step submenu that shows a titled select list.
  * With `searchable: true`, typing filters the list using fuzzy matching.
+ *
+ * 带标题的单步选择列表。有搜索时导航键交给列表，其余输入改过滤。
  */
 export class SelectSubmenu extends Container {
 	private selectList: SelectList;
@@ -141,7 +154,11 @@ export class SelectSubmenu extends Container {
 // SteppedSubmenu — reusable multi-step selector
 // ============================================================================
 
-/** One step in a {@link SteppedSubmenu}. */
+/**
+ * One step in a {@link SteppedSubmenu}.
+ *
+ * 多步子菜单的一步。`options` 每次进入该步都按当前 context 重算。
+ */
 export interface SteppedSubmenuStep {
 	/** Unique key \u2014 the selected value is stored in the result context under this key. */
 	key: string;
@@ -174,6 +191,8 @@ interface SteppedSubmenuOptions {
  * Each step's options can depend on prior selections via the shared context.
  * Esc goes back one step; Esc at step 0 cancels.
  * With `loop: true`, completing the final step invokes `onComplete` then returns to step 0.
+ *
+ * 用共享 context 串多步。最后一步先 `onComplete`；`loop` 时清空 context 回到第 0 步。
  */
 export class SteppedSubmenu extends Container {
 	private readonly steps: SteppedSubmenuStep[];

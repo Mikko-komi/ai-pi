@@ -1,9 +1,19 @@
+/**
+ * Bordered spinner for extension-owned loading UI.
+ *
+ * 扩展用的带边框加载条。默认可取消；不可取消时自己握 AbortController。
+ */
+
 import { CancellableLoader, Container, Loader, Spacer, Text, type TUI } from "@earendil-works/pi-tui";
 import type { Theme } from "../theme/theme.ts";
 import { DynamicBorder } from "./dynamic-border.ts";
 import { keyHint } from "./keybinding-hints.ts";
 
-/** Loader wrapped with borders for extension UI */
+/**
+ * Loader wrapped with borders for extension UI
+ *
+ * 上下 DynamicBorder 夹 Loader。cancellable 时才画取消提示。
+ */
 export class BorderedLoader extends Container {
 	private loader: CancellableLoader | Loader;
 	private cancellable: boolean;

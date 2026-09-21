@@ -1,14 +1,30 @@
+/**
+ * First-run dialog: theme pick and analytics opt-in.
+ *
+ * 首次启动向导。主题步会即时预览；取消整段跳过，不写 settings。
+ */
+
 import { Container, getKeybindings, Spacer, Text } from "@earendil-works/pi-tui";
 import { APP_NAME } from "../../../config.ts";
 import { type TerminalTheme, theme } from "../theme/theme.ts";
 import { DynamicBorder } from "./dynamic-border.ts";
 import { keyHint, rawKeyHint } from "./keybinding-hints.ts";
 
+/**
+ * Theme and analytics choices committed when setup finishes.
+ *
+ * 向导提交结果。取消时不会产生这份结果。
+ */
 export interface FirstTimeSetupResult {
 	theme: TerminalTheme;
 	shareAnalytics: boolean;
 }
 
+/**
+ * Host callbacks for the first-time setup dialog.
+ *
+ * 向导回调。主题预览在选中项变化时就触发，不必等提交。
+ */
 export interface FirstTimeSetupOptions {
 	detectedTheme: TerminalTheme;
 	onThemePreview: (themeName: TerminalTheme) => void;
@@ -28,7 +44,11 @@ const ANALYTICS_OPTIONS: Array<{ value: boolean; label: string }> = [
 
 const SETUP_LOGO_LINES = ["██████", "██  ██", "████  ██", "██    ██"];
 
-/** First-time setup dialog: theme choice and analytics opt-in. */
+/**
+ * First-time setup dialog: theme choice and analytics opt-in.
+ *
+ * 两步向导：先主题后分析。每次改动整页重建，好让主题预览重上色。
+ */
 export class FirstTimeSetupComponent extends Container {
 	private step: "theme" | "analytics" = "theme";
 	private themeIndex: number;

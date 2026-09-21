@@ -1,3 +1,9 @@
+/**
+ * Theme picker that previews the highlighted row.
+ *
+ * 主题选择列表。光标移动就预览，确认才提交，取消还原。
+ */
+
 import { Container, type SelectItem, SelectList, type SelectListLayoutOptions } from "@earendil-works/pi-tui";
 import { getAvailableThemes, getSelectListTheme } from "../theme/theme.ts";
 import { DynamicBorder } from "./dynamic-border.ts";
@@ -9,6 +15,8 @@ const THEME_SELECT_LIST_LAYOUT: SelectListLayoutOptions = {
 
 /**
  * Component that renders a theme selector
+ *
+ * 带边框的主题列表。当前主题预选并标 `(current)`。
  */
 export class ThemeSelectorComponent extends Container {
 	private selectList: SelectList;

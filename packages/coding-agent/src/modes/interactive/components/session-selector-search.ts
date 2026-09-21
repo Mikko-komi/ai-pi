@@ -1,10 +1,31 @@
+/**
+ * Parse, match, and sort session search queries.
+ *
+ * 会话搜索。`re:` 走正则；引号是短语；未闭合引号退回空白分词。
+ */
+
 import { fuzzyMatch } from "@earendil-works/pi-tui";
 import type { SessionInfo } from "../../../core/session-manager.ts";
 
+/**
+ * How filtered sessions are ordered after a search.
+ *
+ * 搜索后的排序。`recent` 只过滤不重排；`relevance` 按匹配分。
+ */
 export type SortMode = "threaded" | "recent" | "relevance";
 
+/**
+ * Restrict the list to named sessions, or show all.
+ *
+ * 名字过滤。`named` 只要有非空 `session.name`。
+ */
 export type NameFilter = "all" | "named";
 
+/**
+ * Tokenized or regex query after {@link parseSearchQuery}.
+ *
+ * 解析后的查询。`error` 有值时整次搜索当无匹配。
+ */
 export interface ParsedSearchQuery {
 	mode: "tokens" | "regex";
 	tokens: { kind: "fuzzy" | "phrase"; value: string }[];
@@ -13,6 +34,11 @@ export interface ParsedSearchQuery {
 	error?: string;
 }
 
+/**
+ * Whether a session matched, plus a lower-is-better score.
+ *
+ * 单条会话的匹配结果。`score` 只在 `matches` 时有意义。
+ */
 export interface MatchResult {
 	matches: boolean;
 	/** Lower is better; only meaningful when matches === true */
@@ -27,6 +53,11 @@ function getSessionSearchText(session: SessionInfo): string {
 	return `${session.id} ${session.name ?? ""} ${session.allMessagesText} ${session.cwd}`;
 }
 
+/**
+ * True when the session has a non-empty display name.
+ *
+ * 有没有去掉空白后的 `name`。给 named 过滤复用。
+ */
 export function hasSessionName(session: SessionInfo): boolean {
 	return Boolean(session.name?.trim());
 }
@@ -36,6 +67,11 @@ function matchesNameFilter(session: SessionInfo, filter: NameFilter): boolean {
 	return hasSessionName(session);
 }
 
+/**
+ * Parse a search box into tokens or a `re:` regular expression.
+ *
+ * 解析搜索框。空串是空 token 列表；非法正则带 `error`。
+ */
 export function parseSearchQuery(query: string): ParsedSearchQuery {
 	const trimmed = query.trim();
 	if (!trimmed) {
@@ -113,6 +149,11 @@ export function parseSearchQuery(query: string): ParsedSearchQuery {
 	return { mode: "tokens", tokens, regex: null };
 }
 
+/**
+ * Test one session against a parsed query.
+ *
+ * 对一条会话做匹配。短语看规范化空白，fuzzy 走 tui 的 fuzzyMatch。
+ */
 export function matchSession(session: SessionInfo, parsed: ParsedSearchQuery): MatchResult {
 	const text = getSessionSearchText(session);
 
@@ -153,6 +194,11 @@ export function matchSession(session: SessionInfo, parsed: ParsedSearchQuery): M
 	return { matches: true, score: totalScore };
 }
 
+/**
+ * Filter sessions by name and query, then sort by {@link SortMode}.
+ *
+ * 先按名字再按查询过滤。解析失败返回空数组，不是原列表。
+ */
 export function filterAndSortSessions(
 	sessions: SessionInfo[],
 	query: string,

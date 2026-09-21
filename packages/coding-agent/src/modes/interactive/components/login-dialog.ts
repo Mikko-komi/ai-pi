@@ -1,3 +1,9 @@
+/**
+ * OAuth login dialog that temporarily replaces the editor.
+ *
+ * OAuth 登录对话。占掉编辑器位置；完成或失败都走 `onComplete`。
+ */
+
 import type { AuthInfoLink, OAuthDeviceCodeInfo } from "@earendil-works/pi-ai";
 import { Container, type Focusable, getKeybindings, Input, Spacer, Text, type TUI } from "@earendil-works/pi-tui";
 import { openBrowser } from "../../../utils/open-browser.ts";
@@ -7,6 +13,8 @@ import { keyHint } from "./keybinding-hints.ts";
 
 /**
  * Login dialog component - replaces editor during OAuth login flow
+ *
+ * 登录流程 UI。焦点转给内部 Input；AbortController 在离开时取消等待。
  */
 export class LoginDialogComponent extends Container implements Focusable {
 	private contentContainer: Container;

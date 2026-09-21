@@ -1,3 +1,9 @@
+/**
+ * Yes/no picker for inline terminal images.
+ *
+ * 是否在终端内联显示图片。Yes/No 两项，当前值预选。
+ */
+
 import { Container, type SelectItem, SelectList, type SelectListLayoutOptions } from "@earendil-works/pi-tui";
 import { getSelectListTheme } from "../theme/theme.ts";
 import { DynamicBorder } from "./dynamic-border.ts";
@@ -9,6 +15,8 @@ const SHOW_IMAGES_SELECT_LIST_LAYOUT: SelectListLayoutOptions = {
 
 /**
  * Component that renders a show images selector with borders
+ *
+ * 带边框的 Yes/No 列表。选 Yes 才内联出图，否则只留文本占位。
  */
 export class ShowImagesSelectorComponent extends Container {
 	private selectList: SelectList;

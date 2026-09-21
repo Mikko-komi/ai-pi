@@ -1,3 +1,9 @@
+/**
+ * Main settings screen and the config/callback contracts it needs.
+ *
+ * 主设置页。改一项立刻走对应 callback；主题预览可另挂。
+ */
+
 import type { ThinkingLevel } from "@earendil-works/pi-agent-core";
 import { getSupportedThinkingLevels, type Model, type Transport } from "@earendil-works/pi-ai";
 import {
@@ -46,6 +52,11 @@ const DEFAULT_PROJECT_TRUST_BY_LABEL = new Map(
 	Object.entries(DEFAULT_PROJECT_TRUST_LABELS).map(([value, label]) => [label, value as DefaultProjectTrust]),
 );
 
+/**
+ * Snapshot of settings shown in the selector.
+ *
+ * 设置页当前值。列表只读这份快照，写入全走 callbacks。
+ */
 export interface SettingsConfig {
 	autoCompact: boolean;
 	defaultModel: string;
@@ -88,6 +99,11 @@ export interface SettingsConfig {
 	warnings: WarningSettings;
 }
 
+/**
+ * Persist hooks for each setting the selector can change.
+ *
+ * 设置项回调。选择器不自己写盘，只通知宿主。
+ */
 export interface SettingsCallbacks {
 	onAutoCompactChange: (enabled: boolean) => void;
 	onShowImagesChange: (enabled: boolean) => void;
@@ -439,6 +455,8 @@ class ThemeSubmenu extends Container {
 
 /**
  * Main settings selector component.
+ *
+ * 设置主列表。子菜单（主题、模型等）叠在 SettingsList 上。
  */
 export class SettingsSelectorComponent extends Container {
 	private settingsList: SettingsList;

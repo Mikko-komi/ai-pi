@@ -1,6 +1,8 @@
 /**
  * Generic selector component for extensions.
  * Displays a list of string options with keyboard navigation.
+ *
+ * 扩展用的字符串列表选择器。超时到点当取消；↑↓ 和 j/k 都能走。
  */
 
 import { Container, getKeybindings, Spacer, Text, type TUI } from "@earendil-works/pi-tui";
@@ -9,12 +11,22 @@ import { CountdownTimer } from "./countdown-timer.ts";
 import { DynamicBorder } from "./dynamic-border.ts";
 import { keyHint, rawKeyHint } from "./keybinding-hints.ts";
 
+/**
+ * Optional timeout and tool-expand hook for {@link ExtensionSelectorComponent}.
+ *
+ * 选择器附加项。`timeout` 要同时有 `tui` 才会倒计时。
+ */
 export interface ExtensionSelectorOptions {
 	tui?: TUI;
 	timeout?: number;
 	onToggleToolsExpanded?: () => void;
 }
 
+/**
+ * Keyboard-driven string list for extension prompts.
+ *
+ * 扩展弹出的选项列表。确认把当前项交给 onSelect；Esc 走 onCancel。
+ */
 export class ExtensionSelectorComponent extends Container {
 	private options: string[];
 	private selectedIndex = 0;

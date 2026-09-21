@@ -1,5 +1,7 @@
 /**
  * Armin says hi! A fun easter egg with animated XBM art.
+ *
+ * Armin 彩蛋。随机一种揭示效果把 XBM 半块图画完，然后停动画。
  */
 
 import type { Component, TUI } from "@earendil-works/pi-tui";
@@ -57,6 +59,11 @@ function buildFinalGrid(): string[][] {
 	return grid;
 }
 
+/**
+ * Animated XBM portrait easter egg.
+ *
+ * 随机一种揭示效果。dispose 必须清 interval，否则会一直 requestRender。
+ */
 export class ArminComponent implements Component {
 	private ui: TUI;
 	private interval: ReturnType<typeof setInterval> | null = null;

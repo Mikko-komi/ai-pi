@@ -1,3 +1,9 @@
+/**
+ * One-shot Earendil join announcement shown in the transcript.
+ *
+ * Earendil 加入公告。图片读失败就只留链接，不抛错。
+ */
+
 import * as fs from "node:fs";
 import { Container, Image, Spacer, Text } from "@earendil-works/pi-tui";
 import { getBundledInteractiveAssetPath } from "../../../config.ts";
@@ -24,6 +30,11 @@ function loadImageBase64(): string | undefined {
 	return cachedImageBase64;
 }
 
+/**
+ * Banner with blog link and optional bundled image.
+ *
+ * 固定文案加博文链接。打包资源缺图时跳过 Image，仍画上下边框。
+ */
 export class EarendilAnnouncementComponent extends Container {
 	constructor() {
 		super();

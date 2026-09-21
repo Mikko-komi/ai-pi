@@ -1,3 +1,9 @@
+/**
+ * Interactive `/llama` screens: catalog, download search, and progress.
+ *
+ * `/llama` TUI。所有交互经 {@link LlamaUi}；出错通知后仍 `done()` 关屏。
+ */
+
 import {
 	type Component,
 	Container,
@@ -22,6 +28,11 @@ import type { HuggingFaceModel } from "./huggingface.ts";
 
 const DOWNLOAD_VALUE = "\0download";
 
+/**
+ * Next action from the model list: pick, download, or leave.
+ *
+ * 模型列表的下一步。`close` 结束 `/llama`，不改目录。
+ */
 export type LlamaManagerAction = { type: "model"; model: LlamaModelInfo } | { type: "download" } | { type: "close" };
 
 interface ProgressState extends LlamaProgress {
@@ -74,6 +85,11 @@ function frame(theme: Theme, title: string, body: Component[], footer?: string):
 	return container;
 }
 
+/**
+ * UI surface the `/llama` command drives.
+ *
+ * `/llama` 用的界面。实现藏在本文件；命令只依赖这组方法。
+ */
 export interface LlamaUi {
 	showModels(serverUrl: string, models: LlamaModelInfo[]): Promise<LlamaManagerAction>;
 	select(title: string, options: string[]): Promise<string | undefined>;
@@ -477,6 +493,11 @@ class LlamaView implements LlamaUi, Focusable {
 	}
 }
 
+/**
+ * Mount the llama custom view, run `run`, then tear the overlay down.
+ *
+ * 挂上 llama 自定义视图。`run` 抛错只 notify，仍关闭 overlay。
+ */
 export async function showLlamaUi(ctx: ExtensionCommandContext, run: (ui: LlamaUi) => Promise<void>): Promise<void> {
 	await ctx.ui.custom<void>((tui, theme, keybindings, done) => {
 		const view = new LlamaView(tui, theme, keybindings);
@@ -491,6 +512,11 @@ export async function showLlamaUi(ctx: ExtensionCommandContext, run: (ui: LlamaU
 	});
 }
 
+/**
+ * Show a cancellable progress screen around an async llama operation.
+ *
+ * 带取消的进度框。取消先 abort 再 `options.cancel()`；已结束则不再问确认。
+ */
 export async function runWithProgress<T>(
 	ui: LlamaUi,
 	options: {

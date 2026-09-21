@@ -1,3 +1,9 @@
+/**
+ * Colorize unified diffs and highlight intra-line word changes.
+ *
+ * 给 diff 上色。上下文 dim，删红加绿；行内改动用 inverse。
+ */
+
 import * as Diff from "diff";
 import { theme } from "../theme/theme.ts";
 
@@ -65,6 +71,11 @@ function renderIntraLineDiff(oldContent: string, newContent: string): { removedL
 	return { removedLine, addedLine };
 }
 
+/**
+ * Unused file-path slot kept for {@link renderDiff} callers.
+ *
+ * 兼容用选项。`filePath` 不参与渲染。
+ */
 export interface RenderDiffOptions {
 	/** File path (unused, kept for API compatibility) */
 	filePath?: string;
@@ -75,6 +86,8 @@ export interface RenderDiffOptions {
  * - Context lines: dim/gray
  * - Removed lines: red, with inverse on changed tokens
  * - Added lines: green, with inverse on changed tokens
+ *
+ * 按行上色。相邻删/加会做词级 diff；解析失败的行当上下文。
  */
 export function renderDiff(diffText: string, _options: RenderDiffOptions = {}): string {
 	const lines = diffText.split("\n");

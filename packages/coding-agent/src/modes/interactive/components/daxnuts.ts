@@ -2,6 +2,8 @@
  * POWERED BY DAXNUTS - Easter egg for OpenCode + Kimi K2.5
  *
  * A heartfelt tribute to dax (@thdxr) for providing free Kimi K2.5 access via OpenCode.
+ *
+ * OpenCode + Kimi 彩蛋。半块字符扫过 32x32 头像后淡入致谢，约两秒停动画。
  */
 
 import type { Component, TUI } from "@earendil-works/pi-tui";
@@ -54,6 +56,11 @@ function buildImage(): string[] {
 	return lines;
 }
 
+/**
+ * Animated daxnuts tribute shown as an easter egg.
+ *
+ * 扫线揭示头像再淡入文字。dispose 必须清 interval，否则会一直 requestRender。
+ */
 export class DaxnutsComponent implements Component {
 	private ui: TUI;
 	private image: string[];

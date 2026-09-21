@@ -1,5 +1,21 @@
+/**
+ * HTTP client and types for a llama.cpp router server.
+ *
+ * llama.cpp 路由客户端。URL 去尾斜杠和 `/v1`；请求默认 15s 超时。
+ */
+
+/**
+ * Lifecycle state reported by the llama.cpp router.
+ *
+ * 路由里的模型状态。`sleeping` 仍算已加载，下次请求会唤醒。
+ */
 export type LlamaModelStatus = "unloaded" | "loading" | "loaded" | "downloading" | "sleeping";
 
+/**
+ * One catalog entry from `/models`.
+ *
+ * 路由目录里的一条模型。`status.value` 决定能否选、能否唤醒。
+ */
 export interface LlamaModelInfo {
 	id: string;
 	aliases?: string[];
@@ -23,21 +39,41 @@ export interface LlamaModelInfo {
 	};
 }
 
+/**
+ * Router `/models` payload.
+ *
+ * `/models` 响应。`data` 必须全是 {@link LlamaModelInfo}，否则当非路由模式。
+ */
 export interface LlamaModelsResponse {
 	data: LlamaModelInfo[];
 	object?: string;
 }
 
+/**
+ * Subset of `/props` used for autoload checks.
+ *
+ * `/props` 里只关心 `models_autoload`。缺字段当关。
+ */
 export interface LlamaServerProps {
 	models_autoload?: boolean;
 }
 
+/**
+ * One SSE frame from `/models/sse`.
+ *
+ * 模型事件。`model` 和 `event` 都要是字符串才交给回调。
+ */
 export interface LlamaModelEvent {
 	model: string;
 	event: string;
 	data?: unknown;
 }
 
+/**
+ * Load or download progress shown in the llama UI.
+ *
+ * 进度条状态。`ratio` 在 0..1；没有总量时可以只有 message。
+ */
 export interface LlamaProgress {
 	message: string;
 	ratio?: number;
@@ -130,6 +166,11 @@ function parseDownloadProgress(data: unknown): LlamaProgress | undefined {
 	};
 }
 
+/**
+ * Human-readable byte size using binary units.
+ *
+ * 二进制单位的字节数。小于 10 留两位小数，否则一位。
+ */
 export function formatBytes(bytes: number): string {
 	if (bytes < 1024) return `${bytes} B`;
 	const units = ["KiB", "MiB", "GiB", "TiB"];
@@ -142,6 +183,11 @@ export function formatBytes(bytes: number): string {
 	return `${value >= 10 ? value.toFixed(1) : value.toFixed(2)} ${unit}`;
 }
 
+/**
+ * Canonical llama.cpp base URL: http(s), no hash/query, no trailing `/v1`.
+ *
+ * 规范服务器根 URL。非 http(s) 抛错；去掉 query/hash 和末尾 `/v1`。
+ */
 export function normalizeLlamaServerUrl(value: string): string {
 	const url = new URL(value.trim());
 	if (url.protocol !== "http:" && url.protocol !== "https:") {
@@ -153,10 +199,20 @@ export function normalizeLlamaServerUrl(value: string): string {
 	return url.toString().replace(/\/$/u, "");
 }
 
+/**
+ * OpenAI-compatible inference endpoint under a server URL.
+ *
+ * 推理入口。在规范化根地址后拼 `/v1`。
+ */
 export function llamaInferenceUrl(serverUrl: string): string {
 	return `${normalizeLlamaServerUrl(serverUrl)}/v1`;
 }
 
+/**
+ * Fetch wrapper for llama.cpp router admin and catalog APIs.
+ *
+ * 路由管理客户端。有 apiKey 才带 Bearer；JSON 失败用 HTTP 状态当错。
+ */
 export class LlamaClient {
 	readonly serverUrl: string;
 	private readonly apiKey: string | undefined;

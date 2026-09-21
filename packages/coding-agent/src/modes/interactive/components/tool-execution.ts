@@ -1,3 +1,9 @@
+/**
+ * Live tool-call card: args, result, and optional custom renderers.
+ *
+ * 工具执行块。只负责画，不执行工具，也不读参数 schema。
+ */
+
 import type { AgentToolResult } from "@earendil-works/pi-agent-core";
 import {
 	Box,
@@ -20,6 +26,8 @@ import type { Theme } from "../theme/theme.ts";
  *
  * The renderer parameters are `any` on purpose: a `ToolDefinition` types them from its schema, and
  * narrowing them here would make those definitions unassignable.
+ *
+ * 工具怎么画。定义和裸 renderer 都能塞进来；参数刻意用 `any` 以兼容 schema 类型。
  */
 export interface ToolRenderers {
 	renderShell?: "default" | "self";
@@ -39,11 +47,21 @@ import { keyHint } from "./keybinding-hints.ts";
 
 const FALLBACK_PREVIEW_LINES = 10;
 
+/**
+ * Image display knobs for {@link ToolExecutionComponent}.
+ *
+ * 工具结果里的图片选项。关 `showImages` 时只留占位。
+ */
 export interface ToolExecutionOptions {
 	showImages?: boolean;
 	imageWidthCells?: number;
 }
 
+/**
+ * Streaming tool call/result card with expand and custom renderers.
+ *
+ * 工具调用卡片。参数未齐时标 partial；展开才出全文和图片。
+ */
 export class ToolExecutionComponent extends Container {
 	private contentBox: Box;
 	private contentText: Text;

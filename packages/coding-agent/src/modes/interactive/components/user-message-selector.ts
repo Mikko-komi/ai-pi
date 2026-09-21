@@ -1,3 +1,9 @@
+/**
+ * Pick a prior user message to branch from.
+ *
+ * 选一条用户消息做分支。默认停在最近一条；可传入初始 id。
+ */
+
 import { type Component, Container, getKeybindings, Spacer, Text, truncateToWidth } from "@earendil-works/pi-tui";
 import { theme } from "../theme/theme.ts";
 import { DynamicBorder } from "./dynamic-border.ts";
@@ -106,6 +112,8 @@ class UserMessageList implements Component {
 
 /**
  * Component that renders a user message selector for branching
+ *
+ * 分支用的用户消息列表。确认交 entry id；内部列表不导出。
  */
 export class UserMessageSelectorComponent extends Container {
 	private messageList: UserMessageList;

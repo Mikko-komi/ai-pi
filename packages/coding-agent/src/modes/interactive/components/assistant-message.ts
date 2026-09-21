@@ -1,3 +1,9 @@
+/**
+ * Rendered assistant turn, including optional thinking blocks.
+ *
+ * 助手消息。thinking 可藏；流式时 transformer 仍按 isStreaming 跑。
+ */
+
 import type { AssistantMessage } from "@earendil-works/pi-ai";
 import { Container, Markdown, type MarkdownTheme, MouseRegion, Spacer, Text } from "@earendil-works/pi-tui";
 import type { MarkdownTransformer } from "../../../core/extensions/types.ts";
@@ -10,6 +16,8 @@ const OSC133_ZONE_FINAL = "\x1b]133;C\x07";
 
 /**
  * Component that renders a complete assistant message
+ *
+ * 完整助手回合。OSC 133 包住可点选区域；thinking 显隐可按块覆盖。
  */
 export class AssistantMessageComponent extends Container {
 	private contentContainer: Container;

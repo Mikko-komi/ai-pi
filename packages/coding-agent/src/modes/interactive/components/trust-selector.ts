@@ -1,3 +1,9 @@
+/**
+ * Project trust picker for the current working directory.
+ *
+ * 项目信任选择。确认只交 `trusted`/`updates`，路径由宿主持有。
+ */
+
 import { Container, getKeybindings, Spacer, Text } from "@earendil-works/pi-tui";
 import {
 	getProjectTrustOptions,
@@ -8,8 +14,18 @@ import { theme } from "../theme/theme.ts";
 import { DynamicBorder } from "./dynamic-border.ts";
 import { keyHint, rawKeyHint } from "./keybinding-hints.ts";
 
+/**
+ * Trust decision fields written back from the picker.
+ *
+ * 选择器提交的信任字段。不含路径，路径在选项元数据里。
+ */
 export type TrustSelection = Pick<ProjectTrustOption, "trusted" | "updates">;
 
+/**
+ * Host state and callbacks for {@link TrustSelectorComponent}.
+ *
+ * 信任选择器输入。`savedDecision` 为 null 表示还没存过。
+ */
 export interface TrustSelectorOptions {
 	cwd: string;
 	savedDecision: ProjectTrustStoreEntry | null;
@@ -29,6 +45,11 @@ function formatDecision(trustPath: string | undefined, decision: ProjectTrustSto
 	return `${label} (${decision.path})`;
 }
 
+/**
+ * Keyboard list of project-trust scopes and actions.
+ *
+ * 项目信任列表。预选已保存项；↑↓ 和 j/k 都能走。
+ */
 export class TrustSelectorComponent extends Container {
 	private selectedIndex: number;
 	private readonly listContainer: Container;

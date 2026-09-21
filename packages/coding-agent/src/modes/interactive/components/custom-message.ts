@@ -1,3 +1,9 @@
+/**
+ * Extension custom message with its own background styling.
+ *
+ * 扩展自定义消息。有渲染器先用渲染器；失败或空结果退回默认紫底盒。
+ */
+
 import type { TextContent } from "@earendil-works/pi-ai";
 import type { Component } from "@earendil-works/pi-tui";
 import { Box, Container, Markdown, type MarkdownTheme, Spacer, Text } from "@earendil-works/pi-tui";
@@ -8,6 +14,8 @@ import { getMarkdownTheme, theme } from "../theme/theme.ts";
 /**
  * Component that renders a custom message entry from extensions.
  * Uses distinct styling to differentiate from user messages.
+ *
+ * 扩展消息块。默认带 `[type]` 标签；展开状态变化会整块重建。
  */
 export class CustomMessageComponent extends Container {
 	private message: CustomMessage<unknown>;

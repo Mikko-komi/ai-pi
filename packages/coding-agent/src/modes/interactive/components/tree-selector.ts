@@ -1,3 +1,9 @@
+/**
+ * Session-tree navigator with ASCII branches and label editing.
+ *
+ * 会话树导航。过滤模式切可见节点；打标签时焦点转到输入框。
+ */
+
 import {
 	type Component,
 	Container,
@@ -91,7 +97,11 @@ function renderHorizontalViewport(rows: HorizontalViewportRow[], width: number):
 	});
 }
 
-/** Filter mode for tree display */
+/**
+ * Filter mode for tree display
+ *
+ * 树可见节点。`default` 藏工具；`all` 全开。
+ */
 export type FilterMode = "default" | "no-tools" | "user-only" | "labeled-only" | "all";
 
 /**
@@ -1324,6 +1334,8 @@ class LabelInput implements Component, Focusable {
 
 /**
  * Component that renders a session tree selector for navigation
+ *
+ * 树选择器外壳。平时焦点在树上；打标签时转给 LabelInput。
  */
 export class TreeSelectorComponent extends Container implements Focusable {
 	private treeList: TreeList;

@@ -64,6 +64,10 @@ _Avoid_: 类方法, native 构建脚本
 已完成：`packages/chord/src` 的导出符号（facet / service / replicated state / delta）。
 _Avoid_: 再导出, 测试夹具
 
+**第十四刀核心**:
+已完成：interactive TUI 组件与 llama 扩展导出。
+_Avoid_: 类方法, experimental
+
 **AgentHarness**:
 agent-core 里按 lane 驱动持久化会话的门面，和旧的 `Agent` 循环并列，不替代 `AgentSession`。
 _Avoid_: Agent, AgentSession

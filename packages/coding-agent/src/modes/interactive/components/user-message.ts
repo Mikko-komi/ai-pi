@@ -1,3 +1,9 @@
+/**
+ * User prompt bubble in the transcript.
+ *
+ * 用户消息盒。背景走 userMessageBg；OSC 133 包住可点选区域。
+ */
+
 import { Box, Container, Markdown, type MarkdownTheme } from "@earendil-works/pi-tui";
 import type { MarkdownTransformer } from "../../../core/extensions/types.ts";
 import { getMarkdownTheme, theme } from "../theme/theme.ts";
@@ -9,6 +15,8 @@ const OSC133_ZONE_FINAL = "\x1b]133;C\x07";
 
 /**
  * Component that renders a user message
+ *
+ * 用户文本。改 outputPad 会重建；transformer 按 user 类型、非流式跑。
  */
 export class UserMessageComponent extends Container {
 	private text: string;

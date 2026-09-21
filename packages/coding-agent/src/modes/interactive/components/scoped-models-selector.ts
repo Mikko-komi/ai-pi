@@ -1,3 +1,9 @@
+/**
+ * Enable, disable, and reorder models for Ctrl+P cycling.
+ *
+ * 会话内模型开关和排序。改动先只活在会话里，Ctrl+S 才写入 settings。
+ */
+
 import type { Model } from "@earendil-works/pi-ai";
 import {
 	Container,
@@ -76,12 +82,22 @@ interface ModelItem {
 	enabled: boolean;
 }
 
+/**
+ * Current catalog and enabled-id list for the scoped model picker.
+ *
+ * 选择器的输入快照。`enabledModelIds === null` 表示全部启用。
+ */
 export interface ModelsConfig {
 	allModels: Model<any>[];
 	enabledModelIds: string[] | null;
 	refreshStatus?: string;
 }
 
+/**
+ * Session-only change, persist, and cancel hooks for the model picker.
+ *
+ * 模型选择回调。`onChange` 不落盘；`onPersist` 才写 settings。
+ */
 export interface ModelsCallbacks {
 	/** Called whenever the enabled model set or order changes (session-only, no persist) */
 	onChange: (enabledModelIds: string[] | null) => void | Promise<void>;
@@ -93,6 +109,8 @@ export interface ModelsCallbacks {
 /**
  * Component for enabling/disabling models for Ctrl+P cycling.
  * Changes are session-only until explicitly persisted with Ctrl+S.
+ *
+ * 给 Ctrl+P 循环用的模型清单。全开时存 `null`，不存完整 id 列表。
  */
 export class ScopedModelsSelectorComponent extends Container implements Focusable {
 	private modelsById: Map<string, Model<any>> = new Map();

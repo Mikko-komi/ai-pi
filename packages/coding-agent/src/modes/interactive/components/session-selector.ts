@@ -1,3 +1,9 @@
+/**
+ * Session picker with search, rename, and delete.
+ *
+ * 会话选择器。搜索走 session-selector-search；删除先 trash 再 unlink。
+ */
+
 import { spawnSync } from "node:child_process";
 import { existsSync } from "node:fs";
 import { unlink } from "node:fs/promises";
@@ -681,6 +687,8 @@ async function deleteSessionFile(
 
 /**
  * Component that renders a session selector
+ *
+ * 会话列表外壳。焦点在搜索或重命名框之间切；内部 SessionList 不导出。
  */
 export class SessionSelectorComponent extends Container implements Focusable {
 	handleInput(data: string): void {

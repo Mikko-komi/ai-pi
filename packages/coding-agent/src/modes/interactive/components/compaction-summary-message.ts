@@ -1,3 +1,9 @@
+/**
+ * Collapsible compaction summary in the transcript.
+ *
+ * 压缩摘要块。折叠只留 token 数；背景跟自定义消息同一套。
+ */
+
 import { Box, Markdown, type MarkdownTheme, Spacer, Text } from "@earendil-works/pi-tui";
 import type { CompactionSummaryMessage } from "../../../core/messages.ts";
 import { getMarkdownTheme, theme } from "../theme/theme.ts";
@@ -6,6 +12,8 @@ import { keyText } from "./keybinding-hints.ts";
 /**
  * Component that renders a compaction message with collapsed/expanded state.
  * Uses same background color as custom messages for visual consistency.
+ *
+ * 压缩消息。折叠给展开快捷键提示；展开才出 summary Markdown。
  */
 export class CompactionSummaryMessageComponent extends Box {
 	private expanded = false;

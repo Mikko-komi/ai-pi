@@ -1,5 +1,7 @@
 /**
  * Component for displaying bash command execution with streaming output.
+ *
+ * bash 执行块。折叠时只留预览行；`!!` 命令用 dim 边框，表示不进上下文。
  */
 
 import { Container, Loader, Spacer, Text, type TUI } from "@earendil-works/pi-tui";
@@ -18,6 +20,11 @@ import { truncateToVisualLines } from "./visual-truncate.ts";
 // Preview line limit when not expanded (matches tool execution behavior)
 const PREVIEW_LINES = 20;
 
+/**
+ * Streaming bash output with expand/collapse and truncation.
+ *
+ * 流式 bash 输出。未展开最多 20 视觉行；截断信息来自 truncateTail。
+ */
 export class BashExecutionComponent extends Container {
 	private command: string;
 	private outputLines: string[] = [];

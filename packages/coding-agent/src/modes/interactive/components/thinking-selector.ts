@@ -1,3 +1,9 @@
+/**
+ * Thinking-level picker with optional search and default shortcut.
+ *
+ * 推理档位选择。可搜；另有快捷键把当前档设为默认。
+ */
+
 import type { ThinkingLevel } from "@earendil-works/pi-agent-core";
 import {
 	Container,
@@ -32,6 +38,8 @@ const LEVEL_DESCRIPTIONS: Record<ThinkingLevel, string> = {
 
 /**
  * Component that renders a thinking level selector with borders
+ *
+ * 带边框的 thinking 列表。焦点转给搜索框；过滤后重建 SelectList。
  */
 export class ThinkingSelectorComponent extends Container implements Focusable {
 	private searchInput: Input;

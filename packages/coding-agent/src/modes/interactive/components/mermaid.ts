@@ -1,3 +1,9 @@
+/**
+ * Turn top-level Mermaid fences into Unicode terminal diagrams.
+ *
+ * Mermaid 代码块改画成终端图。关渲染、thinking、或非 streaming 流式时原样返回。
+ */
+
 import { Marked, type Token } from "@earendil-works/pi-tui";
 import { type MermaidArt, render, type Span } from "grok-mermaid";
 import type { MarkdownTransformer } from "../../../core/extensions/types.ts";
@@ -56,7 +62,11 @@ function themedLines(art: MermaidArt, theme: Theme): string[] {
 	return art.styled.map((row) => row.map((span) => styleSpan(span, theme)).join(""));
 }
 
-/** Create a transformer that replaces top-level Mermaid code blocks with Unicode terminal diagrams. */
+/**
+ * Create a transformer that replaces top-level Mermaid code blocks with Unicode terminal diagrams.
+ *
+ * 只改顶层 mermaid fence。图比可用宽度宽或渲染失败时保留原文。
+ */
 export function createMermaidMarkdownTransformer(options: MermaidTransformerOptions): MarkdownTransformer {
 	return (markdown, context) => {
 		const mode = options.getMode();

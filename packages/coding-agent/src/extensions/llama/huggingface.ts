@@ -1,3 +1,9 @@
+/**
+ * Hugging Face search, details, and token lookup for GGUF downloads.
+ *
+ * Hugging Face 客户端。搜 GGUF；token 先看环境变量再读常见缓存路径。
+ */
+
 import { readFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join } from "node:path";
@@ -7,16 +13,31 @@ const QUANTIZATION_PATTERN =
 	/(?:^|[-_.])((?:UD-)?(?:IQ\d(?:_[A-Z0-9]+)+|Q\d(?:_[A-Z0-9]+)+|BF16|F16|F32|MXFP\d(?:_[A-Z0-9]+)*))$/iu;
 const SHARD_SUFFIX_PATTERN = /-\d{5}-of-\d{5}$/u;
 
+/**
+ * Search-hit id and download count.
+ *
+ * 搜索结果一行。`downloads` 缺省当 0。
+ */
 export interface HuggingFaceModel {
 	id: string;
 	downloads: number;
 }
 
+/**
+ * One GGUF quantization name, optionally with total size.
+ *
+ * 一种量化。分片 size 不全时 `size` 为空。
+ */
 export interface HuggingFaceQuantization {
 	name: string;
 	size?: number;
 }
 
+/**
+ * Gated status and available quantizations for a repo.
+ *
+ * 仓库详情。`gated` 只保留 auto/manual，其余当 false。
+ */
 export interface HuggingFaceModelDetails {
 	id: string;
 	gated: false | "auto" | "manual";
@@ -43,6 +64,11 @@ async function readToken(path: string): Promise<string | undefined> {
 	}
 }
 
+/**
+ * Resolve an HF token from env or the usual cache files.
+ *
+ * 找 HF token。`HF_TOKEN` 优先；文件路径按环境变量再 `~/.cache`。
+ */
 export async function findHuggingFaceToken(env: NodeJS.ProcessEnv = process.env): Promise<string | undefined> {
 	const fromEnvironment = env.HF_TOKEN?.trim();
 	if (fromEnvironment) return fromEnvironment;
@@ -60,6 +86,11 @@ export async function findHuggingFaceToken(env: NodeJS.ProcessEnv = process.env)
 	return undefined;
 }
 
+/**
+ * Hugging Face Hub client for GGUF search and blob-aware details.
+ *
+ * Hub 客户端。429 带重试秒数；mmproj 和无法识别量化的 gguf 会跳过。
+ */
 export class HuggingFaceClient {
 	private readonly token: string | undefined;
 	private readonly baseUrl: string;

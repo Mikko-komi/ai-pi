@@ -1,7 +1,18 @@
+/**
+ * Coding-agent editor with app keybindings and optional status in the top border.
+ *
+ * 主输入编辑器。先吃应用快捷键，再交给底层 Editor。
+ */
+
 import { Editor, type EditorOptions, type EditorTheme, type TUI, visibleWidth } from "@earendil-works/pi-tui";
 import type { AppKeybinding, KeybindingsManager } from "../../../core/keybindings.ts";
 import type { StatusIndicator } from "./status-indicator.ts";
 
+/**
+ * Editor options plus optional working-status embedding.
+ *
+ * 编辑器选项。`embedWorkingStatus` 把忙碌状态画进顶边框。
+ */
 export type CustomEditorOptions = EditorOptions & {
 	/** Render working, compaction, summarization, and retry status in the editor's top border. */
 	embedWorkingStatus?: boolean;
@@ -9,6 +20,8 @@ export type CustomEditorOptions = EditorOptions & {
 
 /**
  * Custom editor that handles app-level keybindings for coding-agent.
+ *
+ * 应用层按键优先。自动完成打开时 interrupt 不抢 Esc。
  */
 export class CustomEditor extends Editor {
 	private keybindings: KeybindingsManager;

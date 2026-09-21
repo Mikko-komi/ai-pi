@@ -1,3 +1,9 @@
+/**
+ * Login/logout provider picker with fuzzy search.
+ *
+ * 登录或登出的供应商列表。列表可搜；多种 authType 才显示类型标签。
+ */
+
 import type { ApiKeyAuth, AuthCheck, OAuthAuth } from "@earendil-works/pi-ai";
 import {
 	Container,
@@ -11,6 +17,11 @@ import {
 import { theme } from "../theme/theme.ts";
 import { DynamicBorder } from "./dynamic-border.ts";
 
+/**
+ * One auth provider row in the login/logout picker.
+ *
+ * 选择器里的一条供应商。`status` 缺省显示未配置。
+ */
 export type AuthSelectorProvider = {
 	id: string;
 	name: string;
@@ -19,12 +30,19 @@ export type AuthSelectorProvider = {
 	status?: AuthCheck;
 };
 
+/**
+ * Human label for an auth method: subscription vs API key.
+ *
+ * oauth 显示成 subscription，api_key 显示成 API key。
+ */
 export function formatAuthSelectorProviderType(authType: AuthSelectorProvider["authType"]): string {
 	return authType === "oauth" ? "subscription" : "API key";
 }
 
 /**
  * Component that renders an auth provider selector
+ *
+ * 登录/登出共用的供应商选择器。焦点转给搜索框，方便 IME 定位光标。
  */
 export class OAuthSelectorComponent extends Container implements Focusable {
 	private searchInput: Input;

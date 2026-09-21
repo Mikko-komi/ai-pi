@@ -1,5 +1,7 @@
 /**
  * TUI component for managing package resources (enable/disable)
+ *
+ * 包资源开关。global/project 分栏写 settings；列表自己管焦点。
  */
 
 import { homedir } from "node:os";
@@ -27,6 +29,12 @@ type ResourceType = "extensions" | "skills" | "prompts" | "themes";
 type ConfigWriteScope = "global" | "project";
 type SettingsScope = "user" | "project";
 type ProjectOverrideState = "inherit" | "load" | "unload";
+
+/**
+ * Resolved resource paths keyed by config write scope.
+ *
+ * 按写入范围分好的已解析路径。global 和 project 各一份。
+ */
 export type ScopedResolvedPaths = Record<ConfigWriteScope, ResolvedPaths>;
 
 const RESOURCE_TYPES = ["extensions", "skills", "prompts", "themes"] as const satisfies readonly ResourceType[];
@@ -863,6 +871,11 @@ class ResourceList implements Component, Focusable {
 	}
 }
 
+/**
+ * Header plus resource list for enabling package paths.
+ *
+ * 配置选择器外壳。焦点转给 ResourceList；写入范围存在本组件。
+ */
 export class ConfigSelectorComponent extends Container implements Focusable {
 	private header: ConfigSelectorHeader;
 	private resourceList: ResourceList;
