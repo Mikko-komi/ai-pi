@@ -1,3 +1,9 @@
+/**
+ * Host-owned service slots and consumer-owned guarded views.
+ *
+ * 服务槽。实现换绑时 view 身份不变；断开后访问必须抛。
+ */
+
 interface ResolvedValue {
 	readonly value: unknown;
 	readonly receiver: object;
@@ -5,7 +11,11 @@ interface ResolvedValue {
 
 type ValueResolver = () => ResolvedValue;
 
-/** Host-owned mutable target with consumer-owned guarded views. */
+/**
+ * Host-owned mutable target with consumer-owned guarded views.
+ *
+ * 宿主持有实现，消费者持有带门禁的 view。unbind 后 resolve 必须失败。
+ */
 export class ServiceSlot {
 	readonly #serviceId: string;
 	readonly #wrapObjects: boolean;

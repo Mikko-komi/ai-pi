@@ -1,3 +1,9 @@
+/**
+ * Node host entry: load, verify, and materialize on-disk or transported facet bundles.
+ *
+ * Node 加载入口。只再导出 manifest 常量和 bundle loader；校验与 VM 执行在 `node/` 里。
+ */
+
 export type {
 	FacetBundleArtifactLoaderOptions,
 	FacetBundleExternalResolver,

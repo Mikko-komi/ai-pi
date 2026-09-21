@@ -1,3 +1,9 @@
+/**
+ * Consumer binding: allowlisted remote facades, keyed observations, and rebind without dropping identity.
+ *
+ * 远端消费绑定实现。facade 身份在 unavailable/rebind 时保持；未 allowlist 或 local 服务必须拒绝。
+ */
+
 import { awaitWithContext, BACKGROUND_CONTEXT } from "../context/index.ts";
 import type { Op } from "../delta/index.ts";
 import type {
@@ -422,6 +428,11 @@ class KeyedBinding<T> {
 	}
 }
 
+/**
+ * Consumer implementation of {@link RemoteServiceBinding}.
+ *
+ * 远端绑定实现。singleton 懒订阅；keyed 按观察者启停；dispose 后所有 facade 失效。
+ */
 export class RemoteServiceBindingImpl implements RemoteServiceBinding {
 	readonly #transport: RemoteServiceTransport;
 	readonly #allowlist = new Set<string>();

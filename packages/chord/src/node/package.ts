@@ -1,7 +1,18 @@
+/**
+ * Package-level facet bundler driven by package.json and host conventions.
+ *
+ * 按 package.json 打插件包。peerDependencies 当 external；约定 entry 文件不存在则跳过。
+ */
+
 import { readFile, realpath, stat } from "node:fs/promises";
 import { basename, dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 import { type BundleFacetsResult, bundleFacets } from "./bundle.ts";
 
+/**
+ * Inputs for {@link bundleFacetPackage}: package path, outdir, and optional default facet map.
+ *
+ * 打包包级选项。packagePath 是目录或 package.json；defaultFacets 只在文件存在时采用。
+ */
 export interface BundleFacetPackageOptions {
 	/** Plugin package directory or its package.json path. */
 	readonly packagePath: string;
@@ -10,6 +21,11 @@ export interface BundleFacetPackageOptions {
 	readonly defaultFacets?: Readonly<Record<string, string>>;
 }
 
+/**
+ * {@link BundleFacetsResult} plus the resolved package directory and package.json path.
+ *
+ * 包级打包结果。多了包目录和 package.json 路径。
+ */
 export interface BundleFacetPackageResult extends BundleFacetsResult {
 	readonly packageDirectory: string;
 	readonly packageJsonPath: string;
@@ -26,7 +42,11 @@ interface FacetPackageMetadata {
 	readonly sourceMap: boolean;
 }
 
-/** Build a plugin package using package.json metadata and application-provided facet conventions. */
+/**
+ * Build a plugin package using package.json metadata and application-provided facet conventions.
+ *
+ * 读 package.json 再打。`chord.facets` 里 false 取消约定 entry；最终至少一条。
+ */
 export async function bundleFacetPackage(options: BundleFacetPackageOptions): Promise<BundleFacetPackageResult> {
 	const metadata = await readFacetPackageMetadata(options.packagePath);
 	const entries = await resolveFacetEntries(metadata, options.defaultFacets ?? {});

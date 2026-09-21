@@ -1,5 +1,7 @@
 /**
  * Chord is a standalone application-composition runtime for agentic applications.
+ *
+ * Chord 根入口。只再导出公共运行时；Context 走 `/context`，打包走 `/bundler` 与 `/node`。
  */
 export {
 	combineFacetLoaders,

@@ -1,3 +1,9 @@
+/**
+ * Facet generation kernel: setup, graph validation, bind, activate, same-shape reload, dispose.
+ *
+ * facet 代内核。setup 必须同步；reload 必须保持服务形状；失败要回滚已 setup 的资源。
+ */
+
 import { BACKGROUND_CONTEXT } from "../context/index.ts";
 import { RemoteServiceBindingImpl } from "../services/consumer.ts";
 import { ServiceSlot } from "../services/handle.ts";
@@ -336,7 +342,11 @@ type FacetProvision =
 			connectRemote(provider: RemoteServiceProvider): void;
 	  };
 
-/** Private lifecycle and dependency kernel behind the atomic host entry point. */
+/**
+ * Private lifecycle and dependency kernel behind the atomic host entry point.
+ *
+ * host 背后的生命周期内核。对外只经 `createFacetHost`；消费者 facade 在 reload 时不断开。
+ */
 export class FacetKernel {
 	readonly #initialFacets: readonly Facet[];
 	readonly #serviceSources: readonly RemoteServiceSource[];

@@ -1,3 +1,9 @@
+/**
+ * Load, verify, and evaluate content-addressed facet bundles in Node.
+ *
+ * 磁盘/artifact 加载。integrity 默认校验；每次 load 在 VM 里新编一代 CommonJS。
+ */
+
 import { createHash } from "node:crypto";
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { createRequire, isBuiltin } from "node:module";
@@ -17,8 +23,18 @@ import {
 	type FacetBundleManifest,
 } from "./manifest.ts";
 
+/**
+ * Resolve a host-provided external specifier to a require target.
+ *
+ * 宿主解析 leftover import。返回 undefined 则回落到 import.meta.resolve。
+ */
 export type FacetBundleExternalResolver = (specifier: string) => string | URL | undefined;
 
+/**
+ * Options for loading one named entry from an on-disk facet bundle.
+ *
+ * 磁盘 loader 选项。entry 非空；verifyIntegrity 默认 true。
+ */
 export interface FacetBundleLoaderOptions {
 	readonly manifestPath: string | URL;
 	readonly entry: string;
@@ -28,6 +44,11 @@ export interface FacetBundleLoaderOptions {
 	readonly resolveExternal?: FacetBundleExternalResolver;
 }
 
+/**
+ * Options for materializing a transported artifact into a temporary generation.
+ *
+ * artifact loader 选项。每次 load 落一代临时目录，dispose 必须删掉。
+ */
 export interface FacetBundleArtifactLoaderOptions {
 	readonly artifact: unknown;
 	/** Resolve host-provided external imports against the receiving application. */
@@ -40,7 +61,11 @@ interface CommonJsModule {
 	exports: unknown;
 }
 
-/** Read and validate a versioned facet bundle manifest. */
+/**
+ * Read and validate a versioned facet bundle manifest.
+ *
+ * 读并校验磁盘清单。format/version 不对或 entries 空都抛。
+ */
 export async function readFacetBundleManifest(path: string | URL): Promise<FacetBundleManifest> {
 	const manifestPath = toFilePath(path);
 	let parsed: unknown;
@@ -52,7 +77,11 @@ export async function readFacetBundleManifest(path: string | URL): Promise<Facet
 	return validateManifest(parsed, manifestPath);
 }
 
-/** Read and verify one transportable entry from a facet bundle on disk. */
+/**
+ * Read and verify one transportable entry from a facet bundle on disk.
+ *
+ * 从磁盘抽出一条可搬运 artifact。读源码时就要过 integrity。
+ */
 export async function readFacetBundleArtifact(options: {
 	readonly manifestPath: string | URL;
 	readonly entry: string;
@@ -80,7 +109,11 @@ export async function readFacetBundleArtifact(options: {
 	});
 }
 
-/** Materialize a transported artifact and create a fresh VM-compiled CommonJS generation for each load. */
+/**
+ * Materialize a transported artifact and create a fresh VM-compiled CommonJS generation for each load.
+ *
+ * 把 artifact 落到临时目录再 load。失败清理目录；dispose 先卸 facets 再删目录。
+ */
 export function createFacetBundleArtifactLoader(options: FacetBundleArtifactLoaderOptions): FacetLoader {
 	const artifact = validateArtifact(options.artifact);
 	const temporaryParent = resolve(options.temporaryDirectory ?? tmpdir());
@@ -130,7 +163,11 @@ export function createFacetBundleArtifactLoader(options: FacetBundleArtifactLoad
 	};
 }
 
-/** Create a reusable loader for one opaque entry in a facet bundle manifest. */
+/**
+ * Create a reusable loader for one opaque entry in a facet bundle manifest.
+ *
+ * 磁盘单 entry loader。可复用；每次 load 重新读盘、校验、VM 执行。
+ */
 export function createFacetBundleLoader(options: FacetBundleLoaderOptions): FacetLoader {
 	if (options.entry.length === 0) throw new TypeError("Facet bundle entry name must not be empty");
 	const manifestPath = toFilePath(options.manifestPath);

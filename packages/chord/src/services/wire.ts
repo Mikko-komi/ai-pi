@@ -1,3 +1,9 @@
+/**
+ * Chord-owned service wire grammar and `$chord.service` control calls.
+ *
+ * 服务线语法。适配器先落到严格 JSON，再用这些 parse；Chord 不规定外层信封。
+ */
+
 import { assertValidOp, assertValidWireOp, type WireOp } from "../delta/index.ts";
 import type {
 	ServiceCall,
@@ -8,21 +14,41 @@ import type {
 	ServiceSubscriptionSnapshot,
 } from "../types.ts";
 
+/**
+ * Wire form of a member snapshot: methods, or state with encoded {@link WireOp}s.
+ *
+ * 线上成员快照。和内存版的差别只在 state ops 是 WireOp。
+ */
 export type WireServiceMemberSnapshot =
 	| { readonly name: string; readonly kind: "method" }
 	| { readonly name: string; readonly kind: "state"; readonly sequence: number; readonly ops: readonly WireOp[] };
 
+/**
+ * Wire form of one instance snapshot.
+ *
+ * 线上实例快照。singleton 无地址；keyed 必须带地址。
+ */
 export type WireServiceInstanceSnapshot = {
 	readonly instance?: ServiceInstanceAddress;
 	readonly members: readonly WireServiceMemberSnapshot[];
 };
 
+/**
+ * Wire form of a subscription opening snapshot.
+ *
+ * 线上订阅快照。解码前不能交给 apply。
+ */
 export type WireServiceSubscriptionSnapshot = {
 	readonly serviceId: string;
 	readonly mode: ServiceMode;
 	readonly instances: readonly WireServiceInstanceSnapshot[];
 };
 
+/**
+ * Wire form of a provider update after subscribe.
+ *
+ * 线上增量。state 的 ops 是 WireOp；语义与内存版相同。
+ */
 export type WireServiceProviderUpdate =
 	| {
 			readonly type: "state";
@@ -41,6 +67,11 @@ const SERVICE_CATALOGUE_MEMBER = "catalogue";
 const SERVICE_SUBSCRIBE_MEMBER = "subscribe";
 const SERVICE_UNSUBSCRIBE_MEMBER = "unsubscribe";
 
+/**
+ * Decoded `$chord.service` control call: catalogue, subscribe, or unsubscribe.
+ *
+ * 控制面调用。普通业务 call 解不出来则不是控制调用。
+ */
 export type ServiceControlCall =
 	| { readonly type: "catalogue" }
 	| {
@@ -51,18 +82,38 @@ export type ServiceControlCall =
 	  }
 	| { readonly type: "unsubscribe"; readonly subscriptionId: string };
 
+/**
+ * Build the reserved catalogue control call.
+ *
+ * 列出远端目录的控制调用。无 args、无 instance。
+ */
 export function createServiceCatalogueCall(): ServiceCall {
 	return { serviceId: SERVICE_CONTROL_ID, member: SERVICE_CATALOGUE_MEMBER, args: [] };
 }
 
+/**
+ * Build the reserved subscribe control call for one service and mode.
+ *
+ * 打开一条订阅。subscriptionId 由适配器分配且必须在该 endpoint 内唯一。
+ */
 export function createServiceSubscribeCall(subscriptionId: string, serviceId: string, mode: ServiceMode): ServiceCall {
 	return { serviceId: SERVICE_CONTROL_ID, member: SERVICE_SUBSCRIBE_MEMBER, args: [subscriptionId, serviceId, mode] };
 }
 
+/**
+ * Build the reserved unsubscribe control call.
+ *
+ * 关闭一条订阅。只认 subscriptionId。
+ */
 export function createServiceUnsubscribeCall(subscriptionId: string): ServiceCall {
 	return { serviceId: SERVICE_CONTROL_ID, member: SERVICE_UNSUBSCRIBE_MEMBER, args: [subscriptionId] };
 }
 
+/**
+ * Decode a `$chord.service` control call, or undefined if the call is ordinary.
+ *
+ * 认出控制调用。带 instance、错成员或错 arity 都当非控制，返回 undefined。
+ */
 export function decodeServiceControlCall(call: ServiceCall): ServiceControlCall | undefined {
 	if (call.serviceId !== SERVICE_CONTROL_ID || call.instance !== undefined) return undefined;
 	if (call.member === SERVICE_CATALOGUE_MEMBER && call.args.length === 0) return { type: "catalogue" };
@@ -86,6 +137,11 @@ export function decodeServiceControlCall(call: ServiceCall): ServiceControlCall 
 	return undefined;
 }
 
+/**
+ * Validate a strict-JSON value as a {@link ServiceCall}.
+ *
+ * 校验一次业务或控制调用。多字段、空 id、非数组 args 都抛。
+ */
 export function parseServiceCall(value: unknown): ServiceCall {
 	const call = record(value, "service call");
 	assertKeys(call, ["serviceId", "member", "args"], ["instance"], "service call");
@@ -96,6 +152,11 @@ export function parseServiceCall(value: unknown): ServiceCall {
 	return value as ServiceCall;
 }
 
+/**
+ * Validate a strict-JSON value as a catalogue with unique service ids.
+ *
+ * 校验目录。重复 serviceId 或非法 mode 都抛。
+ */
 export function parseServiceCatalogue(value: unknown): readonly ServiceCatalogueEntry[] {
 	if (!Array.isArray(value)) throw new TypeError("Invalid service catalogue");
 	const ids = new Set<string>();
@@ -110,21 +171,41 @@ export function parseServiceCatalogue(value: unknown): readonly ServiceCatalogue
 	return value as unknown as readonly ServiceCatalogueEntry[];
 }
 
+/**
+ * Validate a snapshot whose state members carry decoded {@link Op}s.
+ *
+ * 校验已解码订阅快照。state ops 必须过 assertValidOp。
+ */
 export function parseServiceSubscriptionSnapshot(value: unknown): ServiceSubscriptionSnapshot {
 	assertSubscriptionSnapshot(value, assertValidOp);
 	return value as ServiceSubscriptionSnapshot;
 }
 
+/**
+ * Validate a snapshot whose state members carry {@link WireOp}s.
+ *
+ * 校验线上订阅快照。state ops 必须过 assertValidWireOp，不能直接 apply。
+ */
 export function parseWireServiceSubscriptionSnapshot(value: unknown): WireServiceSubscriptionSnapshot {
 	assertSubscriptionSnapshot(value, assertValidWireOp);
 	return value as WireServiceSubscriptionSnapshot;
 }
 
+/**
+ * Validate a provider update whose state ops are decoded {@link Op}s.
+ *
+ * 校验已解码增量。多余字段或非法 verb 都抛。
+ */
 export function parseServiceProviderUpdate(value: unknown): ServiceProviderUpdate {
 	assertProviderUpdate(value, assertValidOp);
 	return value as ServiceProviderUpdate;
 }
 
+/**
+ * Validate a provider update whose state ops are {@link WireOp}s.
+ *
+ * 校验线上增量。解码前不能当 Op 用。
+ */
 export function parseWireServiceProviderUpdate(value: unknown): WireServiceProviderUpdate {
 	assertProviderUpdate(value, assertValidWireOp);
 	return value as WireServiceProviderUpdate;

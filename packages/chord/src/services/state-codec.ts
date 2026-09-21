@@ -1,3 +1,9 @@
+/**
+ * Per-subscription Delta path codecs for every replicated-state member.
+ *
+ * 一条订阅内每个 state 成员各有独立编解码器。replace/unavailable/hydrate 必须重置词典。
+ */
+
 import { type Decoder, decoder, type Encoder, encoder } from "../delta/index.ts";
 import type {
 	ServiceInstanceAddress,
@@ -7,13 +13,21 @@ import type {
 } from "../types.ts";
 import type { WireServiceProviderUpdate, WireServiceSubscriptionSnapshot } from "./wire.ts";
 
-/** Stateful operation encoders for every replicated state in one service subscription. */
+/**
+ * Stateful operation encoders for every replicated state in one service subscription.
+ *
+ * 订阅级编码器。每个 instance/member 一路词典；不能跨订阅或跨成员共用。
+ */
 export interface ServiceStateEncoder {
 	encodeSnapshot(snapshot: ServiceSubscriptionSnapshot): WireServiceSubscriptionSnapshot;
 	encodeUpdate(update: ServiceProviderUpdate): WireServiceProviderUpdate;
 }
 
-/** Stateful operation decoders for every replicated state in one service subscription. */
+/**
+ * Stateful operation decoders for every replicated state in one service subscription.
+ *
+ * 订阅级解码器。必须只吃配对 encoder 发出的批次，从该 state 的 base 开始。
+ */
 export interface ServiceStateDecoder {
 	decodeSnapshot(snapshot: WireServiceSubscriptionSnapshot): ServiceSubscriptionSnapshot;
 	decodeUpdate(update: WireServiceProviderUpdate): ServiceProviderUpdate;
@@ -57,6 +71,11 @@ class StateCodecRegistry<C> {
 	}
 }
 
+/**
+ * Create one encoder registry for a provider-side subscription stream.
+ *
+ * 提供侧一条订阅一个编码器。closed 卸掉该 instance 的词典；replaced/unavailable 全清。
+ */
 export function createServiceStateEncoder(): ServiceStateEncoder {
 	const codecs = new StateCodecRegistry<Encoder>(encoder);
 	return {
@@ -87,6 +106,11 @@ export function createServiceStateEncoder(): ServiceStateEncoder {
 	};
 }
 
+/**
+ * Create one decoder registry for a consumer-side subscription stream.
+ *
+ * 消费侧一条订阅一个解码器。规则与 encoder 对称，不能和别的订阅共用。
+ */
 export function createServiceStateDecoder(): ServiceStateDecoder {
 	const codecs = new StateCodecRegistry<Decoder>(decoder);
 	return {

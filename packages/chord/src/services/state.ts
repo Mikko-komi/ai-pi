@@ -1,8 +1,19 @@
+/**
+ * Producer and replica implementations of replicated state.
+ *
+ * 复制状态实现。生产者走 tracker；副本按连续 sequence hydrate/update，缺口必须 clear。
+ */
+
 import { BACKGROUND_CONTEXT } from "../context/index.ts";
 import { applyImmutable, isBase, type Op, type Tracker, track } from "../delta/index.ts";
 import type { Context, JsonValue, MutableReplicatedState, ReplicatedState, ReplicatedStateDelivery } from "../types.ts";
 import { registerReplicatedStateInternals } from "./state-internals.ts";
 
+/**
+ * Authoritative tracked state. {@link publish} flushes one decoded op batch.
+ *
+ * 生产者实现。写必须走 `state`；空 flush 不升 sequence、不通知。
+ */
 export class MutableReplicatedStateImpl<T extends object> implements MutableReplicatedState<T> {
 	readonly #listeners = new Set<(value: T, context: Context, delivery: ReplicatedStateDelivery) => void>();
 	readonly #sourceListeners = new Set<(ops: readonly Op[], sequence: number, context: Context) => void>();
@@ -56,7 +67,11 @@ export class MutableReplicatedStateImpl<T extends object> implements MutableRepl
 	}
 }
 
-/** A cold read-only state used by service consumers until a complete snapshot arrives. */
+/**
+ * A cold read-only state used by service consumers until a complete snapshot arrives.
+ *
+ * 消费侧冷副本。hydrate 前 `value` 是 undefined；sequence 缺口会 clear 再抛。
+ */
 export class ReplicatedStateReplica<T extends JsonValue = JsonValue> implements ReplicatedState<T> {
 	readonly #listeners = new Set<(value: T, context: Context, delivery: ReplicatedStateDelivery) => void>();
 	readonly #reportError: (error: Error) => void;
@@ -128,7 +143,11 @@ export class ReplicatedStateReplica<T extends JsonValue = JsonValue> implements 
 	}
 }
 
-/** @internal Context for synthetic service deliveries without a caller. */
+/**
+ * @internal Context for synthetic service deliveries without a caller.
+ *
+ * 无调用方的投递上下文。目前就是 BACKGROUND_CONTEXT，不带取消。
+ */
 export function serviceDeliveryContext(): Context {
 	// TODO: Add delivery-scoped cancellation or metadata if deliveries gain an owned lifecycle.
 	return BACKGROUND_CONTEXT;

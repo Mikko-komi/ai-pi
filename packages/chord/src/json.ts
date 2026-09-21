@@ -1,6 +1,16 @@
+/**
+ * Runtime guard for values that may cross a Chord JSON boundary.
+ *
+ * 适配器边界上的严格 JSON 判定。
+ */
+
 import type { JsonValue } from "./types.ts";
 
-/** Return whether a value is finite strict JSON with plain objects and no cycles. */
+/**
+ * Return whether a value is finite strict JSON with plain objects and no cycles.
+ *
+ * 运行时判定严格 JSON。循环、稀疏数组、非 plain object、非有限数字都失败。
+ */
 export function isJsonValue(value: unknown): value is JsonValue {
 	return check(value, new Set<object>(), 0);
 }

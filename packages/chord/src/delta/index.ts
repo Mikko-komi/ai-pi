@@ -1,3 +1,9 @@
+/**
+ * Flush-time change tracking over plain JSON: ops, trackers, appliers, and path codecs.
+ *
+ * 独立的 JSON delta。`Op` 给 apply；`WireOp` 只活在 encode/decode 之间。一对编解码器服务一条有序流。
+ */
+
 import type { JsonValue } from "../types.ts";
 
 export type { JsonValue } from "../types.ts";
@@ -9,11 +15,32 @@ export type { JsonValue } from "../types.ts";
 // facet host consume it; keep the arrows pointing that way.
 // ─────────────────────────────────────────────────────────────────────────────
 
+/**
+ * One path segment: an object key or a dense array index.
+ *
+ * 路径一节。字符串是对象键；整数是数组下标。保留段名非法。
+ */
 export type Seg = string | number;
+
+/**
+ * Ordered path from the tracked root to a node.
+ *
+ * 从根到节点的路径。空路径就是根。
+ */
 export type Path = readonly Seg[];
+
+/**
+ * Path that is forbidden from targeting the root.
+ *
+ * 非空路径。`s`/`d`/`a`/`t` 必须用它，不能打根。
+ */
 export type NonEmptyPath = readonly [Seg, ...Seg[]];
 
-/** A path inline, or an id assigned by the encoder on second use. */
+/**
+ * A path inline, or an id assigned by the encoder on second use.
+ *
+ * 路径引用。第二次出现才 intern 成数字 id；第一次仍内联。
+ */
 export type PathRef<P extends Path = Path> = P | number;
 
 /**
@@ -26,6 +53,8 @@ export type PathRef<P extends Path = Path> = P | number;
  *
  * `Op` knows nothing about the path dictionary. Interning, id references and
  * omitted paths live in `WireOp` and exist only between `encode` and `decode`.
+ *
+ * 已解码操作。`r` 才能换整值；`s`/`d`/`a`/`t` 不能打根。不知道路径词典。
  */
 export type Op =
 	| readonly ["r", JsonValue]
@@ -44,6 +73,8 @@ export type Op =
  *
  * ["r", value] carries no path, so it encodes to itself — which is why isBase
  * works unchanged on either vocabulary.
+ *
+ * 过线操作。多了 `#` 定义和省略路径的短形式。不能直接交给 apply。
  */
 export type WireOp =
 	| readonly ["r", JsonValue]
@@ -61,11 +92,18 @@ export type WireOp =
 
 // ─── Classification ──────────────────────────────────────────────────────────
 
+/**
+ * Return whether an op replaces the whole value.
+ *
+ * 是否整值替换。`r` 在 Op 和 WireOp 里形状相同。
+ */
 export const isReplace = (op: Op | WireOp): boolean => op[0] === "r";
 
 /**
  * A batch begins with a replacement. Flush guarantees `r` is at index 0 or absent,
  * so this is exact rather than a heuristic.
+ *
+ * 批次是否从完整替换开始。flush 保证 `r` 只在下标 0 或没有，不是启发式。
  */
 export const isBase = (ops: readonly (Op | WireOp)[]): boolean => ops.length > 0 && ops[0]![0] === "r";
 
@@ -77,6 +115,8 @@ export const isBase = (ops: readonly (Op | WireOp)[]): boolean => ops.length > 0
  * asymptotically equivalent and much slower in practice.
  *
  * Always correct: the returned n satisfies a.slice(a.length - n) === b.slice(0, n).
+ *
+ * 字符串重叠长度。找不到或候选过多返回 0，结果更大但绝不算错。
  */
 export function overlap(a: string, b: string, scan: number, probe = 64, maxCandidates = 8): number {
 	if (a.length === 0 || b.length === 0 || scan === 0) return 0;
@@ -105,10 +145,20 @@ export function overlap(a: string, b: string, scan: number, probe = 64, maxCandi
 
 // ─── Tracker ─────────────────────────────────────────────────────────────────
 
+/**
+ * Optional tracker knobs. {@link maxOverlapScan} caps the string-overlap window.
+ *
+ * tracker 选项。`maxOverlapScan` 限制滚动窗口扫描长度，默认 65536。
+ */
 export interface TrackerOptions {
 	maxOverlapScan?: number;
 }
 
+/**
+ * Flush-time change tracker over one mutable JSON object.
+ *
+ * 对一份可变 JSON 做 flush 时差分。写必须走 `state`；直接改 `target` 会绕过跟踪。
+ */
 export interface Tracker<T extends object> {
 	/**
 	 * The tracked value. Mutate and read state only through this proxy. Values
@@ -432,6 +482,11 @@ const cloneOp = (op: Op): Op => {
 	}
 };
 
+/**
+ * Start tracking mutations on a plain JSON object. The first flush is always a base batch.
+ *
+ * 开始跟踪。第一次 flush 必是完整 `r`；插入的值归 tracker 所有，之后只能经 `state` 改。
+ */
 export function track<T extends object>(root: T, options: TrackerOptions = {}): Tracker<T> {
 	const scan = options.maxOverlapScan ?? 65_536;
 	let pending = dirtyNode();
@@ -760,9 +815,16 @@ export function track<T extends object>(root: T, options: TrackerOptions = {}): 
  *
  * Ops arrive from a facet, a plugin compartment, or a tool whose details may echo
  * model output, so none of it is trusted input.
+ *
+ * 会碰到原型链的段名。路径是数据，赋值 `__proto__` 会污染进程，必须拒绝。
  */
 export const RESERVED_SEGMENTS: ReadonlySet<string> = new Set(["__proto__", "constructor", "prototype"]);
 
+/**
+ * Thrown when a path segment is reserved or would create a sparse array.
+ *
+ * 非法路径段。保留名、负数下标、越过 length 的写入都走它。
+ */
 export class UnsafePathError extends Error {
 	// Not a parameter property: Node's --experimental-strip-types rejects those,
 	// and these files are meant to run under it directly.
@@ -781,6 +843,8 @@ export class UnsafePathError extends Error {
  * Validating `Op` against the wire grammar would be laxer than the type: a
  * two-element `["s", value]` would pass, and `apply` would then read the value as
  * a path. Each vocabulary gets the validator that matches it.
+ *
+ * 校验已解码 Op。未知 verb 必须抛，不能默默跳过。
  */
 export function assertValidOp(op: unknown): asserts op is Op {
 	if (!Array.isArray(op) || op.length === 0) throw new TypeError("op is not a tuple");
@@ -824,7 +888,11 @@ function assertPathArg(p: unknown, nonEmpty = false): void {
 	assertSafePath(p as Path);
 }
 
-/** The same, for the wire grammar: ids and short forms are legal here. */
+/**
+ * The same, for the wire grammar: ids and short forms are legal here.
+ *
+ * 校验 WireOp。数字 id 和短形式合法；字符串冒充路径必须拒。
+ */
 export function assertValidWireOp(op: unknown): asserts op is WireOp {
 	if (!Array.isArray(op) || op.length === 0) throw new TypeError("op is not a tuple");
 	const [verb] = op as unknown[];
@@ -888,6 +956,11 @@ export function assertValidWireOp(op: unknown): asserts op is WireOp {
 	}
 }
 
+/**
+ * Reject reserved segments and non-integer or negative array indices.
+ *
+ * 路径安全检查。保留段名或非法下标抛 UnsafePathError。
+ */
 export function assertSafePath(path: Path): void {
 	for (const seg of path) {
 		if (typeof seg === "string") {
@@ -919,6 +992,11 @@ function assertIndexInRange(parent: readonly unknown[], index: number): void {
 
 // ─── Applier ─────────────────────────────────────────────────────────────────
 
+/**
+ * Thrown when apply cannot resolve a path or a wire id is unknown.
+ *
+ * 路径解不开。节点缺失、打到非对象、或 wire id 未见过定义。
+ */
 export class PathError extends Error {
 	readonly path: Path | number;
 	constructor(path: Path | number) {
@@ -934,6 +1012,8 @@ export class PathError extends Error {
  *
  * Takes decoded ops. Path ids and omitted paths are a wire concern — run
  * `decode` first if the ops came from a boundary.
+ *
+ * 就地应用已解码 Op。`r` 换根所以返回新值；批次所有权在调用方，扇出必须先拷。
  */
 export function apply<T>(target: T | undefined, ops: readonly Op[]): T {
 	return applyOps(target, ops);
@@ -1010,7 +1090,11 @@ function applyOps<T>(target: T | undefined, ops: readonly Op[]): T {
 	return root as unknown as T;
 }
 
-/** Apply decoded operations without mutating the previous immutable value. */
+/**
+ * Apply decoded operations without mutating the previous immutable value.
+ *
+ * 不可变应用。只拷脏路径上的容器，未改子树共享；不冻输入。
+ */
 export function applyImmutable<T>(target: T | undefined, ops: readonly Op[]): T {
 	let root = target as unknown as JsonValue;
 	for (const op of ops) {
@@ -1094,6 +1178,11 @@ function resolve(root: JsonValue, path: Path): JsonValue {
 
 const pathKey = (path: Path): string => JSON.stringify(path);
 
+/**
+ * Stateful compressor from decoded {@link Op}s to {@link WireOp}s.
+ *
+ * 有状态编码器。一对一流；`r` 清空路径词典，短路径省略只在本批有效。
+ */
 export interface Encoder {
 	encode(ops: readonly Op[]): WireOp[];
 }
@@ -1101,6 +1190,8 @@ export interface Encoder {
 /**
  * Intern on SECOND use. A definition costs more than the path it replaces, so
  * interning on first use loses on the many paths written exactly once.
+ *
+ * 新建编码器。第二次出现才定义 id；第一次内联。不能跨独立 state 流共用。
  */
 export function encoder(): Encoder {
 	const seen = new Set<string>();
@@ -1191,10 +1282,20 @@ export function encoder(): Encoder {
 	};
 }
 
+/**
+ * Stateful expander from {@link WireOp}s back to decoded {@link Op}s.
+ *
+ * 有状态解码器。必须只吃配对 encoder 的批次；`r` 清空词典。
+ */
 export interface Decoder {
 	decode(wire: readonly WireOp[]): Op[];
 }
 
+/**
+ * Create a decoder for one ordered wire stream.
+ *
+ * 新建解码器。短形式依赖本批上一条路径；未见过的 id 抛 PathError。
+ */
 export function decoder(): Decoder {
 	const paths = new Map<number, Path>();
 

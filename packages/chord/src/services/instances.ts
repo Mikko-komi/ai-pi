@@ -1,6 +1,17 @@
+/**
+ * Keyed instance directory: generations, observers, and cancellable observation tasks.
+ *
+ * keyed 实例目录。同一 key 重生必须换 generation；观察任务随实例或 observer 取消。
+ */
+
 import { BACKGROUND_CONTEXT, withCancel } from "../context/index.ts";
 import type { Context } from "../types.ts";
 
+/**
+ * One live keyed instance: address, service object, and deactivate hook.
+ *
+ * 目录里的一条活实例。deactivate 在移除或 dispose 时调用一次。
+ */
 export interface InstanceDirectoryEntry {
 	readonly key: string;
 	readonly generation: number;
@@ -14,7 +25,11 @@ interface Observer {
 	closed: boolean;
 }
 
-/** Owns keyed instance lifetime and the cancellable tasks observing those instances. */
+/**
+ * Owns keyed instance lifetime and the cancellable tasks observing those instances.
+ *
+ * keyed 生命周期。ready 之前不启动观察；reset 卸掉实例但保留 observer；dispose 全清。
+ */
 export class InstanceDirectory<TEntry extends InstanceDirectoryEntry> {
 	readonly #entries = new Map<string, TEntry>();
 	readonly #observers = new Set<Observer>();

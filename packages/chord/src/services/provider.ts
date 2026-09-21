@@ -1,3 +1,9 @@
+/**
+ * Provider catalogue, singleton/keyed instances, and one-consumer remote endpoints.
+ *
+ * 远端提供侧。local 服务不能发布；replace 必须保持成员形状；订阅 activate 前的更新会缓冲。
+ */
+
 import type {
 	Context,
 	JsonValue,
@@ -62,18 +68,32 @@ interface ServiceRegistration {
 	readonly subscribers: Set<ProviderSubscriber>;
 }
 
+/**
+ * Callback an endpoint uses to push one subscription update to its consumer.
+ *
+ * endpoint 把增量推给适配器。失败由适配器吞掉，不能打回 provider。
+ */
 export type ServiceUpdatePublisher = (
 	subscriptionId: string,
 	update: ServiceProviderUpdate,
 	context: Context,
 ) => void | Promise<void>;
 
-/** Hosts one provider for one remote consumer and owns that consumer's subscriptions. */
+/**
+ * Hosts one provider for one remote consumer and owns that consumer's subscriptions.
+ *
+ * 一对一消费者 endpoint。处理 `$chord.service` 控制调用；dispose 关闭它开过的订阅。
+ */
 export interface RemoteServiceEndpoint {
 	invoke(call: ServiceCall, publish: ServiceUpdatePublisher, context: Context): Promise<JsonValue | undefined>;
 	dispose(): void;
 }
 
+/**
+ * In-process catalogue of remoted services: provide, replace, spawn, invoke, subscribe.
+ *
+ * 远端服务目录。目录 id 在构造时冻结；未登记的服务不能 provide/invoke。
+ */
 export class RemoteServiceProvider {
 	readonly #catalogue: readonly ServiceCatalogueEntry[];
 	readonly #registrations = new Map<string, ServiceRegistration>();
@@ -499,6 +519,11 @@ export class RemoteServiceProvider {
 	}
 }
 
+/**
+ * Wrap one provider for one consumer, including `$chord.service` control calls.
+ *
+ * 给一个消费者包一层控制面。subscriptionId 冲突必须拒绝；dispose 只关这个消费者的订阅。
+ */
 export function createRemoteServiceEndpoint(provider: RemoteServiceProvider): RemoteServiceEndpoint {
 	const subscriptions = new Map<string, ServiceSubscription>();
 	let disposed = false;
@@ -537,6 +562,11 @@ export function createRemoteServiceEndpoint(provider: RemoteServiceProvider): Re
 	};
 }
 
+/**
+ * Reject an implementation that is not an object of exposable methods and replicated state.
+ *
+ * 远端实现形状检查。必须是对象；成员只能是方法或已登记的 ReplicatedState。
+ */
 export function validateRemoteServiceImplementation(serviceId: string, implementation: unknown): void {
 	void classifyRemoteServiceImplementation(serviceId, implementation);
 }

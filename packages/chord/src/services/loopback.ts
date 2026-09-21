@@ -1,7 +1,17 @@
+/**
+ * In-process transport that forwards invoke/subscribe to a local provider.
+ *
+ * 进程内回环传输。
+ */
+
 import type { RemoteServiceTransport } from "../types.ts";
 import type { RemoteServiceProvider } from "./provider.ts";
 
-/** Connects a provider to a binding without changing remote service semantics. */
+/**
+ * Connects a provider to a binding without changing remote service semantics.
+ *
+ * 把 provider 接到 binding，语义与远端相同。不改 JSON 合同，也不克隆。
+ */
 export function createLoopbackServiceTransport(provider: RemoteServiceProvider): RemoteServiceTransport {
 	return {
 		invoke: (call, context) => provider.invoke(call, context),

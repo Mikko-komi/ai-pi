@@ -1,3 +1,9 @@
+/**
+ * esbuild bundler for independent, content-addressed CommonJS facet entries.
+ *
+ * facet 打包。每个 entry 一个内容寻址的 cjs；写盘先落临时目录再替换。
+ */
+
 import { createHash, randomUUID } from "node:crypto";
 import { mkdir, readFile, rename, rm, stat, writeFile } from "node:fs/promises";
 import { basename, dirname, extname, join, relative, resolve, sep } from "node:path";
@@ -10,8 +16,18 @@ import {
 	type FacetBundleManifest,
 } from "./manifest.ts";
 
+/**
+ * esbuild platform for a facet bundle: node, browser, or neutral.
+ *
+ * 打包目标平台。缺省是 node。
+ */
 export type FacetBundlePlatform = "node" | "browser" | "neutral";
 
+/**
+ * Inputs for {@link bundleFacets}: plugin identity, opaque entries, and build flags.
+ *
+ * 打包选项。entries 名和路径非空；至少一条；external 也不能是空串。
+ */
 export interface BundleFacetsOptions {
 	readonly plugin: {
 		readonly id: string;
@@ -30,12 +46,21 @@ export interface BundleFacetsOptions {
 	readonly target?: string | readonly string[];
 }
 
+/**
+ * Written bundle: validated manifest plus its on-disk path.
+ *
+ * 打包结果。manifest 已冻结；目录替换成功后才返回。
+ */
 export interface BundleFacetsResult {
 	readonly manifest: FacetBundleManifest;
 	readonly manifestPath: string;
 }
 
-/** Bundle each opaque facet entry into an independent content-addressed CommonJS file. */
+/**
+ * Bundle each opaque facet entry into an independent content-addressed CommonJS file.
+ *
+ * 按 entry 各自打成内容寻址 cjs。失败删临时目录；成功原子替换 outdir。
+ */
 export async function bundleFacets(options: BundleFacetsOptions): Promise<BundleFacetsResult> {
 	validateOptions(options);
 	const workingDirectory = resolve(options.workingDirectory ?? process.cwd());
