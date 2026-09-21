@@ -1,3 +1,9 @@
+/**
+ * Standard api-key auth helper and lazy OAuth wrapper.
+ *
+ * 标准环境变量 api-key 鉴权，以及把 OAuth 实现延迟加载的包装。
+ */
+
 import type { ApiKeyAuth, OAuthAuth } from "./types.ts";
 
 /**
@@ -5,6 +11,8 @@ import type { ApiKeyAuth, OAuthAuth } from "./types.ts";
  * set env var resolves. Includes a `login` that prompts for the key.
  * Providers with non-standard resolution (provider env, ambient files, IAM)
  * write their own `ApiKeyAuth`.
+ *
+ * 标准 api-key：已存 key 优先，否则第一个有值的环境变量。带 prompt login。
  */
 export function envApiKeyAuth(name: string, envVars: readonly string[]): ApiKeyAuth {
 	return {
@@ -36,6 +44,8 @@ export function envApiKeyAuth(name: string, envVars: readonly string[]): ApiKeyA
  * first `login`/`refresh`/`toAuth` call; callers keep Node-only flow code out
  * of bundles by loading through a bundler-opaque dynamic import (variable
  * specifier, see the bedrock lazy wrapper).
+ *
+ * 包装动态 import 的 `OAuthAuth`。首次 login/refresh/toAuth 才加载，避免把 Node-only 流打进包。
  */
 export function lazyOAuth(input: {
 	name: string;

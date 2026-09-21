@@ -1,3 +1,9 @@
+/**
+ * Image-generation provider collection and auth application.
+ *
+ * 图像生成的 Provider 集合。职责对标聊天侧的 `Models`。
+ */
+
 import { defaultProviderAuthContext as defaultAuthContext } from "./auth/context.ts";
 import { InMemoryCredentialStore } from "./auth/credential-store.ts";
 import { type AuthResolutionOverrides, ModelsError, resolveProviderAuth } from "./auth/resolve.ts";
@@ -8,6 +14,8 @@ import type { AssistantImages, ImagesApi, ImagesContext, ImagesModel, ImagesOpti
 /**
  * An image-generation provider: the image-side counterpart of `Provider`.
  * Owns id/name metadata, auth, model listing, and generation behavior.
+ *
+ * 图像生成 Provider。对标聊天侧 `Provider`：鉴权、列模型、生成。
  */
 export interface ImagesProvider {
 	readonly id: string;
@@ -45,6 +53,8 @@ export interface ImagesProvider {
 /**
  * Runtime collection of image-generation providers plus auth application and
  * generation convenience: the image-side counterpart of `Models`.
+ *
+ * 图像 Provider 集合加鉴权与生成便捷。对标聊天侧 `Models`。
  */
 export interface ImagesModels {
 	getProviders(): readonly ImagesProvider[];
@@ -87,6 +97,11 @@ export interface ImagesModels {
 	): Promise<AssistantImages>;
 }
 
+/**
+ * Mutable image-provider collection. Provider ids are unique.
+ *
+ * 可改的图像 Provider 集合。按 `provider.id` 去重替换。
+ */
 export interface MutableImagesModels extends ImagesModels {
 	/** Upsert/replace by provider.id. Provider ids are unique. */
 	setProvider(provider: ImagesProvider): void;
@@ -224,10 +239,20 @@ class ImagesModelsImpl implements MutableImagesModels {
 	}
 }
 
+/**
+ * Create an empty mutable image-provider collection.
+ *
+ * 空的可改 `ImagesModels`。凭证和鉴权上下文可注入。
+ */
 export function createImagesModels(options?: CreateModelsOptions): MutableImagesModels {
 	return new ImagesModelsImpl(options);
 }
 
+/**
+ * Parts used by `createImagesProvider()` to assemble an ImagesProvider.
+ *
+ * `createImagesProvider()` 的零件。`auth` 必填；动态列表靠 `refreshModels`。
+ */
 export interface CreateImagesProviderOptions {
 	id: string;
 	/** Display name. Default: `id`. */
@@ -247,7 +272,11 @@ export interface CreateImagesProviderOptions {
 	api: ProviderImages;
 }
 
-/** Builds an image-generation provider from parts. */
+/**
+ * Builds an image-generation provider from parts.
+ *
+ * 用零件组装图像 Provider。并发 refresh 共用一次 in-flight。
+ */
 export function createImagesProvider(input: CreateImagesProviderOptions): ImagesProvider {
 	let models = input.models;
 	let inflightRefresh: Promise<void> | undefined;

@@ -1,3 +1,9 @@
+/**
+ * In-memory CredentialStore used when the app does not inject persistence.
+ *
+ * 默认内存凭证库。按 Provider 串行写；应用应注入持久化实现。
+ */
+
 import { operationSignal, raceWithAbortSignal } from "../utils/abort.ts";
 import type { AuthOperationOptions, Credential, CredentialInfo, CredentialStore } from "./types.ts";
 
@@ -5,6 +11,8 @@ import type { AuthOperationOptions, Credential, CredentialInfo, CredentialStore 
  * Default in-memory credential store. Apps inject persistent stores.
  * Keyed by `Provider.id`, one credential per provider; see `CredentialStore`.
  * Writes are serialized per provider through a promise chain.
+ *
+ * 默认内存凭证库。按 `Provider.id` 一条；写操作按 Provider 串成 Promise 链。
  */
 export class InMemoryCredentialStore implements CredentialStore {
 	private credentials = new Map<string, Credential>();

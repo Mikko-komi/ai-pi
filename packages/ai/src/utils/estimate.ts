@@ -1,5 +1,16 @@
+/**
+ * Heuristic context-token estimates from reported usage and text length.
+ *
+ * 用最近一次适用 usage 加其后估算。没有 usage 则全文估算。约 4 字符 1 token。
+ */
+
 import type { AssistantMessage, Context, ImageContent, Message, TextContent, Tool, Usage } from "../types.ts";
 
+/**
+ * Combined provider usage plus a heuristic estimate of tokens after that usage.
+ *
+ * usageTokens 是最近适用块；trailingTokens 是其后估算。没有 usage 时 lastUsageIndex 为 null。
+ */
 export interface ContextUsageEstimate {
 	/** Estimated total context tokens. */
 	tokens: number;
@@ -14,6 +25,11 @@ export interface ContextUsageEstimate {
 const CHARS_PER_TOKEN = 4;
 const ESTIMATED_IMAGE_CHARS = 4800;
 
+/**
+ * Sum a Usage record into one context-token count.
+ *
+ * 优先 totalTokens；否则 input + output + cacheRead + cacheWrite。
+ */
 export function calculateContextTokens(usage: Usage): number {
 	return usage.totalTokens || usage.input + usage.output + usage.cacheRead + usage.cacheWrite;
 }
@@ -34,14 +50,29 @@ function estimateTextAndImageContentChars(content: string | Array<TextContent | 
 	return chars;
 }
 
+/**
+ * Estimate tokens from character length at 4 characters per token.
+ *
+ * 按 4 字符 1 token 向上取整。空串为 0。
+ */
 export function estimateTextTokens(text: string): number {
 	return Math.ceil(text.length / CHARS_PER_TOKEN);
 }
 
+/**
+ * Estimate tokens for string or mixed text/image content.
+ *
+ * 图按 4800 字符估。字符串内容按长度。
+ */
 export function estimateTextAndImageContentTokens(content: string | Array<TextContent | ImageContent>): number {
 	return Math.ceil(estimateTextAndImageContentChars(content) / CHARS_PER_TOKEN);
 }
 
+/**
+ * Estimate tokens for one message, including thinking and tool-call arguments.
+ *
+ * user / toolResult 走文本+图。assistant 含 thinking 和 tool 参数 JSON。
+ */
 export function estimateMessageTokens(message: Message): number {
 	let chars = 0;
 
@@ -111,6 +142,11 @@ function isMessageArray(value: Context | readonly Message[]): value is readonly 
 	return Array.isArray(value);
 }
 
+/**
+ * Estimate tokens for a Context or a bare message list.
+ *
+ * 有适用 usage 则只估其后消息；Context 还要加 system / tools，或 usage 之后新加的工具。
+ */
 export function estimateContextTokens(context: Context | readonly Message[]): ContextUsageEstimate {
 	if (isMessageArray(context)) return estimateMessages(context);
 

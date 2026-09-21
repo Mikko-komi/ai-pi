@@ -44,6 +44,10 @@ _Avoid_: drive 内部过程
 已完成：`packages/agent/src/harness/runtime/drive` 的过程导出。agent + coding-agent/src/core 的学习 JSDoc 到此结束。
 _Avoid_: 测试夹具, 类方法, 再导出
 
+**第九刀核心**:
+已完成：pi-ai 的公共合同（types / Models / auth / utils / compat / faux），不含生成目录和各厂商 API 适配器。
+_Avoid_: models.generated.ts, 厂商 *.models.ts, oauth 实现
+
 **AgentHarness**:
 agent-core 里按 lane 驱动持久化会话的门面，和旧的 `Agent` 循环并列，不替代 `AgentSession`。
 _Avoid_: Agent, AgentSession

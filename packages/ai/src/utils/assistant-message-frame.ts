@@ -1,9 +1,17 @@
+/**
+ * Compact, replayable assistant-message progress frames.
+ *
+ * 可重放的紧凑 assistant 进度帧。终态故意不在帧里，必须另存。
+ */
+
 import type { AssistantMessage, AssistantMessageEvent, TextContent, ThinkingContent, ToolCall } from "../types.ts";
 import { parseStreamingJson } from "./json-parse.ts";
 
 /**
  * Compact, replayable assistant-message progress. Terminal settlement is
  * intentionally excluded and must be persisted separately.
+ *
+ * 一条流的进度帧。不含 done/error；终态另存。
  */
 export type AssistantMessageFrame =
 	| { type: "start"; partial: AssistantMessage }
@@ -135,6 +143,8 @@ function isJsonPrefix(snapshot: unknown, current: unknown): boolean {
  * Encodes one assistant stream. `partial` remains a shared live accumulator;
  * the encoder uses per-block offsets to avoid replaying deltas already visible
  * when an older queued event is consumed.
+ *
+ * 编码一条 assistant 流。partial 是共享累加器；按块偏移跳过队列里已可见的 delta。终态事件返回 undefined。
  */
 export class AssistantMessageFrameEncoder {
 	private started = false;
@@ -368,6 +378,8 @@ function activeBlock(
 /**
  * Replay compact frames without mutating them. Returns `undefined` when the
  * iterable contains no start frame.
+ *
+ * 重放帧，不改输入。没有 start 帧返回 undefined。块必须按索引连续追加。
  */
 export function reduceAssistantMessageFrames(frames: Iterable<AssistantMessageFrame>): AssistantMessage | undefined {
 	let message: AssistantMessage | undefined;

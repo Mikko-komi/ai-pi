@@ -1,20 +1,34 @@
-// Shared normalization for provider HTTP error objects.
-//
-// Endpoints behind a proxy / gateway may return a non-2xx response whose body
-// the provider SDK cannot fold into `error.message`. The SDK error object still
-// carries the HTTP status and the raw/parsed body, but under SDK-specific field
-// names. Provider catch blocks that read only `error.message` therefore drop
-// the body and surface opaque messages like `"403 status code (no body)"` or
-// collapse to `"Unknown: UnknownError"`.
-//
-// `normalizeProviderError` probes the known SDK field shapes (Mistral,
-// `openai`, `@google/genai`, AWS Bedrock) and returns a struct each provider
-// composes into its display string. The `messageCarriesBody` flag captures the
-// Anthropic / `@google/genai` happy path where the SDK already folded the body
-// into the message, so providers can preserve it without double-printing.
+/**
+ * Shared normalization for provider HTTP error objects.
+ *
+ * Endpoints behind a proxy / gateway may return a non-2xx response whose body
+ * the provider SDK cannot fold into `error.message`. The SDK error object still
+ * carries the HTTP status and the raw/parsed body, but under SDK-specific field
+ * names. Provider catch blocks that read only `error.message` therefore drop
+ * the body and surface opaque messages like `"403 status code (no body)"` or
+ * collapse to `"Unknown: UnknownError"`.
+ *
+ * `normalizeProviderError` probes the known SDK field shapes (Mistral,
+ * `openai`, `@google/genai`, AWS Bedrock) and returns a struct each provider
+ * composes into its display string. The `messageCarriesBody` flag captures the
+ * Anthropic / `@google/genai` happy path where the SDK already folded the body
+ * into the message, so providers can preserve it without double-printing.
+ *
+ * 把各 SDK 错误对象收成统一结构。message 已含 body 则不再复打。
+ */
 
+/**
+ * Character cap for extracted provider error bodies.
+ *
+ * body 最多 4000 字符。超了截断。
+ */
 export const MAX_PROVIDER_ERROR_BODY_CHARS = 4000;
 
+/**
+ * Unified HTTP error fields extracted from provider SDK error objects.
+ *
+ * 从 SDK 错误抽出的 status / body / message。messageCarriesBody 为真则不要再拼 body。
+ */
 export interface NormalizedProviderError {
 	/** HTTP status code, when one could be extracted from the SDK error object. */
 	status?: number;
@@ -35,6 +49,11 @@ type SdkErrorShape = Error & {
 	$response?: { statusCode?: unknown; body?: unknown };
 };
 
+/**
+ * Probe known SDK error field shapes and return a normalized struct.
+ *
+ * 非 Error 只 stringify。body 已在 message 里则 messageCarriesBody 为真。
+ */
 export function normalizeProviderError(error: unknown): NormalizedProviderError {
 	if (!(error instanceof Error)) {
 		return { message: safeJsonStringify(error), messageCarriesBody: false };
@@ -124,6 +143,8 @@ function isPlainNonEmptyObject(value: unknown): boolean {
  *
  * - no prefix: `"<status>: <body>"`
  * - prefix:    `"<prefix> (<status>): <body>"`
+ *
+ * message 已带 body 或抽不到 status/body 则用 message。否则拼 status 和 body，可选前缀。
  */
 export function formatProviderError(norm: NormalizedProviderError, prefix?: string): string {
 	if (norm.messageCarriesBody || norm.status === undefined || norm.body === undefined) {
@@ -134,11 +155,21 @@ export function formatProviderError(norm: NormalizedProviderError, prefix?: stri
 	return prefix !== undefined ? `${prefix} (${norm.status}): ${norm.body}` : `${norm.status}: ${norm.body}`;
 }
 
+/**
+ * Truncate error text and mark how many characters were dropped.
+ *
+ * 不超过上限原样返回。超了加 truncated 标记。
+ */
 export function truncateErrorText(text: string, maxChars: number): string {
 	if (text.length <= maxChars) return text;
 	return `${text.slice(0, maxChars)}... [truncated ${text.length - maxChars} chars]`;
 }
 
+/**
+ * JSON.stringify that never throws.
+ *
+ * 循环引用等失败时退回 String(value)。undefined 也走 String。
+ */
 export function safeJsonStringify(value: unknown): string {
 	try {
 		const serialized = JSON.stringify(value);

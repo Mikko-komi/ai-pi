@@ -1,3 +1,9 @@
+/**
+ * Discover API keys from known environment variables.
+ *
+ * 从已知环境变量找 API key。环境凭证（AWS/ADC）不算 key 列表，但 `getEnvApiKey` 可报已认证。
+ */
+
 // NEVER convert to top-level imports - breaks browser/Vite builds
 let _existsSync: typeof import("node:fs").existsSync | null = null;
 let _homedir: typeof import("node:os").homedir | null = null;
@@ -26,8 +32,23 @@ if (typeof process !== "undefined" && (process.versions?.node || process.version
 import type { KnownProvider, ProviderEnv } from "./types.ts";
 import { getProviderEnvValue } from "./utils/provider-env.ts";
 
+/**
+ * Anthropic bearer-token env name. Listed by `findEnvKeys`, skipped by `getEnvApiKey`.
+ *
+ * Anthropic Bearer token 环境名。出现在发现列表里，但请求不能当 apiKey 用。
+ */
 export const ANTHROPIC_AUTH_TOKEN_ENV = "ANTHROPIC_AUTH_TOKEN";
+/**
+ * Anthropic OAuth-token environment variable name.
+ *
+ * Anthropic OAuth token 环境名。
+ */
 export const ANTHROPIC_OAUTH_TOKEN_ENV = "ANTHROPIC_OAUTH_TOKEN";
+/**
+ * Anthropic API-key environment variable name.
+ *
+ * Anthropic API key 环境名。
+ */
 export const ANTHROPIC_API_KEY_ENV = "ANTHROPIC_API_KEY";
 
 let cachedVertexAdcCredentialsExists: boolean | null = null;
@@ -125,6 +146,8 @@ function getApiKeyEnvVars(provider: string): readonly string[] | undefined {
  * This only reports actual API key variables. It intentionally excludes ambient
  * credential sources such as AWS profiles, AWS IAM credentials, and Google
  * Application Default Credentials.
+ *
+ * 找已配置的 API key 环境变量。不含 AWS profile / IAM / Google ADC。
  */
 export function findEnvKeys(provider: KnownProvider, env?: ProviderEnv): string[] | undefined;
 export function findEnvKeys(provider: string, env?: ProviderEnv): string[] | undefined;
@@ -140,6 +163,8 @@ export function findEnvKeys(provider: string, env?: ProviderEnv): string[] | und
  * Get API key for provider from known environment variables, e.g. OPENAI_API_KEY.
  *
  * Will not return API keys for providers that require OAuth tokens.
+ *
+ * 从已知环境变量取 API key。OAuth-only 不返回；Vertex/Bedrock 环境凭证返回 `"<authenticated>"`。
  */
 export function getEnvApiKey(provider: KnownProvider, env?: ProviderEnv): string | undefined;
 export function getEnvApiKey(provider: string, env?: ProviderEnv): string | undefined;

@@ -1,8 +1,24 @@
+/**
+ * Merge optional AbortSignals and clean up the listeners used to combine them.
+ *
+ * 把多个可选 AbortSignal 合成一个。无信号则 cleanup 为空；单信号原样返回；多信号任一 abort 即停，cleanup 必须卸监听。
+ */
+
+/**
+ * Combined signal plus the cleanup that removes merge listeners.
+ *
+ * 合成后的 signal 和卸监听的 cleanup。没有活跃源时 signal 可缺。
+ */
 export interface CombinedAbortSignal {
 	signal?: AbortSignal;
 	cleanup: () => void;
 }
 
+/**
+ * Merge undefined-tolerant AbortSignals into one CombinedAbortSignal.
+ *
+ * 丢掉 undefined。0 个源无 signal；1 个源不包一层；多个源用新 controller，cleanup 卸掉全部监听。
+ */
 export function combineAbortSignals(signals: readonly (AbortSignal | undefined)[]): CombinedAbortSignal {
 	const activeSignals = signals.filter((signal): signal is AbortSignal => signal !== undefined);
 	if (activeSignals.length === 0) {

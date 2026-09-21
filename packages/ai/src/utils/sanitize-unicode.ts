@@ -1,4 +1,10 @@
 /**
+ * Strip unpaired UTF-16 surrogates before JSON serialization.
+ *
+ * 去掉落单代理项。成对 emoji 不动。很多提供方 JSON 会因落单代理炸掉。
+ */
+
+/**
  * Removes unpaired Unicode surrogate characters from a string.
  *
  * Unpaired surrogates (high surrogates 0xD800-0xDBFF without matching low surrogates 0xDC00-0xDFFF,
@@ -17,6 +23,8 @@
  * // Unpaired high surrogate is removed
  * const unpaired = String.fromCharCode(0xD83D); // high surrogate without low
  * sanitizeSurrogates(`Text ${unpaired} here`) // => "Text  here"
+ *
+ * 高代理后无低代理、或低代理前无高代理，一律删。成对保留。
  */
 export function sanitizeSurrogates(text: string): string {
 	// Replace unpaired high surrogates (0xD800-0xDBFF not followed by low surrogate)

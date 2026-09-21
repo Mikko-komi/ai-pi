@@ -1,3 +1,9 @@
+/**
+ * Built-in provider factories and typed reads of the generated catalog.
+ *
+ * 内建 Provider 工厂和生成目录的类型化读取。每次调用都新造实例。
+ */
+
 import { createImagesModels, type ImagesProvider, type MutableImagesModels } from "../images-models.ts";
 import { MODELS } from "../models.generated.ts";
 import { type CreateModelsOptions, createModels, type MutableModels, type Provider } from "../models.ts";
@@ -47,9 +53,13 @@ import { zaiCodingCnProvider } from "./zai-coding-cn.ts";
 
 export { radiusProvider };
 
-/** Providers present in the generated catalog. `KnownProvider` additionally
+/**
+ * Providers present in the generated catalog. `KnownProvider` additionally
  * includes purely dynamic providers (e.g. "radius") that have no static
- * catalog entry. */
+ * catalog entry.
+ *
+ * 生成目录里出现的 Provider。`KnownProvider` 还包含无静态条目的纯动态 Provider。
+ */
 export type BuiltinProvider = keyof typeof MODELS;
 
 type BuiltinModelApi<
@@ -57,7 +67,11 @@ type BuiltinModelApi<
 	TModelId extends keyof (typeof MODELS)[TProvider],
 > = (typeof MODELS)[TProvider][TModelId] extends { api: infer TApi } ? (TApi extends Api ? TApi : never) : never;
 
-/** Typed read of the generated built-in catalog. */
+/**
+ * Typed read of the generated built-in catalog.
+ *
+ * 类型化读取生成目录里的一条内建模型。
+ */
 export function getBuiltinModel<TProvider extends BuiltinProvider, TModelId extends keyof (typeof MODELS)[TProvider]>(
 	provider: TProvider,
 	modelId: TModelId,
@@ -66,16 +80,30 @@ export function getBuiltinModel<TProvider extends BuiltinProvider, TModelId exte
 	return models?.[modelId as string] as Model<BuiltinModelApi<TProvider, TModelId>>;
 }
 
+/**
+ * Provider ids present in the generated built-in catalog.
+ *
+ * 生成目录里的 provider id。不含纯动态、无静态条目的 Provider。
+ */
 export function getBuiltinProviders(): BuiltinProvider[] {
 	return Object.keys(MODELS) as BuiltinProvider[];
 }
 
-/** Generation timestamp shared by all built-in provider catalogs. */
+/**
+ * Generation timestamp shared by all built-in provider catalogs.
+ *
+ * 全部内建目录共享的生成时间戳。解析失败则 undefined。
+ */
 export function getBuiltinModelDataGeneratedAt(): number | undefined {
 	const generatedAt = Date.parse(modelDataManifest.generatedAt);
 	return Number.isNaN(generatedAt) ? undefined : generatedAt;
 }
 
+/**
+ * All generated built-in models for one catalog provider.
+ *
+ * 某个生成目录 Provider 的全部静态模型。
+ */
 export function getBuiltinModels<TProvider extends BuiltinProvider>(
 	provider: TProvider,
 ): Model<BuiltinModelApi<TProvider, keyof (typeof MODELS)[TProvider]>>[] {
@@ -85,7 +113,11 @@ export function getBuiltinModels<TProvider extends BuiltinProvider>(
 		: [];
 }
 
-/** All built-in providers, freshly constructed. */
+/**
+ * All built-in providers, freshly constructed.
+ *
+ * 全部内建 Provider，每次新造。
+ */
 export function builtinProviders(): Provider[] {
 	return [
 		amazonBedrockProvider(),
@@ -131,7 +163,11 @@ export function builtinProviders(): Provider[] {
 	];
 }
 
-/** A `Models` collection with every built-in provider registered. */
+/**
+ * A `Models` collection with every built-in provider registered.
+ *
+ * 已登记全部内建 Provider 的 `Models` 集合。
+ */
 export function builtinModels(options?: CreateModelsOptions): MutableModels {
 	const models = createModels(options);
 	for (const provider of builtinProviders()) {
@@ -140,12 +176,20 @@ export function builtinModels(options?: CreateModelsOptions): MutableModels {
 	return models;
 }
 
-/** All built-in image-generation providers, freshly constructed. */
+/**
+ * All built-in image-generation providers, freshly constructed.
+ *
+ * 全部内建图像 Provider，每次新造。
+ */
 export function builtinImagesProviders(): ImagesProvider[] {
 	return [openrouterImagesProvider()];
 }
 
-/** An `ImagesModels` collection with every built-in image-generation provider registered. */
+/**
+ * An `ImagesModels` collection with every built-in image-generation provider registered.
+ *
+ * 已登记全部内建图像 Provider 的 `ImagesModels` 集合。
+ */
 export function builtinImagesModels(options?: CreateModelsOptions): MutableImagesModels {
 	const models = createImagesModels(options);
 	for (const provider of builtinImagesProviders()) {

@@ -1,8 +1,16 @@
+/**
+ * Auth contracts: credentials, stores, login interaction, and provider auth methods.
+ *
+ * 鉴权合同。凭证、存储、登录交互和 Provider 的 apiKey/oauth 方法。
+ */
+
 import type { ProviderEnv, ProviderHeaders } from "../types.ts";
 
 /**
  * Request auth for a single model request. If a value cannot be expressed as
  * `apiKey`, `headers`, or `baseUrl`, it is provider config, not auth.
+ *
+ * 单次请求鉴权。表达不了的东西是 Provider 配置，不是 auth。
  */
 export interface ModelAuth {
 	apiKey?: string;
@@ -13,6 +21,8 @@ export interface ModelAuth {
 /**
  * Stored api-key credential. `env` holds provider-scoped environment/config
  * values such as Cloudflare account/gateway ids.
+ *
+ * 已存的 api-key 凭证。`env` 放 Provider 范围配置（如 Cloudflare 账号）。
  */
 export interface ApiKeyCredential {
 	type: "api_key";
@@ -20,7 +30,11 @@ export interface ApiKeyCredential {
 	env?: ProviderEnv;
 }
 
-/** OAuth token data returned by extension compatibility flows. */
+/**
+ * OAuth token data returned by extension compatibility flows.
+ *
+ * 扩展兼容流返回的 OAuth token 数据。
+ */
 export interface OAuthCredentials {
 	refresh: string;
 	access: string;
@@ -28,21 +42,37 @@ export interface OAuthCredentials {
 	[key: string]: unknown;
 }
 
-/** Stored canonical OAuth credential. */
+/**
+ * Stored canonical OAuth credential.
+ *
+ * 已存的规范 OAuth 凭证。带 `type: "oauth"`。
+ */
 export interface OAuthCredential extends OAuthCredentials {
 	type: "oauth";
 }
 
-/** One type-tagged credential per provider — the shape of today's auth.json. */
+/**
+ * One type-tagged credential per provider — the shape of today's auth.json.
+ *
+ * 每个 Provider 一条带类型标签的凭证，即今天 auth.json 的形状。
+ */
 export type Credential = ApiKeyCredential | OAuthCredential;
 
-/** Non-secret credential metadata for account/status enumeration. */
+/**
+ * Non-secret credential metadata for account/status enumeration.
+ *
+ * 非密钥的凭证元数据，给账号/状态枚举。
+ */
 export interface CredentialInfo {
 	providerId: string;
 	type: Credential["type"];
 }
 
-/** Optional cancellation for public auth and credential operations. */
+/**
+ * Optional cancellation for public auth and credential operations.
+ *
+ * 公开鉴权与凭证操作的可选取消。
+ */
 export interface AuthOperationOptions {
 	signal?: AbortSignal;
 }
@@ -61,6 +91,8 @@ export interface AuthOperationOptions {
  * `ModelsError` with code "auth". Best-effort stores that serve an in-memory
  * view and record persistence errors internally (like coding-agent's
  * AuthStorage) are valid implementations.
+ *
+ * 应用持有的凭证库。按 `Provider.id` 一条；`modify` 是唯一写路径，OAuth refresh 必须在锁里跑。
  */
 export interface CredentialStore {
 	/**
@@ -93,14 +125,22 @@ export interface CredentialStore {
 	delete(providerId: string, options?: AuthOperationOptions): Promise<void>;
 }
 
-/** Environment access for auth resolution. Injectable for tests and browsers. */
+/**
+ * Environment access for auth resolution. Injectable for tests and browsers.
+ *
+ * 鉴权解析用的环境访问。可注入，方便测试和浏览器。
+ */
 export interface AuthContext {
 	env(name: string): Promise<string | undefined>;
 	/** Check whether a file exists. Supports a leading `~`. Always false in browsers. */
 	fileExists(path: string): Promise<boolean>;
 }
 
-/** Result of resolving auth for a model. */
+/**
+ * Result of resolving auth for a model.
+ *
+ * 解析出的请求鉴权。`source` 给状态 UI。
+ */
 export interface AuthResult {
 	auth: ModelAuth;
 	/** Provider-scoped environment/config values resolved from credentials and ambient context. */
@@ -109,11 +149,21 @@ export interface AuthResult {
 	source?: string;
 }
 
+/**
+ * Side-effect-free auth availability for status UI.
+ *
+ * 无副作用的鉴权可用性。给状态展示，不刷新 OAuth。
+ */
 export interface AuthCheck {
 	source?: string;
 	type: "api_key" | "oauth";
 }
 
+/**
+ * Login/auth method kind a provider may expose.
+ *
+ * Provider 可暴露的登录/鉴权种类。
+ */
 export type AuthType = "api_key" | "oauth";
 
 /**
@@ -121,6 +171,8 @@ export type AuthType = "api_key" | "oauth";
  * pending prompt when an out-of-band event resolves the step, e.g. a
  * `manual_code` prompt raced against a callback server, aborted when the
  * callback wins.
+ *
+ * 登录时给用户的提示。`signal` 可在带外事件赢了时取消挂起的 prompt。
  */
 export type AuthPrompt = { signal?: AbortSignal } & (
 	| { type: "text"; message: string; placeholder?: string }
@@ -129,11 +181,21 @@ export type AuthPrompt = { signal?: AbortSignal } & (
 	| { type: "manual_code"; message: string; placeholder?: string }
 );
 
+/**
+ * Optional link attached to an auth info event.
+ *
+ * 鉴权 info 事件上的可选链接。
+ */
 export interface AuthInfoLink {
 	url: string;
 	label?: string;
 }
 
+/**
+ * Progress events a login flow may emit to the UI.
+ *
+ * 登录流发给 UI 的进度事件。不含密钥。
+ */
 export type AuthEvent =
 	| { type: "info"; message: string; links?: readonly AuthInfoLink[] }
 	| { type: "auth_url"; url: string; instructions?: string }
@@ -152,6 +214,8 @@ export type AuthEvent =
  * `prompt()` returns the entered/selected string (`select` returns the option
  * id). Rejects on cancel/abort. `signal` aborts the whole login flow;
  * per-prompt cancellation uses `AuthPrompt.signal`.
+ *
+ * 登录交互回调。api-key 和 OAuth 共用；`prompt` 取消则 reject。
  */
 export interface AuthInteraction {
 	signal?: AbortSignal;
@@ -160,12 +224,18 @@ export interface AuthInteraction {
 	notify(event: AuthEvent): void;
 }
 
-/** Normalized interaction passed to provider login implementations. */
+/**
+ * Normalized interaction passed to provider login implementations.
+ *
+ * 交给 Provider login 的规范化交互。`signal` 必有。
+ */
 export type ProviderAuthInteraction = AuthInteraction & { signal: AbortSignal };
 
 /**
  * Api-key auth: stored key/provider env plus ambient sources (env vars, AWS
  * profiles, ADC files). Ambient-only providers omit `login`.
+ *
+ * Api-key 鉴权：已存 key/环境加上环境变量、AWS、ADC。纯环境 Provider 可省略 `login`。
  */
 export interface ApiKeyAuth {
 	/** Display name, e.g. "Anthropic API key". */
@@ -202,6 +272,8 @@ export interface ApiKeyAuth {
  * OAuth auth. The `refresh`/`toAuth` split lets `Models` own the locked
  * refresh pattern: `refresh` produces a credential, `toAuth` derives request
  * auth from whatever credential ends up stored.
+ *
+ * OAuth 鉴权。`refresh` 产出凭证，`toAuth` 从已存凭证派生请求鉴权；锁由 `Models` 持有。
  */
 export interface OAuthAuth {
 	/** Display name, e.g. "Anthropic (Claude Pro/Max)". */
@@ -233,6 +305,8 @@ export interface OAuthAuth {
  * Provider auth. At least one of `apiKey`/`oauth` must be present: even
  * ambient-credential providers and keyless local servers provide `apiKey`
  * auth whose `resolve()` reports whether the provider is configured.
+ *
+ * Provider 鉴权。`apiKey`/`oauth` 至少一个；无密钥本地服务也要有能报告是否已配置的 `apiKey`。
  */
 export interface ProviderAuth {
 	apiKey?: ApiKeyAuth;

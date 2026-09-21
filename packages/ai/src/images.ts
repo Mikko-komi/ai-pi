@@ -1,3 +1,9 @@
+/**
+ * Dispatch image generation through the registered Images API provider.
+ *
+ * 按 `model.api` 分发图像生成。未注册的 api 抛错。
+ */
+
 import "./providers/images/register-builtins.ts";
 
 import { getImagesApiProvider } from "./images-api-registry.ts";
@@ -11,6 +17,11 @@ function resolveImagesApiProvider(api: ImagesApi) {
 	return provider;
 }
 
+/**
+ * Generate images via the registered API implementation for `model.api`.
+ *
+ * 按 `model.api` 找实现并生成。没有注册则抛。
+ */
 export async function generateImages<TApi extends ImagesApi>(
 	model: ImagesModel<TApi>,
 	context: ImagesContext,

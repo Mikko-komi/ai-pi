@@ -1,3 +1,9 @@
+/**
+ * Interruptible OpenAI/Anthropic-style request retry.
+ *
+ * 复现 SDK 重试策略，但睡眠可被 AbortSignal 打断。调用方必须 maxRetries: 0 再包这层。
+ */
+
 const DEFAULT_MAX_RETRY_DELAY_MS = 60_000;
 
 interface ProviderRetryOptions {
@@ -101,6 +107,8 @@ function abortableSleep(ms: number, signal?: AbortSignal): Promise<void> {
  * wrap the request with this helper. Provider-requested delays above
  * `maxRetryDelayMs` fail immediately (60 seconds by default); set it to zero to
  * disable the limit.
+ *
+ * 每次重试是新请求。超 maxRetryDelayMs 立刻失败；0 表示不封顶。不可重试或预算用尽原样抛。
  */
 export async function retryProviderRequest<T>(
 	request: () => Promise<T>,

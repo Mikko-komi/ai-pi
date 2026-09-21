@@ -1,3 +1,9 @@
+/**
+ * Push-based async iterables with a final result promise.
+ *
+ * 可 push 的异步迭代。完成事件解开 result()；end 后不再投递。
+ */
+
 import type { AssistantMessage, AssistantMessageEvent } from "../types.ts";
 
 class FifoQueue<T> {
@@ -22,7 +28,11 @@ class FifoQueue<T> {
 	}
 }
 
-// Generic event stream class for async iteration
+/**
+ * Generic event stream class for async iteration.
+ *
+ * 生产者 push，消费者 for-await。isComplete 为真时解开 result。done 后再 push 丢弃。
+ */
 export class EventStream<T, R = T> implements AsyncIterable<T> {
 	private queue = new FifoQueue<T>();
 	private waiting = new FifoQueue<(value: IteratorResult<T>) => void>();
@@ -88,6 +98,11 @@ export class EventStream<T, R = T> implements AsyncIterable<T> {
 	}
 }
 
+/**
+ * Assistant-message event stream that settles on done or error.
+ *
+ * done 取 message，error 取 error。其它事件不能当终态。
+ */
 export class AssistantMessageEventStream extends EventStream<AssistantMessageEvent, AssistantMessage> {
 	constructor() {
 		super(
@@ -104,7 +119,11 @@ export class AssistantMessageEventStream extends EventStream<AssistantMessageEve
 	}
 }
 
-/** Factory function for AssistantMessageEventStream (for use in extensions) */
+/**
+ * Factory function for AssistantMessageEventStream (for use in extensions)
+ *
+ * 给扩展用的工厂。每次新实例。
+ */
 export function createAssistantMessageEventStream(): AssistantMessageEventStream {
 	return new AssistantMessageEventStream();
 }

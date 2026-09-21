@@ -1,3 +1,9 @@
+/**
+ * Return streams immediately while async setup runs behind them.
+ *
+ * 同步交出 stream，认证/动态 import 在后面跑。setup 失败用 error 事件收口。
+ */
+
 import type { Api, AssistantMessage, AssistantMessageEvent, Model, ProviderStreams } from "../types.ts";
 import { AssistantMessageEventStream } from "../utils/event-stream.ts";
 
@@ -42,6 +48,8 @@ async function forwardStream(
  * Returns a stream synchronously while running async setup (auth resolution,
  * lazy module loading) behind it. Setup failures terminate the stream with an
  * error event.
+ *
+ * 立刻返回 outer。setup 失败推 error 并 end。成功则转发内层事件和 result。
  */
 export function lazyStream(
 	model: Model<Api>,
@@ -61,15 +69,22 @@ export function lazyStream(
 }
 
 /**
- * Wraps a dynamically imported API implementation module as `ProviderStreams`.
- * The module loads on first stream call; the host's import cache deduplicates
- * loads. Load failures terminate the returned stream with an error event.
+ * Which deferred operations a lazy API wrapper should expose.
+ *
+ * 决定包装后的 ProviderStreams 要不要带 fetchDeferred / cancelDeferred。没标就没有。
  */
 export interface LazyApiCapabilities {
 	fetchDeferred?: boolean;
 	cancelDeferred?: boolean;
 }
 
+/**
+ * Wraps a dynamically imported API implementation module as `ProviderStreams`.
+ * The module loads on first stream call; the host's import cache deduplicates
+ * loads. Load failures terminate the returned stream with an error event.
+ *
+ * 第一次 stream 才 load 实现模块。宿主 import 缓存去重。缺能力却被调用则抛。
+ */
 export function lazyApi(load: () => Promise<ProviderStreams>, capabilities?: LazyApiCapabilities): ProviderStreams {
 	const api: ProviderStreams = {
 		stream: (model, context, options) =>

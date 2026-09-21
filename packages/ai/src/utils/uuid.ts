@@ -1,10 +1,20 @@
+/**
+ * Time-ordered UUIDv7 generator.
+ *
+ * 时间有序 UUIDv7。自增序列保证同毫秒不撞；显式 timestamp 给 follower 用。
+ */
+
 const MAX_UUID_V7_TIMESTAMP = 0xffffffffffff;
 const MAX_SEQUENCE = (1n << 41n) - 1n;
 
 let lastOrdinaryTimestamp = -1;
 let sequence: bigint | undefined;
 
-/** Generate a time-ordered UUIDv7. A supplied timestamp is preserved for follower ids. */
+/**
+ * Generate a time-ordered UUIDv7. A supplied timestamp is preserved for follower ids.
+ *
+ * 不传 timestamp 则单调不回拨。序列耗尽抛 RangeError。非法 timestamp 抛。
+ */
 export function uuidv7(timestampMs?: number): string {
 	const requestedTimestamp = timestampMs ?? Date.now();
 	if (!Number.isInteger(requestedTimestamp) || requestedTimestamp < 0 || requestedTimestamp > MAX_UUID_V7_TIMESTAMP) {

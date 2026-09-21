@@ -1,3 +1,9 @@
+/**
+ * TypeBox helpers for provider-safe string enums.
+ *
+ * 给不支持 anyOf/const 的提供方用 string+enum schema。
+ */
+
 import { type TUnsafe, Type } from "typebox";
 
 /**
@@ -10,6 +16,8 @@ import { type TUnsafe, Type } from "typebox";
  * });
  *
  * type Operation = Static<typeof OperationSchema>; // "add" | "subtract" | "multiply" | "divide"
+ *
+ * 产出 type:string + enum，不是 anyOf const。T 的成员就是枚举值。
  */
 export function StringEnum<T extends readonly string[]>(
 	values: T,

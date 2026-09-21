@@ -1,3 +1,9 @@
+/**
+ * Validate and coerce tool-call arguments against TypeBox or JSON Schema.
+ *
+ * 按工具 schema 校验并尽量 coerce。找不到工具或校验失败抛错。
+ */
+
 import { Compile } from "typebox/compile";
 import type { TLocalizedValidationError } from "typebox/error";
 import { Value } from "typebox/value";
@@ -298,6 +304,8 @@ function formatValidationPath(error: TLocalizedValidationError): string {
  * @param toolCall The tool call from the LLM
  * @returns The validated arguments
  * @throws Error if tool is not found or validation fails
+ *
+ * 按名找工具再校验。找不到抛。返回值是校验后的参数。
  */
 export function validateToolCall(tools: Tool[], toolCall: ToolCall): any {
 	const tool = tools.find((t) => t.name === toolCall.name);
@@ -313,6 +321,8 @@ export function validateToolCall(tools: Tool[], toolCall: ToolCall): any {
  * @param toolCall The tool call from the LLM
  * @returns The validated (and potentially coerced) arguments
  * @throws Error with formatted message if validation fails
+ *
+ * 先去可选 null、Convert，非 TypeBox 再 JSON Schema coerce。失败抛带路径的 Error。
  */
 export function validateToolArguments(tool: Tool, toolCall: ToolCall): any {
 	const args = structuredClone(toolCall.arguments);

@@ -1,3 +1,9 @@
+/**
+ * Resolve provider environment values, including a Bun sandbox fallback.
+ *
+ * 先 scoped env，再 process.env，再 Bun 沙箱 /proc。ai 包不能依赖 coding-agent 的 restore。
+ */
+
 import type { ProviderEnv } from "../types.ts";
 
 let procEnvCache: Map<string, string> | null = null;
@@ -41,6 +47,8 @@ function getBunSandboxEnvValue(name: string): string | undefined {
 /**
  * Resolve a provider env value from scoped overrides, normal process.env, then
  * the duplicated Bun sandbox fallback for direct pi-ai consumers.
+ *
+ * 任一层有值即停。无 process 时跳过 process.env。
  */
 export function getProviderEnvValue(name: string, env?: ProviderEnv): string | undefined {
 	return (

@@ -1,3 +1,9 @@
+/**
+ * Assistant-turn retry policy and transient-error classifier.
+ *
+ * 策略和分类器放一起。abort 不重试；额度/账单耗尽不重试。
+ */
+
 import type { AssistantMessage } from "../types.ts";
 
 function buildProviderErrorPattern(patterns: readonly string[]): RegExp {
@@ -95,6 +101,8 @@ const RETRYABLE_PROVIDER_ERROR_PATTERN = buildProviderErrorPattern([
  * Matches `settings.retry` (`enabled`, `maxRetries`, `baseDelayMs`, `maxAgentDelayMs`) in coding-agent; kept
  * here so the classifier and the policy-driven retry loop live together and stay reusable
  * by the SDK and other callers.
+ *
+ * 对应 settings.retry。enabled 为假或 maxRetries=0 等于不重试。初次调用不算 retry。
  */
 export interface RetryPolicy {
 	enabled: boolean;
@@ -106,15 +114,29 @@ export interface RetryPolicy {
 	maxAgentDelayMs?: number;
 }
 
+/**
+ * Default cap for one agent-level retry delay.
+ *
+ * 单次退避默认上限 60 秒。
+ */
 export const DEFAULT_MAX_AGENT_RETRY_DELAY_MS = 60_000;
 
+/**
+ * Compute one exponential backoff delay, then clamp it to the policy cap.
+ *
+ * `baseDelayMs * 2^(attempt-1)`，再夹到 maxAgentDelayMs。溢出用 MAX_SAFE_INTEGER。
+ */
 export function retryDelayMs(policy: Pick<RetryPolicy, "baseDelayMs" | "maxAgentDelayMs">, attempt: number): number {
 	const delay = policy.baseDelayMs * 2 ** Math.max(0, attempt - 1);
 	const safeDelay = Number.isSafeInteger(delay) ? delay : Number.MAX_SAFE_INTEGER;
 	return Math.min(safeDelay, policy.maxAgentDelayMs ?? DEFAULT_MAX_AGENT_RETRY_DELAY_MS);
 }
 
-/** Optional callbacks emitted by {@link retryAssistantCall} around each retry. */
+/**
+ * Optional callbacks emitted by {@link retryAssistantCall} around each retry.
+ *
+ * 调度、开打、结束各一次。attempt 从 1 计。
+ */
 export interface RetryCallbacks {
 	/** Emitted before the backoff sleep of each retry attempt (1-indexed). */
 	onRetryScheduled?: (
@@ -170,6 +192,8 @@ function sleep(ms: number, signal?: AbortSignal): Promise<void> {
  *
  * When `policy` is undefined or disabled, the first response is returned unchanged
  * (equivalent to calling `produce()` directly).
+ *
+ * 成功或不可重试立刻返回。abort 一律收成 aborted 消息。policy 缺或关则只打一次。
  */
 export async function retryAssistantCall(
 	produce: () => Promise<AssistantMessage>,
@@ -231,6 +255,8 @@ export async function retryAssistantCall(
  * This does not implement retry policy. Callers should first handle context
  * overflow separately, then apply their own retry budget, backoff, and reporting
  * before restarting the assistant turn.
+ *
+ * 只看 stopReason=error 的文案。额度/账单先否；再匹配瞬时模式。不做重试预算。
  */
 export function isRetryableAssistantError(message: AssistantMessage): boolean {
 	if (message.stopReason !== "error" || !message.errorMessage) return false;

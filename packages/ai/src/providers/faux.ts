@@ -1,3 +1,9 @@
+/**
+ * Scripted faux provider for tests: queued responses, deferred handles, and token streaming.
+ *
+ * 测试用脚本 Provider。响应按队列消耗；可模拟 deferred 与按 token 流式输出。
+ */
+
 import { createProvider, type Provider } from "../models.ts";
 import type {
 	AssistantMessage,
@@ -37,6 +43,11 @@ const DEFAULT_USAGE: Usage = {
 	cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, total: 0 },
 };
 
+/**
+ * Partial model fields accepted when constructing a faux catalog entry.
+ *
+ * 构造 faux 目录条目的部分字段。其余用默认值。
+ */
 export interface FauxModelDefinition {
 	id: string;
 	name?: string;
@@ -47,16 +58,36 @@ export interface FauxModelDefinition {
 	maxTokens?: number;
 }
 
+/**
+ * Assistant content a scripted faux response may emit.
+ *
+ * faux 脚本回复能发出的 assistant 内容块。
+ */
 export type FauxContentBlock = TextContent | ThinkingContent | ToolCall;
 
+/**
+ * Build a text content block for a faux assistant message.
+ *
+ * 构造 faux 文本块。
+ */
 export function fauxText(text: string): TextContent {
 	return { type: "text", text };
 }
 
+/**
+ * Build a thinking content block for a faux assistant message.
+ *
+ * 构造 faux thinking 块。
+ */
 export function fauxThinking(thinking: string): ThinkingContent {
 	return { type: "thinking", thinking };
 }
 
+/**
+ * Build a tool-call content block for a faux assistant message.
+ *
+ * 构造 faux 工具调用块。未给 id 则随机。
+ */
 export function fauxToolCall(name: string, arguments_: ToolCall["arguments"], options: { id?: string } = {}): ToolCall {
 	return {
 		type: "toolCall",
@@ -73,6 +104,11 @@ function normalizeFauxAssistantContent(content: string | FauxContentBlock | Faux
 	return Array.isArray(content) ? content : [content];
 }
 
+/**
+ * Build a complete assistant message with faux provider/model defaults.
+ *
+ * 构造完整 assistant 消息。api/provider/model 用 faux 默认值。
+ */
 export function fauxAssistantMessage(
 	content: string | FauxContentBlock | FauxContentBlock[],
 	options: {
@@ -98,12 +134,22 @@ export function fauxAssistantMessage(
 	};
 }
 
+/**
+ * Mutable counters observed by tests and response factories.
+ *
+ * 测试和 factory 观察的计数。每次 stream/fetch/cancel 都会改。
+ */
 export interface FauxProviderState {
 	callCount: number;
 	deferredFetchCount: number;
 	cancelledDeferred: DeferredHandle[];
 }
 
+/**
+ * Function that produces the next scripted assistant message.
+ *
+ * 按当前 context/state 现算下一条脚本回复。
+ */
 export type FauxResponseFactory = (
 	context: Context,
 	options: SimpleStreamOptions | undefined,
@@ -111,8 +157,18 @@ export type FauxResponseFactory = (
 	model: Model<string>,
 ) => AssistantMessage | Promise<AssistantMessage>;
 
+/**
+ * One queued faux reply: a message or a factory.
+ *
+ * 队列里的一步回复：现成消息或 factory。
+ */
 export type FauxResponseStep = AssistantMessage | FauxResponseFactory;
 
+/**
+ * Construction options for a faux provider or compat registration.
+ *
+ * 构造 faux Provider 的选项。`api` 默认随机，避免测试互相抢注册表。
+ */
 export interface RegisterFauxProviderOptions {
 	api?: string;
 	provider?: string;
@@ -129,6 +185,11 @@ export interface RegisterFauxProviderOptions {
 	};
 }
 
+/**
+ * Compat-registry handle returned by `registerFauxProvider()`.
+ *
+ * compat 注册表句柄。`unregister()` 卸掉自己的 api 条目。
+ */
 export interface FauxProviderRegistration {
 	api: string;
 	models: [Model<string>, ...Model<string>[]];
@@ -141,6 +202,11 @@ export interface FauxProviderRegistration {
 	unregister: () => void;
 }
 
+/**
+ * Explicit-Models handle returned by `fauxProvider()`.
+ *
+ * 给 `createModels().setProvider` 用的句柄。不含注册表卸载。
+ */
 export interface FauxProviderHandle {
 	provider: Provider;
 	api: string;
@@ -433,6 +499,11 @@ async function streamWithDeltas(
 	stream.end(message);
 }
 
+/**
+ * Shared faux stream core used by both `fauxProvider` and compat registration.
+ *
+ * faux 流核心。队列空则错误消息；deferred 按 pendingFetches 先回 handle。
+ */
 export function createFauxCore(options: RegisterFauxProviderOptions) {
 	const api = options.api ?? randomId(DEFAULT_API);
 	const provider = options.provider ?? DEFAULT_PROVIDER;
@@ -681,6 +752,8 @@ export function createFauxCore(options: RegisterFauxProviderOptions) {
  * models.setProvider(faux.provider);
  * faux.setResponses([fauxAssistantMessage("hi")]);
  * ```
+ *
+ * 给显式 `Models` 集合用的 faux Provider。测完靠调用方丢掉引用，不碰全局注册表。
  */
 export function fauxProvider(options: RegisterFauxProviderOptions = {}): FauxProviderHandle {
 	const core = createFauxCore(options);

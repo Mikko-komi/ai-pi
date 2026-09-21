@@ -1,3 +1,9 @@
+/**
+ * Normalize messages before sending them to a provider API.
+ *
+ * 发给提供方前的规范化：非视觉去图、跨模型改写 thinking/ID、孤儿 toolCall 补空结果、丢掉 error/aborted 轮。
+ */
+
 import type {
 	Api,
 	AssistantMessage,
@@ -60,6 +66,8 @@ function downgradeUnsupportedImages<TApi extends Api>(messages: Message[], model
  * Normalize tool call ID for cross-provider compatibility.
  * OpenAI Responses API generates IDs that are 450+ chars with special characters like `|`.
  * Anthropic APIs require IDs matching ^[a-zA-Z0-9_-]+$ (max 64 chars).
+ *
+ * 空 content 收成 []。非视觉模型图变占位。跨模型去 redacted thinking 和 thoughtSignature。孤儿 toolCall 补错误空结果。error/aborted assistant 整条丢掉。
  */
 export function transformMessages<TApi extends Api>(
 	messages: Message[],

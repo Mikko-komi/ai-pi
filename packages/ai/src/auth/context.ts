@@ -1,3 +1,9 @@
+/**
+ * Default AuthContext backed by process.env and node:fs.
+ *
+ * 默认 AuthContext。浏览器里 env 为 undefined，文件存在性恒为 false。
+ */
+
 import type { AuthContext } from "./types.ts";
 
 interface NodeFsModule {
@@ -19,6 +25,8 @@ function getProcessEnv(): Record<string, string | undefined> | undefined {
 /**
  * Default auth context: env vars from `process.env` (undefined in browsers),
  * file existence via node:fs (always false in browsers).
+ *
+ * 默认鉴权上下文。浏览器无 `process.env`，文件检查恒 false。
  */
 export function defaultProviderAuthContext(): AuthContext {
 	return {

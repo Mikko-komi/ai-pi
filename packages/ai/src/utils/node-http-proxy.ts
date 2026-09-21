@@ -1,3 +1,9 @@
+/**
+ * Resolve an HTTP(S) proxy URL for a target from provider or process env.
+ *
+ * 按目标 URL 和 no_proxy 解析代理。只支持 http/https；SOCKS/PAC 抛错。
+ */
+
 import type { ProviderEnv } from "../types.ts";
 import { getProviderEnvValue } from "./provider-env.ts";
 
@@ -135,9 +141,19 @@ function getProxyForUrl(targetUrl: string | URL, env?: ProviderEnv): string {
 	return proxy;
 }
 
+/**
+ * Error text for SOCKS or PAC proxy URLs.
+ *
+ * SOCKS/PAC 的固定报错文案。调用方不要改字。
+ */
 export const UNSUPPORTED_PROXY_PROTOCOL_MESSAGE =
 	"Unsupported proxy protocol. SOCKS and PAC proxy URLs are not supported; use an HTTP or HTTPS proxy URL.";
 
+/**
+ * Resolve the HTTP(S) proxy URL that should handle a target, if any.
+ *
+ * 无代理或命中 no_proxy 返回 undefined。非 http/https 协议抛 UNSUPPORTED。非法 URL 抛。
+ */
 export function resolveHttpProxyUrlForTarget(targetUrl: string | URL, env?: ProviderEnv): URL | undefined {
 	const proxy = getProxyForUrl(targetUrl, env);
 	if (!proxy) {

@@ -1,3 +1,9 @@
+/**
+ * Detect context-window overflow from assistant errors, usage, or length stops.
+ *
+ * 从错误文案、静默超窗、length+零输出判断上下文溢出。限流类文案必须排除。
+ */
+
 import type { AssistantMessage } from "../types.ts";
 
 /**
@@ -130,6 +136,8 @@ const NON_OVERFLOW_PATTERNS = [
  * @param message - The assistant message to check
  * @param contextWindow - Optional context window size for detecting silent overflow (z.ai)
  * @returns true if the message indicates a context overflow
+ *
+ * error 文案先排非溢出再匹配模式。给了 contextWindow 才查静默超窗和 length 填满。z.ai / 小米需要这个参数。
  */
 export function isContextOverflow(message: AssistantMessage, contextWindow?: number): boolean {
 	// Case 1: Check error message patterns
@@ -167,6 +175,8 @@ export function isContextOverflow(message: AssistantMessage, contextWindow?: num
  * Such responses may be caused by context pressure or provider-side truncation, so callers
  * can make one bounded compact-and-retry attempt. `desiredMaxOutput` must be the original
  * limit before any context-based clamping.
+ *
+ * length 停且输出未到 desiredMaxOutput。desiredMaxOutput 必须是夹紧前的原上限。
  */
 export function isRecoverableLength(message: AssistantMessage, desiredMaxOutput: number): boolean {
 	return message.stopReason === "length" && desiredMaxOutput > 0 && message.usage.output < desiredMaxOutput;
@@ -174,6 +184,8 @@ export function isRecoverableLength(message: AssistantMessage, desiredMaxOutput:
 
 /**
  * Get the overflow patterns for testing purposes.
+ *
+ * 拷一份模式给测试。不要改内部数组。
  */
 export function getOverflowPatterns(): RegExp[] {
 	return [...OVERFLOW_PATTERNS];

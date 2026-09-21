@@ -1,3 +1,9 @@
+/**
+ * Provider collection, auth application, and stream convenience for chat models.
+ *
+ * 聊天模型的 Provider 集合与鉴权/流式门面。Provider 拥有流；`Models` 解析鉴权后委托。
+ */
+
 import { lazyStream } from "./api/lazy.ts";
 import { defaultProviderAuthContext as defaultAuthContext } from "./auth/context.ts";
 import { InMemoryCredentialStore } from "./auth/credential-store.ts";
@@ -36,6 +42,11 @@ import { operationSignal, raceWithAbortSignal } from "./utils/abort.ts";
 
 export { ModelsError, type ModelsErrorCode } from "./auth/resolve.ts";
 
+/**
+ * Provider-selected catalog publication after a refresh phase.
+ *
+ * 刷新阶段的目录发布。`persist` 省略则不改存储，`null` 删除；`update` 只在持久化成功后同步跑。
+ */
 export interface ModelsPublication {
 	/** Provider-selected persisted catalog. Omit to leave storage unchanged; null deletes it. */
 	persist?: ModelsStoreEntry | null;
@@ -43,6 +54,11 @@ export interface ModelsPublication {
 	update?: () => void;
 }
 
+/**
+ * Context passed to a dynamic provider's `refreshModels()`.
+ *
+ * 动态 Provider 刷新目录的上下文。`publish` 带 generation 检查；`signal` 始终存在。
+ */
 export interface RefreshModelsContext {
 	/** Effective configured credential. OAuth credentials are refreshed before network access. */
 	credential?: Credential;
@@ -61,6 +77,11 @@ export interface RefreshModelsContext {
 	signal: AbortSignal;
 }
 
+/**
+ * Options for `Models.refresh()`.
+ *
+ * `Models.refresh()` 的选项。未知/静态 Provider 会被忽略。
+ */
 export interface ModelsRefreshOptions {
 	allowNetwork?: boolean;
 	/** Restrict refresh to these provider IDs. Unknown and static providers are ignored. */
@@ -70,19 +91,49 @@ export interface ModelsRefreshOptions {
 	signal?: AbortSignal;
 }
 
+/**
+ * Per-provider refresh outcome. Does not reject on provider errors.
+ *
+ * 刷新结果。Provider 错误和取消写进字段，不抛。
+ */
 export interface ModelsRefreshResult {
 	aborted: boolean;
 	errors: ReadonlyMap<string, Error>;
 }
 
+/**
+ * Models-only request transforms applied after auth merge.
+ *
+ * `Models` 请求变换。在鉴权头拼好之后、发给 Provider 之前跑。
+ */
 export interface ModelsRequestTransforms {
 	/** Transform fully assembled model/auth/request headers before provider dispatch. */
 	transformHeaders?: (headers: ProviderHeaders) => ProviderHeaders | Promise<ProviderHeaders>;
 }
 
+/**
+ * Typed stream options plus Models-owned header transforms.
+ *
+ * 带 `Models` 头变换的类型化流选项。
+ */
 export type ModelsApiStreamOptions<TApi extends Api> = ApiStreamOptions<TApi> & ModelsRequestTransforms;
+/**
+ * Simple-stream options plus Models-owned header transforms.
+ *
+ * 带 `Models` 头变换的 simple 流选项。
+ */
 export type ModelsSimpleStreamOptions = SimpleStreamOptions & ModelsRequestTransforms;
+/**
+ * Deferred-fetch options plus Models-owned header transforms.
+ *
+ * 带 `Models` 头变换的延迟拉取选项。
+ */
 export type ModelsDeferredFetchOptions = DeferredFetchOptions & ModelsRequestTransforms;
+/**
+ * Deferred-cancel options plus Models-owned header transforms.
+ *
+ * 带 `Models` 头变换的延迟取消选项。
+ */
 export type ModelsDeferredCancelOptions = DeferredCancelOptions & ModelsRequestTransforms;
 
 /**
@@ -93,6 +144,8 @@ export type ModelsDeferredCancelOptions = DeferredCancelOptions & ModelsRequestT
  * use (e.g. `openaiProvider(): Provider<"openai-responses" | "openai-completions">`),
  * giving typed model lists to direct factory users. Inside a `Models`
  * collection providers are held as `Provider<Api>`.
+ *
+ * Provider 是运行时单元：元数据、鉴权、列模型和流。集合里收成 `Provider<Api>`。
  */
 export interface Provider<TApi extends Api = Api> {
 	readonly id: string;
@@ -152,6 +205,8 @@ export interface Provider<TApi extends Api = Api> {
  * Runtime collection of providers plus auth application and stream
  * convenience. Providers own stream behavior; `Models` resolves auth and
  * delegates each request to the provider that owns the model.
+ *
+ * Provider 集合加鉴权与流便捷。流行为归 Provider；`Models` 解析鉴权后委托。
  */
 export interface Models {
 	getProviders(): readonly Provider[];
@@ -227,6 +282,11 @@ export interface Models {
 	cancelDeferred(model: Model<Api>, handle: DeferredHandle, options?: ModelsDeferredCancelOptions): Promise<void>;
 }
 
+/**
+ * Mutable provider collection. Provider ids are unique.
+ *
+ * 可改的 Provider 集合。按 `provider.id` 去重替换。
+ */
 export interface MutableModels extends Models {
 	/** Upsert/replace by provider.id. Provider ids are unique. */
 	setProvider(provider: Provider): void;
@@ -234,6 +294,11 @@ export interface MutableModels extends Models {
 	clearProviders(): void;
 }
 
+/**
+ * Injected stores and auth context for `createModels()`.
+ *
+ * `createModels()` 的注入项。缺省用内存凭证库、内存目录和默认 AuthContext。
+ */
 export interface CreateModelsOptions {
 	credentials?: CredentialStore;
 	modelsStore?: ModelsStore;
@@ -745,10 +810,20 @@ class ModelsImpl implements MutableModels {
 	}
 }
 
+/**
+ * Create an empty mutable provider collection.
+ *
+ * 空的可改 `Models` 集合。凭证/目录/鉴权上下文可注入。
+ */
 export function createModels(options?: CreateModelsOptions): MutableModels {
 	return new ModelsImpl(options);
 }
 
+/**
+ * Parts used by `createProvider()` to assemble a Provider.
+ *
+ * `createProvider()` 的零件。`auth` 必填；`api` 可以是单一实现或按 `model.api` 分发。
+ */
 export interface CreateProviderOptions<TApi extends Api = Api> {
 	id: string;
 	/** Display name. Default: `id`. */
@@ -771,6 +846,8 @@ export interface CreateProviderOptions<TApi extends Api = Api> {
  * custom providers both go through this. A single `api` streams all models;
  * an `api` map dispatches on `model.api`, and a model whose api has no entry
  * produces a stream error.
+ *
+ * 用零件组装 Provider。内建工厂和 models.json 自定义都走这里。缺 api 条目的模型发流错误。
  */
 export function createProvider<TApi extends Api = Api>(input: CreateProviderOptions<TApi>): Provider<TApi> {
 	const baselineModels = input.models;
@@ -883,11 +960,18 @@ export function createProvider<TApi extends Api = Api>(input: CreateProviderOpti
  *   // model: Model<"anthropic-messages">, stream options fully typed
  * }
  * ```
+ *
+ * 运行时收窄动态查到的模型。`api` 对上才变成 `Model<TApi>`。
  */
 export function hasApi<TApi extends Api>(model: Model<Api>, api: TApi): model is Model<TApi> {
 	return model.api === api;
 }
 
+/**
+ * Compute usage cost in place from the model's rate card, including tiered rates.
+ *
+ * 按价卡原地算 `usage.cost`。1h cache write 按 2 倍 input 计价。
+ */
 export function calculateCost<TApi extends Api>(model: Model<TApi>, usage: Usage): Usage["cost"] {
 	const inputTokens = usage.input + usage.cacheRead + usage.cacheWrite;
 	let rates: ModelCostRates = model.cost;
@@ -912,6 +996,11 @@ export function calculateCost<TApi extends Api>(model: Model<TApi>, usage: Usage
 
 const EXTENDED_THINKING_LEVELS: ModelThinkingLevel[] = ["off", "minimal", "low", "medium", "high", "xhigh", "max"];
 
+/**
+ * Thinking levels the model actually accepts.
+ *
+ * 模型支持的 thinking 档。无 reasoning 则只有 `"off"`；`xhigh`/`max` 要有 map 才算。
+ */
 export function getSupportedThinkingLevels<TApi extends Api>(model: Model<TApi>): ModelThinkingLevel[] {
 	if (!model.reasoning) return ["off"];
 
@@ -923,6 +1012,11 @@ export function getSupportedThinkingLevels<TApi extends Api>(model: Model<TApi>)
 	});
 }
 
+/**
+ * Snap a requested thinking level to the nearest supported one.
+ *
+ * 把请求档夹到模型支持的最近档；未知档回落到最低可用。
+ */
 export function clampThinkingLevel<TApi extends Api>(
 	model: Model<TApi>,
 	level: ModelThinkingLevel,
@@ -947,6 +1041,8 @@ export function clampThinkingLevel<TApi extends Api>(
 /**
  * Check if two models are equal by comparing both their id and provider.
  * Returns false if either model is null or undefined.
+ *
+ * 比 id 和 provider。任一方空则 false。
  */
 export function modelsAreEqual<TApi extends Api>(
 	a: Model<TApi> | null | undefined,

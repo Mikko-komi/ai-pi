@@ -1,3 +1,9 @@
+/**
+ * Typed reads of the generated static image-model catalog.
+ *
+ * 生成目录的类型化读取。只覆盖内建静态图像模型。
+ */
+
 import { IMAGE_MODELS } from "./image-models.generated.ts";
 import type { ImagesApi, ImagesModel, KnownImagesProvider } from "./types.ts";
 
@@ -20,6 +26,11 @@ type ImageModelApi<
 		: never
 	: never;
 
+/**
+ * Typed lookup of one generated image model.
+ *
+ * 按 provider + id 取生成目录里的图像模型。
+ */
 export function getImageModel<
 	TProvider extends KnownImagesProvider,
 	TModelId extends keyof (typeof IMAGE_MODELS)[TProvider],
@@ -28,10 +39,20 @@ export function getImageModel<
 	return providerModels?.get(modelId as string) as ImagesModel<ImageModelApi<TProvider, TModelId>>;
 }
 
+/**
+ * Provider ids present in the generated image catalog.
+ *
+ * 生成图像目录里出现过的 provider id。
+ */
 export function getImageProviders(): KnownImagesProvider[] {
 	return Array.from(imageModelRegistry.keys()) as KnownImagesProvider[];
 }
 
+/**
+ * All generated image models for one provider.
+ *
+ * 某个 provider 在生成目录里的全部图像模型。
+ */
 export function getImageModels<TProvider extends KnownImagesProvider>(
 	provider: TProvider,
 ): ImagesModel<ImageModelApi<TProvider, keyof (typeof IMAGE_MODELS)[TProvider]>>[] {

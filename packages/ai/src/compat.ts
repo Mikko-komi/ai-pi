@@ -8,6 +8,8 @@
  * "@earendil-works/pi-ai/compat" unchanged; new code uses `createModels()`
  * and the provider factories. This module is deleted with the coding-agent
  * ModelManager migration.
+ *
+ * 旧全局 pi-ai API 的临时兼容入口。新代码用 `createModels()`；本模块随 ModelManager 迁移删除。
  */
 
 export * from "./api/anthropic-messages.lazy.ts";
@@ -59,27 +61,54 @@ import type {
 	StreamOptions,
 } from "./types.ts";
 
-/** @deprecated Static catalog read. Use `getBuiltinModel` from "@earendil-works/pi-ai/providers/all" or `Models.getModel()`. */
+/**
+ * @deprecated Static catalog read. Use `getBuiltinModel` from "@earendil-works/pi-ai/providers/all" or `Models.getModel()`.
+ *
+ * 旧全局目录读取。新代码用 `getBuiltinModel` 或 `Models.getModel()`。
+ */
 export const getModel = getBuiltinModel;
 
-/** @deprecated Static catalog read. Use `getBuiltinModels` from "@earendil-works/pi-ai/providers/all" or `Models.getModels()`. */
+/**
+ * @deprecated Static catalog read. Use `getBuiltinModels` from "@earendil-works/pi-ai/providers/all" or `Models.getModels()`.
+ *
+ * 旧全局目录列表。新代码用 `getBuiltinModels` 或 `Models.getModels()`。
+ */
 export const getModels = getBuiltinModels;
 
-/** @deprecated Static catalog read. Use `getBuiltinProviders` from "@earendil-works/pi-ai/providers/all" or `Models.getProviders()`. */
+/**
+ * @deprecated Static catalog read. Use `getBuiltinProviders` from "@earendil-works/pi-ai/providers/all" or `Models.getProviders()`.
+ *
+ * 旧全局 Provider 列表。新代码用 `getBuiltinProviders` 或 `Models.getProviders()`。
+ */
 export const getProviders = getBuiltinProviders;
 
+/**
+ * Untyped stream function stored in the compat api-registry.
+ *
+ * compat 注册表里的无类型 stream。调用前要核对 `model.api`。
+ */
 export type ApiStreamFunction = (
 	model: Model<Api>,
 	context: Context,
 	options?: StreamOptions,
 ) => AssistantMessageEventStream;
 
+/**
+ * Untyped simple-stream function stored in the compat api-registry.
+ *
+ * compat 注册表里的无类型 streamSimple。
+ */
 export type ApiStreamSimpleFunction = (
 	model: Model<Api>,
 	context: Context,
 	options?: SimpleStreamOptions,
 ) => AssistantMessageEventStream;
 
+/**
+ * Typed API implementation registered under `api` for compat dispatch.
+ *
+ * 挂在某个 `Api` 上的类型化实现，给旧 `stream()` 分发用。
+ */
 export interface ApiProvider<TApi extends Api = Api, TOptions extends StreamOptions = StreamOptions> {
 	api: TApi;
 	stream: StreamFunction<TApi, TOptions>;
@@ -123,6 +152,11 @@ function wrapStreamSimple<TApi extends Api>(
 	};
 }
 
+/**
+ * Register or replace the stream implementation for an API.
+ *
+ * 注册或覆盖某个 api 的流实现。`sourceId` 供批量卸载。
+ */
 export function registerApiProvider<TApi extends Api, TOptions extends StreamOptions>(
 	provider: ApiProvider<TApi, TOptions>,
 	sourceId?: string,
@@ -137,14 +171,29 @@ export function registerApiProvider<TApi extends Api, TOptions extends StreamOpt
 	});
 }
 
+/**
+ * Look up the registered stream implementation for an API.
+ *
+ * 按 api 取已注册流实现。没有则 undefined。
+ */
 export function getApiProvider(api: Api): ApiProviderInternal | undefined {
 	return apiProviderRegistry.get(api)?.provider;
 }
 
+/**
+ * All registered stream implementations.
+ *
+ * 当前注册表里的全部流实现。
+ */
 export function getApiProviders(): ApiProviderInternal[] {
 	return Array.from(apiProviderRegistry.values(), (entry) => entry.provider);
 }
 
+/**
+ * Remove registry entries that were registered with `sourceId`.
+ *
+ * 按 `sourceId` 卸掉一批实现。内建项通常没有 sourceId。
+ */
 export function unregisterApiProviders(sourceId: string): void {
 	for (const [api, entry] of apiProviderRegistry.entries()) {
 		if (entry.sourceId === sourceId) {
@@ -157,6 +206,11 @@ function clearApiProviders(): void {
 	apiProviderRegistry.clear();
 }
 
+/**
+ * Register a faux API provider into the compat registry for tests.
+ *
+ * 把 faux 实现挂进 compat 注册表。`unregister()` 按 sourceId 卸掉。
+ */
 export function registerFauxProvider(options: RegisterFauxProviderOptions = {}): FauxProviderRegistration {
 	const core = createFauxCore(options);
 	const sourceId = `faux-provider-${Math.random().toString(36).slice(2, 10)}`;
@@ -194,6 +248,8 @@ const builtinApiProviderInstances = new Map<Api, ReturnType<typeof getApiProvide
  * Registers the builtin API implementations into the api-registry without
  * clobbering existing entries: compat may load after a test or extension has
  * already registered an override for a builtin api id.
+ *
+ * 把内建 API 实现写入注册表。已有同 id 条目不覆盖。
  */
 export function registerBuiltInApiProviders(): void {
 	for (const [api, streams] of BUILTIN_APIS) {
@@ -204,6 +260,11 @@ export function registerBuiltInApiProviders(): void {
 	}
 }
 
+/**
+ * Clear the api-registry and re-register builtin implementations.
+ *
+ * 清空注册表再装回内建实现。测试复位用。
+ */
 export function resetApiProviders(): void {
 	clearApiProviders();
 	builtinApiProviderInstances.clear();
@@ -247,6 +308,11 @@ function resolveApiProvider(api: Api) {
 	return provider;
 }
 
+/**
+ * Compat stream: env API-key injection plus api-registry dispatch.
+ *
+ * 旧全局 stream。无显式 key 时注入环境 key；Cloudflare 环境凭证走 `Models`。
+ */
 export function stream<TApi extends Api>(
 	model: Model<TApi>,
 	context: Context,
@@ -263,6 +329,11 @@ export function stream<TApi extends Api>(
 	return provider.stream(model, context, withEnvApiKey(model, options) as StreamOptions);
 }
 
+/**
+ * Compat complete: drain `stream()` to a final assistant message.
+ *
+ * 旧全局 complete。等 `stream()` 出最终消息。
+ */
 export async function complete<TApi extends Api>(
 	model: Model<TApi>,
 	context: Context,
@@ -272,6 +343,11 @@ export async function complete<TApi extends Api>(
 	return s.result();
 }
 
+/**
+ * Compat simple-stream with the same env-key and builtin routing as `stream()`.
+ *
+ * 旧全局 streamSimple。路由与 `stream()` 相同。
+ */
 export function streamSimple<TApi extends Api>(
 	model: Model<TApi>,
 	context: Context,
@@ -288,6 +364,11 @@ export function streamSimple<TApi extends Api>(
 	return provider.streamSimple(model, context, withEnvApiKey(model, options));
 }
 
+/**
+ * Compat simple-complete: drain `streamSimple()` to a final assistant message.
+ *
+ * 旧全局 completeSimple。等 `streamSimple()` 出最终消息。
+ */
 export async function completeSimple<TApi extends Api>(
 	model: Model<TApi>,
 	context: Context,

@@ -1,3 +1,9 @@
+/**
+ * Repair malformed JSON and parse complete or streaming fragments.
+ *
+ * 修残缺/非法转义后再 parse。流式解析失败也要返回对象，不抛。
+ */
+
 import { parse as partialParse } from "partial-json";
 
 const VALID_JSON_ESCAPES = new Set(['"', "\\", "/", "b", "f", "n", "r", "t", "u"]);
@@ -28,6 +34,8 @@ function escapeControlCharacter(char: string): string {
  * Repairs malformed JSON string literals by:
  * - escaping raw control characters inside strings
  * - doubling backslashes before invalid escape characters
+ *
+ * 只修字符串字面量。非法转义变双反斜杠；控制字符转义。不保证整体合法。
  */
 export function repairJson(json: string): string {
 	let repaired = "";
@@ -82,6 +90,11 @@ export function repairJson(json: string): string {
 	return repaired;
 }
 
+/**
+ * Parse JSON, retrying once after repair when the original text is invalid.
+ *
+ * 先 JSON.parse。失败且 repair 有改动再 parse 一次。没改动则抛原错。
+ */
 export function parseJsonWithRepair<T>(json: string): T {
 	try {
 		return JSON.parse(json) as T;
@@ -97,6 +110,8 @@ export function parseJsonWithRepair<T>(json: string): T {
 /**
  * Attempts to parse potentially incomplete JSON during streaming.
  * Always returns a valid object, even if the JSON is incomplete.
+ *
+ * 空串给 {}。完整 parse 失败再 partial-json，再修过的 partial。全失败仍 {}。
  *
  * @param partialJson The partial JSON string from streaming
  * @returns Parsed object or empty object if parsing fails

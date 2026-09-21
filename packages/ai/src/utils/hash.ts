@@ -1,4 +1,14 @@
-/** Fast deterministic hash to shorten long strings */
+/**
+ * Fast non-cryptographic hashes for shortening long strings.
+ *
+ * 把长串收成短确定性哈希。不是密码学哈希，只求短且稳。
+ */
+
+/**
+ * Fast deterministic hash to shorten long strings
+ *
+ * 两次 32 位混合，36 进制拼接。同输入同输出。
+ */
 export function shortHash(str: string): string {
 	let h1 = 0xdeadbeef;
 	let h2 = 0x41c6ce57;

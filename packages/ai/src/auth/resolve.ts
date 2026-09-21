@@ -1,3 +1,9 @@
+/**
+ * Shared auth resolution and ModelsError used by Models and ImagesModels.
+ *
+ * `Models` 与 `ImagesModels` 共用的鉴权解析。已存凭证拥有 Provider，失败不回落到环境。
+ */
+
 import type { ProviderEnv } from "../types.ts";
 import { operationSignal, raceWithAbortSignal } from "../utils/abort.ts";
 import { formatThrownValue } from "../utils/diagnostics.ts";
@@ -13,8 +19,18 @@ import type {
 	ProviderAuth,
 } from "./types.ts";
 
+/**
+ * Stable error codes thrown by Models auth and catalog operations.
+ *
+ * Models 鉴权与目录操作的稳定错误码。
+ */
 export type ModelsErrorCode = "model_source" | "model_validation" | "provider" | "stream" | "auth" | "oauth";
 
+/**
+ * Per-request overrides for auth resolution.
+ *
+ * 单次解析覆盖。显式 `apiKey` 走 api-key 路径；OAuth 最短剩余有效期默认五分钟。
+ */
 export interface AuthResolutionOverrides {
 	apiKey?: string;
 	env?: ProviderEnv;
@@ -23,6 +39,11 @@ export interface AuthResolutionOverrides {
 	signal?: AbortSignal;
 }
 
+/**
+ * Tagged error from Models auth, catalog, or stream dispatch.
+ *
+ * Models 的带 code 错误。`message` 已拼上 cause，调用方只展示 message。
+ */
 export class ModelsError extends Error {
 	readonly code: ModelsErrorCode;
 
@@ -46,6 +67,8 @@ function withCauseDetail(message: string, cause: unknown): string {
  * A stored credential owns the provider: ambient/env is consulted only when
  * nothing is stored. No silent env fallback after a failed refresh or for a
  * credential type without a matching handler.
+ *
+ * `Models` 与 `ImagesModels` 共用的鉴权解析。已存凭证拥有该 Provider；刷新失败不偷偷回落到环境。
  */
 export function resolveProviderAuth(
 	provider: { id: string; auth: ProviderAuth },
