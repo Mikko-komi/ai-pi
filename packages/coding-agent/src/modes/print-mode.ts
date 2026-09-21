@@ -4,6 +4,8 @@
  * Used for:
  * - `pi -p "prompt"` - text output
  * - `pi --mode json "prompt"` - JSON event stream
+ *
+ * 一次性打印模式。发完 prompt 就退；text 只打最后一条 assistant，json 打全事件流。
  */
 
 import type { AssistantMessage, ImageContent } from "@earendil-works/pi-ai";
@@ -14,6 +16,8 @@ import { toJsonEvent } from "./json-event.ts";
 
 /**
  * Options for print mode.
+ *
+ * 单次打印的输入。`mode` 决定 stdout 是终稿文本还是 JSON 事件。
  */
 export interface PrintModeOptions {
 	/** Output mode: "text" for final response only, "json" for all events */
@@ -29,6 +33,8 @@ export interface PrintModeOptions {
 /**
  * Run in print (single-shot) mode.
  * Sends prompts to the agent and outputs the result.
+ *
+ * 跑完初始消息和后续 messages 后退出。assistant 出错或中止返回 1；信号到达会先 dispose 再 exit。
  */
 export async function runPrintMode(runtimeHost: AgentSessionRuntime, options: PrintModeOptions): Promise<number> {
 	const { mode, messages = [], initialMessage, initialImages } = options;

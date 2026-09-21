@@ -1,6 +1,8 @@
 /**
  * Interactive mode for the coding agent.
  * Handles TUI rendering and user interaction, delegating business logic to AgentSession.
+ *
+ * 交互 TUI。业务在 AgentSession / runtime；这里管渲染、快捷键和扩展 UI。
  */
 
 import * as crypto from "node:crypto";
@@ -268,6 +270,11 @@ function quoteIfNeeded(value: string): string {
 	return `'${value.replace(/'/g, `'\\''`)}'`;
 }
 
+/**
+ * Build a copy-paste `--session` command for the current persisted file.
+ *
+ * 给当前持久化会话拼一条可再开的命令。非 TTY 或内存会话返回 undefined。
+ */
 export function formatResumeCommand(sessionManager: SessionManager): string | undefined {
 	if (!process.stdout.isTTY) return undefined;
 	if (!sessionManager.isPersisted()) return undefined;
@@ -348,6 +355,8 @@ function formatLoginProviderCompletionDescription(provider: LoginProviderComplet
 
 /**
  * Options for InteractiveMode initialization.
+ *
+ * 交互模式启动附加项。启动诊断和迁移警告只在 TUI 起来后展示，不改会话内容。
  */
 export interface InteractiveModeOptions {
 	/** Providers that were migrated to auth.json (shows warning) */
@@ -372,6 +381,11 @@ export interface InteractiveModeOptions {
 	initialThemeSetting?: string;
 }
 
+/**
+ * Interactive TUI over one {@link AgentSessionRuntime}.
+ *
+ * 交互门面。会话生命周期归 runtime；本类只绑 TUI，并在切换会话后重绑扩展。
+ */
 export class InteractiveMode {
 	private runtimeHost: AgentSessionRuntime;
 	private renderer: TuiMainScreen | TuiAltScreen;

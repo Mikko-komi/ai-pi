@@ -1,3 +1,9 @@
+/**
+ * Short-lived TUI used before the main interactive session starts.
+ *
+ * 主会话起来之前的短命 TUI。首次设置、信任对话框、resume 选择器都走这里。
+ */
+
 import {
 	ProcessTerminal,
 	setCapabilityOverrides,
@@ -80,6 +86,11 @@ async function loadStartupThemes(settingsManager: SettingsManager): Promise<Them
 	return loadThemes(resolvedPaths.themes);
 }
 
+/**
+ * Build a MainScreen TUI with startup themes already registered.
+ *
+ * 建启动用 MainScreen。先登记已启用主题，再按 settings / COLORFGBG 选初始主题。
+ */
 export async function createStartupTui(settingsManager: SettingsManager): Promise<TUI> {
 	setCapabilityOverrides(settingsManager.getTerminalCapabilityOverrides());
 	setRegisteredThemes(await loadStartupThemes(settingsManager));
@@ -91,6 +102,11 @@ export async function createStartupTui(settingsManager: SettingsManager): Promis
 	return ui;
 }
 
+/**
+ * Start the startup TUI and refine auto theme from the live terminal.
+ *
+ * 启动这块 TUI，并在 auto 设置下用终端查询修正主题。
+ */
 export function startStartupTui(ui: TUI, settingsManager: SettingsManager): void {
 	ui.start();
 	void applyDetectedStartupTheme(ui, settingsManager);
@@ -118,6 +134,8 @@ async function clearStartupTui(ui: TUI): Promise<void> {
  * - experimental features are enabled (PI_EXPERIMENTAL=1)
  * - the default agent directory is used (no custom agent dir override)
  * - setup was not completed before (settings.json does not exist)
+ *
+ * 官方发行、实验旗标、默认 agent 目录、尚无 settings.json 四者同时成立才跑首次设置。
  */
 export function shouldRunFirstTimeSetup(settingsPath: string = getSettingsPath()): boolean {
 	if (
@@ -138,6 +156,11 @@ export function shouldRunFirstTimeSetup(settingsPath: string = getSettingsPath()
 	return !existsSync(settingsPath);
 }
 
+/**
+ * One-shot startup select list. Cancel or close yields undefined.
+ *
+ * 启动期一次性选择列表。取消或关闭返回 undefined，不 exit。
+ */
 export async function showStartupSelector<T>(
 	settingsManager: SettingsManager,
 	title: string,
@@ -169,7 +192,11 @@ export async function showStartupSelector<T>(
 	});
 }
 
-/** Show the first-time setup dialog and persist the result */
+/**
+ * Show the first-time setup dialog and persist the result
+ *
+ * 首次设置对话框。提交才写 theme / analytics；取消只关 TUI，不写 settings。
+ */
 export async function showFirstTimeSetup(settingsManager: SettingsManager): Promise<void> {
 	const ui = await createStartupTui(settingsManager);
 	return new Promise((resolve) => {
@@ -211,6 +238,11 @@ export async function showFirstTimeSetup(settingsManager: SettingsManager): Prom
 	});
 }
 
+/**
+ * One-shot startup text prompt. Cancel yields undefined.
+ *
+ * 启动期一次性输入框。取消返回 undefined；关闭前会 dispose 输入组件。
+ */
 export async function showStartupInput(
 	settingsManager: SettingsManager,
 	title: string,

@@ -2,6 +2,8 @@
  * RPC Client for programmatic access to the coding agent.
  *
  * Spawns the agent in RPC mode and provides a typed API for all operations.
+ *
+ * 拉起 `--mode rpc` 子进程的客户端。命令走 stdin JSONL，事件和响应对 stdout 分流。
  */
 
 import { type ChildProcess, spawn } from "node:child_process";
@@ -25,6 +27,11 @@ type DistributiveOmit<T, K extends keyof T> = T extends unknown ? Omit<T, K> : n
 /** RpcCommand without the id field (for internal send) */
 type RpcCommandBody = DistributiveOmit<RpcCommand, "id">;
 
+/**
+ * Spawn options for {@link RpcClient}.
+ *
+ * 子进程启动参数。未给 `cliPath` 时默认 `dist/cli.js`，相对当前工作目录解析。
+ */
 export interface RpcClientOptions {
 	/** Path to the CLI entry point (default: searches for dist/cli.js) */
 	cliPath?: string;
@@ -40,6 +47,11 @@ export interface RpcClientOptions {
 	args?: string[];
 }
 
+/**
+ * Model row returned by `get_available_models`.
+ *
+ * `getAvailableModels` 的一行。只带选择器需要的字段，不是完整 `Model`。
+ */
 export interface ModelInfo {
 	provider: string;
 	id: string;
@@ -47,12 +59,22 @@ export interface ModelInfo {
 	reasoning: boolean;
 }
 
+/**
+ * Listener for stdout events that are not request responses.
+ *
+ * 非响应行的事件回调。解析失败的行会被丢掉，不进 listener。
+ */
 export type RpcEventListener = (event: JsonAgentSessionEvent) => void;
 
 // ============================================================================
 // RPC Client
 // ============================================================================
 
+/**
+ * Typed parent-process handle over a coding-agent RPC child.
+ *
+ * 编程访问 RPC 子进程。`start` 前不能发命令；子进程退出会拒绝所有挂起请求。
+ */
 export class RpcClient {
 	private process: ChildProcess | null = null;
 	private stopReadingStdout: (() => void) | null = null;

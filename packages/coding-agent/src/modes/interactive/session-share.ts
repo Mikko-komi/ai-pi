@@ -1,3 +1,9 @@
+/**
+ * Interactive /share: export the current branch, then Radius or a private gist.
+ *
+ * 交互 `/share`。先导出当前分支；Radius 失败再退到私有 gist。
+ */
+
 import { spawn, spawnSync } from "node:child_process";
 import * as crypto from "node:crypto";
 import * as fs from "node:fs";
@@ -21,7 +27,11 @@ interface SessionShareContext {
 	showError: (message: string) => void;
 }
 
-/** Export the current branch with presentation metadata for Radius. */
+/**
+ * Export the current branch with presentation metadata for Radius.
+ *
+ * 把当前分支写成 jsonl，并夹一条 `pi.share` custom，带上 systemPrompt 和工具 schema。
+ */
 export function exportSessionForShare(filePath: string, session: AgentSession): void {
 	exportSessionToJsonl(session.sessionManager, filePath, (parentId, timestamp) => [
 		{
@@ -42,7 +52,11 @@ export function exportSessionForShare(filePath: string, session: AgentSession): 
 	]);
 }
 
-/** Share the current session through Radius, falling back to a private gist. */
+/**
+ * Share the current session through Radius, falling back to a private gist.
+ *
+ * 先试 Radius artifact；没有凭证再走 `gh gist`。取消或失败只通知 UI，不抛给调用方。
+ */
 export async function shareSession(context: SessionShareContext): Promise<void> {
 	const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "pi-share-"));
 	const jsonlFile = path.join(tempDir, "session.jsonl");

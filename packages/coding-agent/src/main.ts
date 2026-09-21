@@ -3,6 +3,8 @@
  *
  * This file handles CLI argument parsing and translates them into
  * createAgentSession() options. The SDK does the heavy lifting.
+ *
+ * 产品 CLI 入口。把 argv 收成会话选项，再交给 SDK 建 runtime；模式层只做 I/O。
  */
 
 import { createInterface } from "node:readline";
@@ -350,6 +352,11 @@ function forkSessionOrExit(sourcePath: string, cwd: string, sessionDir?: string,
 	}
 }
 
+/**
+ * Open, fork, resume, or create the JSONL session this CLI invocation will use.
+ *
+ * 按 flag 选会话。找不到、冲突或用户取消会直接 `process.exit`，不把失败交回调用方。
+ */
 export async function createSessionManager(
 	parsed: Args,
 	cwd: string,
@@ -555,10 +562,20 @@ async function promptForMissingSessionCwd(
 	]);
 }
 
+/**
+ * Extra inline extension factories merged after the built-in list.
+ *
+ * 额外内联扩展。会接在 `builtInExtensions` 后面，不替换内置项。
+ */
 export interface MainOptions {
 	extensionFactories?: InlineExtension[];
 }
 
+/**
+ * Run one CLI invocation: parse args, migrate, assemble a session, then enter a mode.
+ *
+ * 一次进程入口。auth / help / export 等短路命令会提前返回；交互失败会 `process.exit`。
+ */
 export async function main(args: string[], options?: MainOptions) {
 	resetTimings();
 	const extensionFactories = [...builtInExtensions, ...(options?.extensionFactories ?? [])];

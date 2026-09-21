@@ -5,6 +5,8 @@
  * Palette lookup does not, so a presentation that only uses built-in themes should never pay for it.
  * `interactive-mode.ts` installs this validator; anything that does not simply skips validation, as
  * built-in themes already do.
+ *
+ * 用户主题 JSON 的校验。故意不进 `theme.ts`，避免内置主题路径拉进 typebox。
  */
 
 import { type Static, Type } from "typebox";
@@ -96,10 +98,25 @@ const ThemeJsonSchema = Type.Object({
 
 const compiledThemeSchema = Compile(ThemeJsonSchema);
 
+/**
+ * One theme color token: hex, var name, empty default, or a 0–255 index.
+ *
+ * 一个颜色值。hex / 变量名 / 空串（终端默认色）/ 256 色索引。
+ */
 export type ThemeColorValue = Static<typeof ColorValueSchema>;
+
+/**
+ * Theme document after schema validation.
+ *
+ * 通过 schema 的主题文档。`name` 仍可能在运行时因含 `/` 被拒绝。
+ */
 export type ValidatedThemeJson = Static<typeof ThemeJsonSchema>;
 
-/** Validate one theme document, throwing a message that names the offending tokens. */
+/**
+ * Validate one theme document, throwing a message that names the offending tokens.
+ *
+ * 校验一份主题。缺色和其它错误分栏；名字含 `/` 也会抛，因为 `/` 留给 auto 设置。
+ */
 export function validateThemeJson(label: string, json: unknown): ValidatedThemeJson {
 	if (!compiledThemeSchema.Check(json)) {
 		const errors = Array.from(compiledThemeSchema.Errors(json));

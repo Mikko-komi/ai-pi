@@ -1,5 +1,7 @@
 /**
  * CLI argument parsing and help display
+ *
+ * argv 解析和 `--help` 文本。未知 `--flag` 进 `unknownFlags`，留给扩展认领。
  */
 
 import type { ThinkingLevel } from "@earendil-works/pi-agent-core";
@@ -8,8 +10,18 @@ import { APP_NAME, CONFIG_DIR_NAME, ENV_AGENT_DIR, ENV_SESSION_DIR } from "../co
 import type { ExtensionFlag } from "../core/extensions/types.ts";
 import type { TuiMode } from "../core/settings-manager.ts";
 
+/**
+ * `--mode` output contract: text print, JSON events, or RPC.
+ *
+ * `--mode` 的输出合同。未指定时由 main 按 TTY/`-p` 再决定 print 还是 interactive。
+ */
 export type Mode = "text" | "json" | "rpc";
 
+/**
+ * Parsed CLI invocation. Positional leftovers are `messages` and `@file` args.
+ *
+ * 解析后的 argv。非法短选项和缺值写进 `diagnostics`，不在这里 `process.exit`。
+ */
 export interface Args {
 	provider?: string;
 	model?: string;
@@ -59,15 +71,30 @@ export interface Args {
 
 const VALID_THINKING_LEVELS = ["off", "minimal", "low", "medium", "high", "xhigh", "max"] as const;
 
+/**
+ * Type guard for CLI `--thinking` values.
+ *
+ * `--thinking` 的合法字面量守卫。非法值由 `parseArgs` 记 warning，不在这里抛。
+ */
 export function isValidThinkingLevel(level: string): level is ThinkingLevel {
 	return VALID_THINKING_LEVELS.includes(level as ThinkingLevel);
 }
 
+/**
+ * Trim a `--name` value; empty becomes undefined.
+ *
+ * 去掉 `--name` 两端空白。只剩空白则当成没设。
+ */
 export function normalizeSessionName(value: string): string | undefined {
 	const name = value.trim();
 	return name.length > 0 ? name : undefined;
 }
 
+/**
+ * Parse argv into {@link Args}. `--` ends option scanning.
+ *
+ * 扫一遍 argv。`--` 之后全当消息或 `@file`；不认识的 `--flag` 留给扩展。
+ */
 export function parseArgs(args: string[]): Args {
 	const result: Args = {
 		messages: [],
@@ -248,6 +275,11 @@ export function parseArgs(args: string[]): Args {
 	return result;
 }
 
+/**
+ * Print the product `--help` text, including registered extension flags.
+ *
+ * 打产品帮助。扩展旗标追加在内置选项后；本函数只写 stdout。
+ */
 export function printHelp(extensionFlags?: ExtensionFlag[]): void {
 	const extensionFlagsText =
 		extensionFlags && extensionFlags.length > 0

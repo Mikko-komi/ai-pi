@@ -1,3 +1,9 @@
+/**
+ * Interactive theme palette, loaders, and the process-wide `theme` proxy.
+ *
+ * 交互主题：调色板、加载和进程级 `theme` 代理。未 `initTheme` 就读 proxy 会抛。
+ */
+
 import * as fs from "node:fs";
 import * as path from "node:path";
 import type { ThinkingLevel } from "@earendil-works/pi-agent-core";
@@ -25,6 +31,11 @@ import type { ThemeColorValue as ColorValue, ValidatedThemeJson as ThemeJson } f
 
 export type { ValidatedThemeJson as ThemeJson } from "./theme-json.ts";
 
+/**
+ * Optional validator installed by interactive mode. Built-in themes skip it.
+ *
+ * 可选的主题 JSON 校验器。交互模式才安装；内置主题路径不强制校验。
+ */
 export type ThemeJsonValidator = (label: string, json: unknown) => ThemeJson;
 
 let themeJsonValidator: ThemeJsonValidator | undefined;
@@ -33,11 +44,18 @@ let themeJsonValidator: ThemeJsonValidator | undefined;
  * Install full theme validation. Without it, documents are accepted as-is, which is what built-in
  * themes already do: validating user-authored JSON needs typebox, and a presentation that only uses
  * built-in themes should not pay ~17 MB of module graph for it.
+ *
+ * 装上完整校验。不装则用户 JSON 只做浅检查；内置主题本来就不走 typebox。
  */
 export function setThemeJsonValidator(validator: ThemeJsonValidator): void {
 	themeJsonValidator = validator;
 }
 
+/**
+ * Foreground token names a {@link Theme} can paint.
+ *
+ * 前景色 token。缺可选色时 Theme 用 muted/text/thinkingXhigh 回退。
+ */
 export type ThemeColor =
 	| "accent"
 	| "border"
@@ -89,6 +107,11 @@ export type ThemeColor =
 	| "thinkingMax"
 	| "bashMode";
 
+/**
+ * Background token names a {@link Theme} can paint.
+ *
+ * 背景色 token。`searchMatchBg` 缺了回退 `selectedBg`。
+ */
 export type ThemeBg =
 	| "selectedBg"
 	| "searchMatchBg"
@@ -279,6 +302,11 @@ function withThemeColorFallbacks(colors: ThemeJson["colors"]): ThemeJson["colors
 // Theme Class
 // ============================================================================
 
+/**
+ * Resolved ANSI palette for one theme document.
+ *
+ * 一份主题解析后的 ANSI 调色板。未知 token 在 fg/bg 时抛，不静默回退。
+ */
 export class Theme {
 	readonly name?: string;
 	readonly sourcePath?: string;
@@ -414,15 +442,30 @@ function getBuiltinThemes(): Record<string, ThemeJson> {
 	return BUILTIN_THEMES;
 }
 
+/**
+ * Unique theme names: built-in, custom files, then registered instances.
+ *
+ * 可用主题名。内置、用户文件、已登记实例去重后按名字排序。
+ */
 export function getAvailableThemes(): string[] {
 	return getAvailableThemesWithPaths().map(({ name }) => name);
 }
 
+/**
+ * Theme name plus the file it was loaded from, if any.
+ *
+ * 主题名和来源路径。内存登记且无 sourcePath 时 path 为 undefined。
+ */
 export interface ThemeInfo {
 	name: string;
 	path: string | undefined;
 }
 
+/**
+ * {@link getAvailableThemes} plus source paths. First name wins.
+ *
+ * 带路径的主题列表。同名以先见到的为准：内置压过用户文件，再压过登记实例。
+ */
 export function getAvailableThemesWithPaths(): ThemeInfo[] {
 	const themesDir = getThemesDir();
 	const result: ThemeInfo[] = [];
@@ -552,6 +595,11 @@ function createTheme(themeJson: ThemeJson, mode?: ColorMode, sourcePath?: string
 	});
 }
 
+/**
+ * Load and resolve one theme JSON file into a {@link Theme}.
+ *
+ * 从路径加载并解析成 Theme。JSON 坏了或校验失败就抛。
+ */
 export function loadThemeFromPath(themePath: string, mode?: ColorMode): Theme {
 	const content = fs.readFileSync(themePath, "utf-8");
 	const themeJson = parseThemeJsonContent(themePath, content);
@@ -567,6 +615,11 @@ function loadTheme(name: string, mode?: ColorMode): Theme {
 	return createTheme(themeJson, mode);
 }
 
+/**
+ * Load a named theme, or undefined if it cannot be resolved.
+ *
+ * 按名取主题。找不到或解析失败返回 undefined，不抛。
+ */
 export function getThemeByName(name: string): Theme | undefined {
 	try {
 		return loadTheme(name);
@@ -575,8 +628,18 @@ export function getThemeByName(name: string): Theme | undefined {
 	}
 }
 
+/**
+ * Terminal background class used to pick an auto theme.
+ *
+ * 终端底色档。auto 设置 `light/dark` 靠它选一边。
+ */
 export type TerminalTheme = "dark" | "light";
 
+/**
+ * Parse `lightName/darkName`. Extra slashes or empty sides yield undefined.
+ *
+ * 解析 `浅色名/深色名`。多一段 `/` 或任一侧为空都当成普通主题名，返回 undefined。
+ */
 export function parseAutoThemeSetting(
 	themeSetting: string | undefined,
 ): { lightTheme: string; darkTheme: string } | undefined {
@@ -594,6 +657,11 @@ export function parseAutoThemeSetting(
 	return { lightTheme, darkTheme };
 }
 
+/**
+ * Resolve a setting to one theme name given the current terminal class.
+ *
+ * 把设置收成一个主题名。auto 跟终端档走；含 `/` 但不是 auto 则 undefined。
+ */
 export function resolveThemeSetting(
 	themeSetting: string | undefined,
 	terminalTheme: TerminalTheme,
@@ -607,6 +675,11 @@ export function resolveThemeSetting(
 	return undefined;
 }
 
+/**
+ * Result of guessing the terminal background class.
+ *
+ * 终端底色探测结果。`confidence` 决定是否写回 settings。
+ */
 export interface TerminalThemeDetection {
 	theme: TerminalTheme;
 	source: "terminal background" | "COLORFGBG" | "fallback";
@@ -614,23 +687,48 @@ export interface TerminalThemeDetection {
 	confidence: "high" | "low";
 }
 
+/**
+ * Optional env override for COLORFGBG detection.
+ *
+ * COLORFGBG 探测的环境覆盖。测试可注入 env，默认 `process.env`。
+ */
 export interface TerminalThemeDetectionOptions {
 	env?: NodeJS.ProcessEnv;
 }
 
+/**
+ * TUI capability: query OSC 11 background RGB.
+ *
+ * 能查 OSC 11 背景色的 TUI。超时或失败由调用方回退 COLORFGBG。
+ */
 export interface TerminalBackgroundThemeDetector {
 	queryTerminalBackgroundColor({ timeoutMs }: { timeoutMs: number }): Promise<RgbColor | undefined>;
 }
 
+/**
+ * TUI capability: color-scheme query plus OSC 11 fallback.
+ *
+ * 能查终端 color-scheme，并回退 OSC 11 的 TUI。
+ */
 export interface TerminalAutoThemeDetector extends TerminalBackgroundThemeDetector {
 	queryTerminalColorScheme?({ timeoutMs }: { timeoutMs: number }): Promise<TerminalTheme | undefined>;
 }
 
+/**
+ * Inputs for {@link detectTerminalBackgroundTheme}.
+ *
+ * OSC 11 探测参数。`timeoutMs` 必须由调用方给出。
+ */
 export interface TerminalBackgroundThemeDetectionOptions extends TerminalThemeDetectionOptions {
 	ui: TerminalBackgroundThemeDetector;
 	timeoutMs: number;
 }
 
+/**
+ * Inputs for {@link detectTerminalThemeForAuto}.
+ *
+ * auto 主题探测参数。先 color-scheme，再 OSC 11 / COLORFGBG。
+ */
 export interface TerminalAutoThemeDetectionOptions extends TerminalThemeDetectionOptions {
 	ui: TerminalAutoThemeDetector;
 	timeoutMs: number;
@@ -659,10 +757,20 @@ function getAnsiColorLuminance(index: number): number {
 	return getRgbColorLuminance(hexToRgb(ansi256ToHex(index)));
 }
 
+/**
+ * Classify an RGB background as light or dark by relative luminance.
+ *
+ * 按相对亮度把 RGB 底色分成 light/dark。阈值 0.5。
+ */
 export function getThemeForRgbColor(rgb: RgbColor): TerminalTheme {
 	return getRgbColorLuminance(rgb) >= 0.5 ? "light" : "dark";
 }
 
+/**
+ * Guess terminal class from COLORFGBG, else dark with low confidence.
+ *
+ * 从 COLORFGBG 猜终端档。没有可用背景索引就 dark + low confidence。
+ */
 export function detectTerminalBackgroundFromEnv(options: TerminalThemeDetectionOptions = {}): TerminalThemeDetection {
 	const env = options.env ?? process.env;
 	const colorfgbg = env.COLORFGBG || "";
@@ -684,6 +792,11 @@ export function detectTerminalBackgroundFromEnv(options: TerminalThemeDetectionO
 	};
 }
 
+/**
+ * Query OSC 11, then fall back to {@link detectTerminalBackgroundFromEnv}.
+ *
+ * 先问 OSC 11，失败再走 COLORFGBG。查询抛错不当失败，只降级。
+ */
 export async function detectTerminalBackgroundTheme({
 	ui,
 	timeoutMs,
@@ -706,6 +819,11 @@ export async function detectTerminalBackgroundTheme({
 	return detectTerminalBackgroundFromEnv({ env });
 }
 
+/**
+ * Prefer the terminal color-scheme query, then OSC 11 / COLORFGBG.
+ *
+ * auto 用的终端档。color-scheme 有结果就用；否则等并行的背景探测。
+ */
 export async function detectTerminalThemeForAuto({
 	ui,
 	timeoutMs,
@@ -728,6 +846,11 @@ export async function detectTerminalThemeForAuto({
 	return (await backgroundThemePromise).theme;
 }
 
+/**
+ * Default theme name from env detection (`dark` or `light`).
+ *
+ * 默认主题名，等于环境探测出的终端档。
+ */
 export function getDefaultTheme(): string {
 	return detectTerminalBackgroundFromEnv().theme;
 }
@@ -740,8 +863,11 @@ export function getDefaultTheme(): string {
 const THEME_KEY = Symbol.for("@earendil-works/pi-coding-agent:theme");
 const THEME_KEY_OLD = Symbol.for("@mariozechner/pi-coding-agent:theme");
 
-// Export theme as a getter that reads from globalThis
-// This ensures all module instances (tsx, jiti) see the same theme
+/**
+ * Process-wide current {@link Theme}. Shared across tsx/jiti loaders via globalThis.
+ *
+ * 进程级当前主题。tsx/jiti 多实例靠 globalThis 共享；未 init 就读会抛。
+ */
 export const theme: Theme = new Proxy({} as Theme, {
 	get(_target, prop) {
 		const t = (globalThis as Record<symbol, Theme>)[THEME_KEY];
@@ -761,6 +887,11 @@ let themeReloadTimer: NodeJS.Timeout | undefined;
 let onThemeChangeCallback: (() => void) | undefined;
 const registeredThemes = new Map<string, Theme>();
 
+/**
+ * Replace the in-memory theme registry. Names must not contain `/`.
+ *
+ * 整表替换内存主题登记。无名实例丢掉；名字含 `/` 立刻抛。
+ */
 export function setRegisteredThemes(themes: Theme[]): void {
 	registeredThemes.clear();
 	for (const theme of themes) {
@@ -771,6 +902,11 @@ export function setRegisteredThemes(themes: Theme[]): void {
 	}
 }
 
+/**
+ * Load the named theme into {@link theme}. Invalid names fall back to `dark`.
+ *
+ * 把命名主题装进全局 proxy。失败静默回退 dark，且不为回退主题开 watcher。
+ */
 export function initTheme(themeName?: string, enableWatcher: boolean = false): void {
 	const name = themeName ?? getDefaultTheme();
 	currentThemeName = name;
@@ -787,6 +923,11 @@ export function initTheme(themeName?: string, enableWatcher: boolean = false): v
 	}
 }
 
+/**
+ * Switch {@link theme} and notify the change callback. Failure still lands on `dark`.
+ *
+ * 切换全局主题并通知回调。失败也落到 dark，返回 error 字符串。
+ */
 export function setTheme(name: string, enableWatcher: boolean = false): { success: boolean; error?: string } {
 	currentThemeName = name;
 	try {
@@ -810,6 +951,11 @@ export function setTheme(name: string, enableWatcher: boolean = false): { succes
 	}
 }
 
+/**
+ * Install an already-built Theme and stop the file watcher.
+ *
+ * 装入现成 Theme 实例并停掉文件 watcher。名字记成 `<in-memory>`。
+ */
 export function setThemeInstance(themeInstance: Theme): void {
 	setGlobalTheme(themeInstance);
 	currentThemeName = "<in-memory>";
@@ -819,6 +965,11 @@ export function setThemeInstance(themeInstance: Theme): void {
 	}
 }
 
+/**
+ * Replace the single theme-change listener used to invalidate the TUI.
+ *
+ * 替换唯一的主题变更监听。后一次覆盖前一次，不是多播。
+ */
 export function onThemeChange(callback: () => void): void {
 	onThemeChangeCallback = callback;
 }
@@ -896,6 +1047,11 @@ function startThemeWatcher(): void {
 		) ?? undefined;
 }
 
+/**
+ * Drop the custom-theme file watcher and any pending reload timer.
+ *
+ * 停掉自定义主题文件 watcher 和待触发的 reload。内置主题本来就不监视。
+ */
 export function stopThemeWatcher(): void {
 	if (themeReloadTimer) {
 		clearTimeout(themeReloadTimer);
@@ -958,6 +1114,8 @@ function ansi256ToHex(index: number): string {
 /**
  * Get resolved theme colors as CSS-compatible hex strings.
  * Used by HTML export to generate CSS custom properties.
+ *
+ * 解析成 CSS hex。256 色转 hex；空串按主题名猜默认正文色。
  */
 export function getResolvedThemeColors(themeName?: string): Record<string, string> {
 	const name = themeName ?? currentThemeName ?? getDefaultTheme();
@@ -984,6 +1142,8 @@ export function getResolvedThemeColors(themeName?: string): Record<string, strin
 
 /**
  * Check if a theme is a "light" theme (for CSS that needs light/dark variants).
+ *
+ * 是否名为 `light`。只看名字，不分析颜色。
  */
 export function isLightTheme(themeName?: string): boolean {
 	// Currently just check the name - could be extended to analyze colors
@@ -993,6 +1153,8 @@ export function isLightTheme(themeName?: string): boolean {
 /**
  * Get explicit export colors from theme JSON, if specified.
  * Returns undefined for each color that isn't explicitly set.
+ *
+ * 主题 JSON 里显式写的导出色。缺段或加载失败返回空对象，不抛。
  */
 export function getThemeExportColors(themeName?: string): {
 	pageBg?: string;
@@ -1074,6 +1236,8 @@ function getCliHighlightTheme(t: Theme): CliHighlightTheme {
 /**
  * Highlight code with syntax coloring based on file extension or language.
  * Returns array of highlighted lines.
+ *
+ * 按语言高亮，返回行数组。未知语言不自动探测，整段用 mdCodeBlock 色。
  */
 export function highlightCode(code: string, lang?: string): string[] {
 	// Validate language before highlighting to avoid stderr spam from cli-highlight
@@ -1098,6 +1262,8 @@ export function highlightCode(code: string, lang?: string): string[] {
 
 /**
  * Get language identifier from file path extension.
+ *
+ * 从扩展名映射 highlight 语言 id。不认识的扩展返回 undefined。
  */
 export function getLanguageFromPath(filePath: string): string | undefined {
 	const ext = filePath.split(".").pop()?.toLowerCase();
@@ -1167,6 +1333,11 @@ export function getLanguageFromPath(filePath: string): string | undefined {
 	return extToLang[ext];
 }
 
+/**
+ * Markdown renderer theme bound to the current {@link theme} proxy.
+ *
+ * 当前全局主题下的 Markdown 配色。代码高亮同样禁止自动语言探测。
+ */
 export function getMarkdownTheme(): MarkdownTheme {
 	return {
 		heading: (text: string) => theme.fg("mdHeading", text),
@@ -1206,6 +1377,11 @@ export function getMarkdownTheme(): MarkdownTheme {
 	};
 }
 
+/**
+ * Select-list colors bound to the current {@link theme} proxy.
+ *
+ * 当前全局主题下的选择列表配色。
+ */
 export function getSelectListTheme(): SelectListTheme {
 	return {
 		selectedPrefix: (text: string) => theme.fg("accent", text),
@@ -1216,6 +1392,11 @@ export function getSelectListTheme(): SelectListTheme {
 	};
 }
 
+/**
+ * Editor chrome colors, including the nested select-list theme.
+ *
+ * 编辑器边框和嵌套选择列表的配色。
+ */
 export function getEditorTheme(): EditorTheme {
 	return {
 		borderColor: (text: string) => theme.fg("borderMuted", text),
@@ -1223,6 +1404,11 @@ export function getEditorTheme(): EditorTheme {
 	};
 }
 
+/**
+ * Settings-list colors bound to the current {@link theme} proxy.
+ *
+ * 当前全局主题下的设置列表配色。
+ */
 export function getSettingsListTheme(): SettingsListTheme {
 	return {
 		label: (text: string, selected: boolean) => (selected ? theme.fg("accent", text) : text),

@@ -1,3 +1,9 @@
+/**
+ * Interactive TUI factory shared by coding-agent presentations.
+ *
+ * 交互 TUI 组装点。fullscreen 走 AltScreen，regular 走 MainScreen；主题查询走当前全局 theme。
+ */
+
 import type { Terminal } from "@earendil-works/pi-tui";
 import { ProcessTerminal, type TUI, TuiAltScreen, TuiMainScreen } from "@earendil-works/pi-tui";
 import { copyToClipboard } from "../../utils/clipboard.ts";
@@ -5,6 +11,11 @@ import { openBrowser } from "../../utils/open-browser.ts";
 import { keyDisplayText } from "./components/keybinding-hints.ts";
 import { theme } from "./theme/theme.ts";
 
+/**
+ * Options for {@link createInteractiveTui}.
+ *
+ * 建 TUI 的输入。`tuiMode` 决定具体类；缺 terminal 时用 ProcessTerminal。
+ */
 export interface InteractiveTuiOptions {
 	readonly tuiMode: "regular" | "fullscreen";
 	readonly showHardwareCursor: boolean;
@@ -14,7 +25,11 @@ export interface InteractiveTuiOptions {
 	readonly fullscreenCopyOnSelect?: boolean;
 }
 
-/** Composition root shared by coding-agent presentations. */
+/**
+ * Composition root shared by coding-agent presentations.
+ *
+ * 按 `tuiMode` 建具体 TUI。fullscreen 才装搜索样式、点选复制和打开 URL。
+ */
 export function createInteractiveTui(options: InteractiveTuiOptions & { readonly tuiMode: "fullscreen" }): TuiAltScreen;
 export function createInteractiveTui(options: InteractiveTuiOptions & { readonly tuiMode: "regular" }): TuiMainScreen;
 export function createInteractiveTui(options: InteractiveTuiOptions): TuiMainScreen | TuiAltScreen;
@@ -47,7 +62,11 @@ export function createInteractiveTui(options: InteractiveTuiOptions): TuiMainScr
 	return new TuiMainScreen(terminal, options.showHardwareCursor, options.logDirectory);
 }
 
-/** Stable reference for components while InteractiveMode replaces the active renderer. */
+/**
+ * Stable reference for components while InteractiveMode replaces the active renderer.
+ *
+ * 指向当前 TUI 的稳定代理。方法每次调用都解析最新实例，避免换屏后持有旧对象。
+ */
 export function createInteractiveTuiReference(getTui: () => TUI): TUI {
 	return new Proxy({} as TUI, {
 		get: (_target, property) => {

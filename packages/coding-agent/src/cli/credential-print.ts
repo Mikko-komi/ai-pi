@@ -1,3 +1,9 @@
+/**
+ * Resolve a single printable provider credential for `pi auth print-*`.
+ *
+ * 给 `print-api-key` / `print-bearer-token` 解析出唯一一条密钥。多匹配必须指定 `--provider`。
+ */
+
 import type { Api, CredentialInfo, Model } from "@earendil-works/pi-ai";
 import { resolveCliModel } from "../core/model-resolver.ts";
 import type { ModelRuntime } from "../core/model-runtime.ts";
@@ -13,6 +19,8 @@ type CredentialPrintKind = Exclude<AuthCommandKind, "check">;
  *
  * This intentionally calls ModelRuntime.getAuth(), which refreshes and persists
  * OAuth credentials with less than five minutes remaining through the normal request-auth path.
+ *
+ * 解析一条可打印凭证。api_key 跳过 OAuth，bearer 只要 OAuth；0 条或多条都抛 AuthCommandError。
  */
 export async function resolveCredentialForPrint(
 	args: Args,

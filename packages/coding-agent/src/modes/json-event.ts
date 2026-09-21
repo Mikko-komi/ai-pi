@@ -1,3 +1,9 @@
+/**
+ * Wire-safe session events for JSON print mode and RPC stdout.
+ *
+ * JSON/RPC 线上的会话事件。`message_update` 去掉累积 snapshot，只留常量子段。
+ */
+
 import type { Usage } from "@earendil-works/pi-ai";
 import type { AgentSessionEvent } from "../core/agent-session.ts";
 
@@ -14,7 +20,11 @@ type JsonMessageUpdateEvent = {
 	assistantMessageEvent: ToJsonAssistantMessageEvent<MessageUpdateEvent["assistantMessageEvent"]>;
 };
 
-/** Session event shape emitted by the JSON and RPC stdout protocols. */
+/**
+ * Session event shape emitted by the JSON and RPC stdout protocols.
+ *
+ * 线上事件。除 `message_update` 外原样转发；该支去掉 `partial`，toolcall_start 补 id/toolName。
+ */
 export type JsonAgentSessionEvent = Exclude<AgentSessionEvent, { type: "message_update" }> | JsonMessageUpdateEvent;
 
 function toJsonAssistantMessageEvent(
@@ -42,6 +52,8 @@ function toJsonAssistantMessageEvent(
  * `message_start` provides the initial message, deltas build it, and
  * `message_end` provides the final authoritative message. Cumulative usage,
  * tool-call ids, and tool names remain available because their size is constant.
+ *
+ * 把内部 `message_update` 收成线上增量。非 assistant 的 update 立刻抛，不当事件发出。
  */
 export function toJsonEvent(event: MessageUpdateEvent): JsonMessageUpdateEvent;
 export function toJsonEvent(event: AgentSessionEvent): JsonAgentSessionEvent;

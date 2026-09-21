@@ -1,5 +1,7 @@
 /**
  * Process @file CLI arguments into text content and image attachments
+ *
+ * 把 `@file` 收成文本块和图片附件。缺文件或读失败会 `process.exit(1)`。
  */
 
 import { access, readFile, stat } from "node:fs/promises";
@@ -11,17 +13,31 @@ import { processImage } from "../utils/image-process.ts";
 import { detectSupportedImageMimeTypeFromFile } from "../utils/mime.ts";
 import { stripBom } from "../utils/text.ts";
 
+/**
+ * Text blocks and image attachments produced from `@file` args.
+ *
+ * `@file` 处理后的文本和图片。空文件被跳过，不占任一侧。
+ */
 export interface ProcessedFiles {
 	text: string;
 	images: ImageContent[];
 }
 
+/**
+ * Image processing knobs for {@link processFileArguments}.
+ *
+ * 处理 `@file` 时的图片选项。默认会把图缩到 2000x2000。
+ */
 export interface ProcessFileOptions {
 	/** Whether to auto-resize images to 2000x2000 max. Default: true */
 	autoResizeImages?: boolean;
 }
 
-/** Process @file arguments into text content and image attachments */
+/**
+ * Process @file arguments into text content and image attachments
+ *
+ * 逐个读 `@file`。图片进 attachments，文本包进 `<file>`；处理失败的图改记文本提示。
+ */
 export async function processFileArguments(fileArgs: string[], options?: ProcessFileOptions): Promise<ProcessedFiles> {
 	const autoResizeImages = options?.autoResizeImages ?? true;
 	let text = "";

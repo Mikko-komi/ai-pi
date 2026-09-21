@@ -3,6 +3,8 @@
  *
  * Commands are sent as JSON lines on stdin.
  * Responses and events are emitted as JSON lines on stdout.
+ *
+ * 无头 RPC 的 stdin/stdout 合同。命令、成功响应、失败响应靠 `type`/`command`/`success` 对齐。
  */
 
 import type { AgentMessage, ThinkingLevel } from "@earendil-works/pi-agent-core";
@@ -17,6 +19,11 @@ import type { SourceInfo } from "../../core/source-info.ts";
 // RPC Commands (stdin)
 // ============================================================================
 
+/**
+ * One stdin command. Optional `id` correlates the matching stdout response.
+ *
+ * stdin 一条命令。可选 `id` 用来对上 stdout 响应；缺 id 仍执行，只是客户端对不上请求。
+ */
 export type RpcCommand =
 	// Prompting
 	| { id?: string; type: "prompt"; message: string; images?: ImageContent[]; streamingBehavior?: "steer" | "followUp" }
@@ -77,7 +84,11 @@ export type RpcCommand =
 // RPC Slash Command (for get_commands response)
 // ============================================================================
 
-/** A command available for invocation via prompt */
+/**
+ * A command available for invocation via prompt
+ *
+ * `get_commands` 返回的一条斜杠命令。`name` 不含前导 `/`。
+ */
 export interface RpcSlashCommand {
 	/** Command name (without leading slash) */
 	name: string;
@@ -93,6 +104,11 @@ export interface RpcSlashCommand {
 // RPC State
 // ============================================================================
 
+/**
+ * Snapshot returned by `get_state`.
+ *
+ * `get_state` 的会话快照。流式/压缩标志是当时观察值，不是订阅流。
+ */
 export interface RpcSessionState {
 	model?: Model<any>;
 	thinkingLevel: ThinkingLevel;
@@ -112,7 +128,11 @@ export interface RpcSessionState {
 // RPC Responses (stdout)
 // ============================================================================
 
-// Success responses with data
+/**
+ * One stdout response. Failures share `success: false` and a string `error`.
+ *
+ * stdout 一条响应。成功支按 command 带 data；失败支 command 放宽成 string。
+ */
 export type RpcResponse =
 	// Prompting (async - events follow)
 	| { id?: string; type: "response"; command: "prompt"; success: true }
@@ -242,7 +262,11 @@ export type RpcResponse =
 // Extension UI Events (stdout)
 // ============================================================================
 
-/** Emitted when an extension needs user input */
+/**
+ * Emitted when an extension needs user input
+ *
+ * 扩展要 UI 时打到 stdout。`id` 必须由后续 `extension_ui_response` 原样带回。
+ */
 export type RpcExtensionUIRequest =
 	| { type: "extension_ui_request"; id: string; method: "select"; title: string; options: string[]; timeout?: number }
 	| { type: "extension_ui_request"; id: string; method: "confirm"; title: string; message: string; timeout?: number }
@@ -284,7 +308,11 @@ export type RpcExtensionUIRequest =
 // Extension UI Commands (stdin)
 // ============================================================================
 
-/** Response to an extension UI request */
+/**
+ * Response to an extension UI request
+ *
+ * 客户端对扩展 UI 的回包。value / confirmed / cancelled 三选一，id 对齐请求。
+ */
 export type RpcExtensionUIResponse =
 	| { type: "extension_ui_response"; id: string; value: string }
 	| { type: "extension_ui_response"; id: string; confirmed: boolean }
@@ -294,4 +322,9 @@ export type RpcExtensionUIResponse =
 // Helper type for extracting command types
 // ============================================================================
 
+/**
+ * Discriminant of {@link RpcCommand}.
+ *
+ * `RpcCommand` 的 `type` 字面量集合，给响应构造函数收窄 command。
+ */
 export type RpcCommandType = RpcCommand["type"];

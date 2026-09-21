@@ -1,5 +1,7 @@
 /**
  * List available models with optional fuzzy search
+ *
+ * `--list-models` 的表格输出。搜不到或目录为空只打提示，不 exit。
  */
 
 import type { Api, Model } from "@earendil-works/pi-ai";
@@ -25,6 +27,8 @@ function formatTokenCount(count: number): string {
 
 /**
  * List available models, optionally filtered by search pattern
+ *
+ * 列出可用模型。models.json 出错只 warning；过滤后为空打 “No models matching”。
  */
 export async function listModels(
 	modelRuntime: ModelRuntime,

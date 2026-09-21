@@ -1,5 +1,7 @@
 /**
  * One-time migrations that run on startup.
+ *
+ * 启动时一次性搬家。写盘失败就跳过，不挡启动；弃用目录只收集警告。
  */
 
 import chalk from "chalk";
@@ -17,6 +19,8 @@ const EXTENSIONS_DOC_URL = "https://github.com/earendil-works/pi/blob/main/packa
  * Migrate legacy oauth.json and settings.json apiKeys to auth.json.
  *
  * @returns Array of provider names that were migrated
+ *
+ * 旧凭证并进 `auth.json`。目标已存在则整段跳过，不覆盖现有凭证。
  */
 export function migrateAuthToAuthJson(): string[] {
 	const agentDir = getAgentDir();
@@ -80,6 +84,8 @@ export function migrateAuthToAuthJson(): string[] {
  * to the correct location based on the cwd in their session header.
  *
  * See: https://github.com/earendil-works/pi-mono/issues/320
+ *
+ * 把误落在 agent 根目录的 jsonl 按 header.cwd 搬进 sessions。目标已存在则不覆盖。
  */
 export function migrateSessionsFromAgentRoot(): void {
 	const agentDir = getAgentDir();
@@ -273,6 +279,8 @@ function migrateExtensionSystem(cwd: string): string[] {
 
 /**
  * Print deprecation warnings and wait for keypress.
+ *
+ * 把弃用目录警告打到终端并等任意键。空列表立刻返回，不碰 stdin。
  */
 export async function showDeprecationWarnings(warnings: string[]): Promise<void> {
 	if (warnings.length === 0) return;
@@ -301,6 +309,8 @@ export async function showDeprecationWarnings(warnings: string[]): Promise<void>
  * Run all migrations. Called once on startup.
  *
  * @returns Object with migration results and deprecation warnings
+ *
+ * 启动迁移总入口。凭证、会话、bin、键位先搬完，再收集扩展目录警告。
  */
 export function runMigrations(cwd: string): {
 	migratedAuthProviders: string[];

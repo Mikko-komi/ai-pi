@@ -1,3 +1,9 @@
+/**
+ * Strict LF JSONL framing for the RPC stdin/stdout protocol.
+ *
+ * RPC 用的严格 LF JSONL。不走 Node readline，避免 Unicode 分隔符把记录切碎。
+ */
+
 import type { Readable } from "node:stream";
 import { StringDecoder } from "node:string_decoder";
 
@@ -6,6 +12,8 @@ import { StringDecoder } from "node:string_decoder";
  *
  * Framing is LF-only. Payload strings may contain other Unicode separators such as
  * U+2028 and U+2029. Clients must split records on `\n` only.
+ *
+ * 序列化一行 JSONL。只在末尾加 `\n`，载荷里的 U+2028/U+2029 原样保留。
  */
 export function serializeJsonLine(value: unknown): string {
 	return `${JSON.stringify(value)}\n`;
@@ -17,6 +25,8 @@ export function serializeJsonLine(value: unknown): string {
  * This intentionally does not use Node readline. Readline splits on additional
  * Unicode separators that are valid inside JSON strings and therefore does not
  * implement strict JSONL framing.
+ *
+ * 按 `\n` 切流并回调整行。返回的函数只摘监听器，不关流；末行无换行也会发出。
  */
 export function attachJsonlLineReader(stream: Readable, onLine: (line: string) => void): () => void {
 	const decoder = new StringDecoder("utf8");

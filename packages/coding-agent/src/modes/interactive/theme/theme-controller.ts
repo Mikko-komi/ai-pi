@@ -1,3 +1,9 @@
+/**
+ * Interactive-mode owner of the live theme setting and terminal auto-sync.
+ *
+ * 交互模式里主题设置的所有者。`auto` 跟终端配色走；显式主题名关掉自动同步。
+ */
+
 import type { TUI } from "@earendil-works/pi-tui";
 import type { SettingsManager } from "../../../core/settings-manager.ts";
 import {
@@ -15,6 +21,11 @@ import {
 
 type ThemeResult = { success: boolean; error?: string };
 
+/**
+ * Applies settings / CLI theme and optionally follows the terminal color scheme.
+ *
+ * 把当前主题设到全局 `theme` 并通知 TUI 重绘。加载失败回退 dark，不把半套主题留下。
+ */
 export class InteractiveThemeController {
 	private readonly ui: TUI;
 	private readonly getSettingsManager: () => SettingsManager;

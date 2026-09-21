@@ -9,6 +9,8 @@
  * - Responses: JSON objects with `type: "response"`, `command`, `success`, and optional `data`/`error`
  * - Events: AgentSessionEvent objects streamed as they occur
  * - Extension UI: Extension UI requests are emitted, client responds with extension_ui_response
+ *
+ * 无头 RPC 模式。stdin 收命令，stdout 打 JSONL 响应和事件；本函数不返回。
  */
 
 import * as crypto from "node:crypto";
@@ -50,6 +52,8 @@ export type {
 /**
  * Run in RPC mode.
  * Listens for JSON commands on stdin, outputs events and responses on stdout.
+ *
+ * 占住 stdout 并循环读 stdin。扩展 UI 请求按 id 挂起，等客户端回 `extension_ui_response`。
  */
 export async function runRpcMode(runtimeHost: AgentSessionRuntime): Promise<never> {
 	takeOverStdout();

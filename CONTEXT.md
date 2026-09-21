@@ -48,6 +48,10 @@ _Avoid_: 测试夹具, 类方法, 再导出
 已完成：pi-ai 的公共合同（types / Models / auth / utils / compat / faux），不含生成目录和各厂商 API 适配器。
 _Avoid_: models.generated.ts, 厂商 *.models.ts, oauth 实现
 
+**第十刀核心**:
+已完成：coding-agent 进程入口、config / CLI / print·rpc·interactive 模式（不含 components）。
+_Avoid_: TUI 组件, experimental CLI
+
 **AgentHarness**:
 agent-core 里按 lane 驱动持久化会话的门面，和旧的 `Agent` 循环并列，不替代 `AgentSession`。
 _Avoid_: Agent, AgentSession

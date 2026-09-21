@@ -1,5 +1,7 @@
 /**
  * Run modes for the coding agent.
+ *
+ * 四种运行模式的再导出门面。定义写在各模式文件，这里不另立合同。
  */
 
 export { InteractiveMode, type InteractiveModeOptions } from "./interactive/interactive-mode.ts";

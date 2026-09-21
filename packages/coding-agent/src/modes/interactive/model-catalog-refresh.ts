@@ -1,3 +1,9 @@
+/**
+ * Shared in-flight refresh of interactive model catalogs.
+ *
+ * 交互里并发刷新模型目录时共用一次 in-flight。各调用方的 AbortSignal 互不影响。
+ */
+
 import type { ModelsRefreshResult } from "@earendil-works/pi-ai";
 import type { ModelRuntime } from "../../core/model-runtime.ts";
 import { raceWithAbortSignal } from "../../utils/abort.ts";
@@ -42,7 +48,11 @@ class ModelCatalogRefreshCoordinator {
 
 const modelCatalogRefreshCoordinator = new ModelCatalogRefreshCoordinator();
 
-/** Share concurrent interactive all-catalog refreshes while keeping each caller's cancellation independent. */
+/**
+ * Share concurrent interactive all-catalog refreshes while keeping each caller's cancellation independent.
+ *
+ * 同一 runtime 共用一次 refresh。最后一个 waiter 取消才 abort 底层请求。
+ */
 export function refreshModelCatalogs(
 	modelRuntime: ModelCatalogRuntime,
 	signal: AbortSignal,
