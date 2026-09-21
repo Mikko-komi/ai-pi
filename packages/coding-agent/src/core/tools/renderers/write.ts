@@ -4,6 +4,8 @@
  * Renderers live apart from the implementation so a process that only displays tool output does not
  * load the execution path or its typebox parameter schema. `write.ts` spreads these into its
  * definition, so the tool's public shape is unchanged.
+ *
+ * write 的展示层。本文件不写盘；正文高亮缓存在组件上。
  */
 
 import { Container, Text } from "@earendil-works/pi-tui";
@@ -142,6 +144,11 @@ function formatWriteResult(
 	return `\n${theme.fg("error", output)}`;
 }
 
+/**
+ * TUI presentation for the write tool.
+ *
+ * write 的展示。流式参数时增量高亮；成功结果不额外占行。
+ */
 export const writeRenderers: Pick<ToolDefinition<any, any>, "renderCall" | "renderResult"> = {
 	renderCall(args, theme, context) {
 		const renderArgs = args as { path?: string; file_path?: string; content?: string } | undefined;

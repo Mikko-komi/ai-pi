@@ -1,3 +1,9 @@
+/**
+ * Edit tool: exact text replacements against the original file.
+ *
+ * 精确替换工具。每条 oldText 对原文匹配，不允许重叠；BOM 和换行会还原。
+ */
+
 import type { AgentTool } from "@earendil-works/pi-agent-core";
 import { constants } from "fs";
 import { access as fsAccess, readFile as fsReadFile, writeFile as fsWriteFile } from "fs/promises";
@@ -40,6 +46,11 @@ const editSchema = Type.Object(
 	{},
 );
 
+/**
+ * System-prompt snippet and guidelines for the edit tool.
+ *
+ * edit 写进系统提示的片段。多处改动应合并进一次 edits[]。
+ */
 export const editToolSystemPromptContribution = {
 	snippet: "Make precise file edits with exact text replacement, including multiple disjoint edits in one call",
 	guidelines: [
@@ -50,6 +61,11 @@ export const editToolSystemPromptContribution = {
 	],
 } as const;
 
+/**
+ * Arguments the model sends to the edit tool.
+ *
+ * edit 调用参数。edits 至少一条，每条 oldText 必须在原文里唯一。
+ */
 export type EditToolInput = Static<typeof editSchema>;
 type LegacyEditToolInput = EditToolInput & {
 	oldText?: unknown;
@@ -67,6 +83,11 @@ function isSingleEditInput(value: unknown): value is SingleEditInput {
 	return typeof edit.oldText === "string" && typeof edit.newText === "string";
 }
 
+/**
+ * Diff metadata returned after a successful edit.
+ *
+ * 成功后的 diff。`firstChangedLine` 给编辑器跳转。
+ */
 export interface EditToolDetails {
 	/** Display-oriented diff of the changes made */
 	diff: string;
@@ -79,6 +100,8 @@ export interface EditToolDetails {
 /**
  * Pluggable operations for the edit tool.
  * Override these to delegate file editing to remote systems (for example SSH).
+ *
+ * edit 的可替换读写口。access 必须同时可读写。
  */
 export interface EditOperations {
 	/** Read file contents as a Buffer */
@@ -95,6 +118,11 @@ const defaultEditOperations: EditOperations = {
 	access: (path) => fsAccess(path, constants.R_OK | constants.W_OK),
 };
 
+/**
+ * Options for creating the edit tool.
+ *
+ * edit 工厂选项。operations 缺省走本地文件系统。
+ */
 export interface EditToolOptions {
 	/** Custom operations for file editing. Default: local filesystem */
 	operations?: EditOperations;
@@ -140,6 +168,11 @@ function validateEditInput(input: EditToolInput): { path: string; edits: Edit[] 
 	return { path: input.path, edits: input.edits };
 }
 
+/**
+ * Create the built-in edit ToolDefinition.
+ *
+ * 内置 edit 定义。匹配前去 BOM、统一 LF；写回时还原换行和 BOM。
+ */
 export function createEditToolDefinition(
 	cwd: string,
 	options?: EditToolOptions,
@@ -215,6 +248,11 @@ export function createEditToolDefinition(
 	};
 }
 
+/**
+ * Create the built-in edit AgentTool.
+ *
+ * 内置 edit 运行时工具。定义再 wrap。
+ */
 export function createEditTool(cwd: string, options?: EditToolOptions): AgentTool<typeof editSchema> {
 	return wrapToolDefinition(createEditToolDefinition(cwd, options));
 }

@@ -1,3 +1,9 @@
+/**
+ * Built-in coding-agent tool factories and name unions.
+ *
+ * 内置工具的工厂和名字并集。这里只装配，具体执行在各工具文件。
+ */
+
 export {
 	type BashOperations,
 	type BashSpawnContext,
@@ -90,9 +96,32 @@ import { createPowerShellTool, createPowerShellToolDefinition, type PowerShellTo
 import { createReadTool, createReadToolDefinition, type ReadToolOptions } from "./read.ts";
 import { createWriteTool, createWriteToolDefinition, type WriteToolOptions } from "./write.ts";
 
+/**
+ * Runtime AgentTool instance used by the coding agent.
+ *
+ * 运行时工具实例。和 ToolDef 对应，给 Agent 循环直接调用。
+ */
 export type Tool = AgentTool<any>;
+
+/**
+ * ToolDefinition used to register or wrap a built-in tool.
+ *
+ * 带 prompt / 渲染元数据的工具定义。wrap 之后才变成 AgentTool。
+ */
 export type ToolDef = ToolDefinition<any, any>;
+
+/**
+ * Built-in tool name.
+ *
+ * 内置工具名并集。未知名字在工厂里抛错。
+ */
 export type ToolName = "read" | "bash" | "powershell" | "edit" | "write" | "grep" | "find" | "ls";
+
+/**
+ * Set of every built-in tool name.
+ *
+ * 全部内置工具名。用来判断名字是否合法。
+ */
 export const allToolNames: Set<ToolName> = new Set([
 	"read",
 	"bash",
@@ -104,6 +133,11 @@ export const allToolNames: Set<ToolName> = new Set([
 	"ls",
 ]);
 
+/**
+ * Per-tool options passed through the factory helpers.
+ *
+ * 各工具自己的选项。缺的项走该工具默认。
+ */
 export interface ToolsOptions {
 	read?: ReadToolOptions;
 	bash?: BashToolOptions;
@@ -115,6 +149,11 @@ export interface ToolsOptions {
 	ls?: LsToolOptions;
 }
 
+/**
+ * Create one ToolDefinition by built-in name.
+ *
+ * 按名字造一条定义。未知名字抛错。
+ */
 export function createToolDefinition(toolName: ToolName, cwd: string, options?: ToolsOptions): ToolDef {
 	switch (toolName) {
 		case "read":
@@ -138,6 +177,11 @@ export function createToolDefinition(toolName: ToolName, cwd: string, options?: 
 	}
 }
 
+/**
+ * Create one AgentTool by built-in name.
+ *
+ * 按名字造运行时工具。内部先定义再 wrap。
+ */
 export function createTool(toolName: ToolName, cwd: string, options?: ToolsOptions): Tool {
 	switch (toolName) {
 		case "read":
@@ -161,6 +205,11 @@ export function createTool(toolName: ToolName, cwd: string, options?: ToolsOptio
 	}
 }
 
+/**
+ * Definitions for the default coding set: read, bash, edit, write.
+ *
+ * 默认编码工具定义。不含 powershell 和只读搜索工具。
+ */
 export function createCodingToolDefinitions(cwd: string, options?: ToolsOptions): ToolDef[] {
 	return [
 		createReadToolDefinition(cwd, options?.read),
@@ -170,6 +219,11 @@ export function createCodingToolDefinitions(cwd: string, options?: ToolsOptions)
 	];
 }
 
+/**
+ * Definitions for the read-only set: read, grep, find, ls.
+ *
+ * 只读工具定义。不含会改文件或跑 shell 的工具。
+ */
 export function createReadOnlyToolDefinitions(cwd: string, options?: ToolsOptions): ToolDef[] {
 	return [
 		createReadToolDefinition(cwd, options?.read),
@@ -179,6 +233,11 @@ export function createReadOnlyToolDefinitions(cwd: string, options?: ToolsOption
 	];
 }
 
+/**
+ * All built-in ToolDefinitions keyed by ToolName.
+ *
+ * 全部内置定义。按名字取，含 powershell。
+ */
 export function createAllToolDefinitions(cwd: string, options?: ToolsOptions): Record<ToolName, ToolDef> {
 	return {
 		read: createReadToolDefinition(cwd, options?.read),
@@ -192,6 +251,11 @@ export function createAllToolDefinitions(cwd: string, options?: ToolsOptions): R
 	};
 }
 
+/**
+ * Runtime tools for the default coding set.
+ *
+ * 默认编码工具实例。集合和 createCodingToolDefinitions 对齐。
+ */
 export function createCodingTools(cwd: string, options?: ToolsOptions): Tool[] {
 	return [
 		createReadTool(cwd, options?.read),
@@ -201,6 +265,11 @@ export function createCodingTools(cwd: string, options?: ToolsOptions): Tool[] {
 	];
 }
 
+/**
+ * Runtime tools for the read-only set.
+ *
+ * 只读工具实例。集合和 createReadOnlyToolDefinitions 对齐。
+ */
 export function createReadOnlyTools(cwd: string, options?: ToolsOptions): Tool[] {
 	return [
 		createReadTool(cwd, options?.read),
@@ -210,6 +279,11 @@ export function createReadOnlyTools(cwd: string, options?: ToolsOptions): Tool[]
 	];
 }
 
+/**
+ * All built-in AgentTools keyed by ToolName.
+ *
+ * 全部内置工具实例。按名字取。
+ */
 export function createAllTools(cwd: string, options?: ToolsOptions): Record<ToolName, Tool> {
 	return {
 		read: createReadTool(cwd, options?.read),

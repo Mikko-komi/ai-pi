@@ -1,3 +1,9 @@
+/**
+ * Find tool: glob file search via fd or custom operations.
+ *
+ * 按 glob 找文件。默认走 fd；有自定义 glob 则不启动 fd。
+ */
+
 import { createInterface } from "node:readline";
 import type { AgentTool } from "@earendil-works/pi-agent-core";
 import { spawn } from "child_process";
@@ -10,7 +16,11 @@ import { findRenderers } from "./renderers/find.ts";
 import { wrapToolDefinition } from "./tool-definition-wrapper.ts";
 import { DEFAULT_MAX_BYTES, formatSize, type TruncationResult, truncateHead } from "./truncate.ts";
 
-/** Relativize a find result against the search root and normalize it to posix separators. */
+/**
+ * Relativize a find result against the search root and normalize it to posix separators.
+ *
+ * 相对搜索根并改成 posix 分隔。保留末尾 `/`。
+ */
 export function relativizeFindResultPath(
 	resultPath: string,
 	searchPath: string,
@@ -31,15 +41,30 @@ const findSchema = Type.Object({
 	limit: Type.Optional(Type.Number({ description: "Maximum number of results (default: 1000)" })),
 });
 
+/**
+ * System-prompt snippet for the find tool.
+ *
+ * find 写进系统提示的片段。说明遵守 .gitignore。
+ */
 export const findToolSystemPromptContribution = {
 	snippet: "Find files by glob pattern (respects .gitignore)",
 	guidelines: [],
 } as const;
 
+/**
+ * Arguments the model sends to the find tool.
+ *
+ * find 调用参数。默认最多 1000 条。
+ */
 export type FindToolInput = Static<typeof findSchema>;
 
 const DEFAULT_LIMIT = 1000;
 
+/**
+ * Extra result metadata when find hits a limit.
+ *
+ * 触顶或截断时的附加信息。全空则 details 为 undefined。
+ */
 export interface FindToolDetails {
 	truncation?: TruncationResult;
 	resultLimitReached?: number;
@@ -48,6 +73,8 @@ export interface FindToolDetails {
 /**
  * Pluggable operations for the find tool.
  * Override these to delegate file search to remote systems (for example SSH).
+ *
+ * find 的可替换搜索口。提供 glob 就不再跑本机 fd。
  */
 export interface FindOperations {
 	/** Check if path exists */
@@ -62,11 +89,21 @@ const defaultFindOperations: FindOperations = {
 	glob: () => [],
 };
 
+/**
+ * Options for creating the find tool.
+ *
+ * find 工厂选项。operations 缺省走本地 fd。
+ */
 export interface FindToolOptions {
 	/** Custom operations for find. Default: local filesystem plus fd */
 	operations?: FindOperations;
 }
 
+/**
+ * Create the built-in find ToolDefinition.
+ *
+ * 内置 find 定义。git 仓库内尊重嵌套 .gitignore；仓库外加 --no-require-git。
+ */
 export function createFindToolDefinition(
 	cwd: string,
 	options?: FindToolOptions,
@@ -313,6 +350,11 @@ export function createFindToolDefinition(
 	};
 }
 
+/**
+ * Create the built-in find AgentTool.
+ *
+ * 内置 find 运行时工具。定义再 wrap。
+ */
 export function createFindTool(cwd: string, options?: FindToolOptions): AgentTool<typeof findSchema> {
 	return wrapToolDefinition(createFindToolDefinition(cwd, options));
 }

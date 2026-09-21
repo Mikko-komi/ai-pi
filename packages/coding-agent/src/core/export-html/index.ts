@@ -1,3 +1,9 @@
+/**
+ * Session HTML export.
+ *
+ * 会话树导出成单文件 HTML。bash/read/write/edit/ls 走模板；其它工具可预渲染。
+ */
+
 import type { AgentState } from "@earendil-works/pi-agent-core";
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import { basename, join } from "path";
@@ -11,6 +17,8 @@ import { SessionManager } from "../session-manager.ts";
 /**
  * Interface for rendering custom tools to HTML.
  * Used by agent-session to pre-render extension tool output.
+ *
+ * 导出时预渲染扩展工具的契约。内置模板工具不走这里。
  */
 export interface ToolHtmlRenderer {
 	/** Render a tool call to HTML. Returns undefined if tool has no custom renderer. */
@@ -32,6 +40,11 @@ interface RenderedToolHtml {
 	resultHtmlExpanded?: string;
 }
 
+/**
+ * Destination, theme, and optional custom-tool HTML renderer for an export.
+ *
+ * 导出落盘选项。调用方可把路径字符串直接当 `options` 传入，由导出函数拆开。
+ */
 export interface ExportOptions {
 	outputPath?: string;
 	themeName?: string;
@@ -232,6 +245,8 @@ function preRenderCustomTools(
 /**
  * Export session to HTML using SessionManager and AgentState.
  * Used by TUI's /export command.
+ *
+ * 从 SessionManager 导出。内存会话或文件还不存在会 throw；自定义工具可预渲染。
  */
 export async function exportSessionToHtml(
 	sm: SessionManager,
@@ -284,6 +299,8 @@ export async function exportSessionToHtml(
 /**
  * Export session file to HTML (standalone, without AgentState).
  * Used by CLI for exporting arbitrary session files.
+ *
+ * 只凭会话文件导出，没有 AgentState。缺文件 throw；即使给了 toolRenderer 也不预渲染。
  */
 export async function exportFromFile(inputPath: string, options?: ExportOptions | string): Promise<string> {
 	const opts: ExportOptions = typeof options === "string" ? { outputPath: options } : options || {};

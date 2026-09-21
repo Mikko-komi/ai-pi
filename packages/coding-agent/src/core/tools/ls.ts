@@ -1,3 +1,9 @@
+/**
+ * Ls tool: list directory entries with a count/byte cap.
+ *
+ * 列目录工具。含点文件；目录名带 `/`；按不区分大小写排序。
+ */
+
 import { readdir as fsReaddir, stat as fsStat } from "node:fs/promises";
 import type { AgentTool } from "@earendil-works/pi-agent-core";
 import nodePath from "path";
@@ -13,15 +19,30 @@ const lsSchema = Type.Object({
 	limit: Type.Optional(Type.Number({ description: "Maximum number of entries to return (default: 500)" })),
 });
 
+/**
+ * System-prompt snippet for the ls tool.
+ *
+ * ls 写进系统提示的片段。只描述列目录。
+ */
 export const lsToolSystemPromptContribution = {
 	snippet: "List directory contents",
 	guidelines: [],
 } as const;
 
+/**
+ * Arguments the model sends to the ls tool.
+ *
+ * ls 调用参数。默认最多 500 条。
+ */
 export type LsToolInput = Static<typeof lsSchema>;
 
 const DEFAULT_LIMIT = 500;
 
+/**
+ * Extra result metadata when ls hits a limit.
+ *
+ * 触顶或截断时的附加信息。全空则 details 为 undefined。
+ */
 export interface LsToolDetails {
 	truncation?: TruncationResult;
 	entryLimitReached?: number;
@@ -30,6 +51,8 @@ export interface LsToolDetails {
 /**
  * Pluggable operations for the ls tool.
  * Override these to delegate directory listing to remote systems (for example SSH).
+ *
+ * ls 的可替换列目录口。远程只换这一层。
  */
 export interface LsOperations {
 	/** Check if path exists */
@@ -46,11 +69,21 @@ const defaultLsOperations: LsOperations = {
 	readdir: fsReaddir,
 };
 
+/**
+ * Options for creating the ls tool.
+ *
+ * ls 工厂选项。operations 缺省走本地文件系统。
+ */
 export interface LsToolOptions {
 	/** Custom operations for directory listing. Default: local filesystem */
 	operations?: LsOperations;
 }
 
+/**
+ * Create the built-in ls ToolDefinition.
+ *
+ * 内置 ls 定义。stat 失败的条目跳过；空目录返回固定文案。
+ */
 export function createLsToolDefinition(
 	cwd: string,
 	options?: LsToolOptions,
@@ -170,6 +203,11 @@ export function createLsToolDefinition(
 	};
 }
 
+/**
+ * Create the built-in ls AgentTool.
+ *
+ * 内置 ls 运行时工具。定义再 wrap。
+ */
 export function createLsTool(cwd: string, options?: LsToolOptions): AgentTool<typeof lsSchema> {
 	return wrapToolDefinition(createLsToolDefinition(cwd, options));
 }

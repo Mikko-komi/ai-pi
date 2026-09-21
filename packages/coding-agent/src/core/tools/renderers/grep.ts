@@ -4,6 +4,8 @@
  * Renderers live apart from the implementation so a process that only displays tool output does not
  * load the execution path or its typebox parameter schema. `grep.ts` spreads these into its
  * definition, so the tool's public shape is unchanged.
+ *
+ * grep 的展示层。本文件不搜索；截断原因只读 details。
  */
 
 import { Text } from "@earendil-works/pi-tui";
@@ -68,6 +70,11 @@ function formatGrepResult(
 	return text;
 }
 
+/**
+ * TUI presentation for the grep tool.
+ *
+ * grep 的展示。折叠默认 15 行；截断警告来自 details，不重新跑搜索。
+ */
 export const grepRenderers: Pick<ToolDefinition<any, any>, "renderCall" | "renderResult"> = {
 	renderCall(args, theme, context) {
 		const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);

@@ -4,6 +4,8 @@
  * Renderers live apart from the implementation so a process that only displays tool output does not
  * load the execution path or its typebox parameter schema. `ls.ts` spreads these into its
  * definition, so the tool's public shape is unchanged.
+ *
+ * ls 的展示层。本文件不列目录；空路径显示为 `.`。
  */
 
 import { Text } from "@earendil-works/pi-tui";
@@ -56,6 +58,11 @@ function formatLsResult(
 	return text;
 }
 
+/**
+ * TUI presentation for the ls tool.
+ *
+ * ls 的展示。折叠默认 20 行；截断只读 details。
+ */
 export const lsRenderers: Pick<ToolDefinition<any, any>, "renderCall" | "renderResult"> = {
 	renderCall(args, theme, context) {
 		const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);

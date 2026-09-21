@@ -4,6 +4,8 @@
  * Renderers live apart from the implementation so a process that only displays tool output does not
  * load the execution path or its typebox parameter schema. `edit.ts` spreads these into its
  * definition, so the tool's public shape is unchanged.
+ *
+ * edit 的展示层。预览会读盘算 diff，但不写回；真正替换在工具执行里。
  */
 
 import { Box, Container, Spacer, Text } from "@earendil-works/pi-tui";
@@ -15,6 +17,12 @@ import { computeEditsDiff, type Edit, type EditDiffError, type EditDiffResult } 
 import { renderToolPath, str } from "../render-utils.ts";
 
 type EditPreview = EditDiffResult | EditDiffError;
+
+/**
+ * Mutable render state shared between edit call and result passes.
+ *
+ * 跨 renderCall/renderResult 复用同一个 Box，才能把预览和结算结果叠在同一块上。
+ */
 export type EditRenderState = {
 	callComponent?: EditCallRenderComponent;
 };
@@ -168,6 +176,11 @@ function setEditPreview(
 	return changed;
 }
 
+/**
+ * TUI presentation for the edit tool.
+ *
+ * edit 的展示。参数齐了就异步算预览 diff；结果若与预览相同就不再画一遍。
+ */
 export const editRenderers: Pick<ToolDefinition<any, any>, "renderCall" | "renderResult"> = {
 	renderCall(args, theme, context) {
 		const component = getEditCallRenderComponent(context.state, context.lastComponent);

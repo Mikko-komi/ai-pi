@@ -6,12 +6,36 @@
  * - Byte limit (default: 50KB)
  *
  * Never returns partial lines (except bash tail truncation edge case).
+ *
+ * 工具输出截断。行数和字节谁先到谁赢；除 tail 末行超限外不返回半行。
  */
 
+/**
+ * Default complete-line cap for tool output.
+ *
+ * 默认行数上限。2000 行。
+ */
 export const DEFAULT_MAX_LINES = 2000;
+
+/**
+ * Default byte cap for tool output.
+ *
+ * 默认字节上限。50KB。
+ */
 export const DEFAULT_MAX_BYTES = 50 * 1024; // 50KB
+
+/**
+ * Max characters kept on one grep match line.
+ *
+ * grep 单行字符上限。超了加 `[truncated]`。
+ */
 export const GREP_MAX_LINE_LENGTH = 500; // Max chars per grep match line
 
+/**
+ * Outcome of applying line and byte caps to a string.
+ *
+ * 一次截断结果。没截断时 truncatedBy 为 null。
+ */
 export interface TruncationResult {
 	/** The truncated content */
 	content: string;
@@ -37,6 +61,11 @@ export interface TruncationResult {
 	maxBytes: number;
 }
 
+/**
+ * Overrides for the shared line and byte caps.
+ *
+ * 截断上限覆盖。缺的项走模块默认。
+ */
 export interface TruncationOptions {
 	/** Maximum number of lines (default: 2000) */
 	maxLines?: number;
@@ -57,6 +86,8 @@ function splitLinesForCounting(content: string): string[] {
 
 /**
  * Format bytes as human-readable size.
+ *
+ * 字节转可读大小。到 KB / MB 保留一位小数。
  */
 export function formatSize(bytes: number): string {
 	if (bytes < 1024) {
@@ -74,6 +105,8 @@ export function formatSize(bytes: number): string {
  *
  * Never returns partial lines. If first line exceeds byte limit,
  * returns empty content with firstLineExceedsLimit=true.
+ *
+ * 从头截。首行超字节上限则内容为空并标 firstLineExceedsLimit。
  */
 export function truncateHead(content: string, options: TruncationOptions = {}): TruncationResult {
 	const maxLines = options.maxLines ?? DEFAULT_MAX_LINES;
@@ -164,6 +197,8 @@ export function truncateHead(content: string, options: TruncationOptions = {}): 
  * Suitable for bash output where you want to see the end (errors, final results).
  *
  * May return partial first line if the last line of original content exceeds byte limit.
+ *
+ * 从尾截。末行单独超字节上限时允许半行。
  */
 export function truncateTail(content: string, options: TruncationOptions = {}): TruncationResult {
 	const maxLines = options.maxLines ?? DEFAULT_MAX_LINES;
@@ -264,6 +299,8 @@ function truncateStringToBytesFromEnd(str: string, maxBytes: number): string {
 /**
  * Truncate a single line to max characters, adding [truncated] suffix.
  * Used for grep match lines.
+ *
+ * 单行按字符截。超限加 `... [truncated]`。
  */
 export function truncateLine(
 	line: string,

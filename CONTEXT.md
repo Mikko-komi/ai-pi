@@ -24,6 +24,10 @@ _Avoid_: 工具实现细节, telemetry schema 别名
 已完成：`packages/coding-agent/src/core` 除 `tools/` 与 `export-html/` 外的导出符号。
 _Avoid_: 工具实现, HTML 导出渲染
 
+**第四刀核心**:
+已完成：`packages/coding-agent/src/core/tools` 与 `export-html` 的导出符号。
+_Avoid_: 类方法, 再导出
+
 **AgentHarness**:
 agent-core 里按 lane 驱动持久化会话的门面，和旧的 `Agent` 循环并列，不替代 `AgentSession`。
 _Avoid_: Agent, AgentSession

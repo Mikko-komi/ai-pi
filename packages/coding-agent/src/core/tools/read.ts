@@ -1,3 +1,9 @@
+/**
+ * Read tool: text files and images, with offset/limit and truncation.
+ *
+ * 读文件工具。文本按行截断；图片当附件，当前模型不支持视觉时只留说明。
+ */
+
 import type { AgentTool } from "@earendil-works/pi-agent-core";
 import type { Api, ImageContent, Model, TextContent } from "@earendil-works/pi-ai";
 import { constants } from "fs";
@@ -17,13 +23,28 @@ const readSchema = Type.Object({
 	limit: Type.Optional(Type.Number({ description: "Maximum number of lines to read" })),
 });
 
+/**
+ * System-prompt snippet and guidelines for the read tool.
+ *
+ * read 写进系统提示的片段。引导用 read 而不是 cat / sed。
+ */
 export const readToolSystemPromptContribution = {
 	snippet: "Read file contents",
 	guidelines: ["Use read to examine files instead of cat or sed."],
 } as const;
 
+/**
+ * Arguments the model sends to the read tool.
+ *
+ * read 调用参数。offset 从 1 起；超出文件行数会失败。
+ */
 export type ReadToolInput = Static<typeof readSchema>;
 
+/**
+ * Extra result metadata when the read is truncated.
+ *
+ * 截断时的附加信息。没截断则为 undefined。
+ */
 export interface ReadToolDetails {
 	truncation?: TruncationResult;
 }
@@ -31,6 +52,8 @@ export interface ReadToolDetails {
 /**
  * Pluggable operations for the read tool.
  * Override these to delegate file reading to remote systems (for example SSH).
+ *
+ * read 的可替换读写口。远程只换这一层；图片 MIME 探测可缺。
  */
 export interface ReadOperations {
 	/** Read file contents as a Buffer */
@@ -47,6 +70,11 @@ const defaultReadOperations: ReadOperations = {
 	detectImageMimeType: detectSupportedImageMimeTypeFromFile,
 };
 
+/**
+ * Options for creating the read tool.
+ *
+ * read 工厂选项。默认自动缩小图片到 2000x2000。
+ */
 export interface ReadToolOptions {
 	/** Whether to auto-resize images to 2000x2000 max. Default: true */
 	autoResizeImages?: boolean;
@@ -61,6 +89,11 @@ function getNonVisionImageNote(model: Model<Api> | undefined): string | undefine
 	return "[Current model does not support images. The image will be omitted from this request.]";
 }
 
+/**
+ * Create the built-in read ToolDefinition.
+ *
+ * 内置 read 定义。文本走 truncateHead；超限提示用 offset 续读。
+ */
 export function createReadToolDefinition(
 	cwd: string,
 	options?: ReadToolOptions,
@@ -192,6 +225,11 @@ export function createReadToolDefinition(
 	};
 }
 
+/**
+ * Create the built-in read AgentTool.
+ *
+ * 内置 read 运行时工具。定义再 wrap。
+ */
 export function createReadTool(cwd: string, options?: ReadToolOptions): AgentTool<typeof readSchema> {
 	return wrapToolDefinition(createReadToolDefinition(cwd, options));
 }

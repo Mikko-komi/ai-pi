@@ -1,15 +1,31 @@
+/**
+ * Bounded streaming output buffer with optional full-output temp file.
+ *
+ * 流式输出累加器。内存只留尾巴；超限才开临时文件写全文。
+ */
+
 import { randomBytes } from "node:crypto";
 import { createWriteStream, type WriteStream } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { DEFAULT_MAX_BYTES, DEFAULT_MAX_LINES, type TruncationResult, truncateTail } from "./truncate.ts";
 
+/**
+ * Limits and temp-file prefix for an accumulator.
+ *
+ * 累加器上限。缺省用 truncate 模块的默认行/字节。
+ */
 export interface OutputAccumulatorOptions {
 	maxLines?: number;
 	maxBytes?: number;
 	tempFilePrefix?: string;
 }
 
+/**
+ * One display snapshot of accumulated output.
+ *
+ * 当前快照。`fullOutputPath` 只在已开临时文件时有。
+ */
 export interface OutputSnapshot {
 	content: string;
 	truncation: TruncationResult;
@@ -31,6 +47,8 @@ function byteLength(text: string): number {
  * Appends decode chunks with a streaming UTF-8 decoder, keeps only a decoded
  * tail for display snapshots, and opens a temp file when the full output needs
  * to be preserved.
+ *
+ * 流式累加输出。finish 之后不能再 append；截断时才落临时文件。
  */
 export class OutputAccumulator {
 	private readonly maxLines: number;

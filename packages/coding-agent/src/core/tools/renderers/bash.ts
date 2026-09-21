@@ -4,6 +4,8 @@
  * Renderers live apart from the implementation so a process that only displays tool output does not
  * load the execution path or its typebox parameter schema. `bash.ts` spreads these into the shell
  * tool definition, so the tool's public shape is unchanged.
+ *
+ * shell 工具的展示层。bash 和 powershell 共用，只换提示符；本文件不执行命令。
  */
 
 import { Container, Text, truncateToWidth } from "@earendil-works/pi-tui";
@@ -16,6 +18,12 @@ import { getTextOutput, invalidArgText, str } from "../render-utils.ts";
 import { DEFAULT_MAX_BYTES, formatSize } from "../truncate.ts";
 
 const BASH_PREVIEW_LINES = 5;
+
+/**
+ * Minimum interval between live bash result redraws.
+ *
+ * 流式输出刷新间隔。执行路径拿它节流 notify，渲染器不读这个常数。
+ */
 export const BASH_UPDATE_THROTTLE_MS = 100;
 type BashResultRenderState = {
 	cachedWidth: number | undefined;
@@ -121,7 +129,11 @@ function rebuildBashResultRenderComponent(
 	}
 }
 
-/** Shell renderers are shared by bash and powershell, which differ only in the prompt they display. */
+/**
+ * Shell renderers are shared by bash and powershell, which differ only in the prompt they display.
+ *
+ * bash/powershell 共用的展示，只换提示符。不加载执行路径。
+ */
 export function createShellRenderers(prompt: string): Pick<ToolDefinition<any, any>, "renderCall" | "renderResult"> {
 	return {
 		renderCall(args, _theme, context) {

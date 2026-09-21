@@ -1,3 +1,9 @@
+/**
+ * Grep tool: ripgrep search with optional context and match limits.
+ *
+ * 内容搜索工具。默认走 rg；自定义 operations 只替换读文件和判目录。
+ */
+
 import { readFile as fsReadFile, stat as fsStat } from "node:fs/promises";
 import { createInterface } from "node:readline";
 import type { AgentTool } from "@earendil-works/pi-agent-core";
@@ -32,14 +38,29 @@ const grepSchema = Type.Object({
 	limit: Type.Optional(Type.Number({ description: "Maximum number of matches to return (default: 100)" })),
 });
 
+/**
+ * System-prompt snippet for the grep tool.
+ *
+ * grep 写进系统提示的片段。说明遵守 .gitignore。
+ */
 export const grepToolSystemPromptContribution = {
 	snippet: "Search file contents for patterns (respects .gitignore)",
 	guidelines: [],
 } as const;
 
+/**
+ * Arguments the model sends to the grep tool.
+ *
+ * grep 调用参数。默认最多 100 条匹配。
+ */
 export type GrepToolInput = Static<typeof grepSchema>;
 const DEFAULT_LIMIT = 100;
 
+/**
+ * Extra result metadata when grep hits a limit.
+ *
+ * 触顶或截断时的附加信息。全空则 details 为 undefined。
+ */
 export interface GrepToolDetails {
 	truncation?: TruncationResult;
 	matchLimitReached?: number;
@@ -49,6 +70,8 @@ export interface GrepToolDetails {
 /**
  * Pluggable operations for the grep tool.
  * Override these to delegate search to remote systems (for example SSH).
+ *
+ * grep 的可替换文件口。搜仍走本机 rg；这里只负责判目录和读上下文行。
  */
 export interface GrepOperations {
 	/** Check if path is a directory. Throws if path does not exist. */
@@ -62,11 +85,21 @@ const defaultGrepOperations: GrepOperations = {
 	readFile: (p) => fsReadFile(p, "utf-8"),
 };
 
+/**
+ * Options for creating the grep tool.
+ *
+ * grep 工厂选项。operations 缺省走本地文件系统。
+ */
 export interface GrepToolOptions {
 	/** Custom operations for grep. Default: local filesystem plus ripgrep */
 	operations?: GrepOperations;
 }
 
+/**
+ * Create the built-in grep ToolDefinition.
+ *
+ * 内置 grep 定义。匹配数或字节先到先截；长行再按字符截。
+ */
 export function createGrepToolDefinition(
 	cwd: string,
 	options?: GrepToolOptions,
@@ -318,6 +351,11 @@ export function createGrepToolDefinition(
 	};
 }
 
+/**
+ * Create the built-in grep AgentTool.
+ *
+ * 内置 grep 运行时工具。定义再 wrap。
+ */
 export function createGrepTool(cwd: string, options?: GrepToolOptions): AgentTool<typeof grepSchema> {
 	return wrapToolDefinition(createGrepToolDefinition(cwd, options));
 }

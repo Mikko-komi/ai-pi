@@ -1,3 +1,9 @@
+/**
+ * Bash tool: local or remote shell execution with streaming and truncation.
+ *
+ * bash 工具。本地和远程共用同一套定义；超长输出落到临时文件。
+ */
+
 import { constants } from "node:fs";
 import { access as fsAccess } from "node:fs/promises";
 import type { AgentTool } from "@earendil-works/pi-agent-core";
@@ -39,13 +45,28 @@ const bashSchema = Type.Object({
 	timeout: Type.Optional(Type.Number({ description: "Timeout in seconds (optional, no default timeout)" })),
 });
 
+/**
+ * System-prompt snippet and guidelines for the bash tool.
+ *
+ * bash 写进系统提示的片段。guidelines 依赖是否暴露 PI_* 环境变量。
+ */
 export const bashToolSystemPromptContribution = {
 	snippet: "Execute bash commands (ls, grep, find, etc.)",
 	guidelines: ["You can inspect PI_* environment variables for current model and session details."],
 } as const;
 
+/**
+ * Arguments the model sends to the bash tool.
+ *
+ * bash 调用参数。timeout 是秒，未设则不限时。
+ */
 export type BashToolInput = Static<typeof bashSchema>;
 
+/**
+ * Extra result metadata when bash output is truncated.
+ *
+ * 截断时的附加信息。没截断则为 undefined。
+ */
 export interface BashToolDetails {
 	truncation?: TruncationResult;
 	fullOutputPath?: string;
@@ -54,6 +75,8 @@ export interface BashToolDetails {
 /**
  * Pluggable operations for the bash tool.
  * Override these to delegate command execution to remote systems (for example SSH).
+ *
+ * bash 的可替换执行口。远程（SSH / 容器）只换这一层。
  */
 export interface BashOperations {
 	/**
@@ -75,7 +98,11 @@ export interface BashOperations {
 	) => Promise<{ exitCode: number | null }>;
 }
 
-/** Shared process execution used by the built-in shell tools. */
+/**
+ * Shared process execution used by the built-in shell tools.
+ *
+ * 本地 spawn 实现。bash 和 PowerShell 共用；cwd 不存在会立刻失败。
+ */
 export function createLocalShellOperations(shellName: string, resolveShellConfig: () => ShellConfig): BashOperations {
 	return {
 		exec: async (command, cwd, { onData, signal, timeout, env }) => {
@@ -149,17 +176,29 @@ export function createLocalShellOperations(shellName: string, resolveShellConfig
  *
  * This is useful for extensions that intercept user_bash and still want pi's
  * standard local shell behavior while wrapping or rewriting commands.
+ *
+ * 本地 bash 后端。扩展改写命令后仍可走这套 spawn / 杀进程树。
  */
 export function createLocalBashOperations(options?: { shellPath?: string }): BashOperations {
 	return createLocalShellOperations("bash", () => getShellConfig(options?.shellPath));
 }
 
+/**
+ * Command, cwd, and env just before spawn.
+ *
+ * spawn 前的上下文。spawnHook 可以改这三项。
+ */
 export interface BashSpawnContext {
 	command: string;
 	cwd: string;
 	env: NodeJS.ProcessEnv;
 }
 
+/**
+ * Hook that may rewrite spawn context before execution.
+ *
+ * spawn 前钩子。必须返回完整上下文，不能只改一项。
+ */
 export type BashSpawnHook = (context: BashSpawnContext) => BashSpawnContext;
 
 function resolveSpawnContext(
@@ -190,6 +229,11 @@ function resolveSpawnContext(
 	return spawnHook ? spawnHook(baseContext) : baseContext;
 }
 
+/**
+ * Options for creating the bash tool.
+ *
+ * bash 工厂选项。operations 缺省走本地 shell。
+ */
 export interface BashToolOptions {
 	/** Custom operations for command execution. Default: local shell */
 	operations?: BashOperations;
@@ -203,12 +247,22 @@ export interface BashToolOptions {
 	spawnHook?: BashSpawnHook;
 }
 
+/**
+ * Live render timers for a running bash call.
+ *
+ * bash 流式渲染状态。结束后清掉 interval。
+ */
 export type BashRenderState = {
 	startedAt: number | undefined;
 	endedAt: number | undefined;
 	interval: NodeJS.Timeout | undefined;
 };
 
+/**
+ * Shared config that bash and PowerShell tools fill in.
+ *
+ * 通用 shell 工具配置。createShellToolDefinition 靠它区分 bash / PowerShell。
+ */
 export interface ShellToolConfig {
 	name: string;
 	label: string;
@@ -219,6 +273,11 @@ export interface ShellToolConfig {
 	tempFilePrefix: string;
 }
 
+/**
+ * Build a shell ToolDefinition from shared config.
+ *
+ * 通用 shell 定义。bash 和 PowerShell 都走这里，只换 config。
+ */
 export function createShellToolDefinition(
 	cwd: string,
 	config: ShellToolConfig,
@@ -382,6 +441,11 @@ const bashToolConfig: ShellToolConfig = {
 	tempFilePrefix: "pi-bash",
 };
 
+/**
+ * Create the built-in bash ToolDefinition.
+ *
+ * 内置 bash 定义。固定 name/label 为 bash。
+ */
 export function createBashToolDefinition(
 	cwd: string,
 	options?: BashToolOptions,
@@ -389,6 +453,11 @@ export function createBashToolDefinition(
 	return createShellToolDefinition(cwd, bashToolConfig, options);
 }
 
+/**
+ * Create the built-in bash AgentTool.
+ *
+ * 内置 bash 运行时工具。把 prompt 元数据挂到 wrap 后的实例上。
+ */
 export function createBashTool(cwd: string, options?: BashToolOptions): AgentTool<typeof bashSchema> {
 	const definition = createBashToolDefinition(cwd, options);
 	const tool = wrapToolDefinition(definition);

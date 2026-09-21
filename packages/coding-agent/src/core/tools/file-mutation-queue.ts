@@ -1,3 +1,9 @@
+/**
+ * Per-file mutation queue so overlapping writes serialize.
+ *
+ * 同文件写入串行队列。不同文件仍并行；用 realpath 合并硬链接。
+ */
+
 import { realpath } from "node:fs/promises";
 import { resolve } from "node:path";
 
@@ -28,6 +34,8 @@ async function getMutationQueueKey(filePath: string): Promise<string> {
 /**
  * Serialize file mutation operations targeting the same file.
  * Operations for different files still run in parallel.
+ *
+ * 同文件互斥执行。登记本身也串行，避免 key 解析竞态；文件不存在时用 resolve 路径。
  */
 export async function withFileMutationQueue<T>(filePath: string, fn: () => Promise<T>): Promise<T> {
 	const registration = registrationQueue.then(async () => {

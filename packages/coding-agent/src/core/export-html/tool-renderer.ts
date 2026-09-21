@@ -3,6 +3,8 @@
  *
  * Renders custom tool calls and results to HTML by invoking their TUI renderers
  * and converting the ANSI output to HTML.
+ *
+ * 导出时把扩展工具的 TUI 输出转成 HTML。渲染失败就让模板走结构化回退。
  */
 
 import type { ImageContent, TextContent } from "@earendil-works/pi-ai";
@@ -11,6 +13,11 @@ import type { Theme } from "../../modes/interactive/theme/theme.ts";
 import type { ToolDefinition, ToolRenderContext } from "../extensions/types.ts";
 import { ansiLinesToHtml } from "./ansi-to-html.ts";
 
+/**
+ * Inputs needed to render custom tools through their TUI presenters.
+ *
+ * 查工具定义、主题、cwd 和宽度。width 默认 100。
+ */
 export interface ToolHtmlRendererDeps {
 	/** Function to look up tool definition by name */
 	getToolDefinition: (name: string) => ToolDefinition | undefined;
@@ -22,6 +29,11 @@ export interface ToolHtmlRendererDeps {
 	width?: number;
 }
 
+/**
+ * TUI→ANSI→HTML exit shape for one custom tool call and its result.
+ *
+ * 没有自定义渲染器或渲染失败都返回 undefined，导出走结构化回退。
+ */
 export interface ToolHtmlRenderer {
 	/** Render a tool call to HTML. Returns undefined if tool has no custom renderer. */
 	renderCall(toolCallId: string, toolName: string, args: unknown): string | undefined;
@@ -35,12 +47,6 @@ export interface ToolHtmlRenderer {
 	): { collapsed?: string; expanded?: string } | undefined;
 }
 
-/**
- * Create a tool HTML renderer.
- *
- * The renderer looks up tool definitions and invokes their renderCall/renderResult
- * methods, converting the resulting TUI Component output (ANSI) to HTML.
- */
 const ANSI_ESCAPE_REGEX = /\x1b\[[\d;]*m/g;
 
 function isBlankRenderedLine(line: string): boolean {
@@ -55,6 +61,14 @@ function trimRenderedResultLines(lines: string[]): string[] {
 	return lines.slice(start, end);
 }
 
+/**
+ * Create a tool HTML renderer.
+ *
+ * The renderer looks up tool definitions and invokes their renderCall/renderResult
+ * methods, converting the resulting TUI Component output (ANSI) to HTML.
+ *
+ * 用工具自己的 TUI 渲染器出 ANSI，再转 HTML。渲染失败返回 undefined，让导出走结构化回退。
+ */
 export function createToolHtmlRenderer(deps: ToolHtmlRendererDeps): ToolHtmlRenderer {
 	const { getToolDefinition, theme, cwd, width = 100 } = deps;
 

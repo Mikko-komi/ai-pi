@@ -1,3 +1,9 @@
+/**
+ * Write tool: create or overwrite a file, creating parent directories.
+ *
+ * 写文件工具。整文件覆盖；同路径写入走 mutation queue 串行。
+ */
+
 import type { AgentTool } from "@earendil-works/pi-agent-core";
 import { mkdir as fsMkdir, writeFile as fsWriteFile } from "fs/promises";
 import { dirname } from "path";
@@ -13,16 +19,28 @@ const writeSchema = Type.Object({
 	content: Type.String({ description: "Content to write to the file" }),
 });
 
+/**
+ * System-prompt snippet and guidelines for the write tool.
+ *
+ * write 写进系统提示的片段。只用于新文件或整文件重写。
+ */
 export const writeToolSystemPromptContribution = {
 	snippet: "Create or overwrite files",
 	guidelines: ["Use write only for new files or complete rewrites."],
 } as const;
 
+/**
+ * Arguments the model sends to the write tool.
+ *
+ * write 调用参数。path 相对或绝对都可以。
+ */
 export type WriteToolInput = Static<typeof writeSchema>;
 
 /**
  * Pluggable operations for the write tool.
  * Override these to delegate file writing to remote systems (for example SSH).
+ *
+ * write 的可替换写盘口。远程只换这一层。
  */
 export interface WriteOperations {
 	/** Write content to a file */
@@ -36,11 +54,21 @@ const defaultWriteOperations: WriteOperations = {
 	mkdir: (dir) => fsMkdir(dir, { recursive: true }).then(() => {}),
 };
 
+/**
+ * Options for creating the write tool.
+ *
+ * write 工厂选项。operations 缺省走本地文件系统。
+ */
 export interface WriteToolOptions {
 	/** Custom operations for file writing. Default: local filesystem */
 	operations?: WriteOperations;
 }
 
+/**
+ * Create the built-in write ToolDefinition.
+ *
+ * 内置 write 定义。先建父目录再写；中止不从 listener reject，避免提前放锁。
+ */
 export function createWriteToolDefinition(
 	cwd: string,
 	options?: WriteToolOptions,
@@ -92,6 +120,11 @@ export function createWriteToolDefinition(
 	};
 }
 
+/**
+ * Create the built-in write AgentTool.
+ *
+ * 内置 write 运行时工具。定义再 wrap。
+ */
 export function createWriteTool(cwd: string, options?: WriteToolOptions): AgentTool<typeof writeSchema> {
 	return wrapToolDefinition(createWriteToolDefinition(cwd, options));
 }

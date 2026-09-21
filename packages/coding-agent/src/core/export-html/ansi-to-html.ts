@@ -9,6 +9,8 @@
  * - RGB true color (38;2;R;G;B and 48;2;R;G;B)
  * - Text styles: bold (1), dim (2), italic (3), underline (4)
  * - Reset (0)
+ *
+ * ANSI 颜色/样式转 HTML。只认 SGR `m` 序列，其它转义丢掉。
  */
 
 // Standard ANSI color palette (0-15)
@@ -194,6 +196,8 @@ const ANSI_REGEX = /\x1b\[([\d;]*)m/g;
 
 /**
  * Convert ANSI-escaped text to HTML with inline styles.
+ *
+ * 把 ANSI 转成带 inline style 的 HTML。文本会做 HTML 转义；每次调用重置共享正则的 lastIndex。
  */
 export function ansiToHtml(text: string): string {
 	const style = createEmptyStyle();
@@ -252,6 +256,8 @@ export function ansiToHtml(text: string): string {
 /**
  * Convert array of ANSI-escaped lines to HTML.
  * Each line is wrapped in a div element.
+ *
+ * 逐行转 HTML。空行变成 `&nbsp;`，避免塌掉。
  */
 export function ansiLinesToHtml(lines: string[]): string {
 	return lines.map((line) => `<div class="ansi-line">${ansiToHtml(line) || "&nbsp;"}</div>`).join("");

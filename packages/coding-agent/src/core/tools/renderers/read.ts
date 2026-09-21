@@ -4,6 +4,8 @@
  * Renderers live apart from the implementation so a process that only displays tool output does not
  * load the execution path or its typebox parameter schema. `read.ts` spreads these into its
  * definition, so the tool's public shape is unchanged.
+ *
+ * read 的展示层。本文件不读盘；技能/文档/资源文件折叠成短标签。
  */
 
 import { basename, dirname, isAbsolute, relative, resolve as resolvePath, sep } from "node:path";
@@ -147,6 +149,11 @@ function formatReadResult(
 	return text;
 }
 
+/**
+ * TUI presentation for the read tool.
+ *
+ * read 的展示。未展开时技能/文档/资源走短标签；展开才高亮正文。
+ */
 export const readRenderers: Pick<ToolDefinition<any, ReadToolDetails | undefined>, "renderCall" | "renderResult"> = {
 	renderCall(rawArgs, theme, context) {
 		const args = rawArgs as ReadRenderArgs | undefined;
